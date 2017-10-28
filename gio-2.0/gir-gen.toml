@@ -1,0 +1,49 @@
+namespace = "Gio"
+version = "2.0"
+
+[[gen_files]]
+type = "AppInfo"
+funcs = [
+	'g_app_info_get_id',
+#	'g_app_info_launch',
+]
+
+[[gen_files]]
+type = "Settings"
+funcs = [
+    'g_settings_new',
+	'g_settings_get_value',
+	'g_settings_get_string',
+	'g_settings_get_boolean',
+	'g_settings_get_int',
+	'g_settings_get_int64',
+	'g_settings_get_uint',
+	'g_settings_get_uint64',
+	'g_settings_get_double',
+	'g_settings_get_enum',
+	'g_settings_get_flags',
+	'g_settings_get_child',
+	'g_settings_apply',
+]
+
+[[gen_files]]
+type = "File"
+funcs = [
+	'g_file_replace',
+	'g_file_get_path',
+]
+
+[[gen_files]]
+type = "Cancellable"
+
+[[gen_files]]
+type = 'OutputStream'
+
+[[gen_files]]
+type = "FileOutputStream"
+funcs = [
+	'g_file_output_stream_query_info',
+]
+
+[[gen_files]]
+type = "FileInfo"
