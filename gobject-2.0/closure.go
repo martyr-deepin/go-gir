@@ -34,6 +34,7 @@ import (
 	"unsafe"
 
 	"github.com/electricface/go-auto-gir/util"
+	"github.com/electricface/go-auto-gir/glib-2.0"
 )
 
 type closureContext struct {
@@ -205,4 +206,37 @@ func (v Object) connectClosure(after bool, detailedSignal string, f interface{})
 	signals[handle] = closure
 
 	return handle
+}
+
+func SourceSetClosure(src glib.Source, closure Closure) {
+	C.g_source_set_closure( (*C.GSource)(src.Ptr), closure.native())
+}
+
+type SourceFunc func() bool
+
+func IdleAdd(f SourceFunc) uint {
+	src := glib.IdleSourceNew()
+	id := setupSourceFunc(src, f)
+	src.Unref()
+	return id
+}
+
+func TimeoutAdd(interval uint, f SourceFunc) uint {
+	src := glib.TimeoutSourceNew(interval)
+	id := setupSourceFunc(src, f)
+	src.Unref()
+	return id
+}
+
+func TimeoutAddSeconds(interval uint, f SourceFunc) uint {
+	src := glib.TimeoutSourceNewSeconds(interval)
+	id := setupSourceFunc(src, f)
+	src.Unref()
+	return id
+}
+
+func setupSourceFunc(src glib.Source, f SourceFunc) uint {
+	closure := ClosureNew(f)
+	SourceSetClosure(src,closure)
+	return src.Attach(glib.MainContextDefault())
 }
