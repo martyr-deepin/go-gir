@@ -49,8 +49,9 @@ import "C"
 
 import (
 	"errors"
-	"github.com/electricface/go-auto-gir/util"
 	"unsafe"
+
+	"github.com/electricface/go-auto-gir/util"
 )
 
 /*
@@ -88,8 +89,8 @@ func (v Value) Type() (actual Type, fundamental Type, err error) {
 }
 
 // GValueMarshaler is a marshal function to convert a GValue into an
-// appropiate Go type.  The uintptr parameter is a *C.GValue.
-type GValueMarshaler func(uintptr) (interface{}, error)
+// appropiate Go type.  The unsafe.Pointer parameter is a *C.GValue.
+type GValueMarshaler func(unsafe.Pointer) (interface{}, error)
 
 func RegisterGValueMarshaler(t Type, f GValueMarshaler) {
 	// TODO: mutex
@@ -139,106 +140,106 @@ func (m marshalMap) lookup(v Value) (GValueMarshaler, error) {
 	return nil, errors.New("missing marshaler for type")
 }
 
-func marshalInvalid(_ uintptr) (interface{}, error) {
+func marshalInvalid(_ unsafe.Pointer) (interface{}, error) {
 	return nil, errors.New("invalid type")
 }
 
-func marshalNone(_ uintptr) (interface{}, error) {
+func marshalNone(_ unsafe.Pointer) (interface{}, error) {
 	return nil, nil
 }
 
-func marshalInterface(_ uintptr) (interface{}, error) {
+func marshalInterface(_ unsafe.Pointer) (interface{}, error) {
 	return nil, errors.New("interface conversion not yet implemented")
 }
 
-func marshalChar(p uintptr) (interface{}, error) {
-	c := C.g_value_get_schar((*C.GValue)(unsafe.Pointer(p)))
+func marshalChar(p unsafe.Pointer) (interface{}, error) {
+	c := C.g_value_get_schar((*C.GValue)(p))
 	return int8(c), nil
 }
 
-func marshalUchar(p uintptr) (interface{}, error) {
-	c := C.g_value_get_uchar((*C.GValue)(unsafe.Pointer(p)))
+func marshalUchar(p unsafe.Pointer) (interface{}, error) {
+	c := C.g_value_get_uchar((*C.GValue)(p))
 	return uint8(c), nil
 }
 
-func marshalBoolean(p uintptr) (interface{}, error) {
-	c := C.g_value_get_boolean((*C.GValue)(unsafe.Pointer(p)))
+func marshalBoolean(p unsafe.Pointer) (interface{}, error) {
+	c := C.g_value_get_boolean((*C.GValue)(p))
 	return util.Int2Bool(int(c)), nil
 }
 
-func marshalInt(p uintptr) (interface{}, error) {
-	c := C.g_value_get_int((*C.GValue)(unsafe.Pointer(p)))
+func marshalInt(p unsafe.Pointer) (interface{}, error) {
+	c := C.g_value_get_int((*C.GValue)(p))
 	return int(c), nil
 }
 
-func marshalLong(p uintptr) (interface{}, error) {
-	c := C.g_value_get_long((*C.GValue)(unsafe.Pointer(p)))
+func marshalLong(p unsafe.Pointer) (interface{}, error) {
+	c := C.g_value_get_long((*C.GValue)(p))
 	return int(c), nil
 }
 
-func marshalEnum(p uintptr) (interface{}, error) {
-	c := C.g_value_get_enum((*C.GValue)(unsafe.Pointer(p)))
+func marshalEnum(p unsafe.Pointer) (interface{}, error) {
+	c := C.g_value_get_enum((*C.GValue)(p))
 	return int(c), nil
 }
 
-func marshalInt64(p uintptr) (interface{}, error) {
-	c := C.g_value_get_int64((*C.GValue)(unsafe.Pointer(p)))
+func marshalInt64(p unsafe.Pointer) (interface{}, error) {
+	c := C.g_value_get_int64((*C.GValue)(p))
 	return int64(c), nil
 }
 
-func marshalUint(p uintptr) (interface{}, error) {
-	c := C.g_value_get_uint((*C.GValue)(unsafe.Pointer(p)))
+func marshalUint(p unsafe.Pointer) (interface{}, error) {
+	c := C.g_value_get_uint((*C.GValue)(p))
 	return uint(c), nil
 }
 
-func marshalUlong(p uintptr) (interface{}, error) {
-	c := C.g_value_get_ulong((*C.GValue)(unsafe.Pointer(p)))
+func marshalUlong(p unsafe.Pointer) (interface{}, error) {
+	c := C.g_value_get_ulong((*C.GValue)(p))
 	return uint(c), nil
 }
 
-func marshalFlags(p uintptr) (interface{}, error) {
-	c := C.g_value_get_flags((*C.GValue)(unsafe.Pointer(p)))
+func marshalFlags(p unsafe.Pointer) (interface{}, error) {
+	c := C.g_value_get_flags((*C.GValue)(p))
 	return uint(c), nil
 }
 
-func marshalUint64(p uintptr) (interface{}, error) {
-	c := C.g_value_get_uint64((*C.GValue)(unsafe.Pointer(p)))
+func marshalUint64(p unsafe.Pointer) (interface{}, error) {
+	c := C.g_value_get_uint64((*C.GValue)(p))
 	return uint64(c), nil
 }
 
-func marshalFloat(p uintptr) (interface{}, error) {
-	c := C.g_value_get_float((*C.GValue)(unsafe.Pointer(p)))
+func marshalFloat(p unsafe.Pointer) (interface{}, error) {
+	c := C.g_value_get_float((*C.GValue)(p))
 	return float32(c), nil
 }
 
-func marshalDouble(p uintptr) (interface{}, error) {
-	c := C.g_value_get_double((*C.GValue)(unsafe.Pointer(p)))
+func marshalDouble(p unsafe.Pointer) (interface{}, error) {
+	c := C.g_value_get_double((*C.GValue)(p))
 	return float64(c), nil
 }
 
-func marshalString(p uintptr) (interface{}, error) {
-	c := C.g_value_get_string((*C.GValue)(unsafe.Pointer(p)))
+func marshalString(p unsafe.Pointer) (interface{}, error) {
+	c := C.g_value_get_string((*C.GValue)(p))
 	return C.GoString((*C.char)(c)), nil
 }
 
-func marshalBoxed(p uintptr) (interface{}, error) {
-	c := C.g_value_get_boxed((*C.GValue)(unsafe.Pointer(p)))
-	return uintptr(unsafe.Pointer(c)), nil
+func marshalBoxed(p unsafe.Pointer) (interface{}, error) {
+	c := C.g_value_get_boxed((*C.GValue)(p))
+	return unsafe.Pointer(unsafe.Pointer(c)), nil
 }
 
-func marshalPointer(p uintptr) (interface{}, error) {
-	c := C.g_value_get_pointer((*C.GValue)(unsafe.Pointer(p)))
+func marshalPointer(p unsafe.Pointer) (interface{}, error) {
+	c := C.g_value_get_pointer((*C.GValue)(p))
 	return unsafe.Pointer(c), nil
 }
 
-func marshalObject(p uintptr) (interface{}, error) {
-	c := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
+func marshalObject(p unsafe.Pointer) (interface{}, error) {
+	c := C.g_value_get_object((*C.GValue)(p))
 	return WrapObject(unsafe.Pointer(c)), nil
 }
 
-func marshalVariant(p uintptr) (interface{}, error) {
+func marshalVariant(p unsafe.Pointer) (interface{}, error) {
 	// TODO:
-	c := C.g_value_get_variant((*C.GValue)(unsafe.Pointer(p)))
+	c := C.g_value_get_variant((*C.GValue)(p))
 	_ = c
 	//return wrapVariant(c), nil
 	return nil, nil
@@ -258,7 +259,7 @@ func (v Value) GoValue() (interface{}, error) {
 	}
 
 	//No need to add finalizer because it is already done by ValueAlloc and ValueInit
-	rv, err := f(uintptr(unsafe.Pointer(v.native())))
+	rv, err := f(v.Ptr)
 	return rv, err
 }
 
