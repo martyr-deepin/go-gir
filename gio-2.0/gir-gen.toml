@@ -47,3 +47,10 @@ funcs = [
 
 [[gen_files]]
 type = "FileInfo"
+
+[[gen_files]]
+type = 'Application'
+funcs = [
+    'g_application_new',
+
+]
