@@ -33,8 +33,8 @@ import (
 	"sync"
 	"unsafe"
 
-	"github.com/electricface/go-auto-gir/util"
 	"github.com/electricface/go-auto-gir/glib-2.0"
+	"github.com/electricface/go-auto-gir/util"
 )
 
 type closureContext struct {
@@ -109,7 +109,7 @@ func goMarshal(closure *C.GClosure, retValue *C.GValue,
 	// parameters and parameters from the glib runtime.
 	for i := 0; i < nCbParams && i < nGLibParams; i++ {
 		v := wrapValue(&gValues[i])
-		val, err := v.GoValue()
+		val, err := v.Get()
 		if err != nil {
 			fmt.Fprintf(os.Stderr,
 				"no suitable Go value for arg %d: %v\n", i, err)
@@ -142,13 +142,13 @@ func gValueSlice(values *C.GValue, nValues int) (slice []C.GValue) {
 	return
 }
 
-type CanGetTypeAndGValueMarshaler interface {
+type CanGetTypeAndGValueGetter interface {
 	GetType() Type
-	GetGValueMarshaler() GValueMarshaler
+	GetGValueGetter() GValueGetter
 }
 
-var cgtm CanGetTypeAndGValueMarshaler
-var cgtmType = reflect.TypeOf(&cgtm).Elem()
+var cgt CanGetTypeAndGValueGetter
+var cgtIfc = reflect.TypeOf(&cgt).Elem()
 
 // ClosureNew creates a new GClosure and adds its callback function
 // to the internally-maintained map. It's exported for visibility to other
@@ -170,11 +170,10 @@ func ClosureNew(f interface{}) Closure {
 	for i := 0; i < fType.NumIn(); i++ {
 		argType := fType.In(i)
 		fmt.Printf("i: %d, argType: %v\n", i, argType)
-		if argType.Implements(cgtmType) {
-			fmt.Println("it impl cctm")
+		if argType.Implements(cgtIfc) {
 			argEmptyValue := reflect.New(argType)
-			cctm := argEmptyValue.Interface().(CanGetTypeAndGValueMarshaler)
-			RegisterGValueMarshaler(cctm.GetType(), cctm.GetGValueMarshaler())
+			cctm := argEmptyValue.Interface().(CanGetTypeAndGValueGetter)
+			registerGValueGetter(cctm.GetType(), cctm.GetGValueGetter())
 		}
 	}
 
@@ -209,7 +208,7 @@ func (v Object) connectClosure(after bool, detailedSignal string, f interface{})
 }
 
 func SourceSetClosure(src glib.Source, closure Closure) {
-	C.g_source_set_closure( (*C.GSource)(src.Ptr), closure.native())
+	C.g_source_set_closure((*C.GSource)(src.Ptr), closure.native())
 }
 
 type SourceFunc func() bool
@@ -237,6 +236,6 @@ func TimeoutAddSeconds(interval uint, f SourceFunc) uint {
 
 func setupSourceFunc(src glib.Source, f SourceFunc) uint {
 	closure := ClosureNew(f)
-	SourceSetClosure(src,closure)
+	SourceSetClosure(src, closure)
 	return src.Attach(glib.MainContextDefault())
 }

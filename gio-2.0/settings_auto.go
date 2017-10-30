@@ -38,6 +38,19 @@ func WrapSettings(p unsafe.Pointer) (v Settings) {
 	return
 }
 
+func (v Settings) GetType() gobject.Type {
+	return gobject.Type(C.g_settings_get_type())
+}
+
+func (v Settings) GetGValueGetter() gobject.GValueGetter {
+	return gvalueGetSettings
+}
+
+func gvalueGetSettings(p unsafe.Pointer) (interface{}, error) {
+	ret := C.g_value_get_object((*C.GValue)(p))
+	return WrapSettings(unsafe.Pointer(ret)), nil
+}
+
 // SettingsNew is a wrapper around g_settings_new().
 func SettingsNew(schema_id string) Settings {
 
