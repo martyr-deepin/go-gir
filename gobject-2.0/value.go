@@ -49,9 +49,8 @@ import "C"
 
 import (
 	"errors"
-	"reflect"
-	"unsafe"
 	"github.com/electricface/go-auto-gir/util"
+	"unsafe"
 )
 
 /*
@@ -76,16 +75,6 @@ func (v Value) Init(gType Type) {
 	C.g_value_init(v.native(), C.GType(gType))
 }
 
-// ValueFromNative returns a type-asserted pointer to the Value.
-//func ValueFromNative(l unsafe.Pointer) Value {
-//TODO why it does not add finalizer to the value?
-//return Value{(*C.GValue)(l)}
-//}
-
-func (v *Value) Unset() {
-	C.g_value_unset(v.native())
-}
-
 // Type is a wrapper around the G_VALUE_HOLDS_GTYPE() macro and
 // the g_value_get_gtype() function.  GetType() returns TYPE_INVALID if v
 // does not hold a Type, or otherwise returns the Type of v.
@@ -98,124 +87,13 @@ func (v Value) Type() (actual Type, fundamental Type, err error) {
 	return Type(cActual), Type(cFundamental), nil
 }
 
-// GValue converts a Go type to a comparable GValue.  GValue()
-// returns a non-nil error if the conversion was unsuccessful.
-func ToGValue(v interface{}) (gvalue Value, err error) {
-	gvalue = ValueNew()
-	if v == nil {
-		gvalue.Init(TYPE_POINTER)
-		gvalue.SetPointer(unsafe.Pointer(nil))
-		return gvalue, nil
-	}
-
-	switch e := v.(type) {
-	case bool:
-		gvalue.Init(TYPE_BOOLEAN)
-		gvalue.SetBoolean(e)
-		return gvalue, nil
-
-	case int8:
-		gvalue.Init(TYPE_CHAR)
-		gvalue.SetSchar(e)
-		return gvalue, nil
-
-	case int64:
-		gvalue.Init(TYPE_INT64)
-		gvalue.SetInt64(e)
-		return gvalue, nil
-
-	case int:
-		gvalue.Init(TYPE_INT)
-		gvalue.SetInt(e)
-		return gvalue, nil
-
-	case uint8:
-		gvalue.Init(TYPE_UCHAR)
-		gvalue.SetUchar(e)
-		return gvalue, nil
-
-	case uint64:
-		gvalue.Init(TYPE_UINT64)
-		gvalue.SetUint64(e)
-		return gvalue, nil
-
-	case uint:
-		gvalue.Init(TYPE_UINT)
-		gvalue.SetUint(e)
-		return gvalue, nil
-
-	case float32:
-		gvalue.Init(TYPE_FLOAT)
-		gvalue.SetFloat(e)
-		return gvalue, nil
-
-	case float64:
-		gvalue.Init(TYPE_DOUBLE)
-		gvalue.SetDouble(e)
-		return gvalue, nil
-
-	case string:
-		gvalue.Init(TYPE_STRING)
-		gvalue.SetString(e)
-		return gvalue, nil
-
-	case Object:
-		gvalue.Init(TYPE_OBJECT)
-		gvalue.SetInstance(e.Ptr)
-		return gvalue, nil
-
-	default:
-		/* Try this since above doesn't catch constants under other types */
-		rval := reflect.ValueOf(v)
-		switch rval.Kind() {
-		case reflect.Int8:
-			gvalue.Init(TYPE_CHAR)
-			gvalue.SetSchar(int8(rval.Int()))
-			return gvalue, nil
-
-			//case reflect.Int16:
-			//case reflect.Int32:
-
-		case reflect.Int64:
-			gvalue.Init(TYPE_INT64)
-			gvalue.SetInt64(rval.Int())
-			return gvalue, nil
-
-		case reflect.Int:
-			gvalue.Init(TYPE_INT)
-			gvalue.SetInt(int(rval.Int()))
-			return gvalue, nil
-
-		case reflect.Uintptr, reflect.Ptr:
-			gvalue.Init(TYPE_POINTER)
-			gvalue.SetPointer(unsafe.Pointer(rval.Pointer()))
-			return gvalue, nil
-		}
-	}
-
-	return Value{}, errors.New("Type not implemented")
-}
-
 // GValueMarshaler is a marshal function to convert a GValue into an
 // appropiate Go type.  The uintptr parameter is a *C.GValue.
 type GValueMarshaler func(uintptr) (interface{}, error)
 
-// TypeMarshaler represents an actual type and it's associated marshaler.
-type TypeMarshaler struct {
-	T Type
-	F GValueMarshaler
-}
-
-// RegisterGValueMarshalers adds marshalers for several types to the
-// internal marshalers map.  Once registered, calling GoValue on any
-// Value witha registered type will return the data returned by the
-// marshaler.
-func RegisterGValueMarshalers(tm []TypeMarshaler) {
-	gValueMarshalers.register(tm)
-}
-
 func RegisterGValueMarshaler(t Type, f GValueMarshaler) {
-	gValueMarshalers.registerOne(t, f)
+	// TODO: mutex
+	gValueMarshalers[t] = f
 }
 
 type marshalMap map[Type]GValueMarshaler
@@ -244,16 +122,6 @@ var gValueMarshalers = marshalMap{
 	TYPE_BOXED:     marshalBoxed,
 	TYPE_OBJECT:    marshalObject,
 	TYPE_VARIANT:   marshalVariant,
-}
-
-func (m marshalMap) registerOne(t Type, f GValueMarshaler) {
-	m[t] = f
-}
-
-func (m marshalMap) register(tm []TypeMarshaler) {
-	for i := range tm {
-		m[tm[i].T] = tm[i].F
-	}
 }
 
 func (m marshalMap) lookup(v Value) (GValueMarshaler, error) {

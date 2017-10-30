@@ -227,3 +227,13 @@ func (value Value) SetUint64(v_uint64 uint64) {
 	// Type for C: C.guint64
 	C.g_value_set_uint64(value.native(), C.guint64(v_uint64))
 }
+
+// Unset is a wrapper around g_value_unset().
+func (value Value) Unset() {
+
+	// Var for Go: value
+	// Var for C: value0
+	// Type for Go: Value
+	// Type for C: *C.GValue
+	C.g_value_unset(value.native())
+}

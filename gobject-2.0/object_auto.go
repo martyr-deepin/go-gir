@@ -16,11 +16,13 @@ type Object struct {
 func (v Object) native() *C.GObject {
 	return (*C.GObject)(v.Ptr)
 }
-func wrapObject(p *C.GObject) Object {
-	return Object{unsafe.Pointer(p)}
+func wrapObject(p *C.GObject) (v Object) {
+	v.Ptr = unsafe.Pointer(p)
+	return
 }
-func WrapObject(p unsafe.Pointer) Object {
-	return Object{p}
+func WrapObject(p unsafe.Pointer) (v Object) {
+	v.Ptr = p
+	return
 }
 
 // ForceFloating is a wrapper around g_object_force_floating().

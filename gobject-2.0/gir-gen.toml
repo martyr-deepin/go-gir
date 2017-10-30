@@ -18,6 +18,7 @@ funcs = [
 	'g_value_set_pointer',
 	'g_value_get_pointer',
 	'g_value_get_string',
+	'g_value_unset',
 ]
 
 [[gen_files]]
