@@ -363,3 +363,87 @@ func (closure Closure) Unref() {
 	// Type for C: *C.GClosure
 	C.g_closure_unref(closure.native())
 }
+
+type BindingFlags C.GBindingFlags
+
+const (
+	BindingFlagsDefault       BindingFlags = 0
+	BindingFlagsBidirectional              = 1
+	BindingFlagsSyncCreate                 = 2
+	BindingFlagsInvertBoolean              = 4
+)
+
+type ConnectFlags C.GConnectFlags
+
+const (
+	ConnectFlagsAfter   ConnectFlags = 1
+	ConnectFlagsSwapped              = 2
+)
+
+type ParamFlags C.GParamFlags
+
+const (
+	ParamFlagsReadable       ParamFlags = 1
+	ParamFlagsWritable                  = 2
+	ParamFlagsReadwrite                 = 3
+	ParamFlagsConstruct                 = 4
+	ParamFlagsConstructOnly             = 8
+	ParamFlagsLaxValidation             = 16
+	ParamFlagsStaticName                = 32
+	ParamFlagsPrivate                   = 32
+	ParamFlagsStaticNick                = 64
+	ParamFlagsStaticBlurb               = 128
+	ParamFlagsExplicitNotify            = 1073741824
+	ParamFlagsDeprecated                = 2147483648
+)
+
+type SignalFlags C.GSignalFlags
+
+const (
+	SignalFlagsRunFirst    SignalFlags = 1
+	SignalFlagsRunLast                 = 2
+	SignalFlagsRunCleanup              = 4
+	SignalFlagsNoRecurse               = 8
+	SignalFlagsDetailed                = 16
+	SignalFlagsAction                  = 32
+	SignalFlagsNoHooks                 = 64
+	SignalFlagsMustCollect             = 128
+	SignalFlagsDeprecated              = 256
+)
+
+type SignalMatchType C.GSignalMatchType
+
+const (
+	SignalMatchTypeId        SignalMatchType = 1
+	SignalMatchTypeDetail                    = 2
+	SignalMatchTypeClosure                   = 4
+	SignalMatchTypeFunc                      = 8
+	SignalMatchTypeData                      = 16
+	SignalMatchTypeUnblocked                 = 32
+)
+
+type TypeDebugFlags C.GTypeDebugFlags
+
+const (
+	TypeDebugFlagsNone          TypeDebugFlags = 0
+	TypeDebugFlagsObjects                      = 1
+	TypeDebugFlagsSignals                      = 2
+	TypeDebugFlagsInstanceCount                = 4
+	TypeDebugFlagsMask                         = 7
+)
+
+type TypeFlags C.GTypeFlags
+
+const (
+	TypeFlagsAbstract      TypeFlags = 16
+	TypeFlagsValueAbstract           = 32
+)
+
+type TypeFundamentalFlags C.GTypeFundamentalFlags
+
+const (
+	TypeFundamentalFlagsClassed        TypeFundamentalFlags = 1
+	TypeFundamentalFlagsInstantiatable                      = 2
+	TypeFundamentalFlagsDerivable                           = 4
+	TypeFundamentalFlagsDeepDerivable                       = 8
+)

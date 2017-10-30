@@ -481,3 +481,771 @@ func ApplicationNew(application_id string, flags ApplicationFlags) Application {
 	ret0 := C.g_application_new(application_id0, C.GApplicationFlags(flags))
 	return wrapApplication(ret0)
 }
+
+type BusType C.GBusType
+
+const (
+	BusTypeStarter BusType = -1
+	BusTypeNone            = 0
+	BusTypeSystem          = 1
+	BusTypeSession         = 2
+)
+
+type ConverterResult C.GConverterResult
+
+const (
+	ConverterResultError     ConverterResult = 0
+	ConverterResultConverted                 = 1
+	ConverterResultFinished                  = 2
+	ConverterResultFlushed                   = 3
+)
+
+type CredentialsType C.GCredentialsType
+
+const (
+	CredentialsTypeInvalid             CredentialsType = 0
+	CredentialsTypeLinuxUcred                          = 1
+	CredentialsTypeFreebsdCmsgcred                     = 2
+	CredentialsTypeOpenbsdSockpeercred                 = 3
+	CredentialsTypeSolarisUcred                        = 4
+	CredentialsTypeNetbsdUnpcbid                       = 5
+)
+
+type DBusError C.GDBusError
+
+const (
+	DBusErrorFailed                        DBusError = 0
+	DBusErrorNoMemory                                = 1
+	DBusErrorServiceUnknown                          = 2
+	DBusErrorNameHasNoOwner                          = 3
+	DBusErrorNoReply                                 = 4
+	DBusErrorIoError                                 = 5
+	DBusErrorBadAddress                              = 6
+	DBusErrorNotSupported                            = 7
+	DBusErrorLimitsExceeded                          = 8
+	DBusErrorAccessDenied                            = 9
+	DBusErrorAuthFailed                              = 10
+	DBusErrorNoServer                                = 11
+	DBusErrorTimeout                                 = 12
+	DBusErrorNoNetwork                               = 13
+	DBusErrorAddressInUse                            = 14
+	DBusErrorDisconnected                            = 15
+	DBusErrorInvalidArgs                             = 16
+	DBusErrorFileNotFound                            = 17
+	DBusErrorFileExists                              = 18
+	DBusErrorUnknownMethod                           = 19
+	DBusErrorTimedOut                                = 20
+	DBusErrorMatchRuleNotFound                       = 21
+	DBusErrorMatchRuleInvalid                        = 22
+	DBusErrorSpawnExecFailed                         = 23
+	DBusErrorSpawnForkFailed                         = 24
+	DBusErrorSpawnChildExited                        = 25
+	DBusErrorSpawnChildSignaled                      = 26
+	DBusErrorSpawnFailed                             = 27
+	DBusErrorSpawnSetupFailed                        = 28
+	DBusErrorSpawnConfigInvalid                      = 29
+	DBusErrorSpawnServiceInvalid                     = 30
+	DBusErrorSpawnServiceNotFound                    = 31
+	DBusErrorSpawnPermissionsInvalid                 = 32
+	DBusErrorSpawnFileInvalid                        = 33
+	DBusErrorSpawnNoMemory                           = 34
+	DBusErrorUnixProcessIdUnknown                    = 35
+	DBusErrorInvalidSignature                        = 36
+	DBusErrorInvalidFileContent                      = 37
+	DBusErrorSelinuxSecurityContextUnknown           = 38
+	DBusErrorAdtAuditDataUnknown                     = 39
+	DBusErrorObjectPathInUse                         = 40
+	DBusErrorUnknownObject                           = 41
+	DBusErrorUnknownInterface                        = 42
+	DBusErrorUnknownProperty                         = 43
+	DBusErrorPropertyReadOnly                        = 44
+)
+
+type DBusMessageByteOrder C.GDBusMessageByteOrder
+
+const (
+	DBusMessageByteOrderBigEndian    DBusMessageByteOrder = 66
+	DBusMessageByteOrderLittleEndian                      = 108
+)
+
+type DBusMessageHeaderField C.GDBusMessageHeaderField
+
+const (
+	DBusMessageHeaderFieldInvalid     DBusMessageHeaderField = 0
+	DBusMessageHeaderFieldPath                               = 1
+	DBusMessageHeaderFieldInterface                          = 2
+	DBusMessageHeaderFieldMember                             = 3
+	DBusMessageHeaderFieldErrorName                          = 4
+	DBusMessageHeaderFieldReplySerial                        = 5
+	DBusMessageHeaderFieldDestination                        = 6
+	DBusMessageHeaderFieldSender                             = 7
+	DBusMessageHeaderFieldSignature                          = 8
+	DBusMessageHeaderFieldNumUnixFds                         = 9
+)
+
+type DBusMessageType C.GDBusMessageType
+
+const (
+	DBusMessageTypeInvalid      DBusMessageType = 0
+	DBusMessageTypeMethodCall                   = 1
+	DBusMessageTypeMethodReturn                 = 2
+	DBusMessageTypeError                        = 3
+	DBusMessageTypeSignal                       = 4
+)
+
+type DataStreamByteOrder C.GDataStreamByteOrder
+
+const (
+	DataStreamByteOrderBigEndian    DataStreamByteOrder = 0
+	DataStreamByteOrderLittleEndian                     = 1
+	DataStreamByteOrderHostEndian                       = 2
+)
+
+type DataStreamNewlineType C.GDataStreamNewlineType
+
+const (
+	DataStreamNewlineTypeLf   DataStreamNewlineType = 0
+	DataStreamNewlineTypeCr                         = 1
+	DataStreamNewlineTypeCrLf                       = 2
+	DataStreamNewlineTypeAny                        = 3
+)
+
+type DriveStartStopType C.GDriveStartStopType
+
+const (
+	DriveStartStopTypeUnknown   DriveStartStopType = 0
+	DriveStartStopTypeShutdown                     = 1
+	DriveStartStopTypeNetwork                      = 2
+	DriveStartStopTypeMultidisk                    = 3
+	DriveStartStopTypePassword                     = 4
+)
+
+type EmblemOrigin C.GEmblemOrigin
+
+const (
+	EmblemOriginUnknown      EmblemOrigin = 0
+	EmblemOriginDevice                    = 1
+	EmblemOriginLivemetadata              = 2
+	EmblemOriginTag                       = 3
+)
+
+type FileAttributeStatus C.GFileAttributeStatus
+
+const (
+	FileAttributeStatusUnset        FileAttributeStatus = 0
+	FileAttributeStatusSet                              = 1
+	FileAttributeStatusErrorSetting                     = 2
+)
+
+type FileAttributeType C.GFileAttributeType
+
+const (
+	FileAttributeTypeInvalid    FileAttributeType = 0
+	FileAttributeTypeString                       = 1
+	FileAttributeTypeByteString                   = 2
+	FileAttributeTypeBoolean                      = 3
+	FileAttributeTypeUint32                       = 4
+	FileAttributeTypeInt32                        = 5
+	FileAttributeTypeUint64                       = 6
+	FileAttributeTypeInt64                        = 7
+	FileAttributeTypeObject                       = 8
+	FileAttributeTypeStringv                      = 9
+)
+
+type FileMonitorEvent C.GFileMonitorEvent
+
+const (
+	FileMonitorEventChanged          FileMonitorEvent = 0
+	FileMonitorEventChangesDoneHint                   = 1
+	FileMonitorEventDeleted                           = 2
+	FileMonitorEventCreated                           = 3
+	FileMonitorEventAttributeChanged                  = 4
+	FileMonitorEventPreUnmount                        = 5
+	FileMonitorEventUnmounted                         = 6
+	FileMonitorEventMoved                             = 7
+	FileMonitorEventRenamed                           = 8
+	FileMonitorEventMovedIn                           = 9
+	FileMonitorEventMovedOut                          = 10
+)
+
+type FileType C.GFileType
+
+const (
+	FileTypeUnknown      FileType = 0
+	FileTypeRegular               = 1
+	FileTypeDirectory             = 2
+	FileTypeSymbolicLink          = 3
+	FileTypeSpecial               = 4
+	FileTypeShortcut              = 5
+	FileTypeMountable             = 6
+)
+
+type FilesystemPreviewType C.GFilesystemPreviewType
+
+const (
+	FilesystemPreviewTypeIfAlways FilesystemPreviewType = 0
+	FilesystemPreviewTypeIfLocal                        = 1
+	FilesystemPreviewTypeNever                          = 2
+)
+
+type IOErrorEnum C.GIOErrorEnum
+
+const (
+	IOErrorEnumFailed             IOErrorEnum = 0
+	IOErrorEnumNotFound                       = 1
+	IOErrorEnumExists                         = 2
+	IOErrorEnumIsDirectory                    = 3
+	IOErrorEnumNotDirectory                   = 4
+	IOErrorEnumNotEmpty                       = 5
+	IOErrorEnumNotRegularFile                 = 6
+	IOErrorEnumNotSymbolicLink                = 7
+	IOErrorEnumNotMountableFile               = 8
+	IOErrorEnumFilenameTooLong                = 9
+	IOErrorEnumInvalidFilename                = 10
+	IOErrorEnumTooManyLinks                   = 11
+	IOErrorEnumNoSpace                        = 12
+	IOErrorEnumInvalidArgument                = 13
+	IOErrorEnumPermissionDenied               = 14
+	IOErrorEnumNotSupported                   = 15
+	IOErrorEnumNotMounted                     = 16
+	IOErrorEnumAlreadyMounted                 = 17
+	IOErrorEnumClosed                         = 18
+	IOErrorEnumCancelled                      = 19
+	IOErrorEnumPending                        = 20
+	IOErrorEnumReadOnly                       = 21
+	IOErrorEnumCantCreateBackup               = 22
+	IOErrorEnumWrongEtag                      = 23
+	IOErrorEnumTimedOut                       = 24
+	IOErrorEnumWouldRecurse                   = 25
+	IOErrorEnumBusy                           = 26
+	IOErrorEnumWouldBlock                     = 27
+	IOErrorEnumHostNotFound                   = 28
+	IOErrorEnumWouldMerge                     = 29
+	IOErrorEnumFailedHandled                  = 30
+	IOErrorEnumTooManyOpenFiles               = 31
+	IOErrorEnumNotInitialized                 = 32
+	IOErrorEnumAddressInUse                   = 33
+	IOErrorEnumPartialInput                   = 34
+	IOErrorEnumInvalidData                    = 35
+	IOErrorEnumDbusError                      = 36
+	IOErrorEnumHostUnreachable                = 37
+	IOErrorEnumNetworkUnreachable             = 38
+	IOErrorEnumConnectionRefused              = 39
+	IOErrorEnumProxyFailed                    = 40
+	IOErrorEnumProxyAuthFailed                = 41
+	IOErrorEnumProxyNeedAuth                  = 42
+	IOErrorEnumProxyNotAllowed                = 43
+	IOErrorEnumBrokenPipe                     = 44
+	IOErrorEnumConnectionClosed               = 44
+	IOErrorEnumNotConnected                   = 45
+	IOErrorEnumMessageTooLarge                = 46
+)
+
+type IOModuleScopeFlags C.GIOModuleScopeFlags
+
+const (
+	IOModuleScopeFlagsNone            IOModuleScopeFlags = 0
+	IOModuleScopeFlagsBlockDuplicates                    = 1
+)
+
+type MountOperationResult C.GMountOperationResult
+
+const (
+	MountOperationResultHandled   MountOperationResult = 0
+	MountOperationResultAborted                        = 1
+	MountOperationResultUnhandled                      = 2
+)
+
+type NetworkConnectivity C.GNetworkConnectivity
+
+const (
+	NetworkConnectivityLocal   NetworkConnectivity = 1
+	NetworkConnectivityLimited                     = 2
+	NetworkConnectivityPortal                      = 3
+	NetworkConnectivityFull                        = 4
+)
+
+type NotificationPriority C.GNotificationPriority
+
+const (
+	NotificationPriorityNormal NotificationPriority = 0
+	NotificationPriorityLow                         = 1
+	NotificationPriorityHigh                        = 2
+	NotificationPriorityUrgent                      = 3
+)
+
+type PasswordSave C.GPasswordSave
+
+const (
+	PasswordSaveNever       PasswordSave = 0
+	PasswordSaveForSession               = 1
+	PasswordSavePermanently              = 2
+)
+
+type ResolverError C.GResolverError
+
+const (
+	ResolverErrorNotFound         ResolverError = 0
+	ResolverErrorTemporaryFailure               = 1
+	ResolverErrorInternal                       = 2
+)
+
+type ResolverRecordType C.GResolverRecordType
+
+const (
+	ResolverRecordTypeSrv ResolverRecordType = 1
+	ResolverRecordTypeMx                     = 2
+	ResolverRecordTypeTxt                    = 3
+	ResolverRecordTypeSoa                    = 4
+	ResolverRecordTypeNs                     = 5
+)
+
+type ResourceError C.GResourceError
+
+const (
+	ResourceErrorNotFound ResourceError = 0
+	ResourceErrorInternal               = 1
+)
+
+type SocketClientEvent C.GSocketClientEvent
+
+const (
+	SocketClientEventResolving        SocketClientEvent = 0
+	SocketClientEventResolved                           = 1
+	SocketClientEventConnecting                         = 2
+	SocketClientEventConnected                          = 3
+	SocketClientEventProxyNegotiating                   = 4
+	SocketClientEventProxyNegotiated                    = 5
+	SocketClientEventTlsHandshaking                     = 6
+	SocketClientEventTlsHandshaked                      = 7
+	SocketClientEventComplete                           = 8
+)
+
+type SocketFamily C.GSocketFamily
+
+const (
+	SocketFamilyInvalid SocketFamily = 0
+	SocketFamilyUnix                 = 1
+	SocketFamilyIpv4                 = 2
+	SocketFamilyIpv6                 = 10
+)
+
+type SocketListenerEvent C.GSocketListenerEvent
+
+const (
+	SocketListenerEventBinding   SocketListenerEvent = 0
+	SocketListenerEventBound                         = 1
+	SocketListenerEventListening                     = 2
+	SocketListenerEventListened                      = 3
+)
+
+type SocketProtocol C.GSocketProtocol
+
+const (
+	SocketProtocolUnknown SocketProtocol = -1
+	SocketProtocolDefault                = 0
+	SocketProtocolTcp                    = 6
+	SocketProtocolUdp                    = 17
+	SocketProtocolSctp                   = 132
+)
+
+type SocketType C.GSocketType
+
+const (
+	SocketTypeInvalid   SocketType = 0
+	SocketTypeStream               = 1
+	SocketTypeDatagram             = 2
+	SocketTypeSeqpacket            = 3
+)
+
+type TlsAuthenticationMode C.GTlsAuthenticationMode
+
+const (
+	TlsAuthenticationModeNone      TlsAuthenticationMode = 0
+	TlsAuthenticationModeRequested                       = 1
+	TlsAuthenticationModeRequired                        = 2
+)
+
+type TlsCertificateRequestFlags C.GTlsCertificateRequestFlags
+
+const (
+	TlsCertificateRequestFlagsNone TlsCertificateRequestFlags = 0
+)
+
+type TlsDatabaseLookupFlags C.GTlsDatabaseLookupFlags
+
+const (
+	TlsDatabaseLookupFlagsNone    TlsDatabaseLookupFlags = 0
+	TlsDatabaseLookupFlagsKeypair                        = 1
+)
+
+type TlsError C.GTlsError
+
+const (
+	TlsErrorUnavailable         TlsError = 0
+	TlsErrorMisc                         = 1
+	TlsErrorBadCertificate               = 2
+	TlsErrorNotTls                       = 3
+	TlsErrorHandshake                    = 4
+	TlsErrorCertificateRequired          = 5
+	TlsErrorEof                          = 6
+)
+
+type TlsInteractionResult C.GTlsInteractionResult
+
+const (
+	TlsInteractionResultUnhandled TlsInteractionResult = 0
+	TlsInteractionResultHandled                        = 1
+	TlsInteractionResultFailed                         = 2
+)
+
+type TlsRehandshakeMode C.GTlsRehandshakeMode
+
+const (
+	TlsRehandshakeModeNever    TlsRehandshakeMode = 0
+	TlsRehandshakeModeSafely                      = 1
+	TlsRehandshakeModeUnsafely                    = 2
+)
+
+type UnixSocketAddressType C.GUnixSocketAddressType
+
+const (
+	UnixSocketAddressTypeInvalid        UnixSocketAddressType = 0
+	UnixSocketAddressTypeAnonymous                            = 1
+	UnixSocketAddressTypePath                                 = 2
+	UnixSocketAddressTypeAbstract                             = 3
+	UnixSocketAddressTypeAbstractPadded                       = 4
+)
+
+type ZlibCompressorFormat C.GZlibCompressorFormat
+
+const (
+	ZlibCompressorFormatZlib ZlibCompressorFormat = 0
+	ZlibCompressorFormatGzip                      = 1
+	ZlibCompressorFormatRaw                       = 2
+)
+
+type AppInfoCreateFlags C.GAppInfoCreateFlags
+
+const (
+	AppInfoCreateFlagsNone                        AppInfoCreateFlags = 0
+	AppInfoCreateFlagsNeedsTerminal                                  = 1
+	AppInfoCreateFlagsSupportsUris                                   = 2
+	AppInfoCreateFlagsSupportsStartupNotification                    = 4
+)
+
+type ApplicationFlags C.GApplicationFlags
+
+const (
+	ApplicationFlagsFlagsNone          ApplicationFlags = 0
+	ApplicationFlagsIsService                           = 1
+	ApplicationFlagsIsLauncher                          = 2
+	ApplicationFlagsHandlesOpen                         = 4
+	ApplicationFlagsHandlesCommandLine                  = 8
+	ApplicationFlagsSendEnvironment                     = 16
+	ApplicationFlagsNonUnique                           = 32
+	ApplicationFlagsCanOverrideAppId                    = 64
+)
+
+type AskPasswordFlags C.GAskPasswordFlags
+
+const (
+	AskPasswordFlagsNeedPassword       AskPasswordFlags = 1
+	AskPasswordFlagsNeedUsername                        = 2
+	AskPasswordFlagsNeedDomain                          = 4
+	AskPasswordFlagsSavingSupported                     = 8
+	AskPasswordFlagsAnonymousSupported                  = 16
+)
+
+type BusNameOwnerFlags C.GBusNameOwnerFlags
+
+const (
+	BusNameOwnerFlagsNone             BusNameOwnerFlags = 0
+	BusNameOwnerFlagsAllowReplacement                   = 1
+	BusNameOwnerFlagsReplace                            = 2
+)
+
+type BusNameWatcherFlags C.GBusNameWatcherFlags
+
+const (
+	BusNameWatcherFlagsNone      BusNameWatcherFlags = 0
+	BusNameWatcherFlagsAutoStart                     = 1
+)
+
+type ConverterFlags C.GConverterFlags
+
+const (
+	ConverterFlagsNone       ConverterFlags = 0
+	ConverterFlagsInputAtEnd                = 1
+	ConverterFlagsFlush                     = 2
+)
+
+type DBusCallFlags C.GDBusCallFlags
+
+const (
+	DBusCallFlagsNone                          DBusCallFlags = 0
+	DBusCallFlagsNoAutoStart                                 = 1
+	DBusCallFlagsAllowInteractiveAuthorization               = 2
+)
+
+type DBusCapabilityFlags C.GDBusCapabilityFlags
+
+const (
+	DBusCapabilityFlagsNone          DBusCapabilityFlags = 0
+	DBusCapabilityFlagsUnixFdPassing                     = 1
+)
+
+type DBusConnectionFlags C.GDBusConnectionFlags
+
+const (
+	DBusConnectionFlagsNone                         DBusConnectionFlags = 0
+	DBusConnectionFlagsAuthenticationClient                             = 1
+	DBusConnectionFlagsAuthenticationServer                             = 2
+	DBusConnectionFlagsAuthenticationAllowAnonymous                     = 4
+	DBusConnectionFlagsMessageBusConnection                             = 8
+	DBusConnectionFlagsDelayMessageProcessing                           = 16
+)
+
+type DBusInterfaceSkeletonFlags C.GDBusInterfaceSkeletonFlags
+
+const (
+	DBusInterfaceSkeletonFlagsNone                            DBusInterfaceSkeletonFlags = 0
+	DBusInterfaceSkeletonFlagsHandleMethodInvocationsInThread                            = 1
+)
+
+type DBusMessageFlags C.GDBusMessageFlags
+
+const (
+	DBusMessageFlagsNone                          DBusMessageFlags = 0
+	DBusMessageFlagsNoReplyExpected                                = 1
+	DBusMessageFlagsNoAutoStart                                    = 2
+	DBusMessageFlagsAllowInteractiveAuthorization                  = 4
+)
+
+type DBusObjectManagerClientFlags C.GDBusObjectManagerClientFlags
+
+const (
+	DBusObjectManagerClientFlagsNone           DBusObjectManagerClientFlags = 0
+	DBusObjectManagerClientFlagsDoNotAutoStart                              = 1
+)
+
+type DBusPropertyInfoFlags C.GDBusPropertyInfoFlags
+
+const (
+	DBusPropertyInfoFlagsNone     DBusPropertyInfoFlags = 0
+	DBusPropertyInfoFlagsReadable                       = 1
+	DBusPropertyInfoFlagsWritable                       = 2
+)
+
+type DBusProxyFlags C.GDBusProxyFlags
+
+const (
+	DBusProxyFlagsNone                         DBusProxyFlags = 0
+	DBusProxyFlagsDoNotLoadProperties                         = 1
+	DBusProxyFlagsDoNotConnectSignals                         = 2
+	DBusProxyFlagsDoNotAutoStart                              = 4
+	DBusProxyFlagsGetInvalidatedProperties                    = 8
+	DBusProxyFlagsDoNotAutoStartAtConstruction                = 16
+)
+
+type DBusSendMessageFlags C.GDBusSendMessageFlags
+
+const (
+	DBusSendMessageFlagsNone           DBusSendMessageFlags = 0
+	DBusSendMessageFlagsPreserveSerial                      = 1
+)
+
+type DBusServerFlags C.GDBusServerFlags
+
+const (
+	DBusServerFlagsNone                         DBusServerFlags = 0
+	DBusServerFlagsRunInThread                                  = 1
+	DBusServerFlagsAuthenticationAllowAnonymous                 = 2
+)
+
+type DBusSignalFlags C.GDBusSignalFlags
+
+const (
+	DBusSignalFlagsNone               DBusSignalFlags = 0
+	DBusSignalFlagsNoMatchRule                        = 1
+	DBusSignalFlagsMatchArg0Namespace                 = 2
+	DBusSignalFlagsMatchArg0Path                      = 4
+)
+
+type DBusSubtreeFlags C.GDBusSubtreeFlags
+
+const (
+	DBusSubtreeFlagsNone                        DBusSubtreeFlags = 0
+	DBusSubtreeFlagsDispatchToUnenumeratedNodes                  = 1
+)
+
+type DriveStartFlags C.GDriveStartFlags
+
+const (
+	DriveStartFlagsNone DriveStartFlags = 0
+)
+
+type FileAttributeInfoFlags C.GFileAttributeInfoFlags
+
+const (
+	FileAttributeInfoFlagsNone          FileAttributeInfoFlags = 0
+	FileAttributeInfoFlagsCopyWithFile                         = 1
+	FileAttributeInfoFlagsCopyWhenMoved                        = 2
+)
+
+type FileCopyFlags C.GFileCopyFlags
+
+const (
+	FileCopyFlagsNone               FileCopyFlags = 0
+	FileCopyFlagsOverwrite                        = 1
+	FileCopyFlagsBackup                           = 2
+	FileCopyFlagsNofollowSymlinks                 = 4
+	FileCopyFlagsAllMetadata                      = 8
+	FileCopyFlagsNoFallbackForMove                = 16
+	FileCopyFlagsTargetDefaultPerms               = 32
+)
+
+type FileCreateFlags C.GFileCreateFlags
+
+const (
+	FileCreateFlagsNone               FileCreateFlags = 0
+	FileCreateFlagsPrivate                            = 1
+	FileCreateFlagsReplaceDestination                 = 2
+)
+
+type FileMeasureFlags C.GFileMeasureFlags
+
+const (
+	FileMeasureFlagsNone           FileMeasureFlags = 0
+	FileMeasureFlagsReportAnyError                  = 2
+	FileMeasureFlagsApparentSize                    = 4
+	FileMeasureFlagsNoXdev                          = 8
+)
+
+type FileMonitorFlags C.GFileMonitorFlags
+
+const (
+	FileMonitorFlagsNone           FileMonitorFlags = 0
+	FileMonitorFlagsWatchMounts                     = 1
+	FileMonitorFlagsSendMoved                       = 2
+	FileMonitorFlagsWatchHardLinks                  = 4
+	FileMonitorFlagsWatchMoves                      = 8
+)
+
+type FileQueryInfoFlags C.GFileQueryInfoFlags
+
+const (
+	FileQueryInfoFlagsNone             FileQueryInfoFlags = 0
+	FileQueryInfoFlagsNofollowSymlinks                    = 1
+)
+
+type IOStreamSpliceFlags C.GIOStreamSpliceFlags
+
+const (
+	IOStreamSpliceFlagsNone         IOStreamSpliceFlags = 0
+	IOStreamSpliceFlagsCloseStream1                     = 1
+	IOStreamSpliceFlagsCloseStream2                     = 2
+	IOStreamSpliceFlagsWaitForBoth                      = 4
+)
+
+type MountMountFlags C.GMountMountFlags
+
+const (
+	MountMountFlagsNone MountMountFlags = 0
+)
+
+type MountUnmountFlags C.GMountUnmountFlags
+
+const (
+	MountUnmountFlagsNone  MountUnmountFlags = 0
+	MountUnmountFlagsForce                   = 1
+)
+
+type OutputStreamSpliceFlags C.GOutputStreamSpliceFlags
+
+const (
+	OutputStreamSpliceFlagsNone        OutputStreamSpliceFlags = 0
+	OutputStreamSpliceFlagsCloseSource                         = 1
+	OutputStreamSpliceFlagsCloseTarget                         = 2
+)
+
+type ResourceFlags C.GResourceFlags
+
+const (
+	ResourceFlagsNone       ResourceFlags = 0
+	ResourceFlagsCompressed               = 1
+)
+
+type ResourceLookupFlags C.GResourceLookupFlags
+
+const (
+	ResourceLookupFlagsNone ResourceLookupFlags = 0
+)
+
+type SettingsBindFlags C.GSettingsBindFlags
+
+const (
+	SettingsBindFlagsDefault       SettingsBindFlags = 0
+	SettingsBindFlagsGet                             = 1
+	SettingsBindFlagsSet                             = 2
+	SettingsBindFlagsNoSensitivity                   = 4
+	SettingsBindFlagsGetNoChanges                    = 8
+	SettingsBindFlagsInvertBoolean                   = 16
+)
+
+type SocketMsgFlags C.GSocketMsgFlags
+
+const (
+	SocketMsgFlagsNone      SocketMsgFlags = 0
+	SocketMsgFlagsOob                      = 1
+	SocketMsgFlagsPeek                     = 2
+	SocketMsgFlagsDontroute                = 4
+)
+
+type SubprocessFlags C.GSubprocessFlags
+
+const (
+	SubprocessFlagsNone          SubprocessFlags = 0
+	SubprocessFlagsStdinPipe                     = 1
+	SubprocessFlagsStdinInherit                  = 2
+	SubprocessFlagsStdoutPipe                    = 4
+	SubprocessFlagsStdoutSilence                 = 8
+	SubprocessFlagsStderrPipe                    = 16
+	SubprocessFlagsStderrSilence                 = 32
+	SubprocessFlagsStderrMerge                   = 64
+	SubprocessFlagsInheritFds                    = 128
+)
+
+type TestDBusFlags C.GTestDBusFlags
+
+const (
+	TestDBusFlagsNone TestDBusFlags = 0
+)
+
+type TlsCertificateFlags C.GTlsCertificateFlags
+
+const (
+	TlsCertificateFlagsUnknownCa    TlsCertificateFlags = 1
+	TlsCertificateFlagsBadIdentity                      = 2
+	TlsCertificateFlagsNotActivated                     = 4
+	TlsCertificateFlagsExpired                          = 8
+	TlsCertificateFlagsRevoked                          = 16
+	TlsCertificateFlagsInsecure                         = 32
+	TlsCertificateFlagsGenericError                     = 64
+	TlsCertificateFlagsValidateAll                      = 127
+)
+
+type TlsDatabaseVerifyFlags C.GTlsDatabaseVerifyFlags
+
+const (
+	TlsDatabaseVerifyFlagsNone TlsDatabaseVerifyFlags = 0
+)
+
+type TlsPasswordFlags C.GTlsPasswordFlags
+
+const (
+	TlsPasswordFlagsNone      TlsPasswordFlags = 0
+	TlsPasswordFlagsRetry                      = 2
+	TlsPasswordFlagsManyTries                  = 4
+	TlsPasswordFlagsFinalTry                   = 8
+)
