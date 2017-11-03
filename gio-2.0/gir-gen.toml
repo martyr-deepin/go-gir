@@ -6,6 +6,14 @@ type = "AppInfo"
 funcs = [
 	'g_app_info_get_id',
 #	'g_app_info_launch',
+    'g_app_info_get_supported_types',
+]
+
+[[gen_files]]
+type = 'DesktopAppInfo'
+funcs = [
+    'g_desktop_app_info_new_from_filename',
+    'g_desktop_app_info_list_actions',
 ]
 
 [[gen_files]]
@@ -23,6 +31,7 @@ funcs = [
 	'g_settings_get_enum',
 	'g_settings_get_flags',
 	'g_settings_get_child',
+	'g_settings_get_strv',
 	'g_settings_apply',
 ]
 
@@ -46,6 +55,9 @@ funcs = [
 ]
 
 [[gen_files]]
+type = 'Seekable'
+
+[[gen_files]]
 type = "FileInfo"
 
 [[gen_files]]
@@ -57,4 +69,13 @@ funcs = [
     'g_application_hold',
     'g_application_release',
     #'g_application_run',
+]
+
+[[gen_files]]
+type = 'ActionMap'
+
+[[gen_files]]
+type = 'ActionGroup'
+funcs = [
+    'g_action_group_list_actions',
 ]

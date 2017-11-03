@@ -24,6 +24,9 @@ func SetSliceDataLen(pSlice, pData unsafe.Pointer, len int) {
 }
 
 func GetZeroTermArrayLen(p unsafe.Pointer, size uintptr) int {
+	if p == nil {
+		return 0
+	}
 	var count uintptr
 	//fmt.Println("size is", size)
 	for {

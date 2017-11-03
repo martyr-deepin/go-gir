@@ -17,8 +17,8 @@ package gio
 */
 import "C"
 import "unsafe"
-import "github.com/electricface/go-auto-gir/gobject-2.0"
 import "github.com/electricface/go-auto-gir/util"
+import "github.com/electricface/go-auto-gir/gobject-2.0"
 import "github.com/electricface/go-auto-gir/glib-2.0"
 
 // Interface AppInfo
@@ -46,6 +46,79 @@ func (appinfo AppInfo) GetId() string {
 	ret0 := C.g_app_info_get_id(appinfo.native())
 	ret := C.GoString(ret0)
 	defer C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// GetSupportedTypes is a wrapper around g_app_info_get_supported_types().
+func (appinfo AppInfo) GetSupportedTypes() []string {
+
+	// Var for Go: appinfo
+	// Var for C: appinfo0
+	// Type for Go: AppInfo
+	// Type for C: *C.GAppInfo
+	ret0 := C.g_app_info_get_supported_types(appinfo.native())
+	var ret0Slice []*C.char
+	ret0SliceLength := util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), ret0SliceLength)      /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString(elem)
+		defer C.g_free(C.gpointer(elem))
+		ret[idx] = elemG
+	}
+	return ret
+}
+
+// Object DesktopAppInfo
+type DesktopAppInfo struct {
+	gobject.Object
+}
+
+func (v DesktopAppInfo) native() *C.GDesktopAppInfo {
+	return (*C.GDesktopAppInfo)(v.Ptr)
+}
+func wrapDesktopAppInfo(p *C.GDesktopAppInfo) (v DesktopAppInfo) {
+	v.Ptr = unsafe.Pointer(p)
+	return
+}
+func WrapDesktopAppInfo(p unsafe.Pointer) (v DesktopAppInfo) {
+	v.Ptr = p
+	return
+}
+func (v DesktopAppInfo) AppInfo() AppInfo {
+	return WrapAppInfo(v.Ptr)
+}
+
+// DesktopAppInfoNewFromFilename is a wrapper around g_desktop_app_info_new_from_filename().
+func DesktopAppInfoNewFromFilename(filename string) DesktopAppInfo {
+
+	// Var for Go: filename
+	// Var for C: filename0
+	// Type for Go: string
+	// Type for C: *C.char
+	filename0 := C.CString(filename)
+	defer C.free(unsafe.Pointer(filename0)) /*ch:<stdlib.h>*/
+	ret0 := C.g_desktop_app_info_new_from_filename(filename0)
+	return wrapDesktopAppInfo(ret0)
+}
+
+// ListActions is a wrapper around g_desktop_app_info_list_actions().
+func (info DesktopAppInfo) ListActions() []string {
+
+	// Var for Go: info
+	// Var for C: info0
+	// Type for Go: DesktopAppInfo
+	// Type for C: *C.GDesktopAppInfo
+	ret0 := C.g_desktop_app_info_list_actions(info.native())
+	var ret0Slice []*C.gchar
+	ret0SliceLength := util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), ret0SliceLength)      /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString((*C.char)(elem))
+		defer C.g_free(C.gpointer(elem))
+		ret[idx] = elemG
+	}
 	return ret
 }
 
@@ -235,6 +308,33 @@ func (settings Settings) GetString(key string) string {
 	return ret
 }
 
+// GetStrv is a wrapper around g_settings_get_strv().
+func (settings Settings) GetStrv(key string) []string {
+
+	// Var for Go: settings
+	// Var for C: settings0
+	// Type for Go: Settings
+	// Type for C: *C.GSettings
+
+	// Var for Go: key
+	// Var for C: key0
+	// Type for Go: string
+	// Type for C: *C.gchar
+	key0 := (*C.gchar)(C.CString(key))
+	defer C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
+	ret0 := C.g_settings_get_strv(settings.native(), key0)
+	var ret0Slice []*C.gchar
+	ret0SliceLength := util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), ret0SliceLength)      /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString((*C.char)(elem))
+		defer C.g_free(C.gpointer(elem))
+		ret[idx] = elemG
+	}
+	return ret
+}
+
 // GetUint is a wrapper around g_settings_get_uint().
 func (settings Settings) GetUint(key string) uint {
 
@@ -405,6 +505,9 @@ func WrapFileOutputStream(p unsafe.Pointer) (v FileOutputStream) {
 	v.Ptr = p
 	return
 }
+func (v FileOutputStream) Seekable() Seekable {
+	return WrapSeekable(v.Ptr)
+}
 
 // QueryInfo is a wrapper around g_file_output_stream_query_info().
 func (stream FileOutputStream) QueryInfo(attributes string, cancellable Cancellable) (FileInfo, error) {
@@ -432,6 +535,21 @@ func (stream FileOutputStream) QueryInfo(attributes string, cancellable Cancella
 		return FileInfo{}, err.GoValue()
 	}
 	return wrapFileInfo(ret0), nil
+}
+
+// Interface Seekable
+type Seekable struct {
+	Ptr unsafe.Pointer
+}
+
+func (v Seekable) native() *C.GSeekable {
+	return (*C.GSeekable)(v.Ptr)
+}
+func wrapSeekable(p *C.GSeekable) Seekable {
+	return Seekable{unsafe.Pointer(p)}
+}
+func WrapSeekable(p unsafe.Pointer) Seekable {
+	return Seekable{p}
 }
 
 // Object FileInfo
@@ -466,6 +584,12 @@ func wrapApplication(p *C.GApplication) (v Application) {
 func WrapApplication(p unsafe.Pointer) (v Application) {
 	v.Ptr = p
 	return
+}
+func (v Application) ActionGroup() ActionGroup {
+	return WrapActionGroup(v.Ptr)
+}
+func (v Application) ActionMap() ActionMap {
+	return WrapActionMap(v.Ptr)
 }
 
 // ApplicationNew is a wrapper around g_application_new().
@@ -532,6 +656,56 @@ func ApplicationIdIsValid(application_id string) bool {
 	defer C.free(unsafe.Pointer(application_id0)) /*ch:<stdlib.h>*/
 	ret0 := C.g_application_id_is_valid(application_id0)
 	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// Interface ActionMap
+type ActionMap struct {
+	Ptr unsafe.Pointer
+}
+
+func (v ActionMap) native() *C.GActionMap {
+	return (*C.GActionMap)(v.Ptr)
+}
+func wrapActionMap(p *C.GActionMap) ActionMap {
+	return ActionMap{unsafe.Pointer(p)}
+}
+func WrapActionMap(p unsafe.Pointer) ActionMap {
+	return ActionMap{p}
+}
+
+// Interface ActionGroup
+type ActionGroup struct {
+	Ptr unsafe.Pointer
+}
+
+func (v ActionGroup) native() *C.GActionGroup {
+	return (*C.GActionGroup)(v.Ptr)
+}
+func wrapActionGroup(p *C.GActionGroup) ActionGroup {
+	return ActionGroup{unsafe.Pointer(p)}
+}
+func WrapActionGroup(p unsafe.Pointer) ActionGroup {
+	return ActionGroup{p}
+}
+
+// ListActions is a wrapper around g_action_group_list_actions().
+func (action_group ActionGroup) ListActions() []string {
+
+	// Var for Go: action_group
+	// Var for C: action_group0
+	// Type for Go: ActionGroup
+	// Type for C: *C.GActionGroup
+	ret0 := C.g_action_group_list_actions(action_group.native())
+	var ret0Slice []*C.gchar
+	ret0SliceLength := util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), ret0SliceLength)      /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString((*C.char)(elem))
+		defer C.g_free(C.gpointer(elem))
+		ret[idx] = elemG
+	}
+	return ret
 }
 
 type BusType C.GBusType
