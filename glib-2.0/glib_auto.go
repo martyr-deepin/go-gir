@@ -396,7 +396,9 @@ func (source Source) GetName() string {
 	// Type for Go: Source
 	// Type for C: *C.GSource
 	ret0 := C.g_source_get_name(source.native())
-	return C.GoString(ret0)
+	ret := C.GoString(ret0)
+	defer C.g_free(C.gpointer(ret0))
+	return ret
 }
 
 // GetPriority is a wrapper around g_source_get_priority().

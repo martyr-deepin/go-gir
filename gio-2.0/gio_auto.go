@@ -44,7 +44,9 @@ func (appinfo AppInfo) GetId() string {
 	// Type for Go: AppInfo
 	// Type for C: *C.GAppInfo
 	ret0 := C.g_app_info_get_id(appinfo.native())
-	return C.GoString(ret0)
+	ret := C.GoString(ret0)
+	defer C.g_free(C.gpointer(ret0))
+	return ret
 }
 
 // Object Settings
@@ -228,8 +230,9 @@ func (settings Settings) GetString(key string) string {
 	key0 := (*C.gchar)(C.CString(key))
 	defer C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	ret0 := C.g_settings_get_string(settings.native(), key0)
+	ret := C.GoString((*C.char)(ret0))
 	defer C.g_free(C.gpointer(ret0))
-	return C.GoString((*C.char)(ret0))
+	return ret
 }
 
 // GetUint is a wrapper around g_settings_get_uint().
@@ -283,7 +286,7 @@ func (settings Settings) GetValue(key string) glib.Variant {
 	key0 := (*C.gchar)(C.CString(key))
 	defer C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	ret0 := C.g_settings_get_value(settings.native(), key0)
-	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:glib*/
+	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/
 }
 
 // Interface File
@@ -309,8 +312,9 @@ func (file File) GetPath() string {
 	// Type for Go: File
 	// Type for C: *C.GFile
 	ret0 := C.g_file_get_path(file.native())
+	ret := C.GoString(ret0)
 	defer C.g_free(C.gpointer(ret0))
-	return C.GoString(ret0)
+	return ret
 }
 
 // Replace is a wrapper around g_file_replace().
@@ -480,6 +484,54 @@ func ApplicationNew(application_id string, flags ApplicationFlags) Application {
 	// Type for C: C.GApplicationFlags
 	ret0 := C.g_application_new(application_id0, C.GApplicationFlags(flags))
 	return wrapApplication(ret0)
+}
+
+// Hold is a wrapper around g_application_hold().
+func (application Application) Hold() {
+
+	// Var for Go: application
+	// Var for C: application0
+	// Type for Go: Application
+	// Type for C: *C.GApplication
+	C.g_application_hold(application.native())
+}
+
+// Release is a wrapper around g_application_release().
+func (application Application) Release() {
+
+	// Var for Go: application
+	// Var for C: application0
+	// Type for Go: Application
+	// Type for C: *C.GApplication
+	C.g_application_release(application.native())
+}
+
+// SetInactivityTimeout is a wrapper around g_application_set_inactivity_timeout().
+func (application Application) SetInactivityTimeout(inactivity_timeout uint) {
+
+	// Var for Go: application
+	// Var for C: application0
+	// Type for Go: Application
+	// Type for C: *C.GApplication
+
+	// Var for Go: inactivity_timeout
+	// Var for C: inactivity_timeout0
+	// Type for Go: uint
+	// Type for C: C.guint
+	C.g_application_set_inactivity_timeout(application.native(), C.guint(inactivity_timeout))
+}
+
+// ApplicationIdIsValid is a wrapper around g_application_id_is_valid().
+func ApplicationIdIsValid(application_id string) bool {
+
+	// Var for Go: application_id
+	// Var for C: application_id0
+	// Type for Go: string
+	// Type for C: *C.gchar
+	application_id0 := (*C.gchar)(C.CString(application_id))
+	defer C.free(unsafe.Pointer(application_id0)) /*ch:<stdlib.h>*/
+	ret0 := C.g_application_id_is_valid(application_id0)
+	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 type BusType C.GBusType

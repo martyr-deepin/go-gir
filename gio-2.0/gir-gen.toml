@@ -52,5 +52,9 @@ type = "FileInfo"
 type = 'Application'
 funcs = [
     'g_application_new',
-
+    'g_application_id_is_valid',
+    'g_application_set_inactivity_timeout',
+    'g_application_hold',
+    'g_application_release',
+    #'g_application_run',
 ]
