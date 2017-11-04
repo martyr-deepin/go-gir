@@ -38,11 +38,6 @@ func WrapAppInfo(p unsafe.Pointer) AppInfo {
 
 // GetId is a wrapper around g_app_info_get_id().
 func (appinfo AppInfo) GetId() string {
-
-	// Var for Go: appinfo
-	// Var for C: appinfo0
-	// Type for Go: AppInfo
-	// Type for C: *C.GAppInfo
 	ret0 := C.g_app_info_get_id(appinfo.native())
 	ret := C.GoString(ret0)
 	return ret
@@ -50,11 +45,6 @@ func (appinfo AppInfo) GetId() string {
 
 // GetSupportedTypes is a wrapper around g_app_info_get_supported_types().
 func (appinfo AppInfo) GetSupportedTypes() []string {
-
-	// Var for Go: appinfo
-	// Var for C: appinfo0
-	// Type for Go: AppInfo
-	// Type for C: *C.GAppInfo
 	ret0 := C.g_app_info_get_supported_types(appinfo.native())
 	var ret0Slice []*C.char
 	ret0SliceLength := util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/
@@ -89,11 +79,6 @@ func (v DesktopAppInfo) AppInfo() AppInfo {
 
 // DesktopAppInfoNewFromFilename is a wrapper around g_desktop_app_info_new_from_filename().
 func DesktopAppInfoNewFromFilename(filename string) DesktopAppInfo {
-
-	// Var for Go: filename
-	// Var for C: filename0
-	// Type for Go: string
-	// Type for C: *C.char
 	filename0 := C.CString(filename)
 	ret0 := C.g_desktop_app_info_new_from_filename(filename0)
 	C.free(unsafe.Pointer(filename0)) /*ch:<stdlib.h>*/
@@ -102,11 +87,6 @@ func DesktopAppInfoNewFromFilename(filename string) DesktopAppInfo {
 
 // ListActions is a wrapper around g_desktop_app_info_list_actions().
 func (info DesktopAppInfo) ListActions() []string {
-
-	// Var for Go: info
-	// Var for C: info0
-	// Type for Go: DesktopAppInfo
-	// Type for C: *C.GDesktopAppInfo
 	ret0 := C.g_desktop_app_info_list_actions(info.native())
 	var ret0Slice []*C.gchar
 	ret0SliceLength := util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/
@@ -138,11 +118,6 @@ func WrapSettings(p unsafe.Pointer) (v Settings) {
 
 // SettingsNew is a wrapper around g_settings_new().
 func SettingsNew(schema_id string) Settings {
-
-	// Var for Go: schema_id
-	// Var for C: schema_id0
-	// Type for Go: string
-	// Type for C: *C.gchar
 	schema_id0 := (*C.gchar)(C.CString(schema_id))
 	ret0 := C.g_settings_new(schema_id0)
 	C.free(unsafe.Pointer(schema_id0)) /*ch:<stdlib.h>*/
@@ -151,26 +126,11 @@ func SettingsNew(schema_id string) Settings {
 
 // Apply is a wrapper around g_settings_apply().
 func (settings Settings) Apply() {
-
-	// Var for Go: settings
-	// Var for C: settings0
-	// Type for Go: Settings
-	// Type for C: *C.GSettings
 	C.g_settings_apply(settings.native())
 }
 
 // GetBoolean is a wrapper around g_settings_get_boolean().
 func (settings Settings) GetBoolean(key string) bool {
-
-	// Var for Go: settings
-	// Var for C: settings0
-	// Type for Go: Settings
-	// Type for C: *C.GSettings
-
-	// Var for Go: key
-	// Var for C: key0
-	// Type for Go: string
-	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_settings_get_boolean(settings.native(), key0)
 	C.free(unsafe.Pointer(key0))    /*ch:<stdlib.h>*/
@@ -179,16 +139,6 @@ func (settings Settings) GetBoolean(key string) bool {
 
 // GetChild is a wrapper around g_settings_get_child().
 func (settings Settings) GetChild(name string) Settings {
-
-	// Var for Go: settings
-	// Var for C: settings0
-	// Type for Go: Settings
-	// Type for C: *C.GSettings
-
-	// Var for Go: name
-	// Var for C: name0
-	// Type for Go: string
-	// Type for C: *C.gchar
 	name0 := (*C.gchar)(C.CString(name))
 	ret0 := C.g_settings_get_child(settings.native(), name0)
 	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
@@ -197,16 +147,6 @@ func (settings Settings) GetChild(name string) Settings {
 
 // GetDouble is a wrapper around g_settings_get_double().
 func (settings Settings) GetDouble(key string) float64 {
-
-	// Var for Go: settings
-	// Var for C: settings0
-	// Type for Go: Settings
-	// Type for C: *C.GSettings
-
-	// Var for Go: key
-	// Var for C: key0
-	// Type for Go: string
-	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_settings_get_double(settings.native(), key0)
 	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
@@ -215,16 +155,6 @@ func (settings Settings) GetDouble(key string) float64 {
 
 // GetEnum is a wrapper around g_settings_get_enum().
 func (settings Settings) GetEnum(key string) int {
-
-	// Var for Go: settings
-	// Var for C: settings0
-	// Type for Go: Settings
-	// Type for C: *C.GSettings
-
-	// Var for Go: key
-	// Var for C: key0
-	// Type for Go: string
-	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_settings_get_enum(settings.native(), key0)
 	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
@@ -233,16 +163,6 @@ func (settings Settings) GetEnum(key string) int {
 
 // GetFlags is a wrapper around g_settings_get_flags().
 func (settings Settings) GetFlags(key string) uint {
-
-	// Var for Go: settings
-	// Var for C: settings0
-	// Type for Go: Settings
-	// Type for C: *C.GSettings
-
-	// Var for Go: key
-	// Var for C: key0
-	// Type for Go: string
-	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_settings_get_flags(settings.native(), key0)
 	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
@@ -251,16 +171,6 @@ func (settings Settings) GetFlags(key string) uint {
 
 // GetInt is a wrapper around g_settings_get_int().
 func (settings Settings) GetInt(key string) int {
-
-	// Var for Go: settings
-	// Var for C: settings0
-	// Type for Go: Settings
-	// Type for C: *C.GSettings
-
-	// Var for Go: key
-	// Var for C: key0
-	// Type for Go: string
-	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_settings_get_int(settings.native(), key0)
 	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
@@ -269,16 +179,6 @@ func (settings Settings) GetInt(key string) int {
 
 // GetInt64 is a wrapper around g_settings_get_int64().
 func (settings Settings) GetInt64(key string) int64 {
-
-	// Var for Go: settings
-	// Var for C: settings0
-	// Type for Go: Settings
-	// Type for C: *C.GSettings
-
-	// Var for Go: key
-	// Var for C: key0
-	// Type for Go: string
-	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_settings_get_int64(settings.native(), key0)
 	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
@@ -287,16 +187,6 @@ func (settings Settings) GetInt64(key string) int64 {
 
 // GetString is a wrapper around g_settings_get_string().
 func (settings Settings) GetString(key string) string {
-
-	// Var for Go: settings
-	// Var for C: settings0
-	// Type for Go: Settings
-	// Type for C: *C.GSettings
-
-	// Var for Go: key
-	// Var for C: key0
-	// Type for Go: string
-	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_settings_get_string(settings.native(), key0)
 	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
@@ -307,16 +197,6 @@ func (settings Settings) GetString(key string) string {
 
 // GetStrv is a wrapper around g_settings_get_strv().
 func (settings Settings) GetStrv(key string) []string {
-
-	// Var for Go: settings
-	// Var for C: settings0
-	// Type for Go: Settings
-	// Type for C: *C.GSettings
-
-	// Var for Go: key
-	// Var for C: key0
-	// Type for Go: string
-	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_settings_get_strv(settings.native(), key0)
 	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
@@ -335,16 +215,6 @@ func (settings Settings) GetStrv(key string) []string {
 
 // GetUint is a wrapper around g_settings_get_uint().
 func (settings Settings) GetUint(key string) uint {
-
-	// Var for Go: settings
-	// Var for C: settings0
-	// Type for Go: Settings
-	// Type for C: *C.GSettings
-
-	// Var for Go: key
-	// Var for C: key0
-	// Type for Go: string
-	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_settings_get_uint(settings.native(), key0)
 	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
@@ -353,16 +223,6 @@ func (settings Settings) GetUint(key string) uint {
 
 // GetUint64 is a wrapper around g_settings_get_uint64().
 func (settings Settings) GetUint64(key string) uint64 {
-
-	// Var for Go: settings
-	// Var for C: settings0
-	// Type for Go: Settings
-	// Type for C: *C.GSettings
-
-	// Var for Go: key
-	// Var for C: key0
-	// Type for Go: string
-	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_settings_get_uint64(settings.native(), key0)
 	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
@@ -371,16 +231,6 @@ func (settings Settings) GetUint64(key string) uint64 {
 
 // GetValue is a wrapper around g_settings_get_value().
 func (settings Settings) GetValue(key string) glib.Variant {
-
-	// Var for Go: settings
-	// Var for C: settings0
-	// Type for Go: Settings
-	// Type for C: *C.GSettings
-
-	// Var for Go: key
-	// Var for C: key0
-	// Type for Go: string
-	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_settings_get_value(settings.native(), key0)
 	C.free(unsafe.Pointer(key0))                  /*ch:<stdlib.h>*/
@@ -404,11 +254,6 @@ func WrapFile(p unsafe.Pointer) File {
 
 // GetPath is a wrapper around g_file_get_path().
 func (file File) GetPath() string {
-
-	// Var for Go: file
-	// Var for C: file0
-	// Type for Go: File
-	// Type for C: *C.GFile
 	ret0 := C.g_file_get_path(file.native())
 	ret := C.GoString(ret0)
 	C.g_free(C.gpointer(ret0))
@@ -417,32 +262,7 @@ func (file File) GetPath() string {
 
 // Replace is a wrapper around g_file_replace().
 func (file File) Replace(etag string, make_backup bool, flags FileCreateFlags, cancellable Cancellable) (FileOutputStream, error) {
-
-	// Var for Go: file
-	// Var for C: file0
-	// Type for Go: File
-	// Type for C: *C.GFile
-
-	// Var for Go: etag
-	// Var for C: etag0
-	// Type for Go: string
-	// Type for C: *C.char
 	etag0 := C.CString(etag)
-
-	// Var for Go: make_backup
-	// Var for C: make_backup0
-	// Type for Go: bool
-	// Type for C: C.gboolean
-
-	// Var for Go: flags
-	// Var for C: flags0
-	// Type for Go: FileCreateFlags
-	// Type for C: C.GFileCreateFlags
-
-	// Var for Go: cancellable
-	// Var for C: cancellable0
-	// Type for Go: Cancellable
-	// Type for C: *C.GCancellable
 	var err glib.Error
 	ret0 := C.g_file_replace(file.native(), etag0, C.gboolean(util.Bool2Int(make_backup)) /*go:.util*/, C.GFileCreateFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	C.free(unsafe.Pointer(etag0)) /*ch:<stdlib.h>*/
@@ -509,22 +329,7 @@ func (v FileOutputStream) Seekable() Seekable {
 
 // QueryInfo is a wrapper around g_file_output_stream_query_info().
 func (stream FileOutputStream) QueryInfo(attributes string, cancellable Cancellable) (FileInfo, error) {
-
-	// Var for Go: stream
-	// Var for C: stream0
-	// Type for Go: FileOutputStream
-	// Type for C: *C.GFileOutputStream
-
-	// Var for Go: attributes
-	// Var for C: attributes0
-	// Type for Go: string
-	// Type for C: *C.char
 	attributes0 := C.CString(attributes)
-
-	// Var for Go: cancellable
-	// Var for C: cancellable0
-	// Type for Go: Cancellable
-	// Type for C: *C.GCancellable
 	var err glib.Error
 	ret0 := C.g_file_output_stream_query_info(stream.native(), attributes0, cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	C.free(unsafe.Pointer(attributes0)) /*ch:<stdlib.h>*/
@@ -592,17 +397,7 @@ func (v Application) ActionMap() ActionMap {
 
 // ApplicationNew is a wrapper around g_application_new().
 func ApplicationNew(application_id string, flags ApplicationFlags) Application {
-
-	// Var for Go: application_id
-	// Var for C: application_id0
-	// Type for Go: string
-	// Type for C: *C.gchar
 	application_id0 := (*C.gchar)(C.CString(application_id))
-
-	// Var for Go: flags
-	// Var for C: flags0
-	// Type for Go: ApplicationFlags
-	// Type for C: C.GApplicationFlags
 	ret0 := C.g_application_new(application_id0, C.GApplicationFlags(flags))
 	C.free(unsafe.Pointer(application_id0)) /*ch:<stdlib.h>*/
 	return wrapApplication(ret0)
@@ -610,46 +405,21 @@ func ApplicationNew(application_id string, flags ApplicationFlags) Application {
 
 // Hold is a wrapper around g_application_hold().
 func (application Application) Hold() {
-
-	// Var for Go: application
-	// Var for C: application0
-	// Type for Go: Application
-	// Type for C: *C.GApplication
 	C.g_application_hold(application.native())
 }
 
 // Release is a wrapper around g_application_release().
 func (application Application) Release() {
-
-	// Var for Go: application
-	// Var for C: application0
-	// Type for Go: Application
-	// Type for C: *C.GApplication
 	C.g_application_release(application.native())
 }
 
 // SetInactivityTimeout is a wrapper around g_application_set_inactivity_timeout().
 func (application Application) SetInactivityTimeout(inactivity_timeout uint) {
-
-	// Var for Go: application
-	// Var for C: application0
-	// Type for Go: Application
-	// Type for C: *C.GApplication
-
-	// Var for Go: inactivity_timeout
-	// Var for C: inactivity_timeout0
-	// Type for Go: uint
-	// Type for C: C.guint
 	C.g_application_set_inactivity_timeout(application.native(), C.guint(inactivity_timeout))
 }
 
 // ApplicationIdIsValid is a wrapper around g_application_id_is_valid().
 func ApplicationIdIsValid(application_id string) bool {
-
-	// Var for Go: application_id
-	// Var for C: application_id0
-	// Type for Go: string
-	// Type for C: *C.gchar
 	application_id0 := (*C.gchar)(C.CString(application_id))
 	ret0 := C.g_application_id_is_valid(application_id0)
 	C.free(unsafe.Pointer(application_id0)) /*ch:<stdlib.h>*/
@@ -688,11 +458,6 @@ func WrapActionGroup(p unsafe.Pointer) ActionGroup {
 
 // ListActions is a wrapper around g_action_group_list_actions().
 func (action_group ActionGroup) ListActions() []string {
-
-	// Var for Go: action_group
-	// Var for C: action_group0
-	// Type for Go: ActionGroup
-	// Type for C: *C.GActionGroup
 	ret0 := C.g_action_group_list_actions(action_group.native())
 	var ret0Slice []*C.gchar
 	ret0SliceLength := util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/
