@@ -44,7 +44,7 @@ func (value Value) GetString() string {
 	// Type for C: *C.GValue
 	ret0 := C.g_value_get_string(value.native())
 	ret := C.GoString((*C.char)(ret0))
-	defer C.g_free(C.gpointer(ret0))
+	C.g_free(C.gpointer(ret0))
 	return ret
 }
 
@@ -181,8 +181,8 @@ func (value Value) SetString(v_string string) {
 	// Type for Go: string
 	// Type for C: *C.gchar
 	v_string0 := (*C.gchar)(C.CString(v_string))
-	defer C.free(unsafe.Pointer(v_string0)) /*ch:<stdlib.h>*/
 	C.g_value_set_string(value.native(), v_string0)
+	C.free(unsafe.Pointer(v_string0)) /*ch:<stdlib.h>*/
 }
 
 // SetUchar is a wrapper around g_value_set_uchar().
@@ -366,7 +366,7 @@ func (closure Closure) Unref() {
 	C.g_closure_unref(closure.native())
 }
 
-type BindingFlags C.GBindingFlags
+type BindingFlags int
 
 const (
 	BindingFlagsDefault       BindingFlags = 0
@@ -375,14 +375,14 @@ const (
 	BindingFlagsInvertBoolean              = 4
 )
 
-type ConnectFlags C.GConnectFlags
+type ConnectFlags int
 
 const (
 	ConnectFlagsAfter   ConnectFlags = 1
 	ConnectFlagsSwapped              = 2
 )
 
-type ParamFlags C.GParamFlags
+type ParamFlags int
 
 const (
 	ParamFlagsReadable       ParamFlags = 1
@@ -399,7 +399,7 @@ const (
 	ParamFlagsDeprecated                = 2147483648
 )
 
-type SignalFlags C.GSignalFlags
+type SignalFlags int
 
 const (
 	SignalFlagsRunFirst    SignalFlags = 1
@@ -413,7 +413,7 @@ const (
 	SignalFlagsDeprecated              = 256
 )
 
-type SignalMatchType C.GSignalMatchType
+type SignalMatchType int
 
 const (
 	SignalMatchTypeId        SignalMatchType = 1
@@ -424,7 +424,7 @@ const (
 	SignalMatchTypeUnblocked                 = 32
 )
 
-type TypeDebugFlags C.GTypeDebugFlags
+type TypeDebugFlags int
 
 const (
 	TypeDebugFlagsNone          TypeDebugFlags = 0
@@ -434,14 +434,14 @@ const (
 	TypeDebugFlagsMask                         = 7
 )
 
-type TypeFlags C.GTypeFlags
+type TypeFlags int
 
 const (
 	TypeFlagsAbstract      TypeFlags = 16
 	TypeFlagsValueAbstract           = 32
 )
 
-type TypeFundamentalFlags C.GTypeFundamentalFlags
+type TypeFundamentalFlags int
 
 const (
 	TypeFundamentalFlagsClassed        TypeFundamentalFlags = 1

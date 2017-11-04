@@ -397,7 +397,7 @@ func (source Source) GetName() string {
 	// Type for C: *C.GSource
 	ret0 := C.g_source_get_name(source.native())
 	ret := C.GoString(ret0)
-	defer C.g_free(C.gpointer(ret0))
+	C.g_free(C.gpointer(ret0))
 	return ret
 }
 
@@ -473,8 +473,8 @@ func (source Source) SetName(name string) {
 	// Type for Go: string
 	// Type for C: *C.char
 	name0 := C.CString(name)
-	defer C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
 	C.g_source_set_name(source.native(), name0)
+	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
 }
 
 // SetPriority is a wrapper around g_source_set_priority().
@@ -526,8 +526,8 @@ func SourceSetNameById(tag uint, name string) {
 	// Type for Go: string
 	// Type for C: *C.char
 	name0 := C.CString(name)
-	defer C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
 	C.g_source_set_name_by_id(C.guint(tag), name0)
+	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
 }
 
 // IdleSourceNew is a wrapper around g_idle_source_new().
@@ -558,7 +558,7 @@ func TimeoutSourceNewSeconds(interval uint) Source {
 	return wrapSource(ret0)
 }
 
-type BookmarkFileError C.GBookmarkFileError
+type BookmarkFileError int
 
 const (
 	BookmarkFileErrorInvalidUri       BookmarkFileError = 0
@@ -571,7 +571,7 @@ const (
 	BookmarkFileErrorFileNotFound                       = 7
 )
 
-type ChecksumType C.GChecksumType
+type ChecksumType int
 
 const (
 	ChecksumTypeMd5    ChecksumType = 0
@@ -580,7 +580,7 @@ const (
 	ChecksumTypeSha512              = 3
 )
 
-type ConvertError C.GConvertError
+type ConvertError int
 
 const (
 	ConvertErrorNoConversion    ConvertError = 0
@@ -592,7 +592,7 @@ const (
 	ConvertErrorNoMemory                     = 6
 )
 
-type DateDMY C.GDateDMY
+type DateDMY int
 
 const (
 	DateDMYDay   DateDMY = 0
@@ -600,7 +600,7 @@ const (
 	DateDMYYear          = 2
 )
 
-type DateMonth C.GDateMonth
+type DateMonth int
 
 const (
 	DateMonthBadMonth  DateMonth = 0
@@ -618,7 +618,7 @@ const (
 	DateMonthDecember            = 12
 )
 
-type DateWeekday C.GDateWeekday
+type DateWeekday int
 
 const (
 	DateWeekdayBadWeekday DateWeekday = 0
@@ -631,7 +631,7 @@ const (
 	DateWeekdaySunday                 = 7
 )
 
-type ErrorType C.GErrorType
+type ErrorType int
 
 const (
 	ErrorTypeUnknown           ErrorType = 0
@@ -644,7 +644,7 @@ const (
 	ErrorTypeFloatMalformed              = 7
 )
 
-type FileError C.GFileError
+type FileError int
 
 const (
 	FileErrorExist       FileError = 0
@@ -674,7 +674,7 @@ const (
 	FileErrorFailed                = 24
 )
 
-type IOChannelError C.GIOChannelError
+type IOChannelError int
 
 const (
 	IOChannelErrorFbig     IOChannelError = 0
@@ -688,7 +688,7 @@ const (
 	IOChannelErrorFailed                  = 8
 )
 
-type IOError C.GIOError
+type IOError int
 
 const (
 	IOErrorNone    IOError = 0
@@ -697,7 +697,7 @@ const (
 	IOErrorUnknown         = 3
 )
 
-type IOStatus C.GIOStatus
+type IOStatus int
 
 const (
 	IOStatusError  IOStatus = 0
@@ -706,7 +706,7 @@ const (
 	IOStatusAgain           = 3
 )
 
-type KeyFileError C.GKeyFileError
+type KeyFileError int
 
 const (
 	KeyFileErrorUnknownEncoding KeyFileError = 0
@@ -717,14 +717,14 @@ const (
 	KeyFileErrorInvalidValue                 = 5
 )
 
-type LogWriterOutput C.GLogWriterOutput
+type LogWriterOutput int
 
 const (
 	LogWriterOutputHandled   LogWriterOutput = 1
 	LogWriterOutputUnhandled                 = 0
 )
 
-type MarkupError C.GMarkupError
+type MarkupError int
 
 const (
 	MarkupErrorBadUtf8          MarkupError = 0
@@ -736,7 +736,7 @@ const (
 	MarkupErrorMissingAttribute             = 6
 )
 
-type NormalizeMode C.GNormalizeMode
+type NormalizeMode int
 
 const (
 	NormalizeModeDefault        NormalizeMode = 0
@@ -749,7 +749,7 @@ const (
 	NormalizeModeNfkc                         = 3
 )
 
-type OnceStatus C.GOnceStatus
+type OnceStatus int
 
 const (
 	OnceStatusNotcalled OnceStatus = 0
@@ -757,7 +757,7 @@ const (
 	OnceStatusReady                = 2
 )
 
-type OptionArg C.GOptionArg
+type OptionArg int
 
 const (
 	OptionArgNone          OptionArg = 0
@@ -771,7 +771,7 @@ const (
 	OptionArgInt64                   = 8
 )
 
-type OptionError C.GOptionError
+type OptionError int
 
 const (
 	OptionErrorUnknownOption OptionError = 0
@@ -779,7 +779,7 @@ const (
 	OptionErrorFailed                    = 2
 )
 
-type RegexError C.GRegexError
+type RegexError int
 
 const (
 	RegexErrorCompile                                  RegexError = 0
@@ -841,7 +841,7 @@ const (
 	RegexErrorCharacterValueTooLarge                              = 176
 )
 
-type SeekType C.GSeekType
+type SeekType int
 
 const (
 	SeekTypeCur SeekType = 0
@@ -849,7 +849,7 @@ const (
 	SeekTypeEnd          = 2
 )
 
-type ShellError C.GShellError
+type ShellError int
 
 const (
 	ShellErrorBadQuoting  ShellError = 0
@@ -857,7 +857,7 @@ const (
 	ShellErrorFailed                 = 2
 )
 
-type SliceConfig C.GSliceConfig
+type SliceConfig int
 
 const (
 	SliceConfigAlwaysMalloc      SliceConfig = 1
@@ -868,7 +868,7 @@ const (
 	SliceConfigContentionCounter             = 6
 )
 
-type SpawnError C.GSpawnError
+type SpawnError int
 
 const (
 	SpawnErrorFork        SpawnError = 0
@@ -894,14 +894,14 @@ const (
 	SpawnErrorFailed                 = 19
 )
 
-type TestFileType C.GTestFileType
+type TestFileType int
 
 const (
 	TestFileTypeDist  TestFileType = 0
 	TestFileTypeBuilt              = 1
 )
 
-type TestLogType C.GTestLogType
+type TestLogType int
 
 const (
 	TestLogTypeNone        TestLogType = 0
@@ -918,13 +918,13 @@ const (
 	TestLogTypeStopSuite               = 11
 )
 
-type ThreadError C.GThreadError
+type ThreadError int
 
 const (
 	ThreadErrorThreadErrorAgain ThreadError = 0
 )
 
-type TimeType C.GTimeType
+type TimeType int
 
 const (
 	TimeTypeStandard  TimeType = 0
@@ -932,7 +932,7 @@ const (
 	TimeTypeUniversal          = 2
 )
 
-type TokenType C.GTokenType
+type TokenType int
 
 const (
 	TokenTypeEof            TokenType = 0
@@ -960,7 +960,7 @@ const (
 	TokenTypeCommentMulti             = 269
 )
 
-type TraverseType C.GTraverseType
+type TraverseType int
 
 const (
 	TraverseTypeInOrder    TraverseType = 0
@@ -969,7 +969,7 @@ const (
 	TraverseTypeLevelOrder              = 3
 )
 
-type UnicodeBreakType C.GUnicodeBreakType
+type UnicodeBreakType int
 
 const (
 	UnicodeBreakTypeMandatory                  UnicodeBreakType = 0
@@ -1017,7 +1017,7 @@ const (
 	UnicodeBreakTypeZeroWidthJoiner                             = 42
 )
 
-type UnicodeScript C.GUnicodeScript
+type UnicodeScript int
 
 const (
 	UnicodeScriptInvalidCode           UnicodeScript = -1
@@ -1161,7 +1161,7 @@ const (
 	UnicodeScriptTangut                              = 137
 )
 
-type UnicodeType C.GUnicodeType
+type UnicodeType int
 
 const (
 	UnicodeTypeControl            UnicodeType = 0
@@ -1196,7 +1196,7 @@ const (
 	UnicodeTypeSpaceSeparator                 = 29
 )
 
-type UserDirectory C.GUserDirectory
+type UserDirectory int
 
 const (
 	UserDirectoryDirectoryDesktop     UserDirectory = 0
@@ -1210,7 +1210,7 @@ const (
 	UserDirectoryNDirectories                       = 8
 )
 
-type VariantClass C.GVariantClass
+type VariantClass int
 
 const (
 	VariantClassBoolean    VariantClass = 98
@@ -1233,7 +1233,7 @@ const (
 	VariantClassDictEntry               = 123
 )
 
-type VariantParseError C.GVariantParseError
+type VariantParseError int
 
 const (
 	VariantParseErrorFailed                     VariantParseError = 0
@@ -1256,7 +1256,7 @@ const (
 	VariantParseErrorValueExpected                                = 17
 )
 
-type AsciiType C.GAsciiType
+type AsciiType int
 
 const (
 	AsciiTypeAlnum  AsciiType = 1
@@ -1272,7 +1272,7 @@ const (
 	AsciiTypeXdigit           = 1024
 )
 
-type FileTest C.GFileTest
+type FileTest int
 
 const (
 	FileTestIsRegular    FileTest = 1
@@ -1282,7 +1282,7 @@ const (
 	FileTestExists                = 16
 )
 
-type FormatSizeFlags C.GFormatSizeFlags
+type FormatSizeFlags int
 
 const (
 	FormatSizeFlagsDefault    FormatSizeFlags = 0
@@ -1290,7 +1290,7 @@ const (
 	FormatSizeFlagsIecUnits                   = 2
 )
 
-type HookFlagMask C.GHookFlagMask
+type HookFlagMask int
 
 const (
 	HookFlagMaskActive HookFlagMask = 1
@@ -1298,7 +1298,7 @@ const (
 	HookFlagMaskMask                = 15
 )
 
-type IOCondition C.GIOCondition
+type IOCondition int
 
 const (
 	IOConditionIn   IOCondition = 1
@@ -1309,7 +1309,7 @@ const (
 	IOConditionNval             = 32
 )
 
-type IOFlags C.GIOFlags
+type IOFlags int
 
 const (
 	IOFlagsAppend      IOFlags = 1
@@ -1323,7 +1323,7 @@ const (
 	IOFlagsSetMask             = 3
 )
 
-type KeyFileFlags C.GKeyFileFlags
+type KeyFileFlags int
 
 const (
 	KeyFileFlagsNone             KeyFileFlags = 0
@@ -1331,7 +1331,7 @@ const (
 	KeyFileFlagsKeepTranslations              = 2
 )
 
-type LogLevelFlags C.GLogLevelFlags
+type LogLevelFlags int
 
 const (
 	LogLevelFlagsFlagRecursion LogLevelFlags = 1
@@ -1345,7 +1345,7 @@ const (
 	LogLevelFlagsLevelMask                   = -4
 )
 
-type MarkupCollectType C.GMarkupCollectType
+type MarkupCollectType int
 
 const (
 	MarkupCollectTypeInvalid  MarkupCollectType = 0
@@ -1356,7 +1356,7 @@ const (
 	MarkupCollectTypeOptional                   = 65536
 )
 
-type MarkupParseFlags C.GMarkupParseFlags
+type MarkupParseFlags int
 
 const (
 	MarkupParseFlagsDoNotUseThisUnsupportedFlag MarkupParseFlags = 1
@@ -1365,7 +1365,7 @@ const (
 	MarkupParseFlagsIgnoreQualified                              = 8
 )
 
-type OptionFlags C.GOptionFlags
+type OptionFlags int
 
 const (
 	OptionFlagsNone        OptionFlags = 0
@@ -1378,7 +1378,7 @@ const (
 	OptionFlagsNoalias                 = 64
 )
 
-type RegexCompileFlags C.GRegexCompileFlags
+type RegexCompileFlags int
 
 const (
 	RegexCompileFlagsCaseless         RegexCompileFlags = 1
@@ -1401,7 +1401,7 @@ const (
 	RegexCompileFlagsJavascriptCompat                   = 33554432
 )
 
-type RegexMatchFlags C.GRegexMatchFlags
+type RegexMatchFlags int
 
 const (
 	RegexMatchFlagsAnchored        RegexMatchFlags = 16
@@ -1421,7 +1421,7 @@ const (
 	RegexMatchFlagsNotemptyAtstart                 = 268435456
 )
 
-type SpawnFlags C.GSpawnFlags
+type SpawnFlags int
 
 const (
 	SpawnFlagsDefault              SpawnFlags = 0
@@ -1436,7 +1436,7 @@ const (
 	SpawnFlagsCloexecPipes                    = 256
 )
 
-type TestSubprocessFlags C.GTestSubprocessFlags
+type TestSubprocessFlags int
 
 const (
 	TestSubprocessFlagsStdin  TestSubprocessFlags = 1
@@ -1444,7 +1444,7 @@ const (
 	TestSubprocessFlagsStderr                     = 4
 )
 
-type TestTrapFlags C.GTestTrapFlags
+type TestTrapFlags int
 
 const (
 	TestTrapFlagsSilenceStdout TestTrapFlags = 128
@@ -1452,7 +1452,7 @@ const (
 	TestTrapFlagsInheritStdin                = 512
 )
 
-type TraverseFlags C.GTraverseFlags
+type TraverseFlags int
 
 const (
 	TraverseFlagsLeaves    TraverseFlags = 1

@@ -45,7 +45,7 @@ func (appinfo AppInfo) GetId() string {
 	// Type for C: *C.GAppInfo
 	ret0 := C.g_app_info_get_id(appinfo.native())
 	ret := C.GoString(ret0)
-	defer C.g_free(C.gpointer(ret0))
+	C.g_free(C.gpointer(ret0))
 	return ret
 }
 
@@ -97,8 +97,8 @@ func DesktopAppInfoNewFromFilename(filename string) DesktopAppInfo {
 	// Type for Go: string
 	// Type for C: *C.char
 	filename0 := C.CString(filename)
-	defer C.free(unsafe.Pointer(filename0)) /*ch:<stdlib.h>*/
 	ret0 := C.g_desktop_app_info_new_from_filename(filename0)
+	C.free(unsafe.Pointer(filename0)) /*ch:<stdlib.h>*/
 	return wrapDesktopAppInfo(ret0)
 }
 
@@ -147,8 +147,8 @@ func SettingsNew(schema_id string) Settings {
 	// Type for Go: string
 	// Type for C: *C.gchar
 	schema_id0 := (*C.gchar)(C.CString(schema_id))
-	defer C.free(unsafe.Pointer(schema_id0)) /*ch:<stdlib.h>*/
 	ret0 := C.g_settings_new(schema_id0)
+	C.free(unsafe.Pointer(schema_id0)) /*ch:<stdlib.h>*/
 	return wrapSettings(ret0)
 }
 
@@ -175,8 +175,8 @@ func (settings Settings) GetBoolean(key string) bool {
 	// Type for Go: string
 	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
-	defer C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	ret0 := C.g_settings_get_boolean(settings.native(), key0)
+	C.free(unsafe.Pointer(key0))    /*ch:<stdlib.h>*/
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
@@ -193,8 +193,8 @@ func (settings Settings) GetChild(name string) Settings {
 	// Type for Go: string
 	// Type for C: *C.gchar
 	name0 := (*C.gchar)(C.CString(name))
-	defer C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
 	ret0 := C.g_settings_get_child(settings.native(), name0)
+	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
 	return wrapSettings(ret0)
 }
 
@@ -211,8 +211,8 @@ func (settings Settings) GetDouble(key string) float64 {
 	// Type for Go: string
 	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
-	defer C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	ret0 := C.g_settings_get_double(settings.native(), key0)
+	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	return float64(ret0)
 }
 
@@ -229,8 +229,8 @@ func (settings Settings) GetEnum(key string) int {
 	// Type for Go: string
 	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
-	defer C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	ret0 := C.g_settings_get_enum(settings.native(), key0)
+	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	return int(ret0)
 }
 
@@ -247,8 +247,8 @@ func (settings Settings) GetFlags(key string) uint {
 	// Type for Go: string
 	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
-	defer C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	ret0 := C.g_settings_get_flags(settings.native(), key0)
+	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	return uint(ret0)
 }
 
@@ -265,8 +265,8 @@ func (settings Settings) GetInt(key string) int {
 	// Type for Go: string
 	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
-	defer C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	ret0 := C.g_settings_get_int(settings.native(), key0)
+	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	return int(ret0)
 }
 
@@ -283,8 +283,8 @@ func (settings Settings) GetInt64(key string) int64 {
 	// Type for Go: string
 	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
-	defer C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	ret0 := C.g_settings_get_int64(settings.native(), key0)
+	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	return int64(ret0)
 }
 
@@ -301,10 +301,10 @@ func (settings Settings) GetString(key string) string {
 	// Type for Go: string
 	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
-	defer C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	ret0 := C.g_settings_get_string(settings.native(), key0)
+	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	ret := C.GoString((*C.char)(ret0))
-	defer C.g_free(C.gpointer(ret0))
+	C.g_free(C.gpointer(ret0))
 	return ret
 }
 
@@ -321,8 +321,8 @@ func (settings Settings) GetStrv(key string) []string {
 	// Type for Go: string
 	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
-	defer C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	ret0 := C.g_settings_get_strv(settings.native(), key0)
+	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	var ret0Slice []*C.gchar
 	ret0SliceLength := util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/
 	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), ret0SliceLength)      /*go:.util*/
@@ -348,8 +348,8 @@ func (settings Settings) GetUint(key string) uint {
 	// Type for Go: string
 	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
-	defer C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	ret0 := C.g_settings_get_uint(settings.native(), key0)
+	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	return uint(ret0)
 }
 
@@ -366,8 +366,8 @@ func (settings Settings) GetUint64(key string) uint64 {
 	// Type for Go: string
 	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
-	defer C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	ret0 := C.g_settings_get_uint64(settings.native(), key0)
+	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	return uint64(ret0)
 }
 
@@ -384,8 +384,8 @@ func (settings Settings) GetValue(key string) glib.Variant {
 	// Type for Go: string
 	// Type for C: *C.gchar
 	key0 := (*C.gchar)(C.CString(key))
-	defer C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	ret0 := C.g_settings_get_value(settings.native(), key0)
+	C.free(unsafe.Pointer(key0))                  /*ch:<stdlib.h>*/
 	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/
 }
 
@@ -413,7 +413,7 @@ func (file File) GetPath() string {
 	// Type for C: *C.GFile
 	ret0 := C.g_file_get_path(file.native())
 	ret := C.GoString(ret0)
-	defer C.g_free(C.gpointer(ret0))
+	C.g_free(C.gpointer(ret0))
 	return ret
 }
 
@@ -430,7 +430,6 @@ func (file File) Replace(etag string, make_backup bool, flags FileCreateFlags, c
 	// Type for Go: string
 	// Type for C: *C.char
 	etag0 := C.CString(etag)
-	defer C.free(unsafe.Pointer(etag0)) /*ch:<stdlib.h>*/
 
 	// Var for Go: make_backup
 	// Var for C: make_backup0
@@ -448,6 +447,7 @@ func (file File) Replace(etag string, make_backup bool, flags FileCreateFlags, c
 	// Type for C: *C.GCancellable
 	var err glib.Error
 	ret0 := C.g_file_replace(file.native(), etag0, C.gboolean(util.Bool2Int(make_backup)) /*go:.util*/, C.GFileCreateFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(etag0)) /*ch:<stdlib.h>*/
 	if err.Ptr != nil {
 		defer err.Free()
 		return FileOutputStream{}, err.GoValue()
@@ -522,7 +522,6 @@ func (stream FileOutputStream) QueryInfo(attributes string, cancellable Cancella
 	// Type for Go: string
 	// Type for C: *C.char
 	attributes0 := C.CString(attributes)
-	defer C.free(unsafe.Pointer(attributes0)) /*ch:<stdlib.h>*/
 
 	// Var for Go: cancellable
 	// Var for C: cancellable0
@@ -530,6 +529,7 @@ func (stream FileOutputStream) QueryInfo(attributes string, cancellable Cancella
 	// Type for C: *C.GCancellable
 	var err glib.Error
 	ret0 := C.g_file_output_stream_query_info(stream.native(), attributes0, cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(attributes0)) /*ch:<stdlib.h>*/
 	if err.Ptr != nil {
 		defer err.Free()
 		return FileInfo{}, err.GoValue()
@@ -600,13 +600,13 @@ func ApplicationNew(application_id string, flags ApplicationFlags) Application {
 	// Type for Go: string
 	// Type for C: *C.gchar
 	application_id0 := (*C.gchar)(C.CString(application_id))
-	defer C.free(unsafe.Pointer(application_id0)) /*ch:<stdlib.h>*/
 
 	// Var for Go: flags
 	// Var for C: flags0
 	// Type for Go: ApplicationFlags
 	// Type for C: C.GApplicationFlags
 	ret0 := C.g_application_new(application_id0, C.GApplicationFlags(flags))
+	C.free(unsafe.Pointer(application_id0)) /*ch:<stdlib.h>*/
 	return wrapApplication(ret0)
 }
 
@@ -653,9 +653,9 @@ func ApplicationIdIsValid(application_id string) bool {
 	// Type for Go: string
 	// Type for C: *C.gchar
 	application_id0 := (*C.gchar)(C.CString(application_id))
-	defer C.free(unsafe.Pointer(application_id0)) /*ch:<stdlib.h>*/
 	ret0 := C.g_application_id_is_valid(application_id0)
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	C.free(unsafe.Pointer(application_id0)) /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0))         /*go:.util*/
 }
 
 // Interface ActionMap
@@ -708,7 +708,7 @@ func (action_group ActionGroup) ListActions() []string {
 	return ret
 }
 
-type BusType C.GBusType
+type BusType int
 
 const (
 	BusTypeStarter BusType = -1
@@ -717,7 +717,7 @@ const (
 	BusTypeSession         = 2
 )
 
-type ConverterResult C.GConverterResult
+type ConverterResult int
 
 const (
 	ConverterResultError     ConverterResult = 0
@@ -726,7 +726,7 @@ const (
 	ConverterResultFlushed                   = 3
 )
 
-type CredentialsType C.GCredentialsType
+type CredentialsType int
 
 const (
 	CredentialsTypeInvalid             CredentialsType = 0
@@ -737,7 +737,7 @@ const (
 	CredentialsTypeNetbsdUnpcbid                       = 5
 )
 
-type DBusError C.GDBusError
+type DBusError int
 
 const (
 	DBusErrorFailed                        DBusError = 0
@@ -787,14 +787,14 @@ const (
 	DBusErrorPropertyReadOnly                        = 44
 )
 
-type DBusMessageByteOrder C.GDBusMessageByteOrder
+type DBusMessageByteOrder int
 
 const (
 	DBusMessageByteOrderBigEndian    DBusMessageByteOrder = 66
 	DBusMessageByteOrderLittleEndian                      = 108
 )
 
-type DBusMessageHeaderField C.GDBusMessageHeaderField
+type DBusMessageHeaderField int
 
 const (
 	DBusMessageHeaderFieldInvalid     DBusMessageHeaderField = 0
@@ -809,7 +809,7 @@ const (
 	DBusMessageHeaderFieldNumUnixFds                         = 9
 )
 
-type DBusMessageType C.GDBusMessageType
+type DBusMessageType int
 
 const (
 	DBusMessageTypeInvalid      DBusMessageType = 0
@@ -819,7 +819,7 @@ const (
 	DBusMessageTypeSignal                       = 4
 )
 
-type DataStreamByteOrder C.GDataStreamByteOrder
+type DataStreamByteOrder int
 
 const (
 	DataStreamByteOrderBigEndian    DataStreamByteOrder = 0
@@ -827,7 +827,7 @@ const (
 	DataStreamByteOrderHostEndian                       = 2
 )
 
-type DataStreamNewlineType C.GDataStreamNewlineType
+type DataStreamNewlineType int
 
 const (
 	DataStreamNewlineTypeLf   DataStreamNewlineType = 0
@@ -836,7 +836,7 @@ const (
 	DataStreamNewlineTypeAny                        = 3
 )
 
-type DriveStartStopType C.GDriveStartStopType
+type DriveStartStopType int
 
 const (
 	DriveStartStopTypeUnknown   DriveStartStopType = 0
@@ -846,7 +846,7 @@ const (
 	DriveStartStopTypePassword                     = 4
 )
 
-type EmblemOrigin C.GEmblemOrigin
+type EmblemOrigin int
 
 const (
 	EmblemOriginUnknown      EmblemOrigin = 0
@@ -855,7 +855,7 @@ const (
 	EmblemOriginTag                       = 3
 )
 
-type FileAttributeStatus C.GFileAttributeStatus
+type FileAttributeStatus int
 
 const (
 	FileAttributeStatusUnset        FileAttributeStatus = 0
@@ -863,7 +863,7 @@ const (
 	FileAttributeStatusErrorSetting                     = 2
 )
 
-type FileAttributeType C.GFileAttributeType
+type FileAttributeType int
 
 const (
 	FileAttributeTypeInvalid    FileAttributeType = 0
@@ -878,7 +878,7 @@ const (
 	FileAttributeTypeStringv                      = 9
 )
 
-type FileMonitorEvent C.GFileMonitorEvent
+type FileMonitorEvent int
 
 const (
 	FileMonitorEventChanged          FileMonitorEvent = 0
@@ -894,7 +894,7 @@ const (
 	FileMonitorEventMovedOut                          = 10
 )
 
-type FileType C.GFileType
+type FileType int
 
 const (
 	FileTypeUnknown      FileType = 0
@@ -906,7 +906,7 @@ const (
 	FileTypeMountable             = 6
 )
 
-type FilesystemPreviewType C.GFilesystemPreviewType
+type FilesystemPreviewType int
 
 const (
 	FilesystemPreviewTypeIfAlways FilesystemPreviewType = 0
@@ -914,7 +914,7 @@ const (
 	FilesystemPreviewTypeNever                          = 2
 )
 
-type IOErrorEnum C.GIOErrorEnum
+type IOErrorEnum int
 
 const (
 	IOErrorEnumFailed             IOErrorEnum = 0
@@ -967,14 +967,14 @@ const (
 	IOErrorEnumMessageTooLarge                = 46
 )
 
-type IOModuleScopeFlags C.GIOModuleScopeFlags
+type IOModuleScopeFlags int
 
 const (
 	IOModuleScopeFlagsNone            IOModuleScopeFlags = 0
 	IOModuleScopeFlagsBlockDuplicates                    = 1
 )
 
-type MountOperationResult C.GMountOperationResult
+type MountOperationResult int
 
 const (
 	MountOperationResultHandled   MountOperationResult = 0
@@ -982,7 +982,7 @@ const (
 	MountOperationResultUnhandled                      = 2
 )
 
-type NetworkConnectivity C.GNetworkConnectivity
+type NetworkConnectivity int
 
 const (
 	NetworkConnectivityLocal   NetworkConnectivity = 1
@@ -991,7 +991,7 @@ const (
 	NetworkConnectivityFull                        = 4
 )
 
-type NotificationPriority C.GNotificationPriority
+type NotificationPriority int
 
 const (
 	NotificationPriorityNormal NotificationPriority = 0
@@ -1000,7 +1000,7 @@ const (
 	NotificationPriorityUrgent                      = 3
 )
 
-type PasswordSave C.GPasswordSave
+type PasswordSave int
 
 const (
 	PasswordSaveNever       PasswordSave = 0
@@ -1008,7 +1008,7 @@ const (
 	PasswordSavePermanently              = 2
 )
 
-type ResolverError C.GResolverError
+type ResolverError int
 
 const (
 	ResolverErrorNotFound         ResolverError = 0
@@ -1016,7 +1016,7 @@ const (
 	ResolverErrorInternal                       = 2
 )
 
-type ResolverRecordType C.GResolverRecordType
+type ResolverRecordType int
 
 const (
 	ResolverRecordTypeSrv ResolverRecordType = 1
@@ -1026,14 +1026,14 @@ const (
 	ResolverRecordTypeNs                     = 5
 )
 
-type ResourceError C.GResourceError
+type ResourceError int
 
 const (
 	ResourceErrorNotFound ResourceError = 0
 	ResourceErrorInternal               = 1
 )
 
-type SocketClientEvent C.GSocketClientEvent
+type SocketClientEvent int
 
 const (
 	SocketClientEventResolving        SocketClientEvent = 0
@@ -1047,7 +1047,7 @@ const (
 	SocketClientEventComplete                           = 8
 )
 
-type SocketFamily C.GSocketFamily
+type SocketFamily int
 
 const (
 	SocketFamilyInvalid SocketFamily = 0
@@ -1056,7 +1056,7 @@ const (
 	SocketFamilyIpv6                 = 10
 )
 
-type SocketListenerEvent C.GSocketListenerEvent
+type SocketListenerEvent int
 
 const (
 	SocketListenerEventBinding   SocketListenerEvent = 0
@@ -1065,7 +1065,7 @@ const (
 	SocketListenerEventListened                      = 3
 )
 
-type SocketProtocol C.GSocketProtocol
+type SocketProtocol int
 
 const (
 	SocketProtocolUnknown SocketProtocol = -1
@@ -1075,7 +1075,7 @@ const (
 	SocketProtocolSctp                   = 132
 )
 
-type SocketType C.GSocketType
+type SocketType int
 
 const (
 	SocketTypeInvalid   SocketType = 0
@@ -1084,7 +1084,7 @@ const (
 	SocketTypeSeqpacket            = 3
 )
 
-type TlsAuthenticationMode C.GTlsAuthenticationMode
+type TlsAuthenticationMode int
 
 const (
 	TlsAuthenticationModeNone      TlsAuthenticationMode = 0
@@ -1092,20 +1092,20 @@ const (
 	TlsAuthenticationModeRequired                        = 2
 )
 
-type TlsCertificateRequestFlags C.GTlsCertificateRequestFlags
+type TlsCertificateRequestFlags int
 
 const (
 	TlsCertificateRequestFlagsNone TlsCertificateRequestFlags = 0
 )
 
-type TlsDatabaseLookupFlags C.GTlsDatabaseLookupFlags
+type TlsDatabaseLookupFlags int
 
 const (
 	TlsDatabaseLookupFlagsNone    TlsDatabaseLookupFlags = 0
 	TlsDatabaseLookupFlagsKeypair                        = 1
 )
 
-type TlsError C.GTlsError
+type TlsError int
 
 const (
 	TlsErrorUnavailable         TlsError = 0
@@ -1117,7 +1117,7 @@ const (
 	TlsErrorEof                          = 6
 )
 
-type TlsInteractionResult C.GTlsInteractionResult
+type TlsInteractionResult int
 
 const (
 	TlsInteractionResultUnhandled TlsInteractionResult = 0
@@ -1125,7 +1125,7 @@ const (
 	TlsInteractionResultFailed                         = 2
 )
 
-type TlsRehandshakeMode C.GTlsRehandshakeMode
+type TlsRehandshakeMode int
 
 const (
 	TlsRehandshakeModeNever    TlsRehandshakeMode = 0
@@ -1133,7 +1133,7 @@ const (
 	TlsRehandshakeModeUnsafely                    = 2
 )
 
-type UnixSocketAddressType C.GUnixSocketAddressType
+type UnixSocketAddressType int
 
 const (
 	UnixSocketAddressTypeInvalid        UnixSocketAddressType = 0
@@ -1143,7 +1143,7 @@ const (
 	UnixSocketAddressTypeAbstractPadded                       = 4
 )
 
-type ZlibCompressorFormat C.GZlibCompressorFormat
+type ZlibCompressorFormat int
 
 const (
 	ZlibCompressorFormatZlib ZlibCompressorFormat = 0
@@ -1151,7 +1151,7 @@ const (
 	ZlibCompressorFormatRaw                       = 2
 )
 
-type AppInfoCreateFlags C.GAppInfoCreateFlags
+type AppInfoCreateFlags int
 
 const (
 	AppInfoCreateFlagsNone                        AppInfoCreateFlags = 0
@@ -1160,7 +1160,7 @@ const (
 	AppInfoCreateFlagsSupportsStartupNotification                    = 4
 )
 
-type ApplicationFlags C.GApplicationFlags
+type ApplicationFlags int
 
 const (
 	ApplicationFlagsFlagsNone          ApplicationFlags = 0
@@ -1173,7 +1173,7 @@ const (
 	ApplicationFlagsCanOverrideAppId                    = 64
 )
 
-type AskPasswordFlags C.GAskPasswordFlags
+type AskPasswordFlags int
 
 const (
 	AskPasswordFlagsNeedPassword       AskPasswordFlags = 1
@@ -1183,7 +1183,7 @@ const (
 	AskPasswordFlagsAnonymousSupported                  = 16
 )
 
-type BusNameOwnerFlags C.GBusNameOwnerFlags
+type BusNameOwnerFlags int
 
 const (
 	BusNameOwnerFlagsNone             BusNameOwnerFlags = 0
@@ -1191,14 +1191,14 @@ const (
 	BusNameOwnerFlagsReplace                            = 2
 )
 
-type BusNameWatcherFlags C.GBusNameWatcherFlags
+type BusNameWatcherFlags int
 
 const (
 	BusNameWatcherFlagsNone      BusNameWatcherFlags = 0
 	BusNameWatcherFlagsAutoStart                     = 1
 )
 
-type ConverterFlags C.GConverterFlags
+type ConverterFlags int
 
 const (
 	ConverterFlagsNone       ConverterFlags = 0
@@ -1206,7 +1206,7 @@ const (
 	ConverterFlagsFlush                     = 2
 )
 
-type DBusCallFlags C.GDBusCallFlags
+type DBusCallFlags int
 
 const (
 	DBusCallFlagsNone                          DBusCallFlags = 0
@@ -1214,14 +1214,14 @@ const (
 	DBusCallFlagsAllowInteractiveAuthorization               = 2
 )
 
-type DBusCapabilityFlags C.GDBusCapabilityFlags
+type DBusCapabilityFlags int
 
 const (
 	DBusCapabilityFlagsNone          DBusCapabilityFlags = 0
 	DBusCapabilityFlagsUnixFdPassing                     = 1
 )
 
-type DBusConnectionFlags C.GDBusConnectionFlags
+type DBusConnectionFlags int
 
 const (
 	DBusConnectionFlagsNone                         DBusConnectionFlags = 0
@@ -1232,14 +1232,14 @@ const (
 	DBusConnectionFlagsDelayMessageProcessing                           = 16
 )
 
-type DBusInterfaceSkeletonFlags C.GDBusInterfaceSkeletonFlags
+type DBusInterfaceSkeletonFlags int
 
 const (
 	DBusInterfaceSkeletonFlagsNone                            DBusInterfaceSkeletonFlags = 0
 	DBusInterfaceSkeletonFlagsHandleMethodInvocationsInThread                            = 1
 )
 
-type DBusMessageFlags C.GDBusMessageFlags
+type DBusMessageFlags int
 
 const (
 	DBusMessageFlagsNone                          DBusMessageFlags = 0
@@ -1248,14 +1248,14 @@ const (
 	DBusMessageFlagsAllowInteractiveAuthorization                  = 4
 )
 
-type DBusObjectManagerClientFlags C.GDBusObjectManagerClientFlags
+type DBusObjectManagerClientFlags int
 
 const (
 	DBusObjectManagerClientFlagsNone           DBusObjectManagerClientFlags = 0
 	DBusObjectManagerClientFlagsDoNotAutoStart                              = 1
 )
 
-type DBusPropertyInfoFlags C.GDBusPropertyInfoFlags
+type DBusPropertyInfoFlags int
 
 const (
 	DBusPropertyInfoFlagsNone     DBusPropertyInfoFlags = 0
@@ -1263,7 +1263,7 @@ const (
 	DBusPropertyInfoFlagsWritable                       = 2
 )
 
-type DBusProxyFlags C.GDBusProxyFlags
+type DBusProxyFlags int
 
 const (
 	DBusProxyFlagsNone                         DBusProxyFlags = 0
@@ -1274,14 +1274,14 @@ const (
 	DBusProxyFlagsDoNotAutoStartAtConstruction                = 16
 )
 
-type DBusSendMessageFlags C.GDBusSendMessageFlags
+type DBusSendMessageFlags int
 
 const (
 	DBusSendMessageFlagsNone           DBusSendMessageFlags = 0
 	DBusSendMessageFlagsPreserveSerial                      = 1
 )
 
-type DBusServerFlags C.GDBusServerFlags
+type DBusServerFlags int
 
 const (
 	DBusServerFlagsNone                         DBusServerFlags = 0
@@ -1289,7 +1289,7 @@ const (
 	DBusServerFlagsAuthenticationAllowAnonymous                 = 2
 )
 
-type DBusSignalFlags C.GDBusSignalFlags
+type DBusSignalFlags int
 
 const (
 	DBusSignalFlagsNone               DBusSignalFlags = 0
@@ -1298,20 +1298,20 @@ const (
 	DBusSignalFlagsMatchArg0Path                      = 4
 )
 
-type DBusSubtreeFlags C.GDBusSubtreeFlags
+type DBusSubtreeFlags int
 
 const (
 	DBusSubtreeFlagsNone                        DBusSubtreeFlags = 0
 	DBusSubtreeFlagsDispatchToUnenumeratedNodes                  = 1
 )
 
-type DriveStartFlags C.GDriveStartFlags
+type DriveStartFlags int
 
 const (
 	DriveStartFlagsNone DriveStartFlags = 0
 )
 
-type FileAttributeInfoFlags C.GFileAttributeInfoFlags
+type FileAttributeInfoFlags int
 
 const (
 	FileAttributeInfoFlagsNone          FileAttributeInfoFlags = 0
@@ -1319,7 +1319,7 @@ const (
 	FileAttributeInfoFlagsCopyWhenMoved                        = 2
 )
 
-type FileCopyFlags C.GFileCopyFlags
+type FileCopyFlags int
 
 const (
 	FileCopyFlagsNone               FileCopyFlags = 0
@@ -1331,7 +1331,7 @@ const (
 	FileCopyFlagsTargetDefaultPerms               = 32
 )
 
-type FileCreateFlags C.GFileCreateFlags
+type FileCreateFlags int
 
 const (
 	FileCreateFlagsNone               FileCreateFlags = 0
@@ -1339,7 +1339,7 @@ const (
 	FileCreateFlagsReplaceDestination                 = 2
 )
 
-type FileMeasureFlags C.GFileMeasureFlags
+type FileMeasureFlags int
 
 const (
 	FileMeasureFlagsNone           FileMeasureFlags = 0
@@ -1348,7 +1348,7 @@ const (
 	FileMeasureFlagsNoXdev                          = 8
 )
 
-type FileMonitorFlags C.GFileMonitorFlags
+type FileMonitorFlags int
 
 const (
 	FileMonitorFlagsNone           FileMonitorFlags = 0
@@ -1358,14 +1358,14 @@ const (
 	FileMonitorFlagsWatchMoves                      = 8
 )
 
-type FileQueryInfoFlags C.GFileQueryInfoFlags
+type FileQueryInfoFlags int
 
 const (
 	FileQueryInfoFlagsNone             FileQueryInfoFlags = 0
 	FileQueryInfoFlagsNofollowSymlinks                    = 1
 )
 
-type IOStreamSpliceFlags C.GIOStreamSpliceFlags
+type IOStreamSpliceFlags int
 
 const (
 	IOStreamSpliceFlagsNone         IOStreamSpliceFlags = 0
@@ -1374,20 +1374,20 @@ const (
 	IOStreamSpliceFlagsWaitForBoth                      = 4
 )
 
-type MountMountFlags C.GMountMountFlags
+type MountMountFlags int
 
 const (
 	MountMountFlagsNone MountMountFlags = 0
 )
 
-type MountUnmountFlags C.GMountUnmountFlags
+type MountUnmountFlags int
 
 const (
 	MountUnmountFlagsNone  MountUnmountFlags = 0
 	MountUnmountFlagsForce                   = 1
 )
 
-type OutputStreamSpliceFlags C.GOutputStreamSpliceFlags
+type OutputStreamSpliceFlags int
 
 const (
 	OutputStreamSpliceFlagsNone        OutputStreamSpliceFlags = 0
@@ -1395,20 +1395,20 @@ const (
 	OutputStreamSpliceFlagsCloseTarget                         = 2
 )
 
-type ResourceFlags C.GResourceFlags
+type ResourceFlags int
 
 const (
 	ResourceFlagsNone       ResourceFlags = 0
 	ResourceFlagsCompressed               = 1
 )
 
-type ResourceLookupFlags C.GResourceLookupFlags
+type ResourceLookupFlags int
 
 const (
 	ResourceLookupFlagsNone ResourceLookupFlags = 0
 )
 
-type SettingsBindFlags C.GSettingsBindFlags
+type SettingsBindFlags int
 
 const (
 	SettingsBindFlagsDefault       SettingsBindFlags = 0
@@ -1419,7 +1419,7 @@ const (
 	SettingsBindFlagsInvertBoolean                   = 16
 )
 
-type SocketMsgFlags C.GSocketMsgFlags
+type SocketMsgFlags int
 
 const (
 	SocketMsgFlagsNone      SocketMsgFlags = 0
@@ -1428,7 +1428,7 @@ const (
 	SocketMsgFlagsDontroute                = 4
 )
 
-type SubprocessFlags C.GSubprocessFlags
+type SubprocessFlags int
 
 const (
 	SubprocessFlagsNone          SubprocessFlags = 0
@@ -1442,13 +1442,13 @@ const (
 	SubprocessFlagsInheritFds                    = 128
 )
 
-type TestDBusFlags C.GTestDBusFlags
+type TestDBusFlags int
 
 const (
 	TestDBusFlagsNone TestDBusFlags = 0
 )
 
-type TlsCertificateFlags C.GTlsCertificateFlags
+type TlsCertificateFlags int
 
 const (
 	TlsCertificateFlagsUnknownCa    TlsCertificateFlags = 1
@@ -1461,13 +1461,13 @@ const (
 	TlsCertificateFlagsValidateAll                      = 127
 )
 
-type TlsDatabaseVerifyFlags C.GTlsDatabaseVerifyFlags
+type TlsDatabaseVerifyFlags int
 
 const (
 	TlsDatabaseVerifyFlagsNone TlsDatabaseVerifyFlags = 0
 )
 
-type TlsPasswordFlags C.GTlsPasswordFlags
+type TlsPasswordFlags int
 
 const (
 	TlsPasswordFlagsNone      TlsPasswordFlags = 0
