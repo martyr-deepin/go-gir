@@ -44,7 +44,6 @@ func (value Value) GetString() string {
 	// Type for C: *C.GValue
 	ret0 := C.g_value_get_string(value.native())
 	ret := C.GoString((*C.char)(ret0))
-	C.g_free(C.gpointer(ret0))
 	return ret
 }
 

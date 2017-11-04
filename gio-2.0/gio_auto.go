@@ -45,7 +45,6 @@ func (appinfo AppInfo) GetId() string {
 	// Type for C: *C.GAppInfo
 	ret0 := C.g_app_info_get_id(appinfo.native())
 	ret := C.GoString(ret0)
-	C.g_free(C.gpointer(ret0))
 	return ret
 }
 
@@ -63,7 +62,6 @@ func (appinfo AppInfo) GetSupportedTypes() []string {
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString(elem)
-		defer C.g_free(C.gpointer(elem))
 		ret[idx] = elemG
 	}
 	return ret
@@ -116,7 +114,6 @@ func (info DesktopAppInfo) ListActions() []string {
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
-		defer C.g_free(C.gpointer(elem))
 		ret[idx] = elemG
 	}
 	return ret
@@ -329,9 +326,10 @@ func (settings Settings) GetStrv(key string) []string {
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
-		defer C.g_free(C.gpointer(elem))
 		ret[idx] = elemG
+		C.g_free(C.gpointer(elem))
 	}
+	C.g_free(C.gpointer(ret0))
 	return ret
 }
 
@@ -702,9 +700,10 @@ func (action_group ActionGroup) ListActions() []string {
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
-		defer C.g_free(C.gpointer(elem))
 		ret[idx] = elemG
+		C.g_free(C.gpointer(elem))
 	}
+	C.g_free(C.gpointer(ret0))
 	return ret
 }
 

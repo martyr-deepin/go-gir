@@ -35,6 +35,40 @@ func VariantNewBoolean(value bool) Variant {
 	return wrapVariant(ret0)
 }
 
+// GetString is a wrapper around g_variant_get_string().
+func (value Variant) GetString() (string, uint) {
+
+	// Var for Go: value
+	// Var for C: value0
+	// Type for Go: Variant
+	// Type for C: *C.GVariant
+	var length0 C.gsize
+	ret0 := C.g_variant_get_string(value.native(), &length0)
+	ret := C.GoString((*C.char)(ret0))
+	return ret, uint(length0)
+}
+
+// GetStrv is a wrapper around g_variant_get_strv().
+func (value Variant) GetStrv() ([]string, uint) {
+
+	// Var for Go: value
+	// Var for C: value0
+	// Type for Go: Variant
+	// Type for C: *C.GVariant
+	var length0 C.gsize
+	ret0 := C.g_variant_get_strv(value.native(), &length0)
+	var ret0Slice []*C.gchar
+	ret0SliceLength := util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), ret0SliceLength)      /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString((*C.char)(elem))
+		ret[idx] = elemG
+	}
+	C.g_free(C.gpointer(ret0))
+	return ret, uint(length0)
+}
+
 // GetType is a wrapper around g_variant_get_type().
 func (value Variant) GetType() VariantType {
 
@@ -397,7 +431,6 @@ func (source Source) GetName() string {
 	// Type for C: *C.GSource
 	ret0 := C.g_source_get_name(source.native())
 	ret := C.GoString(ret0)
-	C.g_free(C.gpointer(ret0))
 	return ret
 }
 
