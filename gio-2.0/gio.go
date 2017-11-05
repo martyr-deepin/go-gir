@@ -14,41 +14,33 @@ package gio
 #include <gio/gunixoutputstream.h>
 #include <gio/gunixsocketaddress.h>
 #include <stdlib.h>
-
-static int _array_length(void* _array)
-{
-	void** array = (void**)_array;
-	int i=0;
-	while (array && array[i] != 0) i++;
-	return i;
-}
 */
 import "C"
 import (
-	//"github.com/electricface/go-auto-gir/util"
-	"unsafe"
+//"github.com/electricface/go-auto-gir/util"
+//"unsafe"
 )
 
 //import "github.com/electricface/go-auto-gir/gobject-2.0"
 //import "github.com/electricface/go-auto-gir/util"
 //import "github.com/electricface/go-auto-gir/glib-2.0"
 
-func (app Application) Run(argv []string) int {
-	argv0 := make([]*C.char, len(argv))
-	for i, arg := range argv {
-		arg0 := C.CString(arg)
-		defer C.free(unsafe.Pointer(arg0))
-		argv0[i] = arg0
-	}
-
-	var argv0Ptr **C.char
-	if len(argv0) > 0 {
-		argv0Ptr = &argv0[0]
-	}
-
-	ret0 := C.g_application_run(app.native(), C.int(len(argv)), argv0Ptr)
-	return int(ret0)
-}
+//func (app Application) Run(argv []string) int {
+//	argv0 := make([]*C.char, len(argv))
+//	for i, arg := range argv {
+//		arg0 := C.CString(arg)
+//		defer C.free(unsafe.Pointer(arg0))
+//		argv0[i] = arg0
+//	}
+//
+//	var argv0Ptr **C.char
+//	if len(argv0) > 0 {
+//		argv0Ptr = &argv0[0]
+//	}
+//
+//	ret0 := C.g_application_run(app.native(), C.int(len(argv)), argv0Ptr)
+//	return int(ret0)
+//}
 
 //func (settings Settings) GetStrv(key string) []string {
 //	key0 := (*C.gchar)(C.CString(key))

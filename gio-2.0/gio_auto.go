@@ -413,6 +413,24 @@ func (application Application) Release() {
 	C.g_application_release(application.native())
 }
 
+// Run is a wrapper around g_application_run().
+func (application Application) Run(argv []string) int {
+	argv0 := make([]*C.char, len(argv))
+	for idx, elemG := range argv {
+		elem := C.CString(elemG)
+		argv0[idx] = elem
+	}
+	var argv0Ptr **C.char
+	if len(argv0) > 0 {
+		argv0Ptr = &argv0[0]
+	}
+	ret0 := C.g_application_run(application.native(), C.int(len(argv)), argv0Ptr)
+	for _, elem := range argv0 {
+		C.free(unsafe.Pointer(elem)) /*ch:<stdlib.h>*/
+	}
+	return int(ret0)
+}
+
 // SetInactivityTimeout is a wrapper around g_application_set_inactivity_timeout().
 func (application Application) SetInactivityTimeout(inactivity_timeout uint) {
 	C.g_application_set_inactivity_timeout(application.native(), C.guint(inactivity_timeout))
