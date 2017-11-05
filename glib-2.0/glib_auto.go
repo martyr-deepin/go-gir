@@ -647,6 +647,62 @@ func WrapVariantType(p unsafe.Pointer) VariantType {
 	return VariantType{p}
 }
 
+// VariantTypeNew is a wrapper around g_variant_type_new().
+func VariantTypeNew(type_string string) VariantType {
+	type_string0 := (*C.gchar)(C.CString(type_string))
+	ret0 := C.g_variant_type_new(type_string0)
+	C.free(unsafe.Pointer(type_string0)) /*ch:<stdlib.h>*/
+	return wrapVariantType(ret0)
+}
+
+// VariantTypeNewArray is a wrapper around g_variant_type_new_array().
+func VariantTypeNewArray(element VariantType) VariantType {
+	ret0 := C.g_variant_type_new_array(element.native())
+	return wrapVariantType(ret0)
+}
+
+// VariantTypeNewDictEntry is a wrapper around g_variant_type_new_dict_entry().
+func VariantTypeNewDictEntry(key VariantType, value VariantType) VariantType {
+	ret0 := C.g_variant_type_new_dict_entry(key.native(), value.native())
+	return wrapVariantType(ret0)
+}
+
+// VariantTypeNewMaybe is a wrapper around g_variant_type_new_maybe().
+func VariantTypeNewMaybe(element VariantType) VariantType {
+	ret0 := C.g_variant_type_new_maybe(element.native())
+	return wrapVariantType(ret0)
+}
+
+// VariantTypeNewTuple is a wrapper around g_variant_type_new_tuple().
+func VariantTypeNewTuple(items []VariantType) VariantType {
+	items0 := make([]*C.GVariantType, len(items))
+	for idx, elemG := range items {
+		items0[idx] = elemG.native()
+	}
+	var items0Ptr **C.GVariantType
+	if len(items0) > 0 {
+		items0Ptr = &items0[0]
+	}
+	ret0 := C.g_variant_type_new_tuple(items0Ptr, C.gint(len(items)))
+	return wrapVariantType(ret0)
+}
+
+// VariantTypeChecked_ is a wrapper around g_variant_type_checked_().
+func VariantTypeChecked_(arg0 string) VariantType {
+	arg00 := (*C.gchar)(C.CString(arg0))
+	ret0 := C.g_variant_type_checked_(arg00)
+	C.free(unsafe.Pointer(arg00)) /*ch:<stdlib.h>*/
+	return wrapVariantType(ret0)
+}
+
+// VariantTypeStringIsValid is a wrapper around g_variant_type_string_is_valid().
+func VariantTypeStringIsValid(type_string string) bool {
+	type_string0 := (*C.gchar)(C.CString(type_string))
+	ret0 := C.g_variant_type_string_is_valid(type_string0)
+	C.free(unsafe.Pointer(type_string0)) /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0))      /*go:.util*/
+}
+
 // Struct Error
 type Error struct {
 	Ptr unsafe.Pointer
@@ -742,10 +798,33 @@ func MainContextNew() MainContext {
 	return wrapMainContext(ret0)
 }
 
+// Acquire is a wrapper around g_main_context_acquire().
+func (context MainContext) Acquire() bool {
+	ret0 := C.g_main_context_acquire(context.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// Dispatch is a wrapper around g_main_context_dispatch().
+func (context MainContext) Dispatch() {
+	C.g_main_context_dispatch(context.native())
+}
+
 // FindSourceById is a wrapper around g_main_context_find_source_by_id().
 func (context MainContext) FindSourceById(source_id uint) Source {
 	ret0 := C.g_main_context_find_source_by_id(context.native(), C.guint(source_id))
 	return wrapSource(ret0)
+}
+
+// FindSourceByUserData is a wrapper around g_main_context_find_source_by_user_data().
+func (context MainContext) FindSourceByUserData(user_data unsafe.Pointer) Source {
+	ret0 := C.g_main_context_find_source_by_user_data(context.native(), C.gpointer(user_data))
+	return wrapSource(ret0)
+}
+
+// IsOwner is a wrapper around g_main_context_is_owner().
+func (context MainContext) IsOwner() bool {
+	ret0 := C.g_main_context_is_owner(context.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // Iteration is a wrapper around g_main_context_iteration().
@@ -760,10 +839,25 @@ func (context MainContext) Pending() bool {
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
+// PopThreadDefault is a wrapper around g_main_context_pop_thread_default().
+func (context MainContext) PopThreadDefault() {
+	C.g_main_context_pop_thread_default(context.native())
+}
+
+// PushThreadDefault is a wrapper around g_main_context_push_thread_default().
+func (context MainContext) PushThreadDefault() {
+	C.g_main_context_push_thread_default(context.native())
+}
+
 // Ref is a wrapper around g_main_context_ref().
 func (context MainContext) Ref() MainContext {
 	ret0 := C.g_main_context_ref(context.native())
 	return wrapMainContext(ret0)
+}
+
+// Release is a wrapper around g_main_context_release().
+func (context MainContext) Release() {
+	C.g_main_context_release(context.native())
 }
 
 // Unref is a wrapper around g_main_context_unref().
@@ -771,9 +865,26 @@ func (context MainContext) Unref() {
 	C.g_main_context_unref(context.native())
 }
 
+// Wakeup is a wrapper around g_main_context_wakeup().
+func (context MainContext) Wakeup() {
+	C.g_main_context_wakeup(context.native())
+}
+
 // MainContextDefault is a wrapper around g_main_context_default().
 func MainContextDefault() MainContext {
 	ret0 := C.g_main_context_default()
+	return wrapMainContext(ret0)
+}
+
+// MainContextGetThreadDefault is a wrapper around g_main_context_get_thread_default().
+func MainContextGetThreadDefault() MainContext {
+	ret0 := C.g_main_context_get_thread_default()
+	return wrapMainContext(ret0)
+}
+
+// MainContextRefThreadDefault is a wrapper around g_main_context_ref_thread_default().
+func MainContextRefThreadDefault() MainContext {
+	ret0 := C.g_main_context_ref_thread_default()
 	return wrapMainContext(ret0)
 }
 

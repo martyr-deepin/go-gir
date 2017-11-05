@@ -9,15 +9,15 @@ version = "2.0"
   name = "Variant"
 
 [[types]]
-  err_funcs = []
+  err_funcs = ["g_bytes_new","g_bytes_new_static","g_bytes_new_take","g_bytes_new_with_free_func","g_bytes_compare","g_bytes_equal","g_bytes_get_data","g_bytes_hash","g_bytes_unref_to_array","g_bytes_unref_to_data"]
   funcs = ["g_bytes_new_from_bytes","g_bytes_get_size","g_bytes_ref","g_bytes_unref"]
   manual_funcs = []
   name = "Bytes"
 
 [[types]]
-  err_funcs = []
-  funcs = []
-  manual_funcs = []
+  err_funcs = ["g_variant_type_copy","g_variant_type_dup_string","g_variant_type_element","g_variant_type_equal","g_variant_type_first","g_variant_type_free","g_variant_type_get_string_length","g_variant_type_hash","g_variant_type_is_array","g_variant_type_is_container","g_variant_type_is_definite","g_variant_type_is_dict_entry","g_variant_type_is_maybe","g_variant_type_is_subtype_of","g_variant_type_is_tuple","g_variant_type_is_variant","g_variant_type_key","g_variant_type_n_items","g_variant_type_next","g_variant_type_peek_string","g_variant_type_value","g_variant_type_string_scan"]
+  funcs = ["g_variant_type_new","g_variant_type_new_array","g_variant_type_new_dict_entry","g_variant_type_new_maybe","g_variant_type_new_tuple","g_variant_type_checked_","g_variant_type_string_is_valid"]
+  manual_funcs = ["g_variant_type_is_basic"]
   name = "VariantType"
 
 [[types]]
@@ -33,8 +33,8 @@ version = "2.0"
   name = "MainLoop"
 
 [[types]]
-  err_funcs = []
-  funcs = ["g_main_context_ref","g_main_context_unref","g_main_context_default","g_main_context_new","g_main_context_iteration","g_main_context_find_source_by_id","g_main_context_pending"]
+  err_funcs = ["g_main_context_add_poll","g_main_context_check","g_main_context_find_source_by_funcs_user_data","g_main_context_get_poll_func","g_main_context_invoke","g_main_context_invoke_full","g_main_context_prepare","g_main_context_query","g_main_context_remove_poll","g_main_context_set_poll_func","g_main_context_wait"]
+  funcs = ["g_main_context_ref","g_main_context_unref","g_main_context_default","g_main_context_new","g_main_context_iteration","g_main_context_find_source_by_id","g_main_context_pending","g_main_context_acquire","g_main_context_dispatch","g_main_context_find_source_by_user_data","g_main_context_is_owner","g_main_context_pop_thread_default","g_main_context_push_thread_default","g_main_context_release","g_main_context_wakeup","g_main_context_get_thread_default","g_main_context_ref_thread_default"]
   manual_funcs = []
   name = "MainContext"
 
