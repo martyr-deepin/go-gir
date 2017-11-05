@@ -39,19 +39,18 @@ func (value Variant) GetString() (string, uint) {
 }
 
 // GetStrv is a wrapper around g_variant_get_strv().
-func (value Variant) GetStrv() ([]string, uint) {
+func (value Variant) GetStrv() []string {
 	var length0 C.gsize
 	ret0 := C.g_variant_get_strv(value.native(), &length0)
 	var ret0Slice []*C.gchar
-	ret0SliceLength := util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), ret0SliceLength)      /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
 		ret[idx] = elemG
 	}
 	C.g_free(C.gpointer(ret0))
-	return ret, uint(length0)
+	return ret
 }
 
 // GetType is a wrapper around g_variant_get_type().

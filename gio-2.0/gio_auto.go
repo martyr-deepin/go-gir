@@ -47,8 +47,8 @@ func (appinfo AppInfo) GetId() string {
 func (appinfo AppInfo) GetSupportedTypes() []string {
 	ret0 := C.g_app_info_get_supported_types(appinfo.native())
 	var ret0Slice []*C.char
-	ret0SliceLength := util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), ret0SliceLength)      /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString(elem)
@@ -89,8 +89,8 @@ func DesktopAppInfoNewFromFilename(filename string) DesktopAppInfo {
 func (info DesktopAppInfo) ListActions() []string {
 	ret0 := C.g_desktop_app_info_list_actions(info.native())
 	var ret0Slice []*C.gchar
-	ret0SliceLength := util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), ret0SliceLength)      /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
@@ -201,8 +201,8 @@ func (settings Settings) GetStrv(key string) []string {
 	ret0 := C.g_settings_get_strv(settings.native(), key0)
 	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	var ret0Slice []*C.gchar
-	ret0SliceLength := util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), ret0SliceLength)      /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
@@ -460,8 +460,8 @@ func WrapActionGroup(p unsafe.Pointer) ActionGroup {
 func (action_group ActionGroup) ListActions() []string {
 	ret0 := C.g_action_group_list_actions(action_group.native())
 	var ret0Slice []*C.gchar
-	ret0SliceLength := util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), ret0SliceLength)      /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
