@@ -24,10 +24,385 @@ func WrapVariant(p unsafe.Pointer) Variant {
 	return Variant{p}
 }
 
+// VariantNewArray is a wrapper around g_variant_new_array().
+func VariantNewArray(child_type VariantType, children []Variant) Variant {
+	children0 := make([]*C.GVariant, len(children))
+	for idx, elemG := range children {
+		children0[idx] = elemG.native()
+	}
+	var children0Ptr **C.GVariant
+	if len(children0) > 0 {
+		children0Ptr = &children0[0]
+	}
+	ret0 := C.g_variant_new_array(child_type.native(), children0Ptr, C.gsize(len(children)))
+	return wrapVariant(ret0)
+}
+
 // VariantNewBoolean is a wrapper around g_variant_new_boolean().
 func VariantNewBoolean(value bool) Variant {
 	ret0 := C.g_variant_new_boolean(C.gboolean(util.Bool2Int(value)) /*go:.util*/)
 	return wrapVariant(ret0)
+}
+
+// VariantNewByte is a wrapper around g_variant_new_byte().
+func VariantNewByte(value byte) Variant {
+	ret0 := C.g_variant_new_byte(C.guchar(value))
+	return wrapVariant(ret0)
+}
+
+// VariantNewBytestring is a wrapper around g_variant_new_bytestring().
+func VariantNewBytestring(string []byte) Variant {
+	string0 := make([]C.gchar, len(string))
+	for idx, elemG := range string {
+		string0[idx] = C.gchar(elemG)
+	}
+	var string0Ptr *C.gchar
+	if len(string0) > 0 {
+		string0Ptr = &string0[0]
+	}
+	ret0 := C.g_variant_new_bytestring(string0Ptr)
+	return wrapVariant(ret0)
+}
+
+// VariantNewBytestringArray is a wrapper around g_variant_new_bytestring_array().
+func VariantNewBytestringArray(strv []string) Variant {
+	strv0 := make([]*C.gchar, len(strv))
+	for idx, elemG := range strv {
+		elem := (*C.gchar)(C.CString(elemG))
+		strv0[idx] = elem
+	}
+	var strv0Ptr **C.gchar
+	if len(strv0) > 0 {
+		strv0Ptr = &strv0[0]
+	}
+	ret0 := C.g_variant_new_bytestring_array(strv0Ptr, C.gssize(len(strv)))
+	for _, elem := range strv0 {
+		C.free(unsafe.Pointer(elem)) /*ch:<stdlib.h>*/
+	}
+	return wrapVariant(ret0)
+}
+
+// VariantNewDictEntry is a wrapper around g_variant_new_dict_entry().
+func VariantNewDictEntry(key Variant, value Variant) Variant {
+	ret0 := C.g_variant_new_dict_entry(key.native(), value.native())
+	return wrapVariant(ret0)
+}
+
+// VariantNewDouble is a wrapper around g_variant_new_double().
+func VariantNewDouble(value float64) Variant {
+	ret0 := C.g_variant_new_double(C.gdouble(value))
+	return wrapVariant(ret0)
+}
+
+// VariantNewFixedArray is a wrapper around g_variant_new_fixed_array().
+func VariantNewFixedArray(element_type VariantType, elements unsafe.Pointer, n_elements uint, element_size uint) Variant {
+	ret0 := C.g_variant_new_fixed_array(element_type.native(), C.gconstpointer(elements), C.gsize(n_elements), C.gsize(element_size))
+	return wrapVariant(ret0)
+}
+
+// VariantNewHandle is a wrapper around g_variant_new_handle().
+func VariantNewHandle(value int32) Variant {
+	ret0 := C.g_variant_new_handle(C.gint32(value))
+	return wrapVariant(ret0)
+}
+
+// VariantNewInt16 is a wrapper around g_variant_new_int16().
+func VariantNewInt16(value int16) Variant {
+	ret0 := C.g_variant_new_int16(C.gint16(value))
+	return wrapVariant(ret0)
+}
+
+// VariantNewInt32 is a wrapper around g_variant_new_int32().
+func VariantNewInt32(value int32) Variant {
+	ret0 := C.g_variant_new_int32(C.gint32(value))
+	return wrapVariant(ret0)
+}
+
+// VariantNewInt64 is a wrapper around g_variant_new_int64().
+func VariantNewInt64(value int64) Variant {
+	ret0 := C.g_variant_new_int64(C.gint64(value))
+	return wrapVariant(ret0)
+}
+
+// VariantNewMaybe is a wrapper around g_variant_new_maybe().
+func VariantNewMaybe(child_type VariantType, child Variant) Variant {
+	ret0 := C.g_variant_new_maybe(child_type.native(), child.native())
+	return wrapVariant(ret0)
+}
+
+// VariantNewObjectPath is a wrapper around g_variant_new_object_path().
+func VariantNewObjectPath(object_path string) Variant {
+	object_path0 := (*C.gchar)(C.CString(object_path))
+	ret0 := C.g_variant_new_object_path(object_path0)
+	C.free(unsafe.Pointer(object_path0)) /*ch:<stdlib.h>*/
+	return wrapVariant(ret0)
+}
+
+// VariantNewObjv is a wrapper around g_variant_new_objv().
+func VariantNewObjv(strv []string) Variant {
+	strv0 := make([]*C.gchar, len(strv))
+	for idx, elemG := range strv {
+		elem := (*C.gchar)(C.CString(elemG))
+		strv0[idx] = elem
+	}
+	var strv0Ptr **C.gchar
+	if len(strv0) > 0 {
+		strv0Ptr = &strv0[0]
+	}
+	ret0 := C.g_variant_new_objv(strv0Ptr, C.gssize(len(strv)))
+	for _, elem := range strv0 {
+		C.free(unsafe.Pointer(elem)) /*ch:<stdlib.h>*/
+	}
+	return wrapVariant(ret0)
+}
+
+// VariantNewSignature is a wrapper around g_variant_new_signature().
+func VariantNewSignature(signature string) Variant {
+	signature0 := (*C.gchar)(C.CString(signature))
+	ret0 := C.g_variant_new_signature(signature0)
+	C.free(unsafe.Pointer(signature0)) /*ch:<stdlib.h>*/
+	return wrapVariant(ret0)
+}
+
+// VariantNewString is a wrapper around g_variant_new_string().
+func VariantNewString(string string) Variant {
+	string0 := (*C.gchar)(C.CString(string))
+	ret0 := C.g_variant_new_string(string0)
+	C.free(unsafe.Pointer(string0)) /*ch:<stdlib.h>*/
+	return wrapVariant(ret0)
+}
+
+// VariantNewStrv is a wrapper around g_variant_new_strv().
+func VariantNewStrv(strv []string) Variant {
+	strv0 := make([]*C.gchar, len(strv))
+	for idx, elemG := range strv {
+		elem := (*C.gchar)(C.CString(elemG))
+		strv0[idx] = elem
+	}
+	var strv0Ptr **C.gchar
+	if len(strv0) > 0 {
+		strv0Ptr = &strv0[0]
+	}
+	ret0 := C.g_variant_new_strv(strv0Ptr, C.gssize(len(strv)))
+	for _, elem := range strv0 {
+		C.free(unsafe.Pointer(elem)) /*ch:<stdlib.h>*/
+	}
+	return wrapVariant(ret0)
+}
+
+// VariantNewTuple is a wrapper around g_variant_new_tuple().
+func VariantNewTuple(children []Variant) Variant {
+	children0 := make([]*C.GVariant, len(children))
+	for idx, elemG := range children {
+		children0[idx] = elemG.native()
+	}
+	var children0Ptr **C.GVariant
+	if len(children0) > 0 {
+		children0Ptr = &children0[0]
+	}
+	ret0 := C.g_variant_new_tuple(children0Ptr, C.gsize(len(children)))
+	return wrapVariant(ret0)
+}
+
+// VariantNewUint16 is a wrapper around g_variant_new_uint16().
+func VariantNewUint16(value uint16) Variant {
+	ret0 := C.g_variant_new_uint16(C.guint16(value))
+	return wrapVariant(ret0)
+}
+
+// VariantNewUint32 is a wrapper around g_variant_new_uint32().
+func VariantNewUint32(value uint32) Variant {
+	ret0 := C.g_variant_new_uint32(C.guint32(value))
+	return wrapVariant(ret0)
+}
+
+// VariantNewUint64 is a wrapper around g_variant_new_uint64().
+func VariantNewUint64(value uint64) Variant {
+	ret0 := C.g_variant_new_uint64(C.guint64(value))
+	return wrapVariant(ret0)
+}
+
+// VariantNewVariant is a wrapper around g_variant_new_variant().
+func VariantNewVariant(value Variant) Variant {
+	ret0 := C.g_variant_new_variant(value.native())
+	return wrapVariant(ret0)
+}
+
+// DupBytestring is a wrapper around g_variant_dup_bytestring().
+func (value Variant) DupBytestring() []byte {
+	var length0 C.gsize
+	ret0 := C.g_variant_dup_bytestring(value.native(), &length0)
+	var ret0Slice []C.gchar
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	ret := make([]byte, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		ret[idx] = byte(elem)
+	}
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// DupBytestringArray is a wrapper around g_variant_dup_bytestring_array().
+func (value Variant) DupBytestringArray() []string {
+	var length0 C.gsize
+	ret0 := C.g_variant_dup_bytestring_array(value.native(), &length0)
+	var ret0Slice []*C.gchar
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString((*C.char)(elem))
+		ret[idx] = elemG
+		C.g_free(C.gpointer(elem))
+	}
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// DupObjv is a wrapper around g_variant_dup_objv().
+func (value Variant) DupObjv() []string {
+	var length0 C.gsize
+	ret0 := C.g_variant_dup_objv(value.native(), &length0)
+	var ret0Slice []*C.gchar
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString((*C.char)(elem))
+		ret[idx] = elemG
+		C.g_free(C.gpointer(elem))
+	}
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// DupStrv is a wrapper around g_variant_dup_strv().
+func (value Variant) DupStrv() []string {
+	var length0 C.gsize
+	ret0 := C.g_variant_dup_strv(value.native(), &length0)
+	var ret0Slice []*C.gchar
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString((*C.char)(elem))
+		ret[idx] = elemG
+		C.g_free(C.gpointer(elem))
+	}
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// GetBoolean is a wrapper around g_variant_get_boolean().
+func (value Variant) GetBoolean() bool {
+	ret0 := C.g_variant_get_boolean(value.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// GetByte is a wrapper around g_variant_get_byte().
+func (value Variant) GetByte() byte {
+	ret0 := C.g_variant_get_byte(value.native())
+	return byte(ret0)
+}
+
+// GetBytestring is a wrapper around g_variant_get_bytestring().
+func (value Variant) GetBytestring() []byte {
+	ret0 := C.g_variant_get_bytestring(value.native())
+	var ret0Slice []C.gchar
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(C.gchar(0))) /*go:.util*/) /*go:.util*/
+	ret := make([]byte, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		ret[idx] = byte(elem)
+	}
+	return ret
+}
+
+// GetBytestringArray is a wrapper around g_variant_get_bytestring_array().
+func (value Variant) GetBytestringArray() []string {
+	var length0 C.gsize
+	ret0 := C.g_variant_get_bytestring_array(value.native(), &length0)
+	var ret0Slice []*C.gchar
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString((*C.char)(elem))
+		ret[idx] = elemG
+	}
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// GetChildValue is a wrapper around g_variant_get_child_value().
+func (value Variant) GetChildValue(index_ uint) Variant {
+	ret0 := C.g_variant_get_child_value(value.native(), C.gsize(index_))
+	return wrapVariant(ret0)
+}
+
+// GetData is a wrapper around g_variant_get_data().
+func (value Variant) GetData() unsafe.Pointer {
+	ret0 := C.g_variant_get_data(value.native())
+	return unsafe.Pointer(ret0)
+}
+
+// GetDataAsBytes is a wrapper around g_variant_get_data_as_bytes().
+func (value Variant) GetDataAsBytes() Bytes {
+	ret0 := C.g_variant_get_data_as_bytes(value.native())
+	return wrapBytes(ret0)
+}
+
+// GetDouble is a wrapper around g_variant_get_double().
+func (value Variant) GetDouble() float64 {
+	ret0 := C.g_variant_get_double(value.native())
+	return float64(ret0)
+}
+
+// GetHandle is a wrapper around g_variant_get_handle().
+func (value Variant) GetHandle() int32 {
+	ret0 := C.g_variant_get_handle(value.native())
+	return int32(ret0)
+}
+
+// GetInt16 is a wrapper around g_variant_get_int16().
+func (value Variant) GetInt16() int16 {
+	ret0 := C.g_variant_get_int16(value.native())
+	return int16(ret0)
+}
+
+// GetInt32 is a wrapper around g_variant_get_int32().
+func (value Variant) GetInt32() int32 {
+	ret0 := C.g_variant_get_int32(value.native())
+	return int32(ret0)
+}
+
+// GetInt64 is a wrapper around g_variant_get_int64().
+func (value Variant) GetInt64() int64 {
+	ret0 := C.g_variant_get_int64(value.native())
+	return int64(ret0)
+}
+
+// GetMaybe is a wrapper around g_variant_get_maybe().
+func (value Variant) GetMaybe() Variant {
+	ret0 := C.g_variant_get_maybe(value.native())
+	return wrapVariant(ret0)
+}
+
+// GetObjv is a wrapper around g_variant_get_objv().
+func (value Variant) GetObjv() []string {
+	var length0 C.gsize
+	ret0 := C.g_variant_get_objv(value.native(), &length0)
+	var ret0Slice []*C.gchar
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString((*C.char)(elem))
+		ret[idx] = elemG
+	}
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// GetSize is a wrapper around g_variant_get_size().
+func (value Variant) GetSize() uint {
+	ret0 := C.g_variant_get_size(value.native())
+	return uint(ret0)
 }
 
 // GetStrv is a wrapper around g_variant_get_strv().
@@ -51,10 +426,48 @@ func (value Variant) GetType() VariantType {
 	return wrapVariantType(ret0)
 }
 
+// GetUint16 is a wrapper around g_variant_get_uint16().
+func (value Variant) GetUint16() uint16 {
+	ret0 := C.g_variant_get_uint16(value.native())
+	return uint16(ret0)
+}
+
+// GetUint32 is a wrapper around g_variant_get_uint32().
+func (value Variant) GetUint32() uint32 {
+	ret0 := C.g_variant_get_uint32(value.native())
+	return uint32(ret0)
+}
+
+// GetUint64 is a wrapper around g_variant_get_uint64().
+func (value Variant) GetUint64() uint64 {
+	ret0 := C.g_variant_get_uint64(value.native())
+	return uint64(ret0)
+}
+
+// GetVariant is a wrapper around g_variant_get_variant().
+func (value Variant) GetVariant() Variant {
+	ret0 := C.g_variant_get_variant(value.native())
+	return wrapVariant(ret0)
+}
+
 // IsFloating is a wrapper around g_variant_is_floating().
 func (value Variant) IsFloating() bool {
 	ret0 := C.g_variant_is_floating(value.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// LookupValue is a wrapper around g_variant_lookup_value().
+func (dictionary Variant) LookupValue(key string, expected_type VariantType) Variant {
+	key0 := (*C.gchar)(C.CString(key))
+	ret0 := C.g_variant_lookup_value(dictionary.native(), key0, expected_type.native())
+	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
+	return wrapVariant(ret0)
+}
+
+// NChildren is a wrapper around g_variant_n_children().
+func (value Variant) NChildren() uint {
+	ret0 := C.g_variant_n_children(value.native())
+	return uint(ret0)
 }
 
 // Ref is a wrapper around g_variant_ref().
@@ -69,9 +482,68 @@ func (value Variant) RefSink() Variant {
 	return wrapVariant(ret0)
 }
 
+// Store is a wrapper around g_variant_store().
+func (value Variant) Store(data unsafe.Pointer) {
+	C.g_variant_store(value.native(), C.gpointer(data))
+}
+
 // Unref is a wrapper around g_variant_unref().
 func (value Variant) Unref() {
 	C.g_variant_unref(value.native())
+}
+
+// VariantIsObjectPath is a wrapper around g_variant_is_object_path().
+func VariantIsObjectPath(string string) bool {
+	string0 := (*C.gchar)(C.CString(string))
+	ret0 := C.g_variant_is_object_path(string0)
+	C.free(unsafe.Pointer(string0)) /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// VariantIsSignature is a wrapper around g_variant_is_signature().
+func VariantIsSignature(string string) bool {
+	string0 := (*C.gchar)(C.CString(string))
+	ret0 := C.g_variant_is_signature(string0)
+	C.free(unsafe.Pointer(string0)) /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// Struct Bytes
+type Bytes struct {
+	Ptr unsafe.Pointer
+}
+
+func (v Bytes) native() *C.GBytes {
+	return (*C.GBytes)(v.Ptr)
+}
+func wrapBytes(p *C.GBytes) Bytes {
+	return Bytes{unsafe.Pointer(p)}
+}
+func WrapBytes(p unsafe.Pointer) Bytes {
+	return Bytes{p}
+}
+
+// GetSize is a wrapper around g_bytes_get_size().
+func (bytes Bytes) GetSize() uint {
+	ret0 := C.g_bytes_get_size(bytes.native())
+	return uint(ret0)
+}
+
+// NewFromBytes is a wrapper around g_bytes_new_from_bytes().
+func (bytes Bytes) NewFromBytes(offset uint, length uint) Bytes {
+	ret0 := C.g_bytes_new_from_bytes(bytes.native(), C.gsize(offset), C.gsize(length))
+	return wrapBytes(ret0)
+}
+
+// Ref is a wrapper around g_bytes_ref().
+func (bytes Bytes) Ref() Bytes {
+	ret0 := C.g_bytes_ref(bytes.native())
+	return wrapBytes(ret0)
+}
+
+// Unref is a wrapper around g_bytes_unref().
+func (bytes Bytes) Unref() {
+	C.g_bytes_unref(bytes.native())
 }
 
 // Struct VariantType
