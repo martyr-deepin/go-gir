@@ -1,147 +1,45 @@
+funcs = ["g_idle_source_new","g_timeout_source_new","g_timeout_source_new_seconds"]
 namespace = "GLib"
 version = "2.0"
 
-funcs = [
-    'g_idle_source_new',
-    'g_timeout_source_new',
-    'g_timeout_source_new_seconds',
-]
+[[types]]
+  err_funcs = ["g_variant_new","g_variant_new_from_bytes","g_variant_new_from_data","g_variant_new_parsed","g_variant_new_parsed_va","g_variant_new_printf","g_variant_new_va","g_variant_compare","g_variant_equal","g_variant_get","g_variant_get_child","g_variant_get_fixed_array","g_variant_get_va","g_variant_hash","g_variant_is_of_type","g_variant_iter_new","g_variant_lookup","g_variant_print_string","g_variant_parse","g_variant_parse_error_quark","g_variant_parser_get_error_quark"]
+  funcs = ["g_variant_unref","g_variant_ref","g_variant_ref_sink","g_variant_get_type","g_variant_is_floating","g_variant_new_boolean","g_variant_new_byte","g_variant_new_int16","g_variant_new_uint16","g_variant_new_int32","g_variant_new_uint32","g_variant_new_int64","g_variant_new_uint64","g_variant_new_handle","g_variant_new_double","g_variant_new_string","g_variant_new_object_path","g_variant_is_object_path","g_variant_new_signature","g_variant_is_signature","g_variant_new_variant","g_variant_new_strv","g_variant_new_objv","g_variant_new_bytestring","g_variant_new_bytestring_array","g_variant_get_boolean","g_variant_get_byte","g_variant_get_int16","g_variant_get_uint16","g_variant_get_int32","g_variant_get_uint32","g_variant_get_int64","g_variant_get_uint64","g_variant_get_handle","g_variant_get_double","g_variant_get_strv","g_variant_get_variant","g_variant_dup_strv","g_variant_get_objv","g_variant_dup_objv","g_variant_get_bytestring","g_variant_dup_bytestring","g_variant_get_bytestring_array","g_variant_dup_bytestring_array","g_variant_new_maybe","g_variant_new_array","g_variant_new_tuple","g_variant_new_dict_entry","g_variant_new_fixed_array","g_variant_get_maybe","g_variant_n_children","g_variant_get_child_value","g_variant_lookup_value","g_variant_get_size","g_variant_get_data","g_variant_get_data_as_bytes","g_variant_store","g_variant_new_take_string","g_variant_byteswap","g_variant_check_format_string","g_variant_classify","g_variant_dup_string","g_variant_get_normal_form","g_variant_get_type_string","g_variant_is_container","g_variant_is_normal_form","g_variant_print","g_variant_take_ref","g_variant_parse_error_print_context"]
+  manual_funcs = ["g_variant_get_string"]
+  name = "Variant"
 
 [[types]]
-name = "Variant"
-funcs = [
-	'g_variant_unref',
-	'g_variant_ref',
-	'g_variant_ref_sink',
-	'g_variant_get_type',
-	'g_variant_is_floating',
-    'g_variant_new_boolean',
-    'g_variant_new_byte',
-    'g_variant_new_int16',
-    'g_variant_new_uint16',
-    'g_variant_new_int32',
-    'g_variant_new_uint32',
-    'g_variant_new_int64',
-    'g_variant_new_uint64',
-    'g_variant_new_handle',
-    'g_variant_new_double',
-    'g_variant_new_string',
-    'g_variant_new_object_path',
-    'g_variant_is_object_path',
-    'g_variant_new_signature',
-    'g_variant_is_signature',
-    'g_variant_new_variant',
-    'g_variant_new_strv',
-    'g_variant_new_objv',
-    'g_variant_new_bytestring',
-    'g_variant_new_bytestring_array',
-    'g_variant_get_boolean',
-    'g_variant_get_byte',
-    'g_variant_get_int16',
-    'g_variant_get_uint16',
-    'g_variant_get_int32',
-    'g_variant_get_uint32',
-    'g_variant_get_int64',
-    'g_variant_get_uint64',
-    'g_variant_get_handle',
-    'g_variant_get_double',
-    'g_variant_get_strv',
-    'g_variant_get_variant',
-    'g_variant_dup_strv',
-    'g_variant_get_objv',
-    'g_variant_dup_objv',
-    'g_variant_get_bytestring',
-    'g_variant_dup_bytestring',
-    'g_variant_get_bytestring_array',
-    'g_variant_dup_bytestring_array',
-    'g_variant_new_maybe',
-    'g_variant_new_array',
-    'g_variant_new_tuple',
-    'g_variant_new_dict_entry',
-    'g_variant_new_fixed_array',
-    'g_variant_get_maybe',
-    'g_variant_n_children',
-    'g_variant_get_child_value',
-    #'g_variant_get_string', // manual
-    'g_variant_lookup_value',
-#    'g_variant_get_fixed_array', // maual
-    'g_variant_get_size',
-    'g_variant_get_data',
-    'g_variant_get_data_as_bytes',
-    'g_variant_store',
-#    'g_variant_new_from_bytes', // failed
-]
+  err_funcs = []
+  funcs = ["g_bytes_new_from_bytes","g_bytes_get_size","g_bytes_ref","g_bytes_unref"]
+  manual_funcs = []
+  name = "Bytes"
 
 [[types]]
-name = 'Bytes'
-funcs = [
-#    'g_bytes_new', // failed
-    'g_bytes_new_from_bytes',
-#    'g_bytes_get_data', // failed
-    'g_bytes_get_size',
-#    'g_bytes_hash', // failed
-#    'g_bytes_equal', // failed
-    'g_bytes_ref',
-    'g_bytes_unref',
-]
+  err_funcs = []
+  funcs = []
+  manual_funcs = []
+  name = "VariantType"
 
 [[types]]
-name = "VariantType"
-funcs = [
-]
+  err_funcs = []
+  funcs = ["g_error_free"]
+  manual_funcs = []
+  name = "Error"
 
 [[types]]
-name = "Error"
-funcs = [
-    'g_error_free',
-]
+  err_funcs = []
+  funcs = ["g_main_loop_ref","g_main_loop_unref","g_main_loop_run","g_main_loop_quit","g_main_loop_get_context","g_main_loop_is_running","g_main_loop_new"]
+  manual_funcs = []
+  name = "MainLoop"
 
 [[types]]
-name = "MainLoop"
-funcs = [
-    'g_main_loop_ref',
-    'g_main_loop_unref',
-    'g_main_loop_run',
-    'g_main_loop_quit',
-    'g_main_loop_get_context',
-	'g_main_loop_is_running',
-	'g_main_loop_new',
-]
+  err_funcs = []
+  funcs = ["g_main_context_ref","g_main_context_unref","g_main_context_default","g_main_context_new","g_main_context_iteration","g_main_context_find_source_by_id","g_main_context_pending"]
+  manual_funcs = []
+  name = "MainContext"
 
 [[types]]
-name = "MainContext"
-funcs = [
-    'g_main_context_ref',
-    'g_main_context_unref',
-    'g_main_context_default',
-    'g_main_context_new',
-    'g_main_context_iteration',
-    'g_main_context_find_source_by_id',
-	'g_main_context_pending',
-]
-
-[[types]]
-name = "Source"
-funcs = [
-    'g_idle_source_new',
-    'g_timeout_source_new',
-    'g_timeout_source_new_seconds',
-    'g_source_ref',
-    'g_source_unref',
-    'g_source_set_closure',
-    'g_source_attach',
-    'g_source_destroy',
-    'g_source_is_destroyed',
-    'g_source_set_priority',
-    'g_source_get_priority',
-    'g_source_set_can_recurse',
-    'g_source_get_can_recurse',
-    'g_source_get_id',
-    'g_source_get_name',
-    'g_source_set_name',
-    'g_source_set_name_by_id',
-    'g_source_get_context',
-    'g_source_get_time',
-    'g_source_remove',
-]
-
+  err_funcs = []
+  funcs = ["g_idle_source_new","g_timeout_source_new","g_timeout_source_new_seconds","g_source_ref","g_source_unref","g_source_set_closure","g_source_attach","g_source_destroy","g_source_is_destroyed","g_source_set_priority","g_source_get_priority","g_source_set_can_recurse","g_source_get_can_recurse","g_source_get_id","g_source_get_name","g_source_set_name","g_source_set_name_by_id","g_source_get_context","g_source_get_time","g_source_remove"]
+  manual_funcs = []
+  name = "Source"

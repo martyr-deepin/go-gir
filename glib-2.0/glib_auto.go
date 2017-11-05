@@ -190,6 +190,14 @@ func VariantNewStrv(strv []string) Variant {
 	return wrapVariant(ret0)
 }
 
+// VariantNewTakeString is a wrapper around g_variant_new_take_string().
+func VariantNewTakeString(string string) Variant {
+	string0 := (*C.gchar)(C.CString(string))
+	ret0 := C.g_variant_new_take_string(string0)
+	C.free(unsafe.Pointer(string0)) /*ch:<stdlib.h>*/
+	return wrapVariant(ret0)
+}
+
 // VariantNewTuple is a wrapper around g_variant_new_tuple().
 func VariantNewTuple(children []Variant) Variant {
 	children0 := make([]*C.GVariant, len(children))
@@ -226,6 +234,26 @@ func VariantNewUint64(value uint64) Variant {
 func VariantNewVariant(value Variant) Variant {
 	ret0 := C.g_variant_new_variant(value.native())
 	return wrapVariant(ret0)
+}
+
+// Byteswap is a wrapper around g_variant_byteswap().
+func (value Variant) Byteswap() Variant {
+	ret0 := C.g_variant_byteswap(value.native())
+	return wrapVariant(ret0)
+}
+
+// CheckFormatString is a wrapper around g_variant_check_format_string().
+func (value Variant) CheckFormatString(format_string string, copy_only bool) bool {
+	format_string0 := (*C.gchar)(C.CString(format_string))
+	ret0 := C.g_variant_check_format_string(value.native(), format_string0, C.gboolean(util.Bool2Int(copy_only)) /*go:.util*/)
+	C.free(unsafe.Pointer(format_string0)) /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0))        /*go:.util*/
+}
+
+// Classify is a wrapper around g_variant_classify().
+func (value Variant) Classify() VariantClass {
+	ret0 := C.g_variant_classify(value.native())
+	return VariantClass(ret0)
 }
 
 // DupBytestring is a wrapper around g_variant_dup_bytestring().
@@ -272,6 +300,15 @@ func (value Variant) DupObjv() []string {
 	}
 	C.g_free(C.gpointer(ret0))
 	return ret
+}
+
+// DupString is a wrapper around g_variant_dup_string().
+func (value Variant) DupString() (string, uint) {
+	var length0 C.gsize
+	ret0 := C.g_variant_dup_string(value.native(), &length0)
+	ret := C.GoString((*C.char)(ret0))
+	C.g_free(C.gpointer(ret0))
+	return ret, uint(length0)
 }
 
 // DupStrv is a wrapper around g_variant_dup_strv().
@@ -384,6 +421,12 @@ func (value Variant) GetMaybe() Variant {
 	return wrapVariant(ret0)
 }
 
+// GetNormalForm is a wrapper around g_variant_get_normal_form().
+func (value Variant) GetNormalForm() Variant {
+	ret0 := C.g_variant_get_normal_form(value.native())
+	return wrapVariant(ret0)
+}
+
 // GetObjv is a wrapper around g_variant_get_objv().
 func (value Variant) GetObjv() []string {
 	var length0 C.gsize
@@ -426,6 +469,13 @@ func (value Variant) GetType() VariantType {
 	return wrapVariantType(ret0)
 }
 
+// GetTypeString is a wrapper around g_variant_get_type_string().
+func (value Variant) GetTypeString() string {
+	ret0 := C.g_variant_get_type_string(value.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
 // GetUint16 is a wrapper around g_variant_get_uint16().
 func (value Variant) GetUint16() uint16 {
 	ret0 := C.g_variant_get_uint16(value.native())
@@ -450,9 +500,21 @@ func (value Variant) GetVariant() Variant {
 	return wrapVariant(ret0)
 }
 
+// IsContainer is a wrapper around g_variant_is_container().
+func (value Variant) IsContainer() bool {
+	ret0 := C.g_variant_is_container(value.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
 // IsFloating is a wrapper around g_variant_is_floating().
 func (value Variant) IsFloating() bool {
 	ret0 := C.g_variant_is_floating(value.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// IsNormalForm is a wrapper around g_variant_is_normal_form().
+func (value Variant) IsNormalForm() bool {
+	ret0 := C.g_variant_is_normal_form(value.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
@@ -470,6 +532,14 @@ func (value Variant) NChildren() uint {
 	return uint(ret0)
 }
 
+// Print is a wrapper around g_variant_print().
+func (value Variant) Print(type_annotate bool) string {
+	ret0 := C.g_variant_print(value.native(), C.gboolean(util.Bool2Int(type_annotate)) /*go:.util*/)
+	ret := C.GoString((*C.char)(ret0))
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
 // Ref is a wrapper around g_variant_ref().
 func (value Variant) Ref() Variant {
 	ret0 := C.g_variant_ref(value.native())
@@ -485,6 +555,12 @@ func (value Variant) RefSink() Variant {
 // Store is a wrapper around g_variant_store().
 func (value Variant) Store(data unsafe.Pointer) {
 	C.g_variant_store(value.native(), C.gpointer(data))
+}
+
+// TakeRef is a wrapper around g_variant_take_ref().
+func (value Variant) TakeRef() Variant {
+	ret0 := C.g_variant_take_ref(value.native())
+	return wrapVariant(ret0)
 }
 
 // Unref is a wrapper around g_variant_unref().
@@ -506,6 +582,16 @@ func VariantIsSignature(string string) bool {
 	ret0 := C.g_variant_is_signature(string0)
 	C.free(unsafe.Pointer(string0)) /*ch:<stdlib.h>*/
 	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// VariantParseErrorPrintContext is a wrapper around g_variant_parse_error_print_context().
+func VariantParseErrorPrintContext(error Error, source_str string) string {
+	source_str0 := (*C.gchar)(C.CString(source_str))
+	ret0 := C.g_variant_parse_error_print_context(error.native(), source_str0)
+	C.free(unsafe.Pointer(source_str0)) /*ch:<stdlib.h>*/
+	ret := C.GoString((*C.char)(ret0))
+	C.g_free(C.gpointer(ret0))
+	return ret
 }
 
 // Struct Bytes
