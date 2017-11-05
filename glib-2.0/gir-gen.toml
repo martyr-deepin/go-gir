@@ -17,7 +17,7 @@ funcs = [
 	'g_variant_is_floating',
     'g_variant_new_boolean',
     'g_variant_get_strv',
-    'g_variant_get_string',
+    #'g_variant_get_string', // manual
 ]
 
 [[gen_files]]

@@ -30,14 +30,6 @@ func VariantNewBoolean(value bool) Variant {
 	return wrapVariant(ret0)
 }
 
-// GetString is a wrapper around g_variant_get_string().
-func (value Variant) GetString() (string, uint) {
-	var length0 C.gsize
-	ret0 := C.g_variant_get_string(value.native(), &length0)
-	ret := C.GoString((*C.char)(ret0))
-	return ret, uint(length0)
-}
-
 // GetStrv is a wrapper around g_variant_get_strv().
 func (value Variant) GetStrv() []string {
 	var length0 C.gsize
