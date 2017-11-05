@@ -7,8 +7,8 @@ funcs = [
     'g_timeout_source_new_seconds',
 ]
 
-[[gen_files]]
-type = "Variant"
+[[types]]
+name = "Variant"
 funcs = [
 	'g_variant_unref',
 	'g_variant_ref',
@@ -72,8 +72,8 @@ funcs = [
 #    'g_variant_new_from_bytes', // failed
 ]
 
-[[gen_files]]
-type = 'Bytes'
+[[types]]
+name = 'Bytes'
 funcs = [
 #    'g_bytes_new', // failed
     'g_bytes_new_from_bytes',
@@ -85,19 +85,19 @@ funcs = [
     'g_bytes_unref',
 ]
 
-[[gen_files]]
-type = "VariantType"
+[[types]]
+name = "VariantType"
 funcs = [
 ]
 
-[[gen_files]]
-type = "Error"
+[[types]]
+name = "Error"
 funcs = [
     'g_error_free',
 ]
 
-[[gen_files]]
-type = "MainLoop"
+[[types]]
+name = "MainLoop"
 funcs = [
     'g_main_loop_ref',
     'g_main_loop_unref',
@@ -108,8 +108,8 @@ funcs = [
 	'g_main_loop_new',
 ]
 
-[[gen_files]]
-type = "MainContext"
+[[types]]
+name = "MainContext"
 funcs = [
     'g_main_context_ref',
     'g_main_context_unref',
@@ -120,8 +120,8 @@ funcs = [
 	'g_main_context_pending',
 ]
 
-[[gen_files]]
-type = "Source"
+[[types]]
+name = "Source"
 funcs = [
     'g_idle_source_new',
     'g_timeout_source_new',

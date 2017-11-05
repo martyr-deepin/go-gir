@@ -1,8 +1,8 @@
 namespace = "GObject"
 version = "2.0"
 
-[[gen_files]]
-type = "Value"
+[[types]]
+name = "Value"
 funcs = [
 	'g_value_set_boolean',
 	'g_value_set_schar',
@@ -21,8 +21,8 @@ funcs = [
 	'g_value_unset',
 ]
 
-[[gen_files]]
-type = "Object"
+[[types]]
+name = "Object"
 funcs = [
     'g_object_ref',
     'g_object_unref',
@@ -31,8 +31,8 @@ funcs = [
     'g_object_force_floating',
 ]
 
-[[gen_files]]
-type = "Closure"
+[[types]]
+name = "Closure"
 funcs = [
     'g_closure_ref',
     'g_closure_sink',

@@ -1,23 +1,23 @@
 namespace = "Gio"
 version = "2.0"
 
-[[gen_files]]
-type = "AppInfo"
+[[types]]
+name = "AppInfo"
 funcs = [
 	'g_app_info_get_id',
 #	'g_app_info_launch',
     'g_app_info_get_supported_types',
 ]
 
-[[gen_files]]
-type = 'DesktopAppInfo'
+[[types]]
+name = 'DesktopAppInfo'
 funcs = [
     'g_desktop_app_info_new_from_filename',
     'g_desktop_app_info_list_actions',
 ]
 
-[[gen_files]]
-type = "Settings"
+[[types]]
+name = "Settings"
 funcs = [
     'g_settings_new',
 	'g_settings_get_value',
@@ -35,33 +35,33 @@ funcs = [
 	'g_settings_apply',
 ]
 
-[[gen_files]]
-type = "File"
+[[types]]
+name = "File"
 funcs = [
 	'g_file_replace',
 	'g_file_get_path',
 ]
 
-[[gen_files]]
-type = "Cancellable"
+[[types]]
+name = "Cancellable"
 
-[[gen_files]]
-type = 'OutputStream'
+[[types]]
+name = 'OutputStream'
 
-[[gen_files]]
-type = "FileOutputStream"
+[[types]]
+name = "FileOutputStream"
 funcs = [
 	'g_file_output_stream_query_info',
 ]
 
-[[gen_files]]
-type = 'Seekable'
+[[types]]
+name = 'Seekable'
 
-[[gen_files]]
-type = "FileInfo"
+[[types]]
+name = "FileInfo"
 
-[[gen_files]]
-type = 'Application'
+[[types]]
+name = 'Application'
 funcs = [
     'g_application_new',
     'g_application_id_is_valid',
@@ -71,11 +71,11 @@ funcs = [
     'g_application_run',
 ]
 
-[[gen_files]]
-type = 'ActionMap'
+[[types]]
+name = 'ActionMap'
 
-[[gen_files]]
-type = 'ActionGroup'
+[[types]]
+name = 'ActionGroup'
 funcs = [
     'g_action_group_list_actions',
 ]
