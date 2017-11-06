@@ -1,81 +1,94 @@
+funcs = []
 namespace = "Gio"
 version = "2.0"
 
 [[types]]
-name = "AppInfo"
-funcs = [
-	'g_app_info_get_id',
-#	'g_app_info_launch',
-    'g_app_info_get_supported_types',
-]
+  err_funcs = []
+  funcs = ["g_app_info_get_id","g_app_info_get_supported_types"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "AppInfo"
 
 [[types]]
-name = 'DesktopAppInfo'
-funcs = [
-    'g_desktop_app_info_new_from_filename',
-    'g_desktop_app_info_list_actions',
-]
+  err_funcs = ["g_desktop_app_info_new_from_keyfile","g_desktop_app_info_get_keywords","g_desktop_app_info_launch_uris_as_manager","g_desktop_app_info_get_implementations","g_desktop_app_info_search"]
+  funcs = ["g_desktop_app_info_new_from_filename","g_desktop_app_info_list_actions","g_desktop_app_info_new","g_desktop_app_info_get_action_name","g_desktop_app_info_get_boolean","g_desktop_app_info_get_categories","g_desktop_app_info_get_filename","g_desktop_app_info_get_generic_name","g_desktop_app_info_get_is_hidden","g_desktop_app_info_get_nodisplay","g_desktop_app_info_get_show_in","g_desktop_app_info_get_startup_wm_class","g_desktop_app_info_get_string","g_desktop_app_info_has_key","g_desktop_app_info_launch_action"]
+  ignore_funcs = ["g_desktop_app_info_set_desktop_env"]
+  manual_funcs = []
+  name = "DesktopAppInfo"
 
 [[types]]
-name = "Settings"
-funcs = [
-    'g_settings_new',
-	'g_settings_get_value',
-	'g_settings_get_string',
-	'g_settings_get_boolean',
-	'g_settings_get_int',
-	'g_settings_get_int64',
-	'g_settings_get_uint',
-	'g_settings_get_uint64',
-	'g_settings_get_double',
-	'g_settings_get_enum',
-	'g_settings_get_flags',
-	'g_settings_get_child',
-	'g_settings_get_strv',
-	'g_settings_apply',
-]
+  err_funcs = ["g_app_launch_context_get_display","g_app_launch_context_get_startup_notify_id"]
+  funcs = ["g_app_launch_context_new","g_app_launch_context_get_environment","g_app_launch_context_launch_failed","g_app_launch_context_setenv","g_app_launch_context_unsetenv"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "AppLaunchContext"
 
 [[types]]
-name = "File"
-funcs = [
-	'g_file_replace',
-	'g_file_get_path',
-]
+  err_funcs = []
+  funcs = ["g_settings_new","g_settings_get_value","g_settings_get_string","g_settings_get_boolean","g_settings_get_int","g_settings_get_int64","g_settings_get_uint","g_settings_get_uint64","g_settings_get_double","g_settings_get_enum","g_settings_get_flags","g_settings_get_child","g_settings_get_strv","g_settings_apply"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Settings"
 
 [[types]]
-name = "Cancellable"
+  err_funcs = []
+  funcs = ["g_file_replace","g_file_get_path"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "File"
 
 [[types]]
-name = 'OutputStream'
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Cancellable"
 
 [[types]]
-name = "FileOutputStream"
-funcs = [
-	'g_file_output_stream_query_info',
-]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "OutputStream"
 
 [[types]]
-name = 'Seekable'
+  err_funcs = []
+  funcs = ["g_file_output_stream_query_info"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "FileOutputStream"
 
 [[types]]
-name = "FileInfo"
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Seekable"
 
 [[types]]
-name = 'Application'
-funcs = [
-    'g_application_new',
-    'g_application_id_is_valid',
-    'g_application_set_inactivity_timeout',
-    'g_application_hold',
-    'g_application_release',
-    'g_application_run',
-]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "FileInfo"
 
 [[types]]
-name = 'ActionMap'
+  err_funcs = []
+  funcs = ["g_application_new","g_application_id_is_valid","g_application_set_inactivity_timeout","g_application_hold","g_application_release","g_application_run"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Application"
 
 [[types]]
-name = 'ActionGroup'
-funcs = [
-    'g_action_group_list_actions',
-]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ActionMap"
+
+[[types]]
+  err_funcs = []
+  funcs = ["g_action_group_list_actions"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ActionGroup"

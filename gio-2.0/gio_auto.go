@@ -77,12 +77,111 @@ func (v DesktopAppInfo) AppInfo() AppInfo {
 	return WrapAppInfo(v.Ptr)
 }
 
+// DesktopAppInfoNew is a wrapper around g_desktop_app_info_new().
+func DesktopAppInfoNew(desktop_id string) DesktopAppInfo {
+	desktop_id0 := C.CString(desktop_id)
+	ret0 := C.g_desktop_app_info_new(desktop_id0)
+	C.free(unsafe.Pointer(desktop_id0)) /*ch:<stdlib.h>*/
+	return wrapDesktopAppInfo(ret0)
+}
+
 // DesktopAppInfoNewFromFilename is a wrapper around g_desktop_app_info_new_from_filename().
 func DesktopAppInfoNewFromFilename(filename string) DesktopAppInfo {
 	filename0 := C.CString(filename)
 	ret0 := C.g_desktop_app_info_new_from_filename(filename0)
 	C.free(unsafe.Pointer(filename0)) /*ch:<stdlib.h>*/
 	return wrapDesktopAppInfo(ret0)
+}
+
+// GetActionName is a wrapper around g_desktop_app_info_get_action_name().
+func (info DesktopAppInfo) GetActionName(action_name string) string {
+	action_name0 := (*C.gchar)(C.CString(action_name))
+	ret0 := C.g_desktop_app_info_get_action_name(info.native(), action_name0)
+	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
+	ret := C.GoString((*C.char)(ret0))
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// GetBoolean is a wrapper around g_desktop_app_info_get_boolean().
+func (info DesktopAppInfo) GetBoolean(key string) bool {
+	key0 := C.CString(key)
+	ret0 := C.g_desktop_app_info_get_boolean(info.native(), key0)
+	C.free(unsafe.Pointer(key0))    /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// GetCategories is a wrapper around g_desktop_app_info_get_categories().
+func (info DesktopAppInfo) GetCategories() string {
+	ret0 := C.g_desktop_app_info_get_categories(info.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// GetFilename is a wrapper around g_desktop_app_info_get_filename().
+func (info DesktopAppInfo) GetFilename() string {
+	ret0 := C.g_desktop_app_info_get_filename(info.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// GetGenericName is a wrapper around g_desktop_app_info_get_generic_name().
+func (info DesktopAppInfo) GetGenericName() string {
+	ret0 := C.g_desktop_app_info_get_generic_name(info.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// GetIsHidden is a wrapper around g_desktop_app_info_get_is_hidden().
+func (info DesktopAppInfo) GetIsHidden() bool {
+	ret0 := C.g_desktop_app_info_get_is_hidden(info.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// GetNodisplay is a wrapper around g_desktop_app_info_get_nodisplay().
+func (info DesktopAppInfo) GetNodisplay() bool {
+	ret0 := C.g_desktop_app_info_get_nodisplay(info.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// GetShowIn is a wrapper around g_desktop_app_info_get_show_in().
+func (info DesktopAppInfo) GetShowIn(desktop_env string) bool {
+	desktop_env0 := (*C.gchar)(C.CString(desktop_env))
+	ret0 := C.g_desktop_app_info_get_show_in(info.native(), desktop_env0)
+	C.free(unsafe.Pointer(desktop_env0)) /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0))      /*go:.util*/
+}
+
+// GetStartupWmClass is a wrapper around g_desktop_app_info_get_startup_wm_class().
+func (info DesktopAppInfo) GetStartupWmClass() string {
+	ret0 := C.g_desktop_app_info_get_startup_wm_class(info.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// GetString is a wrapper around g_desktop_app_info_get_string().
+func (info DesktopAppInfo) GetString(key string) string {
+	key0 := C.CString(key)
+	ret0 := C.g_desktop_app_info_get_string(info.native(), key0)
+	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
+	ret := C.GoString(ret0)
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// HasKey is a wrapper around g_desktop_app_info_has_key().
+func (info DesktopAppInfo) HasKey(key string) bool {
+	key0 := C.CString(key)
+	ret0 := C.g_desktop_app_info_has_key(info.native(), key0)
+	C.free(unsafe.Pointer(key0))    /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// LaunchAction is a wrapper around g_desktop_app_info_launch_action().
+func (info DesktopAppInfo) LaunchAction(action_name string, launch_context AppLaunchContext) {
+	action_name0 := (*C.gchar)(C.CString(action_name))
+	C.g_desktop_app_info_launch_action(info.native(), action_name0, launch_context.native())
+	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
 }
 
 // ListActions is a wrapper around g_desktop_app_info_list_actions().
@@ -97,6 +196,68 @@ func (info DesktopAppInfo) ListActions() []string {
 		ret[idx] = elemG
 	}
 	return ret
+}
+
+// Object AppLaunchContext
+type AppLaunchContext struct {
+	gobject.Object
+}
+
+func (v AppLaunchContext) native() *C.GAppLaunchContext {
+	return (*C.GAppLaunchContext)(v.Ptr)
+}
+func wrapAppLaunchContext(p *C.GAppLaunchContext) (v AppLaunchContext) {
+	v.Ptr = unsafe.Pointer(p)
+	return
+}
+func WrapAppLaunchContext(p unsafe.Pointer) (v AppLaunchContext) {
+	v.Ptr = p
+	return
+}
+
+// AppLaunchContextNew is a wrapper around g_app_launch_context_new().
+func AppLaunchContextNew() AppLaunchContext {
+	ret0 := C.g_app_launch_context_new()
+	return wrapAppLaunchContext(ret0)
+}
+
+// GetEnvironment is a wrapper around g_app_launch_context_get_environment().
+func (context AppLaunchContext) GetEnvironment() []string {
+	ret0 := C.g_app_launch_context_get_environment(context.native())
+	var ret0Slice []*C.char
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString(elem)
+		ret[idx] = elemG
+		C.g_free(C.gpointer(elem))
+	}
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// LaunchFailed is a wrapper around g_app_launch_context_launch_failed().
+func (context AppLaunchContext) LaunchFailed(startup_notify_id string) {
+	startup_notify_id0 := C.CString(startup_notify_id)
+	C.g_app_launch_context_launch_failed(context.native(), startup_notify_id0)
+	C.free(unsafe.Pointer(startup_notify_id0)) /*ch:<stdlib.h>*/
+}
+
+// Setenv is a wrapper around g_app_launch_context_setenv().
+func (context AppLaunchContext) Setenv(variable string, value string) {
+	variable0 := C.CString(variable)
+	value0 := C.CString(value)
+	C.g_app_launch_context_setenv(context.native(), variable0, value0)
+	C.free(unsafe.Pointer(variable0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(value0))    /*ch:<stdlib.h>*/
+}
+
+// Unsetenv is a wrapper around g_app_launch_context_unsetenv().
+func (context AppLaunchContext) Unsetenv(variable string) {
+	variable0 := C.CString(variable)
+	C.g_app_launch_context_unsetenv(context.native(), variable0)
+	C.free(unsafe.Pointer(variable0)) /*ch:<stdlib.h>*/
 }
 
 // Object Settings
