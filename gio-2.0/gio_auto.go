@@ -848,9 +848,108 @@ func ApplicationNew(application_id string, flags ApplicationFlags) Application {
 	return wrapApplication(ret0)
 }
 
+// Activate is a wrapper around g_application_activate().
+func (application Application) Activate() {
+	C.g_application_activate(application.native())
+}
+
+// BindBusyProperty is a wrapper around g_application_bind_busy_property().
+func (application Application) BindBusyProperty(object gobject.Object, property string) {
+	property0 := (*C.gchar)(C.CString(property))
+	C.g_application_bind_busy_property(application.native(), C.gpointer((C.gpointer)(object.Ptr)), property0)
+	C.free(unsafe.Pointer(property0)) /*ch:<stdlib.h>*/
+}
+
+// GetApplicationId is a wrapper around g_application_get_application_id().
+func (application Application) GetApplicationId() string {
+	ret0 := C.g_application_get_application_id(application.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// GetDbusObjectPath is a wrapper around g_application_get_dbus_object_path().
+func (application Application) GetDbusObjectPath() string {
+	ret0 := C.g_application_get_dbus_object_path(application.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// GetFlags is a wrapper around g_application_get_flags().
+func (application Application) GetFlags() ApplicationFlags {
+	ret0 := C.g_application_get_flags(application.native())
+	return ApplicationFlags(ret0)
+}
+
+// GetInactivityTimeout is a wrapper around g_application_get_inactivity_timeout().
+func (application Application) GetInactivityTimeout() uint {
+	ret0 := C.g_application_get_inactivity_timeout(application.native())
+	return uint(ret0)
+}
+
+// GetIsBusy is a wrapper around g_application_get_is_busy().
+func (application Application) GetIsBusy() bool {
+	ret0 := C.g_application_get_is_busy(application.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// GetIsRegistered is a wrapper around g_application_get_is_registered().
+func (application Application) GetIsRegistered() bool {
+	ret0 := C.g_application_get_is_registered(application.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// GetIsRemote is a wrapper around g_application_get_is_remote().
+func (application Application) GetIsRemote() bool {
+	ret0 := C.g_application_get_is_remote(application.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// GetResourceBasePath is a wrapper around g_application_get_resource_base_path().
+func (application Application) GetResourceBasePath() string {
+	ret0 := C.g_application_get_resource_base_path(application.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
 // Hold is a wrapper around g_application_hold().
 func (application Application) Hold() {
 	C.g_application_hold(application.native())
+}
+
+// MarkBusy is a wrapper around g_application_mark_busy().
+func (application Application) MarkBusy() {
+	C.g_application_mark_busy(application.native())
+}
+
+// Open is a wrapper around g_application_open().
+func (application Application) Open(files []File, hint string) {
+	files0 := make([]*C.GFile, len(files))
+	for idx, elemG := range files {
+		files0[idx] = elemG.native()
+	}
+	var files0Ptr **C.GFile
+	if len(files0) > 0 {
+		files0Ptr = &files0[0]
+	}
+	hint0 := (*C.gchar)(C.CString(hint))
+	C.g_application_open(application.native(), files0Ptr, C.gint(len(files)), hint0)
+	C.free(unsafe.Pointer(hint0)) /*ch:<stdlib.h>*/
+}
+
+// Quit is a wrapper around g_application_quit().
+func (application Application) Quit() {
+	C.g_application_quit(application.native())
+}
+
+// Register is a wrapper around g_application_register().
+func (application Application) Register(cancellable Cancellable) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_application_register(application.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
 }
 
 // Release is a wrapper around g_application_release().
@@ -876,9 +975,58 @@ func (application Application) Run(argv []string) int {
 	return int(ret0)
 }
 
+// SetApplicationId is a wrapper around g_application_set_application_id().
+func (application Application) SetApplicationId(application_id string) {
+	application_id0 := (*C.gchar)(C.CString(application_id))
+	C.g_application_set_application_id(application.native(), application_id0)
+	C.free(unsafe.Pointer(application_id0)) /*ch:<stdlib.h>*/
+}
+
+// SetDefault is a wrapper around g_application_set_default().
+func (application Application) SetDefault() {
+	C.g_application_set_default(application.native())
+}
+
+// SetFlags is a wrapper around g_application_set_flags().
+func (application Application) SetFlags(flags ApplicationFlags) {
+	C.g_application_set_flags(application.native(), C.GApplicationFlags(flags))
+}
+
 // SetInactivityTimeout is a wrapper around g_application_set_inactivity_timeout().
 func (application Application) SetInactivityTimeout(inactivity_timeout uint) {
 	C.g_application_set_inactivity_timeout(application.native(), C.guint(inactivity_timeout))
+}
+
+// SetResourceBasePath is a wrapper around g_application_set_resource_base_path().
+func (application Application) SetResourceBasePath(resource_path string) {
+	resource_path0 := (*C.gchar)(C.CString(resource_path))
+	C.g_application_set_resource_base_path(application.native(), resource_path0)
+	C.free(unsafe.Pointer(resource_path0)) /*ch:<stdlib.h>*/
+}
+
+// UnbindBusyProperty is a wrapper around g_application_unbind_busy_property().
+func (application Application) UnbindBusyProperty(object gobject.Object, property string) {
+	property0 := (*C.gchar)(C.CString(property))
+	C.g_application_unbind_busy_property(application.native(), C.gpointer((C.gpointer)(object.Ptr)), property0)
+	C.free(unsafe.Pointer(property0)) /*ch:<stdlib.h>*/
+}
+
+// UnmarkBusy is a wrapper around g_application_unmark_busy().
+func (application Application) UnmarkBusy() {
+	C.g_application_unmark_busy(application.native())
+}
+
+// WithdrawNotification is a wrapper around g_application_withdraw_notification().
+func (application Application) WithdrawNotification(id string) {
+	id0 := (*C.gchar)(C.CString(id))
+	C.g_application_withdraw_notification(application.native(), id0)
+	C.free(unsafe.Pointer(id0)) /*ch:<stdlib.h>*/
+}
+
+// ApplicationGetDefault is a wrapper around g_application_get_default().
+func ApplicationGetDefault() Application {
+	ret0 := C.g_application_get_default()
+	return wrapApplication(ret0)
 }
 
 // ApplicationIdIsValid is a wrapper around g_application_id_is_valid().

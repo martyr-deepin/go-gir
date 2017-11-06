@@ -26,7 +26,7 @@ version = "2.0"
 [[types]]
   err_funcs = ["g_settings_bind_with_mapping","g_settings_get","g_settings_get_mapped","g_settings_set","g_settings_list_relocatable_schemas","g_settings_list_schemas"]
   funcs = ["g_settings_new","g_settings_get_value","g_settings_get_string","g_settings_get_boolean","g_settings_get_int","g_settings_get_int64","g_settings_get_uint","g_settings_get_uint64","g_settings_get_double","g_settings_get_enum","g_settings_get_flags","g_settings_get_child","g_settings_get_strv","g_settings_apply","g_settings_new_full","g_settings_new_with_backend","g_settings_new_with_backend_and_path","g_settings_new_with_path","g_settings_bind","g_settings_bind_writable","g_settings_create_action","g_settings_delay","g_settings_get_default_value","g_settings_get_has_unapplied","g_settings_get_user_value","g_settings_is_writable","g_settings_list_children","g_settings_reset","g_settings_revert","g_settings_set_boolean","g_settings_set_double","g_settings_set_enum","g_settings_set_flags","g_settings_set_int","g_settings_set_int64","g_settings_set_string","g_settings_set_strv","g_settings_set_uint","g_settings_set_uint64","g_settings_set_value","g_settings_sync","g_settings_unbind"]
-  ignore_funcs = ["g_settings_list_keys", "g_settings_get_range", "g_settings_range_check"]
+  ignore_funcs = ["g_settings_list_keys","g_settings_get_range","g_settings_range_check"]
   manual_funcs = []
   name = "Settings"
 
@@ -94,9 +94,9 @@ version = "2.0"
   name = "FileInfo"
 
 [[types]]
-  err_funcs = []
-  funcs = ["g_application_new","g_application_id_is_valid","g_application_set_inactivity_timeout","g_application_hold","g_application_release","g_application_run"]
-  ignore_funcs = []
+  err_funcs = ["g_application_add_main_option","g_application_add_main_option_entries","g_application_add_option_group","g_application_get_dbus_connection","g_application_send_notification"]
+  funcs = ["g_application_new","g_application_id_is_valid","g_application_set_inactivity_timeout","g_application_hold","g_application_release","g_application_run","g_application_activate","g_application_bind_busy_property","g_application_get_application_id","g_application_get_dbus_object_path","g_application_get_flags","g_application_get_inactivity_timeout","g_application_get_is_busy","g_application_get_is_registered","g_application_get_is_remote","g_application_get_resource_base_path","g_application_mark_busy","g_application_open","g_application_quit","g_application_register","g_application_set_application_id","g_application_set_default","g_application_set_flags","g_application_set_resource_base_path","g_application_unbind_busy_property","g_application_unmark_busy","g_application_withdraw_notification","g_application_get_default"]
+  ignore_funcs = ["g_application_set_action_group"]
   manual_funcs = []
   name = "Application"
 
