@@ -1067,6 +1067,96 @@ func WrapActionGroup(p unsafe.Pointer) ActionGroup {
 	return ActionGroup{p}
 }
 
+// ActionAdded is a wrapper around g_action_group_action_added().
+func (action_group ActionGroup) ActionAdded(action_name string) {
+	action_name0 := (*C.gchar)(C.CString(action_name))
+	C.g_action_group_action_added(action_group.native(), action_name0)
+	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
+}
+
+// ActionEnabledChanged is a wrapper around g_action_group_action_enabled_changed().
+func (action_group ActionGroup) ActionEnabledChanged(action_name string, enabled bool) {
+	action_name0 := (*C.gchar)(C.CString(action_name))
+	C.g_action_group_action_enabled_changed(action_group.native(), action_name0, C.gboolean(util.Bool2Int(enabled)) /*go:.util*/)
+	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
+}
+
+// ActionRemoved is a wrapper around g_action_group_action_removed().
+func (action_group ActionGroup) ActionRemoved(action_name string) {
+	action_name0 := (*C.gchar)(C.CString(action_name))
+	C.g_action_group_action_removed(action_group.native(), action_name0)
+	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
+}
+
+// ActionStateChanged is a wrapper around g_action_group_action_state_changed().
+func (action_group ActionGroup) ActionStateChanged(action_name string, state glib.Variant) {
+	action_name0 := (*C.gchar)(C.CString(action_name))
+	C.g_action_group_action_state_changed(action_group.native(), action_name0, (*C.GVariant)(state.Ptr))
+	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
+}
+
+// ActivateAction is a wrapper around g_action_group_activate_action().
+func (action_group ActionGroup) ActivateAction(action_name string, parameter glib.Variant) {
+	action_name0 := (*C.gchar)(C.CString(action_name))
+	C.g_action_group_activate_action(action_group.native(), action_name0, (*C.GVariant)(parameter.Ptr))
+	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
+}
+
+// ChangeActionState is a wrapper around g_action_group_change_action_state().
+func (action_group ActionGroup) ChangeActionState(action_name string, value glib.Variant) {
+	action_name0 := (*C.gchar)(C.CString(action_name))
+	C.g_action_group_change_action_state(action_group.native(), action_name0, (*C.GVariant)(value.Ptr))
+	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
+}
+
+// GetActionEnabled is a wrapper around g_action_group_get_action_enabled().
+func (action_group ActionGroup) GetActionEnabled(action_name string) bool {
+	action_name0 := (*C.gchar)(C.CString(action_name))
+	ret0 := C.g_action_group_get_action_enabled(action_group.native(), action_name0)
+	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0))      /*go:.util*/
+}
+
+// GetActionParameterType is a wrapper around g_action_group_get_action_parameter_type().
+func (action_group ActionGroup) GetActionParameterType(action_name string) glib.VariantType {
+	action_name0 := (*C.gchar)(C.CString(action_name))
+	ret0 := C.g_action_group_get_action_parameter_type(action_group.native(), action_name0)
+	C.free(unsafe.Pointer(action_name0))              /*ch:<stdlib.h>*/
+	return glib.WrapVariantType(unsafe.Pointer(ret0)) /*gir:GLib*/
+}
+
+// GetActionState is a wrapper around g_action_group_get_action_state().
+func (action_group ActionGroup) GetActionState(action_name string) glib.Variant {
+	action_name0 := (*C.gchar)(C.CString(action_name))
+	ret0 := C.g_action_group_get_action_state(action_group.native(), action_name0)
+	C.free(unsafe.Pointer(action_name0))          /*ch:<stdlib.h>*/
+	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/
+}
+
+// GetActionStateHint is a wrapper around g_action_group_get_action_state_hint().
+func (action_group ActionGroup) GetActionStateHint(action_name string) glib.Variant {
+	action_name0 := (*C.gchar)(C.CString(action_name))
+	ret0 := C.g_action_group_get_action_state_hint(action_group.native(), action_name0)
+	C.free(unsafe.Pointer(action_name0))          /*ch:<stdlib.h>*/
+	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/
+}
+
+// GetActionStateType is a wrapper around g_action_group_get_action_state_type().
+func (action_group ActionGroup) GetActionStateType(action_name string) glib.VariantType {
+	action_name0 := (*C.gchar)(C.CString(action_name))
+	ret0 := C.g_action_group_get_action_state_type(action_group.native(), action_name0)
+	C.free(unsafe.Pointer(action_name0))              /*ch:<stdlib.h>*/
+	return glib.WrapVariantType(unsafe.Pointer(ret0)) /*gir:GLib*/
+}
+
+// HasAction is a wrapper around g_action_group_has_action().
+func (action_group ActionGroup) HasAction(action_name string) bool {
+	action_name0 := (*C.gchar)(C.CString(action_name))
+	ret0 := C.g_action_group_has_action(action_group.native(), action_name0)
+	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0))      /*go:.util*/
+}
+
 // ListActions is a wrapper around g_action_group_list_actions().
 func (action_group ActionGroup) ListActions() []string {
 	ret0 := C.g_action_group_list_actions(action_group.native())
@@ -1081,6 +1171,19 @@ func (action_group ActionGroup) ListActions() []string {
 	}
 	C.g_free(C.gpointer(ret0))
 	return ret
+}
+
+// QueryAction is a wrapper around g_action_group_query_action().
+func (action_group ActionGroup) QueryAction(action_name string) (bool, bool, glib.VariantType, glib.VariantType, glib.Variant, glib.Variant) {
+	action_name0 := (*C.gchar)(C.CString(action_name))
+	var enabled0 C.gboolean
+	var parameter_type0 *C.GVariantType
+	var state_type0 *C.GVariantType
+	var state_hint0 *C.GVariant
+	var state0 *C.GVariant
+	ret0 := C.g_action_group_query_action(action_group.native(), action_name0, &enabled0, &parameter_type0, &state_type0, &state_hint0, &state0)
+	C.free(unsafe.Pointer(action_name0))                                                                                                                                                                                                                                                                                              /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/, util.Int2Bool(int(enabled0)) /*go:.util*/, glib.WrapVariantType(unsafe.Pointer(parameter_type0)) /*gir:GLib*/, glib.WrapVariantType(unsafe.Pointer(state_type0)) /*gir:GLib*/, glib.WrapVariant(unsafe.Pointer(state_hint0)) /*gir:GLib*/, glib.WrapVariant(unsafe.Pointer(state0)) /*gir:GLib*/
 }
 
 type BusType int

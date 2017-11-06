@@ -109,7 +109,7 @@ version = "2.0"
 
 [[types]]
   err_funcs = []
-  funcs = ["g_action_group_list_actions"]
+  funcs = ["g_action_group_list_actions","g_action_group_action_added","g_action_group_action_enabled_changed","g_action_group_action_removed","g_action_group_action_state_changed","g_action_group_activate_action","g_action_group_change_action_state","g_action_group_get_action_enabled","g_action_group_get_action_parameter_type","g_action_group_get_action_state","g_action_group_get_action_state_hint","g_action_group_get_action_state_type","g_action_group_has_action","g_action_group_query_action"]
   ignore_funcs = []
   manual_funcs = []
   name = "ActionGroup"
