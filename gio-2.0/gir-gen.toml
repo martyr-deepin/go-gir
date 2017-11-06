@@ -101,8 +101,8 @@ version = "2.0"
   name = "Application"
 
 [[types]]
-  err_funcs = []
-  funcs = []
+  err_funcs = ["g_action_map_add_action_entries"]
+  funcs = ["g_action_map_add_action","g_action_map_lookup_action","g_action_map_remove_action"]
   ignore_funcs = []
   manual_funcs = []
   name = "ActionMap"

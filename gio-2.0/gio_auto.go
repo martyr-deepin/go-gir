@@ -1052,6 +1052,26 @@ func WrapActionMap(p unsafe.Pointer) ActionMap {
 	return ActionMap{p}
 }
 
+// AddAction is a wrapper around g_action_map_add_action().
+func (action_map ActionMap) AddAction(action Action) {
+	C.g_action_map_add_action(action_map.native(), action.native())
+}
+
+// LookupAction is a wrapper around g_action_map_lookup_action().
+func (action_map ActionMap) LookupAction(action_name string) Action {
+	action_name0 := (*C.gchar)(C.CString(action_name))
+	ret0 := C.g_action_map_lookup_action(action_map.native(), action_name0)
+	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
+	return wrapAction(ret0)
+}
+
+// RemoveAction is a wrapper around g_action_map_remove_action().
+func (action_map ActionMap) RemoveAction(action_name string) {
+	action_name0 := (*C.gchar)(C.CString(action_name))
+	C.g_action_map_remove_action(action_map.native(), action_name0)
+	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
+}
+
 // Interface ActionGroup
 type ActionGroup struct {
 	Ptr unsafe.Pointer
