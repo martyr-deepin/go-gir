@@ -1235,6 +1235,122 @@ func SimpleActionGroupNew() SimpleActionGroup {
 	return wrapSimpleActionGroup(ret0)
 }
 
+// Object Notification
+type Notification struct {
+	gobject.Object
+}
+
+func (v Notification) native() *C.GNotification {
+	return (*C.GNotification)(v.Ptr)
+}
+func wrapNotification(p *C.GNotification) (v Notification) {
+	v.Ptr = unsafe.Pointer(p)
+	return
+}
+func WrapNotification(p unsafe.Pointer) (v Notification) {
+	v.Ptr = p
+	return
+}
+
+// NotificationNew is a wrapper around g_notification_new().
+func NotificationNew(title string) Notification {
+	title0 := (*C.gchar)(C.CString(title))
+	ret0 := C.g_notification_new(title0)
+	C.free(unsafe.Pointer(title0)) /*ch:<stdlib.h>*/
+	return wrapNotification(ret0)
+}
+
+// AddButton is a wrapper around g_notification_add_button().
+func (notification Notification) AddButton(label string, detailed_action string) {
+	label0 := (*C.gchar)(C.CString(label))
+	detailed_action0 := (*C.gchar)(C.CString(detailed_action))
+	C.g_notification_add_button(notification.native(), label0, detailed_action0)
+	C.free(unsafe.Pointer(label0))           /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(detailed_action0)) /*ch:<stdlib.h>*/
+}
+
+// AddButtonWithTargetValue is a wrapper around g_notification_add_button_with_target_value().
+func (notification Notification) AddButtonWithTargetValue(label string, action string, target glib.Variant) {
+	label0 := (*C.gchar)(C.CString(label))
+	action0 := (*C.gchar)(C.CString(action))
+	C.g_notification_add_button_with_target_value(notification.native(), label0, action0, (*C.GVariant)(target.Ptr))
+	C.free(unsafe.Pointer(label0))  /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(action0)) /*ch:<stdlib.h>*/
+}
+
+// SetBody is a wrapper around g_notification_set_body().
+func (notification Notification) SetBody(body string) {
+	body0 := (*C.gchar)(C.CString(body))
+	C.g_notification_set_body(notification.native(), body0)
+	C.free(unsafe.Pointer(body0)) /*ch:<stdlib.h>*/
+}
+
+// SetDefaultAction is a wrapper around g_notification_set_default_action().
+func (notification Notification) SetDefaultAction(detailed_action string) {
+	detailed_action0 := (*C.gchar)(C.CString(detailed_action))
+	C.g_notification_set_default_action(notification.native(), detailed_action0)
+	C.free(unsafe.Pointer(detailed_action0)) /*ch:<stdlib.h>*/
+}
+
+// SetDefaultActionAndTargetValue is a wrapper around g_notification_set_default_action_and_target_value().
+func (notification Notification) SetDefaultActionAndTargetValue(action string, target glib.Variant) {
+	action0 := (*C.gchar)(C.CString(action))
+	C.g_notification_set_default_action_and_target_value(notification.native(), action0, (*C.GVariant)(target.Ptr))
+	C.free(unsafe.Pointer(action0)) /*ch:<stdlib.h>*/
+}
+
+// SetIcon is a wrapper around g_notification_set_icon().
+func (notification Notification) SetIcon(icon Icon) {
+	C.g_notification_set_icon(notification.native(), icon.native())
+}
+
+// SetPriority is a wrapper around g_notification_set_priority().
+func (notification Notification) SetPriority(priority NotificationPriority) {
+	C.g_notification_set_priority(notification.native(), C.GNotificationPriority(priority))
+}
+
+// SetTitle is a wrapper around g_notification_set_title().
+func (notification Notification) SetTitle(title string) {
+	title0 := (*C.gchar)(C.CString(title))
+	C.g_notification_set_title(notification.native(), title0)
+	C.free(unsafe.Pointer(title0)) /*ch:<stdlib.h>*/
+}
+
+// Interface Icon
+type Icon struct {
+	Ptr unsafe.Pointer
+}
+
+func (v Icon) native() *C.GIcon {
+	return (*C.GIcon)(v.Ptr)
+}
+func wrapIcon(p *C.GIcon) Icon {
+	return Icon{unsafe.Pointer(p)}
+}
+func WrapIcon(p unsafe.Pointer) Icon {
+	return Icon{p}
+}
+
+// Equal is a wrapper around g_icon_equal().
+func (icon1 Icon) Equal(icon2 Icon) bool {
+	ret0 := C.g_icon_equal(icon1.native(), icon2.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// Serialize is a wrapper around g_icon_serialize().
+func (icon Icon) Serialize() glib.Variant {
+	ret0 := C.g_icon_serialize(icon.native())
+	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/
+}
+
+// ToString is a wrapper around g_icon_to_string().
+func (icon Icon) ToString() string {
+	ret0 := C.g_icon_to_string(icon.native())
+	ret := C.GoString((*C.char)(ret0))
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
 type BusType int
 
 const (
