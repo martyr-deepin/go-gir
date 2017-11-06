@@ -285,9 +285,76 @@ func SettingsNew(schema_id string) Settings {
 	return wrapSettings(ret0)
 }
 
+// SettingsNewFull is a wrapper around g_settings_new_full().
+func SettingsNewFull(schema SettingsSchema, backend SettingsBackend, path string) Settings {
+	path0 := (*C.gchar)(C.CString(path))
+	ret0 := C.g_settings_new_full(schema.native(), backend.native(), path0)
+	C.free(unsafe.Pointer(path0)) /*ch:<stdlib.h>*/
+	return wrapSettings(ret0)
+}
+
+// SettingsNewWithBackend is a wrapper around g_settings_new_with_backend().
+func SettingsNewWithBackend(schema_id string, backend SettingsBackend) Settings {
+	schema_id0 := (*C.gchar)(C.CString(schema_id))
+	ret0 := C.g_settings_new_with_backend(schema_id0, backend.native())
+	C.free(unsafe.Pointer(schema_id0)) /*ch:<stdlib.h>*/
+	return wrapSettings(ret0)
+}
+
+// SettingsNewWithBackendAndPath is a wrapper around g_settings_new_with_backend_and_path().
+func SettingsNewWithBackendAndPath(schema_id string, backend SettingsBackend, path string) Settings {
+	schema_id0 := (*C.gchar)(C.CString(schema_id))
+	path0 := (*C.gchar)(C.CString(path))
+	ret0 := C.g_settings_new_with_backend_and_path(schema_id0, backend.native(), path0)
+	C.free(unsafe.Pointer(schema_id0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(path0))      /*ch:<stdlib.h>*/
+	return wrapSettings(ret0)
+}
+
+// SettingsNewWithPath is a wrapper around g_settings_new_with_path().
+func SettingsNewWithPath(schema_id string, path string) Settings {
+	schema_id0 := (*C.gchar)(C.CString(schema_id))
+	path0 := (*C.gchar)(C.CString(path))
+	ret0 := C.g_settings_new_with_path(schema_id0, path0)
+	C.free(unsafe.Pointer(schema_id0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(path0))      /*ch:<stdlib.h>*/
+	return wrapSettings(ret0)
+}
+
 // Apply is a wrapper around g_settings_apply().
 func (settings Settings) Apply() {
 	C.g_settings_apply(settings.native())
+}
+
+// Bind is a wrapper around g_settings_bind().
+func (settings Settings) Bind(key string, object gobject.Object, property string, flags SettingsBindFlags) {
+	key0 := (*C.gchar)(C.CString(key))
+	property0 := (*C.gchar)(C.CString(property))
+	C.g_settings_bind(settings.native(), key0, C.gpointer((C.gpointer)(object.Ptr)), property0, C.GSettingsBindFlags(flags))
+	C.free(unsafe.Pointer(key0))      /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(property0)) /*ch:<stdlib.h>*/
+}
+
+// BindWritable is a wrapper around g_settings_bind_writable().
+func (settings Settings) BindWritable(key string, object gobject.Object, property string, inverted bool) {
+	key0 := (*C.gchar)(C.CString(key))
+	property0 := (*C.gchar)(C.CString(property))
+	C.g_settings_bind_writable(settings.native(), key0, C.gpointer((C.gpointer)(object.Ptr)), property0, C.gboolean(util.Bool2Int(inverted)) /*go:.util*/)
+	C.free(unsafe.Pointer(key0))      /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(property0)) /*ch:<stdlib.h>*/
+}
+
+// CreateAction is a wrapper around g_settings_create_action().
+func (settings Settings) CreateAction(key string) Action {
+	key0 := (*C.gchar)(C.CString(key))
+	ret0 := C.g_settings_create_action(settings.native(), key0)
+	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
+	return wrapAction(ret0)
+}
+
+// Delay is a wrapper around g_settings_delay().
+func (settings Settings) Delay() {
+	C.g_settings_delay(settings.native())
 }
 
 // GetBoolean is a wrapper around g_settings_get_boolean().
@@ -304,6 +371,14 @@ func (settings Settings) GetChild(name string) Settings {
 	ret0 := C.g_settings_get_child(settings.native(), name0)
 	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
 	return wrapSettings(ret0)
+}
+
+// GetDefaultValue is a wrapper around g_settings_get_default_value().
+func (settings Settings) GetDefaultValue(key string) glib.Variant {
+	key0 := (*C.gchar)(C.CString(key))
+	ret0 := C.g_settings_get_default_value(settings.native(), key0)
+	C.free(unsafe.Pointer(key0))                  /*ch:<stdlib.h>*/
+	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/
 }
 
 // GetDouble is a wrapper around g_settings_get_double().
@@ -328,6 +403,12 @@ func (settings Settings) GetFlags(key string) uint {
 	ret0 := C.g_settings_get_flags(settings.native(), key0)
 	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
 	return uint(ret0)
+}
+
+// GetHasUnapplied is a wrapper around g_settings_get_has_unapplied().
+func (settings Settings) GetHasUnapplied() bool {
+	ret0 := C.g_settings_get_has_unapplied(settings.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetInt is a wrapper around g_settings_get_int().
@@ -390,12 +471,215 @@ func (settings Settings) GetUint64(key string) uint64 {
 	return uint64(ret0)
 }
 
+// GetUserValue is a wrapper around g_settings_get_user_value().
+func (settings Settings) GetUserValue(key string) glib.Variant {
+	key0 := (*C.gchar)(C.CString(key))
+	ret0 := C.g_settings_get_user_value(settings.native(), key0)
+	C.free(unsafe.Pointer(key0))                  /*ch:<stdlib.h>*/
+	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/
+}
+
 // GetValue is a wrapper around g_settings_get_value().
 func (settings Settings) GetValue(key string) glib.Variant {
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_settings_get_value(settings.native(), key0)
 	C.free(unsafe.Pointer(key0))                  /*ch:<stdlib.h>*/
 	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/
+}
+
+// IsWritable is a wrapper around g_settings_is_writable().
+func (settings Settings) IsWritable(name string) bool {
+	name0 := (*C.gchar)(C.CString(name))
+	ret0 := C.g_settings_is_writable(settings.native(), name0)
+	C.free(unsafe.Pointer(name0))   /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// ListChildren is a wrapper around g_settings_list_children().
+func (settings Settings) ListChildren() []string {
+	ret0 := C.g_settings_list_children(settings.native())
+	var ret0Slice []*C.gchar
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString((*C.char)(elem))
+		ret[idx] = elemG
+		C.g_free(C.gpointer(elem))
+	}
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// Reset is a wrapper around g_settings_reset().
+func (settings Settings) Reset(key string) {
+	key0 := (*C.gchar)(C.CString(key))
+	C.g_settings_reset(settings.native(), key0)
+	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
+}
+
+// Revert is a wrapper around g_settings_revert().
+func (settings Settings) Revert() {
+	C.g_settings_revert(settings.native())
+}
+
+// SetBoolean is a wrapper around g_settings_set_boolean().
+func (settings Settings) SetBoolean(key string, value bool) bool {
+	key0 := (*C.gchar)(C.CString(key))
+	ret0 := C.g_settings_set_boolean(settings.native(), key0, C.gboolean(util.Bool2Int(value)) /*go:.util*/)
+	C.free(unsafe.Pointer(key0))    /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// SetDouble is a wrapper around g_settings_set_double().
+func (settings Settings) SetDouble(key string, value float64) bool {
+	key0 := (*C.gchar)(C.CString(key))
+	ret0 := C.g_settings_set_double(settings.native(), key0, C.gdouble(value))
+	C.free(unsafe.Pointer(key0))    /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// SetEnum is a wrapper around g_settings_set_enum().
+func (settings Settings) SetEnum(key string, value int) bool {
+	key0 := (*C.gchar)(C.CString(key))
+	ret0 := C.g_settings_set_enum(settings.native(), key0, C.gint(value))
+	C.free(unsafe.Pointer(key0))    /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// SetFlags is a wrapper around g_settings_set_flags().
+func (settings Settings) SetFlags(key string, value uint) bool {
+	key0 := (*C.gchar)(C.CString(key))
+	ret0 := C.g_settings_set_flags(settings.native(), key0, C.guint(value))
+	C.free(unsafe.Pointer(key0))    /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// SetInt is a wrapper around g_settings_set_int().
+func (settings Settings) SetInt(key string, value int) bool {
+	key0 := (*C.gchar)(C.CString(key))
+	ret0 := C.g_settings_set_int(settings.native(), key0, C.gint(value))
+	C.free(unsafe.Pointer(key0))    /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// SetInt64 is a wrapper around g_settings_set_int64().
+func (settings Settings) SetInt64(key string, value int64) bool {
+	key0 := (*C.gchar)(C.CString(key))
+	ret0 := C.g_settings_set_int64(settings.native(), key0, C.gint64(value))
+	C.free(unsafe.Pointer(key0))    /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// SetString is a wrapper around g_settings_set_string().
+func (settings Settings) SetString(key string, value string) bool {
+	key0 := (*C.gchar)(C.CString(key))
+	value0 := (*C.gchar)(C.CString(value))
+	ret0 := C.g_settings_set_string(settings.native(), key0, value0)
+	C.free(unsafe.Pointer(key0))    /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(value0))  /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// SetStrv is a wrapper around g_settings_set_strv().
+func (settings Settings) SetStrv(key string, value []string) bool {
+	key0 := (*C.gchar)(C.CString(key))
+	value0 := make([]*C.gchar, len(value))
+	for idx, elemG := range value {
+		elem := (*C.gchar)(C.CString(elemG))
+		value0[idx] = elem
+	}
+	var value0Ptr **C.gchar
+	if len(value0) > 0 {
+		value0Ptr = &value0[0]
+	}
+	ret0 := C.g_settings_set_strv(settings.native(), key0, value0Ptr)
+	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
+	for _, elem := range value0 {
+		C.free(unsafe.Pointer(elem)) /*ch:<stdlib.h>*/
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// SetUint is a wrapper around g_settings_set_uint().
+func (settings Settings) SetUint(key string, value uint) bool {
+	key0 := (*C.gchar)(C.CString(key))
+	ret0 := C.g_settings_set_uint(settings.native(), key0, C.guint(value))
+	C.free(unsafe.Pointer(key0))    /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// SetUint64 is a wrapper around g_settings_set_uint64().
+func (settings Settings) SetUint64(key string, value uint64) bool {
+	key0 := (*C.gchar)(C.CString(key))
+	ret0 := C.g_settings_set_uint64(settings.native(), key0, C.guint64(value))
+	C.free(unsafe.Pointer(key0))    /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// SetValue is a wrapper around g_settings_set_value().
+func (settings Settings) SetValue(key string, value glib.Variant) bool {
+	key0 := (*C.gchar)(C.CString(key))
+	ret0 := C.g_settings_set_value(settings.native(), key0, (*C.GVariant)(value.Ptr))
+	C.free(unsafe.Pointer(key0))    /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// SettingsSync is a wrapper around g_settings_sync().
+func SettingsSync() {
+	C.g_settings_sync()
+}
+
+// SettingsUnbind is a wrapper around g_settings_unbind().
+func SettingsUnbind(object gobject.Object, property string) {
+	property0 := (*C.gchar)(C.CString(property))
+	C.g_settings_unbind(C.gpointer((C.gpointer)(object.Ptr)), property0)
+	C.free(unsafe.Pointer(property0)) /*ch:<stdlib.h>*/
+}
+
+// Struct SettingsSchema
+type SettingsSchema struct {
+	Ptr unsafe.Pointer
+}
+
+func (v SettingsSchema) native() *C.GSettingsSchema {
+	return (*C.GSettingsSchema)(v.Ptr)
+}
+func wrapSettingsSchema(p *C.GSettingsSchema) SettingsSchema {
+	return SettingsSchema{unsafe.Pointer(p)}
+}
+func WrapSettingsSchema(p unsafe.Pointer) SettingsSchema {
+	return SettingsSchema{p}
+}
+
+// Struct SettingsBackend
+type SettingsBackend struct {
+	Ptr unsafe.Pointer
+}
+
+func (v SettingsBackend) native() *C.GSettingsBackend {
+	return (*C.GSettingsBackend)(v.Ptr)
+}
+func wrapSettingsBackend(p *C.GSettingsBackend) SettingsBackend {
+	return SettingsBackend{unsafe.Pointer(p)}
+}
+func WrapSettingsBackend(p unsafe.Pointer) SettingsBackend {
+	return SettingsBackend{p}
+}
+
+// Interface Action
+type Action struct {
+	Ptr unsafe.Pointer
+}
+
+func (v Action) native() *C.GAction {
+	return (*C.GAction)(v.Ptr)
+}
+func wrapAction(p *C.GAction) Action {
+	return Action{unsafe.Pointer(p)}
+}
+func WrapAction(p unsafe.Pointer) Action {
+	return Action{p}
 }
 
 // Interface File
