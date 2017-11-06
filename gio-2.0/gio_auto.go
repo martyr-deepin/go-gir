@@ -697,12 +697,498 @@ func WrapFile(p unsafe.Pointer) File {
 	return File{p}
 }
 
+// AppendTo is a wrapper around g_file_append_to().
+func (file File) AppendTo(flags FileCreateFlags, cancellable Cancellable) (FileOutputStream, error) {
+	var err glib.Error
+	ret0 := C.g_file_append_to(file.native(), C.GFileCreateFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileOutputStream{}, err.GoValue()
+	}
+	return wrapFileOutputStream(ret0), nil
+}
+
+// AppendToFinish is a wrapper around g_file_append_to_finish().
+func (file File) AppendToFinish(res AsyncResult) (FileOutputStream, error) {
+	var err glib.Error
+	ret0 := C.g_file_append_to_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileOutputStream{}, err.GoValue()
+	}
+	return wrapFileOutputStream(ret0), nil
+}
+
+// CopyAttributes is a wrapper around g_file_copy_attributes().
+func (source File) CopyAttributes(destination File, flags FileCopyFlags, cancellable Cancellable) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_file_copy_attributes(source.native(), destination.native(), C.GFileCopyFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// CopyFinish is a wrapper around g_file_copy_finish().
+func (file File) CopyFinish(res AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_file_copy_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// Create is a wrapper around g_file_create().
+func (file File) Create(flags FileCreateFlags, cancellable Cancellable) (FileOutputStream, error) {
+	var err glib.Error
+	ret0 := C.g_file_create(file.native(), C.GFileCreateFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileOutputStream{}, err.GoValue()
+	}
+	return wrapFileOutputStream(ret0), nil
+}
+
+// CreateFinish is a wrapper around g_file_create_finish().
+func (file File) CreateFinish(res AsyncResult) (FileOutputStream, error) {
+	var err glib.Error
+	ret0 := C.g_file_create_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileOutputStream{}, err.GoValue()
+	}
+	return wrapFileOutputStream(ret0), nil
+}
+
+// CreateReadwrite is a wrapper around g_file_create_readwrite().
+func (file File) CreateReadwrite(flags FileCreateFlags, cancellable Cancellable) (FileIOStream, error) {
+	var err glib.Error
+	ret0 := C.g_file_create_readwrite(file.native(), C.GFileCreateFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileIOStream{}, err.GoValue()
+	}
+	return wrapFileIOStream(ret0), nil
+}
+
+// CreateReadwriteFinish is a wrapper around g_file_create_readwrite_finish().
+func (file File) CreateReadwriteFinish(res AsyncResult) (FileIOStream, error) {
+	var err glib.Error
+	ret0 := C.g_file_create_readwrite_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileIOStream{}, err.GoValue()
+	}
+	return wrapFileIOStream(ret0), nil
+}
+
+// Delete is a wrapper around g_file_delete().
+func (file File) Delete(cancellable Cancellable) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_file_delete(file.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// DeleteFinish is a wrapper around g_file_delete_finish().
+func (file File) DeleteFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_file_delete_finish(file.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// Dup is a wrapper around g_file_dup().
+func (file File) Dup() File {
+	ret0 := C.g_file_dup(file.native())
+	return wrapFile(ret0)
+}
+
+// EjectMountableWithOperationFinish is a wrapper around g_file_eject_mountable_with_operation_finish().
+func (file File) EjectMountableWithOperationFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_file_eject_mountable_with_operation_finish(file.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// EnumerateChildrenFinish is a wrapper around g_file_enumerate_children_finish().
+func (file File) EnumerateChildrenFinish(res AsyncResult) (FileEnumerator, error) {
+	var err glib.Error
+	ret0 := C.g_file_enumerate_children_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileEnumerator{}, err.GoValue()
+	}
+	return wrapFileEnumerator(ret0), nil
+}
+
+// Equal is a wrapper around g_file_equal().
+func (file1 File) Equal(file2 File) bool {
+	ret0 := C.g_file_equal(file1.native(), file2.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// FindEnclosingMountFinish is a wrapper around g_file_find_enclosing_mount_finish().
+func (file File) FindEnclosingMountFinish(res AsyncResult) (Mount, error) {
+	var err glib.Error
+	ret0 := C.g_file_find_enclosing_mount_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return Mount{}, err.GoValue()
+	}
+	return wrapMount(ret0), nil
+}
+
+// GetBasename is a wrapper around g_file_get_basename().
+func (file File) GetBasename() string {
+	ret0 := C.g_file_get_basename(file.native())
+	ret := C.GoString(ret0)
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// GetChild is a wrapper around g_file_get_child().
+func (file File) GetChild(name string) File {
+	name0 := C.CString(name)
+	ret0 := C.g_file_get_child(file.native(), name0)
+	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	return wrapFile(ret0)
+}
+
+// GetChildForDisplayName is a wrapper around g_file_get_child_for_display_name().
+func (file File) GetChildForDisplayName(display_name string) (File, error) {
+	display_name0 := C.CString(display_name)
+	var err glib.Error
+	ret0 := C.g_file_get_child_for_display_name(file.native(), display_name0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(display_name0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return File{}, err.GoValue()
+	}
+	return wrapFile(ret0), nil
+}
+
+// GetParent is a wrapper around g_file_get_parent().
+func (file File) GetParent() File {
+	ret0 := C.g_file_get_parent(file.native())
+	return wrapFile(ret0)
+}
+
+// GetParseName is a wrapper around g_file_get_parse_name().
+func (file File) GetParseName() string {
+	ret0 := C.g_file_get_parse_name(file.native())
+	ret := C.GoString(ret0)
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
 // GetPath is a wrapper around g_file_get_path().
 func (file File) GetPath() string {
 	ret0 := C.g_file_get_path(file.native())
 	ret := C.GoString(ret0)
 	C.g_free(C.gpointer(ret0))
 	return ret
+}
+
+// GetRelativePath is a wrapper around g_file_get_relative_path().
+func (parent File) GetRelativePath(descendant File) string {
+	ret0 := C.g_file_get_relative_path(parent.native(), descendant.native())
+	ret := C.GoString(ret0)
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// GetUri is a wrapper around g_file_get_uri().
+func (file File) GetUri() string {
+	ret0 := C.g_file_get_uri(file.native())
+	ret := C.GoString(ret0)
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// GetUriScheme is a wrapper around g_file_get_uri_scheme().
+func (file File) GetUriScheme() string {
+	ret0 := C.g_file_get_uri_scheme(file.native())
+	ret := C.GoString(ret0)
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// HasParent is a wrapper around g_file_has_parent().
+func (file File) HasParent(parent File) bool {
+	ret0 := C.g_file_has_parent(file.native(), parent.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// HasPrefix is a wrapper around g_file_has_prefix().
+func (file File) HasPrefix(prefix File) bool {
+	ret0 := C.g_file_has_prefix(file.native(), prefix.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// HasUriScheme is a wrapper around g_file_has_uri_scheme().
+func (file File) HasUriScheme(uri_scheme string) bool {
+	uri_scheme0 := C.CString(uri_scheme)
+	ret0 := C.g_file_has_uri_scheme(file.native(), uri_scheme0)
+	C.free(unsafe.Pointer(uri_scheme0)) /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0))     /*go:.util*/
+}
+
+// IsNative is a wrapper around g_file_is_native().
+func (file File) IsNative() bool {
+	ret0 := C.g_file_is_native(file.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// MakeDirectory is a wrapper around g_file_make_directory().
+func (file File) MakeDirectory(cancellable Cancellable) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_file_make_directory(file.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// MakeDirectoryFinish is a wrapper around g_file_make_directory_finish().
+func (file File) MakeDirectoryFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_file_make_directory_finish(file.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// MakeDirectoryWithParents is a wrapper around g_file_make_directory_with_parents().
+func (file File) MakeDirectoryWithParents(cancellable Cancellable) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_file_make_directory_with_parents(file.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// MakeSymbolicLink is a wrapper around g_file_make_symbolic_link().
+func (file File) MakeSymbolicLink(symlink_value string, cancellable Cancellable) (bool, error) {
+	symlink_value0 := C.CString(symlink_value)
+	var err glib.Error
+	ret0 := C.g_file_make_symbolic_link(file.native(), symlink_value0, cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(symlink_value0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// Monitor is a wrapper around g_file_monitor().
+func (file File) Monitor(flags FileMonitorFlags, cancellable Cancellable) (FileMonitor, error) {
+	var err glib.Error
+	ret0 := C.g_file_monitor(file.native(), C.GFileMonitorFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileMonitor{}, err.GoValue()
+	}
+	return wrapFileMonitor(ret0), nil
+}
+
+// MonitorDirectory is a wrapper around g_file_monitor_directory().
+func (file File) MonitorDirectory(flags FileMonitorFlags, cancellable Cancellable) (FileMonitor, error) {
+	var err glib.Error
+	ret0 := C.g_file_monitor_directory(file.native(), C.GFileMonitorFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileMonitor{}, err.GoValue()
+	}
+	return wrapFileMonitor(ret0), nil
+}
+
+// MonitorFile is a wrapper around g_file_monitor_file().
+func (file File) MonitorFile(flags FileMonitorFlags, cancellable Cancellable) (FileMonitor, error) {
+	var err glib.Error
+	ret0 := C.g_file_monitor_file(file.native(), C.GFileMonitorFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileMonitor{}, err.GoValue()
+	}
+	return wrapFileMonitor(ret0), nil
+}
+
+// MountEnclosingVolumeFinish is a wrapper around g_file_mount_enclosing_volume_finish().
+func (location File) MountEnclosingVolumeFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_file_mount_enclosing_volume_finish(location.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// MountMountableFinish is a wrapper around g_file_mount_mountable_finish().
+func (file File) MountMountableFinish(result AsyncResult) (File, error) {
+	var err glib.Error
+	ret0 := C.g_file_mount_mountable_finish(file.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return File{}, err.GoValue()
+	}
+	return wrapFile(ret0), nil
+}
+
+// OpenReadwrite is a wrapper around g_file_open_readwrite().
+func (file File) OpenReadwrite(cancellable Cancellable) (FileIOStream, error) {
+	var err glib.Error
+	ret0 := C.g_file_open_readwrite(file.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileIOStream{}, err.GoValue()
+	}
+	return wrapFileIOStream(ret0), nil
+}
+
+// OpenReadwriteFinish is a wrapper around g_file_open_readwrite_finish().
+func (file File) OpenReadwriteFinish(res AsyncResult) (FileIOStream, error) {
+	var err glib.Error
+	ret0 := C.g_file_open_readwrite_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileIOStream{}, err.GoValue()
+	}
+	return wrapFileIOStream(ret0), nil
+}
+
+// PollMountableFinish is a wrapper around g_file_poll_mountable_finish().
+func (file File) PollMountableFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_file_poll_mountable_finish(file.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// QueryDefaultHandler is a wrapper around g_file_query_default_handler().
+func (file File) QueryDefaultHandler(cancellable Cancellable) (AppInfo, error) {
+	var err glib.Error
+	ret0 := C.g_file_query_default_handler(file.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return AppInfo{}, err.GoValue()
+	}
+	return wrapAppInfo(ret0), nil
+}
+
+// QueryExists is a wrapper around g_file_query_exists().
+func (file File) QueryExists(cancellable Cancellable) bool {
+	ret0 := C.g_file_query_exists(file.native(), cancellable.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// QueryFileType is a wrapper around g_file_query_file_type().
+func (file File) QueryFileType(flags FileQueryInfoFlags, cancellable Cancellable) FileType {
+	ret0 := C.g_file_query_file_type(file.native(), C.GFileQueryInfoFlags(flags), cancellable.native())
+	return FileType(ret0)
+}
+
+// QueryFilesystemInfo is a wrapper around g_file_query_filesystem_info().
+func (file File) QueryFilesystemInfo(attributes string, cancellable Cancellable) (FileInfo, error) {
+	attributes0 := C.CString(attributes)
+	var err glib.Error
+	ret0 := C.g_file_query_filesystem_info(file.native(), attributes0, cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(attributes0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileInfo{}, err.GoValue()
+	}
+	return wrapFileInfo(ret0), nil
+}
+
+// QueryFilesystemInfoFinish is a wrapper around g_file_query_filesystem_info_finish().
+func (file File) QueryFilesystemInfoFinish(res AsyncResult) (FileInfo, error) {
+	var err glib.Error
+	ret0 := C.g_file_query_filesystem_info_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileInfo{}, err.GoValue()
+	}
+	return wrapFileInfo(ret0), nil
+}
+
+// QueryInfo is a wrapper around g_file_query_info().
+func (file File) QueryInfo(attributes string, flags FileQueryInfoFlags, cancellable Cancellable) (FileInfo, error) {
+	attributes0 := C.CString(attributes)
+	var err glib.Error
+	ret0 := C.g_file_query_info(file.native(), attributes0, C.GFileQueryInfoFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(attributes0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileInfo{}, err.GoValue()
+	}
+	return wrapFileInfo(ret0), nil
+}
+
+// QueryInfoFinish is a wrapper around g_file_query_info_finish().
+func (file File) QueryInfoFinish(res AsyncResult) (FileInfo, error) {
+	var err glib.Error
+	ret0 := C.g_file_query_info_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileInfo{}, err.GoValue()
+	}
+	return wrapFileInfo(ret0), nil
+}
+
+// QueryWritableNamespaces is a wrapper around g_file_query_writable_namespaces().
+func (file File) QueryWritableNamespaces(cancellable Cancellable) (FileAttributeInfoList, error) {
+	var err glib.Error
+	ret0 := C.g_file_query_writable_namespaces(file.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileAttributeInfoList{}, err.GoValue()
+	}
+	return wrapFileAttributeInfoList(ret0), nil
+}
+
+// Read is a wrapper around g_file_read().
+func (file File) Read(cancellable Cancellable) (FileInputStream, error) {
+	var err glib.Error
+	ret0 := C.g_file_read(file.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileInputStream{}, err.GoValue()
+	}
+	return wrapFileInputStream(ret0), nil
+}
+
+// ReadFinish is a wrapper around g_file_read_finish().
+func (file File) ReadFinish(res AsyncResult) (FileInputStream, error) {
+	var err glib.Error
+	ret0 := C.g_file_read_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileInputStream{}, err.GoValue()
+	}
+	return wrapFileInputStream(ret0), nil
 }
 
 // Replace is a wrapper around g_file_replace().
@@ -716,6 +1202,239 @@ func (file File) Replace(etag string, make_backup bool, flags FileCreateFlags, c
 		return FileOutputStream{}, err.GoValue()
 	}
 	return wrapFileOutputStream(ret0), nil
+}
+
+// ReplaceFinish is a wrapper around g_file_replace_finish().
+func (file File) ReplaceFinish(res AsyncResult) (FileOutputStream, error) {
+	var err glib.Error
+	ret0 := C.g_file_replace_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileOutputStream{}, err.GoValue()
+	}
+	return wrapFileOutputStream(ret0), nil
+}
+
+// ReplaceReadwrite is a wrapper around g_file_replace_readwrite().
+func (file File) ReplaceReadwrite(etag string, make_backup bool, flags FileCreateFlags, cancellable Cancellable) (FileIOStream, error) {
+	etag0 := C.CString(etag)
+	var err glib.Error
+	ret0 := C.g_file_replace_readwrite(file.native(), etag0, C.gboolean(util.Bool2Int(make_backup)) /*go:.util*/, C.GFileCreateFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(etag0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileIOStream{}, err.GoValue()
+	}
+	return wrapFileIOStream(ret0), nil
+}
+
+// ReplaceReadwriteFinish is a wrapper around g_file_replace_readwrite_finish().
+func (file File) ReplaceReadwriteFinish(res AsyncResult) (FileIOStream, error) {
+	var err glib.Error
+	ret0 := C.g_file_replace_readwrite_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileIOStream{}, err.GoValue()
+	}
+	return wrapFileIOStream(ret0), nil
+}
+
+// ResolveRelativePath is a wrapper around g_file_resolve_relative_path().
+func (file File) ResolveRelativePath(relative_path string) File {
+	relative_path0 := C.CString(relative_path)
+	ret0 := C.g_file_resolve_relative_path(file.native(), relative_path0)
+	C.free(unsafe.Pointer(relative_path0)) /*ch:<stdlib.h>*/
+	return wrapFile(ret0)
+}
+
+// SetAttributeByteString is a wrapper around g_file_set_attribute_byte_string().
+func (file File) SetAttributeByteString(attribute string, value string, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
+	attribute0 := C.CString(attribute)
+	value0 := C.CString(value)
+	var err glib.Error
+	ret0 := C.g_file_set_attribute_byte_string(file.native(), attribute0, value0, C.GFileQueryInfoFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(value0))     /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// SetAttributeInt32 is a wrapper around g_file_set_attribute_int32().
+func (file File) SetAttributeInt32(attribute string, value int32, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
+	attribute0 := C.CString(attribute)
+	var err glib.Error
+	ret0 := C.g_file_set_attribute_int32(file.native(), attribute0, C.gint32(value), C.GFileQueryInfoFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// SetAttributeInt64 is a wrapper around g_file_set_attribute_int64().
+func (file File) SetAttributeInt64(attribute string, value int64, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
+	attribute0 := C.CString(attribute)
+	var err glib.Error
+	ret0 := C.g_file_set_attribute_int64(file.native(), attribute0, C.gint64(value), C.GFileQueryInfoFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// SetAttributeString is a wrapper around g_file_set_attribute_string().
+func (file File) SetAttributeString(attribute string, value string, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
+	attribute0 := C.CString(attribute)
+	value0 := C.CString(value)
+	var err glib.Error
+	ret0 := C.g_file_set_attribute_string(file.native(), attribute0, value0, C.GFileQueryInfoFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(value0))     /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// SetAttributeUint32 is a wrapper around g_file_set_attribute_uint32().
+func (file File) SetAttributeUint32(attribute string, value uint32, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
+	attribute0 := C.CString(attribute)
+	var err glib.Error
+	ret0 := C.g_file_set_attribute_uint32(file.native(), attribute0, C.guint32(value), C.GFileQueryInfoFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// SetAttributeUint64 is a wrapper around g_file_set_attribute_uint64().
+func (file File) SetAttributeUint64(attribute string, value uint64, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
+	attribute0 := C.CString(attribute)
+	var err glib.Error
+	ret0 := C.g_file_set_attribute_uint64(file.native(), attribute0, C.guint64(value), C.GFileQueryInfoFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// SetAttributesFinish is a wrapper around g_file_set_attributes_finish().
+func (file File) SetAttributesFinish(result AsyncResult) (bool, FileInfo, error) {
+	var info0 *C.GFileInfo
+	var err glib.Error
+	ret0 := C.g_file_set_attributes_finish(file.native(), result.native(), &info0, (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, FileInfo{}, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, wrapFileInfo(info0), nil
+}
+
+// SetAttributesFromInfo is a wrapper around g_file_set_attributes_from_info().
+func (file File) SetAttributesFromInfo(info FileInfo, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_file_set_attributes_from_info(file.native(), info.native(), C.GFileQueryInfoFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// SetDisplayName is a wrapper around g_file_set_display_name().
+func (file File) SetDisplayName(display_name string, cancellable Cancellable) (File, error) {
+	display_name0 := C.CString(display_name)
+	var err glib.Error
+	ret0 := C.g_file_set_display_name(file.native(), display_name0, cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(display_name0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return File{}, err.GoValue()
+	}
+	return wrapFile(ret0), nil
+}
+
+// SetDisplayNameFinish is a wrapper around g_file_set_display_name_finish().
+func (file File) SetDisplayNameFinish(res AsyncResult) (File, error) {
+	var err glib.Error
+	ret0 := C.g_file_set_display_name_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return File{}, err.GoValue()
+	}
+	return wrapFile(ret0), nil
+}
+
+// StartMountableFinish is a wrapper around g_file_start_mountable_finish().
+func (file File) StartMountableFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_file_start_mountable_finish(file.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// StopMountableFinish is a wrapper around g_file_stop_mountable_finish().
+func (file File) StopMountableFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_file_stop_mountable_finish(file.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// SupportsThreadContexts is a wrapper around g_file_supports_thread_contexts().
+func (file File) SupportsThreadContexts() bool {
+	ret0 := C.g_file_supports_thread_contexts(file.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// Trash is a wrapper around g_file_trash().
+func (file File) Trash(cancellable Cancellable) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_file_trash(file.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// TrashFinish is a wrapper around g_file_trash_finish().
+func (file File) TrashFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_file_trash_finish(file.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// UnmountMountableWithOperationFinish is a wrapper around g_file_unmount_mountable_with_operation_finish().
+func (file File) UnmountMountableWithOperationFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_file_unmount_mountable_with_operation_finish(file.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
 }
 
 // Object Cancellable
@@ -1349,6 +2068,1051 @@ func (icon Icon) ToString() string {
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
 	return ret
+}
+
+// Interface AsyncResult
+type AsyncResult struct {
+	Ptr unsafe.Pointer
+}
+
+func (v AsyncResult) native() *C.GAsyncResult {
+	return (*C.GAsyncResult)(v.Ptr)
+}
+func wrapAsyncResult(p *C.GAsyncResult) AsyncResult {
+	return AsyncResult{unsafe.Pointer(p)}
+}
+func WrapAsyncResult(p unsafe.Pointer) AsyncResult {
+	return AsyncResult{p}
+}
+
+// GetSourceObject is a wrapper around g_async_result_get_source_object().
+func (res AsyncResult) GetSourceObject() gobject.Object {
+	ret0 := C.g_async_result_get_source_object(res.native())
+	return gobject.WrapObject(unsafe.Pointer(ret0)) /*gir:GObject*/
+}
+
+// GetUserData is a wrapper around g_async_result_get_user_data().
+func (res AsyncResult) GetUserData() unsafe.Pointer {
+	ret0 := C.g_async_result_get_user_data(res.native())
+	return unsafe.Pointer(ret0)
+}
+
+// IsTagged is a wrapper around g_async_result_is_tagged().
+func (res AsyncResult) IsTagged(source_tag unsafe.Pointer) bool {
+	ret0 := C.g_async_result_is_tagged(res.native(), C.gpointer(source_tag))
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// LegacyPropagateError is a wrapper around g_async_result_legacy_propagate_error().
+func (res AsyncResult) LegacyPropagateError() (bool, error) {
+	var err glib.Error
+	ret0 := C.g_async_result_legacy_propagate_error(res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// Object IOStream
+type IOStream struct {
+	gobject.Object
+}
+
+func (v IOStream) native() *C.GIOStream {
+	return (*C.GIOStream)(v.Ptr)
+}
+func wrapIOStream(p *C.GIOStream) (v IOStream) {
+	v.Ptr = unsafe.Pointer(p)
+	return
+}
+func WrapIOStream(p unsafe.Pointer) (v IOStream) {
+	v.Ptr = p
+	return
+}
+
+// ClearPending is a wrapper around g_io_stream_clear_pending().
+func (stream IOStream) ClearPending() {
+	C.g_io_stream_clear_pending(stream.native())
+}
+
+// Close is a wrapper around g_io_stream_close().
+func (stream IOStream) Close(cancellable Cancellable) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_io_stream_close(stream.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// CloseFinish is a wrapper around g_io_stream_close_finish().
+func (stream IOStream) CloseFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_io_stream_close_finish(stream.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// GetInputStream is a wrapper around g_io_stream_get_input_stream().
+func (stream IOStream) GetInputStream() InputStream {
+	ret0 := C.g_io_stream_get_input_stream(stream.native())
+	return wrapInputStream(ret0)
+}
+
+// GetOutputStream is a wrapper around g_io_stream_get_output_stream().
+func (stream IOStream) GetOutputStream() OutputStream {
+	ret0 := C.g_io_stream_get_output_stream(stream.native())
+	return wrapOutputStream(ret0)
+}
+
+// HasPending is a wrapper around g_io_stream_has_pending().
+func (stream IOStream) HasPending() bool {
+	ret0 := C.g_io_stream_has_pending(stream.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// IsClosed is a wrapper around g_io_stream_is_closed().
+func (stream IOStream) IsClosed() bool {
+	ret0 := C.g_io_stream_is_closed(stream.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// SetPending is a wrapper around g_io_stream_set_pending().
+func (stream IOStream) SetPending() (bool, error) {
+	var err glib.Error
+	ret0 := C.g_io_stream_set_pending(stream.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// IOStreamSpliceFinish is a wrapper around g_io_stream_splice_finish().
+func IOStreamSpliceFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_io_stream_splice_finish(result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// Object InputStream
+type InputStream struct {
+	gobject.Object
+}
+
+func (v InputStream) native() *C.GInputStream {
+	return (*C.GInputStream)(v.Ptr)
+}
+func wrapInputStream(p *C.GInputStream) (v InputStream) {
+	v.Ptr = unsafe.Pointer(p)
+	return
+}
+func WrapInputStream(p unsafe.Pointer) (v InputStream) {
+	v.Ptr = p
+	return
+}
+
+// ClearPending is a wrapper around g_input_stream_clear_pending().
+func (stream InputStream) ClearPending() {
+	C.g_input_stream_clear_pending(stream.native())
+}
+
+// Close is a wrapper around g_input_stream_close().
+func (stream InputStream) Close(cancellable Cancellable) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_input_stream_close(stream.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// CloseFinish is a wrapper around g_input_stream_close_finish().
+func (stream InputStream) CloseFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_input_stream_close_finish(stream.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// HasPending is a wrapper around g_input_stream_has_pending().
+func (stream InputStream) HasPending() bool {
+	ret0 := C.g_input_stream_has_pending(stream.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// IsClosed is a wrapper around g_input_stream_is_closed().
+func (stream InputStream) IsClosed() bool {
+	ret0 := C.g_input_stream_is_closed(stream.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// ReadAllFinish is a wrapper around g_input_stream_read_all_finish().
+func (stream InputStream) ReadAllFinish(result AsyncResult) (bool, uint, error) {
+	var bytes_read0 C.gsize
+	var err glib.Error
+	ret0 := C.g_input_stream_read_all_finish(stream.native(), result.native(), &bytes_read0, (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, 0, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, uint(bytes_read0), nil
+}
+
+// ReadBytes is a wrapper around g_input_stream_read_bytes().
+func (stream InputStream) ReadBytes(count uint, cancellable Cancellable) (glib.Bytes, error) {
+	var err glib.Error
+	ret0 := C.g_input_stream_read_bytes(stream.native(), C.gsize(count), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return glib.Bytes{}, err.GoValue()
+	}
+	return glib.WrapBytes(unsafe.Pointer(ret0)) /*gir:GLib*/, nil
+}
+
+// ReadBytesFinish is a wrapper around g_input_stream_read_bytes_finish().
+func (stream InputStream) ReadBytesFinish(result AsyncResult) (glib.Bytes, error) {
+	var err glib.Error
+	ret0 := C.g_input_stream_read_bytes_finish(stream.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return glib.Bytes{}, err.GoValue()
+	}
+	return glib.WrapBytes(unsafe.Pointer(ret0)) /*gir:GLib*/, nil
+}
+
+// ReadFinish is a wrapper around g_input_stream_read_finish().
+func (stream InputStream) ReadFinish(result AsyncResult) (int, error) {
+	var err glib.Error
+	ret0 := C.g_input_stream_read_finish(stream.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return 0, err.GoValue()
+	}
+	return int(ret0), nil
+}
+
+// SetPending is a wrapper around g_input_stream_set_pending().
+func (stream InputStream) SetPending() (bool, error) {
+	var err glib.Error
+	ret0 := C.g_input_stream_set_pending(stream.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// Skip is a wrapper around g_input_stream_skip().
+func (stream InputStream) Skip(count uint, cancellable Cancellable) (int, error) {
+	var err glib.Error
+	ret0 := C.g_input_stream_skip(stream.native(), C.gsize(count), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return 0, err.GoValue()
+	}
+	return int(ret0), nil
+}
+
+// SkipFinish is a wrapper around g_input_stream_skip_finish().
+func (stream InputStream) SkipFinish(result AsyncResult) (int, error) {
+	var err glib.Error
+	ret0 := C.g_input_stream_skip_finish(stream.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return 0, err.GoValue()
+	}
+	return int(ret0), nil
+}
+
+// Object FileIOStream
+type FileIOStream struct {
+	IOStream
+}
+
+func (v FileIOStream) native() *C.GFileIOStream {
+	return (*C.GFileIOStream)(v.Ptr)
+}
+func wrapFileIOStream(p *C.GFileIOStream) (v FileIOStream) {
+	v.Ptr = unsafe.Pointer(p)
+	return
+}
+func WrapFileIOStream(p unsafe.Pointer) (v FileIOStream) {
+	v.Ptr = p
+	return
+}
+func (v FileIOStream) Seekable() Seekable {
+	return WrapSeekable(v.Ptr)
+}
+
+// GetEtag is a wrapper around g_file_io_stream_get_etag().
+func (stream FileIOStream) GetEtag() string {
+	ret0 := C.g_file_io_stream_get_etag(stream.native())
+	ret := C.GoString(ret0)
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// QueryInfo is a wrapper around g_file_io_stream_query_info().
+func (stream FileIOStream) QueryInfo(attributes string, cancellable Cancellable) (FileInfo, error) {
+	attributes0 := C.CString(attributes)
+	var err glib.Error
+	ret0 := C.g_file_io_stream_query_info(stream.native(), attributes0, cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(attributes0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileInfo{}, err.GoValue()
+	}
+	return wrapFileInfo(ret0), nil
+}
+
+// QueryInfoFinish is a wrapper around g_file_io_stream_query_info_finish().
+func (stream FileIOStream) QueryInfoFinish(result AsyncResult) (FileInfo, error) {
+	var err glib.Error
+	ret0 := C.g_file_io_stream_query_info_finish(stream.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileInfo{}, err.GoValue()
+	}
+	return wrapFileInfo(ret0), nil
+}
+
+// Object FileEnumerator
+type FileEnumerator struct {
+	gobject.Object
+}
+
+func (v FileEnumerator) native() *C.GFileEnumerator {
+	return (*C.GFileEnumerator)(v.Ptr)
+}
+func wrapFileEnumerator(p *C.GFileEnumerator) (v FileEnumerator) {
+	v.Ptr = unsafe.Pointer(p)
+	return
+}
+func WrapFileEnumerator(p unsafe.Pointer) (v FileEnumerator) {
+	v.Ptr = p
+	return
+}
+
+// Close is a wrapper around g_file_enumerator_close().
+func (enumerator FileEnumerator) Close(cancellable Cancellable) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_file_enumerator_close(enumerator.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// CloseFinish is a wrapper around g_file_enumerator_close_finish().
+func (enumerator FileEnumerator) CloseFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_file_enumerator_close_finish(enumerator.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// GetChild is a wrapper around g_file_enumerator_get_child().
+func (enumerator FileEnumerator) GetChild(info FileInfo) File {
+	ret0 := C.g_file_enumerator_get_child(enumerator.native(), info.native())
+	return wrapFile(ret0)
+}
+
+// GetContainer is a wrapper around g_file_enumerator_get_container().
+func (enumerator FileEnumerator) GetContainer() File {
+	ret0 := C.g_file_enumerator_get_container(enumerator.native())
+	return wrapFile(ret0)
+}
+
+// HasPending is a wrapper around g_file_enumerator_has_pending().
+func (enumerator FileEnumerator) HasPending() bool {
+	ret0 := C.g_file_enumerator_has_pending(enumerator.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// IsClosed is a wrapper around g_file_enumerator_is_closed().
+func (enumerator FileEnumerator) IsClosed() bool {
+	ret0 := C.g_file_enumerator_is_closed(enumerator.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// Iterate is a wrapper around g_file_enumerator_iterate().
+func (direnum FileEnumerator) Iterate(cancellable Cancellable) (bool, FileInfo, File, error) {
+	var out_info0 *C.GFileInfo
+	var out_child0 *C.GFile
+	var err glib.Error
+	ret0 := C.g_file_enumerator_iterate(direnum.native(), &out_info0, &out_child0, cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, FileInfo{}, File{}, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, wrapFileInfo(out_info0), wrapFile(out_child0), nil
+}
+
+// NextFile is a wrapper around g_file_enumerator_next_file().
+func (enumerator FileEnumerator) NextFile(cancellable Cancellable) (FileInfo, error) {
+	var err glib.Error
+	ret0 := C.g_file_enumerator_next_file(enumerator.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileInfo{}, err.GoValue()
+	}
+	return wrapFileInfo(ret0), nil
+}
+
+// SetPending is a wrapper around g_file_enumerator_set_pending().
+func (enumerator FileEnumerator) SetPending(pending bool) {
+	C.g_file_enumerator_set_pending(enumerator.native(), C.gboolean(util.Bool2Int(pending)) /*go:.util*/)
+}
+
+// Interface Mount
+type Mount struct {
+	Ptr unsafe.Pointer
+}
+
+func (v Mount) native() *C.GMount {
+	return (*C.GMount)(v.Ptr)
+}
+func wrapMount(p *C.GMount) Mount {
+	return Mount{unsafe.Pointer(p)}
+}
+func WrapMount(p unsafe.Pointer) Mount {
+	return Mount{p}
+}
+
+// CanEject is a wrapper around g_mount_can_eject().
+func (mount Mount) CanEject() bool {
+	ret0 := C.g_mount_can_eject(mount.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// CanUnmount is a wrapper around g_mount_can_unmount().
+func (mount Mount) CanUnmount() bool {
+	ret0 := C.g_mount_can_unmount(mount.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// EjectWithOperationFinish is a wrapper around g_mount_eject_with_operation_finish().
+func (mount Mount) EjectWithOperationFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_mount_eject_with_operation_finish(mount.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// GetDefaultLocation is a wrapper around g_mount_get_default_location().
+func (mount Mount) GetDefaultLocation() File {
+	ret0 := C.g_mount_get_default_location(mount.native())
+	return wrapFile(ret0)
+}
+
+// GetDrive is a wrapper around g_mount_get_drive().
+func (mount Mount) GetDrive() Drive {
+	ret0 := C.g_mount_get_drive(mount.native())
+	return wrapDrive(ret0)
+}
+
+// GetIcon is a wrapper around g_mount_get_icon().
+func (mount Mount) GetIcon() Icon {
+	ret0 := C.g_mount_get_icon(mount.native())
+	return wrapIcon(ret0)
+}
+
+// GetName is a wrapper around g_mount_get_name().
+func (mount Mount) GetName() string {
+	ret0 := C.g_mount_get_name(mount.native())
+	ret := C.GoString(ret0)
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// GetRoot is a wrapper around g_mount_get_root().
+func (mount Mount) GetRoot() File {
+	ret0 := C.g_mount_get_root(mount.native())
+	return wrapFile(ret0)
+}
+
+// GetSortKey is a wrapper around g_mount_get_sort_key().
+func (mount Mount) GetSortKey() string {
+	ret0 := C.g_mount_get_sort_key(mount.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// GetSymbolicIcon is a wrapper around g_mount_get_symbolic_icon().
+func (mount Mount) GetSymbolicIcon() Icon {
+	ret0 := C.g_mount_get_symbolic_icon(mount.native())
+	return wrapIcon(ret0)
+}
+
+// GetUuid is a wrapper around g_mount_get_uuid().
+func (mount Mount) GetUuid() string {
+	ret0 := C.g_mount_get_uuid(mount.native())
+	ret := C.GoString(ret0)
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// GetVolume is a wrapper around g_mount_get_volume().
+func (mount Mount) GetVolume() Volume {
+	ret0 := C.g_mount_get_volume(mount.native())
+	return wrapVolume(ret0)
+}
+
+// GuessContentTypeFinish is a wrapper around g_mount_guess_content_type_finish().
+func (mount Mount) GuessContentTypeFinish(result AsyncResult) ([]string, error) {
+	var err glib.Error
+	ret0 := C.g_mount_guess_content_type_finish(mount.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	var ret0Slice []*C.gchar
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString((*C.char)(elem))
+		ret[idx] = elemG
+		C.g_free(C.gpointer(elem))
+	}
+	C.g_free(C.gpointer(ret0))
+	if err.Ptr != nil {
+		defer err.Free()
+		return nil, err.GoValue()
+	}
+	return ret, nil
+}
+
+// GuessContentTypeSync is a wrapper around g_mount_guess_content_type_sync().
+func (mount Mount) GuessContentTypeSync(force_rescan bool, cancellable Cancellable) ([]string, error) {
+	var err glib.Error
+	ret0 := C.g_mount_guess_content_type_sync(mount.native(), C.gboolean(util.Bool2Int(force_rescan)) /*go:.util*/, cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	var ret0Slice []*C.gchar
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString((*C.char)(elem))
+		ret[idx] = elemG
+		C.g_free(C.gpointer(elem))
+	}
+	C.g_free(C.gpointer(ret0))
+	if err.Ptr != nil {
+		defer err.Free()
+		return nil, err.GoValue()
+	}
+	return ret, nil
+}
+
+// IsShadowed is a wrapper around g_mount_is_shadowed().
+func (mount Mount) IsShadowed() bool {
+	ret0 := C.g_mount_is_shadowed(mount.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// RemountFinish is a wrapper around g_mount_remount_finish().
+func (mount Mount) RemountFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_mount_remount_finish(mount.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// Shadow is a wrapper around g_mount_shadow().
+func (mount Mount) Shadow() {
+	C.g_mount_shadow(mount.native())
+}
+
+// UnmountWithOperationFinish is a wrapper around g_mount_unmount_with_operation_finish().
+func (mount Mount) UnmountWithOperationFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_mount_unmount_with_operation_finish(mount.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// Unshadow is a wrapper around g_mount_unshadow().
+func (mount Mount) Unshadow() {
+	C.g_mount_unshadow(mount.native())
+}
+
+// Interface Drive
+type Drive struct {
+	Ptr unsafe.Pointer
+}
+
+func (v Drive) native() *C.GDrive {
+	return (*C.GDrive)(v.Ptr)
+}
+func wrapDrive(p *C.GDrive) Drive {
+	return Drive{unsafe.Pointer(p)}
+}
+func WrapDrive(p unsafe.Pointer) Drive {
+	return Drive{p}
+}
+
+// CanEject is a wrapper around g_drive_can_eject().
+func (drive Drive) CanEject() bool {
+	ret0 := C.g_drive_can_eject(drive.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// CanPollForMedia is a wrapper around g_drive_can_poll_for_media().
+func (drive Drive) CanPollForMedia() bool {
+	ret0 := C.g_drive_can_poll_for_media(drive.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// CanStart is a wrapper around g_drive_can_start().
+func (drive Drive) CanStart() bool {
+	ret0 := C.g_drive_can_start(drive.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// CanStartDegraded is a wrapper around g_drive_can_start_degraded().
+func (drive Drive) CanStartDegraded() bool {
+	ret0 := C.g_drive_can_start_degraded(drive.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// CanStop is a wrapper around g_drive_can_stop().
+func (drive Drive) CanStop() bool {
+	ret0 := C.g_drive_can_stop(drive.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// EjectWithOperationFinish is a wrapper around g_drive_eject_with_operation_finish().
+func (drive Drive) EjectWithOperationFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_drive_eject_with_operation_finish(drive.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// EnumerateIdentifiers is a wrapper around g_drive_enumerate_identifiers().
+func (drive Drive) EnumerateIdentifiers() []string {
+	ret0 := C.g_drive_enumerate_identifiers(drive.native())
+	var ret0Slice []*C.char
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString(elem)
+		ret[idx] = elemG
+		C.g_free(C.gpointer(elem))
+	}
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// GetIcon is a wrapper around g_drive_get_icon().
+func (drive Drive) GetIcon() Icon {
+	ret0 := C.g_drive_get_icon(drive.native())
+	return wrapIcon(ret0)
+}
+
+// GetIdentifier is a wrapper around g_drive_get_identifier().
+func (drive Drive) GetIdentifier(kind string) string {
+	kind0 := C.CString(kind)
+	ret0 := C.g_drive_get_identifier(drive.native(), kind0)
+	C.free(unsafe.Pointer(kind0)) /*ch:<stdlib.h>*/
+	ret := C.GoString(ret0)
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// GetName is a wrapper around g_drive_get_name().
+func (drive Drive) GetName() string {
+	ret0 := C.g_drive_get_name(drive.native())
+	ret := C.GoString(ret0)
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// GetSortKey is a wrapper around g_drive_get_sort_key().
+func (drive Drive) GetSortKey() string {
+	ret0 := C.g_drive_get_sort_key(drive.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// GetStartStopType is a wrapper around g_drive_get_start_stop_type().
+func (drive Drive) GetStartStopType() DriveStartStopType {
+	ret0 := C.g_drive_get_start_stop_type(drive.native())
+	return DriveStartStopType(ret0)
+}
+
+// GetSymbolicIcon is a wrapper around g_drive_get_symbolic_icon().
+func (drive Drive) GetSymbolicIcon() Icon {
+	ret0 := C.g_drive_get_symbolic_icon(drive.native())
+	return wrapIcon(ret0)
+}
+
+// HasMedia is a wrapper around g_drive_has_media().
+func (drive Drive) HasMedia() bool {
+	ret0 := C.g_drive_has_media(drive.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// HasVolumes is a wrapper around g_drive_has_volumes().
+func (drive Drive) HasVolumes() bool {
+	ret0 := C.g_drive_has_volumes(drive.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// IsMediaCheckAutomatic is a wrapper around g_drive_is_media_check_automatic().
+func (drive Drive) IsMediaCheckAutomatic() bool {
+	ret0 := C.g_drive_is_media_check_automatic(drive.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// IsMediaRemovable is a wrapper around g_drive_is_media_removable().
+func (drive Drive) IsMediaRemovable() bool {
+	ret0 := C.g_drive_is_media_removable(drive.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// IsRemovable is a wrapper around g_drive_is_removable().
+func (drive Drive) IsRemovable() bool {
+	ret0 := C.g_drive_is_removable(drive.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// PollForMediaFinish is a wrapper around g_drive_poll_for_media_finish().
+func (drive Drive) PollForMediaFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_drive_poll_for_media_finish(drive.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// StartFinish is a wrapper around g_drive_start_finish().
+func (drive Drive) StartFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_drive_start_finish(drive.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// StopFinish is a wrapper around g_drive_stop_finish().
+func (drive Drive) StopFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_drive_stop_finish(drive.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// Interface Volume
+type Volume struct {
+	Ptr unsafe.Pointer
+}
+
+func (v Volume) native() *C.GVolume {
+	return (*C.GVolume)(v.Ptr)
+}
+func wrapVolume(p *C.GVolume) Volume {
+	return Volume{unsafe.Pointer(p)}
+}
+func WrapVolume(p unsafe.Pointer) Volume {
+	return Volume{p}
+}
+
+// CanEject is a wrapper around g_volume_can_eject().
+func (volume Volume) CanEject() bool {
+	ret0 := C.g_volume_can_eject(volume.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// CanMount is a wrapper around g_volume_can_mount().
+func (volume Volume) CanMount() bool {
+	ret0 := C.g_volume_can_mount(volume.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// EjectWithOperationFinish is a wrapper around g_volume_eject_with_operation_finish().
+func (volume Volume) EjectWithOperationFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_volume_eject_with_operation_finish(volume.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// EnumerateIdentifiers is a wrapper around g_volume_enumerate_identifiers().
+func (volume Volume) EnumerateIdentifiers() []string {
+	ret0 := C.g_volume_enumerate_identifiers(volume.native())
+	var ret0Slice []*C.char
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString(elem)
+		ret[idx] = elemG
+		C.g_free(C.gpointer(elem))
+	}
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// GetActivationRoot is a wrapper around g_volume_get_activation_root().
+func (volume Volume) GetActivationRoot() File {
+	ret0 := C.g_volume_get_activation_root(volume.native())
+	return wrapFile(ret0)
+}
+
+// GetDrive is a wrapper around g_volume_get_drive().
+func (volume Volume) GetDrive() Drive {
+	ret0 := C.g_volume_get_drive(volume.native())
+	return wrapDrive(ret0)
+}
+
+// GetIcon is a wrapper around g_volume_get_icon().
+func (volume Volume) GetIcon() Icon {
+	ret0 := C.g_volume_get_icon(volume.native())
+	return wrapIcon(ret0)
+}
+
+// GetIdentifier is a wrapper around g_volume_get_identifier().
+func (volume Volume) GetIdentifier(kind string) string {
+	kind0 := C.CString(kind)
+	ret0 := C.g_volume_get_identifier(volume.native(), kind0)
+	C.free(unsafe.Pointer(kind0)) /*ch:<stdlib.h>*/
+	ret := C.GoString(ret0)
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// GetMount is a wrapper around g_volume_get_mount().
+func (volume Volume) GetMount() Mount {
+	ret0 := C.g_volume_get_mount(volume.native())
+	return wrapMount(ret0)
+}
+
+// GetName is a wrapper around g_volume_get_name().
+func (volume Volume) GetName() string {
+	ret0 := C.g_volume_get_name(volume.native())
+	ret := C.GoString(ret0)
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// GetSortKey is a wrapper around g_volume_get_sort_key().
+func (volume Volume) GetSortKey() string {
+	ret0 := C.g_volume_get_sort_key(volume.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// GetSymbolicIcon is a wrapper around g_volume_get_symbolic_icon().
+func (volume Volume) GetSymbolicIcon() Icon {
+	ret0 := C.g_volume_get_symbolic_icon(volume.native())
+	return wrapIcon(ret0)
+}
+
+// GetUuid is a wrapper around g_volume_get_uuid().
+func (volume Volume) GetUuid() string {
+	ret0 := C.g_volume_get_uuid(volume.native())
+	ret := C.GoString(ret0)
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// MountFinish is a wrapper around g_volume_mount_finish().
+func (volume Volume) MountFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_volume_mount_finish(volume.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// ShouldAutomount is a wrapper around g_volume_should_automount().
+func (volume Volume) ShouldAutomount() bool {
+	ret0 := C.g_volume_should_automount(volume.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// Object FileMonitor
+type FileMonitor struct {
+	gobject.Object
+}
+
+func (v FileMonitor) native() *C.GFileMonitor {
+	return (*C.GFileMonitor)(v.Ptr)
+}
+func wrapFileMonitor(p *C.GFileMonitor) (v FileMonitor) {
+	v.Ptr = unsafe.Pointer(p)
+	return
+}
+func WrapFileMonitor(p unsafe.Pointer) (v FileMonitor) {
+	v.Ptr = p
+	return
+}
+
+// Cancel is a wrapper around g_file_monitor_cancel().
+func (monitor FileMonitor) Cancel() bool {
+	ret0 := C.g_file_monitor_cancel(monitor.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// EmitEvent is a wrapper around g_file_monitor_emit_event().
+func (monitor FileMonitor) EmitEvent(child File, other_file File, event_type FileMonitorEvent) {
+	C.g_file_monitor_emit_event(monitor.native(), child.native(), other_file.native(), C.GFileMonitorEvent(event_type))
+}
+
+// IsCancelled is a wrapper around g_file_monitor_is_cancelled().
+func (monitor FileMonitor) IsCancelled() bool {
+	ret0 := C.g_file_monitor_is_cancelled(monitor.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// SetRateLimit is a wrapper around g_file_monitor_set_rate_limit().
+func (monitor FileMonitor) SetRateLimit(limit_msecs int) {
+	C.g_file_monitor_set_rate_limit(monitor.native(), C.gint(limit_msecs))
+}
+
+// Struct FileAttributeInfoList
+type FileAttributeInfoList struct {
+	Ptr unsafe.Pointer
+}
+
+func (v FileAttributeInfoList) native() *C.GFileAttributeInfoList {
+	return (*C.GFileAttributeInfoList)(v.Ptr)
+}
+func wrapFileAttributeInfoList(p *C.GFileAttributeInfoList) FileAttributeInfoList {
+	return FileAttributeInfoList{unsafe.Pointer(p)}
+}
+func WrapFileAttributeInfoList(p unsafe.Pointer) FileAttributeInfoList {
+	return FileAttributeInfoList{p}
+}
+
+// FileAttributeInfoListNew is a wrapper around g_file_attribute_info_list_new().
+func FileAttributeInfoListNew() FileAttributeInfoList {
+	ret0 := C.g_file_attribute_info_list_new()
+	return wrapFileAttributeInfoList(ret0)
+}
+
+// Dup is a wrapper around g_file_attribute_info_list_dup().
+func (list FileAttributeInfoList) Dup() FileAttributeInfoList {
+	ret0 := C.g_file_attribute_info_list_dup(list.native())
+	return wrapFileAttributeInfoList(ret0)
+}
+
+// Lookup is a wrapper around g_file_attribute_info_list_lookup().
+func (list FileAttributeInfoList) Lookup(name string) FileAttributeInfo {
+	name0 := C.CString(name)
+	ret0 := C.g_file_attribute_info_list_lookup(list.native(), name0)
+	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	return wrapFileAttributeInfo(ret0)
+}
+
+// Ref is a wrapper around g_file_attribute_info_list_ref().
+func (list FileAttributeInfoList) Ref() FileAttributeInfoList {
+	ret0 := C.g_file_attribute_info_list_ref(list.native())
+	return wrapFileAttributeInfoList(ret0)
+}
+
+// Unref is a wrapper around g_file_attribute_info_list_unref().
+func (list FileAttributeInfoList) Unref() {
+	C.g_file_attribute_info_list_unref(list.native())
+}
+
+// Struct FileAttributeInfo
+type FileAttributeInfo struct {
+	Ptr unsafe.Pointer
+}
+
+func (v FileAttributeInfo) native() *C.GFileAttributeInfo {
+	return (*C.GFileAttributeInfo)(v.Ptr)
+}
+func wrapFileAttributeInfo(p *C.GFileAttributeInfo) FileAttributeInfo {
+	return FileAttributeInfo{unsafe.Pointer(p)}
+}
+func WrapFileAttributeInfo(p unsafe.Pointer) FileAttributeInfo {
+	return FileAttributeInfo{p}
+}
+
+// Object FileInputStream
+type FileInputStream struct {
+	InputStream
+}
+
+func (v FileInputStream) native() *C.GFileInputStream {
+	return (*C.GFileInputStream)(v.Ptr)
+}
+func wrapFileInputStream(p *C.GFileInputStream) (v FileInputStream) {
+	v.Ptr = unsafe.Pointer(p)
+	return
+}
+func WrapFileInputStream(p unsafe.Pointer) (v FileInputStream) {
+	v.Ptr = p
+	return
+}
+func (v FileInputStream) Seekable() Seekable {
+	return WrapSeekable(v.Ptr)
+}
+
+// QueryInfo is a wrapper around g_file_input_stream_query_info().
+func (stream FileInputStream) QueryInfo(attributes string, cancellable Cancellable) (FileInfo, error) {
+	attributes0 := C.CString(attributes)
+	var err glib.Error
+	ret0 := C.g_file_input_stream_query_info(stream.native(), attributes0, cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(attributes0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileInfo{}, err.GoValue()
+	}
+	return wrapFileInfo(ret0), nil
+}
+
+// QueryInfoFinish is a wrapper around g_file_input_stream_query_info_finish().
+func (stream FileInputStream) QueryInfoFinish(result AsyncResult) (FileInfo, error) {
+	var err glib.Error
+	ret0 := C.g_file_input_stream_query_info_finish(stream.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileInfo{}, err.GoValue()
+	}
+	return wrapFileInfo(ret0), nil
 }
 
 type BusType int
