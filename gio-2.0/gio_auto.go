@@ -1206,6 +1206,35 @@ func (action_group ActionGroup) QueryAction(action_name string) (bool, bool, gli
 	return util.Int2Bool(int(ret0)) /*go:.util*/, util.Int2Bool(int(enabled0)) /*go:.util*/, glib.WrapVariantType(unsafe.Pointer(parameter_type0)) /*gir:GLib*/, glib.WrapVariantType(unsafe.Pointer(state_type0)) /*gir:GLib*/, glib.WrapVariant(unsafe.Pointer(state_hint0)) /*gir:GLib*/, glib.WrapVariant(unsafe.Pointer(state0)) /*gir:GLib*/
 }
 
+// Object SimpleActionGroup
+type SimpleActionGroup struct {
+	gobject.Object
+}
+
+func (v SimpleActionGroup) native() *C.GSimpleActionGroup {
+	return (*C.GSimpleActionGroup)(v.Ptr)
+}
+func wrapSimpleActionGroup(p *C.GSimpleActionGroup) (v SimpleActionGroup) {
+	v.Ptr = unsafe.Pointer(p)
+	return
+}
+func WrapSimpleActionGroup(p unsafe.Pointer) (v SimpleActionGroup) {
+	v.Ptr = p
+	return
+}
+func (v SimpleActionGroup) ActionGroup() ActionGroup {
+	return WrapActionGroup(v.Ptr)
+}
+func (v SimpleActionGroup) ActionMap() ActionMap {
+	return WrapActionMap(v.Ptr)
+}
+
+// SimpleActionGroupNew is a wrapper around g_simple_action_group_new().
+func SimpleActionGroupNew() SimpleActionGroup {
+	ret0 := C.g_simple_action_group_new()
+	return wrapSimpleActionGroup(ret0)
+}
+
 type BusType int
 
 const (
