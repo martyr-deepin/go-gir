@@ -100,6 +100,12 @@ func VariantNewFixedArray(element_type VariantType, elements unsafe.Pointer, n_e
 	return wrapVariant(ret0)
 }
 
+// VariantNewFromBytes is a wrapper around g_variant_new_from_bytes().
+func VariantNewFromBytes(type_ VariantType, bytes Bytes, trusted bool) Variant {
+	ret0 := C.g_variant_new_from_bytes(type_.native(), bytes.native(), C.gboolean(util.Bool2Int(trusted)) /*go:.util*/)
+	return wrapVariant(ret0)
+}
+
 // VariantNewHandle is a wrapper around g_variant_new_handle().
 func VariantNewHandle(value int32) Variant {
 	ret0 := C.g_variant_new_handle(C.gint32(value))
@@ -256,6 +262,12 @@ func (value Variant) Classify() VariantClass {
 	return VariantClass(ret0)
 }
 
+// Compare is a wrapper around g_variant_compare().
+func (one Variant) Compare(two Variant) int {
+	ret0 := C.g_variant_compare(C.gconstpointer(one.native()), C.gconstpointer(two.native()))
+	return int(ret0)
+}
+
 // DupBytestring is a wrapper around g_variant_dup_bytestring().
 func (value Variant) DupBytestring() []byte {
 	var length0 C.gsize
@@ -325,6 +337,12 @@ func (value Variant) DupStrv() []string {
 	}
 	C.g_free(C.gpointer(ret0))
 	return ret
+}
+
+// Equal is a wrapper around g_variant_equal().
+func (one Variant) Equal(two Variant) bool {
+	ret0 := C.g_variant_equal(C.gconstpointer(one.native()), C.gconstpointer(two.native()))
+	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetBoolean is a wrapper around g_variant_get_boolean().
@@ -500,6 +518,12 @@ func (value Variant) GetVariant() Variant {
 	return wrapVariant(ret0)
 }
 
+// Hash is a wrapper around g_variant_hash().
+func (value Variant) Hash() uint {
+	ret0 := C.g_variant_hash(C.gconstpointer(value.native()))
+	return uint(ret0)
+}
+
 // IsContainer is a wrapper around g_variant_is_container().
 func (value Variant) IsContainer() bool {
 	ret0 := C.g_variant_is_container(value.native())
@@ -516,6 +540,18 @@ func (value Variant) IsFloating() bool {
 func (value Variant) IsNormalForm() bool {
 	ret0 := C.g_variant_is_normal_form(value.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// IsOfType is a wrapper around g_variant_is_of_type().
+func (value Variant) IsOfType(type_ VariantType) bool {
+	ret0 := C.g_variant_is_of_type(value.native(), type_.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// IterNew is a wrapper around g_variant_iter_new().
+func (value Variant) IterNew() VariantIter {
+	ret0 := C.g_variant_iter_new(value.native())
+	return wrapVariantIter(ret0)
 }
 
 // LookupValue is a wrapper around g_variant_lookup_value().
@@ -592,6 +628,12 @@ func VariantParseErrorPrintContext(error Error, source_str string) string {
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
 	return ret
+}
+
+// VariantParseErrorQuark is a wrapper around g_variant_parse_error_quark().
+func VariantParseErrorQuark() Quark {
+	ret0 := C.g_variant_parse_error_quark()
+	return Quark(ret0)
 }
 
 // Struct Bytes
@@ -996,6 +1038,50 @@ func SourceSetNameById(tag uint, name string) {
 	name0 := C.CString(name)
 	C.g_source_set_name_by_id(C.guint(tag), name0)
 	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+}
+
+// Struct VariantIter
+type VariantIter struct {
+	Ptr unsafe.Pointer
+}
+
+func (v VariantIter) native() *C.GVariantIter {
+	return (*C.GVariantIter)(v.Ptr)
+}
+func wrapVariantIter(p *C.GVariantIter) VariantIter {
+	return VariantIter{unsafe.Pointer(p)}
+}
+func WrapVariantIter(p unsafe.Pointer) VariantIter {
+	return VariantIter{p}
+}
+
+// Copy is a wrapper around g_variant_iter_copy().
+func (iter VariantIter) Copy() VariantIter {
+	ret0 := C.g_variant_iter_copy(iter.native())
+	return wrapVariantIter(ret0)
+}
+
+// Free is a wrapper around g_variant_iter_free().
+func (iter VariantIter) Free() {
+	C.g_variant_iter_free(iter.native())
+}
+
+// Init is a wrapper around g_variant_iter_init().
+func (iter VariantIter) Init(value Variant) uint {
+	ret0 := C.g_variant_iter_init(iter.native(), value.native())
+	return uint(ret0)
+}
+
+// NChildren is a wrapper around g_variant_iter_n_children().
+func (iter VariantIter) NChildren() uint {
+	ret0 := C.g_variant_iter_n_children(iter.native())
+	return uint(ret0)
+}
+
+// NextValue is a wrapper around g_variant_iter_next_value().
+func (iter VariantIter) NextValue() Variant {
+	ret0 := C.g_variant_iter_next_value(iter.native())
+	return wrapVariant(ret0)
 }
 
 // IdleSourceNew is a wrapper around g_idle_source_new().
