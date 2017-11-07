@@ -729,6 +729,140 @@ func VariantTypeNewTuple(items []VariantType) VariantType {
 	return wrapVariantType(ret0)
 }
 
+// Copy is a wrapper around g_variant_type_copy().
+func (type_ VariantType) Copy() VariantType {
+	ret0 := C.g_variant_type_copy(type_.native())
+	return wrapVariantType(ret0)
+}
+
+// DupString is a wrapper around g_variant_type_dup_string().
+func (type_ VariantType) DupString() string {
+	ret0 := C.g_variant_type_dup_string(type_.native())
+	ret := C.GoString((*C.char)(ret0))
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// Element is a wrapper around g_variant_type_element().
+func (type_ VariantType) Element() VariantType {
+	ret0 := C.g_variant_type_element(type_.native())
+	return wrapVariantType(ret0)
+}
+
+// Equal is a wrapper around g_variant_type_equal().
+func (type1 VariantType) Equal(type2 VariantType) bool {
+	ret0 := C.g_variant_type_equal(C.gconstpointer(type1.native()), C.gconstpointer(type2.native()))
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// First is a wrapper around g_variant_type_first().
+func (type_ VariantType) First() VariantType {
+	ret0 := C.g_variant_type_first(type_.native())
+	return wrapVariantType(ret0)
+}
+
+// Free is a wrapper around g_variant_type_free().
+func (type_ VariantType) Free() {
+	C.g_variant_type_free(type_.native())
+}
+
+// GetStringLength is a wrapper around g_variant_type_get_string_length().
+func (type_ VariantType) GetStringLength() uint {
+	ret0 := C.g_variant_type_get_string_length(type_.native())
+	return uint(ret0)
+}
+
+// Hash is a wrapper around g_variant_type_hash().
+func (type_ VariantType) Hash() uint {
+	ret0 := C.g_variant_type_hash(C.gconstpointer(type_.native()))
+	return uint(ret0)
+}
+
+// IsArray is a wrapper around g_variant_type_is_array().
+func (type_ VariantType) IsArray() bool {
+	ret0 := C.g_variant_type_is_array(type_.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// IsBasic is a wrapper around g_variant_type_is_basic().
+func (type_ VariantType) IsBasic() bool {
+	ret0 := C.g_variant_type_is_basic(type_.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// IsContainer is a wrapper around g_variant_type_is_container().
+func (type_ VariantType) IsContainer() bool {
+	ret0 := C.g_variant_type_is_container(type_.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// IsDefinite is a wrapper around g_variant_type_is_definite().
+func (type_ VariantType) IsDefinite() bool {
+	ret0 := C.g_variant_type_is_definite(type_.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// IsDictEntry is a wrapper around g_variant_type_is_dict_entry().
+func (type_ VariantType) IsDictEntry() bool {
+	ret0 := C.g_variant_type_is_dict_entry(type_.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// IsMaybe is a wrapper around g_variant_type_is_maybe().
+func (type_ VariantType) IsMaybe() bool {
+	ret0 := C.g_variant_type_is_maybe(type_.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// IsSubtypeOf is a wrapper around g_variant_type_is_subtype_of().
+func (type_ VariantType) IsSubtypeOf(supertype VariantType) bool {
+	ret0 := C.g_variant_type_is_subtype_of(type_.native(), supertype.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// IsTuple is a wrapper around g_variant_type_is_tuple().
+func (type_ VariantType) IsTuple() bool {
+	ret0 := C.g_variant_type_is_tuple(type_.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// IsVariant is a wrapper around g_variant_type_is_variant().
+func (type_ VariantType) IsVariant() bool {
+	ret0 := C.g_variant_type_is_variant(type_.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// Key is a wrapper around g_variant_type_key().
+func (type_ VariantType) Key() VariantType {
+	ret0 := C.g_variant_type_key(type_.native())
+	return wrapVariantType(ret0)
+}
+
+// NItems is a wrapper around g_variant_type_n_items().
+func (type_ VariantType) NItems() uint {
+	ret0 := C.g_variant_type_n_items(type_.native())
+	return uint(ret0)
+}
+
+// Next is a wrapper around g_variant_type_next().
+func (type_ VariantType) Next() VariantType {
+	ret0 := C.g_variant_type_next(type_.native())
+	return wrapVariantType(ret0)
+}
+
+// PeekString is a wrapper around g_variant_type_peek_string().
+func (type_ VariantType) PeekString() string {
+	ret0 := C.g_variant_type_peek_string(type_.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// Value is a wrapper around g_variant_type_value().
+func (type_ VariantType) Value() VariantType {
+	ret0 := C.g_variant_type_value(type_.native())
+	return wrapVariantType(ret0)
+}
+
 // VariantTypeChecked_ is a wrapper around g_variant_type_checked_().
 func VariantTypeChecked_(arg0 string) VariantType {
 	arg00 := (*C.gchar)(C.CString(arg0))
@@ -743,6 +877,19 @@ func VariantTypeStringIsValid(type_string string) bool {
 	ret0 := C.g_variant_type_string_is_valid(type_string0)
 	C.free(unsafe.Pointer(type_string0)) /*ch:<stdlib.h>*/
 	return util.Int2Bool(int(ret0))      /*go:.util*/
+}
+
+// VariantTypeStringScan is a wrapper around g_variant_type_string_scan().
+func VariantTypeStringScan(string string, limit string) (bool, string) {
+	string0 := (*C.gchar)(C.CString(string))
+	limit0 := (*C.gchar)(C.CString(limit))
+	var endptr0 *C.gchar
+	ret0 := C.g_variant_type_string_scan(string0, limit0, &endptr0)
+	C.free(unsafe.Pointer(string0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(limit0))  /*ch:<stdlib.h>*/
+	endptr := C.GoString((*C.char)(endptr0))
+	defer C.g_free(C.gpointer(endptr0))
+	return util.Int2Bool(int(ret0)) /*go:.util*/, endptr
 }
 
 // Struct Error
