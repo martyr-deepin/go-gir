@@ -778,6 +778,7 @@ func WrapValueArray(p unsafe.Pointer) ValueArray {
 	return ValueArray{p}
 }
 
+type Type uint
 type BindingFlags int
 
 const (

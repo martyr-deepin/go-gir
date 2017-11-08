@@ -2352,6 +2352,15 @@ func TimeoutSourceNewSeconds(interval uint) Source {
 	return wrapSource(ret0)
 }
 
+type DateDay uint8
+type DateYear uint16
+type MutexLocker unsafe.Pointer
+type Pid int
+type Quark uint32
+type Strv unsafe.Pointer
+type Time int32
+type TimeSpan int64
+type Type uint
 type BookmarkFileError int
 
 const (

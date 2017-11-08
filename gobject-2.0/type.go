@@ -8,9 +8,6 @@ package gobject
 */
 import "C"
 
-// Type is a representation of GLib's GType.
-type Type uint
-
 const (
 	TYPE_INVALID   Type = C.G_TYPE_INVALID
 	TYPE_NONE      Type = C.G_TYPE_NONE

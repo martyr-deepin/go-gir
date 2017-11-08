@@ -11,8 +11,6 @@ import (
 	"unsafe"
 )
 
-type Quark uint32
-
 type ErrorGo struct {
 	Domain  Quark
 	Code    int

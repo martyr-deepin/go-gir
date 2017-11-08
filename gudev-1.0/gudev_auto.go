@@ -481,7 +481,7 @@ func (enumerator Enumerator) AddSysfsPath(sysfs_path string) Enumerator {
 	return wrapEnumerator(ret0)
 }
 
-type DeviceNumber C.GUdevDeviceNumber
+type DeviceNumber uint64
 type DeviceType int
 
 const (
