@@ -17,8 +17,8 @@ version = "2.0"
   name = "Object"
 
 [[types]]
-  err_funcs = []
-  funcs = ["g_closure_ref","g_closure_sink","g_closure_unref","g_closure_invalidate"]
+  err_funcs = ["g_closure_add_finalize_notifier","g_closure_add_invalidate_notifier","g_closure_add_marshal_guards","g_closure_invoke","g_closure_remove_finalize_notifier","g_closure_remove_invalidate_notifier","g_closure_set_marshal","g_closure_set_meta_marshal"]
+  funcs = ["g_closure_ref","g_closure_sink","g_closure_unref","g_closure_invalidate","g_closure_new_object","g_closure_new_simple"]
   ignore_funcs = []
   manual_funcs = []
   name = "Closure"
@@ -50,3 +50,10 @@ version = "2.0"
   ignore_funcs = []
   manual_funcs = ["g_type_instance_get_private"]
   name = "TypeInstance"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = ["g_value_array_new","g_value_array_append","g_value_array_copy","g_value_array_free","g_value_array_get_nth","g_value_array_insert","g_value_array_prepend","g_value_array_remove","g_value_array_sort","g_value_array_sort_with_data"]
+  manual_funcs = []
+  name = "ValueArray"

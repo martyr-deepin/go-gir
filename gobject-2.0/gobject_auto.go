@@ -545,6 +545,18 @@ func WrapClosure(p unsafe.Pointer) Closure {
 	return Closure{p}
 }
 
+// ClosureNewObject is a wrapper around g_closure_new_object().
+func ClosureNewObject(sizeof_closure uint, object Object) Closure {
+	ret0 := C.g_closure_new_object(C.guint(sizeof_closure), object.native())
+	return wrapClosure(ret0)
+}
+
+// ClosureNewSimple is a wrapper around g_closure_new_simple().
+func ClosureNewSimple(sizeof_closure uint, data unsafe.Pointer) Closure {
+	ret0 := C.g_closure_new_simple(C.guint(sizeof_closure), C.gpointer(data))
+	return wrapClosure(ret0)
+}
+
 // Invalidate is a wrapper around g_closure_invalidate().
 func (closure Closure) Invalidate() {
 	C.g_closure_invalidate(closure.native())
@@ -749,6 +761,21 @@ func wrapTypeInstance(p *C.GTypeInstance) TypeInstance {
 }
 func WrapTypeInstance(p unsafe.Pointer) TypeInstance {
 	return TypeInstance{p}
+}
+
+// Struct ValueArray
+type ValueArray struct {
+	Ptr unsafe.Pointer
+}
+
+func (v ValueArray) native() *C.GValueArray {
+	return (*C.GValueArray)(v.Ptr)
+}
+func wrapValueArray(p *C.GValueArray) ValueArray {
+	return ValueArray{unsafe.Pointer(p)}
+}
+func WrapValueArray(p unsafe.Pointer) ValueArray {
+	return ValueArray{p}
 }
 
 type BindingFlags int
