@@ -7,8 +7,8 @@ package gobject
 */
 import "C"
 import "unsafe"
-import "github.com/electricface/go-auto-gir/util"
 import "github.com/electricface/go-auto-gir/glib-2.0"
+import "github.com/electricface/go-auto-gir/util"
 
 // Struct Value
 type Value struct {
@@ -25,10 +25,125 @@ func WrapValue(p unsafe.Pointer) Value {
 	return Value{p}
 }
 
+// Copy is a wrapper around g_value_copy().
+func (src_value Value) Copy(dest_value Value) {
+	C.g_value_copy(src_value.native(), dest_value.native())
+}
+
+// DupBoxed is a wrapper around g_value_dup_boxed().
+func (value Value) DupBoxed() unsafe.Pointer {
+	ret0 := C.g_value_dup_boxed(value.native())
+	return unsafe.Pointer(ret0)
+}
+
+// DupObject is a wrapper around g_value_dup_object().
+func (value Value) DupObject() Object {
+	ret0 := C.g_value_dup_object(value.native())
+	return WrapObject(unsafe.Pointer(ret0))
+}
+
+// DupParam is a wrapper around g_value_dup_param().
+func (value Value) DupParam() ParamSpec {
+	ret0 := C.g_value_dup_param(value.native())
+	return wrapParamSpec(ret0)
+}
+
+// DupString is a wrapper around g_value_dup_string().
+func (value Value) DupString() string {
+	ret0 := C.g_value_dup_string(value.native())
+	ret := C.GoString((*C.char)(ret0))
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// DupVariant is a wrapper around g_value_dup_variant().
+func (value Value) DupVariant() glib.Variant {
+	ret0 := C.g_value_dup_variant(value.native())
+	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/
+}
+
+// FitsPointer is a wrapper around g_value_fits_pointer().
+func (value Value) FitsPointer() bool {
+	ret0 := C.g_value_fits_pointer(value.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// GetBoolean is a wrapper around g_value_get_boolean().
+func (value Value) GetBoolean() bool {
+	ret0 := C.g_value_get_boolean(value.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// GetBoxed is a wrapper around g_value_get_boxed().
+func (value Value) GetBoxed() unsafe.Pointer {
+	ret0 := C.g_value_get_boxed(value.native())
+	return unsafe.Pointer(ret0)
+}
+
+// GetDouble is a wrapper around g_value_get_double().
+func (value Value) GetDouble() float64 {
+	ret0 := C.g_value_get_double(value.native())
+	return float64(ret0)
+}
+
+// GetEnum is a wrapper around g_value_get_enum().
+func (value Value) GetEnum() int {
+	ret0 := C.g_value_get_enum(value.native())
+	return int(ret0)
+}
+
+// GetFlags is a wrapper around g_value_get_flags().
+func (value Value) GetFlags() uint {
+	ret0 := C.g_value_get_flags(value.native())
+	return uint(ret0)
+}
+
+// GetFloat is a wrapper around g_value_get_float().
+func (value Value) GetFloat() float32 {
+	ret0 := C.g_value_get_float(value.native())
+	return float32(ret0)
+}
+
+// GetInt is a wrapper around g_value_get_int().
+func (value Value) GetInt() int {
+	ret0 := C.g_value_get_int(value.native())
+	return int(ret0)
+}
+
+// GetInt64 is a wrapper around g_value_get_int64().
+func (value Value) GetInt64() int64 {
+	ret0 := C.g_value_get_int64(value.native())
+	return int64(ret0)
+}
+
+// GetLong is a wrapper around g_value_get_long().
+func (value Value) GetLong() int {
+	ret0 := C.g_value_get_long(value.native())
+	return int(ret0)
+}
+
+// GetObject is a wrapper around g_value_get_object().
+func (value Value) GetObject() Object {
+	ret0 := C.g_value_get_object(value.native())
+	return WrapObject(unsafe.Pointer(ret0))
+}
+
+// GetParam is a wrapper around g_value_get_param().
+func (value Value) GetParam() ParamSpec {
+	ret0 := C.g_value_get_param(value.native())
+	return wrapParamSpec(ret0)
+}
+
 // GetPointer is a wrapper around g_value_get_pointer().
 func (value Value) GetPointer() unsafe.Pointer {
 	ret0 := C.g_value_get_pointer(value.native())
 	return unsafe.Pointer(ret0)
+}
+
+// GetSchar is a wrapper around g_value_get_schar().
+func (value Value) GetSchar() int8 {
+	ret0 := C.g_value_get_schar(value.native())
+	return int8(ret0)
 }
 
 // GetString is a wrapper around g_value_get_string().
@@ -38,14 +153,76 @@ func (value Value) GetString() string {
 	return ret
 }
 
+// GetUchar is a wrapper around g_value_get_uchar().
+func (value Value) GetUchar() byte {
+	ret0 := C.g_value_get_uchar(value.native())
+	return byte(ret0)
+}
+
+// GetUint is a wrapper around g_value_get_uint().
+func (value Value) GetUint() uint {
+	ret0 := C.g_value_get_uint(value.native())
+	return uint(ret0)
+}
+
+// GetUint64 is a wrapper around g_value_get_uint64().
+func (value Value) GetUint64() uint64 {
+	ret0 := C.g_value_get_uint64(value.native())
+	return uint64(ret0)
+}
+
+// GetUlong is a wrapper around g_value_get_ulong().
+func (value Value) GetUlong() uint {
+	ret0 := C.g_value_get_ulong(value.native())
+	return uint(ret0)
+}
+
+// GetVariant is a wrapper around g_value_get_variant().
+func (value Value) GetVariant() glib.Variant {
+	ret0 := C.g_value_get_variant(value.native())
+	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/
+}
+
+// InitFromInstance is a wrapper around g_value_init_from_instance().
+func (value Value) InitFromInstance(instance TypeInstance) {
+	C.g_value_init_from_instance(value.native(), C.gpointer(instance.native()))
+}
+
+// PeekPointer is a wrapper around g_value_peek_pointer().
+func (value Value) PeekPointer() unsafe.Pointer {
+	ret0 := C.g_value_peek_pointer(value.native())
+	return unsafe.Pointer(ret0)
+}
+
+// Reset is a wrapper around g_value_reset().
+func (value Value) Reset() Value {
+	ret0 := C.g_value_reset(value.native())
+	return wrapValue(ret0)
+}
+
 // SetBoolean is a wrapper around g_value_set_boolean().
 func (value Value) SetBoolean(v_boolean bool) {
 	C.g_value_set_boolean(value.native(), C.gboolean(util.Bool2Int(v_boolean)) /*go:.util*/)
 }
 
+// SetBoxed is a wrapper around g_value_set_boxed().
+func (value Value) SetBoxed(v_boxed unsafe.Pointer) {
+	C.g_value_set_boxed(value.native(), C.gconstpointer(v_boxed))
+}
+
 // SetDouble is a wrapper around g_value_set_double().
 func (value Value) SetDouble(v_double float64) {
 	C.g_value_set_double(value.native(), C.gdouble(v_double))
+}
+
+// SetEnum is a wrapper around g_value_set_enum().
+func (value Value) SetEnum(v_enum int) {
+	C.g_value_set_enum(value.native(), C.gint(v_enum))
+}
+
+// SetFlags is a wrapper around g_value_set_flags().
+func (value Value) SetFlags(v_flags uint) {
+	C.g_value_set_flags(value.native(), C.guint(v_flags))
 }
 
 // SetFloat is a wrapper around g_value_set_float().
@@ -68,6 +245,21 @@ func (value Value) SetInt64(v_int64 int64) {
 	C.g_value_set_int64(value.native(), C.gint64(v_int64))
 }
 
+// SetLong is a wrapper around g_value_set_long().
+func (value Value) SetLong(v_long int) {
+	C.g_value_set_long(value.native(), C.glong(v_long))
+}
+
+// SetObject is a wrapper around g_value_set_object().
+func (value Value) SetObject(v_object Object) {
+	C.g_value_set_object(value.native(), C.gpointer(v_object.native()))
+}
+
+// SetParam is a wrapper around g_value_set_param().
+func (value Value) SetParam(param ParamSpec) {
+	C.g_value_set_param(value.native(), param.native())
+}
+
 // SetPointer is a wrapper around g_value_set_pointer().
 func (value Value) SetPointer(v_pointer unsafe.Pointer) {
 	C.g_value_set_pointer(value.native(), C.gpointer(v_pointer))
@@ -76,6 +268,18 @@ func (value Value) SetPointer(v_pointer unsafe.Pointer) {
 // SetSchar is a wrapper around g_value_set_schar().
 func (value Value) SetSchar(v_char int8) {
 	C.g_value_set_schar(value.native(), C.gint8(v_char))
+}
+
+// SetStaticBoxed is a wrapper around g_value_set_static_boxed().
+func (value Value) SetStaticBoxed(v_boxed unsafe.Pointer) {
+	C.g_value_set_static_boxed(value.native(), C.gconstpointer(v_boxed))
+}
+
+// SetStaticString is a wrapper around g_value_set_static_string().
+func (value Value) SetStaticString(v_string string) {
+	v_string0 := (*C.gchar)(C.CString(v_string))
+	C.g_value_set_static_string(value.native(), v_string0)
+	C.free(unsafe.Pointer(v_string0)) /*ch:<stdlib.h>*/
 }
 
 // SetString is a wrapper around g_value_set_string().
@@ -98,6 +302,49 @@ func (value Value) SetUint(v_uint uint) {
 // SetUint64 is a wrapper around g_value_set_uint64().
 func (value Value) SetUint64(v_uint64 uint64) {
 	C.g_value_set_uint64(value.native(), C.guint64(v_uint64))
+}
+
+// SetUlong is a wrapper around g_value_set_ulong().
+func (value Value) SetUlong(v_ulong uint) {
+	C.g_value_set_ulong(value.native(), C.gulong(v_ulong))
+}
+
+// SetVariant is a wrapper around g_value_set_variant().
+func (value Value) SetVariant(variant glib.Variant) {
+	C.g_value_set_variant(value.native(), (*C.GVariant)(variant.Ptr))
+}
+
+// TakeBoxed is a wrapper around g_value_take_boxed().
+func (value Value) TakeBoxed(v_boxed unsafe.Pointer) {
+	C.g_value_take_boxed(value.native(), C.gconstpointer(v_boxed))
+}
+
+// TakeObject is a wrapper around g_value_take_object().
+func (value Value) TakeObject(v_object unsafe.Pointer) {
+	C.g_value_take_object(value.native(), C.gpointer(v_object))
+}
+
+// TakeParam is a wrapper around g_value_take_param().
+func (value Value) TakeParam(param ParamSpec) {
+	C.g_value_take_param(value.native(), param.native())
+}
+
+// TakeString is a wrapper around g_value_take_string().
+func (value Value) TakeString(v_string string) {
+	v_string0 := (*C.gchar)(C.CString(v_string))
+	C.g_value_take_string(value.native(), v_string0)
+	C.free(unsafe.Pointer(v_string0)) /*ch:<stdlib.h>*/
+}
+
+// TakeVariant is a wrapper around g_value_take_variant().
+func (value Value) TakeVariant(variant glib.Variant) {
+	C.g_value_take_variant(value.native(), (*C.GVariant)(variant.Ptr))
+}
+
+// Transform is a wrapper around g_value_transform().
+func (src_value Value) Transform(dest_value Value) bool {
+	ret0 := C.g_value_transform(src_value.native(), dest_value.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // Unset is a wrapper around g_value_unset().
@@ -487,6 +734,21 @@ func WrapTypeInterface(p unsafe.Pointer) TypeInterface {
 func (g_iface TypeInterface) PeekParent() TypeInterface {
 	ret0 := C.g_type_interface_peek_parent(C.gpointer(g_iface.native()))
 	return WrapTypeInterface(unsafe.Pointer(ret0))
+}
+
+// Struct TypeInstance
+type TypeInstance struct {
+	Ptr unsafe.Pointer
+}
+
+func (v TypeInstance) native() *C.GTypeInstance {
+	return (*C.GTypeInstance)(v.Ptr)
+}
+func wrapTypeInstance(p *C.GTypeInstance) TypeInstance {
+	return TypeInstance{unsafe.Pointer(p)}
+}
+func WrapTypeInstance(p unsafe.Pointer) TypeInstance {
+	return TypeInstance{p}
 }
 
 type BindingFlags int
