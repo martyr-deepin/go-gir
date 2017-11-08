@@ -1141,11 +1141,6 @@ func (source Source) GetContext() MainContext {
 	return wrapMainContext(ret0)
 }
 
-// GetCurrentTime is a wrapper around g_source_get_current_time().
-func (source Source) GetCurrentTime(timeval TimeVal) {
-	C.g_source_get_current_time(source.native(), timeval.native())
-}
-
 // GetId is a wrapper around g_source_get_id().
 func (source Source) GetId() uint {
 	ret0 := C.g_source_get_id(source.native())
@@ -1346,6 +1341,640 @@ func (time_ TimeVal) ToIso8601() string {
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
 	return ret
+}
+
+// Struct KeyFile
+type KeyFile struct {
+	Ptr unsafe.Pointer
+}
+
+func (v KeyFile) native() *C.GKeyFile {
+	return (*C.GKeyFile)(v.Ptr)
+}
+func wrapKeyFile(p *C.GKeyFile) KeyFile {
+	return KeyFile{unsafe.Pointer(p)}
+}
+func WrapKeyFile(p unsafe.Pointer) KeyFile {
+	return KeyFile{p}
+}
+
+// KeyFileNew is a wrapper around g_key_file_new().
+func KeyFileNew() KeyFile {
+	ret0 := C.g_key_file_new()
+	return wrapKeyFile(ret0)
+}
+
+// Free is a wrapper around g_key_file_free().
+func (key_file KeyFile) Free() {
+	C.g_key_file_free(key_file.native())
+}
+
+// GetBoolean is a wrapper around g_key_file_get_boolean().
+func (key_file KeyFile) GetBoolean(group_name string, key string) (bool, error) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	var err Error
+	ret0 := C.g_key_file_get_boolean(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// GetBooleanList is a wrapper around g_key_file_get_boolean_list().
+func (key_file KeyFile) GetBooleanList(group_name string, key string) ([]bool, error) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	var length0 C.gsize
+	var err Error
+	ret0 := C.g_key_file_get_boolean_list(key_file.native(), group_name0, key0, &length0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	var ret0Slice []C.gboolean
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	ret := make([]bool, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		ret[idx] = util.Int2Bool(int(elem)) /*go:.util*/
+	}
+	C.g_free(C.gpointer(ret0))
+	if err.Ptr != nil {
+		defer err.Free()
+		return nil, err.GoValue()
+	}
+	return ret, nil
+}
+
+// GetComment is a wrapper around g_key_file_get_comment().
+func (key_file KeyFile) GetComment(group_name string, key string) (string, error) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	var err Error
+	ret0 := C.g_key_file_get_comment(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	ret := C.GoString((*C.char)(ret0))
+	C.g_free(C.gpointer(ret0))
+	if err.Ptr != nil {
+		defer err.Free()
+		return "", err.GoValue()
+	}
+	return ret, nil
+}
+
+// GetDouble is a wrapper around g_key_file_get_double().
+func (key_file KeyFile) GetDouble(group_name string, key string) (float64, error) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	var err Error
+	ret0 := C.g_key_file_get_double(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return 0.0, err.GoValue()
+	}
+	return float64(ret0), nil
+}
+
+// GetDoubleList is a wrapper around g_key_file_get_double_list().
+func (key_file KeyFile) GetDoubleList(group_name string, key string) ([]float64, error) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	var length0 C.gsize
+	var err Error
+	ret0 := C.g_key_file_get_double_list(key_file.native(), group_name0, key0, &length0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	var ret0Slice []C.gdouble
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	ret := make([]float64, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		ret[idx] = float64(elem)
+	}
+	C.g_free(C.gpointer(ret0))
+	if err.Ptr != nil {
+		defer err.Free()
+		return nil, err.GoValue()
+	}
+	return ret, nil
+}
+
+// GetGroups is a wrapper around g_key_file_get_groups().
+func (key_file KeyFile) GetGroups() ([]string, uint) {
+	var length0 C.gsize
+	ret0 := C.g_key_file_get_groups(key_file.native(), &length0)
+	var ret0Slice []*C.gchar
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString((*C.char)(elem))
+		ret[idx] = elemG
+		C.g_free(C.gpointer(elem))
+	}
+	C.g_free(C.gpointer(ret0))
+	return ret, uint(length0)
+}
+
+// GetInt64 is a wrapper around g_key_file_get_int64().
+func (key_file KeyFile) GetInt64(group_name string, key string) (int64, error) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	var err Error
+	ret0 := C.g_key_file_get_int64(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return 0, err.GoValue()
+	}
+	return int64(ret0), nil
+}
+
+// GetInteger is a wrapper around g_key_file_get_integer().
+func (key_file KeyFile) GetInteger(group_name string, key string) (int, error) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	var err Error
+	ret0 := C.g_key_file_get_integer(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return 0, err.GoValue()
+	}
+	return int(ret0), nil
+}
+
+// GetIntegerList is a wrapper around g_key_file_get_integer_list().
+func (key_file KeyFile) GetIntegerList(group_name string, key string) ([]int, error) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	var length0 C.gsize
+	var err Error
+	ret0 := C.g_key_file_get_integer_list(key_file.native(), group_name0, key0, &length0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	var ret0Slice []C.gint
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	ret := make([]int, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		ret[idx] = int(elem)
+	}
+	C.g_free(C.gpointer(ret0))
+	if err.Ptr != nil {
+		defer err.Free()
+		return nil, err.GoValue()
+	}
+	return ret, nil
+}
+
+// GetKeys is a wrapper around g_key_file_get_keys().
+func (key_file KeyFile) GetKeys(group_name string) ([]string, uint, error) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	var length0 C.gsize
+	var err Error
+	ret0 := C.g_key_file_get_keys(key_file.native(), group_name0, &length0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	var ret0Slice []*C.gchar
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString((*C.char)(elem))
+		ret[idx] = elemG
+		C.g_free(C.gpointer(elem))
+	}
+	C.g_free(C.gpointer(ret0))
+	if err.Ptr != nil {
+		defer err.Free()
+		return nil, 0, err.GoValue()
+	}
+	return ret, uint(length0), nil
+}
+
+// GetLocaleString is a wrapper around g_key_file_get_locale_string().
+func (key_file KeyFile) GetLocaleString(group_name string, key string, locale string) (string, error) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	locale0 := (*C.gchar)(C.CString(locale))
+	var err Error
+	ret0 := C.g_key_file_get_locale_string(key_file.native(), group_name0, key0, locale0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(locale0))     /*ch:<stdlib.h>*/
+	ret := C.GoString((*C.char)(ret0))
+	C.g_free(C.gpointer(ret0))
+	if err.Ptr != nil {
+		defer err.Free()
+		return "", err.GoValue()
+	}
+	return ret, nil
+}
+
+// GetLocaleStringList is a wrapper around g_key_file_get_locale_string_list().
+func (key_file KeyFile) GetLocaleStringList(group_name string, key string, locale string) ([]string, error) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	locale0 := (*C.gchar)(C.CString(locale))
+	var length0 C.gsize
+	var err Error
+	ret0 := C.g_key_file_get_locale_string_list(key_file.native(), group_name0, key0, locale0, &length0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(locale0))     /*ch:<stdlib.h>*/
+	var ret0Slice []*C.gchar
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString((*C.char)(elem))
+		ret[idx] = elemG
+		C.g_free(C.gpointer(elem))
+	}
+	C.g_free(C.gpointer(ret0))
+	if err.Ptr != nil {
+		defer err.Free()
+		return nil, err.GoValue()
+	}
+	return ret, nil
+}
+
+// GetStartGroup is a wrapper around g_key_file_get_start_group().
+func (key_file KeyFile) GetStartGroup() string {
+	ret0 := C.g_key_file_get_start_group(key_file.native())
+	ret := C.GoString((*C.char)(ret0))
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// GetString is a wrapper around g_key_file_get_string().
+func (key_file KeyFile) GetString(group_name string, key string) (string, error) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	var err Error
+	ret0 := C.g_key_file_get_string(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	ret := C.GoString((*C.char)(ret0))
+	C.g_free(C.gpointer(ret0))
+	if err.Ptr != nil {
+		defer err.Free()
+		return "", err.GoValue()
+	}
+	return ret, nil
+}
+
+// GetStringList is a wrapper around g_key_file_get_string_list().
+func (key_file KeyFile) GetStringList(group_name string, key string) ([]string, error) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	var length0 C.gsize
+	var err Error
+	ret0 := C.g_key_file_get_string_list(key_file.native(), group_name0, key0, &length0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	var ret0Slice []*C.gchar
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString((*C.char)(elem))
+		ret[idx] = elemG
+		C.g_free(C.gpointer(elem))
+	}
+	C.g_free(C.gpointer(ret0))
+	if err.Ptr != nil {
+		defer err.Free()
+		return nil, err.GoValue()
+	}
+	return ret, nil
+}
+
+// GetUint64 is a wrapper around g_key_file_get_uint64().
+func (key_file KeyFile) GetUint64(group_name string, key string) (uint64, error) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	var err Error
+	ret0 := C.g_key_file_get_uint64(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return 0, err.GoValue()
+	}
+	return uint64(ret0), nil
+}
+
+// GetValue is a wrapper around g_key_file_get_value().
+func (key_file KeyFile) GetValue(group_name string, key string) (string, error) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	var err Error
+	ret0 := C.g_key_file_get_value(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	ret := C.GoString((*C.char)(ret0))
+	C.g_free(C.gpointer(ret0))
+	if err.Ptr != nil {
+		defer err.Free()
+		return "", err.GoValue()
+	}
+	return ret, nil
+}
+
+// HasGroup is a wrapper around g_key_file_has_group().
+func (key_file KeyFile) HasGroup(group_name string) bool {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	ret0 := C.g_key_file_has_group(key_file.native(), group_name0)
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0))     /*go:.util*/
+}
+
+// HasKey is a wrapper around g_key_file_has_key().
+func (key_file KeyFile) HasKey(group_name string, key string) (bool, error) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	var err Error
+	ret0 := C.g_key_file_has_key(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// LoadFromBytes is a wrapper around g_key_file_load_from_bytes().
+func (key_file KeyFile) LoadFromBytes(bytes Bytes, flags KeyFileFlags) (bool, error) {
+	var err Error
+	ret0 := C.g_key_file_load_from_bytes(key_file.native(), bytes.native(), C.GKeyFileFlags(flags), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// LoadFromData is a wrapper around g_key_file_load_from_data().
+func (key_file KeyFile) LoadFromData(data string, length uint, flags KeyFileFlags) (bool, error) {
+	data0 := (*C.gchar)(C.CString(data))
+	var err Error
+	ret0 := C.g_key_file_load_from_data(key_file.native(), data0, C.gsize(length), C.GKeyFileFlags(flags), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(data0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// LoadFromDataDirs is a wrapper around g_key_file_load_from_data_dirs().
+func (key_file KeyFile) LoadFromDataDirs(file string, flags KeyFileFlags) (bool, string, error) {
+	file0 := (*C.gchar)(C.CString(file))
+	var full_path0 *C.gchar
+	var err Error
+	ret0 := C.g_key_file_load_from_data_dirs(key_file.native(), file0, &full_path0, C.GKeyFileFlags(flags), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(file0)) /*ch:<stdlib.h>*/
+	full_path := C.GoString((*C.char)(full_path0))
+	defer C.g_free(C.gpointer(full_path0))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, "", err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, full_path, nil
+}
+
+// LoadFromDirs is a wrapper around g_key_file_load_from_dirs().
+func (key_file KeyFile) LoadFromDirs(file string, search_dirs []string, flags KeyFileFlags) (bool, string, error) {
+	file0 := (*C.gchar)(C.CString(file))
+	search_dirs0 := make([]*C.gchar, len(search_dirs))
+	for idx, elemG := range search_dirs {
+		elem := (*C.gchar)(C.CString(elemG))
+		search_dirs0[idx] = elem
+	}
+	var search_dirs0Ptr **C.gchar
+	if len(search_dirs0) > 0 {
+		search_dirs0Ptr = &search_dirs0[0]
+	}
+	var full_path0 *C.gchar
+	var err Error
+	ret0 := C.g_key_file_load_from_dirs(key_file.native(), file0, search_dirs0Ptr, &full_path0, C.GKeyFileFlags(flags), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(file0)) /*ch:<stdlib.h>*/
+	for _, elem := range search_dirs0 {
+		C.free(unsafe.Pointer(elem)) /*ch:<stdlib.h>*/
+	}
+	full_path := C.GoString((*C.char)(full_path0))
+	defer C.g_free(C.gpointer(full_path0))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, "", err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, full_path, nil
+}
+
+// LoadFromFile is a wrapper around g_key_file_load_from_file().
+func (key_file KeyFile) LoadFromFile(file string, flags KeyFileFlags) (bool, error) {
+	file0 := (*C.gchar)(C.CString(file))
+	var err Error
+	ret0 := C.g_key_file_load_from_file(key_file.native(), file0, C.GKeyFileFlags(flags), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(file0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// Ref is a wrapper around g_key_file_ref().
+func (key_file KeyFile) Ref() KeyFile {
+	ret0 := C.g_key_file_ref(key_file.native())
+	return wrapKeyFile(ret0)
+}
+
+// RemoveComment is a wrapper around g_key_file_remove_comment().
+func (key_file KeyFile) RemoveComment(group_name string, key string) (bool, error) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	var err Error
+	ret0 := C.g_key_file_remove_comment(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// RemoveGroup is a wrapper around g_key_file_remove_group().
+func (key_file KeyFile) RemoveGroup(group_name string) (bool, error) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	var err Error
+	ret0 := C.g_key_file_remove_group(key_file.native(), group_name0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// RemoveKey is a wrapper around g_key_file_remove_key().
+func (key_file KeyFile) RemoveKey(group_name string, key string) (bool, error) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	var err Error
+	ret0 := C.g_key_file_remove_key(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// SaveToFile is a wrapper around g_key_file_save_to_file().
+func (key_file KeyFile) SaveToFile(filename string) (bool, error) {
+	filename0 := (*C.gchar)(C.CString(filename))
+	var err Error
+	ret0 := C.g_key_file_save_to_file(key_file.native(), filename0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(filename0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// SetBoolean is a wrapper around g_key_file_set_boolean().
+func (key_file KeyFile) SetBoolean(group_name string, key string, value bool) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	C.g_key_file_set_boolean(key_file.native(), group_name0, key0, C.gboolean(util.Bool2Int(value)) /*go:.util*/)
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+}
+
+// SetComment is a wrapper around g_key_file_set_comment().
+func (key_file KeyFile) SetComment(group_name string, key string, comment string) (bool, error) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	comment0 := (*C.gchar)(C.CString(comment))
+	var err Error
+	ret0 := C.g_key_file_set_comment(key_file.native(), group_name0, key0, comment0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(comment0))    /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// SetDouble is a wrapper around g_key_file_set_double().
+func (key_file KeyFile) SetDouble(group_name string, key string, value float64) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	C.g_key_file_set_double(key_file.native(), group_name0, key0, C.gdouble(value))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+}
+
+// SetInt64 is a wrapper around g_key_file_set_int64().
+func (key_file KeyFile) SetInt64(group_name string, key string, value int64) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	C.g_key_file_set_int64(key_file.native(), group_name0, key0, C.gint64(value))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+}
+
+// SetInteger is a wrapper around g_key_file_set_integer().
+func (key_file KeyFile) SetInteger(group_name string, key string, value int) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	C.g_key_file_set_integer(key_file.native(), group_name0, key0, C.gint(value))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+}
+
+// SetListSeparator is a wrapper around g_key_file_set_list_separator().
+func (key_file KeyFile) SetListSeparator(separator int8) {
+	C.g_key_file_set_list_separator(key_file.native(), C.gchar(separator))
+}
+
+// SetLocaleString is a wrapper around g_key_file_set_locale_string().
+func (key_file KeyFile) SetLocaleString(group_name string, key string, locale string, string string) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	locale0 := (*C.gchar)(C.CString(locale))
+	string0 := (*C.gchar)(C.CString(string))
+	C.g_key_file_set_locale_string(key_file.native(), group_name0, key0, locale0, string0)
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(locale0))     /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(string0))     /*ch:<stdlib.h>*/
+}
+
+// SetString is a wrapper around g_key_file_set_string().
+func (key_file KeyFile) SetString(group_name string, key string, string string) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	string0 := (*C.gchar)(C.CString(string))
+	C.g_key_file_set_string(key_file.native(), group_name0, key0, string0)
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(string0))     /*ch:<stdlib.h>*/
+}
+
+// SetUint64 is a wrapper around g_key_file_set_uint64().
+func (key_file KeyFile) SetUint64(group_name string, key string, value uint64) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	C.g_key_file_set_uint64(key_file.native(), group_name0, key0, C.guint64(value))
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+}
+
+// SetValue is a wrapper around g_key_file_set_value().
+func (key_file KeyFile) SetValue(group_name string, key string, value string) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	key0 := (*C.gchar)(C.CString(key))
+	value0 := (*C.gchar)(C.CString(value))
+	C.g_key_file_set_value(key_file.native(), group_name0, key0, value0)
+	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(value0))      /*ch:<stdlib.h>*/
+}
+
+// ToData is a wrapper around g_key_file_to_data().
+func (key_file KeyFile) ToData() (string, uint, error) {
+	var length0 C.gsize
+	var err Error
+	ret0 := C.g_key_file_to_data(key_file.native(), &length0, (**C.GError)(unsafe.Pointer(&err)))
+	ret := C.GoString((*C.char)(ret0))
+	C.g_free(C.gpointer(ret0))
+	if err.Ptr != nil {
+		defer err.Free()
+		return "", 0, err.GoValue()
+	}
+	return ret, uint(length0), nil
+}
+
+// Unref is a wrapper around g_key_file_unref().
+func (key_file KeyFile) Unref() {
+	C.g_key_file_unref(key_file.native())
+}
+
+// KeyFileErrorQuark is a wrapper around g_key_file_error_quark().
+func KeyFileErrorQuark() Quark {
+	ret0 := C.g_key_file_error_quark()
+	return Quark(ret0)
 }
 
 // IdleSourceNew is a wrapper around g_idle_source_new().
