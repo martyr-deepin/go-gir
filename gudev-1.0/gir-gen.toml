@@ -3,8 +3,8 @@ namespace = "GUdev"
 version = "1.0"
 
 [[types]]
-  err_funcs = ["g_udev_client_query_by_subsystem"]
-  funcs = ["g_udev_client_new","g_udev_client_query_by_device_file","g_udev_client_query_by_device_number","g_udev_client_query_by_subsystem_and_name","g_udev_client_query_by_sysfs_path"]
+  err_funcs = []
+  funcs = ["g_udev_client_new","g_udev_client_query_by_device_file","g_udev_client_query_by_device_number","g_udev_client_query_by_subsystem_and_name","g_udev_client_query_by_sysfs_path","g_udev_client_query_by_subsystem"]
   ignore_funcs = []
   manual_funcs = []
   name = "Client"
@@ -17,8 +17,8 @@ version = "1.0"
   name = "Device"
 
 [[types]]
-  err_funcs = ["g_udev_enumerator_execute"]
-  funcs = ["g_udev_enumerator_new","g_udev_enumerator_add_match_is_initialized","g_udev_enumerator_add_match_name","g_udev_enumerator_add_match_property","g_udev_enumerator_add_match_subsystem","g_udev_enumerator_add_match_sysfs_attr","g_udev_enumerator_add_match_tag","g_udev_enumerator_add_nomatch_subsystem","g_udev_enumerator_add_nomatch_sysfs_attr","g_udev_enumerator_add_sysfs_path"]
+  err_funcs = []
+  funcs = ["g_udev_enumerator_new","g_udev_enumerator_add_match_is_initialized","g_udev_enumerator_add_match_name","g_udev_enumerator_add_match_property","g_udev_enumerator_add_match_subsystem","g_udev_enumerator_add_match_sysfs_attr","g_udev_enumerator_add_match_tag","g_udev_enumerator_add_nomatch_subsystem","g_udev_enumerator_add_nomatch_sysfs_attr","g_udev_enumerator_add_sysfs_path","g_udev_enumerator_execute"]
   ignore_funcs = []
   manual_funcs = []
   name = "Enumerator"

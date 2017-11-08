@@ -92,3 +92,17 @@ version = "2.0"
   ignore_funcs = []
   manual_funcs = []
   name = "DateTime"
+
+[[types]]
+  err_funcs = ["g_option_group_new","g_option_group_set_error_hook","g_option_group_set_parse_hooks","g_option_group_set_translate_func"]
+  funcs = ["g_option_group_add_entries","g_option_group_ref","g_option_group_set_translation_domain","g_option_group_unref"]
+  ignore_funcs = ["g_option_group_free"]
+  manual_funcs = []
+  name = "OptionGroup"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "OptionEntry"

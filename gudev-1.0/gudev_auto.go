@@ -8,6 +8,7 @@ package gudev
 import "C"
 import "unsafe"
 import "github.com/electricface/go-auto-gir/gobject-2.0"
+import "github.com/electricface/go-auto-gir/glib-2.0"
 import "github.com/electricface/go-auto-gir/util"
 
 // Object Client
@@ -57,6 +58,15 @@ func (client Client) QueryByDeviceFile(device_file string) Device {
 func (client Client) QueryByDeviceNumber(type_ DeviceType, number DeviceNumber) Device {
 	ret0 := C.g_udev_client_query_by_device_number(client.native(), C.GUdevDeviceType(type_), C.GUdevDeviceNumber(number))
 	return wrapDevice(ret0)
+}
+
+// QueryBySubsystem is a wrapper around g_udev_client_query_by_subsystem().
+func (client Client) QueryBySubsystem(subsystem string) glib.List {
+	subsystem0 := (*C.gchar)(C.CString(subsystem))
+	ret0 := C.g_udev_client_query_by_subsystem(client.native(), subsystem0)
+	C.free(unsafe.Pointer(subsystem0)) /*ch:<stdlib.h>*/
+	return glib.WrapList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapDevice(p) }) /*gir:GLib*/
 }
 
 // QueryBySubsystemAndName is a wrapper around g_udev_client_query_by_subsystem_and_name().
@@ -479,6 +489,13 @@ func (enumerator Enumerator) AddSysfsPath(sysfs_path string) Enumerator {
 	ret0 := C.g_udev_enumerator_add_sysfs_path(enumerator.native(), sysfs_path0)
 	C.free(unsafe.Pointer(sysfs_path0)) /*ch:<stdlib.h>*/
 	return wrapEnumerator(ret0)
+}
+
+// Execute is a wrapper around g_udev_enumerator_execute().
+func (enumerator Enumerator) Execute() glib.List {
+	ret0 := C.g_udev_enumerator_execute(enumerator.native())
+	return glib.WrapList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapDevice(p) }) /*gir:GLib*/
 }
 
 type DeviceNumber uint64

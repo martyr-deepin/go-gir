@@ -2334,6 +2334,59 @@ func DateTimeHash(datetime unsafe.Pointer) uint {
 	return uint(ret0)
 }
 
+// Struct OptionGroup
+type OptionGroup struct {
+	Ptr unsafe.Pointer
+}
+
+func (v OptionGroup) native() *C.GOptionGroup {
+	return (*C.GOptionGroup)(v.Ptr)
+}
+func wrapOptionGroup(p *C.GOptionGroup) OptionGroup {
+	return OptionGroup{unsafe.Pointer(p)}
+}
+func WrapOptionGroup(p unsafe.Pointer) OptionGroup {
+	return OptionGroup{p}
+}
+
+// AddEntries is a wrapper around g_option_group_add_entries().
+func (group OptionGroup) AddEntries(entries OptionEntry) {
+	C.g_option_group_add_entries(group.native(), entries.native())
+}
+
+// Ref is a wrapper around g_option_group_ref().
+func (group OptionGroup) Ref() OptionGroup {
+	ret0 := C.g_option_group_ref(group.native())
+	return wrapOptionGroup(ret0)
+}
+
+// SetTranslationDomain is a wrapper around g_option_group_set_translation_domain().
+func (group OptionGroup) SetTranslationDomain(domain string) {
+	domain0 := (*C.gchar)(C.CString(domain))
+	C.g_option_group_set_translation_domain(group.native(), domain0)
+	C.free(unsafe.Pointer(domain0)) /*ch:<stdlib.h>*/
+}
+
+// Unref is a wrapper around g_option_group_unref().
+func (group OptionGroup) Unref() {
+	C.g_option_group_unref(group.native())
+}
+
+// Struct OptionEntry
+type OptionEntry struct {
+	Ptr unsafe.Pointer
+}
+
+func (v OptionEntry) native() *C.GOptionEntry {
+	return (*C.GOptionEntry)(v.Ptr)
+}
+func wrapOptionEntry(p *C.GOptionEntry) OptionEntry {
+	return OptionEntry{unsafe.Pointer(p)}
+}
+func WrapOptionEntry(p unsafe.Pointer) OptionEntry {
+	return OptionEntry{p}
+}
+
 // IdleSourceNew is a wrapper around g_idle_source_new().
 func IdleSourceNew() Source {
 	ret0 := C.g_idle_source_new()

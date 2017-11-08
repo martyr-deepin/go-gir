@@ -141,6 +141,28 @@ func (appinfo AppInfo) GetSupportedTypes() []string {
 	return ret
 }
 
+// Launch is a wrapper around g_app_info_launch().
+func (appinfo AppInfo) Launch(files glib.List, launch_context AppLaunchContext) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_app_info_launch(appinfo.native(), (*C.GList)(files.Ptr), launch_context.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// LaunchUris is a wrapper around g_app_info_launch_uris().
+func (appinfo AppInfo) LaunchUris(uris glib.List, launch_context AppLaunchContext) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_app_info_launch_uris(appinfo.native(), (*C.GList)(uris.Ptr), launch_context.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
 // RemoveSupportsType is a wrapper around g_app_info_remove_supports_type().
 func (appinfo AppInfo) RemoveSupportsType(content_type string) (bool, error) {
 	content_type0 := C.CString(content_type)
@@ -211,6 +233,102 @@ func (appinfo AppInfo) SupportsUris() bool {
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
+// AppInfoCreateFromCommandline is a wrapper around g_app_info_create_from_commandline().
+func AppInfoCreateFromCommandline(commandline string, application_name string, flags AppInfoCreateFlags) (AppInfo, error) {
+	commandline0 := C.CString(commandline)
+	application_name0 := C.CString(application_name)
+	var err glib.Error
+	ret0 := C.g_app_info_create_from_commandline(commandline0, application_name0, C.GAppInfoCreateFlags(flags), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(commandline0))      /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(application_name0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return AppInfo{}, err.GoValue()
+	}
+	return wrapAppInfo(ret0), nil
+}
+
+// AppInfoGetAll is a wrapper around g_app_info_get_all().
+func AppInfoGetAll() glib.List {
+	ret0 := C.g_app_info_get_all()
+	return glib.WrapList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapAppInfo(p) }) /*gir:GLib*/
+}
+
+// AppInfoGetAllForType is a wrapper around g_app_info_get_all_for_type().
+func AppInfoGetAllForType(content_type string) glib.List {
+	content_type0 := C.CString(content_type)
+	ret0 := C.g_app_info_get_all_for_type(content_type0)
+	C.free(unsafe.Pointer(content_type0)) /*ch:<stdlib.h>*/
+	return glib.WrapList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapAppInfo(p) }) /*gir:GLib*/
+}
+
+// AppInfoGetDefaultForType is a wrapper around g_app_info_get_default_for_type().
+func AppInfoGetDefaultForType(content_type string, must_support_uris bool) AppInfo {
+	content_type0 := C.CString(content_type)
+	ret0 := C.g_app_info_get_default_for_type(content_type0, C.gboolean(util.Bool2Int(must_support_uris)) /*go:.util*/)
+	C.free(unsafe.Pointer(content_type0)) /*ch:<stdlib.h>*/
+	return wrapAppInfo(ret0)
+}
+
+// AppInfoGetDefaultForUriScheme is a wrapper around g_app_info_get_default_for_uri_scheme().
+func AppInfoGetDefaultForUriScheme(uri_scheme string) AppInfo {
+	uri_scheme0 := C.CString(uri_scheme)
+	ret0 := C.g_app_info_get_default_for_uri_scheme(uri_scheme0)
+	C.free(unsafe.Pointer(uri_scheme0)) /*ch:<stdlib.h>*/
+	return wrapAppInfo(ret0)
+}
+
+// AppInfoGetFallbackForType is a wrapper around g_app_info_get_fallback_for_type().
+func AppInfoGetFallbackForType(content_type string) glib.List {
+	content_type0 := (*C.gchar)(C.CString(content_type))
+	ret0 := C.g_app_info_get_fallback_for_type(content_type0)
+	C.free(unsafe.Pointer(content_type0)) /*ch:<stdlib.h>*/
+	return glib.WrapList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapAppInfo(p) }) /*gir:GLib*/
+}
+
+// AppInfoGetRecommendedForType is a wrapper around g_app_info_get_recommended_for_type().
+func AppInfoGetRecommendedForType(content_type string) glib.List {
+	content_type0 := (*C.gchar)(C.CString(content_type))
+	ret0 := C.g_app_info_get_recommended_for_type(content_type0)
+	C.free(unsafe.Pointer(content_type0)) /*ch:<stdlib.h>*/
+	return glib.WrapList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapAppInfo(p) }) /*gir:GLib*/
+}
+
+// AppInfoLaunchDefaultForUri is a wrapper around g_app_info_launch_default_for_uri().
+func AppInfoLaunchDefaultForUri(uri string, launch_context AppLaunchContext) (bool, error) {
+	uri0 := C.CString(uri)
+	var err glib.Error
+	ret0 := C.g_app_info_launch_default_for_uri(uri0, launch_context.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(uri0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// AppInfoLaunchDefaultForUriFinish is a wrapper around g_app_info_launch_default_for_uri_finish().
+func AppInfoLaunchDefaultForUriFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_app_info_launch_default_for_uri_finish(result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// AppInfoResetTypeAssociations is a wrapper around g_app_info_reset_type_associations().
+func AppInfoResetTypeAssociations(content_type string) {
+	content_type0 := C.CString(content_type)
+	C.g_app_info_reset_type_associations(content_type0)
+	C.free(unsafe.Pointer(content_type0)) /*ch:<stdlib.h>*/
+}
+
 // Object DesktopAppInfo
 type DesktopAppInfo struct {
 	gobject.Object
@@ -244,6 +362,12 @@ func DesktopAppInfoNewFromFilename(filename string) DesktopAppInfo {
 	filename0 := C.CString(filename)
 	ret0 := C.g_desktop_app_info_new_from_filename(filename0)
 	C.free(unsafe.Pointer(filename0)) /*ch:<stdlib.h>*/
+	return wrapDesktopAppInfo(ret0)
+}
+
+// DesktopAppInfoNewFromKeyfile is a wrapper around g_desktop_app_info_new_from_keyfile().
+func DesktopAppInfoNewFromKeyfile(key_file glib.KeyFile) DesktopAppInfo {
+	ret0 := C.g_desktop_app_info_new_from_keyfile((*C.GKeyFile)(key_file.Ptr))
 	return wrapDesktopAppInfo(ret0)
 }
 
@@ -352,6 +476,15 @@ func (info DesktopAppInfo) ListActions() []string {
 	return ret
 }
 
+// DesktopAppInfoGetImplementations is a wrapper around g_desktop_app_info_get_implementations().
+func DesktopAppInfoGetImplementations(interface_ string) glib.List {
+	interface0 := (*C.gchar)(C.CString(interface_))
+	ret0 := C.g_desktop_app_info_get_implementations(interface0)
+	C.free(unsafe.Pointer(interface0)) /*ch:<stdlib.h>*/
+	return glib.WrapList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapDesktopAppInfo(p) }) /*gir:GLib*/
+}
+
 // Object AppLaunchContext
 type AppLaunchContext struct {
 	gobject.Object
@@ -375,6 +508,14 @@ func AppLaunchContextNew() AppLaunchContext {
 	return wrapAppLaunchContext(ret0)
 }
 
+// GetDisplay is a wrapper around g_app_launch_context_get_display().
+func (context AppLaunchContext) GetDisplay(info AppInfo, files glib.List) string {
+	ret0 := C.g_app_launch_context_get_display(context.native(), info.native(), (*C.GList)(files.Ptr))
+	ret := C.GoString(ret0)
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
 // GetEnvironment is a wrapper around g_app_launch_context_get_environment().
 func (context AppLaunchContext) GetEnvironment() []string {
 	ret0 := C.g_app_launch_context_get_environment(context.native())
@@ -387,6 +528,14 @@ func (context AppLaunchContext) GetEnvironment() []string {
 		ret[idx] = elemG
 		C.g_free(C.gpointer(elem))
 	}
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// GetStartupNotifyId is a wrapper around g_app_launch_context_get_startup_notify_id().
+func (context AppLaunchContext) GetStartupNotifyId(info AppInfo, files glib.List) string {
+	ret0 := C.g_app_launch_context_get_startup_notify_id(context.native(), info.native(), (*C.GList)(files.Ptr))
+	ret := C.GoString(ret0)
 	C.g_free(C.gpointer(ret0))
 	return ret
 }
@@ -954,6 +1103,41 @@ func (action Action) GetStateHint() glib.Variant {
 func (action Action) GetStateType() glib.VariantType {
 	ret0 := C.g_action_get_state_type(action.native())
 	return glib.WrapVariantType(unsafe.Pointer(ret0)) /*gir:GLib*/
+}
+
+// ActionNameIsValid is a wrapper around g_action_name_is_valid().
+func ActionNameIsValid(action_name string) bool {
+	action_name0 := (*C.gchar)(C.CString(action_name))
+	ret0 := C.g_action_name_is_valid(action_name0)
+	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0))      /*go:.util*/
+}
+
+// ActionParseDetailedName is a wrapper around g_action_parse_detailed_name().
+func ActionParseDetailedName(detailed_name string) (bool, string, glib.Variant, error) {
+	detailed_name0 := (*C.gchar)(C.CString(detailed_name))
+	var action_name0 *C.gchar
+	var target_value0 *C.GVariant
+	var err glib.Error
+	ret0 := C.g_action_parse_detailed_name(detailed_name0, &action_name0, &target_value0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(detailed_name0)) /*ch:<stdlib.h>*/
+	action_name := C.GoString((*C.char)(action_name0))
+	defer C.g_free(C.gpointer(action_name0))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, "", glib.Variant{}, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, action_name, glib.WrapVariant(unsafe.Pointer(target_value0)) /*gir:GLib*/, nil
+}
+
+// ActionPrintDetailedName is a wrapper around g_action_print_detailed_name().
+func ActionPrintDetailedName(action_name string, target_value glib.Variant) string {
+	action_name0 := (*C.gchar)(C.CString(action_name))
+	ret0 := C.g_action_print_detailed_name(action_name0, (*C.GVariant)(target_value.Ptr))
+	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
+	ret := C.GoString((*C.char)(ret0))
+	C.g_free(C.gpointer(ret0))
+	return ret
 }
 
 // Interface File
@@ -1709,6 +1893,62 @@ func (file File) UnmountMountableWithOperationFinish(result AsyncResult) (bool, 
 		return false, err.GoValue()
 	}
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// FileNewForCommandlineArg is a wrapper around g_file_new_for_commandline_arg().
+func FileNewForCommandlineArg(arg string) File {
+	arg0 := C.CString(arg)
+	ret0 := C.g_file_new_for_commandline_arg(arg0)
+	C.free(unsafe.Pointer(arg0)) /*ch:<stdlib.h>*/
+	return wrapFile(ret0)
+}
+
+// FileNewForCommandlineArgAndCwd is a wrapper around g_file_new_for_commandline_arg_and_cwd().
+func FileNewForCommandlineArgAndCwd(arg string, cwd string) File {
+	arg0 := (*C.gchar)(C.CString(arg))
+	cwd0 := (*C.gchar)(C.CString(cwd))
+	ret0 := C.g_file_new_for_commandline_arg_and_cwd(arg0, cwd0)
+	C.free(unsafe.Pointer(arg0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(cwd0)) /*ch:<stdlib.h>*/
+	return wrapFile(ret0)
+}
+
+// FileNewForPath is a wrapper around g_file_new_for_path().
+func FileNewForPath(path string) File {
+	path0 := C.CString(path)
+	ret0 := C.g_file_new_for_path(path0)
+	C.free(unsafe.Pointer(path0)) /*ch:<stdlib.h>*/
+	return wrapFile(ret0)
+}
+
+// FileNewForUri is a wrapper around g_file_new_for_uri().
+func FileNewForUri(uri string) File {
+	uri0 := C.CString(uri)
+	ret0 := C.g_file_new_for_uri(uri0)
+	C.free(unsafe.Pointer(uri0)) /*ch:<stdlib.h>*/
+	return wrapFile(ret0)
+}
+
+// FileNewTmp is a wrapper around g_file_new_tmp().
+func FileNewTmp(tmpl string) (File, FileIOStream, error) {
+	tmpl0 := C.CString(tmpl)
+	var iostream0 *C.GFileIOStream
+	var err glib.Error
+	ret0 := C.g_file_new_tmp(tmpl0, &iostream0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(tmpl0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return File{}, FileIOStream{}, err.GoValue()
+	}
+	return wrapFile(ret0), wrapFileIOStream(iostream0), nil
+}
+
+// FileParseName is a wrapper around g_file_parse_name().
+func FileParseName(parse_name string) File {
+	parse_name0 := C.CString(parse_name)
+	ret0 := C.g_file_parse_name(parse_name0)
+	C.free(unsafe.Pointer(parse_name0)) /*ch:<stdlib.h>*/
+	return wrapFile(ret0)
 }
 
 // Object Cancellable
@@ -2584,6 +2824,11 @@ func (application Application) Activate() {
 	C.g_application_activate(application.native())
 }
 
+// AddOptionGroup is a wrapper around g_application_add_option_group().
+func (application Application) AddOptionGroup(group glib.OptionGroup) {
+	C.g_application_add_option_group(application.native(), (*C.GOptionGroup)(group.Ptr))
+}
+
 // BindBusyProperty is a wrapper around g_application_bind_busy_property().
 func (application Application) BindBusyProperty(object gobject.Object, property string) {
 	property0 := (*C.gchar)(C.CString(property))
@@ -2596,6 +2841,12 @@ func (application Application) GetApplicationId() string {
 	ret0 := C.g_application_get_application_id(application.native())
 	ret := C.GoString((*C.char)(ret0))
 	return ret
+}
+
+// GetDbusConnection is a wrapper around g_application_get_dbus_connection().
+func (application Application) GetDbusConnection() DBusConnection {
+	ret0 := C.g_application_get_dbus_connection(application.native())
+	return wrapDBusConnection(ret0)
 }
 
 // GetDbusObjectPath is a wrapper around g_application_get_dbus_object_path().
@@ -2704,6 +2955,13 @@ func (application Application) Run(argv []string) int {
 		C.free(unsafe.Pointer(elem)) /*ch:<stdlib.h>*/
 	}
 	return int(ret0)
+}
+
+// SendNotification is a wrapper around g_application_send_notification().
+func (application Application) SendNotification(id string, notification Notification) {
+	id0 := (*C.gchar)(C.CString(id))
+	C.g_application_send_notification(application.native(), id0, notification.native())
+	C.free(unsafe.Pointer(id0)) /*ch:<stdlib.h>*/
 }
 
 // SetApplicationId is a wrapper around g_application_set_application_id().
@@ -3080,6 +3338,31 @@ func (icon Icon) ToString() string {
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
 	return ret
+}
+
+// IconDeserialize is a wrapper around g_icon_deserialize().
+func IconDeserialize(value glib.Variant) Icon {
+	ret0 := C.g_icon_deserialize((*C.GVariant)(value.Ptr))
+	return wrapIcon(ret0)
+}
+
+// IconHash is a wrapper around g_icon_hash().
+func IconHash(icon unsafe.Pointer) uint {
+	ret0 := C.g_icon_hash(C.gconstpointer(icon))
+	return uint(ret0)
+}
+
+// IconNewForString is a wrapper around g_icon_new_for_string().
+func IconNewForString(str string) (Icon, error) {
+	str0 := (*C.gchar)(C.CString(str))
+	var err glib.Error
+	ret0 := C.g_icon_new_for_string(str0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(str0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return Icon{}, err.GoValue()
+	}
+	return wrapIcon(ret0), nil
 }
 
 // Interface AsyncResult
@@ -4275,6 +4558,92 @@ func (matcher FileAttributeMatcher) ToString() string {
 // Unref is a wrapper around g_file_attribute_matcher_unref().
 func (matcher FileAttributeMatcher) Unref() {
 	C.g_file_attribute_matcher_unref(matcher.native())
+}
+
+// Object DBusConnection
+type DBusConnection struct {
+	gobject.Object
+}
+
+func (v DBusConnection) native() *C.GDBusConnection {
+	return (*C.GDBusConnection)(v.Ptr)
+}
+func wrapDBusConnection(p *C.GDBusConnection) (v DBusConnection) {
+	v.Ptr = unsafe.Pointer(p)
+	return
+}
+func WrapDBusConnection(p unsafe.Pointer) (v DBusConnection) {
+	v.Ptr = p
+	return
+}
+func (v DBusConnection) AsyncInitable() AsyncInitable {
+	return WrapAsyncInitable(v.Ptr)
+}
+func (v DBusConnection) Initable() Initable {
+	return WrapInitable(v.Ptr)
+}
+
+// Interface AsyncInitable
+type AsyncInitable struct {
+	Ptr unsafe.Pointer
+}
+
+func (v AsyncInitable) native() *C.GAsyncInitable {
+	return (*C.GAsyncInitable)(v.Ptr)
+}
+func wrapAsyncInitable(p *C.GAsyncInitable) AsyncInitable {
+	return AsyncInitable{unsafe.Pointer(p)}
+}
+func WrapAsyncInitable(p unsafe.Pointer) AsyncInitable {
+	return AsyncInitable{p}
+}
+
+// InitFinish is a wrapper around g_async_initable_init_finish().
+func (initable AsyncInitable) InitFinish(res AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_async_initable_init_finish(initable.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// NewFinish is a wrapper around g_async_initable_new_finish().
+func (initable AsyncInitable) NewFinish(res AsyncResult) (gobject.Object, error) {
+	var err glib.Error
+	ret0 := C.g_async_initable_new_finish(initable.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return gobject.Object{}, err.GoValue()
+	}
+	return gobject.WrapObject(unsafe.Pointer(ret0)) /*gir:GObject*/, nil
+}
+
+// Interface Initable
+type Initable struct {
+	Ptr unsafe.Pointer
+}
+
+func (v Initable) native() *C.GInitable {
+	return (*C.GInitable)(v.Ptr)
+}
+func wrapInitable(p *C.GInitable) Initable {
+	return Initable{unsafe.Pointer(p)}
+}
+func WrapInitable(p unsafe.Pointer) Initable {
+	return Initable{p}
+}
+
+// Init is a wrapper around g_initable_init().
+func (initable Initable) Init(cancellable Cancellable) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_initable_init(initable.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
 }
 
 type BusType int
