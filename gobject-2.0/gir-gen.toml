@@ -1,41 +1,45 @@
+funcs = []
 namespace = "GObject"
 version = "2.0"
 
 [[types]]
-name = "Value"
-funcs = [
-	'g_value_set_boolean',
-	'g_value_set_schar',
-	'g_value_set_int64',
-	'g_value_set_int',
-	'g_value_set_uchar',
-	'g_value_set_uint64',
-	'g_value_set_uint',
-	'g_value_set_float',
-	'g_value_set_double',
-	'g_value_set_string',
-	'g_value_set_instance',
-	'g_value_set_pointer',
-	'g_value_get_pointer',
-	'g_value_get_string',
-	'g_value_unset',
-]
+  err_funcs = []
+  funcs = ["g_value_set_boolean","g_value_set_schar","g_value_set_int64","g_value_set_int","g_value_set_uchar","g_value_set_uint64","g_value_set_uint","g_value_set_float","g_value_set_double","g_value_set_string","g_value_set_instance","g_value_set_pointer","g_value_get_pointer","g_value_get_string","g_value_unset"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Value"
 
 [[types]]
-name = "Object"
-funcs = [
-    'g_object_ref',
-    'g_object_unref',
-    'g_object_ref_sink',
-    'g_object_is_floating',
-    'g_object_force_floating',
-]
+  err_funcs = ["g_object_add_toggle_ref","g_object_add_weak_pointer","g_object_bind_property_full","g_object_connect","g_object_disconnect","g_object_dup_data","g_object_dup_qdata","g_object_get","g_object_remove_toggle_ref","g_object_remove_weak_pointer","g_object_replace_data","g_object_replace_qdata","g_object_set_data_full","g_object_set_qdata_full","g_object_weak_ref","g_object_weak_unref"]
+  funcs = ["g_object_ref","g_object_unref","g_object_ref_sink","g_object_is_floating","g_object_force_floating","g_object_bind_property","g_object_bind_property_with_closures","g_object_freeze_notify","g_object_get_data","g_object_get_property","g_object_get_qdata","g_object_notify","g_object_notify_by_pspec","g_object_run_dispose","g_object_set_data","g_object_set_property","g_object_set_qdata","g_object_steal_data","g_object_steal_qdata","g_object_thaw_notify","g_object_watch_closure","g_object_interface_find_property","g_object_interface_install_property","g_object_interface_list_properties"]
+  ignore_funcs = ["g_object_new","g_object_new_valist","g_object_newv","g_object_get_valist","g_object_set","g_object_set_valist","g_object_compat_control"]
+  manual_funcs = []
+  name = "Object"
 
 [[types]]
-name = "Closure"
-funcs = [
-    'g_closure_ref',
-    'g_closure_sink',
-    'g_closure_unref',
-    'g_closure_invalidate',
-]
+  err_funcs = []
+  funcs = ["g_closure_ref","g_closure_sink","g_closure_unref","g_closure_invalidate"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Closure"
+
+[[types]]
+  err_funcs = []
+  funcs = ["g_binding_get_flags","g_binding_get_source","g_binding_get_source_property","g_binding_get_target","g_binding_get_target_property","g_binding_unbind"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Binding"
+
+[[types]]
+  err_funcs = ["g_param_spec_set_qdata_full"]
+  funcs = ["g_param_spec_get_blurb","g_param_spec_get_default_value","g_param_spec_get_name","g_param_spec_get_name_quark","g_param_spec_get_nick","g_param_spec_get_qdata","g_param_spec_get_redirect_target","g_param_spec_ref","g_param_spec_ref_sink","g_param_spec_set_qdata","g_param_spec_sink","g_param_spec_steal_qdata","g_param_spec_unref"]
+  ignore_funcs = []
+  manual_funcs = ["g_param_spec_internal"]
+  name = "ParamSpec"
+
+[[types]]
+  err_funcs = []
+  funcs = ["g_type_interface_peek_parent"]
+  ignore_funcs = []
+  manual_funcs = ["g_type_interface_add_prerequisite","g_type_interface_get_plugin","g_type_interface_peek","g_type_interface_prerequisites"]
+  name = "TypeInterface"
