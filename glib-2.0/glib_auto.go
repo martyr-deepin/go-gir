@@ -1977,6 +1977,363 @@ func KeyFileErrorQuark() Quark {
 	return Quark(ret0)
 }
 
+// Struct TimeZone
+type TimeZone struct {
+	Ptr unsafe.Pointer
+}
+
+func (v TimeZone) native() *C.GTimeZone {
+	return (*C.GTimeZone)(v.Ptr)
+}
+func wrapTimeZone(p *C.GTimeZone) TimeZone {
+	return TimeZone{unsafe.Pointer(p)}
+}
+func WrapTimeZone(p unsafe.Pointer) TimeZone {
+	return TimeZone{p}
+}
+
+// TimeZoneNew is a wrapper around g_time_zone_new().
+func TimeZoneNew(identifier string) TimeZone {
+	identifier0 := (*C.gchar)(C.CString(identifier))
+	ret0 := C.g_time_zone_new(identifier0)
+	C.free(unsafe.Pointer(identifier0)) /*ch:<stdlib.h>*/
+	return wrapTimeZone(ret0)
+}
+
+// TimeZoneNewLocal is a wrapper around g_time_zone_new_local().
+func TimeZoneNewLocal() TimeZone {
+	ret0 := C.g_time_zone_new_local()
+	return wrapTimeZone(ret0)
+}
+
+// TimeZoneNewUtc is a wrapper around g_time_zone_new_utc().
+func TimeZoneNewUtc() TimeZone {
+	ret0 := C.g_time_zone_new_utc()
+	return wrapTimeZone(ret0)
+}
+
+// FindInterval is a wrapper around g_time_zone_find_interval().
+func (tz TimeZone) FindInterval(type_ TimeType, time_ int64) int {
+	ret0 := C.g_time_zone_find_interval(tz.native(), C.GTimeType(type_), C.gint64(time_))
+	return int(ret0)
+}
+
+// GetAbbreviation is a wrapper around g_time_zone_get_abbreviation().
+func (tz TimeZone) GetAbbreviation(interval int) string {
+	ret0 := C.g_time_zone_get_abbreviation(tz.native(), C.gint(interval))
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// GetOffset is a wrapper around g_time_zone_get_offset().
+func (tz TimeZone) GetOffset(interval int) int32 {
+	ret0 := C.g_time_zone_get_offset(tz.native(), C.gint(interval))
+	return int32(ret0)
+}
+
+// IsDst is a wrapper around g_time_zone_is_dst().
+func (tz TimeZone) IsDst(interval int) bool {
+	ret0 := C.g_time_zone_is_dst(tz.native(), C.gint(interval))
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// Ref is a wrapper around g_time_zone_ref().
+func (tz TimeZone) Ref() TimeZone {
+	ret0 := C.g_time_zone_ref(tz.native())
+	return wrapTimeZone(ret0)
+}
+
+// Unref is a wrapper around g_time_zone_unref().
+func (tz TimeZone) Unref() {
+	C.g_time_zone_unref(tz.native())
+}
+
+// Struct DateTime
+type DateTime struct {
+	Ptr unsafe.Pointer
+}
+
+func (v DateTime) native() *C.GDateTime {
+	return (*C.GDateTime)(v.Ptr)
+}
+func wrapDateTime(p *C.GDateTime) DateTime {
+	return DateTime{unsafe.Pointer(p)}
+}
+func WrapDateTime(p unsafe.Pointer) DateTime {
+	return DateTime{p}
+}
+
+// DateTimeNew is a wrapper around g_date_time_new().
+func DateTimeNew(tz TimeZone, year int, month int, day int, hour int, minute int, seconds float64) DateTime {
+	ret0 := C.g_date_time_new(tz.native(), C.gint(year), C.gint(month), C.gint(day), C.gint(hour), C.gint(minute), C.gdouble(seconds))
+	return wrapDateTime(ret0)
+}
+
+// DateTimeNewFromTimevalLocal is a wrapper around g_date_time_new_from_timeval_local().
+func DateTimeNewFromTimevalLocal(tv TimeVal) DateTime {
+	ret0 := C.g_date_time_new_from_timeval_local(tv.native())
+	return wrapDateTime(ret0)
+}
+
+// DateTimeNewFromTimevalUtc is a wrapper around g_date_time_new_from_timeval_utc().
+func DateTimeNewFromTimevalUtc(tv TimeVal) DateTime {
+	ret0 := C.g_date_time_new_from_timeval_utc(tv.native())
+	return wrapDateTime(ret0)
+}
+
+// DateTimeNewFromUnixLocal is a wrapper around g_date_time_new_from_unix_local().
+func DateTimeNewFromUnixLocal(t int64) DateTime {
+	ret0 := C.g_date_time_new_from_unix_local(C.gint64(t))
+	return wrapDateTime(ret0)
+}
+
+// DateTimeNewFromUnixUtc is a wrapper around g_date_time_new_from_unix_utc().
+func DateTimeNewFromUnixUtc(t int64) DateTime {
+	ret0 := C.g_date_time_new_from_unix_utc(C.gint64(t))
+	return wrapDateTime(ret0)
+}
+
+// DateTimeNewLocal is a wrapper around g_date_time_new_local().
+func DateTimeNewLocal(year int, month int, day int, hour int, minute int, seconds float64) DateTime {
+	ret0 := C.g_date_time_new_local(C.gint(year), C.gint(month), C.gint(day), C.gint(hour), C.gint(minute), C.gdouble(seconds))
+	return wrapDateTime(ret0)
+}
+
+// DateTimeNewNow is a wrapper around g_date_time_new_now().
+func DateTimeNewNow(tz TimeZone) DateTime {
+	ret0 := C.g_date_time_new_now(tz.native())
+	return wrapDateTime(ret0)
+}
+
+// DateTimeNewNowLocal is a wrapper around g_date_time_new_now_local().
+func DateTimeNewNowLocal() DateTime {
+	ret0 := C.g_date_time_new_now_local()
+	return wrapDateTime(ret0)
+}
+
+// DateTimeNewNowUtc is a wrapper around g_date_time_new_now_utc().
+func DateTimeNewNowUtc() DateTime {
+	ret0 := C.g_date_time_new_now_utc()
+	return wrapDateTime(ret0)
+}
+
+// DateTimeNewUtc is a wrapper around g_date_time_new_utc().
+func DateTimeNewUtc(year int, month int, day int, hour int, minute int, seconds float64) DateTime {
+	ret0 := C.g_date_time_new_utc(C.gint(year), C.gint(month), C.gint(day), C.gint(hour), C.gint(minute), C.gdouble(seconds))
+	return wrapDateTime(ret0)
+}
+
+// AddDays is a wrapper around g_date_time_add_days().
+func (datetime DateTime) AddDays(days int) DateTime {
+	ret0 := C.g_date_time_add_days(datetime.native(), C.gint(days))
+	return wrapDateTime(ret0)
+}
+
+// AddFull is a wrapper around g_date_time_add_full().
+func (datetime DateTime) AddFull(years int, months int, days int, hours int, minutes int, seconds float64) DateTime {
+	ret0 := C.g_date_time_add_full(datetime.native(), C.gint(years), C.gint(months), C.gint(days), C.gint(hours), C.gint(minutes), C.gdouble(seconds))
+	return wrapDateTime(ret0)
+}
+
+// AddHours is a wrapper around g_date_time_add_hours().
+func (datetime DateTime) AddHours(hours int) DateTime {
+	ret0 := C.g_date_time_add_hours(datetime.native(), C.gint(hours))
+	return wrapDateTime(ret0)
+}
+
+// AddMinutes is a wrapper around g_date_time_add_minutes().
+func (datetime DateTime) AddMinutes(minutes int) DateTime {
+	ret0 := C.g_date_time_add_minutes(datetime.native(), C.gint(minutes))
+	return wrapDateTime(ret0)
+}
+
+// AddMonths is a wrapper around g_date_time_add_months().
+func (datetime DateTime) AddMonths(months int) DateTime {
+	ret0 := C.g_date_time_add_months(datetime.native(), C.gint(months))
+	return wrapDateTime(ret0)
+}
+
+// AddSeconds is a wrapper around g_date_time_add_seconds().
+func (datetime DateTime) AddSeconds(seconds float64) DateTime {
+	ret0 := C.g_date_time_add_seconds(datetime.native(), C.gdouble(seconds))
+	return wrapDateTime(ret0)
+}
+
+// AddWeeks is a wrapper around g_date_time_add_weeks().
+func (datetime DateTime) AddWeeks(weeks int) DateTime {
+	ret0 := C.g_date_time_add_weeks(datetime.native(), C.gint(weeks))
+	return wrapDateTime(ret0)
+}
+
+// AddYears is a wrapper around g_date_time_add_years().
+func (datetime DateTime) AddYears(years int) DateTime {
+	ret0 := C.g_date_time_add_years(datetime.native(), C.gint(years))
+	return wrapDateTime(ret0)
+}
+
+// Format is a wrapper around g_date_time_format().
+func (datetime DateTime) Format(format string) string {
+	format0 := (*C.gchar)(C.CString(format))
+	ret0 := C.g_date_time_format(datetime.native(), format0)
+	C.free(unsafe.Pointer(format0)) /*ch:<stdlib.h>*/
+	ret := C.GoString((*C.char)(ret0))
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// GetDayOfMonth is a wrapper around g_date_time_get_day_of_month().
+func (datetime DateTime) GetDayOfMonth() int {
+	ret0 := C.g_date_time_get_day_of_month(datetime.native())
+	return int(ret0)
+}
+
+// GetDayOfWeek is a wrapper around g_date_time_get_day_of_week().
+func (datetime DateTime) GetDayOfWeek() int {
+	ret0 := C.g_date_time_get_day_of_week(datetime.native())
+	return int(ret0)
+}
+
+// GetDayOfYear is a wrapper around g_date_time_get_day_of_year().
+func (datetime DateTime) GetDayOfYear() int {
+	ret0 := C.g_date_time_get_day_of_year(datetime.native())
+	return int(ret0)
+}
+
+// GetHour is a wrapper around g_date_time_get_hour().
+func (datetime DateTime) GetHour() int {
+	ret0 := C.g_date_time_get_hour(datetime.native())
+	return int(ret0)
+}
+
+// GetMicrosecond is a wrapper around g_date_time_get_microsecond().
+func (datetime DateTime) GetMicrosecond() int {
+	ret0 := C.g_date_time_get_microsecond(datetime.native())
+	return int(ret0)
+}
+
+// GetMinute is a wrapper around g_date_time_get_minute().
+func (datetime DateTime) GetMinute() int {
+	ret0 := C.g_date_time_get_minute(datetime.native())
+	return int(ret0)
+}
+
+// GetMonth is a wrapper around g_date_time_get_month().
+func (datetime DateTime) GetMonth() int {
+	ret0 := C.g_date_time_get_month(datetime.native())
+	return int(ret0)
+}
+
+// GetSecond is a wrapper around g_date_time_get_second().
+func (datetime DateTime) GetSecond() int {
+	ret0 := C.g_date_time_get_second(datetime.native())
+	return int(ret0)
+}
+
+// GetSeconds is a wrapper around g_date_time_get_seconds().
+func (datetime DateTime) GetSeconds() float64 {
+	ret0 := C.g_date_time_get_seconds(datetime.native())
+	return float64(ret0)
+}
+
+// GetTimezoneAbbreviation is a wrapper around g_date_time_get_timezone_abbreviation().
+func (datetime DateTime) GetTimezoneAbbreviation() string {
+	ret0 := C.g_date_time_get_timezone_abbreviation(datetime.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// GetWeekNumberingYear is a wrapper around g_date_time_get_week_numbering_year().
+func (datetime DateTime) GetWeekNumberingYear() int {
+	ret0 := C.g_date_time_get_week_numbering_year(datetime.native())
+	return int(ret0)
+}
+
+// GetWeekOfYear is a wrapper around g_date_time_get_week_of_year().
+func (datetime DateTime) GetWeekOfYear() int {
+	ret0 := C.g_date_time_get_week_of_year(datetime.native())
+	return int(ret0)
+}
+
+// GetYear is a wrapper around g_date_time_get_year().
+func (datetime DateTime) GetYear() int {
+	ret0 := C.g_date_time_get_year(datetime.native())
+	return int(ret0)
+}
+
+// GetYmd is a wrapper around g_date_time_get_ymd().
+func (datetime DateTime) GetYmd() (int, int, int) {
+	var year0 C.gint
+	var month0 C.gint
+	var day0 C.gint
+	C.g_date_time_get_ymd(datetime.native(), &year0, &month0, &day0)
+	return int(year0), int(month0), int(day0)
+}
+
+// IsDaylightSavings is a wrapper around g_date_time_is_daylight_savings().
+func (datetime DateTime) IsDaylightSavings() bool {
+	ret0 := C.g_date_time_is_daylight_savings(datetime.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// Ref is a wrapper around g_date_time_ref().
+func (datetime DateTime) Ref() DateTime {
+	ret0 := C.g_date_time_ref(datetime.native())
+	return wrapDateTime(ret0)
+}
+
+// ToLocal is a wrapper around g_date_time_to_local().
+func (datetime DateTime) ToLocal() DateTime {
+	ret0 := C.g_date_time_to_local(datetime.native())
+	return wrapDateTime(ret0)
+}
+
+// ToTimeval is a wrapper around g_date_time_to_timeval().
+func (datetime DateTime) ToTimeval(tv TimeVal) bool {
+	ret0 := C.g_date_time_to_timeval(datetime.native(), tv.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// ToTimezone is a wrapper around g_date_time_to_timezone().
+func (datetime DateTime) ToTimezone(tz TimeZone) DateTime {
+	ret0 := C.g_date_time_to_timezone(datetime.native(), tz.native())
+	return wrapDateTime(ret0)
+}
+
+// ToUnix is a wrapper around g_date_time_to_unix().
+func (datetime DateTime) ToUnix() int64 {
+	ret0 := C.g_date_time_to_unix(datetime.native())
+	return int64(ret0)
+}
+
+// ToUtc is a wrapper around g_date_time_to_utc().
+func (datetime DateTime) ToUtc() DateTime {
+	ret0 := C.g_date_time_to_utc(datetime.native())
+	return wrapDateTime(ret0)
+}
+
+// Unref is a wrapper around g_date_time_unref().
+func (datetime DateTime) Unref() {
+	C.g_date_time_unref(datetime.native())
+}
+
+// DateTimeCompare is a wrapper around g_date_time_compare().
+func DateTimeCompare(dt1 unsafe.Pointer, dt2 unsafe.Pointer) int {
+	ret0 := C.g_date_time_compare(C.gconstpointer(dt1), C.gconstpointer(dt2))
+	return int(ret0)
+}
+
+// DateTimeEqual is a wrapper around g_date_time_equal().
+func DateTimeEqual(dt1 unsafe.Pointer, dt2 unsafe.Pointer) bool {
+	ret0 := C.g_date_time_equal(C.gconstpointer(dt1), C.gconstpointer(dt2))
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// DateTimeHash is a wrapper around g_date_time_hash().
+func DateTimeHash(datetime unsafe.Pointer) uint {
+	ret0 := C.g_date_time_hash(C.gconstpointer(datetime))
+	return uint(ret0)
+}
+
 // IdleSourceNew is a wrapper around g_idle_source_new().
 func IdleSourceNew() Source {
 	ret0 := C.g_idle_source_new()

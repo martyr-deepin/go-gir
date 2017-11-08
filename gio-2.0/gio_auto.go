@@ -806,6 +806,79 @@ func WrapSettingsSchema(p unsafe.Pointer) SettingsSchema {
 	return SettingsSchema{p}
 }
 
+// GetId is a wrapper around g_settings_schema_get_id().
+func (schema SettingsSchema) GetId() string {
+	ret0 := C.g_settings_schema_get_id(schema.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// GetKey is a wrapper around g_settings_schema_get_key().
+func (schema SettingsSchema) GetKey(name string) SettingsSchemaKey {
+	name0 := (*C.gchar)(C.CString(name))
+	ret0 := C.g_settings_schema_get_key(schema.native(), name0)
+	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	return wrapSettingsSchemaKey(ret0)
+}
+
+// GetPath is a wrapper around g_settings_schema_get_path().
+func (schema SettingsSchema) GetPath() string {
+	ret0 := C.g_settings_schema_get_path(schema.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// HasKey is a wrapper around g_settings_schema_has_key().
+func (schema SettingsSchema) HasKey(name string) bool {
+	name0 := (*C.gchar)(C.CString(name))
+	ret0 := C.g_settings_schema_has_key(schema.native(), name0)
+	C.free(unsafe.Pointer(name0))   /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// ListChildren is a wrapper around g_settings_schema_list_children().
+func (schema SettingsSchema) ListChildren() []string {
+	ret0 := C.g_settings_schema_list_children(schema.native())
+	var ret0Slice []*C.gchar
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString((*C.char)(elem))
+		ret[idx] = elemG
+		C.g_free(C.gpointer(elem))
+	}
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// ListKeys is a wrapper around g_settings_schema_list_keys().
+func (schema SettingsSchema) ListKeys() []string {
+	ret0 := C.g_settings_schema_list_keys(schema.native())
+	var ret0Slice []*C.gchar
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString((*C.char)(elem))
+		ret[idx] = elemG
+		C.g_free(C.gpointer(elem))
+	}
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// Ref is a wrapper around g_settings_schema_ref().
+func (schema SettingsSchema) Ref() SettingsSchema {
+	ret0 := C.g_settings_schema_ref(schema.native())
+	return wrapSettingsSchema(ret0)
+}
+
+// Unref is a wrapper around g_settings_schema_unref().
+func (schema SettingsSchema) Unref() {
+	C.g_settings_schema_unref(schema.native())
+}
+
 // Struct SettingsBackend
 type SettingsBackend struct {
 	Ptr unsafe.Pointer
@@ -834,6 +907,53 @@ func wrapAction(p *C.GAction) Action {
 }
 func WrapAction(p unsafe.Pointer) Action {
 	return Action{p}
+}
+
+// Activate is a wrapper around g_action_activate().
+func (action Action) Activate(parameter glib.Variant) {
+	C.g_action_activate(action.native(), (*C.GVariant)(parameter.Ptr))
+}
+
+// ChangeState is a wrapper around g_action_change_state().
+func (action Action) ChangeState(value glib.Variant) {
+	C.g_action_change_state(action.native(), (*C.GVariant)(value.Ptr))
+}
+
+// GetEnabled is a wrapper around g_action_get_enabled().
+func (action Action) GetEnabled() bool {
+	ret0 := C.g_action_get_enabled(action.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// GetName is a wrapper around g_action_get_name().
+func (action Action) GetName() string {
+	ret0 := C.g_action_get_name(action.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// GetParameterType is a wrapper around g_action_get_parameter_type().
+func (action Action) GetParameterType() glib.VariantType {
+	ret0 := C.g_action_get_parameter_type(action.native())
+	return glib.WrapVariantType(unsafe.Pointer(ret0)) /*gir:GLib*/
+}
+
+// GetState is a wrapper around g_action_get_state().
+func (action Action) GetState() glib.Variant {
+	ret0 := C.g_action_get_state(action.native())
+	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/
+}
+
+// GetStateHint is a wrapper around g_action_get_state_hint().
+func (action Action) GetStateHint() glib.Variant {
+	ret0 := C.g_action_get_state_hint(action.native())
+	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/
+}
+
+// GetStateType is a wrapper around g_action_get_state_type().
+func (action Action) GetStateType() glib.VariantType {
+	ret0 := C.g_action_get_state_type(action.native())
+	return glib.WrapVariantType(unsafe.Pointer(ret0)) /*gir:GLib*/
 }
 
 // Interface File
@@ -1608,6 +1728,83 @@ func WrapCancellable(p unsafe.Pointer) (v Cancellable) {
 	return
 }
 
+// CancellableNew is a wrapper around g_cancellable_new().
+func CancellableNew() Cancellable {
+	ret0 := C.g_cancellable_new()
+	return wrapCancellable(ret0)
+}
+
+// Cancel is a wrapper around g_cancellable_cancel().
+func (cancellable Cancellable) Cancel() {
+	C.g_cancellable_cancel(cancellable.native())
+}
+
+// Disconnect is a wrapper around g_cancellable_disconnect().
+func (cancellable Cancellable) Disconnect(handler_id uint) {
+	C.g_cancellable_disconnect(cancellable.native(), C.gulong(handler_id))
+}
+
+// GetFd is a wrapper around g_cancellable_get_fd().
+func (cancellable Cancellable) GetFd() int {
+	ret0 := C.g_cancellable_get_fd(cancellable.native())
+	return int(ret0)
+}
+
+// IsCancelled is a wrapper around g_cancellable_is_cancelled().
+func (cancellable Cancellable) IsCancelled() bool {
+	ret0 := C.g_cancellable_is_cancelled(cancellable.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// MakePollfd is a wrapper around g_cancellable_make_pollfd().
+func (cancellable Cancellable) MakePollfd(pollfd glib.PollFD) bool {
+	ret0 := C.g_cancellable_make_pollfd(cancellable.native(), (*C.GPollFD)(pollfd.Ptr))
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// PopCurrent is a wrapper around g_cancellable_pop_current().
+func (cancellable Cancellable) PopCurrent() {
+	C.g_cancellable_pop_current(cancellable.native())
+}
+
+// PushCurrent is a wrapper around g_cancellable_push_current().
+func (cancellable Cancellable) PushCurrent() {
+	C.g_cancellable_push_current(cancellable.native())
+}
+
+// ReleaseFd is a wrapper around g_cancellable_release_fd().
+func (cancellable Cancellable) ReleaseFd() {
+	C.g_cancellable_release_fd(cancellable.native())
+}
+
+// Reset is a wrapper around g_cancellable_reset().
+func (cancellable Cancellable) Reset() {
+	C.g_cancellable_reset(cancellable.native())
+}
+
+// SetErrorIfCancelled is a wrapper around g_cancellable_set_error_if_cancelled().
+func (cancellable Cancellable) SetErrorIfCancelled() (bool, error) {
+	var err glib.Error
+	ret0 := C.g_cancellable_set_error_if_cancelled(cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// SourceNew is a wrapper around g_cancellable_source_new().
+func (cancellable Cancellable) SourceNew() glib.Source {
+	ret0 := C.g_cancellable_source_new(cancellable.native())
+	return glib.WrapSource(unsafe.Pointer(ret0)) /*gir:GLib*/
+}
+
+// CancellableGetCurrent is a wrapper around g_cancellable_get_current().
+func CancellableGetCurrent() Cancellable {
+	ret0 := C.g_cancellable_get_current()
+	return wrapCancellable(ret0)
+}
+
 // Object OutputStream
 type OutputStream struct {
 	gobject.Object
@@ -1623,6 +1820,151 @@ func wrapOutputStream(p *C.GOutputStream) (v OutputStream) {
 func WrapOutputStream(p unsafe.Pointer) (v OutputStream) {
 	v.Ptr = p
 	return
+}
+
+// ClearPending is a wrapper around g_output_stream_clear_pending().
+func (stream OutputStream) ClearPending() {
+	C.g_output_stream_clear_pending(stream.native())
+}
+
+// Close is a wrapper around g_output_stream_close().
+func (stream OutputStream) Close(cancellable Cancellable) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_output_stream_close(stream.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// CloseFinish is a wrapper around g_output_stream_close_finish().
+func (stream OutputStream) CloseFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_output_stream_close_finish(stream.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// Flush is a wrapper around g_output_stream_flush().
+func (stream OutputStream) Flush(cancellable Cancellable) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_output_stream_flush(stream.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// FlushFinish is a wrapper around g_output_stream_flush_finish().
+func (stream OutputStream) FlushFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_output_stream_flush_finish(stream.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// HasPending is a wrapper around g_output_stream_has_pending().
+func (stream OutputStream) HasPending() bool {
+	ret0 := C.g_output_stream_has_pending(stream.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// IsClosed is a wrapper around g_output_stream_is_closed().
+func (stream OutputStream) IsClosed() bool {
+	ret0 := C.g_output_stream_is_closed(stream.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// IsClosing is a wrapper around g_output_stream_is_closing().
+func (stream OutputStream) IsClosing() bool {
+	ret0 := C.g_output_stream_is_closing(stream.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// SetPending is a wrapper around g_output_stream_set_pending().
+func (stream OutputStream) SetPending() (bool, error) {
+	var err glib.Error
+	ret0 := C.g_output_stream_set_pending(stream.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// Splice is a wrapper around g_output_stream_splice().
+func (stream OutputStream) Splice(source InputStream, flags OutputStreamSpliceFlags, cancellable Cancellable) (int, error) {
+	var err glib.Error
+	ret0 := C.g_output_stream_splice(stream.native(), source.native(), C.GOutputStreamSpliceFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return 0, err.GoValue()
+	}
+	return int(ret0), nil
+}
+
+// SpliceFinish is a wrapper around g_output_stream_splice_finish().
+func (stream OutputStream) SpliceFinish(result AsyncResult) (int, error) {
+	var err glib.Error
+	ret0 := C.g_output_stream_splice_finish(stream.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return 0, err.GoValue()
+	}
+	return int(ret0), nil
+}
+
+// WriteAllFinish is a wrapper around g_output_stream_write_all_finish().
+func (stream OutputStream) WriteAllFinish(result AsyncResult) (bool, uint, error) {
+	var bytes_written0 C.gsize
+	var err glib.Error
+	ret0 := C.g_output_stream_write_all_finish(stream.native(), result.native(), &bytes_written0, (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, 0, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, uint(bytes_written0), nil
+}
+
+// WriteBytes is a wrapper around g_output_stream_write_bytes().
+func (stream OutputStream) WriteBytes(bytes glib.Bytes, cancellable Cancellable) (int, error) {
+	var err glib.Error
+	ret0 := C.g_output_stream_write_bytes(stream.native(), (*C.GBytes)(bytes.Ptr), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return 0, err.GoValue()
+	}
+	return int(ret0), nil
+}
+
+// WriteBytesFinish is a wrapper around g_output_stream_write_bytes_finish().
+func (stream OutputStream) WriteBytesFinish(result AsyncResult) (int, error) {
+	var err glib.Error
+	ret0 := C.g_output_stream_write_bytes_finish(stream.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return 0, err.GoValue()
+	}
+	return int(ret0), nil
+}
+
+// WriteFinish is a wrapper around g_output_stream_write_finish().
+func (stream OutputStream) WriteFinish(result AsyncResult) (int, error) {
+	var err glib.Error
+	ret0 := C.g_output_stream_write_finish(stream.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return 0, err.GoValue()
+	}
+	return int(ret0), nil
 }
 
 // Object FileOutputStream
@@ -1645,12 +1987,31 @@ func (v FileOutputStream) Seekable() Seekable {
 	return WrapSeekable(v.Ptr)
 }
 
+// GetEtag is a wrapper around g_file_output_stream_get_etag().
+func (stream FileOutputStream) GetEtag() string {
+	ret0 := C.g_file_output_stream_get_etag(stream.native())
+	ret := C.GoString(ret0)
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
 // QueryInfo is a wrapper around g_file_output_stream_query_info().
 func (stream FileOutputStream) QueryInfo(attributes string, cancellable Cancellable) (FileInfo, error) {
 	attributes0 := C.CString(attributes)
 	var err glib.Error
 	ret0 := C.g_file_output_stream_query_info(stream.native(), attributes0, cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	C.free(unsafe.Pointer(attributes0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileInfo{}, err.GoValue()
+	}
+	return wrapFileInfo(ret0), nil
+}
+
+// QueryInfoFinish is a wrapper around g_file_output_stream_query_info_finish().
+func (stream FileOutputStream) QueryInfoFinish(result AsyncResult) (FileInfo, error) {
+	var err glib.Error
+	ret0 := C.g_file_output_stream_query_info_finish(stream.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
 		defer err.Free()
 		return FileInfo{}, err.GoValue()
@@ -1673,6 +2034,46 @@ func WrapSeekable(p unsafe.Pointer) Seekable {
 	return Seekable{p}
 }
 
+// CanSeek is a wrapper around g_seekable_can_seek().
+func (seekable Seekable) CanSeek() bool {
+	ret0 := C.g_seekable_can_seek(seekable.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// CanTruncate is a wrapper around g_seekable_can_truncate().
+func (seekable Seekable) CanTruncate() bool {
+	ret0 := C.g_seekable_can_truncate(seekable.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// Seek is a wrapper around g_seekable_seek().
+func (seekable Seekable) Seek(offset int64, type_ /*gir:GLib*/ glib.SeekType, cancellable Cancellable) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_seekable_seek(seekable.native(), C.goffset(offset), C.GSeekType(type_), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// Tell is a wrapper around g_seekable_tell().
+func (seekable Seekable) Tell() int64 {
+	ret0 := C.g_seekable_tell(seekable.native())
+	return int64(ret0)
+}
+
+// Truncate is a wrapper around g_seekable_truncate().
+func (seekable Seekable) Truncate(offset int64, cancellable Cancellable) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_seekable_truncate(seekable.native(), C.goffset(offset), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
 // Object FileInfo
 type FileInfo struct {
 	gobject.Object
@@ -1688,6 +2089,463 @@ func wrapFileInfo(p *C.GFileInfo) (v FileInfo) {
 func WrapFileInfo(p unsafe.Pointer) (v FileInfo) {
 	v.Ptr = p
 	return
+}
+
+// FileInfoNew is a wrapper around g_file_info_new().
+func FileInfoNew() FileInfo {
+	ret0 := C.g_file_info_new()
+	return wrapFileInfo(ret0)
+}
+
+// ClearStatus is a wrapper around g_file_info_clear_status().
+func (info FileInfo) ClearStatus() {
+	C.g_file_info_clear_status(info.native())
+}
+
+// CopyInto is a wrapper around g_file_info_copy_into().
+func (src_info FileInfo) CopyInto(dest_info FileInfo) {
+	C.g_file_info_copy_into(src_info.native(), dest_info.native())
+}
+
+// Dup is a wrapper around g_file_info_dup().
+func (other FileInfo) Dup() FileInfo {
+	ret0 := C.g_file_info_dup(other.native())
+	return wrapFileInfo(ret0)
+}
+
+// GetAttributeAsString is a wrapper around g_file_info_get_attribute_as_string().
+func (info FileInfo) GetAttributeAsString(attribute string) string {
+	attribute0 := C.CString(attribute)
+	ret0 := C.g_file_info_get_attribute_as_string(info.native(), attribute0)
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	ret := C.GoString(ret0)
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// GetAttributeBoolean is a wrapper around g_file_info_get_attribute_boolean().
+func (info FileInfo) GetAttributeBoolean(attribute string) bool {
+	attribute0 := C.CString(attribute)
+	ret0 := C.g_file_info_get_attribute_boolean(info.native(), attribute0)
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0))    /*go:.util*/
+}
+
+// GetAttributeByteString is a wrapper around g_file_info_get_attribute_byte_string().
+func (info FileInfo) GetAttributeByteString(attribute string) string {
+	attribute0 := C.CString(attribute)
+	ret0 := C.g_file_info_get_attribute_byte_string(info.native(), attribute0)
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// GetAttributeData is a wrapper around g_file_info_get_attribute_data().
+func (info FileInfo) GetAttributeData(attribute string) (bool, FileAttributeType, unsafe.Pointer, FileAttributeStatus) {
+	attribute0 := C.CString(attribute)
+	var type0 C.GFileAttributeType
+	var value_pp0 C.gpointer
+	var status0 C.GFileAttributeStatus
+	ret0 := C.g_file_info_get_attribute_data(info.native(), attribute0, &type0, &value_pp0, &status0)
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/, FileAttributeType(type0), unsafe.Pointer(value_pp0), FileAttributeStatus(status0)
+}
+
+// GetAttributeInt32 is a wrapper around g_file_info_get_attribute_int32().
+func (info FileInfo) GetAttributeInt32(attribute string) int32 {
+	attribute0 := C.CString(attribute)
+	ret0 := C.g_file_info_get_attribute_int32(info.native(), attribute0)
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	return int32(ret0)
+}
+
+// GetAttributeInt64 is a wrapper around g_file_info_get_attribute_int64().
+func (info FileInfo) GetAttributeInt64(attribute string) int64 {
+	attribute0 := C.CString(attribute)
+	ret0 := C.g_file_info_get_attribute_int64(info.native(), attribute0)
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	return int64(ret0)
+}
+
+// GetAttributeObject is a wrapper around g_file_info_get_attribute_object().
+func (info FileInfo) GetAttributeObject(attribute string) gobject.Object {
+	attribute0 := C.CString(attribute)
+	ret0 := C.g_file_info_get_attribute_object(info.native(), attribute0)
+	C.free(unsafe.Pointer(attribute0))              /*ch:<stdlib.h>*/
+	return gobject.WrapObject(unsafe.Pointer(ret0)) /*gir:GObject*/
+}
+
+// GetAttributeStatus is a wrapper around g_file_info_get_attribute_status().
+func (info FileInfo) GetAttributeStatus(attribute string) FileAttributeStatus {
+	attribute0 := C.CString(attribute)
+	ret0 := C.g_file_info_get_attribute_status(info.native(), attribute0)
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	return FileAttributeStatus(ret0)
+}
+
+// GetAttributeString is a wrapper around g_file_info_get_attribute_string().
+func (info FileInfo) GetAttributeString(attribute string) string {
+	attribute0 := C.CString(attribute)
+	ret0 := C.g_file_info_get_attribute_string(info.native(), attribute0)
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// GetAttributeStringv is a wrapper around g_file_info_get_attribute_stringv().
+func (info FileInfo) GetAttributeStringv(attribute string) []string {
+	attribute0 := C.CString(attribute)
+	ret0 := C.g_file_info_get_attribute_stringv(info.native(), attribute0)
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	var ret0Slice []*C.char
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString(elem)
+		ret[idx] = elemG
+	}
+	return ret
+}
+
+// GetAttributeType is a wrapper around g_file_info_get_attribute_type().
+func (info FileInfo) GetAttributeType(attribute string) FileAttributeType {
+	attribute0 := C.CString(attribute)
+	ret0 := C.g_file_info_get_attribute_type(info.native(), attribute0)
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	return FileAttributeType(ret0)
+}
+
+// GetAttributeUint32 is a wrapper around g_file_info_get_attribute_uint32().
+func (info FileInfo) GetAttributeUint32(attribute string) uint32 {
+	attribute0 := C.CString(attribute)
+	ret0 := C.g_file_info_get_attribute_uint32(info.native(), attribute0)
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	return uint32(ret0)
+}
+
+// GetAttributeUint64 is a wrapper around g_file_info_get_attribute_uint64().
+func (info FileInfo) GetAttributeUint64(attribute string) uint64 {
+	attribute0 := C.CString(attribute)
+	ret0 := C.g_file_info_get_attribute_uint64(info.native(), attribute0)
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	return uint64(ret0)
+}
+
+// GetContentType is a wrapper around g_file_info_get_content_type().
+func (info FileInfo) GetContentType() string {
+	ret0 := C.g_file_info_get_content_type(info.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// GetDeletionDate is a wrapper around g_file_info_get_deletion_date().
+func (info FileInfo) GetDeletionDate() glib.DateTime {
+	ret0 := C.g_file_info_get_deletion_date(info.native())
+	return glib.WrapDateTime(unsafe.Pointer(ret0)) /*gir:GLib*/
+}
+
+// GetDisplayName is a wrapper around g_file_info_get_display_name().
+func (info FileInfo) GetDisplayName() string {
+	ret0 := C.g_file_info_get_display_name(info.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// GetEditName is a wrapper around g_file_info_get_edit_name().
+func (info FileInfo) GetEditName() string {
+	ret0 := C.g_file_info_get_edit_name(info.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// GetEtag is a wrapper around g_file_info_get_etag().
+func (info FileInfo) GetEtag() string {
+	ret0 := C.g_file_info_get_etag(info.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// GetFileType is a wrapper around g_file_info_get_file_type().
+func (info FileInfo) GetFileType() FileType {
+	ret0 := C.g_file_info_get_file_type(info.native())
+	return FileType(ret0)
+}
+
+// GetIcon is a wrapper around g_file_info_get_icon().
+func (info FileInfo) GetIcon() Icon {
+	ret0 := C.g_file_info_get_icon(info.native())
+	return wrapIcon(ret0)
+}
+
+// GetIsBackup is a wrapper around g_file_info_get_is_backup().
+func (info FileInfo) GetIsBackup() bool {
+	ret0 := C.g_file_info_get_is_backup(info.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// GetIsHidden is a wrapper around g_file_info_get_is_hidden().
+func (info FileInfo) GetIsHidden() bool {
+	ret0 := C.g_file_info_get_is_hidden(info.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// GetIsSymlink is a wrapper around g_file_info_get_is_symlink().
+func (info FileInfo) GetIsSymlink() bool {
+	ret0 := C.g_file_info_get_is_symlink(info.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// GetName is a wrapper around g_file_info_get_name().
+func (info FileInfo) GetName() string {
+	ret0 := C.g_file_info_get_name(info.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// GetSize is a wrapper around g_file_info_get_size().
+func (info FileInfo) GetSize() int64 {
+	ret0 := C.g_file_info_get_size(info.native())
+	return int64(ret0)
+}
+
+// GetSortOrder is a wrapper around g_file_info_get_sort_order().
+func (info FileInfo) GetSortOrder() int32 {
+	ret0 := C.g_file_info_get_sort_order(info.native())
+	return int32(ret0)
+}
+
+// GetSymbolicIcon is a wrapper around g_file_info_get_symbolic_icon().
+func (info FileInfo) GetSymbolicIcon() Icon {
+	ret0 := C.g_file_info_get_symbolic_icon(info.native())
+	return wrapIcon(ret0)
+}
+
+// GetSymlinkTarget is a wrapper around g_file_info_get_symlink_target().
+func (info FileInfo) GetSymlinkTarget() string {
+	ret0 := C.g_file_info_get_symlink_target(info.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// HasAttribute is a wrapper around g_file_info_has_attribute().
+func (info FileInfo) HasAttribute(attribute string) bool {
+	attribute0 := C.CString(attribute)
+	ret0 := C.g_file_info_has_attribute(info.native(), attribute0)
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0))    /*go:.util*/
+}
+
+// HasNamespace is a wrapper around g_file_info_has_namespace().
+func (info FileInfo) HasNamespace(name_space string) bool {
+	name_space0 := C.CString(name_space)
+	ret0 := C.g_file_info_has_namespace(info.native(), name_space0)
+	C.free(unsafe.Pointer(name_space0)) /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0))     /*go:.util*/
+}
+
+// ListAttributes is a wrapper around g_file_info_list_attributes().
+func (info FileInfo) ListAttributes(name_space string) []string {
+	name_space0 := C.CString(name_space)
+	ret0 := C.g_file_info_list_attributes(info.native(), name_space0)
+	C.free(unsafe.Pointer(name_space0)) /*ch:<stdlib.h>*/
+	var ret0Slice []*C.char
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString(elem)
+		ret[idx] = elemG
+		C.g_free(C.gpointer(elem))
+	}
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// RemoveAttribute is a wrapper around g_file_info_remove_attribute().
+func (info FileInfo) RemoveAttribute(attribute string) {
+	attribute0 := C.CString(attribute)
+	C.g_file_info_remove_attribute(info.native(), attribute0)
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+}
+
+// SetAttribute is a wrapper around g_file_info_set_attribute().
+func (info FileInfo) SetAttribute(attribute string, type_ FileAttributeType, value_p unsafe.Pointer) {
+	attribute0 := C.CString(attribute)
+	C.g_file_info_set_attribute(info.native(), attribute0, C.GFileAttributeType(type_), C.gpointer(value_p))
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+}
+
+// SetAttributeBoolean is a wrapper around g_file_info_set_attribute_boolean().
+func (info FileInfo) SetAttributeBoolean(attribute string, attr_value bool) {
+	attribute0 := C.CString(attribute)
+	C.g_file_info_set_attribute_boolean(info.native(), attribute0, C.gboolean(util.Bool2Int(attr_value)) /*go:.util*/)
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+}
+
+// SetAttributeByteString is a wrapper around g_file_info_set_attribute_byte_string().
+func (info FileInfo) SetAttributeByteString(attribute string, attr_value string) {
+	attribute0 := C.CString(attribute)
+	attr_value0 := C.CString(attr_value)
+	C.g_file_info_set_attribute_byte_string(info.native(), attribute0, attr_value0)
+	C.free(unsafe.Pointer(attribute0))  /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(attr_value0)) /*ch:<stdlib.h>*/
+}
+
+// SetAttributeInt32 is a wrapper around g_file_info_set_attribute_int32().
+func (info FileInfo) SetAttributeInt32(attribute string, attr_value int32) {
+	attribute0 := C.CString(attribute)
+	C.g_file_info_set_attribute_int32(info.native(), attribute0, C.gint32(attr_value))
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+}
+
+// SetAttributeInt64 is a wrapper around g_file_info_set_attribute_int64().
+func (info FileInfo) SetAttributeInt64(attribute string, attr_value int64) {
+	attribute0 := C.CString(attribute)
+	C.g_file_info_set_attribute_int64(info.native(), attribute0, C.gint64(attr_value))
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+}
+
+// SetAttributeMask is a wrapper around g_file_info_set_attribute_mask().
+func (info FileInfo) SetAttributeMask(mask FileAttributeMatcher) {
+	C.g_file_info_set_attribute_mask(info.native(), mask.native())
+}
+
+// SetAttributeObject is a wrapper around g_file_info_set_attribute_object().
+func (info FileInfo) SetAttributeObject(attribute string, attr_value gobject.Object) {
+	attribute0 := C.CString(attribute)
+	C.g_file_info_set_attribute_object(info.native(), attribute0, (*C.GObject)(attr_value.Ptr))
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+}
+
+// SetAttributeStatus is a wrapper around g_file_info_set_attribute_status().
+func (info FileInfo) SetAttributeStatus(attribute string, status FileAttributeStatus) bool {
+	attribute0 := C.CString(attribute)
+	ret0 := C.g_file_info_set_attribute_status(info.native(), attribute0, C.GFileAttributeStatus(status))
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0))    /*go:.util*/
+}
+
+// SetAttributeString is a wrapper around g_file_info_set_attribute_string().
+func (info FileInfo) SetAttributeString(attribute string, attr_value string) {
+	attribute0 := C.CString(attribute)
+	attr_value0 := C.CString(attr_value)
+	C.g_file_info_set_attribute_string(info.native(), attribute0, attr_value0)
+	C.free(unsafe.Pointer(attribute0))  /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(attr_value0)) /*ch:<stdlib.h>*/
+}
+
+// SetAttributeStringv is a wrapper around g_file_info_set_attribute_stringv().
+func (info FileInfo) SetAttributeStringv(attribute string, attr_value []string) {
+	attribute0 := C.CString(attribute)
+	attr_value0 := make([]*C.char, len(attr_value))
+	for idx, elemG := range attr_value {
+		elem := C.CString(elemG)
+		attr_value0[idx] = elem
+	}
+	var attr_value0Ptr **C.char
+	if len(attr_value0) > 0 {
+		attr_value0Ptr = &attr_value0[0]
+	}
+	C.g_file_info_set_attribute_stringv(info.native(), attribute0, attr_value0Ptr)
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	for _, elem := range attr_value0 {
+		C.free(unsafe.Pointer(elem)) /*ch:<stdlib.h>*/
+	}
+}
+
+// SetAttributeUint32 is a wrapper around g_file_info_set_attribute_uint32().
+func (info FileInfo) SetAttributeUint32(attribute string, attr_value uint32) {
+	attribute0 := C.CString(attribute)
+	C.g_file_info_set_attribute_uint32(info.native(), attribute0, C.guint32(attr_value))
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+}
+
+// SetAttributeUint64 is a wrapper around g_file_info_set_attribute_uint64().
+func (info FileInfo) SetAttributeUint64(attribute string, attr_value uint64) {
+	attribute0 := C.CString(attribute)
+	C.g_file_info_set_attribute_uint64(info.native(), attribute0, C.guint64(attr_value))
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+}
+
+// SetContentType is a wrapper around g_file_info_set_content_type().
+func (info FileInfo) SetContentType(content_type string) {
+	content_type0 := C.CString(content_type)
+	C.g_file_info_set_content_type(info.native(), content_type0)
+	C.free(unsafe.Pointer(content_type0)) /*ch:<stdlib.h>*/
+}
+
+// SetDisplayName is a wrapper around g_file_info_set_display_name().
+func (info FileInfo) SetDisplayName(display_name string) {
+	display_name0 := C.CString(display_name)
+	C.g_file_info_set_display_name(info.native(), display_name0)
+	C.free(unsafe.Pointer(display_name0)) /*ch:<stdlib.h>*/
+}
+
+// SetEditName is a wrapper around g_file_info_set_edit_name().
+func (info FileInfo) SetEditName(edit_name string) {
+	edit_name0 := C.CString(edit_name)
+	C.g_file_info_set_edit_name(info.native(), edit_name0)
+	C.free(unsafe.Pointer(edit_name0)) /*ch:<stdlib.h>*/
+}
+
+// SetFileType is a wrapper around g_file_info_set_file_type().
+func (info FileInfo) SetFileType(type_ FileType) {
+	C.g_file_info_set_file_type(info.native(), C.GFileType(type_))
+}
+
+// SetIcon is a wrapper around g_file_info_set_icon().
+func (info FileInfo) SetIcon(icon Icon) {
+	C.g_file_info_set_icon(info.native(), icon.native())
+}
+
+// SetIsHidden is a wrapper around g_file_info_set_is_hidden().
+func (info FileInfo) SetIsHidden(is_hidden bool) {
+	C.g_file_info_set_is_hidden(info.native(), C.gboolean(util.Bool2Int(is_hidden)) /*go:.util*/)
+}
+
+// SetIsSymlink is a wrapper around g_file_info_set_is_symlink().
+func (info FileInfo) SetIsSymlink(is_symlink bool) {
+	C.g_file_info_set_is_symlink(info.native(), C.gboolean(util.Bool2Int(is_symlink)) /*go:.util*/)
+}
+
+// SetModificationTime is a wrapper around g_file_info_set_modification_time().
+func (info FileInfo) SetModificationTime(mtime glib.TimeVal) {
+	C.g_file_info_set_modification_time(info.native(), (*C.GTimeVal)(mtime.Ptr))
+}
+
+// SetName is a wrapper around g_file_info_set_name().
+func (info FileInfo) SetName(name string) {
+	name0 := C.CString(name)
+	C.g_file_info_set_name(info.native(), name0)
+	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+}
+
+// SetSize is a wrapper around g_file_info_set_size().
+func (info FileInfo) SetSize(size int64) {
+	C.g_file_info_set_size(info.native(), C.goffset(size))
+}
+
+// SetSortOrder is a wrapper around g_file_info_set_sort_order().
+func (info FileInfo) SetSortOrder(sort_order int32) {
+	C.g_file_info_set_sort_order(info.native(), C.gint32(sort_order))
+}
+
+// SetSymbolicIcon is a wrapper around g_file_info_set_symbolic_icon().
+func (info FileInfo) SetSymbolicIcon(icon Icon) {
+	C.g_file_info_set_symbolic_icon(info.native(), icon.native())
+}
+
+// SetSymlinkTarget is a wrapper around g_file_info_set_symlink_target().
+func (info FileInfo) SetSymlinkTarget(symlink_target string) {
+	symlink_target0 := C.CString(symlink_target)
+	C.g_file_info_set_symlink_target(info.native(), symlink_target0)
+	C.free(unsafe.Pointer(symlink_target0)) /*ch:<stdlib.h>*/
+}
+
+// UnsetAttributeMask is a wrapper around g_file_info_unset_attribute_mask().
+func (info FileInfo) UnsetAttributeMask() {
+	C.g_file_info_unset_attribute_mask(info.native())
 }
 
 // Object Application
@@ -3267,6 +4125,156 @@ func (stream FileInputStream) QueryInfoFinish(result AsyncResult) (FileInfo, err
 		return FileInfo{}, err.GoValue()
 	}
 	return wrapFileInfo(ret0), nil
+}
+
+// Struct SettingsSchemaKey
+type SettingsSchemaKey struct {
+	Ptr unsafe.Pointer
+}
+
+func (v SettingsSchemaKey) native() *C.GSettingsSchemaKey {
+	return (*C.GSettingsSchemaKey)(v.Ptr)
+}
+func wrapSettingsSchemaKey(p *C.GSettingsSchemaKey) SettingsSchemaKey {
+	return SettingsSchemaKey{unsafe.Pointer(p)}
+}
+func WrapSettingsSchemaKey(p unsafe.Pointer) SettingsSchemaKey {
+	return SettingsSchemaKey{p}
+}
+
+// GetDefaultValue is a wrapper around g_settings_schema_key_get_default_value().
+func (key SettingsSchemaKey) GetDefaultValue() glib.Variant {
+	ret0 := C.g_settings_schema_key_get_default_value(key.native())
+	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/
+}
+
+// GetDescription is a wrapper around g_settings_schema_key_get_description().
+func (key SettingsSchemaKey) GetDescription() string {
+	ret0 := C.g_settings_schema_key_get_description(key.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// GetName is a wrapper around g_settings_schema_key_get_name().
+func (key SettingsSchemaKey) GetName() string {
+	ret0 := C.g_settings_schema_key_get_name(key.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// GetRange is a wrapper around g_settings_schema_key_get_range().
+func (key SettingsSchemaKey) GetRange() glib.Variant {
+	ret0 := C.g_settings_schema_key_get_range(key.native())
+	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/
+}
+
+// GetSummary is a wrapper around g_settings_schema_key_get_summary().
+func (key SettingsSchemaKey) GetSummary() string {
+	ret0 := C.g_settings_schema_key_get_summary(key.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// GetValueType is a wrapper around g_settings_schema_key_get_value_type().
+func (key SettingsSchemaKey) GetValueType() glib.VariantType {
+	ret0 := C.g_settings_schema_key_get_value_type(key.native())
+	return glib.WrapVariantType(unsafe.Pointer(ret0)) /*gir:GLib*/
+}
+
+// RangeCheck is a wrapper around g_settings_schema_key_range_check().
+func (key SettingsSchemaKey) RangeCheck(value glib.Variant) bool {
+	ret0 := C.g_settings_schema_key_range_check(key.native(), (*C.GVariant)(value.Ptr))
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// Ref is a wrapper around g_settings_schema_key_ref().
+func (key SettingsSchemaKey) Ref() SettingsSchemaKey {
+	ret0 := C.g_settings_schema_key_ref(key.native())
+	return wrapSettingsSchemaKey(ret0)
+}
+
+// Unref is a wrapper around g_settings_schema_key_unref().
+func (key SettingsSchemaKey) Unref() {
+	C.g_settings_schema_key_unref(key.native())
+}
+
+// Struct FileAttributeMatcher
+type FileAttributeMatcher struct {
+	Ptr unsafe.Pointer
+}
+
+func (v FileAttributeMatcher) native() *C.GFileAttributeMatcher {
+	return (*C.GFileAttributeMatcher)(v.Ptr)
+}
+func wrapFileAttributeMatcher(p *C.GFileAttributeMatcher) FileAttributeMatcher {
+	return FileAttributeMatcher{unsafe.Pointer(p)}
+}
+func WrapFileAttributeMatcher(p unsafe.Pointer) FileAttributeMatcher {
+	return FileAttributeMatcher{p}
+}
+
+// FileAttributeMatcherNew is a wrapper around g_file_attribute_matcher_new().
+func FileAttributeMatcherNew(attributes string) FileAttributeMatcher {
+	attributes0 := C.CString(attributes)
+	ret0 := C.g_file_attribute_matcher_new(attributes0)
+	C.free(unsafe.Pointer(attributes0)) /*ch:<stdlib.h>*/
+	return wrapFileAttributeMatcher(ret0)
+}
+
+// EnumerateNamespace is a wrapper around g_file_attribute_matcher_enumerate_namespace().
+func (matcher FileAttributeMatcher) EnumerateNamespace(ns string) bool {
+	ns0 := C.CString(ns)
+	ret0 := C.g_file_attribute_matcher_enumerate_namespace(matcher.native(), ns0)
+	C.free(unsafe.Pointer(ns0))     /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// EnumerateNext is a wrapper around g_file_attribute_matcher_enumerate_next().
+func (matcher FileAttributeMatcher) EnumerateNext() string {
+	ret0 := C.g_file_attribute_matcher_enumerate_next(matcher.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// Matches is a wrapper around g_file_attribute_matcher_matches().
+func (matcher FileAttributeMatcher) Matches(attribute string) bool {
+	attribute0 := C.CString(attribute)
+	ret0 := C.g_file_attribute_matcher_matches(matcher.native(), attribute0)
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0))    /*go:.util*/
+}
+
+// MatchesOnly is a wrapper around g_file_attribute_matcher_matches_only().
+func (matcher FileAttributeMatcher) MatchesOnly(attribute string) bool {
+	attribute0 := C.CString(attribute)
+	ret0 := C.g_file_attribute_matcher_matches_only(matcher.native(), attribute0)
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0))    /*go:.util*/
+}
+
+// Ref is a wrapper around g_file_attribute_matcher_ref().
+func (matcher FileAttributeMatcher) Ref() FileAttributeMatcher {
+	ret0 := C.g_file_attribute_matcher_ref(matcher.native())
+	return wrapFileAttributeMatcher(ret0)
+}
+
+// Subtract is a wrapper around g_file_attribute_matcher_subtract().
+func (matcher FileAttributeMatcher) Subtract(subtract FileAttributeMatcher) FileAttributeMatcher {
+	ret0 := C.g_file_attribute_matcher_subtract(matcher.native(), subtract.native())
+	return wrapFileAttributeMatcher(ret0)
+}
+
+// ToString is a wrapper around g_file_attribute_matcher_to_string().
+func (matcher FileAttributeMatcher) ToString() string {
+	ret0 := C.g_file_attribute_matcher_to_string(matcher.native())
+	ret := C.GoString(ret0)
+	C.g_free(C.gpointer(ret0))
+	return ret
+}
+
+// Unref is a wrapper around g_file_attribute_matcher_unref().
+func (matcher FileAttributeMatcher) Unref() {
+	C.g_file_attribute_matcher_unref(matcher.native())
 }
 
 type BusType int
