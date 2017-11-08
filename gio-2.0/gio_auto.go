@@ -17,9 +17,9 @@ package gio
 */
 import "C"
 import "unsafe"
+import "github.com/electricface/go-auto-gir/glib-2.0"
 import "github.com/electricface/go-auto-gir/util"
 import "github.com/electricface/go-auto-gir/gobject-2.0"
-import "github.com/electricface/go-auto-gir/glib-2.0"
 
 // Interface AppInfo
 type AppInfo struct {
@@ -36,9 +36,93 @@ func WrapAppInfo(p unsafe.Pointer) AppInfo {
 	return AppInfo{p}
 }
 
+// AddSupportsType is a wrapper around g_app_info_add_supports_type().
+func (appinfo AppInfo) AddSupportsType(content_type string) (bool, error) {
+	content_type0 := C.CString(content_type)
+	var err glib.Error
+	ret0 := C.g_app_info_add_supports_type(appinfo.native(), content_type0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(content_type0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// CanDelete is a wrapper around g_app_info_can_delete().
+func (appinfo AppInfo) CanDelete() bool {
+	ret0 := C.g_app_info_can_delete(appinfo.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// CanRemoveSupportsType is a wrapper around g_app_info_can_remove_supports_type().
+func (appinfo AppInfo) CanRemoveSupportsType() bool {
+	ret0 := C.g_app_info_can_remove_supports_type(appinfo.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// Delete is a wrapper around g_app_info_delete().
+func (appinfo AppInfo) Delete() bool {
+	ret0 := C.g_app_info_delete(appinfo.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// Dup is a wrapper around g_app_info_dup().
+func (appinfo AppInfo) Dup() AppInfo {
+	ret0 := C.g_app_info_dup(appinfo.native())
+	return wrapAppInfo(ret0)
+}
+
+// Equal is a wrapper around g_app_info_equal().
+func (appinfo1 AppInfo) Equal(appinfo2 AppInfo) bool {
+	ret0 := C.g_app_info_equal(appinfo1.native(), appinfo2.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// GetCommandline is a wrapper around g_app_info_get_commandline().
+func (appinfo AppInfo) GetCommandline() string {
+	ret0 := C.g_app_info_get_commandline(appinfo.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// GetDescription is a wrapper around g_app_info_get_description().
+func (appinfo AppInfo) GetDescription() string {
+	ret0 := C.g_app_info_get_description(appinfo.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// GetDisplayName is a wrapper around g_app_info_get_display_name().
+func (appinfo AppInfo) GetDisplayName() string {
+	ret0 := C.g_app_info_get_display_name(appinfo.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// GetExecutable is a wrapper around g_app_info_get_executable().
+func (appinfo AppInfo) GetExecutable() string {
+	ret0 := C.g_app_info_get_executable(appinfo.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// GetIcon is a wrapper around g_app_info_get_icon().
+func (appinfo AppInfo) GetIcon() Icon {
+	ret0 := C.g_app_info_get_icon(appinfo.native())
+	return wrapIcon(ret0)
+}
+
 // GetId is a wrapper around g_app_info_get_id().
 func (appinfo AppInfo) GetId() string {
 	ret0 := C.g_app_info_get_id(appinfo.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// GetName is a wrapper around g_app_info_get_name().
+func (appinfo AppInfo) GetName() string {
+	ret0 := C.g_app_info_get_name(appinfo.native())
 	ret := C.GoString(ret0)
 	return ret
 }
@@ -55,6 +139,76 @@ func (appinfo AppInfo) GetSupportedTypes() []string {
 		ret[idx] = elemG
 	}
 	return ret
+}
+
+// RemoveSupportsType is a wrapper around g_app_info_remove_supports_type().
+func (appinfo AppInfo) RemoveSupportsType(content_type string) (bool, error) {
+	content_type0 := C.CString(content_type)
+	var err glib.Error
+	ret0 := C.g_app_info_remove_supports_type(appinfo.native(), content_type0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(content_type0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// SetAsDefaultForExtension is a wrapper around g_app_info_set_as_default_for_extension().
+func (appinfo AppInfo) SetAsDefaultForExtension(extension string) (bool, error) {
+	extension0 := C.CString(extension)
+	var err glib.Error
+	ret0 := C.g_app_info_set_as_default_for_extension(appinfo.native(), extension0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(extension0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// SetAsDefaultForType is a wrapper around g_app_info_set_as_default_for_type().
+func (appinfo AppInfo) SetAsDefaultForType(content_type string) (bool, error) {
+	content_type0 := C.CString(content_type)
+	var err glib.Error
+	ret0 := C.g_app_info_set_as_default_for_type(appinfo.native(), content_type0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(content_type0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// SetAsLastUsedForType is a wrapper around g_app_info_set_as_last_used_for_type().
+func (appinfo AppInfo) SetAsLastUsedForType(content_type string) (bool, error) {
+	content_type0 := C.CString(content_type)
+	var err glib.Error
+	ret0 := C.g_app_info_set_as_last_used_for_type(appinfo.native(), content_type0, (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(content_type0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// ShouldShow is a wrapper around g_app_info_should_show().
+func (appinfo AppInfo) ShouldShow() bool {
+	ret0 := C.g_app_info_should_show(appinfo.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// SupportsFiles is a wrapper around g_app_info_supports_files().
+func (appinfo AppInfo) SupportsFiles() bool {
+	ret0 := C.g_app_info_supports_files(appinfo.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// SupportsUris is a wrapper around g_app_info_supports_uris().
+func (appinfo AppInfo) SupportsUris() bool {
+	ret0 := C.g_app_info_supports_uris(appinfo.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // Object DesktopAppInfo
