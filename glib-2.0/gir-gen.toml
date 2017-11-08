@@ -38,16 +38,16 @@ version = "2.0"
   name = "MainLoop"
 
 [[types]]
-  err_funcs = ["g_main_context_add_poll","g_main_context_check","g_main_context_find_source_by_funcs_user_data","g_main_context_get_poll_func","g_main_context_invoke","g_main_context_invoke_full","g_main_context_prepare","g_main_context_query","g_main_context_remove_poll","g_main_context_set_poll_func","g_main_context_wait"]
-  funcs = ["g_main_context_ref","g_main_context_unref","g_main_context_default","g_main_context_new","g_main_context_iteration","g_main_context_find_source_by_id","g_main_context_pending","g_main_context_acquire","g_main_context_dispatch","g_main_context_find_source_by_user_data","g_main_context_is_owner","g_main_context_pop_thread_default","g_main_context_push_thread_default","g_main_context_release","g_main_context_wakeup","g_main_context_get_thread_default","g_main_context_ref_thread_default"]
-  ignore_funcs = []
+  err_funcs = ["g_main_context_check","g_main_context_query","g_main_context_set_poll_func","g_main_context_wait"]
+  funcs = ["g_main_context_ref","g_main_context_unref","g_main_context_default","g_main_context_new","g_main_context_iteration","g_main_context_find_source_by_id","g_main_context_pending","g_main_context_acquire","g_main_context_dispatch","g_main_context_find_source_by_user_data","g_main_context_is_owner","g_main_context_pop_thread_default","g_main_context_push_thread_default","g_main_context_release","g_main_context_wakeup","g_main_context_get_thread_default","g_main_context_ref_thread_default","g_main_context_add_poll","g_main_context_remove_poll"]
+  ignore_funcs = ["g_main_context_find_source_by_funcs_user_data","g_main_context_get_poll_func","g_main_context_invoke","g_main_context_invoke_full","g_main_context_prepare"]
   manual_funcs = []
   name = "MainContext"
 
 [[types]]
   err_funcs = []
-  funcs = ["g_idle_source_new","g_timeout_source_new","g_timeout_source_new_seconds","g_source_ref","g_source_unref","g_source_set_closure","g_source_attach","g_source_destroy","g_source_is_destroyed","g_source_set_priority","g_source_get_priority","g_source_set_can_recurse","g_source_get_can_recurse","g_source_get_id","g_source_get_name","g_source_set_name","g_source_set_name_by_id","g_source_get_context","g_source_get_time","g_source_remove"]
-  ignore_funcs = []
+  funcs = ["g_idle_source_new","g_timeout_source_new","g_timeout_source_new_seconds","g_source_ref","g_source_unref","g_source_set_closure","g_source_attach","g_source_destroy","g_source_is_destroyed","g_source_set_priority","g_source_get_priority","g_source_set_can_recurse","g_source_get_can_recurse","g_source_get_id","g_source_get_name","g_source_set_name","g_source_set_name_by_id","g_source_get_context","g_source_get_time","g_source_remove","g_source_add_child_source","g_source_add_poll","g_source_add_unix_fd","g_source_get_ready_time","g_source_modify_unix_fd","g_source_query_unix_fd","g_source_remove_child_source","g_source_remove_poll","g_source_remove_unix_fd","g_source_set_ready_time","g_source_remove_by_user_data"]
+  ignore_funcs = ["g_source_new","g_source_set_callback","g_source_set_callback_indirect","g_source_set_funcs","g_source_remove_by_funcs_user_data","g_source_get_current_time"]
   manual_funcs = []
   name = "Source"
 
@@ -57,3 +57,17 @@ version = "2.0"
   ignore_funcs = ["g_variant_iter_loop","g_variant_iter_next"]
   manual_funcs = []
   name = "VariantIter"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "PollFD"
+
+[[types]]
+  err_funcs = ["g_time_val_from_iso8601"]
+  funcs = ["g_time_val_add","g_time_val_to_iso8601"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TimeVal"

@@ -993,6 +993,11 @@ func (context MainContext) Acquire() bool {
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
+// AddPoll is a wrapper around g_main_context_add_poll().
+func (context MainContext) AddPoll(fd PollFD, priority int) {
+	C.g_main_context_add_poll(context.native(), fd.native(), C.gint(priority))
+}
+
 // Dispatch is a wrapper around g_main_context_dispatch().
 func (context MainContext) Dispatch() {
 	C.g_main_context_dispatch(context.native())
@@ -1049,6 +1054,11 @@ func (context MainContext) Release() {
 	C.g_main_context_release(context.native())
 }
 
+// RemovePoll is a wrapper around g_main_context_remove_poll().
+func (context MainContext) RemovePoll(fd PollFD) {
+	C.g_main_context_remove_poll(context.native(), fd.native())
+}
+
 // Unref is a wrapper around g_main_context_unref().
 func (context MainContext) Unref() {
 	C.g_main_context_unref(context.native())
@@ -1092,6 +1102,22 @@ func WrapSource(p unsafe.Pointer) Source {
 	return Source{p}
 }
 
+// AddChildSource is a wrapper around g_source_add_child_source().
+func (source Source) AddChildSource(child_source Source) {
+	C.g_source_add_child_source(source.native(), child_source.native())
+}
+
+// AddPoll is a wrapper around g_source_add_poll().
+func (source Source) AddPoll(fd PollFD) {
+	C.g_source_add_poll(source.native(), fd.native())
+}
+
+// AddUnixFd is a wrapper around g_source_add_unix_fd().
+func (source Source) AddUnixFd(fd int, events IOCondition) unsafe.Pointer {
+	ret0 := C.g_source_add_unix_fd(source.native(), C.gint(fd), C.GIOCondition(events))
+	return unsafe.Pointer(ret0)
+}
+
 // Attach is a wrapper around g_source_attach().
 func (source Source) Attach(context MainContext) uint {
 	ret0 := C.g_source_attach(source.native(), context.native())
@@ -1115,6 +1141,11 @@ func (source Source) GetContext() MainContext {
 	return wrapMainContext(ret0)
 }
 
+// GetCurrentTime is a wrapper around g_source_get_current_time().
+func (source Source) GetCurrentTime(timeval TimeVal) {
+	C.g_source_get_current_time(source.native(), timeval.native())
+}
+
 // GetId is a wrapper around g_source_get_id().
 func (source Source) GetId() uint {
 	ret0 := C.g_source_get_id(source.native())
@@ -1134,6 +1165,12 @@ func (source Source) GetPriority() int {
 	return int(ret0)
 }
 
+// GetReadyTime is a wrapper around g_source_get_ready_time().
+func (source Source) GetReadyTime() int64 {
+	ret0 := C.g_source_get_ready_time(source.native())
+	return int64(ret0)
+}
+
 // GetTime is a wrapper around g_source_get_time().
 func (source Source) GetTime() int64 {
 	ret0 := C.g_source_get_time(source.native())
@@ -1146,10 +1183,36 @@ func (source Source) IsDestroyed() bool {
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
+// ModifyUnixFd is a wrapper around g_source_modify_unix_fd().
+func (source Source) ModifyUnixFd(tag unsafe.Pointer, new_events IOCondition) {
+	C.g_source_modify_unix_fd(source.native(), C.gpointer(tag), C.GIOCondition(new_events))
+}
+
+// QueryUnixFd is a wrapper around g_source_query_unix_fd().
+func (source Source) QueryUnixFd(tag unsafe.Pointer) IOCondition {
+	ret0 := C.g_source_query_unix_fd(source.native(), C.gpointer(tag))
+	return IOCondition(ret0)
+}
+
 // Ref is a wrapper around g_source_ref().
 func (source Source) Ref() Source {
 	ret0 := C.g_source_ref(source.native())
 	return wrapSource(ret0)
+}
+
+// RemoveChildSource is a wrapper around g_source_remove_child_source().
+func (source Source) RemoveChildSource(child_source Source) {
+	C.g_source_remove_child_source(source.native(), child_source.native())
+}
+
+// RemovePoll is a wrapper around g_source_remove_poll().
+func (source Source) RemovePoll(fd PollFD) {
+	C.g_source_remove_poll(source.native(), fd.native())
+}
+
+// RemoveUnixFd is a wrapper around g_source_remove_unix_fd().
+func (source Source) RemoveUnixFd(tag unsafe.Pointer) {
+	C.g_source_remove_unix_fd(source.native(), C.gpointer(tag))
 }
 
 // SetCanRecurse is a wrapper around g_source_set_can_recurse().
@@ -1169,6 +1232,11 @@ func (source Source) SetPriority(priority int) {
 	C.g_source_set_priority(source.native(), C.gint(priority))
 }
 
+// SetReadyTime is a wrapper around g_source_set_ready_time().
+func (source Source) SetReadyTime(ready_time int64) {
+	C.g_source_set_ready_time(source.native(), C.gint64(ready_time))
+}
+
 // Unref is a wrapper around g_source_unref().
 func (source Source) Unref() {
 	C.g_source_unref(source.native())
@@ -1177,6 +1245,12 @@ func (source Source) Unref() {
 // SourceRemove is a wrapper around g_source_remove().
 func SourceRemove(tag uint) bool {
 	ret0 := C.g_source_remove(C.guint(tag))
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// SourceRemoveByUserData is a wrapper around g_source_remove_by_user_data().
+func SourceRemoveByUserData(user_data unsafe.Pointer) bool {
+	ret0 := C.g_source_remove_by_user_data(C.gpointer(user_data))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
@@ -1229,6 +1303,49 @@ func (iter VariantIter) NChildren() uint {
 func (iter VariantIter) NextValue() Variant {
 	ret0 := C.g_variant_iter_next_value(iter.native())
 	return wrapVariant(ret0)
+}
+
+// Struct PollFD
+type PollFD struct {
+	Ptr unsafe.Pointer
+}
+
+func (v PollFD) native() *C.GPollFD {
+	return (*C.GPollFD)(v.Ptr)
+}
+func wrapPollFD(p *C.GPollFD) PollFD {
+	return PollFD{unsafe.Pointer(p)}
+}
+func WrapPollFD(p unsafe.Pointer) PollFD {
+	return PollFD{p}
+}
+
+// Struct TimeVal
+type TimeVal struct {
+	Ptr unsafe.Pointer
+}
+
+func (v TimeVal) native() *C.GTimeVal {
+	return (*C.GTimeVal)(v.Ptr)
+}
+func wrapTimeVal(p *C.GTimeVal) TimeVal {
+	return TimeVal{unsafe.Pointer(p)}
+}
+func WrapTimeVal(p unsafe.Pointer) TimeVal {
+	return TimeVal{p}
+}
+
+// Add is a wrapper around g_time_val_add().
+func (time_ TimeVal) Add(microseconds int) {
+	C.g_time_val_add(time_.native(), C.glong(microseconds))
+}
+
+// ToIso8601 is a wrapper around g_time_val_to_iso8601().
+func (time_ TimeVal) ToIso8601() string {
+	ret0 := C.g_time_val_to_iso8601(time_.native())
+	ret := C.GoString((*C.char)(ret0))
+	C.g_free(C.gpointer(ret0))
+	return ret
 }
 
 // IdleSourceNew is a wrapper around g_idle_source_new().
