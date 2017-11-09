@@ -6,10 +6,10 @@ package gudev
 #include <stdlib.h>
 */
 import "C"
-import "unsafe"
-import "github.com/electricface/go-auto-gir/gobject-2.0"
 import "github.com/electricface/go-auto-gir/glib-2.0"
+import "github.com/electricface/go-auto-gir/gobject-2.0"
 import "github.com/electricface/go-auto-gir/util"
+import "unsafe"
 
 // Object Client
 type Client struct {

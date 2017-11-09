@@ -6,9 +6,9 @@ package gobject
 #include <stdlib.h>
 */
 import "C"
-import "unsafe"
 import "github.com/electricface/go-auto-gir/glib-2.0"
 import "github.com/electricface/go-auto-gir/util"
+import "unsafe"
 
 // Struct Value
 type Value struct {

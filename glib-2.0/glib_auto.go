@@ -6,8 +6,8 @@ package glib
 #include <stdlib.h>
 */
 import "C"
-import "unsafe"
 import "github.com/electricface/go-auto-gir/util"
+import "unsafe"
 
 // Struct Variant
 type Variant struct {
