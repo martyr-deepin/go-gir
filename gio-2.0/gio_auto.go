@@ -35,6 +35,15 @@ func wrapAppInfo(p *C.GAppInfo) AppInfo {
 func WrapAppInfo(p unsafe.Pointer) AppInfo {
 	return AppInfo{p}
 }
+func (v AppInfo) GetType() gobject.Type {
+	return gobject.Type(C.g_app_info_get_type())
+}
+func (v AppInfo) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapAppInfo(unsafe.Pointer(ptr)), nil
+	}
+}
 
 // AddSupportsType is a wrapper around g_app_info_add_supports_type().
 func (appinfo AppInfo) AddSupportsType(content_type string) (bool, error) {
@@ -345,6 +354,15 @@ func WrapDesktopAppInfo(p unsafe.Pointer) (v DesktopAppInfo) {
 	v.Ptr = p
 	return
 }
+func (v DesktopAppInfo) GetType() gobject.Type {
+	return gobject.Type(C.g_desktop_app_info_get_type())
+}
+func (v DesktopAppInfo) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapDesktopAppInfo(unsafe.Pointer(ptr)), nil
+	}
+}
 func (v DesktopAppInfo) AppInfo() AppInfo {
 	return WrapAppInfo(v.Ptr)
 }
@@ -501,6 +519,15 @@ func WrapAppLaunchContext(p unsafe.Pointer) (v AppLaunchContext) {
 	v.Ptr = p
 	return
 }
+func (v AppLaunchContext) GetType() gobject.Type {
+	return gobject.Type(C.g_app_launch_context_get_type())
+}
+func (v AppLaunchContext) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapAppLaunchContext(unsafe.Pointer(ptr)), nil
+	}
+}
 
 // AppLaunchContextNew is a wrapper around g_app_launch_context_new().
 func AppLaunchContextNew() AppLaunchContext {
@@ -578,6 +605,15 @@ func wrapSettings(p *C.GSettings) (v Settings) {
 func WrapSettings(p unsafe.Pointer) (v Settings) {
 	v.Ptr = p
 	return
+}
+func (v Settings) GetType() gobject.Type {
+	return gobject.Type(C.g_settings_get_type())
+}
+func (v Settings) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapSettings(unsafe.Pointer(ptr)), nil
+	}
 }
 
 // SettingsNew is a wrapper around g_settings_new().
@@ -1057,6 +1093,15 @@ func wrapAction(p *C.GAction) Action {
 func WrapAction(p unsafe.Pointer) Action {
 	return Action{p}
 }
+func (v Action) GetType() gobject.Type {
+	return gobject.Type(C.g_action_get_type())
+}
+func (v Action) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapAction(unsafe.Pointer(ptr)), nil
+	}
+}
 
 // Activate is a wrapper around g_action_activate().
 func (action Action) Activate(parameter glib.Variant) {
@@ -1153,6 +1198,15 @@ func wrapFile(p *C.GFile) File {
 }
 func WrapFile(p unsafe.Pointer) File {
 	return File{p}
+}
+func (v File) GetType() gobject.Type {
+	return gobject.Type(C.g_file_get_type())
+}
+func (v File) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapFile(unsafe.Pointer(ptr)), nil
+	}
 }
 
 // AppendTo is a wrapper around g_file_append_to().
@@ -1967,6 +2021,15 @@ func WrapCancellable(p unsafe.Pointer) (v Cancellable) {
 	v.Ptr = p
 	return
 }
+func (v Cancellable) GetType() gobject.Type {
+	return gobject.Type(C.g_cancellable_get_type())
+}
+func (v Cancellable) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapCancellable(unsafe.Pointer(ptr)), nil
+	}
+}
 
 // CancellableNew is a wrapper around g_cancellable_new().
 func CancellableNew() Cancellable {
@@ -2060,6 +2123,15 @@ func wrapOutputStream(p *C.GOutputStream) (v OutputStream) {
 func WrapOutputStream(p unsafe.Pointer) (v OutputStream) {
 	v.Ptr = p
 	return
+}
+func (v OutputStream) GetType() gobject.Type {
+	return gobject.Type(C.g_output_stream_get_type())
+}
+func (v OutputStream) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapOutputStream(unsafe.Pointer(ptr)), nil
+	}
 }
 
 // ClearPending is a wrapper around g_output_stream_clear_pending().
@@ -2223,6 +2295,15 @@ func WrapFileOutputStream(p unsafe.Pointer) (v FileOutputStream) {
 	v.Ptr = p
 	return
 }
+func (v FileOutputStream) GetType() gobject.Type {
+	return gobject.Type(C.g_file_output_stream_get_type())
+}
+func (v FileOutputStream) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapFileOutputStream(unsafe.Pointer(ptr)), nil
+	}
+}
 func (v FileOutputStream) Seekable() Seekable {
 	return WrapSeekable(v.Ptr)
 }
@@ -2272,6 +2353,15 @@ func wrapSeekable(p *C.GSeekable) Seekable {
 }
 func WrapSeekable(p unsafe.Pointer) Seekable {
 	return Seekable{p}
+}
+func (v Seekable) GetType() gobject.Type {
+	return gobject.Type(C.g_seekable_get_type())
+}
+func (v Seekable) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapSeekable(unsafe.Pointer(ptr)), nil
+	}
 }
 
 // CanSeek is a wrapper around g_seekable_can_seek().
@@ -2329,6 +2419,15 @@ func wrapFileInfo(p *C.GFileInfo) (v FileInfo) {
 func WrapFileInfo(p unsafe.Pointer) (v FileInfo) {
 	v.Ptr = p
 	return
+}
+func (v FileInfo) GetType() gobject.Type {
+	return gobject.Type(C.g_file_info_get_type())
+}
+func (v FileInfo) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapFileInfo(unsafe.Pointer(ptr)), nil
+	}
 }
 
 // FileInfoNew is a wrapper around g_file_info_new().
@@ -2804,6 +2903,15 @@ func WrapApplication(p unsafe.Pointer) (v Application) {
 	v.Ptr = p
 	return
 }
+func (v Application) GetType() gobject.Type {
+	return gobject.Type(C.g_application_get_type())
+}
+func (v Application) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapApplication(unsafe.Pointer(ptr)), nil
+	}
+}
 func (v Application) ActionGroup() ActionGroup {
 	return WrapActionGroup(v.Ptr)
 }
@@ -3040,6 +3148,15 @@ func wrapActionMap(p *C.GActionMap) ActionMap {
 func WrapActionMap(p unsafe.Pointer) ActionMap {
 	return ActionMap{p}
 }
+func (v ActionMap) GetType() gobject.Type {
+	return gobject.Type(C.g_action_map_get_type())
+}
+func (v ActionMap) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapActionMap(unsafe.Pointer(ptr)), nil
+	}
+}
 
 // AddAction is a wrapper around g_action_map_add_action().
 func (action_map ActionMap) AddAction(action Action) {
@@ -3074,6 +3191,15 @@ func wrapActionGroup(p *C.GActionGroup) ActionGroup {
 }
 func WrapActionGroup(p unsafe.Pointer) ActionGroup {
 	return ActionGroup{p}
+}
+func (v ActionGroup) GetType() gobject.Type {
+	return gobject.Type(C.g_action_group_get_type())
+}
+func (v ActionGroup) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapActionGroup(unsafe.Pointer(ptr)), nil
+	}
 }
 
 // ActionAdded is a wrapper around g_action_group_action_added().
@@ -3211,6 +3337,15 @@ func WrapSimpleActionGroup(p unsafe.Pointer) (v SimpleActionGroup) {
 	v.Ptr = p
 	return
 }
+func (v SimpleActionGroup) GetType() gobject.Type {
+	return gobject.Type(C.g_simple_action_group_get_type())
+}
+func (v SimpleActionGroup) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapSimpleActionGroup(unsafe.Pointer(ptr)), nil
+	}
+}
 func (v SimpleActionGroup) ActionGroup() ActionGroup {
 	return WrapActionGroup(v.Ptr)
 }
@@ -3239,6 +3374,15 @@ func wrapNotification(p *C.GNotification) (v Notification) {
 func WrapNotification(p unsafe.Pointer) (v Notification) {
 	v.Ptr = p
 	return
+}
+func (v Notification) GetType() gobject.Type {
+	return gobject.Type(C.g_notification_get_type())
+}
+func (v Notification) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapNotification(unsafe.Pointer(ptr)), nil
+	}
 }
 
 // NotificationNew is a wrapper around g_notification_new().
@@ -3319,6 +3463,15 @@ func wrapIcon(p *C.GIcon) Icon {
 func WrapIcon(p unsafe.Pointer) Icon {
 	return Icon{p}
 }
+func (v Icon) GetType() gobject.Type {
+	return gobject.Type(C.g_icon_get_type())
+}
+func (v Icon) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapIcon(unsafe.Pointer(ptr)), nil
+	}
+}
 
 // Equal is a wrapper around g_icon_equal().
 func (icon1 Icon) Equal(icon2 Icon) bool {
@@ -3379,6 +3532,15 @@ func wrapAsyncResult(p *C.GAsyncResult) AsyncResult {
 func WrapAsyncResult(p unsafe.Pointer) AsyncResult {
 	return AsyncResult{p}
 }
+func (v AsyncResult) GetType() gobject.Type {
+	return gobject.Type(C.g_async_result_get_type())
+}
+func (v AsyncResult) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapAsyncResult(unsafe.Pointer(ptr)), nil
+	}
+}
 
 // GetSourceObject is a wrapper around g_async_result_get_source_object().
 func (res AsyncResult) GetSourceObject() gobject.Object {
@@ -3424,6 +3586,15 @@ func wrapIOStream(p *C.GIOStream) (v IOStream) {
 func WrapIOStream(p unsafe.Pointer) (v IOStream) {
 	v.Ptr = p
 	return
+}
+func (v IOStream) GetType() gobject.Type {
+	return gobject.Type(C.g_io_stream_get_type())
+}
+func (v IOStream) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapIOStream(unsafe.Pointer(ptr)), nil
+	}
 }
 
 // ClearPending is a wrapper around g_io_stream_clear_pending().
@@ -3514,6 +3685,15 @@ func wrapInputStream(p *C.GInputStream) (v InputStream) {
 func WrapInputStream(p unsafe.Pointer) (v InputStream) {
 	v.Ptr = p
 	return
+}
+func (v InputStream) GetType() gobject.Type {
+	return gobject.Type(C.g_input_stream_get_type())
+}
+func (v InputStream) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapInputStream(unsafe.Pointer(ptr)), nil
+	}
 }
 
 // ClearPending is a wrapper around g_input_stream_clear_pending().
@@ -3649,6 +3829,15 @@ func WrapFileIOStream(p unsafe.Pointer) (v FileIOStream) {
 	v.Ptr = p
 	return
 }
+func (v FileIOStream) GetType() gobject.Type {
+	return gobject.Type(C.g_file_io_stream_get_type())
+}
+func (v FileIOStream) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapFileIOStream(unsafe.Pointer(ptr)), nil
+	}
+}
 func (v FileIOStream) Seekable() Seekable {
 	return WrapSeekable(v.Ptr)
 }
@@ -3700,6 +3889,15 @@ func wrapFileEnumerator(p *C.GFileEnumerator) (v FileEnumerator) {
 func WrapFileEnumerator(p unsafe.Pointer) (v FileEnumerator) {
 	v.Ptr = p
 	return
+}
+func (v FileEnumerator) GetType() gobject.Type {
+	return gobject.Type(C.g_file_enumerator_get_type())
+}
+func (v FileEnumerator) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapFileEnumerator(unsafe.Pointer(ptr)), nil
+	}
 }
 
 // Close is a wrapper around g_file_enumerator_close().
@@ -3790,6 +3988,15 @@ func wrapMount(p *C.GMount) Mount {
 }
 func WrapMount(p unsafe.Pointer) Mount {
 	return Mount{p}
+}
+func (v Mount) GetType() gobject.Type {
+	return gobject.Type(C.g_mount_get_type())
+}
+func (v Mount) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapMount(unsafe.Pointer(ptr)), nil
+	}
 }
 
 // CanEject is a wrapper around g_mount_can_eject().
@@ -3967,6 +4174,15 @@ func wrapDrive(p *C.GDrive) Drive {
 }
 func WrapDrive(p unsafe.Pointer) Drive {
 	return Drive{p}
+}
+func (v Drive) GetType() gobject.Type {
+	return gobject.Type(C.g_drive_get_type())
+}
+func (v Drive) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapDrive(unsafe.Pointer(ptr)), nil
+	}
 }
 
 // CanEject is a wrapper around g_drive_can_eject().
@@ -4146,6 +4362,15 @@ func wrapVolume(p *C.GVolume) Volume {
 func WrapVolume(p unsafe.Pointer) Volume {
 	return Volume{p}
 }
+func (v Volume) GetType() gobject.Type {
+	return gobject.Type(C.g_volume_get_type())
+}
+func (v Volume) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapVolume(unsafe.Pointer(ptr)), nil
+	}
+}
 
 // CanEject is a wrapper around g_volume_can_eject().
 func (volume Volume) CanEject() bool {
@@ -4282,6 +4507,15 @@ func WrapFileMonitor(p unsafe.Pointer) (v FileMonitor) {
 	v.Ptr = p
 	return
 }
+func (v FileMonitor) GetType() gobject.Type {
+	return gobject.Type(C.g_file_monitor_get_type())
+}
+func (v FileMonitor) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapFileMonitor(unsafe.Pointer(ptr)), nil
+	}
+}
 
 // Cancel is a wrapper around g_file_monitor_cancel().
 func (monitor FileMonitor) Cancel() bool {
@@ -4381,6 +4615,15 @@ func wrapFileInputStream(p *C.GFileInputStream) (v FileInputStream) {
 func WrapFileInputStream(p unsafe.Pointer) (v FileInputStream) {
 	v.Ptr = p
 	return
+}
+func (v FileInputStream) GetType() gobject.Type {
+	return gobject.Type(C.g_file_input_stream_get_type())
+}
+func (v FileInputStream) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapFileInputStream(unsafe.Pointer(ptr)), nil
+	}
 }
 func (v FileInputStream) Seekable() Seekable {
 	return WrapSeekable(v.Ptr)
@@ -4576,6 +4819,15 @@ func WrapDBusConnection(p unsafe.Pointer) (v DBusConnection) {
 	v.Ptr = p
 	return
 }
+func (v DBusConnection) GetType() gobject.Type {
+	return gobject.Type(C.g_dbus_connection_get_type())
+}
+func (v DBusConnection) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapDBusConnection(unsafe.Pointer(ptr)), nil
+	}
+}
 func (v DBusConnection) AsyncInitable() AsyncInitable {
 	return WrapAsyncInitable(v.Ptr)
 }
@@ -4596,6 +4848,15 @@ func wrapAsyncInitable(p *C.GAsyncInitable) AsyncInitable {
 }
 func WrapAsyncInitable(p unsafe.Pointer) AsyncInitable {
 	return AsyncInitable{p}
+}
+func (v AsyncInitable) GetType() gobject.Type {
+	return gobject.Type(C.g_async_initable_get_type())
+}
+func (v AsyncInitable) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapAsyncInitable(unsafe.Pointer(ptr)), nil
+	}
 }
 
 // InitFinish is a wrapper around g_async_initable_init_finish().
@@ -4633,6 +4894,15 @@ func wrapInitable(p *C.GInitable) Initable {
 }
 func WrapInitable(p unsafe.Pointer) Initable {
 	return Initable{p}
+}
+func (v Initable) GetType() gobject.Type {
+	return gobject.Type(C.g_initable_get_type())
+}
+func (v Initable) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapInitable(unsafe.Pointer(ptr)), nil
+	}
 }
 
 // Init is a wrapper around g_initable_init().

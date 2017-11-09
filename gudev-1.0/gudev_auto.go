@@ -27,6 +27,15 @@ func WrapClient(p unsafe.Pointer) (v Client) {
 	v.Ptr = p
 	return
 }
+func (v Client) GetType() gobject.Type {
+	return gobject.Type(C.g_udev_client_get_type())
+}
+func (v Client) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapClient(unsafe.Pointer(ptr)), nil
+	}
+}
 
 // ClientNew is a wrapper around g_udev_client_new().
 func ClientNew(subsystems []string) Client {
@@ -102,6 +111,15 @@ func wrapDevice(p *C.GUdevDevice) (v Device) {
 func WrapDevice(p unsafe.Pointer) (v Device) {
 	v.Ptr = p
 	return
+}
+func (v Device) GetType() gobject.Type {
+	return gobject.Type(C.g_udev_device_get_type())
+}
+func (v Device) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapDevice(unsafe.Pointer(ptr)), nil
+	}
 }
 
 // GetAction is a wrapper around g_udev_device_get_action().
@@ -407,6 +425,15 @@ func wrapEnumerator(p *C.GUdevEnumerator) (v Enumerator) {
 func WrapEnumerator(p unsafe.Pointer) (v Enumerator) {
 	v.Ptr = p
 	return
+}
+func (v Enumerator) GetType() gobject.Type {
+	return gobject.Type(C.g_udev_enumerator_get_type())
+}
+func (v Enumerator) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapEnumerator(unsafe.Pointer(ptr)), nil
+	}
 }
 
 // EnumeratorNew is a wrapper around g_udev_enumerator_new().

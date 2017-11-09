@@ -51,6 +51,7 @@ import (
 	"errors"
 	"unsafe"
 
+	"fmt"
 	"github.com/electricface/go-auto-gir/glib-2.0"
 	"github.com/electricface/go-auto-gir/util"
 	"sync"
@@ -110,6 +111,8 @@ func (v Value) Get() (interface{}, error) {
 	if err != nil {
 		return nil, err
 	}
+	fmt.Println("actual Type:", actualType)
+	fmt.Println("fund Type:", fundamentalType)
 
 	val, err := v.get(actualType)
 	if err == nil {

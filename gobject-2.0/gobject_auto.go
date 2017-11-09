@@ -368,6 +368,15 @@ func WrapObject(p unsafe.Pointer) (v Object) {
 	v.Ptr = p
 	return
 }
+func (v Object) GetType() Type {
+	return Type(C.g_object_get_type())
+}
+func (v Object) GetGValueGetter() GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapObject(unsafe.Pointer(ptr)), nil
+	}
+}
 
 // BindProperty is a wrapper around g_object_bind_property().
 func (source Object) BindProperty(source_property string, target Object, target_property string, flags BindingFlags) Binding {
@@ -594,6 +603,15 @@ func WrapBinding(p unsafe.Pointer) (v Binding) {
 	v.Ptr = p
 	return
 }
+func (v Binding) GetType() Type {
+	return Type(C.g_binding_get_type())
+}
+func (v Binding) GetGValueGetter() GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapBinding(unsafe.Pointer(ptr)), nil
+	}
+}
 
 // GetFlags is a wrapper around g_binding_get_flags().
 func (binding Binding) GetFlags() BindingFlags {
@@ -647,6 +665,12 @@ func wrapParamSpec(p *C.GParamSpec) (v ParamSpec) {
 func WrapParamSpec(p unsafe.Pointer) (v ParamSpec) {
 	v.Ptr = p
 	return
+}
+func (v ParamSpec) GetGValueGetter() GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapParamSpec(unsafe.Pointer(ptr)), nil
+	}
 }
 
 // GetBlurb is a wrapper around g_param_spec_get_blurb().

@@ -28,6 +28,15 @@ func WrapInstallation(p unsafe.Pointer) (v Installation) {
 	v.Ptr = p
 	return
 }
+func (v Installation) GetType() gobject.Type {
+	return gobject.Type(C.flatpak_installation_get_type())
+}
+func (v Installation) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapInstallation(unsafe.Pointer(ptr)), nil
+	}
+}
 
 // InstallationNewForPath is a wrapper around flatpak_installation_new_for_path().
 func InstallationNewForPath(path gio.File, user bool, cancellable gio.Cancellable) (Installation, error) {
@@ -323,6 +332,15 @@ func WrapRef(p unsafe.Pointer) (v Ref) {
 	v.Ptr = p
 	return
 }
+func (v Ref) GetType() gobject.Type {
+	return gobject.Type(C.flatpak_ref_get_type())
+}
+func (v Ref) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapRef(unsafe.Pointer(ptr)), nil
+	}
+}
 
 // FormatRef is a wrapper around flatpak_ref_format_ref().
 func (self Ref) FormatRef() string {
@@ -395,6 +413,15 @@ func WrapInstalledRef(p unsafe.Pointer) (v InstalledRef) {
 	v.Ptr = p
 	return
 }
+func (v InstalledRef) GetType() gobject.Type {
+	return gobject.Type(C.flatpak_installed_ref_get_type())
+}
+func (v InstalledRef) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapInstalledRef(unsafe.Pointer(ptr)), nil
+	}
+}
 
 // GetDeployDir is a wrapper around flatpak_installed_ref_get_deploy_dir().
 func (self InstalledRef) GetDeployDir() string {
@@ -456,6 +483,15 @@ func WrapRemoteRef(p unsafe.Pointer) (v RemoteRef) {
 	v.Ptr = p
 	return
 }
+func (v RemoteRef) GetType() gobject.Type {
+	return gobject.Type(C.flatpak_remote_ref_get_type())
+}
+func (v RemoteRef) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapRemoteRef(unsafe.Pointer(ptr)), nil
+	}
+}
 
 // GetRemoteName is a wrapper around flatpak_remote_ref_get_remote_name().
 func (self RemoteRef) GetRemoteName() string {
@@ -479,6 +515,15 @@ func wrapBundleRef(p *C.FlatpakBundleRef) (v BundleRef) {
 func WrapBundleRef(p unsafe.Pointer) (v BundleRef) {
 	v.Ptr = p
 	return
+}
+func (v BundleRef) GetType() gobject.Type {
+	return gobject.Type(C.flatpak_bundle_ref_get_type())
+}
+func (v BundleRef) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapBundleRef(unsafe.Pointer(ptr)), nil
+	}
 }
 
 // BundleRefNew is a wrapper around flatpak_bundle_ref_new().
@@ -553,6 +598,15 @@ func wrapRemote(p *C.FlatpakRemote) (v Remote) {
 func WrapRemote(p unsafe.Pointer) (v Remote) {
 	v.Ptr = p
 	return
+}
+func (v Remote) GetType() gobject.Type {
+	return gobject.Type(C.flatpak_remote_get_type())
+}
+func (v Remote) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapRemote(unsafe.Pointer(ptr)), nil
+	}
 }
 
 // RemoteNew is a wrapper around flatpak_remote_new().
