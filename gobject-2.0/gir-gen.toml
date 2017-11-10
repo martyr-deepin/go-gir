@@ -1,6 +1,7 @@
 funcs = []
 namespace = "GObject"
 version = "2.0"
+callbacks = []
 
 [[types]]
   err_funcs = []

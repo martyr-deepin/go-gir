@@ -14,12 +14,213 @@ package gio
 #include <gio/gunixoutputstream.h>
 #include <gio/gunixsocketaddress.h>
 #include <stdlib.h>
+#include <strings.h>
+static void AsyncReadyCallbackWrapper(GObject* source_object, GAsyncResult* res, gpointer user_data);
+static void FileMeasureProgressCallbackWrapper(gboolean reporting, guint64 current_size, guint64 num_dirs, guint64 num_files, gpointer user_data);
+static void FileProgressCallbackWrapper(goffset current_num_bytes, goffset total_num_bytes, gpointer user_data);
+static void AsyncReadyCallbackWrapper(GObject* source_object, GAsyncResult* res, gpointer user_data) {
+    GClosure* closure = user_data;
+    GValue params[2];
+    bzero(params, 2*sizeof(GValue));
+    g_value_init(&params[0], G_TYPE_OBJECT);
+    g_value_set_object(&params[0], source_object);
+    g_value_init(&params[1], g_async_result_get_type());
+    g_value_set_object(&params[1], res);
+    g_closure_invoke(closure, NULL, 2, params, NULL);
+}
+static void FileMeasureProgressCallbackWrapper(gboolean reporting, guint64 current_size, guint64 num_dirs, guint64 num_files, gpointer user_data) {
+    GClosure* closure = user_data;
+    GValue params[4];
+    bzero(params, 4*sizeof(GValue));
+    g_value_init(&params[0], G_TYPE_BOOLEAN);
+    g_value_set_boolean(&params[0], reporting);
+    g_value_init(&params[1], G_TYPE_UINT64);
+    g_value_set_uint64(&params[1], current_size);
+    g_value_init(&params[2], G_TYPE_UINT64);
+    g_value_set_uint64(&params[2], num_dirs);
+    g_value_init(&params[3], G_TYPE_UINT64);
+    g_value_set_uint64(&params[3], num_files);
+    g_closure_invoke(closure, NULL, 4, params, NULL);
+}
+static void FileProgressCallbackWrapper(goffset current_num_bytes, goffset total_num_bytes, gpointer user_data) {
+    GClosure* closure = user_data;
+    GValue params[2];
+    bzero(params, 2*sizeof(GValue));
+    g_value_init(&params[0], G_TYPE_INT64);
+    g_value_set_int64(&params[0], current_num_bytes);
+    g_value_init(&params[1], G_TYPE_INT64);
+    g_value_set_int64(&params[1], total_num_bytes);
+    g_closure_invoke(closure, NULL, 2, params, NULL);
+}
+static void _g_app_info_launch_default_for_uri_async(const char* uri, GAppLaunchContext* launch_context, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_app_info_launch_default_for_uri_async(uri, launch_context, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_append_to_async(GFile* file, GFileCreateFlags flags, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_append_to_async(file, flags, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static gboolean _g_file_copy(GFile* source, GFile* destination, GFileCopyFlags flags, GCancellable* cancellable, GClosure* progress_callback_data_for_progress_callback, GError **error) {
+    return g_file_copy(source, destination, flags, cancellable, FileProgressCallbackWrapper, progress_callback_data_for_progress_callback, error);
+}
+static void _g_file_copy_async(GFile* source, GFile* destination, GFileCopyFlags flags, int io_priority, GCancellable* cancellable, GClosure* progress_callback_data_for_progress_callback, GClosure* user_data_for_callback) {
+    return g_file_copy_async(source, destination, flags, io_priority, cancellable, FileProgressCallbackWrapper, progress_callback_data_for_progress_callback, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_create_async(GFile* file, GFileCreateFlags flags, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_create_async(file, flags, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_create_readwrite_async(GFile* file, GFileCreateFlags flags, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_create_readwrite_async(file, flags, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_delete_async(GFile* file, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_delete_async(file, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_eject_mountable_with_operation(GFile* file, GMountUnmountFlags flags, GMountOperation* mount_operation, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_eject_mountable_with_operation(file, flags, mount_operation, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_enumerate_children_async(GFile* file, const char* attributes, GFileQueryInfoFlags flags, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_enumerate_children_async(file, attributes, flags, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_find_enclosing_mount_async(GFile* file, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_find_enclosing_mount_async(file, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_make_directory_async(GFile* file, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_make_directory_async(file, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static gboolean _g_file_measure_disk_usage(GFile* file, GFileMeasureFlags flags, GCancellable* cancellable, GClosure* progress_data_for_progress_callback, guint64* disk_usage, guint64* num_dirs, guint64* num_files, GError **error) {
+    return g_file_measure_disk_usage(file, flags, cancellable, FileMeasureProgressCallbackWrapper, progress_data_for_progress_callback, disk_usage, num_dirs, num_files, error);
+}
+static void _g_file_measure_disk_usage_async(GFile* file, GFileMeasureFlags flags, gint io_priority, GCancellable* cancellable, GClosure* progress_data_for_progress_callback, GClosure* user_data_for_callback) {
+    return g_file_measure_disk_usage_async(file, flags, io_priority, cancellable, FileMeasureProgressCallbackWrapper, progress_data_for_progress_callback, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_mount_enclosing_volume(GFile* location, GMountMountFlags flags, GMountOperation* mount_operation, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_mount_enclosing_volume(location, flags, mount_operation, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_mount_mountable(GFile* file, GMountMountFlags flags, GMountOperation* mount_operation, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_mount_mountable(file, flags, mount_operation, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static gboolean _g_file_move(GFile* source, GFile* destination, GFileCopyFlags flags, GCancellable* cancellable, GClosure* progress_callback_data_for_progress_callback, GError **error) {
+    return g_file_move(source, destination, flags, cancellable, FileProgressCallbackWrapper, progress_callback_data_for_progress_callback, error);
+}
+static void _g_file_open_readwrite_async(GFile* file, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_open_readwrite_async(file, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_poll_mountable(GFile* file, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_poll_mountable(file, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_query_filesystem_info_async(GFile* file, const char* attributes, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_query_filesystem_info_async(file, attributes, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_query_info_async(GFile* file, const char* attributes, GFileQueryInfoFlags flags, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_query_info_async(file, attributes, flags, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_read_async(GFile* file, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_read_async(file, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_replace_async(GFile* file, const char* etag, gboolean make_backup, GFileCreateFlags flags, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_replace_async(file, etag, make_backup, flags, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_set_attributes_async(GFile* file, GFileInfo* info, GFileQueryInfoFlags flags, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_set_attributes_async(file, info, flags, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_set_display_name_async(GFile* file, const char* display_name, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_set_display_name_async(file, display_name, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_start_mountable(GFile* file, GDriveStartFlags flags, GMountOperation* start_operation, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_start_mountable(file, flags, start_operation, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_stop_mountable(GFile* file, GMountUnmountFlags flags, GMountOperation* mount_operation, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_stop_mountable(file, flags, mount_operation, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_trash_async(GFile* file, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_trash_async(file, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_unmount_mountable_with_operation(GFile* file, GMountUnmountFlags flags, GMountOperation* mount_operation, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_unmount_mountable_with_operation(file, flags, mount_operation, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_output_stream_close_async(GOutputStream* stream, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_output_stream_close_async(stream, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_output_stream_flush_async(GOutputStream* stream, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_output_stream_flush_async(stream, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_output_stream_splice_async(GOutputStream* stream, GInputStream* source, GOutputStreamSpliceFlags flags, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_output_stream_splice_async(stream, source, flags, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_output_stream_write_bytes_async(GOutputStream* stream, GBytes* bytes, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_output_stream_write_bytes_async(stream, bytes, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_output_stream_query_info_async(GFileOutputStream* stream, const char* attributes, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_output_stream_query_info_async(stream, attributes, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_io_stream_close_async(GIOStream* stream, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_io_stream_close_async(stream, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_io_stream_splice_async(GIOStream* stream1, GIOStream* stream2, GIOStreamSpliceFlags flags, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_io_stream_splice_async(stream1, stream2, flags, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_input_stream_close_async(GInputStream* stream, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_input_stream_close_async(stream, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_input_stream_read_bytes_async(GInputStream* stream, gsize count, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_input_stream_read_bytes_async(stream, count, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_input_stream_skip_async(GInputStream* stream, gsize count, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_input_stream_skip_async(stream, count, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_io_stream_query_info_async(GFileIOStream* stream, const char* attributes, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_io_stream_query_info_async(stream, attributes, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_enumerator_close_async(GFileEnumerator* enumerator, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_enumerator_close_async(enumerator, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_enumerator_next_files_async(GFileEnumerator* enumerator, int num_files, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_enumerator_next_files_async(enumerator, num_files, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_mount_eject_with_operation(GMount* mount, GMountUnmountFlags flags, GMountOperation* mount_operation, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_mount_eject_with_operation(mount, flags, mount_operation, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_mount_guess_content_type(GMount* mount, gboolean force_rescan, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_mount_guess_content_type(mount, force_rescan, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_mount_remount(GMount* mount, GMountMountFlags flags, GMountOperation* mount_operation, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_mount_remount(mount, flags, mount_operation, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_mount_unmount_with_operation(GMount* mount, GMountUnmountFlags flags, GMountOperation* mount_operation, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_mount_unmount_with_operation(mount, flags, mount_operation, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_drive_eject_with_operation(GDrive* drive, GMountUnmountFlags flags, GMountOperation* mount_operation, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_drive_eject_with_operation(drive, flags, mount_operation, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_drive_poll_for_media(GDrive* drive, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_drive_poll_for_media(drive, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_drive_start(GDrive* drive, GDriveStartFlags flags, GMountOperation* mount_operation, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_drive_start(drive, flags, mount_operation, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_drive_stop(GDrive* drive, GMountUnmountFlags flags, GMountOperation* mount_operation, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_drive_stop(drive, flags, mount_operation, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_volume_eject_with_operation(GVolume* volume, GMountUnmountFlags flags, GMountOperation* mount_operation, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_volume_eject_with_operation(volume, flags, mount_operation, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_volume_mount(GVolume* volume, GMountMountFlags flags, GMountOperation* mount_operation, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_volume_mount(volume, flags, mount_operation, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_input_stream_query_info_async(GFileInputStream* stream, const char* attributes, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_input_stream_query_info_async(stream, attributes, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_async_initable_init_async(GAsyncInitable* initable, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_async_initable_init_async(initable, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
 */
 import "C"
 import "github.com/electricface/go-auto-gir/glib-2.0"
 import "github.com/electricface/go-auto-gir/gobject-2.0"
 import "github.com/electricface/go-auto-gir/util"
 import "unsafe"
+
+type AsyncReadyCallback func(source_object gobject.Object, res AsyncResult)
+type FileMeasureProgressCallback func(reporting bool, current_size uint64, num_dirs uint64, num_files uint64)
+type FileProgressCallback func(current_num_bytes int64, total_num_bytes int64)
 
 // Interface AppInfo
 type AppInfo struct {
@@ -318,6 +519,14 @@ func AppInfoLaunchDefaultForUri(uri string, launch_context AppLaunchContext) (bo
 		return false, err.GoValue()
 	}
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// AppInfoLaunchDefaultForUriAsync is a wrapper around g_app_info_launch_default_for_uri_async().
+func AppInfoLaunchDefaultForUriAsync(uri string, launch_context AppLaunchContext, cancellable Cancellable, callback AsyncReadyCallback) {
+	uri0 := C.CString(uri)
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_app_info_launch_default_for_uri_async(uri0, launch_context.native(), cancellable.native(), callback0)
+	C.free(unsafe.Pointer(uri0)) /*ch:<stdlib.h>*/
 }
 
 // AppInfoLaunchDefaultForUriFinish is a wrapper around g_app_info_launch_default_for_uri_finish().
@@ -1220,6 +1429,12 @@ func (file File) AppendTo(flags FileCreateFlags, cancellable Cancellable) (FileO
 	return wrapFileOutputStream(ret0), nil
 }
 
+// AppendToAsync is a wrapper around g_file_append_to_async().
+func (file File) AppendToAsync(flags FileCreateFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_append_to_async(file.native(), C.GFileCreateFlags(flags), C.int(io_priority), cancellable.native(), callback0)
+}
+
 // AppendToFinish is a wrapper around g_file_append_to_finish().
 func (file File) AppendToFinish(res AsyncResult) (FileOutputStream, error) {
 	var err glib.Error
@@ -1229,6 +1444,25 @@ func (file File) AppendToFinish(res AsyncResult) (FileOutputStream, error) {
 		return FileOutputStream{}, err.GoValue()
 	}
 	return wrapFileOutputStream(ret0), nil
+}
+
+// Copy is a wrapper around g_file_copy().
+func (source File) Copy(destination File, flags FileCopyFlags, cancellable Cancellable, progress_callback FileProgressCallback) (bool, error) {
+	progress_callback0 := (*C.GClosure)(gobject.ClosureNew(progress_callback).Ptr) /*gir:GObject*/
+	var err glib.Error
+	ret0 := C._g_file_copy(source.native(), destination.native(), C.GFileCopyFlags(flags), cancellable.native(), progress_callback0, (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// CopyAsync is a wrapper around g_file_copy_async().
+func (source File) CopyAsync(destination File, flags FileCopyFlags, io_priority int, cancellable Cancellable, progress_callback FileProgressCallback, callback AsyncReadyCallback) {
+	progress_callback0 := (*C.GClosure)(gobject.ClosureNew(progress_callback).Ptr) /*gir:GObject*/
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr)                   /*gir:GObject*/
+	C._g_file_copy_async(source.native(), destination.native(), C.GFileCopyFlags(flags), C.int(io_priority), cancellable.native(), progress_callback0, callback0)
 }
 
 // CopyAttributes is a wrapper around g_file_copy_attributes().
@@ -1264,6 +1498,12 @@ func (file File) Create(flags FileCreateFlags, cancellable Cancellable) (FileOut
 	return wrapFileOutputStream(ret0), nil
 }
 
+// CreateAsync is a wrapper around g_file_create_async().
+func (file File) CreateAsync(flags FileCreateFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_create_async(file.native(), C.GFileCreateFlags(flags), C.int(io_priority), cancellable.native(), callback0)
+}
+
 // CreateFinish is a wrapper around g_file_create_finish().
 func (file File) CreateFinish(res AsyncResult) (FileOutputStream, error) {
 	var err glib.Error
@@ -1284,6 +1524,12 @@ func (file File) CreateReadwrite(flags FileCreateFlags, cancellable Cancellable)
 		return FileIOStream{}, err.GoValue()
 	}
 	return wrapFileIOStream(ret0), nil
+}
+
+// CreateReadwriteAsync is a wrapper around g_file_create_readwrite_async().
+func (file File) CreateReadwriteAsync(flags FileCreateFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_create_readwrite_async(file.native(), C.GFileCreateFlags(flags), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // CreateReadwriteFinish is a wrapper around g_file_create_readwrite_finish().
@@ -1308,6 +1554,12 @@ func (file File) Delete(cancellable Cancellable) (bool, error) {
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
 }
 
+// DeleteAsync is a wrapper around g_file_delete_async().
+func (file File) DeleteAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_delete_async(file.native(), C.int(io_priority), cancellable.native(), callback0)
+}
+
 // DeleteFinish is a wrapper around g_file_delete_finish().
 func (file File) DeleteFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
@@ -1325,6 +1577,12 @@ func (file File) Dup() File {
 	return wrapFile(ret0)
 }
 
+// EjectMountableWithOperation is a wrapper around g_file_eject_mountable_with_operation().
+func (file File) EjectMountableWithOperation(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_eject_mountable_with_operation(file.native(), C.GMountUnmountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
+}
+
 // EjectMountableWithOperationFinish is a wrapper around g_file_eject_mountable_with_operation_finish().
 func (file File) EjectMountableWithOperationFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
@@ -1334,6 +1592,27 @@ func (file File) EjectMountableWithOperationFinish(result AsyncResult) (bool, er
 		return false, err.GoValue()
 	}
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// EnumerateChildren is a wrapper around g_file_enumerate_children().
+func (file File) EnumerateChildren(attributes string, flags FileQueryInfoFlags, cancellable Cancellable) (FileEnumerator, error) {
+	attributes0 := C.CString(attributes)
+	var err glib.Error
+	ret0 := C.g_file_enumerate_children(file.native(), attributes0, C.GFileQueryInfoFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(attributes0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileEnumerator{}, err.GoValue()
+	}
+	return wrapFileEnumerator(ret0), nil
+}
+
+// EnumerateChildrenAsync is a wrapper around g_file_enumerate_children_async().
+func (file File) EnumerateChildrenAsync(attributes string, flags FileQueryInfoFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	attributes0 := C.CString(attributes)
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_enumerate_children_async(file.native(), attributes0, C.GFileQueryInfoFlags(flags), C.int(io_priority), cancellable.native(), callback0)
+	C.free(unsafe.Pointer(attributes0)) /*ch:<stdlib.h>*/
 }
 
 // EnumerateChildrenFinish is a wrapper around g_file_enumerate_children_finish().
@@ -1351,6 +1630,23 @@ func (file File) EnumerateChildrenFinish(res AsyncResult) (FileEnumerator, error
 func (file1 File) Equal(file2 File) bool {
 	ret0 := C.g_file_equal(file1.native(), file2.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// FindEnclosingMount is a wrapper around g_file_find_enclosing_mount().
+func (file File) FindEnclosingMount(cancellable Cancellable) (Mount, error) {
+	var err glib.Error
+	ret0 := C.g_file_find_enclosing_mount(file.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return Mount{}, err.GoValue()
+	}
+	return wrapMount(ret0), nil
+}
+
+// FindEnclosingMountAsync is a wrapper around g_file_find_enclosing_mount_async().
+func (file File) FindEnclosingMountAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_find_enclosing_mount_async(file.native(), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // FindEnclosingMountFinish is a wrapper around g_file_find_enclosing_mount_finish().
@@ -1459,6 +1755,12 @@ func (file File) HasUriScheme(uri_scheme string) bool {
 	return util.Int2Bool(int(ret0))     /*go:.util*/
 }
 
+// Hash is a wrapper around g_file_hash().
+func (file File) Hash() uint {
+	ret0 := C.g_file_hash(C.gconstpointer(file.native()))
+	return uint(ret0)
+}
+
 // IsNative is a wrapper around g_file_is_native().
 func (file File) IsNative() bool {
 	ret0 := C.g_file_is_native(file.native())
@@ -1474,6 +1776,12 @@ func (file File) MakeDirectory(cancellable Cancellable) (bool, error) {
 		return false, err.GoValue()
 	}
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// MakeDirectoryAsync is a wrapper around g_file_make_directory_async().
+func (file File) MakeDirectoryAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_make_directory_async(file.native(), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // MakeDirectoryFinish is a wrapper around g_file_make_directory_finish().
@@ -1511,6 +1819,42 @@ func (file File) MakeSymbolicLink(symlink_value string, cancellable Cancellable)
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
 }
 
+// MeasureDiskUsage is a wrapper around g_file_measure_disk_usage().
+func (file File) MeasureDiskUsage(flags FileMeasureFlags, cancellable Cancellable, progress_callback FileMeasureProgressCallback) (bool, uint64, uint64, uint64, error) {
+	progress_callback0 := (*C.GClosure)(gobject.ClosureNew(progress_callback).Ptr) /*gir:GObject*/
+	var disk_usage0 C.guint64
+	var num_dirs0 C.guint64
+	var num_files0 C.guint64
+	var err glib.Error
+	ret0 := C._g_file_measure_disk_usage(file.native(), C.GFileMeasureFlags(flags), cancellable.native(), progress_callback0, &disk_usage0, &num_dirs0, &num_files0, (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, 0, 0, 0, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, uint64(disk_usage0), uint64(num_dirs0), uint64(num_files0), nil
+}
+
+// MeasureDiskUsageAsync is a wrapper around g_file_measure_disk_usage_async().
+func (file File) MeasureDiskUsageAsync(flags FileMeasureFlags, io_priority int, cancellable Cancellable, progress_callback FileMeasureProgressCallback, callback AsyncReadyCallback) {
+	progress_callback0 := (*C.GClosure)(gobject.ClosureNew(progress_callback).Ptr) /*gir:GObject*/
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr)                   /*gir:GObject*/
+	C._g_file_measure_disk_usage_async(file.native(), C.GFileMeasureFlags(flags), C.gint(io_priority), cancellable.native(), progress_callback0, callback0)
+}
+
+// MeasureDiskUsageFinish is a wrapper around g_file_measure_disk_usage_finish().
+func (file File) MeasureDiskUsageFinish(result AsyncResult) (bool, uint64, uint64, uint64, error) {
+	var disk_usage0 C.guint64
+	var num_dirs0 C.guint64
+	var num_files0 C.guint64
+	var err glib.Error
+	ret0 := C.g_file_measure_disk_usage_finish(file.native(), result.native(), &disk_usage0, &num_dirs0, &num_files0, (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, 0, 0, 0, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, uint64(disk_usage0), uint64(num_dirs0), uint64(num_files0), nil
+}
+
 // Monitor is a wrapper around g_file_monitor().
 func (file File) Monitor(flags FileMonitorFlags, cancellable Cancellable) (FileMonitor, error) {
 	var err glib.Error
@@ -1544,6 +1888,12 @@ func (file File) MonitorFile(flags FileMonitorFlags, cancellable Cancellable) (F
 	return wrapFileMonitor(ret0), nil
 }
 
+// MountEnclosingVolume is a wrapper around g_file_mount_enclosing_volume().
+func (location File) MountEnclosingVolume(flags MountMountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_mount_enclosing_volume(location.native(), C.GMountMountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
+}
+
 // MountEnclosingVolumeFinish is a wrapper around g_file_mount_enclosing_volume_finish().
 func (location File) MountEnclosingVolumeFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
@@ -1553,6 +1903,12 @@ func (location File) MountEnclosingVolumeFinish(result AsyncResult) (bool, error
 		return false, err.GoValue()
 	}
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// MountMountable is a wrapper around g_file_mount_mountable().
+func (file File) MountMountable(flags MountMountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_mount_mountable(file.native(), C.GMountMountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
 }
 
 // MountMountableFinish is a wrapper around g_file_mount_mountable_finish().
@@ -1566,6 +1922,18 @@ func (file File) MountMountableFinish(result AsyncResult) (File, error) {
 	return wrapFile(ret0), nil
 }
 
+// Move is a wrapper around g_file_move().
+func (source File) Move(destination File, flags FileCopyFlags, cancellable Cancellable, progress_callback FileProgressCallback) (bool, error) {
+	progress_callback0 := (*C.GClosure)(gobject.ClosureNew(progress_callback).Ptr) /*gir:GObject*/
+	var err glib.Error
+	ret0 := C._g_file_move(source.native(), destination.native(), C.GFileCopyFlags(flags), cancellable.native(), progress_callback0, (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
 // OpenReadwrite is a wrapper around g_file_open_readwrite().
 func (file File) OpenReadwrite(cancellable Cancellable) (FileIOStream, error) {
 	var err glib.Error
@@ -1577,6 +1945,12 @@ func (file File) OpenReadwrite(cancellable Cancellable) (FileIOStream, error) {
 	return wrapFileIOStream(ret0), nil
 }
 
+// OpenReadwriteAsync is a wrapper around g_file_open_readwrite_async().
+func (file File) OpenReadwriteAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_open_readwrite_async(file.native(), C.int(io_priority), cancellable.native(), callback0)
+}
+
 // OpenReadwriteFinish is a wrapper around g_file_open_readwrite_finish().
 func (file File) OpenReadwriteFinish(res AsyncResult) (FileIOStream, error) {
 	var err glib.Error
@@ -1586,6 +1960,12 @@ func (file File) OpenReadwriteFinish(res AsyncResult) (FileIOStream, error) {
 		return FileIOStream{}, err.GoValue()
 	}
 	return wrapFileIOStream(ret0), nil
+}
+
+// PollMountable is a wrapper around g_file_poll_mountable().
+func (file File) PollMountable(cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_poll_mountable(file.native(), cancellable.native(), callback0)
 }
 
 // PollMountableFinish is a wrapper around g_file_poll_mountable_finish().
@@ -1635,6 +2015,14 @@ func (file File) QueryFilesystemInfo(attributes string, cancellable Cancellable)
 	return wrapFileInfo(ret0), nil
 }
 
+// QueryFilesystemInfoAsync is a wrapper around g_file_query_filesystem_info_async().
+func (file File) QueryFilesystemInfoAsync(attributes string, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	attributes0 := C.CString(attributes)
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_query_filesystem_info_async(file.native(), attributes0, C.int(io_priority), cancellable.native(), callback0)
+	C.free(unsafe.Pointer(attributes0)) /*ch:<stdlib.h>*/
+}
+
 // QueryFilesystemInfoFinish is a wrapper around g_file_query_filesystem_info_finish().
 func (file File) QueryFilesystemInfoFinish(res AsyncResult) (FileInfo, error) {
 	var err glib.Error
@@ -1659,6 +2047,14 @@ func (file File) QueryInfo(attributes string, flags FileQueryInfoFlags, cancella
 	return wrapFileInfo(ret0), nil
 }
 
+// QueryInfoAsync is a wrapper around g_file_query_info_async().
+func (file File) QueryInfoAsync(attributes string, flags FileQueryInfoFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	attributes0 := C.CString(attributes)
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_query_info_async(file.native(), attributes0, C.GFileQueryInfoFlags(flags), C.int(io_priority), cancellable.native(), callback0)
+	C.free(unsafe.Pointer(attributes0)) /*ch:<stdlib.h>*/
+}
+
 // QueryInfoFinish is a wrapper around g_file_query_info_finish().
 func (file File) QueryInfoFinish(res AsyncResult) (FileInfo, error) {
 	var err glib.Error
@@ -1668,6 +2064,17 @@ func (file File) QueryInfoFinish(res AsyncResult) (FileInfo, error) {
 		return FileInfo{}, err.GoValue()
 	}
 	return wrapFileInfo(ret0), nil
+}
+
+// QuerySettableAttributes is a wrapper around g_file_query_settable_attributes().
+func (file File) QuerySettableAttributes(cancellable Cancellable) (FileAttributeInfoList, error) {
+	var err glib.Error
+	ret0 := C.g_file_query_settable_attributes(file.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return FileAttributeInfoList{}, err.GoValue()
+	}
+	return wrapFileAttributeInfoList(ret0), nil
 }
 
 // QueryWritableNamespaces is a wrapper around g_file_query_writable_namespaces().
@@ -1692,6 +2099,12 @@ func (file File) Read(cancellable Cancellable) (FileInputStream, error) {
 	return wrapFileInputStream(ret0), nil
 }
 
+// ReadAsync is a wrapper around g_file_read_async().
+func (file File) ReadAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_read_async(file.native(), C.int(io_priority), cancellable.native(), callback0)
+}
+
 // ReadFinish is a wrapper around g_file_read_finish().
 func (file File) ReadFinish(res AsyncResult) (FileInputStream, error) {
 	var err glib.Error
@@ -1714,6 +2127,14 @@ func (file File) Replace(etag string, make_backup bool, flags FileCreateFlags, c
 		return FileOutputStream{}, err.GoValue()
 	}
 	return wrapFileOutputStream(ret0), nil
+}
+
+// ReplaceAsync is a wrapper around g_file_replace_async().
+func (file File) ReplaceAsync(etag string, make_backup bool, flags FileCreateFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	etag0 := C.CString(etag)
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_replace_async(file.native(), etag0, C.gboolean(util.Bool2Int(make_backup)) /*go:.util*/, C.GFileCreateFlags(flags), C.int(io_priority), cancellable.native(), callback0)
+	C.free(unsafe.Pointer(etag0)) /*ch:<stdlib.h>*/
 }
 
 // ReplaceFinish is a wrapper around g_file_replace_finish().
@@ -1757,6 +2178,19 @@ func (file File) ResolveRelativePath(relative_path string) File {
 	ret0 := C.g_file_resolve_relative_path(file.native(), relative_path0)
 	C.free(unsafe.Pointer(relative_path0)) /*ch:<stdlib.h>*/
 	return wrapFile(ret0)
+}
+
+// SetAttribute is a wrapper around g_file_set_attribute().
+func (file File) SetAttribute(attribute string, type_ FileAttributeType, value_p unsafe.Pointer, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
+	attribute0 := C.CString(attribute)
+	var err glib.Error
+	ret0 := C.g_file_set_attribute(file.native(), attribute0, C.GFileAttributeType(type_), C.gpointer(value_p), C.GFileQueryInfoFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
 }
 
 // SetAttributeByteString is a wrapper around g_file_set_attribute_byte_string().
@@ -1841,6 +2275,12 @@ func (file File) SetAttributeUint64(attribute string, value uint64, flags FileQu
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
 }
 
+// SetAttributesAsync is a wrapper around g_file_set_attributes_async().
+func (file File) SetAttributesAsync(info FileInfo, flags FileQueryInfoFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_set_attributes_async(file.native(), info.native(), C.GFileQueryInfoFlags(flags), C.int(io_priority), cancellable.native(), callback0)
+}
+
 // SetAttributesFinish is a wrapper around g_file_set_attributes_finish().
 func (file File) SetAttributesFinish(result AsyncResult) (bool, FileInfo, error) {
 	var info0 *C.GFileInfo
@@ -1877,6 +2317,14 @@ func (file File) SetDisplayName(display_name string, cancellable Cancellable) (F
 	return wrapFile(ret0), nil
 }
 
+// SetDisplayNameAsync is a wrapper around g_file_set_display_name_async().
+func (file File) SetDisplayNameAsync(display_name string, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	display_name0 := C.CString(display_name)
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_set_display_name_async(file.native(), display_name0, C.int(io_priority), cancellable.native(), callback0)
+	C.free(unsafe.Pointer(display_name0)) /*ch:<stdlib.h>*/
+}
+
 // SetDisplayNameFinish is a wrapper around g_file_set_display_name_finish().
 func (file File) SetDisplayNameFinish(res AsyncResult) (File, error) {
 	var err glib.Error
@@ -1888,6 +2336,12 @@ func (file File) SetDisplayNameFinish(res AsyncResult) (File, error) {
 	return wrapFile(ret0), nil
 }
 
+// StartMountable is a wrapper around g_file_start_mountable().
+func (file File) StartMountable(flags DriveStartFlags, start_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_start_mountable(file.native(), C.GDriveStartFlags(flags), start_operation.native(), cancellable.native(), callback0)
+}
+
 // StartMountableFinish is a wrapper around g_file_start_mountable_finish().
 func (file File) StartMountableFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
@@ -1897,6 +2351,12 @@ func (file File) StartMountableFinish(result AsyncResult) (bool, error) {
 		return false, err.GoValue()
 	}
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// StopMountable is a wrapper around g_file_stop_mountable().
+func (file File) StopMountable(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_stop_mountable(file.native(), C.GMountUnmountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
 }
 
 // StopMountableFinish is a wrapper around g_file_stop_mountable_finish().
@@ -1927,6 +2387,12 @@ func (file File) Trash(cancellable Cancellable) (bool, error) {
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
 }
 
+// TrashAsync is a wrapper around g_file_trash_async().
+func (file File) TrashAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_trash_async(file.native(), C.int(io_priority), cancellable.native(), callback0)
+}
+
 // TrashFinish is a wrapper around g_file_trash_finish().
 func (file File) TrashFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
@@ -1936,6 +2402,12 @@ func (file File) TrashFinish(result AsyncResult) (bool, error) {
 		return false, err.GoValue()
 	}
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// UnmountMountableWithOperation is a wrapper around g_file_unmount_mountable_with_operation().
+func (file File) UnmountMountableWithOperation(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_unmount_mountable_with_operation(file.native(), C.GMountUnmountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
 }
 
 // UnmountMountableWithOperationFinish is a wrapper around g_file_unmount_mountable_with_operation_finish().
@@ -2150,6 +2622,12 @@ func (stream OutputStream) Close(cancellable Cancellable) (bool, error) {
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
 }
 
+// CloseAsync is a wrapper around g_output_stream_close_async().
+func (stream OutputStream) CloseAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_output_stream_close_async(stream.native(), C.int(io_priority), cancellable.native(), callback0)
+}
+
 // CloseFinish is a wrapper around g_output_stream_close_finish().
 func (stream OutputStream) CloseFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
@@ -2170,6 +2648,12 @@ func (stream OutputStream) Flush(cancellable Cancellable) (bool, error) {
 		return false, err.GoValue()
 	}
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// FlushAsync is a wrapper around g_output_stream_flush_async().
+func (stream OutputStream) FlushAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_output_stream_flush_async(stream.native(), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // FlushFinish is a wrapper around g_output_stream_flush_finish().
@@ -2223,6 +2707,12 @@ func (stream OutputStream) Splice(source InputStream, flags OutputStreamSpliceFl
 	return int(ret0), nil
 }
 
+// SpliceAsync is a wrapper around g_output_stream_splice_async().
+func (stream OutputStream) SpliceAsync(source InputStream, flags OutputStreamSpliceFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_output_stream_splice_async(stream.native(), source.native(), C.GOutputStreamSpliceFlags(flags), C.int(io_priority), cancellable.native(), callback0)
+}
+
 // SpliceFinish is a wrapper around g_output_stream_splice_finish().
 func (stream OutputStream) SpliceFinish(result AsyncResult) (int, error) {
 	var err glib.Error
@@ -2255,6 +2745,12 @@ func (stream OutputStream) WriteBytes(bytes glib.Bytes, cancellable Cancellable)
 		return 0, err.GoValue()
 	}
 	return int(ret0), nil
+}
+
+// WriteBytesAsync is a wrapper around g_output_stream_write_bytes_async().
+func (stream OutputStream) WriteBytesAsync(bytes glib.Bytes, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_output_stream_write_bytes_async(stream.native(), (*C.GBytes)(bytes.Ptr), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // WriteBytesFinish is a wrapper around g_output_stream_write_bytes_finish().
@@ -2327,6 +2823,14 @@ func (stream FileOutputStream) QueryInfo(attributes string, cancellable Cancella
 		return FileInfo{}, err.GoValue()
 	}
 	return wrapFileInfo(ret0), nil
+}
+
+// QueryInfoAsync is a wrapper around g_file_output_stream_query_info_async().
+func (stream FileOutputStream) QueryInfoAsync(attributes string, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	attributes0 := C.CString(attributes)
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_output_stream_query_info_async(stream.native(), attributes0, C.int(io_priority), cancellable.native(), callback0)
+	C.free(unsafe.Pointer(attributes0)) /*ch:<stdlib.h>*/
 }
 
 // QueryInfoFinish is a wrapper around g_file_output_stream_query_info_finish().
@@ -3613,6 +4117,12 @@ func (stream IOStream) Close(cancellable Cancellable) (bool, error) {
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
 }
 
+// CloseAsync is a wrapper around g_io_stream_close_async().
+func (stream IOStream) CloseAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_io_stream_close_async(stream.native(), C.int(io_priority), cancellable.native(), callback0)
+}
+
 // CloseFinish is a wrapper around g_io_stream_close_finish().
 func (stream IOStream) CloseFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
@@ -3657,6 +4167,12 @@ func (stream IOStream) SetPending() (bool, error) {
 		return false, err.GoValue()
 	}
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// SpliceAsync is a wrapper around g_io_stream_splice_async().
+func (stream1 IOStream) SpliceAsync(stream2 IOStream, flags IOStreamSpliceFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_io_stream_splice_async(stream1.native(), stream2.native(), C.GIOStreamSpliceFlags(flags), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // IOStreamSpliceFinish is a wrapper around g_io_stream_splice_finish().
@@ -3712,6 +4228,12 @@ func (stream InputStream) Close(cancellable Cancellable) (bool, error) {
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
 }
 
+// CloseAsync is a wrapper around g_input_stream_close_async().
+func (stream InputStream) CloseAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_input_stream_close_async(stream.native(), C.int(io_priority), cancellable.native(), callback0)
+}
+
 // CloseFinish is a wrapper around g_input_stream_close_finish().
 func (stream InputStream) CloseFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
@@ -3758,6 +4280,12 @@ func (stream InputStream) ReadBytes(count uint, cancellable Cancellable) (glib.B
 	return glib.WrapBytes(unsafe.Pointer(ret0)) /*gir:GLib*/, nil
 }
 
+// ReadBytesAsync is a wrapper around g_input_stream_read_bytes_async().
+func (stream InputStream) ReadBytesAsync(count uint, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_input_stream_read_bytes_async(stream.native(), C.gsize(count), C.int(io_priority), cancellable.native(), callback0)
+}
+
 // ReadBytesFinish is a wrapper around g_input_stream_read_bytes_finish().
 func (stream InputStream) ReadBytesFinish(result AsyncResult) (glib.Bytes, error) {
 	var err glib.Error
@@ -3800,6 +4328,12 @@ func (stream InputStream) Skip(count uint, cancellable Cancellable) (int, error)
 		return 0, err.GoValue()
 	}
 	return int(ret0), nil
+}
+
+// SkipAsync is a wrapper around g_input_stream_skip_async().
+func (stream InputStream) SkipAsync(count uint, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_input_stream_skip_async(stream.native(), C.gsize(count), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // SkipFinish is a wrapper around g_input_stream_skip_finish().
@@ -3863,6 +4397,14 @@ func (stream FileIOStream) QueryInfo(attributes string, cancellable Cancellable)
 	return wrapFileInfo(ret0), nil
 }
 
+// QueryInfoAsync is a wrapper around g_file_io_stream_query_info_async().
+func (stream FileIOStream) QueryInfoAsync(attributes string, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	attributes0 := C.CString(attributes)
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_io_stream_query_info_async(stream.native(), attributes0, C.int(io_priority), cancellable.native(), callback0)
+	C.free(unsafe.Pointer(attributes0)) /*ch:<stdlib.h>*/
+}
+
 // QueryInfoFinish is a wrapper around g_file_io_stream_query_info_finish().
 func (stream FileIOStream) QueryInfoFinish(result AsyncResult) (FileInfo, error) {
 	var err glib.Error
@@ -3909,6 +4451,12 @@ func (enumerator FileEnumerator) Close(cancellable Cancellable) (bool, error) {
 		return false, err.GoValue()
 	}
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// CloseAsync is a wrapper around g_file_enumerator_close_async().
+func (enumerator FileEnumerator) CloseAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_enumerator_close_async(enumerator.native(), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // CloseFinish is a wrapper around g_file_enumerator_close_finish().
@@ -3970,6 +4518,24 @@ func (enumerator FileEnumerator) NextFile(cancellable Cancellable) (FileInfo, er
 	return wrapFileInfo(ret0), nil
 }
 
+// NextFilesAsync is a wrapper around g_file_enumerator_next_files_async().
+func (enumerator FileEnumerator) NextFilesAsync(num_files int, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_enumerator_next_files_async(enumerator.native(), C.int(num_files), C.int(io_priority), cancellable.native(), callback0)
+}
+
+// NextFilesFinish is a wrapper around g_file_enumerator_next_files_finish().
+func (enumerator FileEnumerator) NextFilesFinish(result AsyncResult) (glib.List, error) {
+	var err glib.Error
+	ret0 := C.g_file_enumerator_next_files_finish(enumerator.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return glib.List{}, err.GoValue()
+	}
+	return glib.WrapList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapFileInfo(p) }), /*gir:GLib*/ nil
+}
+
 // SetPending is a wrapper around g_file_enumerator_set_pending().
 func (enumerator FileEnumerator) SetPending(pending bool) {
 	C.g_file_enumerator_set_pending(enumerator.native(), C.gboolean(util.Bool2Int(pending)) /*go:.util*/)
@@ -4009,6 +4575,12 @@ func (mount Mount) CanEject() bool {
 func (mount Mount) CanUnmount() bool {
 	ret0 := C.g_mount_can_unmount(mount.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// EjectWithOperation is a wrapper around g_mount_eject_with_operation().
+func (mount Mount) EjectWithOperation(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_mount_eject_with_operation(mount.native(), C.GMountUnmountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
 }
 
 // EjectWithOperationFinish is a wrapper around g_mount_eject_with_operation_finish().
@@ -4081,6 +4653,12 @@ func (mount Mount) GetVolume() Volume {
 	return wrapVolume(ret0)
 }
 
+// GuessContentType is a wrapper around g_mount_guess_content_type().
+func (mount Mount) GuessContentType(force_rescan bool, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_mount_guess_content_type(mount.native(), C.gboolean(util.Bool2Int(force_rescan)) /*go:.util*/, cancellable.native(), callback0)
+}
+
 // GuessContentTypeFinish is a wrapper around g_mount_guess_content_type_finish().
 func (mount Mount) GuessContentTypeFinish(result AsyncResult) ([]string, error) {
 	var err glib.Error
@@ -4129,6 +4707,12 @@ func (mount Mount) IsShadowed() bool {
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
+// Remount is a wrapper around g_mount_remount().
+func (mount Mount) Remount(flags MountMountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_mount_remount(mount.native(), C.GMountMountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
+}
+
 // RemountFinish is a wrapper around g_mount_remount_finish().
 func (mount Mount) RemountFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
@@ -4143,6 +4727,12 @@ func (mount Mount) RemountFinish(result AsyncResult) (bool, error) {
 // Shadow is a wrapper around g_mount_shadow().
 func (mount Mount) Shadow() {
 	C.g_mount_shadow(mount.native())
+}
+
+// UnmountWithOperation is a wrapper around g_mount_unmount_with_operation().
+func (mount Mount) UnmountWithOperation(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_mount_unmount_with_operation(mount.native(), C.GMountUnmountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
 }
 
 // UnmountWithOperationFinish is a wrapper around g_mount_unmount_with_operation_finish().
@@ -4215,6 +4805,12 @@ func (drive Drive) CanStop() bool {
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
+// EjectWithOperation is a wrapper around g_drive_eject_with_operation().
+func (drive Drive) EjectWithOperation(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_drive_eject_with_operation(drive.native(), C.GMountUnmountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
+}
+
 // EjectWithOperationFinish is a wrapper around g_drive_eject_with_operation_finish().
 func (drive Drive) EjectWithOperationFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
@@ -4285,6 +4881,13 @@ func (drive Drive) GetSymbolicIcon() Icon {
 	return wrapIcon(ret0)
 }
 
+// GetVolumes is a wrapper around g_drive_get_volumes().
+func (drive Drive) GetVolumes() glib.List {
+	ret0 := C.g_drive_get_volumes(drive.native())
+	return glib.WrapList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapVolume(p) }) /*gir:GLib*/
+}
+
 // HasMedia is a wrapper around g_drive_has_media().
 func (drive Drive) HasMedia() bool {
 	ret0 := C.g_drive_has_media(drive.native())
@@ -4315,6 +4918,12 @@ func (drive Drive) IsRemovable() bool {
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
+// PollForMedia is a wrapper around g_drive_poll_for_media().
+func (drive Drive) PollForMedia(cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_drive_poll_for_media(drive.native(), cancellable.native(), callback0)
+}
+
 // PollForMediaFinish is a wrapper around g_drive_poll_for_media_finish().
 func (drive Drive) PollForMediaFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
@@ -4326,6 +4935,12 @@ func (drive Drive) PollForMediaFinish(result AsyncResult) (bool, error) {
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
 }
 
+// Start is a wrapper around g_drive_start().
+func (drive Drive) Start(flags DriveStartFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_drive_start(drive.native(), C.GDriveStartFlags(flags), mount_operation.native(), cancellable.native(), callback0)
+}
+
 // StartFinish is a wrapper around g_drive_start_finish().
 func (drive Drive) StartFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
@@ -4335,6 +4950,12 @@ func (drive Drive) StartFinish(result AsyncResult) (bool, error) {
 		return false, err.GoValue()
 	}
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// Stop is a wrapper around g_drive_stop().
+func (drive Drive) Stop(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_drive_stop(drive.native(), C.GMountUnmountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
 }
 
 // StopFinish is a wrapper around g_drive_stop_finish().
@@ -4382,6 +5003,12 @@ func (volume Volume) CanEject() bool {
 func (volume Volume) CanMount() bool {
 	ret0 := C.g_volume_can_mount(volume.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// EjectWithOperation is a wrapper around g_volume_eject_with_operation().
+func (volume Volume) EjectWithOperation(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_volume_eject_with_operation(volume.native(), C.GMountUnmountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
 }
 
 // EjectWithOperationFinish is a wrapper around g_volume_eject_with_operation_finish().
@@ -4474,6 +5101,12 @@ func (volume Volume) GetUuid() string {
 	return ret
 }
 
+// Mount is a wrapper around g_volume_mount().
+func (volume Volume) Mount(flags MountMountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_volume_mount(volume.native(), C.GMountMountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
+}
+
 // MountFinish is a wrapper around g_volume_mount_finish().
 func (volume Volume) MountFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
@@ -4560,6 +5193,13 @@ func FileAttributeInfoListNew() FileAttributeInfoList {
 	return wrapFileAttributeInfoList(ret0)
 }
 
+// Add is a wrapper around g_file_attribute_info_list_add().
+func (list FileAttributeInfoList) Add(name string, type_ FileAttributeType, flags FileAttributeInfoFlags) {
+	name0 := C.CString(name)
+	C.g_file_attribute_info_list_add(list.native(), name0, C.GFileAttributeType(type_), C.GFileAttributeInfoFlags(flags))
+	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+}
+
 // Dup is a wrapper around g_file_attribute_info_list_dup().
 func (list FileAttributeInfoList) Dup() FileAttributeInfoList {
 	ret0 := C.g_file_attribute_info_list_dup(list.native())
@@ -4640,6 +5280,14 @@ func (stream FileInputStream) QueryInfo(attributes string, cancellable Cancellab
 		return FileInfo{}, err.GoValue()
 	}
 	return wrapFileInfo(ret0), nil
+}
+
+// QueryInfoAsync is a wrapper around g_file_input_stream_query_info_async().
+func (stream FileInputStream) QueryInfoAsync(attributes string, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	attributes0 := C.CString(attributes)
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_input_stream_query_info_async(stream.native(), attributes0, C.int(io_priority), cancellable.native(), callback0)
+	C.free(unsafe.Pointer(attributes0)) /*ch:<stdlib.h>*/
 }
 
 // QueryInfoFinish is a wrapper around g_file_input_stream_query_info_finish().
@@ -4859,6 +5507,12 @@ func (v AsyncInitable) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 
+// InitAsync is a wrapper around g_async_initable_init_async().
+func (initable AsyncInitable) InitAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_async_initable_init_async(initable.native(), C.int(io_priority), cancellable.native(), callback0)
+}
+
 // InitFinish is a wrapper around g_async_initable_init_finish().
 func (initable AsyncInitable) InitFinish(res AsyncResult) (bool, error) {
 	var err glib.Error
@@ -4914,6 +5568,118 @@ func (initable Initable) Init(cancellable Cancellable) (bool, error) {
 		return false, err.GoValue()
 	}
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// Object MountOperation
+type MountOperation struct {
+	gobject.Object
+}
+
+func (v MountOperation) native() *C.GMountOperation {
+	return (*C.GMountOperation)(v.Ptr)
+}
+func wrapMountOperation(p *C.GMountOperation) (v MountOperation) {
+	v.Ptr = unsafe.Pointer(p)
+	return
+}
+func WrapMountOperation(p unsafe.Pointer) (v MountOperation) {
+	v.Ptr = p
+	return
+}
+func (v MountOperation) GetType() gobject.Type {
+	return gobject.Type(C.g_mount_operation_get_type())
+}
+func (v MountOperation) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapMountOperation(unsafe.Pointer(ptr)), nil
+	}
+}
+
+// MountOperationNew is a wrapper around g_mount_operation_new().
+func MountOperationNew() MountOperation {
+	ret0 := C.g_mount_operation_new()
+	return wrapMountOperation(ret0)
+}
+
+// GetAnonymous is a wrapper around g_mount_operation_get_anonymous().
+func (op MountOperation) GetAnonymous() bool {
+	ret0 := C.g_mount_operation_get_anonymous(op.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// GetChoice is a wrapper around g_mount_operation_get_choice().
+func (op MountOperation) GetChoice() int {
+	ret0 := C.g_mount_operation_get_choice(op.native())
+	return int(ret0)
+}
+
+// GetDomain is a wrapper around g_mount_operation_get_domain().
+func (op MountOperation) GetDomain() string {
+	ret0 := C.g_mount_operation_get_domain(op.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// GetPassword is a wrapper around g_mount_operation_get_password().
+func (op MountOperation) GetPassword() string {
+	ret0 := C.g_mount_operation_get_password(op.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// GetPasswordSave is a wrapper around g_mount_operation_get_password_save().
+func (op MountOperation) GetPasswordSave() PasswordSave {
+	ret0 := C.g_mount_operation_get_password_save(op.native())
+	return PasswordSave(ret0)
+}
+
+// GetUsername is a wrapper around g_mount_operation_get_username().
+func (op MountOperation) GetUsername() string {
+	ret0 := C.g_mount_operation_get_username(op.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// Reply is a wrapper around g_mount_operation_reply().
+func (op MountOperation) Reply(result MountOperationResult) {
+	C.g_mount_operation_reply(op.native(), C.GMountOperationResult(result))
+}
+
+// SetAnonymous is a wrapper around g_mount_operation_set_anonymous().
+func (op MountOperation) SetAnonymous(anonymous bool) {
+	C.g_mount_operation_set_anonymous(op.native(), C.gboolean(util.Bool2Int(anonymous)) /*go:.util*/)
+}
+
+// SetChoice is a wrapper around g_mount_operation_set_choice().
+func (op MountOperation) SetChoice(choice int) {
+	C.g_mount_operation_set_choice(op.native(), C.int(choice))
+}
+
+// SetDomain is a wrapper around g_mount_operation_set_domain().
+func (op MountOperation) SetDomain(domain string) {
+	domain0 := C.CString(domain)
+	C.g_mount_operation_set_domain(op.native(), domain0)
+	C.free(unsafe.Pointer(domain0)) /*ch:<stdlib.h>*/
+}
+
+// SetPassword is a wrapper around g_mount_operation_set_password().
+func (op MountOperation) SetPassword(password string) {
+	password0 := C.CString(password)
+	C.g_mount_operation_set_password(op.native(), password0)
+	C.free(unsafe.Pointer(password0)) /*ch:<stdlib.h>*/
+}
+
+// SetPasswordSave is a wrapper around g_mount_operation_set_password_save().
+func (op MountOperation) SetPasswordSave(save PasswordSave) {
+	C.g_mount_operation_set_password_save(op.native(), C.GPasswordSave(save))
+}
+
+// SetUsername is a wrapper around g_mount_operation_set_username().
+func (op MountOperation) SetUsername(username string) {
+	username0 := C.CString(username)
+	C.g_mount_operation_set_username(op.native(), username0)
+	C.free(unsafe.Pointer(username0)) /*ch:<stdlib.h>*/
 }
 
 type BusType int

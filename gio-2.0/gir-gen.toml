@@ -1,10 +1,11 @@
+callbacks = ["AsyncReadyCallback","FileProgressCallback","FileMeasureProgressCallback"]
 funcs = []
 namespace = "Gio"
 version = "2.0"
 
 [[types]]
-  err_funcs = ["g_app_info_launch_default_for_uri_async"]
-  funcs = ["g_app_info_get_id","g_app_info_get_supported_types","g_app_info_add_supports_type","g_app_info_can_delete","g_app_info_can_remove_supports_type","g_app_info_delete","g_app_info_dup","g_app_info_equal","g_app_info_get_commandline","g_app_info_get_description","g_app_info_get_display_name","g_app_info_get_executable","g_app_info_get_icon","g_app_info_get_name","g_app_info_remove_supports_type","g_app_info_set_as_default_for_extension","g_app_info_set_as_default_for_type","g_app_info_set_as_last_used_for_type","g_app_info_should_show","g_app_info_supports_files","g_app_info_supports_uris","g_app_info_create_from_commandline","g_app_info_get_all_for_type","g_app_info_get_default_for_type","g_app_info_get_default_for_uri_scheme","g_app_info_get_fallback_for_type","g_app_info_get_recommended_for_type","g_app_info_launch_default_for_uri","g_app_info_launch_default_for_uri_finish","g_app_info_reset_type_associations","g_app_info_get_all","g_app_info_launch_uris","g_app_info_launch"]
+  err_funcs = []
+  funcs = ["g_app_info_get_id","g_app_info_get_supported_types","g_app_info_add_supports_type","g_app_info_can_delete","g_app_info_can_remove_supports_type","g_app_info_delete","g_app_info_dup","g_app_info_equal","g_app_info_get_commandline","g_app_info_get_description","g_app_info_get_display_name","g_app_info_get_executable","g_app_info_get_icon","g_app_info_get_name","g_app_info_remove_supports_type","g_app_info_set_as_default_for_extension","g_app_info_set_as_default_for_type","g_app_info_set_as_last_used_for_type","g_app_info_should_show","g_app_info_supports_files","g_app_info_supports_uris","g_app_info_create_from_commandline","g_app_info_get_all_for_type","g_app_info_get_default_for_type","g_app_info_get_default_for_uri_scheme","g_app_info_get_fallback_for_type","g_app_info_get_recommended_for_type","g_app_info_launch_default_for_uri","g_app_info_launch_default_for_uri_finish","g_app_info_reset_type_associations","g_app_info_get_all","g_app_info_launch_uris","g_app_info_launch","g_app_info_launch_default_for_uri_async"]
   ignore_funcs = []
   manual_funcs = []
   name = "AppInfo"
@@ -24,9 +25,9 @@ version = "2.0"
   name = "AppLaunchContext"
 
 [[types]]
-  err_funcs = ["g_settings_bind_with_mapping","g_settings_get_mapped","g_settings_list_relocatable_schemas","g_settings_list_schemas"]
+  err_funcs = ["g_settings_get_mapped","g_settings_bind_with_mapping"]
   funcs = ["g_settings_new","g_settings_get_value","g_settings_get_string","g_settings_get_boolean","g_settings_get_int","g_settings_get_int64","g_settings_get_uint","g_settings_get_uint64","g_settings_get_double","g_settings_get_enum","g_settings_get_flags","g_settings_get_child","g_settings_get_strv","g_settings_apply","g_settings_new_full","g_settings_new_with_backend","g_settings_new_with_backend_and_path","g_settings_new_with_path","g_settings_bind","g_settings_bind_writable","g_settings_create_action","g_settings_delay","g_settings_get_default_value","g_settings_get_has_unapplied","g_settings_get_user_value","g_settings_is_writable","g_settings_list_children","g_settings_reset","g_settings_revert","g_settings_set_boolean","g_settings_set_double","g_settings_set_enum","g_settings_set_flags","g_settings_set_int","g_settings_set_int64","g_settings_set_string","g_settings_set_strv","g_settings_set_uint","g_settings_set_uint64","g_settings_set_value","g_settings_sync","g_settings_unbind"]
-  ignore_funcs = ["g_settings_list_keys","g_settings_get_range","g_settings_range_check","g_settings_get","g_settings_set"]
+  ignore_funcs = ["g_settings_list_keys","g_settings_get_range","g_settings_range_check","g_settings_get","g_settings_set","g_settings_list_relocatable_schemas","g_settings_list_schemas"]
   manual_funcs = []
   name = "Settings"
 
@@ -52,9 +53,9 @@ version = "2.0"
   name = "Action"
 
 [[types]]
-  err_funcs = ["g_file_append_to_async","g_file_copy","g_file_copy_async","g_file_create_async","g_file_create_readwrite_async","g_file_delete_async","g_file_eject_mountable","g_file_eject_mountable_with_operation","g_file_enumerate_children","g_file_enumerate_children_async","g_file_find_enclosing_mount","g_file_find_enclosing_mount_async","g_file_hash","g_file_load_contents","g_file_load_contents_async","g_file_load_contents_finish","g_file_load_partial_contents_async","g_file_load_partial_contents_finish","g_file_make_directory_async","g_file_measure_disk_usage","g_file_measure_disk_usage_async","g_file_measure_disk_usage_finish","g_file_mount_enclosing_volume","g_file_mount_mountable","g_file_move","g_file_open_readwrite_async","g_file_poll_mountable","g_file_query_filesystem_info_async","g_file_query_info_async","g_file_query_settable_attributes","g_file_read_async","g_file_replace_async","g_file_replace_contents","g_file_replace_contents_async","g_file_replace_contents_bytes_async","g_file_replace_contents_finish","g_file_replace_readwrite_async","g_file_set_attribute","g_file_set_attributes_async","g_file_set_display_name_async","g_file_start_mountable","g_file_stop_mountable","g_file_trash_async","g_file_unmount_mountable","g_file_unmount_mountable_with_operation"]
-  funcs = ["g_file_replace","g_file_get_path","g_file_append_to","g_file_append_to_finish","g_file_copy_attributes","g_file_copy_finish","g_file_create","g_file_create_finish","g_file_create_readwrite","g_file_create_readwrite_finish","g_file_delete","g_file_delete_finish","g_file_dup","g_file_eject_mountable_with_operation_finish","g_file_enumerate_children_finish","g_file_equal","g_file_find_enclosing_mount_finish","g_file_get_basename","g_file_get_child","g_file_get_child_for_display_name","g_file_get_parent","g_file_get_parse_name","g_file_get_relative_path","g_file_get_uri","g_file_get_uri_scheme","g_file_has_parent","g_file_has_prefix","g_file_has_uri_scheme","g_file_is_native","g_file_make_directory","g_file_make_directory_finish","g_file_make_directory_with_parents","g_file_make_symbolic_link","g_file_monitor","g_file_monitor_directory","g_file_monitor_file","g_file_mount_enclosing_volume_finish","g_file_mount_mountable_finish","g_file_open_readwrite","g_file_open_readwrite_finish","g_file_poll_mountable_finish","g_file_query_default_handler","g_file_query_exists","g_file_query_file_type","g_file_query_filesystem_info","g_file_query_filesystem_info_finish","g_file_query_info","g_file_query_info_finish","g_file_query_writable_namespaces","g_file_read","g_file_read_finish","g_file_replace_finish","g_file_replace_readwrite","g_file_replace_readwrite_finish","g_file_resolve_relative_path","g_file_set_attribute_byte_string","g_file_set_attribute_int32","g_file_set_attribute_int64","g_file_set_attribute_string","g_file_set_attribute_uint32","g_file_set_attribute_uint64","g_file_set_attributes_finish","g_file_set_attributes_from_info","g_file_set_display_name","g_file_set_display_name_finish","g_file_start_mountable_finish","g_file_stop_mountable_finish","g_file_supports_thread_contexts","g_file_trash","g_file_trash_finish","g_file_unmount_mountable_with_operation_finish","g_file_new_for_commandline_arg","g_file_new_for_commandline_arg_and_cwd","g_file_new_for_path","g_file_new_for_uri","g_file_new_tmp","g_file_parse_name"]
-  ignore_funcs = ["g_file_eject_mountable_finish","g_file_unmount_mountable_finish"]
+  err_funcs = ["g_file_load_contents_async","g_file_load_contents_finish","g_file_load_partial_contents_async","g_file_load_partial_contents_finish","g_file_replace_contents_async","g_file_replace_contents_bytes_async","g_file_replace_contents_finish","g_file_replace_readwrite_async","g_file_replace_contents","g_file_load_contents"]
+  funcs = ["g_file_replace","g_file_get_path","g_file_append_to","g_file_append_to_finish","g_file_copy_attributes","g_file_copy_finish","g_file_create","g_file_create_finish","g_file_create_readwrite","g_file_create_readwrite_finish","g_file_delete","g_file_delete_finish","g_file_dup","g_file_eject_mountable_with_operation_finish","g_file_enumerate_children_finish","g_file_equal","g_file_find_enclosing_mount_finish","g_file_get_basename","g_file_get_child","g_file_get_child_for_display_name","g_file_get_parent","g_file_get_parse_name","g_file_get_relative_path","g_file_get_uri","g_file_get_uri_scheme","g_file_has_parent","g_file_has_prefix","g_file_has_uri_scheme","g_file_is_native","g_file_make_directory","g_file_make_directory_finish","g_file_make_directory_with_parents","g_file_make_symbolic_link","g_file_monitor","g_file_monitor_directory","g_file_monitor_file","g_file_mount_enclosing_volume_finish","g_file_mount_mountable_finish","g_file_open_readwrite","g_file_open_readwrite_finish","g_file_poll_mountable_finish","g_file_query_default_handler","g_file_query_exists","g_file_query_file_type","g_file_query_filesystem_info","g_file_query_filesystem_info_finish","g_file_query_info","g_file_query_info_finish","g_file_query_writable_namespaces","g_file_read","g_file_read_finish","g_file_replace_finish","g_file_replace_readwrite","g_file_replace_readwrite_finish","g_file_resolve_relative_path","g_file_set_attribute_byte_string","g_file_set_attribute_int32","g_file_set_attribute_int64","g_file_set_attribute_string","g_file_set_attribute_uint32","g_file_set_attribute_uint64","g_file_set_attributes_finish","g_file_set_attributes_from_info","g_file_set_display_name","g_file_set_display_name_finish","g_file_start_mountable_finish","g_file_stop_mountable_finish","g_file_supports_thread_contexts","g_file_trash","g_file_trash_finish","g_file_unmount_mountable_with_operation_finish","g_file_new_for_commandline_arg","g_file_new_for_commandline_arg_and_cwd","g_file_new_for_path","g_file_new_for_uri","g_file_new_tmp","g_file_parse_name","g_file_query_info_async","g_file_append_to_async","g_file_copy","g_file_copy_async","g_file_create_async","g_file_create_readwrite_async","g_file_delete_async","g_file_eject_mountable_with_operation","g_file_unmount_mountable_with_operation","g_file_enumerate_children","g_file_enumerate_children_async","g_file_find_enclosing_mount","g_file_find_enclosing_mount_async","g_file_hash","g_file_make_directory_async","g_file_measure_disk_usage","g_file_measure_disk_usage_async","g_file_measure_disk_usage_finish","g_file_mount_enclosing_volume","g_file_mount_mountable","g_file_move","g_file_open_readwrite_async","g_file_poll_mountable","g_file_query_filesystem_info_async","g_file_query_settable_attributes","g_file_read_async","g_file_replace_async","g_file_set_attribute","g_file_set_attributes_async","g_file_set_display_name_async","g_file_start_mountable","g_file_stop_mountable","g_file_trash_async"]
+  ignore_funcs = ["g_file_eject_mountable_finish","g_file_unmount_mountable_finish","g_file_eject_mountable","g_file_unmount_mountable"]
   manual_funcs = []
   name = "File"
 
@@ -66,15 +67,15 @@ version = "2.0"
   name = "Cancellable"
 
 [[types]]
-  err_funcs = ["g_output_stream_close_async","g_output_stream_flush_async","g_output_stream_splice_async","g_output_stream_write_all","g_output_stream_write_all_async","g_output_stream_write_async","g_output_stream_write_bytes_async","g_output_stream_write"]
-  funcs = ["g_output_stream_clear_pending","g_output_stream_close","g_output_stream_close_finish","g_output_stream_flush","g_output_stream_flush_finish","g_output_stream_has_pending","g_output_stream_is_closed","g_output_stream_is_closing","g_output_stream_set_pending","g_output_stream_splice","g_output_stream_splice_finish","g_output_stream_write_all_finish","g_output_stream_write_bytes","g_output_stream_write_bytes_finish","g_output_stream_write_finish"]
+  err_funcs = ["g_output_stream_write","g_output_stream_write_all","g_output_stream_write_all_async","g_output_stream_write_async"]
+  funcs = ["g_output_stream_clear_pending","g_output_stream_close","g_output_stream_close_finish","g_output_stream_flush","g_output_stream_flush_finish","g_output_stream_has_pending","g_output_stream_is_closed","g_output_stream_is_closing","g_output_stream_set_pending","g_output_stream_splice","g_output_stream_splice_finish","g_output_stream_write_all_finish","g_output_stream_write_bytes","g_output_stream_write_bytes_finish","g_output_stream_write_finish","g_output_stream_close_async","g_output_stream_flush_async","g_output_stream_splice_async","g_output_stream_write_bytes_async"]
   ignore_funcs = ["g_output_stream_printf","g_output_stream_vprintf"]
   manual_funcs = []
   name = "OutputStream"
 
 [[types]]
-  err_funcs = ["g_file_output_stream_query_info_async"]
-  funcs = ["g_file_output_stream_query_info","g_file_output_stream_get_etag","g_file_output_stream_query_info_finish"]
+  err_funcs = []
+  funcs = ["g_file_output_stream_query_info","g_file_output_stream_get_etag","g_file_output_stream_query_info_finish","g_file_output_stream_query_info_async"]
   ignore_funcs = []
   manual_funcs = []
   name = "FileOutputStream"
@@ -143,51 +144,51 @@ version = "2.0"
   name = "AsyncResult"
 
 [[types]]
-  err_funcs = ["g_io_stream_close_async","g_io_stream_splice_async"]
-  funcs = ["g_io_stream_clear_pending","g_io_stream_close","g_io_stream_close_finish","g_io_stream_get_input_stream","g_io_stream_get_output_stream","g_io_stream_has_pending","g_io_stream_is_closed","g_io_stream_set_pending","g_io_stream_splice_finish"]
+  err_funcs = []
+  funcs = ["g_io_stream_clear_pending","g_io_stream_close","g_io_stream_close_finish","g_io_stream_get_input_stream","g_io_stream_get_output_stream","g_io_stream_has_pending","g_io_stream_is_closed","g_io_stream_set_pending","g_io_stream_splice_finish","g_io_stream_close_async","g_io_stream_splice_async"]
   ignore_funcs = []
   manual_funcs = []
   name = "IOStream"
 
 [[types]]
-  err_funcs = ["g_input_stream_close_async","g_input_stream_read","g_input_stream_read_all","g_input_stream_read_all_async","g_input_stream_read_async","g_input_stream_read_bytes_async","g_input_stream_skip_async"]
-  funcs = ["g_input_stream_clear_pending","g_input_stream_close","g_input_stream_close_finish","g_input_stream_has_pending","g_input_stream_is_closed","g_input_stream_read_all_finish","g_input_stream_read_bytes","g_input_stream_read_bytes_finish","g_input_stream_read_finish","g_input_stream_set_pending","g_input_stream_skip","g_input_stream_skip_finish"]
+  err_funcs = ["g_input_stream_read","g_input_stream_read_all","g_input_stream_read_all_async","g_input_stream_read_async"]
+  funcs = ["g_input_stream_clear_pending","g_input_stream_close","g_input_stream_close_finish","g_input_stream_has_pending","g_input_stream_is_closed","g_input_stream_read_all_finish","g_input_stream_read_bytes","g_input_stream_read_bytes_finish","g_input_stream_read_finish","g_input_stream_set_pending","g_input_stream_skip","g_input_stream_skip_finish","g_input_stream_close_async","g_input_stream_read_bytes_async","g_input_stream_skip_async"]
   ignore_funcs = []
   manual_funcs = []
   name = "InputStream"
 
 [[types]]
-  err_funcs = ["g_file_io_stream_query_info_async"]
-  funcs = ["g_file_io_stream_get_etag","g_file_io_stream_query_info","g_file_io_stream_query_info_finish"]
+  err_funcs = []
+  funcs = ["g_file_io_stream_get_etag","g_file_io_stream_query_info","g_file_io_stream_query_info_finish","g_file_io_stream_query_info_async"]
   ignore_funcs = []
   manual_funcs = []
   name = "FileIOStream"
 
 [[types]]
-  err_funcs = ["g_file_enumerator_close_async","g_file_enumerator_next_files_async","g_file_enumerator_next_files_finish"]
-  funcs = ["g_file_enumerator_close","g_file_enumerator_close_finish","g_file_enumerator_get_child","g_file_enumerator_get_container","g_file_enumerator_has_pending","g_file_enumerator_is_closed","g_file_enumerator_iterate","g_file_enumerator_next_file","g_file_enumerator_set_pending"]
+  err_funcs = []
+  funcs = ["g_file_enumerator_close","g_file_enumerator_close_finish","g_file_enumerator_get_child","g_file_enumerator_get_container","g_file_enumerator_has_pending","g_file_enumerator_is_closed","g_file_enumerator_iterate","g_file_enumerator_next_file","g_file_enumerator_set_pending","g_file_enumerator_close_async","g_file_enumerator_next_files_async","g_file_enumerator_next_files_finish"]
   ignore_funcs = []
   manual_funcs = []
   name = "FileEnumerator"
 
 [[types]]
-  err_funcs = ["g_mount_eject","g_mount_eject_with_operation","g_mount_guess_content_type","g_mount_remount","g_mount_unmount","g_mount_unmount_with_operation"]
-  funcs = ["g_mount_can_eject","g_mount_can_unmount","g_mount_eject_with_operation_finish","g_mount_get_default_location","g_mount_get_drive","g_mount_get_icon","g_mount_get_name","g_mount_get_root","g_mount_get_sort_key","g_mount_get_symbolic_icon","g_mount_get_uuid","g_mount_get_volume","g_mount_guess_content_type_finish","g_mount_guess_content_type_sync","g_mount_is_shadowed","g_mount_remount_finish","g_mount_shadow","g_mount_unmount_with_operation_finish","g_mount_unshadow"]
-  ignore_funcs = ["g_mount_unmount_finish","g_mount_eject_finish"]
+  err_funcs = []
+  funcs = ["g_mount_can_eject","g_mount_can_unmount","g_mount_eject_with_operation_finish","g_mount_get_default_location","g_mount_get_drive","g_mount_get_icon","g_mount_get_name","g_mount_get_root","g_mount_get_sort_key","g_mount_get_symbolic_icon","g_mount_get_uuid","g_mount_get_volume","g_mount_guess_content_type_finish","g_mount_guess_content_type_sync","g_mount_is_shadowed","g_mount_remount_finish","g_mount_shadow","g_mount_unmount_with_operation_finish","g_mount_unshadow","g_mount_eject_with_operation","g_mount_remount","g_mount_unmount_with_operation","g_mount_guess_content_type"]
+  ignore_funcs = ["g_mount_unmount_finish","g_mount_eject_finish","g_mount_eject","g_mount_unmount"]
   manual_funcs = []
   name = "Mount"
 
 [[types]]
-  err_funcs = ["g_drive_eject","g_drive_eject_with_operation","g_drive_get_volumes","g_drive_poll_for_media","g_drive_start","g_drive_stop"]
-  funcs = ["g_drive_can_eject","g_drive_can_poll_for_media","g_drive_can_start","g_drive_can_start_degraded","g_drive_can_stop","g_drive_eject_with_operation_finish","g_drive_enumerate_identifiers","g_drive_get_icon","g_drive_get_identifier","g_drive_get_name","g_drive_get_sort_key","g_drive_get_start_stop_type","g_drive_get_symbolic_icon","g_drive_has_media","g_drive_has_volumes","g_drive_is_media_check_automatic","g_drive_is_media_removable","g_drive_is_removable","g_drive_poll_for_media_finish","g_drive_start_finish","g_drive_stop_finish"]
-  ignore_funcs = ["g_drive_eject_finish"]
+  err_funcs = []
+  funcs = ["g_drive_can_eject","g_drive_can_poll_for_media","g_drive_can_start","g_drive_can_start_degraded","g_drive_can_stop","g_drive_eject_with_operation_finish","g_drive_enumerate_identifiers","g_drive_get_icon","g_drive_get_identifier","g_drive_get_name","g_drive_get_sort_key","g_drive_get_start_stop_type","g_drive_get_symbolic_icon","g_drive_has_media","g_drive_has_volumes","g_drive_is_media_check_automatic","g_drive_is_media_removable","g_drive_is_removable","g_drive_poll_for_media_finish","g_drive_start_finish","g_drive_stop_finish","g_drive_eject_with_operation","g_drive_get_volumes","g_drive_poll_for_media","g_drive_start","g_drive_stop"]
+  ignore_funcs = ["g_drive_eject_finish","g_drive_eject"]
   manual_funcs = []
   name = "Drive"
 
 [[types]]
-  err_funcs = ["g_volume_eject","g_volume_eject_with_operation","g_volume_mount"]
-  funcs = ["g_volume_can_eject","g_volume_can_mount","g_volume_eject_with_operation_finish","g_volume_enumerate_identifiers","g_volume_get_activation_root","g_volume_get_drive","g_volume_get_icon","g_volume_get_identifier","g_volume_get_mount","g_volume_get_name","g_volume_get_sort_key","g_volume_get_symbolic_icon","g_volume_get_uuid","g_volume_mount_finish","g_volume_should_automount"]
-  ignore_funcs = ["g_volume_eject_finish"]
+  err_funcs = []
+  funcs = ["g_volume_can_eject","g_volume_can_mount","g_volume_eject_with_operation_finish","g_volume_enumerate_identifiers","g_volume_get_activation_root","g_volume_get_drive","g_volume_get_icon","g_volume_get_identifier","g_volume_get_mount","g_volume_get_name","g_volume_get_sort_key","g_volume_get_symbolic_icon","g_volume_get_uuid","g_volume_mount_finish","g_volume_should_automount","g_volume_eject_with_operation","g_volume_mount"]
+  ignore_funcs = ["g_volume_eject_finish","g_volume_eject"]
   manual_funcs = []
   name = "Volume"
 
@@ -199,8 +200,8 @@ version = "2.0"
   name = "FileMonitor"
 
 [[types]]
-  err_funcs = ["g_file_attribute_info_list_add"]
-  funcs = ["g_file_attribute_info_list_new","g_file_attribute_info_list_dup","g_file_attribute_info_list_lookup","g_file_attribute_info_list_ref","g_file_attribute_info_list_unref"]
+  err_funcs = []
+  funcs = ["g_file_attribute_info_list_new","g_file_attribute_info_list_dup","g_file_attribute_info_list_lookup","g_file_attribute_info_list_ref","g_file_attribute_info_list_unref","g_file_attribute_info_list_add"]
   ignore_funcs = []
   manual_funcs = []
   name = "FileAttributeInfoList"
@@ -213,8 +214,8 @@ version = "2.0"
   name = "FileAttributeInfo"
 
 [[types]]
-  err_funcs = ["g_file_input_stream_query_info_async"]
-  funcs = ["g_file_input_stream_query_info","g_file_input_stream_query_info_finish"]
+  err_funcs = []
+  funcs = ["g_file_input_stream_query_info","g_file_input_stream_query_info_finish","g_file_input_stream_query_info_async"]
   ignore_funcs = []
   manual_funcs = []
   name = "FileInputStream"
@@ -241,9 +242,9 @@ version = "2.0"
   name = "DBusConnection"
 
 [[types]]
-  err_funcs = ["g_async_initable_init_async","g_async_initable_new_async","g_async_initable_new_valist_async","g_async_initable_newv_async"]
-  funcs = ["g_async_initable_init_finish","g_async_initable_new_finish"]
-  ignore_funcs = []
+  err_funcs = ["g_async_initable_newv_async"]
+  funcs = ["g_async_initable_init_finish","g_async_initable_new_finish","g_async_initable_init_async"]
+  ignore_funcs = ["g_async_initable_new_valist_async", "g_async_initable_new_async"]
   manual_funcs = []
   name = "AsyncInitable"
 
@@ -253,3 +254,10 @@ version = "2.0"
   ignore_funcs = []
   manual_funcs = []
   name = "Initable"
+
+[[types]]
+  err_funcs = []
+  funcs = ["g_mount_operation_new","g_mount_operation_get_anonymous","g_mount_operation_get_choice","g_mount_operation_get_domain","g_mount_operation_get_password","g_mount_operation_get_password_save","g_mount_operation_get_username","g_mount_operation_reply","g_mount_operation_set_anonymous","g_mount_operation_set_choice","g_mount_operation_set_domain","g_mount_operation_set_password","g_mount_operation_set_password_save","g_mount_operation_set_username"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "MountOperation"
