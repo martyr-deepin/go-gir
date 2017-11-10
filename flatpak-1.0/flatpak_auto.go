@@ -4,6 +4,32 @@ package flatpak
 #cgo pkg-config: flatpak
 #include <flatpak.h>
 #include <stdlib.h>
+#include <strings.h>
+static void ProgressCallbackWrapper(const char* status, guint progress, gboolean estimating, gpointer user_data);
+static void ProgressCallbackWrapper(const char* status, guint progress, gboolean estimating, gpointer user_data) {
+    GClosure* closure = user_data;
+    GValue params[3];
+    bzero(params, 3*sizeof(GValue));
+    g_value_init(&params[0], G_TYPE_STRING);
+    g_value_set_string(&params[0], status);
+    g_value_init(&params[1], G_TYPE_UINT);
+    g_value_set_uint(&params[1], progress);
+    g_value_init(&params[2], G_TYPE_BOOLEAN);
+    g_value_set_boolean(&params[2], estimating);
+    g_closure_invoke(closure, NULL, 3, params, NULL);
+}
+static FlatpakInstalledRef* _flatpak_installation_install(FlatpakInstallation* self, const char* remote_name, FlatpakRefKind kind, const char* name, const char* arch, const char* branch, GClosure* progress_data_for_progress, GCancellable* cancellable, GError **error) {
+    return flatpak_installation_install(self, remote_name, kind, name, arch, branch, ProgressCallbackWrapper, progress_data_for_progress, cancellable, error);
+}
+static FlatpakInstalledRef* _flatpak_installation_install_bundle(FlatpakInstallation* self, GFile* file, GClosure* progress_data_for_progress, GCancellable* cancellable, GError **error) {
+    return flatpak_installation_install_bundle(self, file, ProgressCallbackWrapper, progress_data_for_progress, cancellable, error);
+}
+static gboolean _flatpak_installation_uninstall(FlatpakInstallation* self, FlatpakRefKind kind, const char* name, const char* arch, const char* branch, GClosure* progress_data_for_progress, GCancellable* cancellable, GError **error) {
+    return flatpak_installation_uninstall(self, kind, name, arch, branch, ProgressCallbackWrapper, progress_data_for_progress, cancellable, error);
+}
+static FlatpakInstalledRef* _flatpak_installation_update(FlatpakInstallation* self, FlatpakUpdateFlags flags, FlatpakRefKind kind, const char* name, const char* arch, const char* branch, GClosure* progress_data_for_progress, GCancellable* cancellable, GError **error) {
+    return flatpak_installation_update(self, flags, kind, name, arch, branch, ProgressCallbackWrapper, progress_data_for_progress, cancellable, error);
+}
 */
 import "C"
 import "github.com/electricface/go-auto-gir/gio-2.0"
@@ -11,6 +37,8 @@ import "github.com/electricface/go-auto-gir/glib-2.0"
 import "github.com/electricface/go-auto-gir/gobject-2.0"
 import "github.com/electricface/go-auto-gir/util"
 import "unsafe"
+
+type ProgressCallback func(status string, progress uint, estimating bool)
 
 // Object Installation
 type Installation struct {
@@ -234,6 +262,38 @@ func (self Installation) GetStorageType() StorageType {
 	return StorageType(ret0)
 }
 
+// Install is a wrapper around flatpak_installation_install().
+func (self Installation) Install(remote_name string, kind RefKind, name string, arch string, branch string, progress ProgressCallback, cancellable gio.Cancellable) (InstalledRef, error) {
+	remote_name0 := C.CString(remote_name)
+	name0 := C.CString(name)
+	arch0 := C.CString(arch)
+	branch0 := C.CString(branch)
+	progress0 := (*C.GClosure)(gobject.ClosureNew(progress).Ptr) /*gir:GObject*/
+	var err glib.Error
+	ret0 := C._flatpak_installation_install(self.native(), remote_name0, C.FlatpakRefKind(kind), name0, arch0, branch0, progress0, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(remote_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(arch0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(branch0))      /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return InstalledRef{}, err.GoValue()
+	}
+	return wrapInstalledRef(ret0), nil
+}
+
+// InstallBundle is a wrapper around flatpak_installation_install_bundle().
+func (self Installation) InstallBundle(file gio.File, progress ProgressCallback, cancellable gio.Cancellable) (InstalledRef, error) {
+	progress0 := (*C.GClosure)(gobject.ClosureNew(progress).Ptr) /*gir:GObject*/
+	var err glib.Error
+	ret0 := C._flatpak_installation_install_bundle(self.native(), (*C.GFile)(file.Ptr), progress0, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return InstalledRef{}, err.GoValue()
+	}
+	return wrapInstalledRef(ret0), nil
+}
+
 // InstallRefFile is a wrapper around flatpak_installation_install_ref_file().
 func (self Installation) InstallRefFile(ref_file_data glib.Bytes, cancellable gio.Cancellable) (RemoteRef, error) {
 	var err glib.Error
@@ -301,6 +361,42 @@ func (self Installation) RemoveRemote(name string, cancellable gio.Cancellable) 
 		return false, err.GoValue()
 	}
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// Uninstall is a wrapper around flatpak_installation_uninstall().
+func (self Installation) Uninstall(kind RefKind, name string, arch string, branch string, progress ProgressCallback, cancellable gio.Cancellable) (bool, error) {
+	name0 := C.CString(name)
+	arch0 := C.CString(arch)
+	branch0 := C.CString(branch)
+	progress0 := (*C.GClosure)(gobject.ClosureNew(progress).Ptr) /*gir:GObject*/
+	var err glib.Error
+	ret0 := C._flatpak_installation_uninstall(self.native(), C.FlatpakRefKind(kind), name0, arch0, branch0, progress0, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(name0))   /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(arch0))   /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(branch0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// Update is a wrapper around flatpak_installation_update().
+func (self Installation) Update(flags UpdateFlags, kind RefKind, name string, arch string, branch string, progress ProgressCallback, cancellable gio.Cancellable) (InstalledRef, error) {
+	name0 := C.CString(name)
+	arch0 := C.CString(arch)
+	branch0 := C.CString(branch)
+	progress0 := (*C.GClosure)(gobject.ClosureNew(progress).Ptr) /*gir:GObject*/
+	var err glib.Error
+	ret0 := C._flatpak_installation_update(self.native(), C.FlatpakUpdateFlags(flags), C.FlatpakRefKind(kind), name0, arch0, branch0, progress0, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(name0))   /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(arch0))   /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(branch0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return InstalledRef{}, err.GoValue()
+	}
+	return wrapInstalledRef(ret0), nil
 }
 
 // UpdateRemoteSync is a wrapper around flatpak_installation_update_remote_sync().
