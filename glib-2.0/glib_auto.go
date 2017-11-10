@@ -23,6 +23,12 @@ func wrapVariant(p *C.GVariant) Variant {
 func WrapVariant(p unsafe.Pointer) Variant {
 	return Variant{p}
 }
+func (v Variant) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapVariant(p unsafe.Pointer) interface{} {
+	return WrapVariant(p)
+}
 
 // VariantNewArray is a wrapper around g_variant_new_array().
 func VariantNewArray(child_type VariantType, children []Variant) Variant {
@@ -650,6 +656,12 @@ func wrapBytes(p *C.GBytes) Bytes {
 func WrapBytes(p unsafe.Pointer) Bytes {
 	return Bytes{p}
 }
+func (v Bytes) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapBytes(p unsafe.Pointer) interface{} {
+	return WrapBytes(p)
+}
 
 // GetSize is a wrapper around g_bytes_get_size().
 func (bytes Bytes) GetSize() uint {
@@ -687,6 +699,12 @@ func wrapVariantType(p *C.GVariantType) VariantType {
 }
 func WrapVariantType(p unsafe.Pointer) VariantType {
 	return VariantType{p}
+}
+func (v VariantType) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapVariantType(p unsafe.Pointer) interface{} {
+	return WrapVariantType(p)
 }
 
 // VariantTypeNew is a wrapper around g_variant_type_new().
@@ -906,6 +924,12 @@ func wrapError(p *C.GError) Error {
 func WrapError(p unsafe.Pointer) Error {
 	return Error{p}
 }
+func (v Error) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapError(p unsafe.Pointer) interface{} {
+	return WrapError(p)
+}
 
 // Free is a wrapper around g_error_free().
 func (error Error) Free() {
@@ -925,6 +949,12 @@ func wrapMainLoop(p *C.GMainLoop) MainLoop {
 }
 func WrapMainLoop(p unsafe.Pointer) MainLoop {
 	return MainLoop{p}
+}
+func (v MainLoop) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapMainLoop(p unsafe.Pointer) interface{} {
+	return WrapMainLoop(p)
 }
 
 // MainLoopNew is a wrapper around g_main_loop_new().
@@ -979,6 +1009,12 @@ func wrapMainContext(p *C.GMainContext) MainContext {
 }
 func WrapMainContext(p unsafe.Pointer) MainContext {
 	return MainContext{p}
+}
+func (v MainContext) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapMainContext(p unsafe.Pointer) interface{} {
+	return WrapMainContext(p)
 }
 
 // MainContextNew is a wrapper around g_main_context_new().
@@ -1100,6 +1136,12 @@ func wrapSource(p *C.GSource) Source {
 }
 func WrapSource(p unsafe.Pointer) Source {
 	return Source{p}
+}
+func (v Source) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapSource(p unsafe.Pointer) interface{} {
+	return WrapSource(p)
 }
 
 // AddChildSource is a wrapper around g_source_add_child_source().
@@ -1270,6 +1312,12 @@ func wrapVariantIter(p *C.GVariantIter) VariantIter {
 func WrapVariantIter(p unsafe.Pointer) VariantIter {
 	return VariantIter{p}
 }
+func (v VariantIter) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapVariantIter(p unsafe.Pointer) interface{} {
+	return WrapVariantIter(p)
+}
 
 // Copy is a wrapper around g_variant_iter_copy().
 func (iter VariantIter) Copy() VariantIter {
@@ -1314,6 +1362,12 @@ func wrapPollFD(p *C.GPollFD) PollFD {
 func WrapPollFD(p unsafe.Pointer) PollFD {
 	return PollFD{p}
 }
+func (v PollFD) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapPollFD(p unsafe.Pointer) interface{} {
+	return WrapPollFD(p)
+}
 
 // Struct TimeVal
 type TimeVal struct {
@@ -1328,6 +1382,12 @@ func wrapTimeVal(p *C.GTimeVal) TimeVal {
 }
 func WrapTimeVal(p unsafe.Pointer) TimeVal {
 	return TimeVal{p}
+}
+func (v TimeVal) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapTimeVal(p unsafe.Pointer) interface{} {
+	return WrapTimeVal(p)
 }
 
 // Add is a wrapper around g_time_val_add().
@@ -1356,6 +1416,12 @@ func wrapKeyFile(p *C.GKeyFile) KeyFile {
 }
 func WrapKeyFile(p unsafe.Pointer) KeyFile {
 	return KeyFile{p}
+}
+func (v KeyFile) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapKeyFile(p unsafe.Pointer) interface{} {
+	return WrapKeyFile(p)
 }
 
 // KeyFileNew is a wrapper around g_key_file_new().
@@ -1991,6 +2057,12 @@ func wrapTimeZone(p *C.GTimeZone) TimeZone {
 func WrapTimeZone(p unsafe.Pointer) TimeZone {
 	return TimeZone{p}
 }
+func (v TimeZone) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapTimeZone(p unsafe.Pointer) interface{} {
+	return WrapTimeZone(p)
+}
 
 // TimeZoneNew is a wrapper around g_time_zone_new().
 func TimeZoneNew(identifier string) TimeZone {
@@ -2061,6 +2133,12 @@ func wrapDateTime(p *C.GDateTime) DateTime {
 }
 func WrapDateTime(p unsafe.Pointer) DateTime {
 	return DateTime{p}
+}
+func (v DateTime) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapDateTime(p unsafe.Pointer) interface{} {
+	return WrapDateTime(p)
 }
 
 // DateTimeNew is a wrapper around g_date_time_new().
@@ -2348,6 +2426,12 @@ func wrapOptionGroup(p *C.GOptionGroup) OptionGroup {
 func WrapOptionGroup(p unsafe.Pointer) OptionGroup {
 	return OptionGroup{p}
 }
+func (v OptionGroup) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapOptionGroup(p unsafe.Pointer) interface{} {
+	return WrapOptionGroup(p)
+}
 
 // AddEntries is a wrapper around g_option_group_add_entries().
 func (group OptionGroup) AddEntries(entries OptionEntry) {
@@ -2385,6 +2469,12 @@ func wrapOptionEntry(p *C.GOptionEntry) OptionEntry {
 }
 func WrapOptionEntry(p unsafe.Pointer) OptionEntry {
 	return OptionEntry{p}
+}
+func (v OptionEntry) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapOptionEntry(p unsafe.Pointer) interface{} {
+	return WrapOptionEntry(p)
 }
 
 // IdleSourceNew is a wrapper around g_idle_source_new().

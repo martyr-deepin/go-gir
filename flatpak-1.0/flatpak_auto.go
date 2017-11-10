@@ -56,6 +56,12 @@ func WrapInstallation(p unsafe.Pointer) (v Installation) {
 	v.Ptr = p
 	return
 }
+func (v Installation) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapInstallation(p unsafe.Pointer) interface{} {
+	return WrapInstallation(p)
+}
 func (v Installation) GetType() gobject.Type {
 	return gobject.Type(C.flatpak_installation_get_type())
 }
@@ -428,6 +434,12 @@ func WrapRef(p unsafe.Pointer) (v Ref) {
 	v.Ptr = p
 	return
 }
+func (v Ref) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapRef(p unsafe.Pointer) interface{} {
+	return WrapRef(p)
+}
 func (v Ref) GetType() gobject.Type {
 	return gobject.Type(C.flatpak_ref_get_type())
 }
@@ -509,6 +521,12 @@ func WrapInstalledRef(p unsafe.Pointer) (v InstalledRef) {
 	v.Ptr = p
 	return
 }
+func (v InstalledRef) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapInstalledRef(p unsafe.Pointer) interface{} {
+	return WrapInstalledRef(p)
+}
 func (v InstalledRef) GetType() gobject.Type {
 	return gobject.Type(C.flatpak_installed_ref_get_type())
 }
@@ -579,6 +597,12 @@ func WrapRemoteRef(p unsafe.Pointer) (v RemoteRef) {
 	v.Ptr = p
 	return
 }
+func (v RemoteRef) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapRemoteRef(p unsafe.Pointer) interface{} {
+	return WrapRemoteRef(p)
+}
 func (v RemoteRef) GetType() gobject.Type {
 	return gobject.Type(C.flatpak_remote_ref_get_type())
 }
@@ -611,6 +635,12 @@ func wrapBundleRef(p *C.FlatpakBundleRef) (v BundleRef) {
 func WrapBundleRef(p unsafe.Pointer) (v BundleRef) {
 	v.Ptr = p
 	return
+}
+func (v BundleRef) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapBundleRef(p unsafe.Pointer) interface{} {
+	return WrapBundleRef(p)
 }
 func (v BundleRef) GetType() gobject.Type {
 	return gobject.Type(C.flatpak_bundle_ref_get_type())
@@ -694,6 +724,12 @@ func wrapRemote(p *C.FlatpakRemote) (v Remote) {
 func WrapRemote(p unsafe.Pointer) (v Remote) {
 	v.Ptr = p
 	return
+}
+func (v Remote) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapRemote(p unsafe.Pointer) interface{} {
+	return WrapRemote(p)
 }
 func (v Remote) GetType() gobject.Type {
 	return gobject.Type(C.flatpak_remote_get_type())

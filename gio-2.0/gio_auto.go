@@ -236,6 +236,12 @@ func wrapAppInfo(p *C.GAppInfo) AppInfo {
 func WrapAppInfo(p unsafe.Pointer) AppInfo {
 	return AppInfo{p}
 }
+func (v AppInfo) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapAppInfo(p unsafe.Pointer) interface{} {
+	return WrapAppInfo(p)
+}
 func (v AppInfo) GetType() gobject.Type {
 	return gobject.Type(C.g_app_info_get_type())
 }
@@ -563,6 +569,12 @@ func WrapDesktopAppInfo(p unsafe.Pointer) (v DesktopAppInfo) {
 	v.Ptr = p
 	return
 }
+func (v DesktopAppInfo) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapDesktopAppInfo(p unsafe.Pointer) interface{} {
+	return WrapDesktopAppInfo(p)
+}
 func (v DesktopAppInfo) GetType() gobject.Type {
 	return gobject.Type(C.g_desktop_app_info_get_type())
 }
@@ -728,6 +740,12 @@ func WrapAppLaunchContext(p unsafe.Pointer) (v AppLaunchContext) {
 	v.Ptr = p
 	return
 }
+func (v AppLaunchContext) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapAppLaunchContext(p unsafe.Pointer) interface{} {
+	return WrapAppLaunchContext(p)
+}
 func (v AppLaunchContext) GetType() gobject.Type {
 	return gobject.Type(C.g_app_launch_context_get_type())
 }
@@ -814,6 +832,12 @@ func wrapSettings(p *C.GSettings) (v Settings) {
 func WrapSettings(p unsafe.Pointer) (v Settings) {
 	v.Ptr = p
 	return
+}
+func (v Settings) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapSettings(p unsafe.Pointer) interface{} {
+	return WrapSettings(p)
 }
 func (v Settings) GetType() gobject.Type {
 	return gobject.Type(C.g_settings_get_type())
@@ -1199,6 +1223,12 @@ func wrapSettingsSchema(p *C.GSettingsSchema) SettingsSchema {
 func WrapSettingsSchema(p unsafe.Pointer) SettingsSchema {
 	return SettingsSchema{p}
 }
+func (v SettingsSchema) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapSettingsSchema(p unsafe.Pointer) interface{} {
+	return WrapSettingsSchema(p)
+}
 
 // GetId is a wrapper around g_settings_schema_get_id().
 func (schema SettingsSchema) GetId() string {
@@ -1287,6 +1317,12 @@ func wrapSettingsBackend(p *C.GSettingsBackend) SettingsBackend {
 func WrapSettingsBackend(p unsafe.Pointer) SettingsBackend {
 	return SettingsBackend{p}
 }
+func (v SettingsBackend) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapSettingsBackend(p unsafe.Pointer) interface{} {
+	return WrapSettingsBackend(p)
+}
 
 // Interface Action
 type Action struct {
@@ -1301,6 +1337,12 @@ func wrapAction(p *C.GAction) Action {
 }
 func WrapAction(p unsafe.Pointer) Action {
 	return Action{p}
+}
+func (v Action) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapAction(p unsafe.Pointer) interface{} {
+	return WrapAction(p)
 }
 func (v Action) GetType() gobject.Type {
 	return gobject.Type(C.g_action_get_type())
@@ -1407,6 +1449,12 @@ func wrapFile(p *C.GFile) File {
 }
 func WrapFile(p unsafe.Pointer) File {
 	return File{p}
+}
+func (v File) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapFile(p unsafe.Pointer) interface{} {
+	return WrapFile(p)
 }
 func (v File) GetType() gobject.Type {
 	return gobject.Type(C.g_file_get_type())
@@ -2493,6 +2541,12 @@ func WrapCancellable(p unsafe.Pointer) (v Cancellable) {
 	v.Ptr = p
 	return
 }
+func (v Cancellable) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapCancellable(p unsafe.Pointer) interface{} {
+	return WrapCancellable(p)
+}
 func (v Cancellable) GetType() gobject.Type {
 	return gobject.Type(C.g_cancellable_get_type())
 }
@@ -2595,6 +2649,12 @@ func wrapOutputStream(p *C.GOutputStream) (v OutputStream) {
 func WrapOutputStream(p unsafe.Pointer) (v OutputStream) {
 	v.Ptr = p
 	return
+}
+func (v OutputStream) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapOutputStream(p unsafe.Pointer) interface{} {
+	return WrapOutputStream(p)
 }
 func (v OutputStream) GetType() gobject.Type {
 	return gobject.Type(C.g_output_stream_get_type())
@@ -2791,6 +2851,12 @@ func WrapFileOutputStream(p unsafe.Pointer) (v FileOutputStream) {
 	v.Ptr = p
 	return
 }
+func (v FileOutputStream) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapFileOutputStream(p unsafe.Pointer) interface{} {
+	return WrapFileOutputStream(p)
+}
 func (v FileOutputStream) GetType() gobject.Type {
 	return gobject.Type(C.g_file_output_stream_get_type())
 }
@@ -2858,6 +2924,12 @@ func wrapSeekable(p *C.GSeekable) Seekable {
 func WrapSeekable(p unsafe.Pointer) Seekable {
 	return Seekable{p}
 }
+func (v Seekable) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapSeekable(p unsafe.Pointer) interface{} {
+	return WrapSeekable(p)
+}
 func (v Seekable) GetType() gobject.Type {
 	return gobject.Type(C.g_seekable_get_type())
 }
@@ -2923,6 +2995,12 @@ func wrapFileInfo(p *C.GFileInfo) (v FileInfo) {
 func WrapFileInfo(p unsafe.Pointer) (v FileInfo) {
 	v.Ptr = p
 	return
+}
+func (v FileInfo) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapFileInfo(p unsafe.Pointer) interface{} {
+	return WrapFileInfo(p)
 }
 func (v FileInfo) GetType() gobject.Type {
 	return gobject.Type(C.g_file_info_get_type())
@@ -3407,6 +3485,12 @@ func WrapApplication(p unsafe.Pointer) (v Application) {
 	v.Ptr = p
 	return
 }
+func (v Application) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapApplication(p unsafe.Pointer) interface{} {
+	return WrapApplication(p)
+}
 func (v Application) GetType() gobject.Type {
 	return gobject.Type(C.g_application_get_type())
 }
@@ -3652,6 +3736,12 @@ func wrapActionMap(p *C.GActionMap) ActionMap {
 func WrapActionMap(p unsafe.Pointer) ActionMap {
 	return ActionMap{p}
 }
+func (v ActionMap) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapActionMap(p unsafe.Pointer) interface{} {
+	return WrapActionMap(p)
+}
 func (v ActionMap) GetType() gobject.Type {
 	return gobject.Type(C.g_action_map_get_type())
 }
@@ -3695,6 +3785,12 @@ func wrapActionGroup(p *C.GActionGroup) ActionGroup {
 }
 func WrapActionGroup(p unsafe.Pointer) ActionGroup {
 	return ActionGroup{p}
+}
+func (v ActionGroup) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapActionGroup(p unsafe.Pointer) interface{} {
+	return WrapActionGroup(p)
 }
 func (v ActionGroup) GetType() gobject.Type {
 	return gobject.Type(C.g_action_group_get_type())
@@ -3841,6 +3937,12 @@ func WrapSimpleActionGroup(p unsafe.Pointer) (v SimpleActionGroup) {
 	v.Ptr = p
 	return
 }
+func (v SimpleActionGroup) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapSimpleActionGroup(p unsafe.Pointer) interface{} {
+	return WrapSimpleActionGroup(p)
+}
 func (v SimpleActionGroup) GetType() gobject.Type {
 	return gobject.Type(C.g_simple_action_group_get_type())
 }
@@ -3878,6 +3980,12 @@ func wrapNotification(p *C.GNotification) (v Notification) {
 func WrapNotification(p unsafe.Pointer) (v Notification) {
 	v.Ptr = p
 	return
+}
+func (v Notification) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapNotification(p unsafe.Pointer) interface{} {
+	return WrapNotification(p)
 }
 func (v Notification) GetType() gobject.Type {
 	return gobject.Type(C.g_notification_get_type())
@@ -3967,6 +4075,12 @@ func wrapIcon(p *C.GIcon) Icon {
 func WrapIcon(p unsafe.Pointer) Icon {
 	return Icon{p}
 }
+func (v Icon) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapIcon(p unsafe.Pointer) interface{} {
+	return WrapIcon(p)
+}
 func (v Icon) GetType() gobject.Type {
 	return gobject.Type(C.g_icon_get_type())
 }
@@ -4036,6 +4150,12 @@ func wrapAsyncResult(p *C.GAsyncResult) AsyncResult {
 func WrapAsyncResult(p unsafe.Pointer) AsyncResult {
 	return AsyncResult{p}
 }
+func (v AsyncResult) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapAsyncResult(p unsafe.Pointer) interface{} {
+	return WrapAsyncResult(p)
+}
 func (v AsyncResult) GetType() gobject.Type {
 	return gobject.Type(C.g_async_result_get_type())
 }
@@ -4090,6 +4210,12 @@ func wrapIOStream(p *C.GIOStream) (v IOStream) {
 func WrapIOStream(p unsafe.Pointer) (v IOStream) {
 	v.Ptr = p
 	return
+}
+func (v IOStream) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapIOStream(p unsafe.Pointer) interface{} {
+	return WrapIOStream(p)
 }
 func (v IOStream) GetType() gobject.Type {
 	return gobject.Type(C.g_io_stream_get_type())
@@ -4201,6 +4327,12 @@ func wrapInputStream(p *C.GInputStream) (v InputStream) {
 func WrapInputStream(p unsafe.Pointer) (v InputStream) {
 	v.Ptr = p
 	return
+}
+func (v InputStream) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapInputStream(p unsafe.Pointer) interface{} {
+	return WrapInputStream(p)
 }
 func (v InputStream) GetType() gobject.Type {
 	return gobject.Type(C.g_input_stream_get_type())
@@ -4363,6 +4495,12 @@ func WrapFileIOStream(p unsafe.Pointer) (v FileIOStream) {
 	v.Ptr = p
 	return
 }
+func (v FileIOStream) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapFileIOStream(p unsafe.Pointer) interface{} {
+	return WrapFileIOStream(p)
+}
 func (v FileIOStream) GetType() gobject.Type {
 	return gobject.Type(C.g_file_io_stream_get_type())
 }
@@ -4431,6 +4569,12 @@ func wrapFileEnumerator(p *C.GFileEnumerator) (v FileEnumerator) {
 func WrapFileEnumerator(p unsafe.Pointer) (v FileEnumerator) {
 	v.Ptr = p
 	return
+}
+func (v FileEnumerator) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapFileEnumerator(p unsafe.Pointer) interface{} {
+	return WrapFileEnumerator(p)
 }
 func (v FileEnumerator) GetType() gobject.Type {
 	return gobject.Type(C.g_file_enumerator_get_type())
@@ -4554,6 +4698,12 @@ func wrapMount(p *C.GMount) Mount {
 }
 func WrapMount(p unsafe.Pointer) Mount {
 	return Mount{p}
+}
+func (v Mount) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapMount(p unsafe.Pointer) interface{} {
+	return WrapMount(p)
 }
 func (v Mount) GetType() gobject.Type {
 	return gobject.Type(C.g_mount_get_type())
@@ -4764,6 +4914,12 @@ func wrapDrive(p *C.GDrive) Drive {
 }
 func WrapDrive(p unsafe.Pointer) Drive {
 	return Drive{p}
+}
+func (v Drive) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapDrive(p unsafe.Pointer) interface{} {
+	return WrapDrive(p)
 }
 func (v Drive) GetType() gobject.Type {
 	return gobject.Type(C.g_drive_get_type())
@@ -4983,6 +5139,12 @@ func wrapVolume(p *C.GVolume) Volume {
 func WrapVolume(p unsafe.Pointer) Volume {
 	return Volume{p}
 }
+func (v Volume) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapVolume(p unsafe.Pointer) interface{} {
+	return WrapVolume(p)
+}
 func (v Volume) GetType() gobject.Type {
 	return gobject.Type(C.g_volume_get_type())
 }
@@ -5140,6 +5302,12 @@ func WrapFileMonitor(p unsafe.Pointer) (v FileMonitor) {
 	v.Ptr = p
 	return
 }
+func (v FileMonitor) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapFileMonitor(p unsafe.Pointer) interface{} {
+	return WrapFileMonitor(p)
+}
 func (v FileMonitor) GetType() gobject.Type {
 	return gobject.Type(C.g_file_monitor_get_type())
 }
@@ -5185,6 +5353,12 @@ func wrapFileAttributeInfoList(p *C.GFileAttributeInfoList) FileAttributeInfoLis
 }
 func WrapFileAttributeInfoList(p unsafe.Pointer) FileAttributeInfoList {
 	return FileAttributeInfoList{p}
+}
+func (v FileAttributeInfoList) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapFileAttributeInfoList(p unsafe.Pointer) interface{} {
+	return WrapFileAttributeInfoList(p)
 }
 
 // FileAttributeInfoListNew is a wrapper around g_file_attribute_info_list_new().
@@ -5239,6 +5413,12 @@ func wrapFileAttributeInfo(p *C.GFileAttributeInfo) FileAttributeInfo {
 func WrapFileAttributeInfo(p unsafe.Pointer) FileAttributeInfo {
 	return FileAttributeInfo{p}
 }
+func (v FileAttributeInfo) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapFileAttributeInfo(p unsafe.Pointer) interface{} {
+	return WrapFileAttributeInfo(p)
+}
 
 // Object FileInputStream
 type FileInputStream struct {
@@ -5255,6 +5435,12 @@ func wrapFileInputStream(p *C.GFileInputStream) (v FileInputStream) {
 func WrapFileInputStream(p unsafe.Pointer) (v FileInputStream) {
 	v.Ptr = p
 	return
+}
+func (v FileInputStream) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapFileInputStream(p unsafe.Pointer) interface{} {
+	return WrapFileInputStream(p)
 }
 func (v FileInputStream) GetType() gobject.Type {
 	return gobject.Type(C.g_file_input_stream_get_type())
@@ -5314,6 +5500,12 @@ func wrapSettingsSchemaKey(p *C.GSettingsSchemaKey) SettingsSchemaKey {
 }
 func WrapSettingsSchemaKey(p unsafe.Pointer) SettingsSchemaKey {
 	return SettingsSchemaKey{p}
+}
+func (v SettingsSchemaKey) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapSettingsSchemaKey(p unsafe.Pointer) interface{} {
+	return WrapSettingsSchemaKey(p)
 }
 
 // GetDefaultValue is a wrapper around g_settings_schema_key_get_default_value().
@@ -5385,6 +5577,12 @@ func wrapFileAttributeMatcher(p *C.GFileAttributeMatcher) FileAttributeMatcher {
 }
 func WrapFileAttributeMatcher(p unsafe.Pointer) FileAttributeMatcher {
 	return FileAttributeMatcher{p}
+}
+func (v FileAttributeMatcher) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapFileAttributeMatcher(p unsafe.Pointer) interface{} {
+	return WrapFileAttributeMatcher(p)
 }
 
 // FileAttributeMatcherNew is a wrapper around g_file_attribute_matcher_new().
@@ -5467,6 +5665,12 @@ func WrapDBusConnection(p unsafe.Pointer) (v DBusConnection) {
 	v.Ptr = p
 	return
 }
+func (v DBusConnection) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapDBusConnection(p unsafe.Pointer) interface{} {
+	return WrapDBusConnection(p)
+}
 func (v DBusConnection) GetType() gobject.Type {
 	return gobject.Type(C.g_dbus_connection_get_type())
 }
@@ -5496,6 +5700,12 @@ func wrapAsyncInitable(p *C.GAsyncInitable) AsyncInitable {
 }
 func WrapAsyncInitable(p unsafe.Pointer) AsyncInitable {
 	return AsyncInitable{p}
+}
+func (v AsyncInitable) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapAsyncInitable(p unsafe.Pointer) interface{} {
+	return WrapAsyncInitable(p)
 }
 func (v AsyncInitable) GetType() gobject.Type {
 	return gobject.Type(C.g_async_initable_get_type())
@@ -5549,6 +5759,12 @@ func wrapInitable(p *C.GInitable) Initable {
 func WrapInitable(p unsafe.Pointer) Initable {
 	return Initable{p}
 }
+func (v Initable) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapInitable(p unsafe.Pointer) interface{} {
+	return WrapInitable(p)
+}
 func (v Initable) GetType() gobject.Type {
 	return gobject.Type(C.g_initable_get_type())
 }
@@ -5585,6 +5801,12 @@ func wrapMountOperation(p *C.GMountOperation) (v MountOperation) {
 func WrapMountOperation(p unsafe.Pointer) (v MountOperation) {
 	v.Ptr = p
 	return
+}
+func (v MountOperation) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapMountOperation(p unsafe.Pointer) interface{} {
+	return WrapMountOperation(p)
 }
 func (v MountOperation) GetType() gobject.Type {
 	return gobject.Type(C.g_mount_operation_get_type())

@@ -24,6 +24,12 @@ func wrapValue(p *C.GValue) Value {
 func WrapValue(p unsafe.Pointer) Value {
 	return Value{p}
 }
+func (v Value) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapValue(p unsafe.Pointer) interface{} {
+	return WrapValue(p)
+}
 
 // Copy is a wrapper around g_value_copy().
 func (src_value Value) Copy(dest_value Value) {
@@ -360,13 +366,17 @@ type Object struct {
 func (v Object) native() *C.GObject {
 	return (*C.GObject)(v.Ptr)
 }
-func wrapObject(p *C.GObject) (v Object) {
-	v.Ptr = unsafe.Pointer(p)
-	return
+func wrapObject(p *C.GObject) Object {
+	return Object{unsafe.Pointer(p)}
 }
-func WrapObject(p unsafe.Pointer) (v Object) {
-	v.Ptr = p
-	return
+func WrapObject(p unsafe.Pointer) Object {
+	return Object{p}
+}
+func (v Object) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapObject(p unsafe.Pointer) interface{} {
+	return WrapObject(p)
 }
 func (v Object) GetType() Type {
 	return Type(C.g_object_get_type())
@@ -553,6 +563,12 @@ func wrapClosure(p *C.GClosure) Closure {
 func WrapClosure(p unsafe.Pointer) Closure {
 	return Closure{p}
 }
+func (v Closure) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapClosure(p unsafe.Pointer) interface{} {
+	return WrapClosure(p)
+}
 
 // ClosureNewObject is a wrapper around g_closure_new_object().
 func ClosureNewObject(sizeof_closure uint, object Object) Closure {
@@ -602,6 +618,12 @@ func wrapBinding(p *C.GBinding) (v Binding) {
 func WrapBinding(p unsafe.Pointer) (v Binding) {
 	v.Ptr = p
 	return
+}
+func (v Binding) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapBinding(p unsafe.Pointer) interface{} {
+	return WrapBinding(p)
 }
 func (v Binding) GetType() Type {
 	return Type(C.g_binding_get_type())
@@ -658,13 +680,17 @@ type ParamSpec struct {
 func (v ParamSpec) native() *C.GParamSpec {
 	return (*C.GParamSpec)(v.Ptr)
 }
-func wrapParamSpec(p *C.GParamSpec) (v ParamSpec) {
-	v.Ptr = unsafe.Pointer(p)
-	return
+func wrapParamSpec(p *C.GParamSpec) ParamSpec {
+	return ParamSpec{unsafe.Pointer(p)}
 }
-func WrapParamSpec(p unsafe.Pointer) (v ParamSpec) {
-	v.Ptr = p
-	return
+func WrapParamSpec(p unsafe.Pointer) ParamSpec {
+	return ParamSpec{p}
+}
+func (v ParamSpec) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapParamSpec(p unsafe.Pointer) interface{} {
+	return WrapParamSpec(p)
 }
 func (v ParamSpec) GetGValueGetter() GValueGetter {
 	return func(p unsafe.Pointer) (interface{}, error) {
@@ -765,6 +791,12 @@ func wrapTypeInterface(p *C.GTypeInterface) TypeInterface {
 func WrapTypeInterface(p unsafe.Pointer) TypeInterface {
 	return TypeInterface{p}
 }
+func (v TypeInterface) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapTypeInterface(p unsafe.Pointer) interface{} {
+	return WrapTypeInterface(p)
+}
 
 // PeekParent is a wrapper around g_type_interface_peek_parent().
 func (g_iface TypeInterface) PeekParent() TypeInterface {
@@ -786,6 +818,12 @@ func wrapTypeInstance(p *C.GTypeInstance) TypeInstance {
 func WrapTypeInstance(p unsafe.Pointer) TypeInstance {
 	return TypeInstance{p}
 }
+func (v TypeInstance) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapTypeInstance(p unsafe.Pointer) interface{} {
+	return WrapTypeInstance(p)
+}
 
 // Struct ValueArray
 type ValueArray struct {
@@ -800,6 +838,12 @@ func wrapValueArray(p *C.GValueArray) ValueArray {
 }
 func WrapValueArray(p unsafe.Pointer) ValueArray {
 	return ValueArray{p}
+}
+func (v ValueArray) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapValueArray(p unsafe.Pointer) interface{} {
+	return WrapValueArray(p)
 }
 
 type Type uint

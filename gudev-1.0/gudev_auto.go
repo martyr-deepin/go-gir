@@ -27,6 +27,12 @@ func WrapClient(p unsafe.Pointer) (v Client) {
 	v.Ptr = p
 	return
 }
+func (v Client) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapClient(p unsafe.Pointer) interface{} {
+	return WrapClient(p)
+}
 func (v Client) GetType() gobject.Type {
 	return gobject.Type(C.g_udev_client_get_type())
 }
@@ -111,6 +117,12 @@ func wrapDevice(p *C.GUdevDevice) (v Device) {
 func WrapDevice(p unsafe.Pointer) (v Device) {
 	v.Ptr = p
 	return
+}
+func (v Device) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapDevice(p unsafe.Pointer) interface{} {
+	return WrapDevice(p)
 }
 func (v Device) GetType() gobject.Type {
 	return gobject.Type(C.g_udev_device_get_type())
@@ -425,6 +437,12 @@ func wrapEnumerator(p *C.GUdevEnumerator) (v Enumerator) {
 func WrapEnumerator(p unsafe.Pointer) (v Enumerator) {
 	v.Ptr = p
 	return
+}
+func (v Enumerator) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapEnumerator(p unsafe.Pointer) interface{} {
+	return WrapEnumerator(p)
 }
 func (v Enumerator) GetType() gobject.Type {
 	return gobject.Type(C.g_udev_enumerator_get_type())
