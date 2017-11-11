@@ -86,8 +86,8 @@ func goMarshal(closure *C.GClosure, retValue *C.GValue,
 	// closure context, increment the total number of parameters.
 	nGLibParams := int(nParams)
 	nTotalParams := nGLibParams
-	println("nGLibParams: ", nGLibParams)
-	println("nTotalParams: ", nTotalParams)
+	//println("nGLibParams: ", nGLibParams)
+	//println("nTotalParams: ", nTotalParams)
 
 	// Get number of parameters from the callback closure.  If this exceeds
 	// the total number of marshaled parameters, a warning will be printed
@@ -109,7 +109,11 @@ func goMarshal(closure *C.GClosure, retValue *C.GValue,
 	// parameters and parameters from the glib runtime.
 	for i := 0; i < nCbParams && i < nGLibParams; i++ {
 		v := wrapValue(&gValues[i])
-		val, err := v.Get()
+		argReflectType := cc.rf.Type().In(i)
+		// v.GetWithType( argReflectType )
+		//val, err := v.Get()
+		val, err := v.GetWithType(argReflectType)
+
 		if err != nil {
 			fmt.Fprintf(os.Stderr,
 				"no suitable Go value for arg %d: %v\n", i, err)

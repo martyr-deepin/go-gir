@@ -54,6 +54,7 @@ import (
 	"fmt"
 	"github.com/electricface/go-auto-gir/glib-2.0"
 	"github.com/electricface/go-auto-gir/util"
+	"reflect"
 	"sync"
 )
 
@@ -195,6 +196,108 @@ func (v Value) get(typ Type) (interface{}, error) {
 		return nil, errTypeUnknown
 	}
 	return getter(v.Ptr)
+}
+
+func (v Value) GetWithType(reflectType reflect.Type) (interface{}, error) {
+	kind := reflectType.Kind()
+	switch kind {
+	case reflect.Bool:
+		val := v.GetBoolean()
+		return val, nil
+
+	case reflect.Int:
+		_, fundType, err := v.Type()
+		if err != nil {
+			return nil, err
+		}
+
+		switch fundType {
+		case TYPE_ENUM:
+			val := v.GetEnum()
+			return val, nil
+
+		default:
+			val := v.GetInt()
+			return val, nil
+		}
+
+	case reflect.Int8:
+		val := v.GetSchar()
+		return val, nil
+
+	case reflect.Int16:
+		val := v.GetInt()
+		return int16(val), nil
+
+	case reflect.Int32:
+		val := v.GetInt()
+		return int32(val), nil
+
+	case reflect.Int64:
+		val := v.GetInt64()
+		return val, nil
+
+	case reflect.Uint:
+		val := v.GetUint()
+		return val, nil
+
+	case reflect.Uint8:
+		val := v.GetUchar()
+		return val, nil
+
+	case reflect.Uint16:
+		val := v.GetUint()
+		return uint16(val), nil
+
+	case reflect.Uint32:
+		val := v.GetUint()
+		return uint32(val), nil
+
+	case reflect.Uint64:
+		val := v.GetUint64()
+		return val, nil
+
+	case reflect.Uintptr:
+		val := v.GetPointer()
+		return uintptr(val), nil
+
+	case reflect.Float32:
+		val := v.GetFloat()
+		return val, nil
+
+	case reflect.Float64:
+		val := v.GetDouble()
+		return val, nil
+
+	case reflect.UnsafePointer:
+		val := v.GetPointer()
+		return val, nil
+
+	case reflect.String:
+		val := v.GetString()
+		return val, nil
+
+	case reflect.Struct:
+		val := unsafe.Pointer(C.g_value_get_object(v.native()))
+
+		newValPtr := reflect.New(reflectType)
+		newVal := newValPtr.Elem()
+		ptrFieldVal := newVal.FieldByName("Ptr")
+		ptrFieldVal.SetPointer(val)
+
+		return newVal.Interface(), nil
+
+	default:
+		// Complex64, Complex128
+		// Array
+		// Chan
+		// Func
+		// Interface
+		// Map
+		// Ptr
+		// Slice
+		return nil, errors.New("unsupported reflect type")
+	}
 }
 
 var errTypeConvert = errors.New("type convert failed")

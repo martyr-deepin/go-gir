@@ -1,5 +1,7 @@
 package gobject
 
+import "unsafe"
+
 // Connect is a wrapper around g_signal_connect_closure().  f must be
 // a function with a signaure matching the callback signature for
 // detailedSignal.  userData must either 0 or 1 elements which can
@@ -29,4 +31,16 @@ func (v *Object) Connect(detailedSignal string, f interface{}) SignalHandle {
 // will be invoked after the default handler, not before.
 func (v *Object) ConnectAfter(detailedSignal string, f interface{}) SignalHandle {
 	return v.connectClosure(true, detailedSignal, f)
+}
+
+func Unref(p unsafe.Pointer) {
+	WrapObject(p).Unref()
+}
+
+func Ref(p unsafe.Pointer) {
+	WrapObject(p).Ref()
+}
+
+func RefSink(p unsafe.Pointer) {
+	WrapObject(p).RefSink()
 }
