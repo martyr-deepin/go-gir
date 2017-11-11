@@ -16,8 +16,29 @@ package gio
 #include <stdlib.h>
 #include <stdio.h>
 #include <strings.h>
+
+static void destroy_closure(gpointer data) {
+	g_closure_unref( (GClosure*)(data) );
+}
+
+// CallbackWapper?
+static void callback_handler(gpointer instance, gpointer user_data) {
+	GClosure* closure = user_data;
+	g_closure_invoke(closure, NULL, 0, NULL, NULL);
+}
+
+static gulong _g_cancellable_connect(GCancellable *cancellable, GClosure* closure) {
+	return g_cancellable_connect(cancellable, (GCallback)(callback_handler), closure, destroy_closure);
+}
 */
 import "C"
+import "github.com/electricface/go-auto-gir/gobject-2.0"
+
+func (cancellable Cancellable) Connect(callback func()) uint {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr)
+	ret0 := C._g_cancellable_connect(cancellable.native(), callback0)
+	return uint(ret0)
+}
 
 //func (app Application) Run(argv []string) int {
 //	argv0 := make([]*C.char, len(argv))
