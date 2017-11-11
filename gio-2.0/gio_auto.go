@@ -1499,6 +1499,7 @@ func (source File) Copy(destination File, flags FileCopyFlags, cancellable Cance
 	progress_callback0 := (*C.GClosure)(gobject.ClosureNew(progress_callback).Ptr) /*gir:GObject*/
 	var err glib.Error
 	ret0 := C._g_file_copy(source.native(), destination.native(), C.GFileCopyFlags(flags), cancellable.native(), progress_callback0, (**C.GError)(unsafe.Pointer(&err)))
+	C.g_closure_unref(progress_callback0)
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, err.GoValue()
@@ -1511,6 +1512,7 @@ func (source File) CopyAsync(destination File, flags FileCopyFlags, io_priority 
 	progress_callback0 := (*C.GClosure)(gobject.ClosureNew(progress_callback).Ptr) /*gir:GObject*/
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr)                   /*gir:GObject*/
 	C._g_file_copy_async(source.native(), destination.native(), C.GFileCopyFlags(flags), C.int(io_priority), cancellable.native(), progress_callback0, callback0)
+	C.g_closure_unref(progress_callback0)
 }
 
 // CopyAttributes is a wrapper around g_file_copy_attributes().
@@ -1875,6 +1877,7 @@ func (file File) MeasureDiskUsage(flags FileMeasureFlags, cancellable Cancellabl
 	var num_files0 C.guint64
 	var err glib.Error
 	ret0 := C._g_file_measure_disk_usage(file.native(), C.GFileMeasureFlags(flags), cancellable.native(), progress_callback0, &disk_usage0, &num_dirs0, &num_files0, (**C.GError)(unsafe.Pointer(&err)))
+	C.g_closure_unref(progress_callback0)
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, 0, 0, 0, err.GoValue()
@@ -1887,6 +1890,7 @@ func (file File) MeasureDiskUsageAsync(flags FileMeasureFlags, io_priority int, 
 	progress_callback0 := (*C.GClosure)(gobject.ClosureNew(progress_callback).Ptr) /*gir:GObject*/
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr)                   /*gir:GObject*/
 	C._g_file_measure_disk_usage_async(file.native(), C.GFileMeasureFlags(flags), C.gint(io_priority), cancellable.native(), progress_callback0, callback0)
+	C.g_closure_unref(progress_callback0)
 }
 
 // MeasureDiskUsageFinish is a wrapper around g_file_measure_disk_usage_finish().
@@ -1975,6 +1979,7 @@ func (source File) Move(destination File, flags FileCopyFlags, cancellable Cance
 	progress_callback0 := (*C.GClosure)(gobject.ClosureNew(progress_callback).Ptr) /*gir:GObject*/
 	var err glib.Error
 	ret0 := C._g_file_move(source.native(), destination.native(), C.GFileCopyFlags(flags), cancellable.native(), progress_callback0, (**C.GError)(unsafe.Pointer(&err)))
+	C.g_closure_unref(progress_callback0)
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, err.GoValue()

@@ -281,6 +281,7 @@ func (self Installation) Install(remote_name string, kind RefKind, name string, 
 	C.free(unsafe.Pointer(name0))        /*ch:<stdlib.h>*/
 	C.free(unsafe.Pointer(arch0))        /*ch:<stdlib.h>*/
 	C.free(unsafe.Pointer(branch0))      /*ch:<stdlib.h>*/
+	C.g_closure_unref(progress0)
 	if err.Ptr != nil {
 		defer err.Free()
 		return InstalledRef{}, err.GoValue()
@@ -293,6 +294,7 @@ func (self Installation) InstallBundle(file gio.File, progress ProgressCallback,
 	progress0 := (*C.GClosure)(gobject.ClosureNew(progress).Ptr) /*gir:GObject*/
 	var err glib.Error
 	ret0 := C._flatpak_installation_install_bundle(self.native(), (*C.GFile)(file.Ptr), progress0, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
+	C.g_closure_unref(progress0)
 	if err.Ptr != nil {
 		defer err.Free()
 		return InstalledRef{}, err.GoValue()
@@ -380,6 +382,7 @@ func (self Installation) Uninstall(kind RefKind, name string, arch string, branc
 	C.free(unsafe.Pointer(name0))   /*ch:<stdlib.h>*/
 	C.free(unsafe.Pointer(arch0))   /*ch:<stdlib.h>*/
 	C.free(unsafe.Pointer(branch0)) /*ch:<stdlib.h>*/
+	C.g_closure_unref(progress0)
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, err.GoValue()
@@ -398,6 +401,7 @@ func (self Installation) Update(flags UpdateFlags, kind RefKind, name string, ar
 	C.free(unsafe.Pointer(name0))   /*ch:<stdlib.h>*/
 	C.free(unsafe.Pointer(arch0))   /*ch:<stdlib.h>*/
 	C.free(unsafe.Pointer(branch0)) /*ch:<stdlib.h>*/
+	C.g_closure_unref(progress0)
 	if err.Ptr != nil {
 		defer err.Free()
 		return InstalledRef{}, err.GoValue()
