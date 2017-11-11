@@ -18,40 +18,6 @@ package gio
 static void AsyncReadyCallbackWrapper(GObject* source_object, GAsyncResult* res, gpointer user_data);
 static void FileMeasureProgressCallbackWrapper(gboolean reporting, guint64 current_size, guint64 num_dirs, guint64 num_files, gpointer user_data);
 static void FileProgressCallbackWrapper(goffset current_num_bytes, goffset total_num_bytes, gpointer user_data);
-static void AsyncReadyCallbackWrapper(GObject* source_object, GAsyncResult* res, gpointer user_data) {
-    GClosure* closure = user_data;
-    GValue params[2];
-    bzero(params, 2*sizeof(GValue));
-    g_value_init(&params[0], G_TYPE_OBJECT);
-    g_value_set_object(&params[0], source_object);
-    g_value_init(&params[1], g_async_result_get_type());
-    g_value_set_object(&params[1], res);
-    g_closure_invoke(closure, NULL, 2, params, NULL);
-}
-static void FileMeasureProgressCallbackWrapper(gboolean reporting, guint64 current_size, guint64 num_dirs, guint64 num_files, gpointer user_data) {
-    GClosure* closure = user_data;
-    GValue params[4];
-    bzero(params, 4*sizeof(GValue));
-    g_value_init(&params[0], G_TYPE_BOOLEAN);
-    g_value_set_boolean(&params[0], reporting);
-    g_value_init(&params[1], G_TYPE_UINT64);
-    g_value_set_uint64(&params[1], current_size);
-    g_value_init(&params[2], G_TYPE_UINT64);
-    g_value_set_uint64(&params[2], num_dirs);
-    g_value_init(&params[3], G_TYPE_UINT64);
-    g_value_set_uint64(&params[3], num_files);
-    g_closure_invoke(closure, NULL, 4, params, NULL);
-}
-static void FileProgressCallbackWrapper(goffset current_num_bytes, goffset total_num_bytes, gpointer user_data) {
-    GClosure* closure = user_data;
-    GValue params[2];
-    bzero(params, 2*sizeof(GValue));
-    g_value_init(&params[0], G_TYPE_INT64);
-    g_value_set_int64(&params[0], current_num_bytes);
-    g_value_init(&params[1], G_TYPE_INT64);
-    g_value_set_int64(&params[1], total_num_bytes);
-    g_closure_invoke(closure, NULL, 2, params, NULL);
-}
 static void _g_app_info_launch_default_for_uri_async(const char* uri, GAppLaunchContext* launch_context, GCancellable* cancellable, GClosure* user_data_for_callback) {
     return g_app_info_launch_default_for_uri_async(uri, launch_context, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
 }
@@ -211,16 +177,47 @@ static void _g_file_input_stream_query_info_async(GFileInputStream* stream, cons
 static void _g_async_initable_init_async(GAsyncInitable* initable, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
     return g_async_initable_init_async(initable, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
 }
+static void AsyncReadyCallbackWrapper(GObject* source_object, GAsyncResult* res, gpointer user_data) {
+    GClosure* closure = user_data;
+    GValue params[2];
+    bzero(params, 2*sizeof(GValue));
+    g_value_init(&params[0], G_TYPE_OBJECT);
+    g_value_set_object(&params[0], source_object);
+    g_value_init(&params[1], g_async_result_get_type());
+    g_value_set_object(&params[1], res);
+    g_closure_invoke(closure, NULL, 2, params, NULL);
+    g_closure_unref(closure);
+}
+static void FileMeasureProgressCallbackWrapper(gboolean reporting, guint64 current_size, guint64 num_dirs, guint64 num_files, gpointer user_data) {
+    GClosure* closure = user_data;
+    GValue params[4];
+    bzero(params, 4*sizeof(GValue));
+    g_value_init(&params[0], G_TYPE_BOOLEAN);
+    g_value_set_boolean(&params[0], reporting);
+    g_value_init(&params[1], G_TYPE_UINT64);
+    g_value_set_uint64(&params[1], current_size);
+    g_value_init(&params[2], G_TYPE_UINT64);
+    g_value_set_uint64(&params[2], num_dirs);
+    g_value_init(&params[3], G_TYPE_UINT64);
+    g_value_set_uint64(&params[3], num_files);
+    g_closure_invoke(closure, NULL, 4, params, NULL);
+}
+static void FileProgressCallbackWrapper(goffset current_num_bytes, goffset total_num_bytes, gpointer user_data) {
+    GClosure* closure = user_data;
+    GValue params[2];
+    bzero(params, 2*sizeof(GValue));
+    g_value_init(&params[0], G_TYPE_INT64);
+    g_value_set_int64(&params[0], current_num_bytes);
+    g_value_init(&params[1], G_TYPE_INT64);
+    g_value_set_int64(&params[1], total_num_bytes);
+    g_closure_invoke(closure, NULL, 2, params, NULL);
+}
 */
 import "C"
 import "github.com/electricface/go-auto-gir/glib-2.0"
 import "github.com/electricface/go-auto-gir/gobject-2.0"
 import "github.com/electricface/go-auto-gir/util"
 import "unsafe"
-
-type AsyncReadyCallback func(source_object gobject.Object, res AsyncResult)
-type FileMeasureProgressCallback func(reporting bool, current_size uint64, num_dirs uint64, num_files uint64)
-type FileProgressCallback func(current_num_bytes int64, total_num_bytes int64)
 
 // Interface AppInfo
 type AppInfo struct {
@@ -5909,6 +5906,9 @@ func (op MountOperation) SetUsername(username string) {
 	C.free(unsafe.Pointer(username0)) /*ch:<stdlib.h>*/
 }
 
+type AsyncReadyCallback func(source_object gobject.Object, res AsyncResult)
+type FileMeasureProgressCallback func(reporting bool, current_size uint64, num_dirs uint64, num_files uint64)
+type FileProgressCallback func(current_num_bytes int64, total_num_bytes int64)
 type BusType int
 
 const (
