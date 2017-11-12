@@ -12598,6 +12598,12 @@ func (v ListStore) ListModel() ListModel {
 	return WrapListModel(v.Ptr)
 }
 
+// ListStoreNew is a wrapper around g_list_store_new().
+func ListStoreNew(item_type /*Gir:GObject*/ gobject.Type) ListStore {
+	ret0 := C.g_list_store_new(C.GType(item_type))
+	return wrapListStore(ret0)
+}
+
 // Append is a wrapper around g_list_store_append().
 func (store ListStore) Append(item gobject.Object) {
 	C.g_list_store_append(store.native(), C.gpointer((C.gpointer)(item.Ptr)))
