@@ -174,6 +174,24 @@ static void _g_volume_mount(GVolume* volume, GMountMountFlags flags, GMountOpera
 static void _g_file_input_stream_query_info_async(GFileInputStream* stream, const char* attributes, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
     return g_file_input_stream_query_info_async(stream, attributes, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
 }
+static void _g_dbus_connection_call(GDBusConnection* connection, const gchar* bus_name, const gchar* object_path, const gchar* interface_name, const gchar* method_name, GVariant* parameters, const GVariantType* reply_type, GDBusCallFlags flags, gint timeout_msec, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_dbus_connection_call(connection, bus_name, object_path, interface_name, method_name, parameters, reply_type, flags, timeout_msec, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_dbus_connection_call_with_unix_fd_list(GDBusConnection* connection, const gchar* bus_name, const gchar* object_path, const gchar* interface_name, const gchar* method_name, GVariant* parameters, const GVariantType* reply_type, GDBusCallFlags flags, gint timeout_msec, GUnixFDList* fd_list, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_dbus_connection_call_with_unix_fd_list(connection, bus_name, object_path, interface_name, method_name, parameters, reply_type, flags, timeout_msec, fd_list, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_dbus_connection_close(GDBusConnection* connection, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_dbus_connection_close(connection, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_dbus_connection_flush(GDBusConnection* connection, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_dbus_connection_flush(connection, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_dbus_connection_new(GIOStream* stream, const gchar* guid, GDBusConnectionFlags flags, GDBusAuthObserver* observer, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_dbus_connection_new(stream, guid, flags, observer, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_dbus_connection_new_for_address(const gchar* address, GDBusConnectionFlags flags, GDBusAuthObserver* observer, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_dbus_connection_new_for_address(address, flags, observer, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
 static void _g_async_initable_init_async(GAsyncInitable* initable, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
     return g_async_initable_init_async(initable, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
 }
@@ -182,6 +200,12 @@ static void _g_socket_address_enumerator_next_async(GSocketAddressEnumerator* en
 }
 static void _g_dtls_connection_close_async(GDtlsConnection* conn, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
     return g_dtls_connection_close_async(conn, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_dtls_connection_handshake_async(GDtlsConnection* conn, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_dtls_connection_handshake_async(conn, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_dtls_connection_shutdown_async(GDtlsConnection* conn, gboolean shutdown_read, gboolean shutdown_write, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_dtls_connection_shutdown_async(conn, shutdown_read, shutdown_write, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
 }
 static void _g_loadable_icon_load_async(GLoadableIcon* icon, int size, GCancellable* cancellable, GClosure* user_data_for_callback) {
     return g_loadable_icon_load_async(icon, size, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
@@ -5812,6 +5836,355 @@ func (v DBusConnection) Initable() Initable {
 	return WrapInitable(v.Ptr)
 }
 
+// DBusConnectionNewForAddressSync is a wrapper around g_dbus_connection_new_for_address_sync().
+func DBusConnectionNewForAddressSync(address string, flags DBusConnectionFlags, observer DBusAuthObserver, cancellable Cancellable) (DBusConnection, error) {
+	address0 := (*C.gchar)(C.CString(address))
+	var err glib.Error
+	ret0 := C.g_dbus_connection_new_for_address_sync(address0, C.GDBusConnectionFlags(flags), observer.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(address0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return DBusConnection{}, err.GoValue()
+	}
+	return wrapDBusConnection(ret0), nil
+}
+
+// DBusConnectionNewSync is a wrapper around g_dbus_connection_new_sync().
+func DBusConnectionNewSync(stream IOStream, guid string, flags DBusConnectionFlags, observer DBusAuthObserver, cancellable Cancellable) (DBusConnection, error) {
+	guid0 := (*C.gchar)(C.CString(guid))
+	var err glib.Error
+	ret0 := C.g_dbus_connection_new_sync(stream.native(), guid0, C.GDBusConnectionFlags(flags), observer.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(guid0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return DBusConnection{}, err.GoValue()
+	}
+	return wrapDBusConnection(ret0), nil
+}
+
+// Call is a wrapper around g_dbus_connection_call().
+func (connection DBusConnection) Call(bus_name string, object_path string, interface_name string, method_name string, parameters glib.Variant, reply_type glib.VariantType, flags DBusCallFlags, timeout_msec int, cancellable Cancellable, callback AsyncReadyCallback) {
+	bus_name0 := (*C.gchar)(C.CString(bus_name))
+	object_path0 := (*C.gchar)(C.CString(object_path))
+	interface_name0 := (*C.gchar)(C.CString(interface_name))
+	method_name0 := (*C.gchar)(C.CString(method_name))
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_dbus_connection_call(connection.native(), bus_name0, object_path0, interface_name0, method_name0, (*C.GVariant)(parameters.Ptr), (*C.GVariantType)(reply_type.Ptr), C.GDBusCallFlags(flags), C.gint(timeout_msec), cancellable.native(), callback0)
+	C.free(unsafe.Pointer(bus_name0))       /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(object_path0))    /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(interface_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(method_name0))    /*ch:<stdlib.h>*/
+}
+
+// CallFinish is a wrapper around g_dbus_connection_call_finish().
+func (connection DBusConnection) CallFinish(res AsyncResult) (glib.Variant, error) {
+	var err glib.Error
+	ret0 := C.g_dbus_connection_call_finish(connection.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return glib.Variant{}, err.GoValue()
+	}
+	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/, nil
+}
+
+// CallSync is a wrapper around g_dbus_connection_call_sync().
+func (connection DBusConnection) CallSync(bus_name string, object_path string, interface_name string, method_name string, parameters glib.Variant, reply_type glib.VariantType, flags DBusCallFlags, timeout_msec int, cancellable Cancellable) (glib.Variant, error) {
+	bus_name0 := (*C.gchar)(C.CString(bus_name))
+	object_path0 := (*C.gchar)(C.CString(object_path))
+	interface_name0 := (*C.gchar)(C.CString(interface_name))
+	method_name0 := (*C.gchar)(C.CString(method_name))
+	var err glib.Error
+	ret0 := C.g_dbus_connection_call_sync(connection.native(), bus_name0, object_path0, interface_name0, method_name0, (*C.GVariant)(parameters.Ptr), (*C.GVariantType)(reply_type.Ptr), C.GDBusCallFlags(flags), C.gint(timeout_msec), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(bus_name0))       /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(object_path0))    /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(interface_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(method_name0))    /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return glib.Variant{}, err.GoValue()
+	}
+	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/, nil
+}
+
+// CallWithUnixFdList is a wrapper around g_dbus_connection_call_with_unix_fd_list().
+func (connection DBusConnection) CallWithUnixFdList(bus_name string, object_path string, interface_name string, method_name string, parameters glib.Variant, reply_type glib.VariantType, flags DBusCallFlags, timeout_msec int, fd_list UnixFDList, cancellable Cancellable, callback AsyncReadyCallback) {
+	bus_name0 := (*C.gchar)(C.CString(bus_name))
+	object_path0 := (*C.gchar)(C.CString(object_path))
+	interface_name0 := (*C.gchar)(C.CString(interface_name))
+	method_name0 := (*C.gchar)(C.CString(method_name))
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_dbus_connection_call_with_unix_fd_list(connection.native(), bus_name0, object_path0, interface_name0, method_name0, (*C.GVariant)(parameters.Ptr), (*C.GVariantType)(reply_type.Ptr), C.GDBusCallFlags(flags), C.gint(timeout_msec), fd_list.native(), cancellable.native(), callback0)
+	C.free(unsafe.Pointer(bus_name0))       /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(object_path0))    /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(interface_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(method_name0))    /*ch:<stdlib.h>*/
+}
+
+// CallWithUnixFdListFinish is a wrapper around g_dbus_connection_call_with_unix_fd_list_finish().
+func (connection DBusConnection) CallWithUnixFdListFinish(res AsyncResult) (glib.Variant, UnixFDList, error) {
+	var out_fd_list0 *C.GUnixFDList
+	var err glib.Error
+	ret0 := C.g_dbus_connection_call_with_unix_fd_list_finish(connection.native(), &out_fd_list0, res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return glib.Variant{}, UnixFDList{}, err.GoValue()
+	}
+	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/, wrapUnixFDList(out_fd_list0), nil
+}
+
+// CallWithUnixFdListSync is a wrapper around g_dbus_connection_call_with_unix_fd_list_sync().
+func (connection DBusConnection) CallWithUnixFdListSync(bus_name string, object_path string, interface_name string, method_name string, parameters glib.Variant, reply_type glib.VariantType, flags DBusCallFlags, timeout_msec int, fd_list UnixFDList, cancellable Cancellable) (glib.Variant, UnixFDList, error) {
+	bus_name0 := (*C.gchar)(C.CString(bus_name))
+	object_path0 := (*C.gchar)(C.CString(object_path))
+	interface_name0 := (*C.gchar)(C.CString(interface_name))
+	method_name0 := (*C.gchar)(C.CString(method_name))
+	var out_fd_list0 *C.GUnixFDList
+	var err glib.Error
+	ret0 := C.g_dbus_connection_call_with_unix_fd_list_sync(connection.native(), bus_name0, object_path0, interface_name0, method_name0, (*C.GVariant)(parameters.Ptr), (*C.GVariantType)(reply_type.Ptr), C.GDBusCallFlags(flags), C.gint(timeout_msec), fd_list.native(), &out_fd_list0, cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(bus_name0))       /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(object_path0))    /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(interface_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(method_name0))    /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return glib.Variant{}, UnixFDList{}, err.GoValue()
+	}
+	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/, wrapUnixFDList(out_fd_list0), nil
+}
+
+// Close is a wrapper around g_dbus_connection_close().
+func (connection DBusConnection) Close(cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_dbus_connection_close(connection.native(), cancellable.native(), callback0)
+}
+
+// CloseFinish is a wrapper around g_dbus_connection_close_finish().
+func (connection DBusConnection) CloseFinish(res AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_dbus_connection_close_finish(connection.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// CloseSync is a wrapper around g_dbus_connection_close_sync().
+func (connection DBusConnection) CloseSync(cancellable Cancellable) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_dbus_connection_close_sync(connection.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// EmitSignal is a wrapper around g_dbus_connection_emit_signal().
+func (connection DBusConnection) EmitSignal(destination_bus_name string, object_path string, interface_name string, signal_name string, parameters glib.Variant) (bool, error) {
+	destination_bus_name0 := (*C.gchar)(C.CString(destination_bus_name))
+	object_path0 := (*C.gchar)(C.CString(object_path))
+	interface_name0 := (*C.gchar)(C.CString(interface_name))
+	signal_name0 := (*C.gchar)(C.CString(signal_name))
+	var err glib.Error
+	ret0 := C.g_dbus_connection_emit_signal(connection.native(), destination_bus_name0, object_path0, interface_name0, signal_name0, (*C.GVariant)(parameters.Ptr), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(destination_bus_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(object_path0))          /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(interface_name0))       /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(signal_name0))          /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// ExportActionGroup is a wrapper around g_dbus_connection_export_action_group().
+func (connection DBusConnection) ExportActionGroup(object_path string, action_group ActionGroup) (uint, error) {
+	object_path0 := (*C.gchar)(C.CString(object_path))
+	var err glib.Error
+	ret0 := C.g_dbus_connection_export_action_group(connection.native(), object_path0, action_group.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(object_path0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return 0, err.GoValue()
+	}
+	return uint(ret0), nil
+}
+
+// ExportMenuModel is a wrapper around g_dbus_connection_export_menu_model().
+func (connection DBusConnection) ExportMenuModel(object_path string, menu MenuModel) (uint, error) {
+	object_path0 := (*C.gchar)(C.CString(object_path))
+	var err glib.Error
+	ret0 := C.g_dbus_connection_export_menu_model(connection.native(), object_path0, menu.native(), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(object_path0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return 0, err.GoValue()
+	}
+	return uint(ret0), nil
+}
+
+// Flush is a wrapper around g_dbus_connection_flush().
+func (connection DBusConnection) Flush(cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_dbus_connection_flush(connection.native(), cancellable.native(), callback0)
+}
+
+// FlushFinish is a wrapper around g_dbus_connection_flush_finish().
+func (connection DBusConnection) FlushFinish(res AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_dbus_connection_flush_finish(connection.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// FlushSync is a wrapper around g_dbus_connection_flush_sync().
+func (connection DBusConnection) FlushSync(cancellable Cancellable) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_dbus_connection_flush_sync(connection.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// GetCapabilities is a wrapper around g_dbus_connection_get_capabilities().
+func (connection DBusConnection) GetCapabilities() DBusCapabilityFlags {
+	ret0 := C.g_dbus_connection_get_capabilities(connection.native())
+	return DBusCapabilityFlags(ret0)
+}
+
+// GetExitOnClose is a wrapper around g_dbus_connection_get_exit_on_close().
+func (connection DBusConnection) GetExitOnClose() bool {
+	ret0 := C.g_dbus_connection_get_exit_on_close(connection.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// GetGuid is a wrapper around g_dbus_connection_get_guid().
+func (connection DBusConnection) GetGuid() string {
+	ret0 := C.g_dbus_connection_get_guid(connection.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// GetLastSerial is a wrapper around g_dbus_connection_get_last_serial().
+func (connection DBusConnection) GetLastSerial() uint32 {
+	ret0 := C.g_dbus_connection_get_last_serial(connection.native())
+	return uint32(ret0)
+}
+
+// GetPeerCredentials is a wrapper around g_dbus_connection_get_peer_credentials().
+func (connection DBusConnection) GetPeerCredentials() Credentials {
+	ret0 := C.g_dbus_connection_get_peer_credentials(connection.native())
+	return wrapCredentials(ret0)
+}
+
+// GetStream is a wrapper around g_dbus_connection_get_stream().
+func (connection DBusConnection) GetStream() IOStream {
+	ret0 := C.g_dbus_connection_get_stream(connection.native())
+	return wrapIOStream(ret0)
+}
+
+// GetUniqueName is a wrapper around g_dbus_connection_get_unique_name().
+func (connection DBusConnection) GetUniqueName() string {
+	ret0 := C.g_dbus_connection_get_unique_name(connection.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// IsClosed is a wrapper around g_dbus_connection_is_closed().
+func (connection DBusConnection) IsClosed() bool {
+	ret0 := C.g_dbus_connection_is_closed(connection.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// RegisterObjectWithClosures is a wrapper around g_dbus_connection_register_object_with_closures().
+func (connection DBusConnection) RegisterObjectWithClosures(object_path string, interface_info DBusInterfaceInfo, method_call_closure gobject.Closure, get_property_closure gobject.Closure, set_property_closure gobject.Closure) (uint, error) {
+	object_path0 := (*C.gchar)(C.CString(object_path))
+	var err glib.Error
+	ret0 := C.g_dbus_connection_register_object_with_closures(connection.native(), object_path0, interface_info.native(), (*C.GClosure)(method_call_closure.Ptr), (*C.GClosure)(get_property_closure.Ptr), (*C.GClosure)(set_property_closure.Ptr), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(object_path0)) /*ch:<stdlib.h>*/
+	if err.Ptr != nil {
+		defer err.Free()
+		return 0, err.GoValue()
+	}
+	return uint(ret0), nil
+}
+
+// RemoveFilter is a wrapper around g_dbus_connection_remove_filter().
+func (connection DBusConnection) RemoveFilter(filter_id uint) {
+	C.g_dbus_connection_remove_filter(connection.native(), C.guint(filter_id))
+}
+
+// SendMessageWithReplyFinish is a wrapper around g_dbus_connection_send_message_with_reply_finish().
+func (connection DBusConnection) SendMessageWithReplyFinish(res AsyncResult) (DBusMessage, error) {
+	var err glib.Error
+	ret0 := C.g_dbus_connection_send_message_with_reply_finish(connection.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return DBusMessage{}, err.GoValue()
+	}
+	return wrapDBusMessage(ret0), nil
+}
+
+// SetExitOnClose is a wrapper around g_dbus_connection_set_exit_on_close().
+func (connection DBusConnection) SetExitOnClose(exit_on_close bool) {
+	C.g_dbus_connection_set_exit_on_close(connection.native(), C.gboolean(util.Bool2Int(exit_on_close)) /*go:.util*/)
+}
+
+// SignalUnsubscribe is a wrapper around g_dbus_connection_signal_unsubscribe().
+func (connection DBusConnection) SignalUnsubscribe(subscription_id uint) {
+	C.g_dbus_connection_signal_unsubscribe(connection.native(), C.guint(subscription_id))
+}
+
+// StartMessageProcessing is a wrapper around g_dbus_connection_start_message_processing().
+func (connection DBusConnection) StartMessageProcessing() {
+	C.g_dbus_connection_start_message_processing(connection.native())
+}
+
+// UnexportActionGroup is a wrapper around g_dbus_connection_unexport_action_group().
+func (connection DBusConnection) UnexportActionGroup(export_id uint) {
+	C.g_dbus_connection_unexport_action_group(connection.native(), C.guint(export_id))
+}
+
+// UnexportMenuModel is a wrapper around g_dbus_connection_unexport_menu_model().
+func (connection DBusConnection) UnexportMenuModel(export_id uint) {
+	C.g_dbus_connection_unexport_menu_model(connection.native(), C.guint(export_id))
+}
+
+// UnregisterObject is a wrapper around g_dbus_connection_unregister_object().
+func (connection DBusConnection) UnregisterObject(registration_id uint) bool {
+	ret0 := C.g_dbus_connection_unregister_object(connection.native(), C.guint(registration_id))
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// UnregisterSubtree is a wrapper around g_dbus_connection_unregister_subtree().
+func (connection DBusConnection) UnregisterSubtree(registration_id uint) bool {
+	ret0 := C.g_dbus_connection_unregister_subtree(connection.native(), C.guint(registration_id))
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// DBusConnectionNew is a wrapper around g_dbus_connection_new().
+func DBusConnectionNew(stream IOStream, guid string, flags DBusConnectionFlags, observer DBusAuthObserver, cancellable Cancellable, callback AsyncReadyCallback) {
+	guid0 := (*C.gchar)(C.CString(guid))
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_dbus_connection_new(stream.native(), guid0, C.GDBusConnectionFlags(flags), observer.native(), cancellable.native(), callback0)
+	C.free(unsafe.Pointer(guid0)) /*ch:<stdlib.h>*/
+}
+
+// DBusConnectionNewForAddress is a wrapper around g_dbus_connection_new_for_address().
+func DBusConnectionNewForAddress(address string, flags DBusConnectionFlags, observer DBusAuthObserver, cancellable Cancellable, callback AsyncReadyCallback) {
+	address0 := (*C.gchar)(C.CString(address))
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_dbus_connection_new_for_address(address0, C.GDBusConnectionFlags(flags), observer.native(), cancellable.native(), callback0)
+	C.free(unsafe.Pointer(address0)) /*ch:<stdlib.h>*/
+}
+
 // Interface AsyncInitable
 type AsyncInitable struct {
 	Ptr unsafe.Pointer
@@ -6189,6 +6562,33 @@ func (info DBusInterfaceInfo) LookupMethod(name string) DBusMethodInfo {
 	ret0 := C.g_dbus_interface_info_lookup_method(info.native(), name0)
 	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
 	return wrapDBusMethodInfo(ret0)
+}
+
+// LookupProperty is a wrapper around g_dbus_interface_info_lookup_property().
+func (info DBusInterfaceInfo) LookupProperty(name string) DBusPropertyInfo {
+	name0 := (*C.gchar)(C.CString(name))
+	ret0 := C.g_dbus_interface_info_lookup_property(info.native(), name0)
+	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	return wrapDBusPropertyInfo(ret0)
+}
+
+// LookupSignal is a wrapper around g_dbus_interface_info_lookup_signal().
+func (info DBusInterfaceInfo) LookupSignal(name string) DBusSignalInfo {
+	name0 := (*C.gchar)(C.CString(name))
+	ret0 := C.g_dbus_interface_info_lookup_signal(info.native(), name0)
+	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	return wrapDBusSignalInfo(ret0)
+}
+
+// Ref is a wrapper around g_dbus_interface_info_ref().
+func (info DBusInterfaceInfo) Ref() DBusInterfaceInfo {
+	ret0 := C.g_dbus_interface_info_ref(info.native())
+	return wrapDBusInterfaceInfo(ret0)
+}
+
+// Unref is a wrapper around g_dbus_interface_info_unref().
+func (info DBusInterfaceInfo) Unref() {
+	C.g_dbus_interface_info_unref(info.native())
 }
 
 // Struct DBusMethodInfo
@@ -6832,6 +7232,28 @@ func (manager DBusObjectManager) GetInterface(object_path string, interface_name
 	return wrapDBusInterface(ret0)
 }
 
+// GetObject is a wrapper around g_dbus_object_manager_get_object().
+func (manager DBusObjectManager) GetObject(object_path string) DBusObject {
+	object_path0 := (*C.gchar)(C.CString(object_path))
+	ret0 := C.g_dbus_object_manager_get_object(manager.native(), object_path0)
+	C.free(unsafe.Pointer(object_path0)) /*ch:<stdlib.h>*/
+	return wrapDBusObject(ret0)
+}
+
+// GetObjectPath is a wrapper around g_dbus_object_manager_get_object_path().
+func (manager DBusObjectManager) GetObjectPath() string {
+	ret0 := C.g_dbus_object_manager_get_object_path(manager.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// GetObjects is a wrapper around g_dbus_object_manager_get_objects().
+func (manager DBusObjectManager) GetObjects() glib.List {
+	ret0 := C.g_dbus_object_manager_get_objects(manager.native())
+	return glib.WrapList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapDBusObject(p) }) /*gir:GLib*/
+}
+
 // Interface DBusInterface
 type DBusInterface struct {
 	Ptr unsafe.Pointer
@@ -7054,6 +7476,22 @@ func (v DtlsClientConnection) GetGValueGetter() gobject.GValueGetter {
 func (conn DtlsClientConnection) GetServerIdentity() SocketConnectable {
 	ret0 := C.g_dtls_client_connection_get_server_identity(conn.native())
 	return wrapSocketConnectable(ret0)
+}
+
+// GetValidationFlags is a wrapper around g_dtls_client_connection_get_validation_flags().
+func (conn DtlsClientConnection) GetValidationFlags() TlsCertificateFlags {
+	ret0 := C.g_dtls_client_connection_get_validation_flags(conn.native())
+	return TlsCertificateFlags(ret0)
+}
+
+// SetServerIdentity is a wrapper around g_dtls_client_connection_set_server_identity().
+func (conn DtlsClientConnection) SetServerIdentity(identity SocketConnectable) {
+	C.g_dtls_client_connection_set_server_identity(conn.native(), identity.native())
+}
+
+// SetValidationFlags is a wrapper around g_dtls_client_connection_set_validation_flags().
+func (conn DtlsClientConnection) SetValidationFlags(flags TlsCertificateFlags) {
+	C.g_dtls_client_connection_set_validation_flags(conn.native(), C.GTlsCertificateFlags(flags))
 }
 
 // Interface SocketConnectable
@@ -7292,6 +7730,129 @@ func (conn DtlsConnection) CloseFinish(result AsyncResult) (bool, error) {
 func (conn DtlsConnection) EmitAcceptCertificate(peer_cert TlsCertificate, errors TlsCertificateFlags) bool {
 	ret0 := C.g_dtls_connection_emit_accept_certificate(conn.native(), peer_cert.native(), C.GTlsCertificateFlags(errors))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// GetCertificate is a wrapper around g_dtls_connection_get_certificate().
+func (conn DtlsConnection) GetCertificate() TlsCertificate {
+	ret0 := C.g_dtls_connection_get_certificate(conn.native())
+	return wrapTlsCertificate(ret0)
+}
+
+// GetDatabase is a wrapper around g_dtls_connection_get_database().
+func (conn DtlsConnection) GetDatabase() TlsDatabase {
+	ret0 := C.g_dtls_connection_get_database(conn.native())
+	return wrapTlsDatabase(ret0)
+}
+
+// GetInteraction is a wrapper around g_dtls_connection_get_interaction().
+func (conn DtlsConnection) GetInteraction() TlsInteraction {
+	ret0 := C.g_dtls_connection_get_interaction(conn.native())
+	return wrapTlsInteraction(ret0)
+}
+
+// GetPeerCertificate is a wrapper around g_dtls_connection_get_peer_certificate().
+func (conn DtlsConnection) GetPeerCertificate() TlsCertificate {
+	ret0 := C.g_dtls_connection_get_peer_certificate(conn.native())
+	return wrapTlsCertificate(ret0)
+}
+
+// GetPeerCertificateErrors is a wrapper around g_dtls_connection_get_peer_certificate_errors().
+func (conn DtlsConnection) GetPeerCertificateErrors() TlsCertificateFlags {
+	ret0 := C.g_dtls_connection_get_peer_certificate_errors(conn.native())
+	return TlsCertificateFlags(ret0)
+}
+
+// GetRehandshakeMode is a wrapper around g_dtls_connection_get_rehandshake_mode().
+func (conn DtlsConnection) GetRehandshakeMode() TlsRehandshakeMode {
+	ret0 := C.g_dtls_connection_get_rehandshake_mode(conn.native())
+	return TlsRehandshakeMode(ret0)
+}
+
+// GetRequireCloseNotify is a wrapper around g_dtls_connection_get_require_close_notify().
+func (conn DtlsConnection) GetRequireCloseNotify() bool {
+	ret0 := C.g_dtls_connection_get_require_close_notify(conn.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// Handshake is a wrapper around g_dtls_connection_handshake().
+func (conn DtlsConnection) Handshake(cancellable Cancellable) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_dtls_connection_handshake(conn.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// HandshakeAsync is a wrapper around g_dtls_connection_handshake_async().
+func (conn DtlsConnection) HandshakeAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_dtls_connection_handshake_async(conn.native(), C.int(io_priority), cancellable.native(), callback0)
+}
+
+// HandshakeFinish is a wrapper around g_dtls_connection_handshake_finish().
+func (conn DtlsConnection) HandshakeFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_dtls_connection_handshake_finish(conn.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// SetCertificate is a wrapper around g_dtls_connection_set_certificate().
+func (conn DtlsConnection) SetCertificate(certificate TlsCertificate) {
+	C.g_dtls_connection_set_certificate(conn.native(), certificate.native())
+}
+
+// SetDatabase is a wrapper around g_dtls_connection_set_database().
+func (conn DtlsConnection) SetDatabase(database TlsDatabase) {
+	C.g_dtls_connection_set_database(conn.native(), database.native())
+}
+
+// SetInteraction is a wrapper around g_dtls_connection_set_interaction().
+func (conn DtlsConnection) SetInteraction(interaction TlsInteraction) {
+	C.g_dtls_connection_set_interaction(conn.native(), interaction.native())
+}
+
+// SetRehandshakeMode is a wrapper around g_dtls_connection_set_rehandshake_mode().
+func (conn DtlsConnection) SetRehandshakeMode(mode TlsRehandshakeMode) {
+	C.g_dtls_connection_set_rehandshake_mode(conn.native(), C.GTlsRehandshakeMode(mode))
+}
+
+// SetRequireCloseNotify is a wrapper around g_dtls_connection_set_require_close_notify().
+func (conn DtlsConnection) SetRequireCloseNotify(require_close_notify bool) {
+	C.g_dtls_connection_set_require_close_notify(conn.native(), C.gboolean(util.Bool2Int(require_close_notify)) /*go:.util*/)
+}
+
+// Shutdown is a wrapper around g_dtls_connection_shutdown().
+func (conn DtlsConnection) Shutdown(shutdown_read bool, shutdown_write bool, cancellable Cancellable) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_dtls_connection_shutdown(conn.native(), C.gboolean(util.Bool2Int(shutdown_read)) /*go:.util*/, C.gboolean(util.Bool2Int(shutdown_write)) /*go:.util*/, cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// ShutdownAsync is a wrapper around g_dtls_connection_shutdown_async().
+func (conn DtlsConnection) ShutdownAsync(shutdown_read bool, shutdown_write bool, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_dtls_connection_shutdown_async(conn.native(), C.gboolean(util.Bool2Int(shutdown_read)) /*go:.util*/, C.gboolean(util.Bool2Int(shutdown_write)) /*go:.util*/, C.int(io_priority), cancellable.native(), callback0)
+}
+
+// ShutdownFinish is a wrapper around g_dtls_connection_shutdown_finish().
+func (conn DtlsConnection) ShutdownFinish(result AsyncResult) (bool, error) {
+	var err glib.Error
+	ret0 := C.g_dtls_connection_shutdown_finish(conn.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
 }
 
 // Object TlsCertificate

@@ -235,8 +235,8 @@ version = "2.0"
   name = "FileAttributeMatcher"
 
 [[types]]
-  err_funcs = ["g_dbus_connection_new_finish","g_dbus_connection_new_for_address_finish"]
-  funcs = []
+  err_funcs = ["g_dbus_connection_new_finish","g_dbus_connection_new_for_address_finish","g_dbus_connection_add_filter","g_dbus_connection_register_object","g_dbus_connection_register_subtree","g_dbus_connection_send_message","g_dbus_connection_send_message_with_reply","g_dbus_connection_send_message_with_reply_sync","g_dbus_connection_signal_subscribe"]
+  funcs = ["g_dbus_connection_new_for_address_sync","g_dbus_connection_new_sync","g_dbus_connection_call","g_dbus_connection_call_finish","g_dbus_connection_call_sync","g_dbus_connection_call_with_unix_fd_list","g_dbus_connection_call_with_unix_fd_list_finish","g_dbus_connection_call_with_unix_fd_list_sync","g_dbus_connection_close","g_dbus_connection_close_finish","g_dbus_connection_close_sync","g_dbus_connection_emit_signal","g_dbus_connection_export_action_group","g_dbus_connection_export_menu_model","g_dbus_connection_flush","g_dbus_connection_flush_finish","g_dbus_connection_flush_sync","g_dbus_connection_get_capabilities","g_dbus_connection_get_exit_on_close","g_dbus_connection_get_guid","g_dbus_connection_get_last_serial","g_dbus_connection_get_peer_credentials","g_dbus_connection_get_stream","g_dbus_connection_get_unique_name","g_dbus_connection_is_closed","g_dbus_connection_register_object_with_closures","g_dbus_connection_remove_filter","g_dbus_connection_send_message_with_reply_finish","g_dbus_connection_set_exit_on_close","g_dbus_connection_signal_unsubscribe","g_dbus_connection_start_message_processing","g_dbus_connection_unexport_action_group","g_dbus_connection_unexport_menu_model","g_dbus_connection_unregister_object","g_dbus_connection_unregister_subtree","g_dbus_connection_new","g_dbus_connection_new_for_address"]
   ignore_funcs = []
   manual_funcs = []
   name = "DBusConnection"
@@ -249,7 +249,7 @@ version = "2.0"
   name = "AsyncInitable"
 
 [[types]]
-  err_funcs = []
+  err_funcs = ["g_initable_new","g_initable_new_valist","g_initable_newv"]
   funcs = ["g_initable_init"]
   ignore_funcs = []
   manual_funcs = []
@@ -292,7 +292,7 @@ version = "2.0"
 
 [[types]]
   err_funcs = ["g_dbus_interface_info_generate_xml"]
-  funcs = ["g_dbus_interface_info_cache_build","g_dbus_interface_info_cache_release","g_dbus_interface_info_lookup_method"]
+  funcs = ["g_dbus_interface_info_cache_build","g_dbus_interface_info_cache_release","g_dbus_interface_info_lookup_method","g_dbus_interface_info_lookup_property","g_dbus_interface_info_lookup_signal","g_dbus_interface_info_ref","g_dbus_interface_info_unref"]
   ignore_funcs = []
   manual_funcs = []
   name = "DBusInterfaceInfo"
@@ -404,7 +404,7 @@ version = "2.0"
 
 [[types]]
   err_funcs = []
-  funcs = ["g_dbus_object_manager_get_interface"]
+  funcs = ["g_dbus_object_manager_get_interface","g_dbus_object_manager_get_object","g_dbus_object_manager_get_object_path","g_dbus_object_manager_get_objects"]
   ignore_funcs = []
   manual_funcs = []
   name = "DBusObjectManager"
@@ -438,8 +438,8 @@ version = "2.0"
   name = "DesktopAppInfoLookup"
 
 [[types]]
-  err_funcs = ["g_dtls_client_connection_get_accepted_cas"]
-  funcs = ["g_dtls_client_connection_get_server_identity"]
+  err_funcs = ["g_dtls_client_connection_get_accepted_cas","g_dtls_client_connection_new"]
+  funcs = ["g_dtls_client_connection_get_server_identity","g_dtls_client_connection_get_validation_flags","g_dtls_client_connection_set_server_identity","g_dtls_client_connection_set_validation_flags"]
   ignore_funcs = []
   manual_funcs = []
   name = "DtlsClientConnection"
@@ -467,7 +467,7 @@ version = "2.0"
 
 [[types]]
   err_funcs = []
-  funcs = ["g_dtls_connection_close","g_dtls_connection_close_async","g_dtls_connection_close_finish","g_dtls_connection_emit_accept_certificate"]
+  funcs = ["g_dtls_connection_close","g_dtls_connection_close_async","g_dtls_connection_close_finish","g_dtls_connection_emit_accept_certificate","g_dtls_connection_get_certificate","g_dtls_connection_get_database","g_dtls_connection_get_interaction","g_dtls_connection_get_peer_certificate","g_dtls_connection_get_peer_certificate_errors","g_dtls_connection_get_rehandshake_mode","g_dtls_connection_get_require_close_notify","g_dtls_connection_handshake","g_dtls_connection_handshake_async","g_dtls_connection_handshake_finish","g_dtls_connection_set_certificate","g_dtls_connection_set_database","g_dtls_connection_set_interaction","g_dtls_connection_set_rehandshake_mode","g_dtls_connection_set_require_close_notify","g_dtls_connection_shutdown","g_dtls_connection_shutdown_async","g_dtls_connection_shutdown_finish"]
   ignore_funcs = []
   manual_funcs = []
   name = "DtlsConnection"
@@ -914,7 +914,7 @@ version = "2.0"
   name = "NativeVolumeMonitor"
 
 [[types]]
-  err_funcs = ["g_network_address_new_loopback","g_network_address_get_hostname","g_network_address_get_port","g_network_address_get_scheme","g_network_address_parse","g_network_address_parse_uri"]
+  err_funcs = ["g_network_address_new_loopback","g_network_address_get_hostname","g_network_address_get_port","g_network_address_get_scheme","g_network_address_parse","g_network_address_parse_uri","g_network_address_new"]
   funcs = []
   ignore_funcs = []
   manual_funcs = []
