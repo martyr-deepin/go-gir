@@ -2477,6 +2477,75 @@ func IWrapOptionEntry(p unsafe.Pointer) interface{} {
 	return WrapOptionEntry(p)
 }
 
+// Struct VariantBuilder
+type VariantBuilder struct {
+	Ptr unsafe.Pointer
+}
+
+func (v VariantBuilder) native() *C.GVariantBuilder {
+	return (*C.GVariantBuilder)(v.Ptr)
+}
+func wrapVariantBuilder(p *C.GVariantBuilder) VariantBuilder {
+	return VariantBuilder{unsafe.Pointer(p)}
+}
+func WrapVariantBuilder(p unsafe.Pointer) VariantBuilder {
+	return VariantBuilder{p}
+}
+func (v VariantBuilder) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapVariantBuilder(p unsafe.Pointer) interface{} {
+	return WrapVariantBuilder(p)
+}
+
+// VariantBuilderNew is a wrapper around g_variant_builder_new().
+func VariantBuilderNew(type_ VariantType) VariantBuilder {
+	ret0 := C.g_variant_builder_new(type_.native())
+	return wrapVariantBuilder(ret0)
+}
+
+// AddValue is a wrapper around g_variant_builder_add_value().
+func (builder VariantBuilder) AddValue(value Variant) {
+	C.g_variant_builder_add_value(builder.native(), value.native())
+}
+
+// Clear is a wrapper around g_variant_builder_clear().
+func (builder VariantBuilder) Clear() {
+	C.g_variant_builder_clear(builder.native())
+}
+
+// Close is a wrapper around g_variant_builder_close().
+func (builder VariantBuilder) Close() {
+	C.g_variant_builder_close(builder.native())
+}
+
+// End is a wrapper around g_variant_builder_end().
+func (builder VariantBuilder) End() Variant {
+	ret0 := C.g_variant_builder_end(builder.native())
+	return wrapVariant(ret0)
+}
+
+// Init is a wrapper around g_variant_builder_init().
+func (builder VariantBuilder) Init(type_ VariantType) {
+	C.g_variant_builder_init(builder.native(), type_.native())
+}
+
+// Open is a wrapper around g_variant_builder_open().
+func (builder VariantBuilder) Open(type_ VariantType) {
+	C.g_variant_builder_open(builder.native(), type_.native())
+}
+
+// Ref is a wrapper around g_variant_builder_ref().
+func (builder VariantBuilder) Ref() VariantBuilder {
+	ret0 := C.g_variant_builder_ref(builder.native())
+	return wrapVariantBuilder(ret0)
+}
+
+// Unref is a wrapper around g_variant_builder_unref().
+func (builder VariantBuilder) Unref() {
+	C.g_variant_builder_unref(builder.native())
+}
+
 // IdleSourceNew is a wrapper around g_idle_source_new().
 func IdleSourceNew() Source {
 	ret0 := C.g_idle_source_new()

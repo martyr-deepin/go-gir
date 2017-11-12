@@ -879,6 +879,50 @@ func (self Remote) SetUrl(url string) {
 	C.free(unsafe.Pointer(url0)) /*ch:<stdlib.h>*/
 }
 
+// Object RelatedRef
+type RelatedRef struct {
+	Ref
+}
+
+func (v RelatedRef) native() *C.FlatpakRelatedRef {
+	return (*C.FlatpakRelatedRef)(v.Ptr)
+}
+func wrapRelatedRef(p *C.FlatpakRelatedRef) (v RelatedRef) {
+	v.Ptr = unsafe.Pointer(p)
+	return
+}
+func WrapRelatedRef(p unsafe.Pointer) (v RelatedRef) {
+	v.Ptr = p
+	return
+}
+func (v RelatedRef) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapRelatedRef(p unsafe.Pointer) interface{} {
+	return WrapRelatedRef(p)
+}
+func (v RelatedRef) GetType() gobject.Type {
+	return gobject.Type(C.flatpak_related_ref_get_type())
+}
+func (v RelatedRef) GetGValueGetter() gobject.GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapRelatedRef(unsafe.Pointer(ptr)), nil
+	}
+}
+
+// ShouldDelete is a wrapper around flatpak_related_ref_should_delete().
+func (self RelatedRef) ShouldDelete() bool {
+	ret0 := C.flatpak_related_ref_should_delete(self.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// ShouldDownload is a wrapper around flatpak_related_ref_should_download().
+func (self RelatedRef) ShouldDownload() bool {
+	ret0 := C.flatpak_related_ref_should_download(self.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
 type ProgressCallback func(status string, progress uint, estimating bool)
 type Error int
 

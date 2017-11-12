@@ -44,3 +44,10 @@ version = "1.0"
   ignore_funcs = []
   manual_funcs = []
   name = "Remote"
+
+[[types]]
+  err_funcs = ["flatpak_related_ref_get_subpaths"]
+  funcs = ["flatpak_related_ref_should_delete","flatpak_related_ref_should_download"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "RelatedRef"
