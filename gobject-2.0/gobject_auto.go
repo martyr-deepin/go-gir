@@ -846,6 +846,99 @@ func IWrapValueArray(p unsafe.Pointer) interface{} {
 	return WrapValueArray(p)
 }
 
+// Object TypeModule
+type TypeModule struct {
+	Object
+}
+
+func (v TypeModule) native() *C.GTypeModule {
+	return (*C.GTypeModule)(v.Ptr)
+}
+func wrapTypeModule(p *C.GTypeModule) (v TypeModule) {
+	v.Ptr = unsafe.Pointer(p)
+	return
+}
+func WrapTypeModule(p unsafe.Pointer) (v TypeModule) {
+	v.Ptr = p
+	return
+}
+func (v TypeModule) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapTypeModule(p unsafe.Pointer) interface{} {
+	return WrapTypeModule(p)
+}
+func (v TypeModule) GetType() Type {
+	return Type(C.g_type_module_get_type())
+}
+func (v TypeModule) GetGValueGetter() GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapTypeModule(unsafe.Pointer(ptr)), nil
+	}
+}
+func (v TypeModule) TypePlugin() TypePlugin {
+	return WrapTypePlugin(v.Ptr)
+}
+
+// SetName is a wrapper around g_type_module_set_name().
+func (module TypeModule) SetName(name string) {
+	name0 := (*C.gchar)(C.CString(name))
+	C.g_type_module_set_name(module.native(), name0)
+	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+}
+
+// Unuse is a wrapper around g_type_module_unuse().
+func (module TypeModule) Unuse() {
+	C.g_type_module_unuse(module.native())
+}
+
+// Use is a wrapper around g_type_module_use().
+func (module TypeModule) Use() bool {
+	ret0 := C.g_type_module_use(module.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// Interface TypePlugin
+type TypePlugin struct {
+	Ptr unsafe.Pointer
+}
+
+func (v TypePlugin) native() *C.GTypePlugin {
+	return (*C.GTypePlugin)(v.Ptr)
+}
+func wrapTypePlugin(p *C.GTypePlugin) TypePlugin {
+	return TypePlugin{unsafe.Pointer(p)}
+}
+func WrapTypePlugin(p unsafe.Pointer) TypePlugin {
+	return TypePlugin{p}
+}
+func (v TypePlugin) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapTypePlugin(p unsafe.Pointer) interface{} {
+	return WrapTypePlugin(p)
+}
+func (v TypePlugin) GetType() Type {
+	return Type(C.g_type_plugin_get_type())
+}
+func (v TypePlugin) GetGValueGetter() GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapTypePlugin(unsafe.Pointer(ptr)), nil
+	}
+}
+
+// Unuse is a wrapper around g_type_plugin_unuse().
+func (plugin TypePlugin) Unuse() {
+	C.g_type_plugin_unuse(plugin.native())
+}
+
+// Use is a wrapper around g_type_plugin_use().
+func (plugin TypePlugin) Use() {
+	C.g_type_plugin_use(plugin.native())
+}
+
 type Type uint
 type BindingFlags int
 

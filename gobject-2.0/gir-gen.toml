@@ -1,7 +1,7 @@
+callbacks = []
 funcs = []
 namespace = "GObject"
 version = "2.0"
-callbacks = []
 
 [[types]]
   err_funcs = []
@@ -58,3 +58,17 @@ callbacks = []
   ignore_funcs = ["g_value_array_new","g_value_array_append","g_value_array_copy","g_value_array_free","g_value_array_get_nth","g_value_array_insert","g_value_array_prepend","g_value_array_remove","g_value_array_sort","g_value_array_sort_with_data"]
   manual_funcs = []
   name = "ValueArray"
+
+[[types]]
+  err_funcs = ["g_type_module_add_interface","g_type_module_register_enum","g_type_module_register_flags","g_type_module_register_type"]
+  funcs = ["g_type_module_set_name","g_type_module_unuse","g_type_module_use"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TypeModule"
+
+[[types]]
+  err_funcs = ["g_type_plugin_complete_interface_info","g_type_plugin_complete_type_info"]
+  funcs = ["g_type_plugin_unuse","g_type_plugin_use"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TypePlugin"
