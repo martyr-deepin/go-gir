@@ -7412,36 +7412,6 @@ func (datagram_based DatagramBased) CreateSource(condition /*gir:GLib*/ glib.IOC
 	return glib.WrapSource(unsafe.Pointer(ret0)) /*gir:GLib*/
 }
 
-// Interface DesktopAppInfoLookup
-type DesktopAppInfoLookup struct {
-	Ptr unsafe.Pointer
-}
-
-func (v DesktopAppInfoLookup) native() *C.GDesktopAppInfoLookup {
-	return (*C.GDesktopAppInfoLookup)(v.Ptr)
-}
-func wrapDesktopAppInfoLookup(p *C.GDesktopAppInfoLookup) DesktopAppInfoLookup {
-	return DesktopAppInfoLookup{unsafe.Pointer(p)}
-}
-func WrapDesktopAppInfoLookup(p unsafe.Pointer) DesktopAppInfoLookup {
-	return DesktopAppInfoLookup{p}
-}
-func (v DesktopAppInfoLookup) IsNil() bool {
-	return v.Ptr == nil
-}
-func IWrapDesktopAppInfoLookup(p unsafe.Pointer) interface{} {
-	return WrapDesktopAppInfoLookup(p)
-}
-func (v DesktopAppInfoLookup) GetType() gobject.Type {
-	return gobject.Type(C.g_desktop_app_info_lookup_get_type())
-}
-func (v DesktopAppInfoLookup) GetGValueGetter() gobject.GValueGetter {
-	return func(p unsafe.Pointer) (interface{}, error) {
-		ptr := C.g_value_get_object((*C.GValue)(p))
-		return WrapDesktopAppInfoLookup(unsafe.Pointer(ptr)), nil
-	}
-}
-
 // Interface DtlsClientConnection
 type DtlsClientConnection struct {
 	Ptr unsafe.Pointer

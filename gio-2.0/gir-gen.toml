@@ -2,6 +2,7 @@ callbacks = ["AsyncReadyCallback","FileProgressCallback","FileMeasureProgressCal
 funcs = []
 namespace = "Gio"
 version = "2.0"
+ignore_types = ["DesktopAppInfoLookup"]
 
 [[types]]
   err_funcs = []
@@ -429,13 +430,6 @@ version = "2.0"
   ignore_funcs = []
   manual_funcs = []
   name = "DatagramBased"
-
-[[types]]
-  err_funcs = []
-  funcs = []
-  ignore_funcs = ["g_desktop_app_info_lookup_get_default_for_uri_scheme"]
-  manual_funcs = []
-  name = "DesktopAppInfoLookup"
 
 [[types]]
   err_funcs = ["g_dtls_client_connection_get_accepted_cas","g_dtls_client_connection_new"]
