@@ -12,8 +12,8 @@ ignore_types = ["DesktopAppInfoLookup"]
   name = "AppInfo"
 
 [[types]]
-  err_funcs = ["g_desktop_app_info_search","g_desktop_app_info_get_keywords","g_desktop_app_info_launch_uris_as_manager"]
-  funcs = ["g_desktop_app_info_new_from_filename","g_desktop_app_info_list_actions","g_desktop_app_info_new","g_desktop_app_info_get_action_name","g_desktop_app_info_get_boolean","g_desktop_app_info_get_categories","g_desktop_app_info_get_filename","g_desktop_app_info_get_generic_name","g_desktop_app_info_get_is_hidden","g_desktop_app_info_get_nodisplay","g_desktop_app_info_get_show_in","g_desktop_app_info_get_startup_wm_class","g_desktop_app_info_get_string","g_desktop_app_info_has_key","g_desktop_app_info_launch_action","g_desktop_app_info_new_from_keyfile","g_desktop_app_info_get_implementations"]
+  err_funcs = ["g_desktop_app_info_search","g_desktop_app_info_launch_uris_as_manager"]
+  funcs = ["g_desktop_app_info_get_keywords","g_desktop_app_info_new_from_filename","g_desktop_app_info_list_actions","g_desktop_app_info_new","g_desktop_app_info_get_action_name","g_desktop_app_info_get_boolean","g_desktop_app_info_get_categories","g_desktop_app_info_get_filename","g_desktop_app_info_get_generic_name","g_desktop_app_info_get_is_hidden","g_desktop_app_info_get_nodisplay","g_desktop_app_info_get_show_in","g_desktop_app_info_get_startup_wm_class","g_desktop_app_info_get_string","g_desktop_app_info_has_key","g_desktop_app_info_launch_action","g_desktop_app_info_new_from_keyfile","g_desktop_app_info_get_implementations"]
   ignore_funcs = ["g_desktop_app_info_set_desktop_env"]
   manual_funcs = []
   name = "DesktopAppInfo"
@@ -243,16 +243,16 @@ ignore_types = ["DesktopAppInfoLookup"]
   name = "DBusConnection"
 
 [[types]]
-  err_funcs = ["g_async_initable_newv_async"]
+  err_funcs = []
   funcs = ["g_async_initable_init_finish","g_async_initable_new_finish","g_async_initable_init_async"]
-  ignore_funcs = ["g_async_initable_new_valist_async","g_async_initable_new_async"]
+  ignore_funcs = ["g_async_initable_new_valist_async","g_async_initable_new_async","g_async_initable_newv_async"]
   manual_funcs = []
   name = "AsyncInitable"
 
 [[types]]
-  err_funcs = ["g_initable_new","g_initable_new_valist","g_initable_newv"]
+  err_funcs = []
   funcs = ["g_initable_init"]
-  ignore_funcs = []
+  ignore_funcs = ["g_initable_new","g_initable_new_valist","g_initable_newv"]
   manual_funcs = []
   name = "Initable"
 

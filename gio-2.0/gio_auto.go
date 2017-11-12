@@ -799,6 +799,20 @@ func (info DesktopAppInfo) GetIsHidden() bool {
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
+// GetKeywords is a wrapper around g_desktop_app_info_get_keywords().
+func (info DesktopAppInfo) GetKeywords() []string {
+	ret0 := C.g_desktop_app_info_get_keywords(info.native())
+	var ret0Slice []*C.char
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString(elem)
+		ret[idx] = elemG
+	}
+	return ret
+}
+
 // GetNodisplay is a wrapper around g_desktop_app_info_get_nodisplay().
 func (info DesktopAppInfo) GetNodisplay() bool {
 	ret0 := C.g_desktop_app_info_get_nodisplay(info.native())
