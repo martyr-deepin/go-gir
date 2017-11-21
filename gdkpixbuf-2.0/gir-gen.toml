@@ -1,6 +1,6 @@
 callbacks = []
 funcs = []
-ignore_types = ["Pixdata"]
+ignore_types = ["Pixdata", "PixbufSimpleAnimIter"]
 namespace = "GdkPixbuf"
 version = "2.0"
 
