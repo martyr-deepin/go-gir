@@ -89,10 +89,10 @@ ignore_types = ["DesktopAppInfoLookup"]
   name = "Seekable"
 
 [[types]]
-  err_funcs = ["g_file_info_get_modification_time"]
+  err_funcs = []
   funcs = ["g_file_info_new","g_file_info_clear_status","g_file_info_copy_into","g_file_info_dup","g_file_info_get_attribute_as_string","g_file_info_get_attribute_boolean","g_file_info_get_attribute_byte_string","g_file_info_get_attribute_data","g_file_info_get_attribute_int32","g_file_info_get_attribute_int64","g_file_info_get_attribute_object","g_file_info_get_attribute_status","g_file_info_get_attribute_string","g_file_info_get_attribute_stringv","g_file_info_get_attribute_type","g_file_info_get_attribute_uint32","g_file_info_get_attribute_uint64","g_file_info_get_content_type","g_file_info_get_deletion_date","g_file_info_get_display_name","g_file_info_get_edit_name","g_file_info_get_etag","g_file_info_get_file_type","g_file_info_get_icon","g_file_info_get_is_backup","g_file_info_get_is_hidden","g_file_info_get_is_symlink","g_file_info_get_name","g_file_info_get_size","g_file_info_get_sort_order","g_file_info_get_symbolic_icon","g_file_info_get_symlink_target","g_file_info_has_attribute","g_file_info_has_namespace","g_file_info_list_attributes","g_file_info_remove_attribute","g_file_info_set_attribute","g_file_info_set_attribute_boolean","g_file_info_set_attribute_byte_string","g_file_info_set_attribute_int32","g_file_info_set_attribute_int64","g_file_info_set_attribute_mask","g_file_info_set_attribute_object","g_file_info_set_attribute_status","g_file_info_set_attribute_string","g_file_info_set_attribute_stringv","g_file_info_set_attribute_uint32","g_file_info_set_attribute_uint64","g_file_info_set_content_type","g_file_info_set_display_name","g_file_info_set_edit_name","g_file_info_set_file_type","g_file_info_set_icon","g_file_info_set_is_hidden","g_file_info_set_is_symlink","g_file_info_set_modification_time","g_file_info_set_name","g_file_info_set_size","g_file_info_set_sort_order","g_file_info_set_symbolic_icon","g_file_info_set_symlink_target","g_file_info_unset_attribute_mask"]
   ignore_funcs = []
-  manual_funcs = []
+  manual_funcs = ["g_file_info_get_modification_time"]
   name = "FileInfo"
 
 [[types]]

@@ -6,7 +6,10 @@ package glib
 #include <stdlib.h>
 */
 import "C"
-import "unsafe"
+import (
+	"time"
+	"unsafe"
+)
 
 // GetString is a wrapper around g_variant_get_string().
 func (variant Variant) GetString() string {
@@ -93,4 +96,43 @@ func (v List) Prepend(data unsafe.Pointer) List {
 func (v List) Insert(data unsafe.Pointer, position int) List {
 	list := C.g_list_insert(v.native(), C.gpointer(data), C.gint(position))
 	return wrapList(list, v.DataWrap)
+}
+
+// TimeVal
+func TimeValNew() TimeVal {
+	ptr := C.g_malloc0(C.gsize(C.sizeof_GTimeVal))
+	return TimeVal{
+		Ptr: unsafe.Pointer(ptr),
+	}
+}
+
+func (v TimeVal) Free() {
+	C.g_free(C.gpointer(v.Ptr))
+}
+
+// field tv_sec
+func (v TimeVal) Seconds() int64 {
+	native := v.native()
+	return int64(native.tv_sec)
+}
+
+func (v TimeVal) SetSeconds(secs int64) {
+	native := v.native()
+	native.tv_sec = C.glong(secs)
+}
+
+// field tv_usec
+func (v TimeVal) Microseconds() int64 {
+	native := v.native()
+	return int64(native.tv_usec)
+}
+
+func (v TimeVal) SetMicroseconds(usecs int64) {
+	native := v.native()
+	native.tv_usec = C.glong(usecs)
+}
+
+func (v TimeVal) GoValue() time.Time {
+	native := v.native()
+	return time.Unix(int64(native.tv_sec), int64(native.tv_usec)*1000)
 }

@@ -32,12 +32,22 @@ static gulong _g_cancellable_connect(GCancellable *cancellable, GClosure* closur
 }
 */
 import "C"
-import "github.com/electricface/go-auto-gir/gobject-2.0"
+import (
+	"github.com/electricface/go-auto-gir/glib-2.0"
+	"github.com/electricface/go-auto-gir/gobject-2.0"
+)
 
 func (cancellable Cancellable) Connect(callback func()) uint {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr)
 	ret0 := C._g_cancellable_connect(cancellable.native(), callback0)
 	return uint(ret0)
+}
+
+//g_file_info_get_modification_time
+func (info FileInfo) GetModificationTime() glib.TimeVal {
+	result := glib.TimeValNew()
+	C.g_file_info_get_modification_time(info.native(), (*C.GTimeVal)(result.Ptr))
+	return result
 }
 
 //func (app Application) Run(argv []string) int {
