@@ -3,7 +3,7 @@ Section: devel
 Priority: extra
 Maintainer: Deepin Packages Builder <packages@deepin.com>
 Build-Depends: debhelper (>= 10),
-               dh-golang, libgudev-1.0-dev, libflatpak-dev, golang-any
+               dh-golang, libgudev-1.0-dev, libflatpak-dev, golang-any, libgdk-pixbuf2.0-dev
 Standards-Version: 4.0.0
 Homepage: https://github.com/linuxdeepin/go-gir
 XS-Go-Import-Path: github.com/linuxdeepin/go-gir
