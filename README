@@ -1,0 +1,6 @@
+go-gir
+
+Go bindings based on GObject-Introspection.
+
+usage
+go get github.com/linuxdeepin/go-gir
