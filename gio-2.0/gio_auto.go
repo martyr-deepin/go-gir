@@ -4177,8 +4177,8 @@ func (notification Notification) AddButton(label string, detailed_action string)
 	C.free(unsafe.Pointer(detailed_action0)) /*ch:<stdlib.h>*/
 }
 
-// AddButtonWithTargetValue is a wrapper around g_notification_add_button_with_target_value().
-func (notification Notification) AddButtonWithTargetValue(label string, action string, target glib.Variant) {
+// AddButtonWithTarget is a wrapper around g_notification_add_button_with_target_value().
+func (notification Notification) AddButtonWithTarget(label string, action string, target glib.Variant) {
 	label0 := (*C.gchar)(C.CString(label))
 	action0 := (*C.gchar)(C.CString(action))
 	C.g_notification_add_button_with_target_value(notification.native(), label0, action0, (*C.GVariant)(target.Ptr))
@@ -4200,8 +4200,8 @@ func (notification Notification) SetDefaultAction(detailed_action string) {
 	C.free(unsafe.Pointer(detailed_action0)) /*ch:<stdlib.h>*/
 }
 
-// SetDefaultActionAndTargetValue is a wrapper around g_notification_set_default_action_and_target_value().
-func (notification Notification) SetDefaultActionAndTargetValue(action string, target glib.Variant) {
+// SetDefaultActionAndTarget is a wrapper around g_notification_set_default_action_and_target_value().
+func (notification Notification) SetDefaultActionAndTarget(action string, target glib.Variant) {
 	action0 := (*C.gchar)(C.CString(action))
 	C.g_notification_set_default_action_and_target_value(notification.native(), action0, (*C.GVariant)(target.Ptr))
 	C.free(unsafe.Pointer(action0)) /*ch:<stdlib.h>*/
@@ -6117,8 +6117,8 @@ func (connection DBusConnection) IsClosed() bool {
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
-// RegisterObjectWithClosures is a wrapper around g_dbus_connection_register_object_with_closures().
-func (connection DBusConnection) RegisterObjectWithClosures(object_path string, interface_info DBusInterfaceInfo, method_call_closure gobject.Closure, get_property_closure gobject.Closure, set_property_closure gobject.Closure) (uint, error) {
+// RegisterObject is a wrapper around g_dbus_connection_register_object_with_closures().
+func (connection DBusConnection) RegisterObject(object_path string, interface_info DBusInterfaceInfo, method_call_closure gobject.Closure, get_property_closure gobject.Closure, set_property_closure gobject.Closure) (uint, error) {
 	object_path0 := (*C.gchar)(C.CString(object_path))
 	var err glib.Error
 	ret0 := C.g_dbus_connection_register_object_with_closures(connection.native(), object_path0, interface_info.native(), (*C.GClosure)(method_call_closure.Ptr), (*C.GClosure)(get_property_closure.Ptr), (*C.GClosure)(set_property_closure.Ptr), (**C.GError)(unsafe.Pointer(&err)))
@@ -7298,8 +7298,8 @@ func (v DBusInterface) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 
-// DupObject is a wrapper around g_dbus_interface_dup_object().
-func (interface_ DBusInterface) DupObject() DBusObject {
+// GetObject is a wrapper around g_dbus_interface_dup_object().
+func (interface_ DBusInterface) GetObject() DBusObject {
 	ret0 := C.g_dbus_interface_dup_object(interface_.native())
 	return wrapDBusObject(ret0)
 }
@@ -7310,11 +7310,7 @@ func (interface_ DBusInterface) GetInfo() DBusInterfaceInfo {
 	return wrapDBusInterfaceInfo(ret0)
 }
 
-// GetObject is a wrapper around g_dbus_interface_get_object().
-func (interface_ DBusInterface) GetObject() DBusObject {
-	ret0 := C.g_dbus_interface_get_object(interface_.native())
-	return wrapDBusObject(ret0)
-}
+// g_dbus_interface_get_object shadowed by dup_object
 
 // SetObject is a wrapper around g_dbus_interface_set_object().
 func (interface_ DBusInterface) SetObject(object DBusObject) {
@@ -8040,11 +8036,7 @@ func (v ListModel) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 
-// GetItem is a wrapper around g_list_model_get_item().
-func (list ListModel) GetItem(position uint) gobject.Object {
-	ret0 := C.g_list_model_get_item(list.native(), C.guint(position))
-	return gobject.WrapObject(unsafe.Pointer(ret0)) /*gir:GObject*/
-}
+// g_list_model_get_item shadowed by get_object
 
 // GetNItems is a wrapper around g_list_model_get_n_items().
 func (list ListModel) GetNItems() uint {
@@ -8052,8 +8044,8 @@ func (list ListModel) GetNItems() uint {
 	return uint(ret0)
 }
 
-// GetObject is a wrapper around g_list_model_get_object().
-func (list ListModel) GetObject(position uint) gobject.Object {
+// GetItem is a wrapper around g_list_model_get_object().
+func (list ListModel) GetItem(position uint) gobject.Object {
 	ret0 := C.g_list_model_get_object(list.native(), C.guint(position))
 	return gobject.WrapObject(unsafe.Pointer(ret0)) /*gir:GObject*/
 }
@@ -14939,8 +14931,8 @@ func (v Subprocess) Initable() Initable {
 	return WrapInitable(v.Ptr)
 }
 
-// SubprocessNewv is a wrapper around g_subprocess_newv().
-func SubprocessNewv(argv []string, flags SubprocessFlags) (Subprocess, error) {
+// SubprocessNew is a wrapper around g_subprocess_newv().
+func SubprocessNew(argv []string, flags SubprocessFlags) (Subprocess, error) {
 	argv0 := make([]*C.gchar, len(argv))
 	for idx, elemG := range argv {
 		elem := (*C.gchar)(C.CString(elemG))

@@ -398,8 +398,8 @@ func (source Object) BindProperty(source_property string, target Object, target_
 	return wrapBinding(ret0)
 }
 
-// BindPropertyWithClosures is a wrapper around g_object_bind_property_with_closures().
-func (source Object) BindPropertyWithClosures(source_property string, target Object, target_property string, flags BindingFlags, transform_to Closure, transform_from Closure) Binding {
+// BindPropertyFull is a wrapper around g_object_bind_property_with_closures().
+func (source Object) BindPropertyFull(source_property string, target Object, target_property string, flags BindingFlags, transform_to Closure, transform_from Closure) Binding {
 	source_property0 := (*C.gchar)(C.CString(source_property))
 	target_property0 := (*C.gchar)(C.CString(target_property))
 	ret0 := C.g_object_bind_property_with_closures(C.gpointer(source.native()), source_property0, C.gpointer(target.native()), target_property0, C.GBindingFlags(flags), transform_to.native(), transform_from.native())

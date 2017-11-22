@@ -382,20 +382,10 @@ func (pixbuf Pixbuf) GetOption(key string) string {
 	return ret
 }
 
-// GetPixels is a wrapper around gdk_pixbuf_get_pixels().
-func (pixbuf Pixbuf) GetPixels() []byte {
-	ret0 := C.gdk_pixbuf_get_pixels(pixbuf.native())
-	var ret0Slice []C.guchar
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), 0 /*TODO*/) /*go:.util*/
-	ret := make([]byte, len(ret0Slice))
-	for idx, elem := range ret0Slice {
-		ret[idx] = byte(elem)
-	}
-	return ret
-}
+// gdk_pixbuf_get_pixels shadowed by get_pixels_with_length
 
-// GetPixelsWithLength is a wrapper around gdk_pixbuf_get_pixels_with_length().
-func (pixbuf Pixbuf) GetPixelsWithLength() []byte {
+// GetPixels is a wrapper around gdk_pixbuf_get_pixels_with_length().
+func (pixbuf Pixbuf) GetPixels() []byte {
 	var length0 C.guint
 	ret0 := C.gdk_pixbuf_get_pixels_with_length(pixbuf.native(), &length0)
 	var ret0Slice []C.guchar
