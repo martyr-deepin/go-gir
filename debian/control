@@ -1,0 +1,16 @@
+Source: golang-github-linuxdeepin-go-gir
+Section: devel
+Priority: extra
+Maintainer: Deepin Packages Builder <packages@deepin.com>
+Build-Depends: debhelper (>= 10),
+               dh-golang, libgudev-1.0-dev, libflatpak-dev, golang-any
+Standards-Version: 4.0.0
+Homepage: https://github.com/linuxdeepin/go-gir
+XS-Go-Import-Path: github.com/linuxdeepin/go-gir
+Testsuite: autopkgtest-pkg-go
+
+Package: golang-github-linuxdeepin-go-gir-dev
+Architecture: all
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
+Description: Go bindings based on GObject-Introspection

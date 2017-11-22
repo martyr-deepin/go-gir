@@ -1,0 +1,15 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: go-gir
+Source: https://github.com/linuxdeepin/go-gir
+
+Files: *
+Copyright: 2017 Wuhan Deepin Technology Co.,Ltd.
+License: GPL-3.0
+
+Files: debian/*
+Copyright: 2017 Deepin Packages Builder <packages@deepin.com>
+License: GPL-3.0
+Comment: Debian packaging is licensed under the same terms as upstream
+
+License: GPL-3.0
+TODO
