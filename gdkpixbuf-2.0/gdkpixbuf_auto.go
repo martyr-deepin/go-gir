@@ -6,10 +6,10 @@ package gdkpixbuf
 #include <stdlib.h>
 */
 import "C"
-import "github.com/electricface/go-auto-gir/gio-2.0"
-import "github.com/electricface/go-auto-gir/glib-2.0"
-import "github.com/electricface/go-auto-gir/gobject-2.0"
-import "github.com/electricface/go-auto-gir/util"
+import "github.com/linuxdeepin/go-gir/gio-2.0"
+import "github.com/linuxdeepin/go-gir/glib-2.0"
+import "github.com/linuxdeepin/go-gir/gobject-2.0"
+import "github.com/linuxdeepin/go-gir/util"
 import "unsafe"
 
 // Struct PixbufFormat

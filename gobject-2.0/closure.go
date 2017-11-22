@@ -33,8 +33,8 @@ import (
 	"sync"
 	"unsafe"
 
-	"github.com/electricface/go-auto-gir/glib-2.0"
-	"github.com/electricface/go-auto-gir/util"
+	"github.com/linuxdeepin/go-gir/glib-2.0"
+	"github.com/linuxdeepin/go-gir/util"
 )
 
 type closureContext struct {

@@ -33,8 +33,8 @@ static gulong _g_cancellable_connect(GCancellable *cancellable, GClosure* closur
 */
 import "C"
 import (
-	"github.com/electricface/go-auto-gir/glib-2.0"
-	"github.com/electricface/go-auto-gir/gobject-2.0"
+	"github.com/linuxdeepin/go-gir/glib-2.0"
+	"github.com/linuxdeepin/go-gir/gobject-2.0"
 )
 
 func (cancellable Cancellable) Connect(callback func()) uint {

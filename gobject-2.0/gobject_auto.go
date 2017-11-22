@@ -6,8 +6,8 @@ package gobject
 #include <stdlib.h>
 */
 import "C"
-import "github.com/electricface/go-auto-gir/glib-2.0"
-import "github.com/electricface/go-auto-gir/util"
+import "github.com/linuxdeepin/go-gir/glib-2.0"
+import "github.com/linuxdeepin/go-gir/util"
 import "unsafe"
 
 // Struct Value
