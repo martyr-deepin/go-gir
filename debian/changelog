@@ -1,5 +1,5 @@
-golang-github-linuxdeepin-go-gir (0.0~git20171122.0.e4e083f-1) UNRELEASED; urgency=medium
+golang-github-linuxdeepin-go-gir (1.0.1) unstable; urgency=medium
 
-  * Initial release (Closes: TODO)
+  * Initial release
 
  -- Deepin Packages Builder <packages@deepin.com>  Wed, 22 Nov 2017 11:54:54 +0800
