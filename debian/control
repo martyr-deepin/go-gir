@@ -7,7 +7,8 @@ Build-Depends: debhelper (>= 10), dh-golang, golang-any,
  libglib2.0-dev,
  libflatpak-dev,
  libgdk-pixbuf2.0-dev,
- libpango1.0-dev
+ libpango1.0-dev,
+ libcairo2-dev
 Standards-Version: 4.0.0
 Homepage: https://github.com/linuxdeepin/go-gir
 XS-Go-Import-Path: github.com/linuxdeepin/go-gir
@@ -42,4 +43,9 @@ Package: golang-github-linuxdeepin-go-gir-pango-1.0-dev
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, golang-github-linuxdeepin-go-gir-dev, libpango1.0-dev
 Description: go bindings for the Pango library
+
+Package: golang-github-linuxdeepin-go-gir-cairo-1.0-dev
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, golang-github-linuxdeepin-go-gir-dev, libcairo2-dev
+Description: go bindings for the Cairo library
 
