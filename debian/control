@@ -2,8 +2,11 @@ Source: golang-github-linuxdeepin-go-gir
 Section: devel
 Priority: extra
 Maintainer: Deepin Packages Builder <packages@deepin.com>
-Build-Depends: debhelper (>= 10),
-               dh-golang, libgudev-1.0-dev, libflatpak-dev, golang-any, libgdk-pixbuf2.0-dev
+Build-Depends: debhelper (>= 10), dh-golang, golang-any,
+ libgudev-1.0-dev,
+ libglib2.0-dev,
+ libflatpak-dev,
+ libgdk-pixbuf2.0-dev
 Standards-Version: 4.0.0
 Homepage: https://github.com/linuxdeepin/go-gir
 XS-Go-Import-Path: github.com/linuxdeepin/go-gir
@@ -11,6 +14,26 @@ Testsuite: autopkgtest-pkg-go
 
 Package: golang-github-linuxdeepin-go-gir-dev
 Architecture: all
-Depends: ${shlibs:Depends},
-         ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Go bindings based on GObject-Introspection
+
+Package: golang-github-linuxdeepin-go-gir-gudev-1.0-dev
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, golang-github-linuxdeepin-go-gir-dev, libgudev-1.0-dev
+Description: go bindings for the GUdev library
+
+Package: golang-github-linuxdeepin-go-gir-glib-2.0-dev
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, golang-github-linuxdeepin-go-gir-dev, libglib2.0-dev
+Description: go bindings for the GLib library
+
+Package: golang-github-linuxdeepin-go-gir-flatpak-1.0-dev
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, golang-github-linuxdeepin-go-gir-dev, libflatpak-dev
+Description: go bindings for the Flatpak library
+
+Package: golang-github-linuxdeepin-go-gir-gdkpixbuf-2.0-dev
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, golang-github-linuxdeepin-go-gir-dev, libgdk-pixbuf2.0-dev
+Description: go bindings for the GDK Pixbuf library
+
