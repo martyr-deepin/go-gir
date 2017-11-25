@@ -1,0 +1,251 @@
+callbacks = []
+cincludes = []
+funcs = []
+ignore_types = ["AttributeSet","Misc"]
+namespace = "Atk"
+version = "1.0"
+
+[[types]]
+  err_funcs = ["atk_attribute_set_free"]
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Attribute"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "KeyEventStruct"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "PropertyValues"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Rectangle"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TextRange"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TextRectangle"
+
+[[types]]
+  err_funcs = []
+  funcs = ["atk_component_contains","atk_component_get_alpha","atk_component_get_extents","atk_component_get_layer","atk_component_get_mdi_zorder","atk_component_grab_focus","atk_component_ref_accessible_at_point","atk_component_set_extents","atk_component_set_position","atk_component_set_size"]
+  ignore_funcs = ["atk_component_add_focus_handler","atk_component_get_position","atk_component_get_size","atk_component_remove_focus_handler"]
+  manual_funcs = []
+  name = "Component"
+
+[[types]]
+  err_funcs = ["atk_editable_text_insert_text","atk_editable_text_set_run_attributes"]
+  funcs = ["atk_editable_text_copy_text","atk_editable_text_cut_text","atk_editable_text_delete_text","atk_editable_text_paste_text","atk_editable_text_set_text_contents"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "EditableText"
+
+[[types]]
+  err_funcs = []
+  funcs = ["atk_range_new","atk_range_copy","atk_range_free","atk_range_get_description","atk_range_get_lower_limit","atk_range_get_upper_limit"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Range"
+
+[[types]]
+  err_funcs = []
+  funcs = ["atk_action_do_action","atk_action_get_description","atk_action_get_keybinding","atk_action_get_localized_name","atk_action_get_n_actions","atk_action_get_name","atk_action_set_description"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Action"
+
+[[types]]
+  err_funcs = ["atk_object_get_attributes"]
+  funcs = ["atk_object_add_relationship","atk_object_get_description","atk_object_get_index_in_parent","atk_object_get_n_accessible_children","atk_object_get_name","atk_object_get_object_locale","atk_object_get_parent","atk_object_get_role","atk_object_initialize","atk_object_notify_state_change","atk_object_peek_parent","atk_object_ref_accessible_child","atk_object_ref_relation_set","atk_object_ref_state_set","atk_object_remove_relationship","atk_object_set_description","atk_object_set_name","atk_object_set_parent","atk_object_set_role"]
+  ignore_funcs = ["atk_object_connect_property_change_handler","atk_object_get_layer","atk_object_get_mdi_zorder","atk_object_remove_property_change_handler"]
+  manual_funcs = []
+  name = "Object"
+
+[[types]]
+  err_funcs = []
+  funcs = ["atk_relation_set_new","atk_relation_set_add","atk_relation_set_add_relation_by_type","atk_relation_set_contains","atk_relation_set_contains_target","atk_relation_set_get_n_relations","atk_relation_set_get_relation","atk_relation_set_get_relation_by_type","atk_relation_set_remove"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "RelationSet"
+
+[[types]]
+  err_funcs = ["atk_relation_get_target"]
+  funcs = ["atk_relation_new","atk_relation_add_target","atk_relation_get_relation_type","atk_relation_remove_target"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Relation"
+
+[[types]]
+  err_funcs = ["atk_document_get_attributes"]
+  funcs = ["atk_document_get_attribute_value","atk_document_get_current_page_number","atk_document_get_page_count","atk_document_set_attribute_value"]
+  ignore_funcs = ["atk_document_get_document","atk_document_get_document_type","atk_document_get_locale"]
+  manual_funcs = []
+  name = "Document"
+
+[[types]]
+  err_funcs = []
+  funcs = ["atk_hyperlink_impl_get_hyperlink"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "HyperlinkImpl"
+
+[[types]]
+  err_funcs = []
+  funcs = ["atk_hyperlink_get_end_index","atk_hyperlink_get_n_anchors","atk_hyperlink_get_object","atk_hyperlink_get_start_index","atk_hyperlink_get_uri","atk_hyperlink_is_inline","atk_hyperlink_is_valid"]
+  ignore_funcs = ["atk_hyperlink_is_selected_link"]
+  manual_funcs = []
+  name = "Hyperlink"
+
+[[types]]
+  err_funcs = []
+  funcs = ["atk_hypertext_get_link","atk_hypertext_get_link_index","atk_hypertext_get_n_links"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Hypertext"
+
+[[types]]
+  err_funcs = []
+  funcs = ["atk_image_get_image_description","atk_image_get_image_locale","atk_image_get_image_position","atk_image_get_image_size","atk_image_set_image_description"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Image"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ImplementorIface"
+
+[[types]]
+  err_funcs = []
+  funcs = ["atk_selection_add_selection","atk_selection_clear_selection","atk_selection_get_selection_count","atk_selection_is_child_selected","atk_selection_ref_selection","atk_selection_remove_selection","atk_selection_select_all_selection"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Selection"
+
+[[types]]
+  err_funcs = ["atk_streamable_content_get_stream"]
+  funcs = ["atk_streamable_content_get_mime_type","atk_streamable_content_get_n_mime_types","atk_streamable_content_get_uri"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "StreamableContent"
+
+[[types]]
+  err_funcs = ["atk_table_get_selected_columns","atk_table_get_selected_rows"]
+  funcs = ["atk_table_add_column_selection","atk_table_add_row_selection","atk_table_get_caption","atk_table_get_column_description","atk_table_get_column_extent_at","atk_table_get_column_header","atk_table_get_n_columns","atk_table_get_n_rows","atk_table_get_row_description","atk_table_get_row_extent_at","atk_table_get_row_header","atk_table_get_summary","atk_table_is_column_selected","atk_table_is_row_selected","atk_table_is_selected","atk_table_ref_at","atk_table_remove_column_selection","atk_table_remove_row_selection","atk_table_set_caption","atk_table_set_column_description","atk_table_set_column_header","atk_table_set_row_description","atk_table_set_row_header","atk_table_set_summary"]
+  ignore_funcs = ["atk_table_get_column_at_index","atk_table_get_index_at","atk_table_get_row_at_index"]
+  manual_funcs = []
+  name = "Table"
+
+[[types]]
+  err_funcs = ["atk_table_cell_get_column_header_cells","atk_table_cell_get_row_header_cells"]
+  funcs = ["atk_table_cell_get_column_span","atk_table_cell_get_position","atk_table_cell_get_row_column_span","atk_table_cell_get_row_span","atk_table_cell_get_table"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TableCell"
+
+[[types]]
+  err_funcs = ["atk_text_get_character_at_offset","atk_text_get_default_attributes","atk_text_get_range_extents","atk_text_get_run_attributes"]
+  funcs = ["atk_text_add_selection","atk_text_get_bounded_ranges","atk_text_get_caret_offset","atk_text_get_character_count","atk_text_get_character_extents","atk_text_get_n_selections","atk_text_get_offset_at_point","atk_text_get_selection","atk_text_get_string_at_offset","atk_text_get_text","atk_text_remove_selection","atk_text_set_caret_offset","atk_text_set_selection","atk_text_free_ranges"]
+  ignore_funcs = ["atk_text_get_text_after_offset","atk_text_get_text_at_offset","atk_text_get_text_before_offset"]
+  manual_funcs = []
+  name = "Text"
+
+[[types]]
+  err_funcs = ["atk_value_get_sub_ranges"]
+  funcs = ["atk_value_get_increment","atk_value_get_range","atk_value_get_value_and_text","atk_value_set_value"]
+  ignore_funcs = ["atk_value_get_current_value","atk_value_get_maximum_value","atk_value_get_minimum_increment","atk_value_get_minimum_value","atk_value_set_current_value"]
+  manual_funcs = []
+  name = "Value"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Window"
+
+[[types]]
+  err_funcs = []
+  funcs = ["atk_gobject_accessible_get_object","atk_gobject_accessible_for_object"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "GObjectAccessible"
+
+[[types]]
+  err_funcs = []
+  funcs = ["atk_no_op_object_new"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "NoOpObject"
+
+[[types]]
+  err_funcs = []
+  funcs = ["atk_no_op_object_factory_new"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "NoOpObjectFactory"
+
+[[types]]
+  err_funcs = []
+  funcs = ["atk_object_factory_create_accessible","atk_object_factory_get_accessible_type","atk_object_factory_invalidate"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ObjectFactory"
+
+[[types]]
+  err_funcs = []
+  funcs = ["atk_state_set_new","atk_state_set_add_state","atk_state_set_add_states","atk_state_set_and_sets","atk_state_set_clear_states","atk_state_set_contains_state","atk_state_set_contains_states","atk_state_set_is_empty","atk_state_set_or_sets","atk_state_set_remove_state","atk_state_set_xor_sets"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "StateSet"
+
+[[types]]
+  err_funcs = []
+  funcs = ["atk_plug_new","atk_plug_get_id"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Plug"
+
+[[types]]
+  err_funcs = []
+  funcs = ["atk_registry_get_factory","atk_registry_get_factory_type","atk_registry_set_factory_type"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Registry"
+
+[[types]]
+  err_funcs = []
+  funcs = ["atk_socket_new","atk_socket_embed","atk_socket_is_occupied"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Socket"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Util"

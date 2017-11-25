@@ -9,6 +9,7 @@ Build-Depends: debhelper (>= 10), dh-golang, golang-any,
  libgdk-pixbuf2.0-dev,
  libpango1.0-dev,
  libcairo2-dev,
+ libatk1.0-dev,
  libgtk-3-dev
 Standards-Version: 4.0.0
 Homepage: https://github.com/linuxdeepin/go-gir
@@ -49,6 +50,11 @@ Package: golang-github-linuxdeepin-go-gir-cairo-1.0-dev
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, golang-github-linuxdeepin-go-gir-dev, libcairo2-dev
 Description: go bindings for the Cairo library
+
+Package: golang-github-linuxdeepin-go-gir-atk-1.0-dev
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, golang-github-linuxdeepin-go-gir-dev, libatk1.0-dev
+Description: go bindings for the ATK library
 
 Package: golang-github-linuxdeepin-go-gir-gtk-3.0-dev
 Architecture: all
