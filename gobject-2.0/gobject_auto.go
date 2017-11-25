@@ -939,6 +939,38 @@ func (plugin TypePlugin) Use() {
 	C.g_type_plugin_use(plugin.native())
 }
 
+// Object InitiallyUnowned
+type InitiallyUnowned struct {
+	Object
+}
+
+func (v InitiallyUnowned) native() *C.GInitiallyUnowned {
+	return (*C.GInitiallyUnowned)(v.Ptr)
+}
+func wrapInitiallyUnowned(p *C.GInitiallyUnowned) (v InitiallyUnowned) {
+	v.Ptr = unsafe.Pointer(p)
+	return
+}
+func WrapInitiallyUnowned(p unsafe.Pointer) (v InitiallyUnowned) {
+	v.Ptr = p
+	return
+}
+func (v InitiallyUnowned) IsNil() bool {
+	return v.Ptr == nil
+}
+func IWrapInitiallyUnowned(p unsafe.Pointer) interface{} {
+	return WrapInitiallyUnowned(p)
+}
+func (v InitiallyUnowned) GetType() Type {
+	return Type(C.g_initially_unowned_get_type())
+}
+func (v InitiallyUnowned) GetGValueGetter() GValueGetter {
+	return func(p unsafe.Pointer) (interface{}, error) {
+		ptr := C.g_value_get_object((*C.GValue)(p))
+		return WrapInitiallyUnowned(unsafe.Pointer(ptr)), nil
+	}
+}
+
 type Type uint
 type BindingFlags int
 

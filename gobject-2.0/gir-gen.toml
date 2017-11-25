@@ -1,5 +1,7 @@
 callbacks = []
+cincludes = []
 funcs = []
+ignore_types = []
 namespace = "GObject"
 version = "2.0"
 
@@ -72,3 +74,10 @@ version = "2.0"
   ignore_funcs = []
   manual_funcs = []
   name = "TypePlugin"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "InitiallyUnowned"

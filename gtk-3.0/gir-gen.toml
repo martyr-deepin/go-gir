@@ -1,0 +1,1133 @@
+callbacks = []
+cincludes = ["<gtk/gtk.h>","<gtk/gtk-a11y.h>"]
+funcs = []
+ignore_types = ["Allocation","CellAccessibleParent","Activatable","Alignment","Action","ActionGroup","ArrowAccessible","Arrow","BooleanCellAccessible","EntryIconAccessible"]
+namespace = "Gtk"
+version = "3.0"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "AccelGroupEntry"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "AccelKey"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ActionEntry"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "BindingArg"
+
+[[types]]
+  err_funcs = ["gtk_binding_entry_add_signall","gtk_binding_entry_remove","gtk_binding_entry_skip"]
+  funcs = ["gtk_binding_entry_add_signal_from_string"]
+  ignore_funcs = ["gtk_binding_entry_add_signal"]
+  manual_funcs = []
+  name = "BindingEntry"
+
+[[types]]
+  err_funcs = ["gtk_binding_set_activate"]
+  funcs = ["gtk_binding_set_by_class","gtk_binding_set_find","gtk_binding_set_new"]
+  ignore_funcs = ["gtk_binding_set_add_path"]
+  manual_funcs = []
+  name = "BindingSet"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "BindingSignal"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_border_new","gtk_border_copy","gtk_border_free"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Border"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_css_section_get_end_line","gtk_css_section_get_end_position","gtk_css_section_get_file","gtk_css_section_get_parent","gtk_css_section_get_section_type","gtk_css_section_get_start_line","gtk_css_section_get_start_position","gtk_css_section_ref","gtk_css_section_unref"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "CssSection"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "FileFilterInfo"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "FixedChild"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = ["gtk_gradient_new_linear","gtk_gradient_new_radial","gtk_gradient_add_color_stop","gtk_gradient_ref","gtk_gradient_resolve","gtk_gradient_resolve_for_context","gtk_gradient_to_string","gtk_gradient_unref"]
+  manual_funcs = []
+  name = "Gradient"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "IMContextInfo"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = ["gtk_icon_set_new","gtk_icon_set_new_from_pixbuf","gtk_icon_set_add_source","gtk_icon_set_copy","gtk_icon_set_get_sizes","gtk_icon_set_ref","gtk_icon_set_render_icon","gtk_icon_set_render_icon_pixbuf","gtk_icon_set_render_icon_surface","gtk_icon_set_unref"]
+  manual_funcs = []
+  name = "IconSet"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = ["gtk_icon_source_new","gtk_icon_source_copy","gtk_icon_source_free","gtk_icon_source_get_direction","gtk_icon_source_get_direction_wildcarded","gtk_icon_source_get_filename","gtk_icon_source_get_icon_name","gtk_icon_source_get_pixbuf","gtk_icon_source_get_size","gtk_icon_source_get_size_wildcarded","gtk_icon_source_get_state","gtk_icon_source_get_state_wildcarded","gtk_icon_source_set_direction","gtk_icon_source_set_direction_wildcarded","gtk_icon_source_set_filename","gtk_icon_source_set_icon_name","gtk_icon_source_set_pixbuf","gtk_icon_source_set_size","gtk_icon_source_set_size_wildcarded","gtk_icon_source_set_state","gtk_icon_source_set_state_wildcarded"]
+  manual_funcs = []
+  name = "IconSource"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "PadActionEntry"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "PageRange"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_paper_size_new","gtk_paper_size_new_custom","gtk_paper_size_new_from_gvariant","gtk_paper_size_new_from_ipp","gtk_paper_size_new_from_key_file","gtk_paper_size_new_from_ppd","gtk_paper_size_copy","gtk_paper_size_free","gtk_paper_size_get_default_bottom_margin","gtk_paper_size_get_default_left_margin","gtk_paper_size_get_default_right_margin","gtk_paper_size_get_default_top_margin","gtk_paper_size_get_display_name","gtk_paper_size_get_height","gtk_paper_size_get_name","gtk_paper_size_get_ppd_name","gtk_paper_size_get_width","gtk_paper_size_is_custom","gtk_paper_size_is_equal","gtk_paper_size_is_ipp","gtk_paper_size_set_size","gtk_paper_size_to_gvariant","gtk_paper_size_to_key_file","gtk_paper_size_get_default","gtk_paper_size_get_paper_sizes"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "PaperSize"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "RadioActionEntry"
+
+[[types]]
+  err_funcs = ["gtk_rc_property_parse_border","gtk_rc_property_parse_color","gtk_rc_property_parse_enum","gtk_rc_property_parse_flags","gtk_rc_property_parse_requisition"]
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "RcProperty"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "RecentData"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "RecentFilterInfo"
+
+[[types]]
+  err_funcs = ["gtk_recent_info_get_added","gtk_recent_info_get_application_info","gtk_recent_info_get_modified","gtk_recent_info_get_visited"]
+  funcs = ["gtk_recent_info_create_app_info","gtk_recent_info_exists","gtk_recent_info_get_age","gtk_recent_info_get_applications","gtk_recent_info_get_description","gtk_recent_info_get_display_name","gtk_recent_info_get_gicon","gtk_recent_info_get_groups","gtk_recent_info_get_icon","gtk_recent_info_get_mime_type","gtk_recent_info_get_private_hint","gtk_recent_info_get_short_name","gtk_recent_info_get_uri","gtk_recent_info_get_uri_display","gtk_recent_info_has_application","gtk_recent_info_has_group","gtk_recent_info_is_local","gtk_recent_info_last_application","gtk_recent_info_match","gtk_recent_info_ref","gtk_recent_info_unref"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "RecentInfo"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "RequestedSize"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_requisition_new","gtk_requisition_copy","gtk_requisition_free"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Requisition"
+
+[[types]]
+  err_funcs = ["gtk_selection_data_get_data_type","gtk_selection_data_get_display","gtk_selection_data_get_selection","gtk_selection_data_get_target","gtk_selection_data_get_targets","gtk_selection_data_get_text","gtk_selection_data_set"]
+  funcs = ["gtk_selection_data_copy","gtk_selection_data_free","gtk_selection_data_get_data","gtk_selection_data_get_data_with_length","gtk_selection_data_get_format","gtk_selection_data_get_length","gtk_selection_data_get_pixbuf","gtk_selection_data_get_uris","gtk_selection_data_set_pixbuf","gtk_selection_data_set_text","gtk_selection_data_set_uris","gtk_selection_data_targets_include_image","gtk_selection_data_targets_include_rich_text","gtk_selection_data_targets_include_text","gtk_selection_data_targets_include_uri"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "SelectionData"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_text_buffer_new"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TextBuffer"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_text_tag_table_new"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TextTagTable"
+
+[[types]]
+  err_funcs = ["gtk_buildable_custom_tag_end","gtk_buildable_custom_tag_start"]
+  funcs = ["gtk_buildable_add_child","gtk_buildable_construct_child","gtk_buildable_custom_finished","gtk_buildable_get_internal_child","gtk_buildable_get_name","gtk_buildable_parser_finished","gtk_buildable_set_buildable_property","gtk_buildable_set_name"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Buildable"
+
+[[types]]
+  err_funcs = ["gtk_builder_add_callback_symbol","gtk_builder_connect_signals_full","gtk_builder_get_objects","gtk_builder_lookup_callback_symbol","gtk_builder_set_application","gtk_builder_value_from_string","gtk_builder_value_from_string_type"]
+  funcs = ["gtk_builder_new","gtk_builder_new_from_file","gtk_builder_new_from_resource","gtk_builder_new_from_string","gtk_builder_add_from_file","gtk_builder_add_from_resource","gtk_builder_add_from_string","gtk_builder_add_objects_from_file","gtk_builder_add_objects_from_resource","gtk_builder_add_objects_from_string","gtk_builder_connect_signals","gtk_builder_expose_object","gtk_builder_extend_with_template","gtk_builder_get_application","gtk_builder_get_object","gtk_builder_get_translation_domain","gtk_builder_get_type_from_name","gtk_builder_set_translation_domain"]
+  ignore_funcs = ["gtk_builder_add_callback_symbols"]
+  manual_funcs = []
+  name = "Builder"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_widget_activate"]
+  ignore_funcs = ["gtk_widget_new"]
+  manual_funcs = []
+  name = "Widget"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "SettingsValue"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = ["gtk_stock_item_copy","gtk_stock_item_free"]
+  manual_funcs = []
+  name = "StockItem"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = ["gtk_symbolic_color_new_alpha","gtk_symbolic_color_new_literal","gtk_symbolic_color_new_mix","gtk_symbolic_color_new_name","gtk_symbolic_color_new_shade","gtk_symbolic_color_new_win32","gtk_symbolic_color_ref","gtk_symbolic_color_resolve","gtk_symbolic_color_to_string","gtk_symbolic_color_unref"]
+  manual_funcs = []
+  name = "SymbolicColor"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TableChild"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TableRowCol"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_target_entry_new","gtk_target_entry_copy","gtk_target_entry_free"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TargetEntry"
+
+[[types]]
+  err_funcs = ["gtk_target_list_new","gtk_target_list_add","gtk_target_list_add_table","gtk_target_list_find","gtk_target_list_remove"]
+  funcs = ["gtk_target_list_add_image_targets","gtk_target_list_add_rich_text_targets","gtk_target_list_add_text_targets","gtk_target_list_add_uri_targets","gtk_target_list_ref","gtk_target_list_unref"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TargetList"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TargetPair"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TextAppearance"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_text_attributes_new","gtk_text_attributes_copy","gtk_text_attributes_copy_values","gtk_text_attributes_ref","gtk_text_attributes_unref"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TextAttributes"
+
+[[types]]
+  err_funcs = ["gtk_text_iter_backward_find_char","gtk_text_iter_backward_search","gtk_text_iter_forward_find_char","gtk_text_iter_forward_search","gtk_text_iter_get_attributes","gtk_text_iter_get_char","gtk_text_iter_get_marks","gtk_text_iter_get_tags","gtk_text_iter_get_toggled_tags"]
+  funcs = ["gtk_text_iter_assign","gtk_text_iter_backward_char","gtk_text_iter_backward_chars","gtk_text_iter_backward_cursor_position","gtk_text_iter_backward_cursor_positions","gtk_text_iter_backward_line","gtk_text_iter_backward_lines","gtk_text_iter_backward_sentence_start","gtk_text_iter_backward_sentence_starts","gtk_text_iter_backward_to_tag_toggle","gtk_text_iter_backward_visible_cursor_position","gtk_text_iter_backward_visible_cursor_positions","gtk_text_iter_backward_visible_line","gtk_text_iter_backward_visible_lines","gtk_text_iter_backward_visible_word_start","gtk_text_iter_backward_visible_word_starts","gtk_text_iter_backward_word_start","gtk_text_iter_backward_word_starts","gtk_text_iter_can_insert","gtk_text_iter_compare","gtk_text_iter_copy","gtk_text_iter_editable","gtk_text_iter_ends_line","gtk_text_iter_ends_sentence","gtk_text_iter_ends_tag","gtk_text_iter_ends_word","gtk_text_iter_equal","gtk_text_iter_forward_char","gtk_text_iter_forward_chars","gtk_text_iter_forward_cursor_position","gtk_text_iter_forward_cursor_positions","gtk_text_iter_forward_line","gtk_text_iter_forward_lines","gtk_text_iter_forward_sentence_end","gtk_text_iter_forward_sentence_ends","gtk_text_iter_forward_to_end","gtk_text_iter_forward_to_line_end","gtk_text_iter_forward_to_tag_toggle","gtk_text_iter_forward_visible_cursor_position","gtk_text_iter_forward_visible_cursor_positions","gtk_text_iter_forward_visible_line","gtk_text_iter_forward_visible_lines","gtk_text_iter_forward_visible_word_end","gtk_text_iter_forward_visible_word_ends","gtk_text_iter_forward_word_end","gtk_text_iter_forward_word_ends","gtk_text_iter_free","gtk_text_iter_get_buffer","gtk_text_iter_get_bytes_in_line","gtk_text_iter_get_chars_in_line","gtk_text_iter_get_child_anchor","gtk_text_iter_get_language","gtk_text_iter_get_line","gtk_text_iter_get_line_index","gtk_text_iter_get_line_offset","gtk_text_iter_get_offset","gtk_text_iter_get_pixbuf","gtk_text_iter_get_slice","gtk_text_iter_get_text","gtk_text_iter_get_visible_line_index","gtk_text_iter_get_visible_line_offset","gtk_text_iter_get_visible_slice","gtk_text_iter_get_visible_text","gtk_text_iter_has_tag","gtk_text_iter_in_range","gtk_text_iter_inside_sentence","gtk_text_iter_inside_word","gtk_text_iter_is_cursor_position","gtk_text_iter_is_end","gtk_text_iter_is_start","gtk_text_iter_order","gtk_text_iter_set_line","gtk_text_iter_set_line_index","gtk_text_iter_set_line_offset","gtk_text_iter_set_offset","gtk_text_iter_set_visible_line_index","gtk_text_iter_set_visible_line_offset","gtk_text_iter_starts_line","gtk_text_iter_starts_sentence","gtk_text_iter_starts_tag","gtk_text_iter_starts_word","gtk_text_iter_toggles_tag"]
+  ignore_funcs = ["gtk_text_iter_begins_tag"]
+  manual_funcs = []
+  name = "TextIter"
+
+[[types]]
+  err_funcs = ["gtk_text_tag_event"]
+  funcs = ["gtk_text_tag_new","gtk_text_tag_changed","gtk_text_tag_get_priority","gtk_text_tag_set_priority"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TextTag"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_text_child_anchor_new","gtk_text_child_anchor_get_deleted","gtk_text_child_anchor_get_widgets"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TextChildAnchor"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ToggleActionEntry"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_tree_iter_copy","gtk_tree_iter_free"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TreeIter"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_tree_path_new","gtk_tree_path_new_first","gtk_tree_path_new_from_indices","gtk_tree_path_new_from_indicesv","gtk_tree_path_new_from_string","gtk_tree_path_append_index","gtk_tree_path_compare","gtk_tree_path_copy","gtk_tree_path_down","gtk_tree_path_free","gtk_tree_path_get_depth","gtk_tree_path_get_indices","gtk_tree_path_get_indices_with_depth","gtk_tree_path_is_ancestor","gtk_tree_path_is_descendant","gtk_tree_path_next","gtk_tree_path_prepend_index","gtk_tree_path_prev","gtk_tree_path_to_string","gtk_tree_path_up"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TreePath"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_tree_row_reference_new","gtk_tree_row_reference_new_proxy","gtk_tree_row_reference_copy","gtk_tree_row_reference_free","gtk_tree_row_reference_get_model","gtk_tree_row_reference_get_path","gtk_tree_row_reference_valid","gtk_tree_row_reference_deleted","gtk_tree_row_reference_inserted","gtk_tree_row_reference_reordered"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TreeRowReference"
+
+[[types]]
+  err_funcs = ["gtk_tree_model_foreach","gtk_tree_model_get_iter","gtk_tree_model_get_iter_first","gtk_tree_model_get_iter_from_string","gtk_tree_model_get_value","gtk_tree_model_iter_children","gtk_tree_model_iter_nth_child","gtk_tree_model_iter_parent"]
+  funcs = ["gtk_tree_model_filter_new","gtk_tree_model_get_column_type","gtk_tree_model_get_flags","gtk_tree_model_get_n_columns","gtk_tree_model_get_path","gtk_tree_model_get_string_from_iter","gtk_tree_model_iter_has_child","gtk_tree_model_iter_n_children","gtk_tree_model_iter_next","gtk_tree_model_iter_previous","gtk_tree_model_ref_node","gtk_tree_model_row_changed","gtk_tree_model_row_deleted","gtk_tree_model_row_has_child_toggled","gtk_tree_model_row_inserted","gtk_tree_model_rows_reordered","gtk_tree_model_rows_reordered_with_length","gtk_tree_model_sort_new_with_model","gtk_tree_model_unref_node"]
+  ignore_funcs = ["gtk_tree_model_get","gtk_tree_model_get_valist"]
+  manual_funcs = []
+  name = "TreeModel"
+
+[[types]]
+  err_funcs = ["gtk_widget_path_iter_list_classes"]
+  funcs = ["gtk_widget_path_new","gtk_widget_path_append_for_widget","gtk_widget_path_append_type","gtk_widget_path_append_with_siblings","gtk_widget_path_copy","gtk_widget_path_free","gtk_widget_path_get_object_type","gtk_widget_path_has_parent","gtk_widget_path_is_type","gtk_widget_path_iter_add_class","gtk_widget_path_iter_clear_classes","gtk_widget_path_iter_get_name","gtk_widget_path_iter_get_object_name","gtk_widget_path_iter_get_object_type","gtk_widget_path_iter_get_sibling_index","gtk_widget_path_iter_get_siblings","gtk_widget_path_iter_get_state","gtk_widget_path_iter_has_class","gtk_widget_path_iter_has_name","gtk_widget_path_iter_has_qclass","gtk_widget_path_iter_has_qname","gtk_widget_path_iter_remove_class","gtk_widget_path_iter_set_name","gtk_widget_path_iter_set_object_name","gtk_widget_path_iter_set_object_type","gtk_widget_path_iter_set_state","gtk_widget_path_length","gtk_widget_path_prepend_type","gtk_widget_path_ref","gtk_widget_path_to_string","gtk_widget_path_unref"]
+  ignore_funcs = ["gtk_widget_path_iter_add_region","gtk_widget_path_iter_clear_regions","gtk_widget_path_iter_has_qregion","gtk_widget_path_iter_has_region","gtk_widget_path_iter_list_regions","gtk_widget_path_iter_remove_region"]
+  manual_funcs = []
+  name = "WidgetPath"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_actionable_get_action_name","gtk_actionable_get_action_target_value","gtk_actionable_set_action_name","gtk_actionable_set_action_target_value","gtk_actionable_set_detailed_action_name"]
+  ignore_funcs = ["gtk_actionable_set_action_target"]
+  manual_funcs = []
+  name = "Actionable"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_app_chooser_get_app_info","gtk_app_chooser_get_content_type","gtk_app_chooser_refresh"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "AppChooser"
+
+[[types]]
+  err_funcs = ["gtk_cell_editable_start_editing"]
+  funcs = ["gtk_cell_editable_editing_done","gtk_cell_editable_remove_widget"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "CellEditable"
+
+[[types]]
+  err_funcs = ["gtk_cell_layout_set_cell_data_func"]
+  funcs = ["gtk_cell_layout_add_attribute","gtk_cell_layout_clear","gtk_cell_layout_clear_attributes","gtk_cell_layout_get_area","gtk_cell_layout_get_cells","gtk_cell_layout_pack_end","gtk_cell_layout_pack_start","gtk_cell_layout_reorder"]
+  ignore_funcs = ["gtk_cell_layout_set_attributes"]
+  manual_funcs = []
+  name = "CellLayout"
+
+[[types]]
+  err_funcs = ["gtk_cell_renderer_activate","gtk_cell_renderer_get_aligned_area","gtk_cell_renderer_get_preferred_size","gtk_cell_renderer_render","gtk_cell_renderer_start_editing"]
+  funcs = ["gtk_cell_renderer_get_alignment","gtk_cell_renderer_get_fixed_size","gtk_cell_renderer_get_padding","gtk_cell_renderer_get_preferred_height","gtk_cell_renderer_get_preferred_height_for_width","gtk_cell_renderer_get_preferred_width","gtk_cell_renderer_get_preferred_width_for_height","gtk_cell_renderer_get_request_mode","gtk_cell_renderer_get_sensitive","gtk_cell_renderer_get_state","gtk_cell_renderer_get_visible","gtk_cell_renderer_is_activatable","gtk_cell_renderer_set_alignment","gtk_cell_renderer_set_fixed_size","gtk_cell_renderer_set_padding","gtk_cell_renderer_set_sensitive","gtk_cell_renderer_set_visible","gtk_cell_renderer_stop_editing"]
+  ignore_funcs = ["gtk_cell_renderer_get_size"]
+  manual_funcs = []
+  name = "CellRenderer"
+
+[[types]]
+  err_funcs = ["gtk_cell_area_activate_cell","gtk_cell_area_event","gtk_cell_area_foreach","gtk_cell_area_foreach_alloc","gtk_cell_area_get_cell_allocation","gtk_cell_area_get_cell_at_position","gtk_cell_area_inner_cell_area","gtk_cell_area_render"]
+  funcs = ["gtk_cell_area_activate","gtk_cell_area_add","gtk_cell_area_add_focus_sibling","gtk_cell_area_apply_attributes","gtk_cell_area_attribute_connect","gtk_cell_area_attribute_disconnect","gtk_cell_area_attribute_get_column","gtk_cell_area_cell_get_property","gtk_cell_area_cell_set_property","gtk_cell_area_copy_context","gtk_cell_area_create_context","gtk_cell_area_focus","gtk_cell_area_get_current_path_string","gtk_cell_area_get_edit_widget","gtk_cell_area_get_edited_cell","gtk_cell_area_get_focus_cell","gtk_cell_area_get_focus_from_sibling","gtk_cell_area_get_focus_siblings","gtk_cell_area_get_preferred_height","gtk_cell_area_get_preferred_height_for_width","gtk_cell_area_get_preferred_width","gtk_cell_area_get_preferred_width_for_height","gtk_cell_area_get_request_mode","gtk_cell_area_has_renderer","gtk_cell_area_is_activatable","gtk_cell_area_is_focus_sibling","gtk_cell_area_remove","gtk_cell_area_remove_focus_sibling","gtk_cell_area_request_renderer","gtk_cell_area_set_focus_cell","gtk_cell_area_stop_editing"]
+  ignore_funcs = ["gtk_cell_area_add_with_properties","gtk_cell_area_cell_get","gtk_cell_area_cell_get_valist","gtk_cell_area_cell_set","gtk_cell_area_cell_set_valist"]
+  manual_funcs = []
+  name = "CellArea"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_cell_area_context_get_area","gtk_cell_area_context_get_preferred_height","gtk_cell_area_context_get_preferred_height_for_width","gtk_cell_area_context_get_preferred_width","gtk_cell_area_context_get_preferred_width_for_height","gtk_cell_area_context_allocate","gtk_cell_area_context_get_allocation","gtk_cell_area_context_push_preferred_height","gtk_cell_area_context_push_preferred_width","gtk_cell_area_context_reset"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "CellAreaContext"
+
+[[types]]
+  err_funcs = ["gtk_color_chooser_add_palette","gtk_color_chooser_get_rgba","gtk_color_chooser_set_rgba"]
+  funcs = ["gtk_color_chooser_get_use_alpha","gtk_color_chooser_set_use_alpha"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ColorChooser"
+
+[[types]]
+  err_funcs = ["gtk_editable_insert_text"]
+  funcs = ["gtk_editable_copy_clipboard","gtk_editable_cut_clipboard","gtk_editable_delete_selection","gtk_editable_delete_text","gtk_editable_get_chars","gtk_editable_get_editable","gtk_editable_get_position","gtk_editable_get_selection_bounds","gtk_editable_paste_clipboard","gtk_editable_select_region","gtk_editable_set_editable","gtk_editable_set_position"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Editable"
+
+[[types]]
+  err_funcs = ["gtk_file_chooser_add_choice","gtk_file_chooser_get_filenames","gtk_file_chooser_get_files","gtk_file_chooser_get_uris","gtk_file_chooser_list_filters","gtk_file_chooser_list_shortcut_folder_uris","gtk_file_chooser_list_shortcut_folders","gtk_file_chooser_set_action","gtk_file_chooser_set_current_folder","gtk_file_chooser_set_filename"]
+  funcs = ["gtk_file_chooser_add_filter","gtk_file_chooser_add_shortcut_folder","gtk_file_chooser_add_shortcut_folder_uri","gtk_file_chooser_get_action","gtk_file_chooser_get_choice","gtk_file_chooser_get_create_folders","gtk_file_chooser_get_current_folder","gtk_file_chooser_get_current_folder_file","gtk_file_chooser_get_current_folder_uri","gtk_file_chooser_get_current_name","gtk_file_chooser_get_do_overwrite_confirmation","gtk_file_chooser_get_extra_widget","gtk_file_chooser_get_file","gtk_file_chooser_get_filename","gtk_file_chooser_get_filter","gtk_file_chooser_get_local_only","gtk_file_chooser_get_preview_file","gtk_file_chooser_get_preview_filename","gtk_file_chooser_get_preview_uri","gtk_file_chooser_get_preview_widget","gtk_file_chooser_get_preview_widget_active","gtk_file_chooser_get_select_multiple","gtk_file_chooser_get_show_hidden","gtk_file_chooser_get_uri","gtk_file_chooser_get_use_preview_label","gtk_file_chooser_remove_choice","gtk_file_chooser_remove_filter","gtk_file_chooser_remove_shortcut_folder","gtk_file_chooser_remove_shortcut_folder_uri","gtk_file_chooser_select_all","gtk_file_chooser_select_file","gtk_file_chooser_select_filename","gtk_file_chooser_select_uri","gtk_file_chooser_set_choice","gtk_file_chooser_set_create_folders","gtk_file_chooser_set_current_folder_file","gtk_file_chooser_set_current_folder_uri","gtk_file_chooser_set_current_name","gtk_file_chooser_set_do_overwrite_confirmation","gtk_file_chooser_set_extra_widget","gtk_file_chooser_set_file","gtk_file_chooser_set_filter","gtk_file_chooser_set_local_only","gtk_file_chooser_set_preview_widget","gtk_file_chooser_set_preview_widget_active","gtk_file_chooser_set_select_multiple","gtk_file_chooser_set_show_hidden","gtk_file_chooser_set_uri","gtk_file_chooser_set_use_preview_label","gtk_file_chooser_unselect_all","gtk_file_chooser_unselect_file","gtk_file_chooser_unselect_filename","gtk_file_chooser_unselect_uri"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "FileChooser"
+
+[[types]]
+  err_funcs = ["gtk_font_chooser_set_filter_func"]
+  funcs = ["gtk_font_chooser_get_font","gtk_font_chooser_get_font_desc","gtk_font_chooser_get_font_face","gtk_font_chooser_get_font_family","gtk_font_chooser_get_font_map","gtk_font_chooser_get_font_size","gtk_font_chooser_get_preview_text","gtk_font_chooser_get_show_preview_entry","gtk_font_chooser_set_font","gtk_font_chooser_set_font_desc","gtk_font_chooser_set_font_map","gtk_font_chooser_set_preview_text","gtk_font_chooser_set_show_preview_entry"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "FontChooser"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_orientable_get_orientation","gtk_orientable_set_orientation"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Orientable"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_print_operation_preview_end_preview","gtk_print_operation_preview_is_selected","gtk_print_operation_preview_render_page"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "PrintOperationPreview"
+
+[[types]]
+  err_funcs = ["gtk_scrollable_get_border"]
+  funcs = ["gtk_scrollable_get_hadjustment","gtk_scrollable_get_hscroll_policy","gtk_scrollable_get_vadjustment","gtk_scrollable_get_vscroll_policy","gtk_scrollable_set_hadjustment","gtk_scrollable_set_hscroll_policy","gtk_scrollable_set_vadjustment","gtk_scrollable_set_vscroll_policy"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Scrollable"
+
+[[types]]
+  err_funcs = ["gtk_style_provider_get_style_property"]
+  funcs = []
+  ignore_funcs = ["gtk_style_provider_get_icon_factory","gtk_style_provider_get_style"]
+  manual_funcs = []
+  name = "StyleProvider"
+
+[[types]]
+  err_funcs = ["gtk_tool_shell_get_icon_size"]
+  funcs = ["gtk_tool_shell_get_ellipsize_mode","gtk_tool_shell_get_orientation","gtk_tool_shell_get_relief_style","gtk_tool_shell_get_style","gtk_tool_shell_get_text_alignment","gtk_tool_shell_get_text_orientation","gtk_tool_shell_get_text_size_group","gtk_tool_shell_rebuild_menu"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ToolShell"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_tree_drag_dest_drag_data_received","gtk_tree_drag_dest_row_drop_possible"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TreeDragDest"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_tree_drag_source_drag_data_delete","gtk_tree_drag_source_drag_data_get","gtk_tree_drag_source_row_draggable"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TreeDragSource"
+
+[[types]]
+  err_funcs = ["gtk_tree_sortable_set_default_sort_func","gtk_tree_sortable_set_sort_func"]
+  funcs = ["gtk_tree_sortable_get_sort_column_id","gtk_tree_sortable_has_default_sort_func","gtk_tree_sortable_set_sort_column_id","gtk_tree_sortable_sort_column_changed"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "TreeSortable"
+
+[[types]]
+  err_funcs = ["gtk_accel_group_connect_by_path","gtk_accel_group_find","gtk_accel_group_query"]
+  funcs = ["gtk_accel_group_new","gtk_accel_group_activate","gtk_accel_group_connect","gtk_accel_group_disconnect","gtk_accel_group_disconnect_key","gtk_accel_group_get_is_locked","gtk_accel_group_get_modifier_mask","gtk_accel_group_lock","gtk_accel_group_unlock","gtk_accel_group_from_accel_closure"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "AccelGroup"
+
+[[types]]
+  err_funcs = ["gtk_accel_map_foreach","gtk_accel_map_foreach_unfiltered","gtk_accel_map_load_scanner","gtk_accel_map_lookup_entry"]
+  funcs = ["gtk_accel_map_add_entry","gtk_accel_map_add_filter","gtk_accel_map_change_entry","gtk_accel_map_get","gtk_accel_map_load","gtk_accel_map_load_fd","gtk_accel_map_lock_path","gtk_accel_map_save","gtk_accel_map_save_fd","gtk_accel_map_unlock_path"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "AccelMap"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_accessible_get_widget","gtk_accessible_set_widget"]
+  ignore_funcs = ["gtk_accessible_connect_widget_destroyed"]
+  manual_funcs = []
+  name = "Accessible"
+
+[[types]]
+  err_funcs = ["gtk_adjustment_get_page_increment","gtk_adjustment_set_lower","gtk_adjustment_set_page_increment"]
+  funcs = ["gtk_adjustment_new","gtk_adjustment_clamp_page","gtk_adjustment_configure","gtk_adjustment_get_lower","gtk_adjustment_get_minimum_increment","gtk_adjustment_get_page_size","gtk_adjustment_get_step_increment","gtk_adjustment_get_upper","gtk_adjustment_get_value","gtk_adjustment_set_page_size","gtk_adjustment_set_step_increment","gtk_adjustment_set_upper","gtk_adjustment_set_value"]
+  ignore_funcs = ["gtk_adjustment_changed","gtk_adjustment_value_changed"]
+  manual_funcs = []
+  name = "Adjustment"
+
+[[types]]
+  err_funcs = ["gtk_app_chooser_dialog_new"]
+  funcs = ["gtk_app_chooser_dialog_new_for_content_type","gtk_app_chooser_dialog_get_heading","gtk_app_chooser_dialog_get_widget","gtk_app_chooser_dialog_set_heading"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "AppChooserDialog"
+
+[[types]]
+  err_funcs = ["gtk_application_new"]
+  funcs = ["gtk_application_add_window","gtk_application_get_accels_for_action","gtk_application_get_actions_for_accel","gtk_application_get_active_window","gtk_application_get_app_menu","gtk_application_get_menu_by_id","gtk_application_get_menubar","gtk_application_get_window_by_id","gtk_application_get_windows","gtk_application_inhibit","gtk_application_is_inhibited","gtk_application_list_action_descriptions","gtk_application_prefers_app_menu","gtk_application_remove_window","gtk_application_set_accels_for_action","gtk_application_set_app_menu","gtk_application_set_menubar","gtk_application_uninhibit"]
+  ignore_funcs = ["gtk_application_add_accelerator","gtk_application_remove_accelerator"]
+  manual_funcs = []
+  name = "Application"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_bin_get_child"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Bin"
+
+[[types]]
+  err_funcs = ["gtk_container_forall","gtk_container_foreach","gtk_container_get_focus_chain","gtk_container_propagate_draw"]
+  funcs = ["gtk_container_add","gtk_container_check_resize","gtk_container_child_get_property","gtk_container_child_notify","gtk_container_child_notify_by_pspec","gtk_container_child_set_property","gtk_container_child_type","gtk_container_get_border_width","gtk_container_get_children","gtk_container_get_focus_child","gtk_container_get_focus_hadjustment","gtk_container_get_focus_vadjustment","gtk_container_get_path_for_child","gtk_container_remove","gtk_container_set_border_width","gtk_container_set_focus_chain","gtk_container_set_focus_child","gtk_container_set_focus_hadjustment","gtk_container_set_focus_vadjustment","gtk_container_unset_focus_chain"]
+  ignore_funcs = ["gtk_container_add_with_properties","gtk_container_child_get","gtk_container_child_get_valist","gtk_container_child_set","gtk_container_child_set_valist","gtk_container_get_resize_mode","gtk_container_resize_children","gtk_container_set_reallocate_redraws","gtk_container_set_resize_mode"]
+  manual_funcs = []
+  name = "Container"
+
+[[types]]
+  err_funcs = ["gtk_dialog_get_content_area"]
+  funcs = ["gtk_dialog_new","gtk_dialog_add_action_widget","gtk_dialog_add_button","gtk_dialog_get_header_bar","gtk_dialog_get_response_for_widget","gtk_dialog_get_widget_for_response","gtk_dialog_response","gtk_dialog_run","gtk_dialog_set_default_response","gtk_dialog_set_response_sensitive"]
+  ignore_funcs = ["gtk_dialog_new_with_buttons","gtk_dialog_add_buttons","gtk_dialog_get_action_area","gtk_dialog_set_alternative_button_order","gtk_dialog_set_alternative_button_order_from_array"]
+  manual_funcs = []
+  name = "Dialog"
+
+[[types]]
+  err_funcs = ["gtk_window_close","gtk_window_get_accept_focus","gtk_window_get_application","gtk_window_get_attached_to","gtk_window_get_deletable"]
+  funcs = ["gtk_window_new","gtk_window_activate_default","gtk_window_activate_focus","gtk_window_activate_key","gtk_window_add_accel_group","gtk_window_add_mnemonic","gtk_window_begin_move_drag","gtk_window_begin_resize_drag","gtk_window_deiconify","gtk_window_fullscreen","gtk_window_fullscreen_on_monitor","gtk_window_get_decorated","gtk_window_get_default_size","gtk_window_get_default_widget","gtk_window_get_destroy_with_parent","gtk_window_get_focus","gtk_window_get_focus_on_map","gtk_window_get_focus_visible","gtk_window_get_gravity"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Window"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_window_group_new","gtk_window_group_add_window","gtk_window_group_get_current_device_grab","gtk_window_group_get_current_grab","gtk_window_group_list_windows","gtk_window_group_remove_window"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "WindowGroup"
+
+[[types]]
+  err_funcs = ["gtk_about_dialog_get_logo_icon_name"]
+  funcs = ["gtk_about_dialog_new","gtk_about_dialog_add_credit_section","gtk_about_dialog_get_artists","gtk_about_dialog_get_authors","gtk_about_dialog_get_comments","gtk_about_dialog_get_copyright","gtk_about_dialog_get_documenters","gtk_about_dialog_get_license","gtk_about_dialog_get_license_type","gtk_about_dialog_get_logo","gtk_about_dialog_get_program_name","gtk_about_dialog_get_translator_credits","gtk_about_dialog_get_version","gtk_about_dialog_get_website","gtk_about_dialog_get_website_label","gtk_about_dialog_get_wrap_license","gtk_about_dialog_set_artists","gtk_about_dialog_set_authors","gtk_about_dialog_set_comments","gtk_about_dialog_set_copyright","gtk_about_dialog_set_documenters","gtk_about_dialog_set_license","gtk_about_dialog_set_license_type","gtk_about_dialog_set_logo","gtk_about_dialog_set_logo_icon_name","gtk_about_dialog_set_program_name","gtk_about_dialog_set_translator_credits","gtk_about_dialog_set_version","gtk_about_dialog_set_website","gtk_about_dialog_set_website_label","gtk_about_dialog_set_wrap_license"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "AboutDialog"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_action_bar_new","gtk_action_bar_get_center_widget","gtk_action_bar_pack_end","gtk_action_bar_pack_start","gtk_action_bar_set_center_widget"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ActionBar"
+
+[[types]]
+  err_funcs = ["gtk_application_window_set_help_overlay"]
+  funcs = ["gtk_application_window_new","gtk_application_window_get_help_overlay","gtk_application_window_get_id","gtk_application_window_get_show_menubar","gtk_application_window_set_show_menubar"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ApplicationWindow"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_aspect_frame_new","gtk_aspect_frame_set"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "AspectFrame"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_frame_new","gtk_frame_get_label","gtk_frame_get_label_align","gtk_frame_get_label_widget","gtk_frame_get_shadow_type","gtk_frame_set_label","gtk_frame_set_label_align","gtk_frame_set_label_widget","gtk_frame_set_shadow_type"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Frame"
+
+[[types]]
+  err_funcs = ["gtk_file_filter_add_custom","gtk_file_filter_set_name"]
+  funcs = ["gtk_file_filter_new","gtk_file_filter_new_from_gvariant","gtk_file_filter_add_mime_type","gtk_file_filter_add_pattern","gtk_file_filter_add_pixbuf_formats","gtk_file_filter_filter","gtk_file_filter_get_name","gtk_file_filter_get_needed","gtk_file_filter_to_gvariant"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "FileFilter"
+
+[[types]]
+  err_funcs = ["gtk_recent_chooser_get_show_tips","gtk_recent_chooser_list_filters","gtk_recent_chooser_remove_filter","gtk_recent_chooser_set_sort_func","gtk_recent_chooser_set_sort_type"]
+  funcs = ["gtk_recent_chooser_add_filter","gtk_recent_chooser_get_current_item","gtk_recent_chooser_get_current_uri","gtk_recent_chooser_get_filter","gtk_recent_chooser_get_items","gtk_recent_chooser_get_limit","gtk_recent_chooser_get_local_only","gtk_recent_chooser_get_select_multiple","gtk_recent_chooser_get_show_icons","gtk_recent_chooser_get_show_not_found","gtk_recent_chooser_get_show_private","gtk_recent_chooser_get_sort_type","gtk_recent_chooser_get_uris","gtk_recent_chooser_select_all","gtk_recent_chooser_select_uri","gtk_recent_chooser_set_current_uri","gtk_recent_chooser_set_filter","gtk_recent_chooser_set_limit","gtk_recent_chooser_set_local_only","gtk_recent_chooser_set_select_multiple","gtk_recent_chooser_set_show_icons","gtk_recent_chooser_set_show_not_found","gtk_recent_chooser_set_show_private","gtk_recent_chooser_set_show_tips","gtk_recent_chooser_unselect_all","gtk_recent_chooser_unselect_uri"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "RecentChooser"
+
+[[types]]
+  err_funcs = ["gtk_recent_filter_add_custom","gtk_recent_filter_get_needed"]
+  funcs = ["gtk_recent_filter_new","gtk_recent_filter_add_age","gtk_recent_filter_add_application","gtk_recent_filter_add_group","gtk_recent_filter_add_mime_type","gtk_recent_filter_add_pattern","gtk_recent_filter_add_pixbuf_formats","gtk_recent_filter_filter","gtk_recent_filter_get_name","gtk_recent_filter_set_name"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "RecentFilter"
+
+[[types]]
+  err_funcs = ["gtk_size_group_get_widgets"]
+  funcs = ["gtk_size_group_new","gtk_size_group_add_widget","gtk_size_group_get_mode","gtk_size_group_remove_widget","gtk_size_group_set_mode"]
+  ignore_funcs = ["gtk_size_group_get_ignore_hidden","gtk_size_group_set_ignore_hidden"]
+  manual_funcs = []
+  name = "SizeGroup"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_accel_label_new","gtk_accel_label_get_accel","gtk_accel_label_get_accel_widget","gtk_accel_label_get_accel_width","gtk_accel_label_refetch","gtk_accel_label_set_accel","gtk_accel_label_set_accel_closure","gtk_accel_label_set_accel_widget"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "AccelLabel"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_label_new","gtk_label_new_with_mnemonic","gtk_label_get_angle","gtk_label_get_attributes","gtk_label_get_current_uri","gtk_label_get_ellipsize","gtk_label_get_justify","gtk_label_get_label","gtk_label_get_layout","gtk_label_get_layout_offsets","gtk_label_get_line_wrap","gtk_label_get_line_wrap_mode","gtk_label_get_lines","gtk_label_get_max_width_chars","gtk_label_get_mnemonic_keyval","gtk_label_get_mnemonic_widget","gtk_label_get_selectable","gtk_label_get_selection_bounds","gtk_label_get_single_line_mode","gtk_label_get_text","gtk_label_get_track_visited_links","gtk_label_get_use_markup","gtk_label_get_use_underline","gtk_label_get_width_chars","gtk_label_get_xalign","gtk_label_get_yalign","gtk_label_select_region","gtk_label_set_angle","gtk_label_set_attributes","gtk_label_set_ellipsize","gtk_label_set_justify","gtk_label_set_label","gtk_label_set_line_wrap","gtk_label_set_line_wrap_mode","gtk_label_set_lines","gtk_label_set_markup","gtk_label_set_markup_with_mnemonic","gtk_label_set_max_width_chars","gtk_label_set_mnemonic_widget","gtk_label_set_pattern","gtk_label_set_selectable","gtk_label_set_single_line_mode","gtk_label_set_text","gtk_label_set_text_with_mnemonic","gtk_label_set_track_visited_links","gtk_label_set_use_markup","gtk_label_set_use_underline","gtk_label_set_width_chars","gtk_label_set_xalign","gtk_label_set_yalign"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Label"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = ["gtk_misc_get_alignment","gtk_misc_get_padding","gtk_misc_set_alignment","gtk_misc_set_padding"]
+  manual_funcs = []
+  name = "Misc"
+
+[[types]]
+  err_funcs = ["gtk_app_chooser_button_new"]
+  funcs = ["gtk_app_chooser_button_append_custom_item","gtk_app_chooser_button_append_separator","gtk_app_chooser_button_get_heading","gtk_app_chooser_button_get_show_default_item","gtk_app_chooser_button_get_show_dialog_item","gtk_app_chooser_button_set_active_custom_item","gtk_app_chooser_button_set_heading","gtk_app_chooser_button_set_show_default_item","gtk_app_chooser_button_set_show_dialog_item"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "AppChooserButton"
+
+[[types]]
+  err_funcs = ["gtk_combo_box_get_active_iter","gtk_combo_box_get_row_separator_func","gtk_combo_box_set_row_separator_func"]
+  funcs = ["gtk_combo_box_new","gtk_combo_box_new_with_area","gtk_combo_box_new_with_area_and_entry","gtk_combo_box_new_with_entry","gtk_combo_box_new_with_model","gtk_combo_box_new_with_model_and_entry","gtk_combo_box_get_active","gtk_combo_box_get_active_id","gtk_combo_box_get_button_sensitivity","gtk_combo_box_get_column_span_column","gtk_combo_box_get_entry_text_column","gtk_combo_box_get_has_entry","gtk_combo_box_get_id_column","gtk_combo_box_get_model","gtk_combo_box_get_popup_accessible","gtk_combo_box_get_popup_fixed_width","gtk_combo_box_get_row_span_column","gtk_combo_box_get_wrap_width","gtk_combo_box_popdown","gtk_combo_box_popup","gtk_combo_box_popup_for_device","gtk_combo_box_set_active","gtk_combo_box_set_active_id","gtk_combo_box_set_active_iter","gtk_combo_box_set_button_sensitivity","gtk_combo_box_set_column_span_column","gtk_combo_box_set_entry_text_column","gtk_combo_box_set_id_column","gtk_combo_box_set_model","gtk_combo_box_set_popup_fixed_width","gtk_combo_box_set_row_span_column","gtk_combo_box_set_wrap_width"]
+  ignore_funcs = ["gtk_combo_box_get_add_tearoffs","gtk_combo_box_get_focus_on_click","gtk_combo_box_get_title","gtk_combo_box_set_add_tearoffs","gtk_combo_box_set_focus_on_click","gtk_combo_box_set_title"]
+  manual_funcs = []
+  name = "ComboBox"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_app_chooser_widget_new","gtk_app_chooser_widget_get_default_text","gtk_app_chooser_widget_get_show_all","gtk_app_chooser_widget_get_show_default","gtk_app_chooser_widget_get_show_fallback","gtk_app_chooser_widget_get_show_other","gtk_app_chooser_widget_get_show_recommended","gtk_app_chooser_widget_set_default_text","gtk_app_chooser_widget_set_show_all","gtk_app_chooser_widget_set_show_default","gtk_app_chooser_widget_set_show_fallback","gtk_app_chooser_widget_set_show_other","gtk_app_chooser_widget_set_show_recommended"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "AppChooserWidget"
+
+[[types]]
+  err_funcs = ["gtk_box_set_center_widget"]
+  funcs = ["gtk_box_new","gtk_box_get_baseline_position","gtk_box_get_center_widget","gtk_box_get_homogeneous","gtk_box_get_spacing","gtk_box_pack_end","gtk_box_pack_start","gtk_box_query_child_packing","gtk_box_reorder_child","gtk_box_set_baseline_position","gtk_box_set_child_packing","gtk_box_set_homogeneous","gtk_box_set_spacing"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Box"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ShortcutsWindow"
+
+[[types]]
+  err_funcs = ["gtk_assistant_set_forward_page_func"]
+  funcs = ["gtk_assistant_new","gtk_assistant_add_action_widget","gtk_assistant_append_page","gtk_assistant_commit","gtk_assistant_get_current_page","gtk_assistant_get_n_pages","gtk_assistant_get_nth_page","gtk_assistant_get_page_complete","gtk_assistant_get_page_has_padding","gtk_assistant_get_page_title","gtk_assistant_get_page_type","gtk_assistant_insert_page","gtk_assistant_next_page","gtk_assistant_prepend_page","gtk_assistant_previous_page","gtk_assistant_remove_action_widget","gtk_assistant_remove_page","gtk_assistant_set_current_page","gtk_assistant_set_page_complete","gtk_assistant_set_page_has_padding","gtk_assistant_set_page_title","gtk_assistant_set_page_type","gtk_assistant_update_buttons_state"]
+  ignore_funcs = ["gtk_assistant_get_page_header_image","gtk_assistant_get_page_side_image","gtk_assistant_set_page_header_image","gtk_assistant_set_page_side_image"]
+  manual_funcs = []
+  name = "Assistant"
+
+[[types]]
+  err_funcs = ["gtk_button_new_from_icon_name"]
+  funcs = ["gtk_button_new","gtk_button_new_with_label","gtk_button_new_with_mnemonic","gtk_button_clicked","gtk_button_get_always_show_image","gtk_button_get_event_window","gtk_button_get_image","gtk_button_get_image_position","gtk_button_get_label","gtk_button_get_relief","gtk_button_get_use_underline","gtk_button_set_always_show_image","gtk_button_set_image","gtk_button_set_image_position","gtk_button_set_label","gtk_button_set_relief","gtk_button_set_use_underline"]
+  ignore_funcs = ["gtk_button_new_from_stock","gtk_button_enter","gtk_button_get_alignment","gtk_button_get_focus_on_click","gtk_button_get_use_stock","gtk_button_leave","gtk_button_pressed","gtk_button_released","gtk_button_set_alignment","gtk_button_set_focus_on_click","gtk_button_set_use_stock"]
+  manual_funcs = []
+  name = "Button"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = ["gtk_activatable_do_set_related_action","gtk_activatable_get_related_action","gtk_activatable_get_use_action_appearance","gtk_activatable_set_related_action","gtk_activatable_set_use_action_appearance","gtk_activatable_sync_action_properties"]
+  manual_funcs = []
+  name = "Activatable"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_button_box_new","gtk_button_box_get_child_non_homogeneous","gtk_button_box_get_child_secondary","gtk_button_box_get_layout","gtk_button_box_set_child_non_homogeneous","gtk_button_box_set_child_secondary","gtk_button_box_set_layout"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ButtonBox"
+
+[[types]]
+  err_funcs = ["gtk_calendar_set_detail_func"]
+  funcs = ["gtk_calendar_new","gtk_calendar_clear_marks","gtk_calendar_get_date","gtk_calendar_get_day_is_marked","gtk_calendar_get_detail_height_rows","gtk_calendar_get_detail_width_chars","gtk_calendar_get_display_options","gtk_calendar_mark_day","gtk_calendar_select_day","gtk_calendar_select_month","gtk_calendar_set_detail_height_rows","gtk_calendar_set_detail_width_chars","gtk_calendar_set_display_options","gtk_calendar_unmark_day"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Calendar"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_cell_area_box_new","gtk_cell_area_box_get_spacing","gtk_cell_area_box_pack_end","gtk_cell_area_box_pack_start","gtk_cell_area_box_set_spacing"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "CellAreaBox"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_cell_renderer_accel_new"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "CellRendererAccel"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_cell_renderer_text_new","gtk_cell_renderer_text_set_fixed_height_from_font"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "CellRendererText"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_cell_renderer_combo_new"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "CellRendererCombo"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_cell_renderer_pixbuf_new"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "CellRendererPixbuf"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_cell_renderer_progress_new"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "CellRendererProgress"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_cell_renderer_spin_new"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "CellRendererSpin"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_cell_renderer_spinner_new"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "CellRendererSpinner"
+
+[[types]]
+  err_funcs = ["gtk_cell_renderer_toggle_new"]
+  funcs = ["gtk_cell_renderer_toggle_get_activatable","gtk_cell_renderer_toggle_get_active","gtk_cell_renderer_toggle_get_radio","gtk_cell_renderer_toggle_set_activatable","gtk_cell_renderer_toggle_set_active","gtk_cell_renderer_toggle_set_radio"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "CellRendererToggle"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_cell_view_new","gtk_cell_view_new_with_context","gtk_cell_view_new_with_markup","gtk_cell_view_new_with_pixbuf","gtk_cell_view_new_with_text","gtk_cell_view_get_displayed_row","gtk_cell_view_get_draw_sensitive","gtk_cell_view_get_fit_model","gtk_cell_view_get_model","gtk_cell_view_set_background_rgba","gtk_cell_view_set_displayed_row","gtk_cell_view_set_draw_sensitive","gtk_cell_view_set_fit_model","gtk_cell_view_set_model"]
+  ignore_funcs = ["gtk_cell_view_get_size_of_row","gtk_cell_view_set_background_color"]
+  manual_funcs = []
+  name = "CellView"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_check_button_new","gtk_check_button_new_with_label","gtk_check_button_new_with_mnemonic"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "CheckButton"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_toggle_button_new","gtk_toggle_button_new_with_label","gtk_toggle_button_new_with_mnemonic","gtk_toggle_button_get_active","gtk_toggle_button_get_inconsistent","gtk_toggle_button_get_mode","gtk_toggle_button_set_active","gtk_toggle_button_set_inconsistent","gtk_toggle_button_set_mode","gtk_toggle_button_toggled"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ToggleButton"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_check_menu_item_new","gtk_check_menu_item_new_with_label","gtk_check_menu_item_new_with_mnemonic","gtk_check_menu_item_get_active","gtk_check_menu_item_get_draw_as_radio","gtk_check_menu_item_get_inconsistent","gtk_check_menu_item_set_active","gtk_check_menu_item_set_draw_as_radio","gtk_check_menu_item_set_inconsistent","gtk_check_menu_item_toggled"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "CheckMenuItem"
+
+[[types]]
+  err_funcs = ["gtk_menu_item_set_submenu"]
+  funcs = ["gtk_menu_item_new","gtk_menu_item_new_with_label","gtk_menu_item_new_with_mnemonic","gtk_menu_item_activate","gtk_menu_item_deselect","gtk_menu_item_get_accel_path","gtk_menu_item_get_label","gtk_menu_item_get_reserve_indicator","gtk_menu_item_get_submenu","gtk_menu_item_get_use_underline","gtk_menu_item_select","gtk_menu_item_set_accel_path","gtk_menu_item_set_label","gtk_menu_item_set_reserve_indicator"]
+  ignore_funcs = ["gtk_menu_item_get_right_justified","gtk_menu_item_set_right_justified"]
+  manual_funcs = []
+  name = "MenuItem"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_menu_new"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Menu"
+
+[[types]]
+  err_funcs = ["gtk_menu_shell_append","gtk_menu_shell_deactivate"]
+  funcs = ["gtk_menu_shell_prepend","gtk_menu_shell_activate_item","gtk_menu_shell_bind_model","gtk_menu_shell_cancel","gtk_menu_shell_deselect","gtk_menu_shell_get_parent_shell","gtk_menu_shell_get_selected_item","gtk_menu_shell_get_take_focus","gtk_menu_shell_insert","gtk_menu_shell_select_first","gtk_menu_shell_select_item","gtk_menu_shell_set_take_focus"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "MenuShell"
+
+[[types]]
+  err_funcs = ["gtk_clipboard_get_selection","gtk_clipboard_request_contents","gtk_clipboard_request_image","gtk_clipboard_request_rich_text","gtk_clipboard_request_targets","gtk_clipboard_request_text","gtk_clipboard_request_uris","gtk_clipboard_set_can_store","gtk_clipboard_set_with_data","gtk_clipboard_set_with_owner","gtk_clipboard_wait_for_contents","gtk_clipboard_wait_for_rich_text","gtk_clipboard_wait_for_targets","gtk_clipboard_wait_is_target_available","gtk_clipboard_get","gtk_clipboard_get_for_display"]
+  funcs = ["gtk_clipboard_clear","gtk_clipboard_get_display","gtk_clipboard_get_owner","gtk_clipboard_set_image","gtk_clipboard_set_text","gtk_clipboard_store","gtk_clipboard_wait_for_image","gtk_clipboard_wait_for_text","gtk_clipboard_wait_for_uris","gtk_clipboard_wait_is_image_available","gtk_clipboard_wait_is_rich_text_available","gtk_clipboard_wait_is_text_available","gtk_clipboard_wait_is_uris_available","gtk_clipboard_get_default"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Clipboard"
+
+[[types]]
+  err_funcs = ["gtk_color_button_set_title"]
+  funcs = ["gtk_color_button_new","gtk_color_button_new_with_rgba","gtk_color_button_get_title"]
+  ignore_funcs = ["gtk_color_button_new_with_color","gtk_color_button_get_alpha","gtk_color_button_get_color","gtk_color_button_get_rgba","gtk_color_button_get_use_alpha","gtk_color_button_set_alpha","gtk_color_button_set_color","gtk_color_button_set_rgba","gtk_color_button_set_use_alpha"]
+  manual_funcs = []
+  name = "ColorButton"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_color_chooser_dialog_new"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ColorChooserDialog"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_color_chooser_widget_new"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ColorChooserWidget"
+
+[[types]]
+  err_funcs = ["gtk_color_selection_get_current_rgba","gtk_color_selection_get_previous_rgba","gtk_color_selection_palette_from_string","gtk_color_selection_palette_to_string","gtk_color_selection_set_change_palette_with_screen_hook"]
+  funcs = ["gtk_color_selection_new","gtk_color_selection_get_current_alpha","gtk_color_selection_get_has_opacity_control","gtk_color_selection_get_has_palette","gtk_color_selection_get_previous_alpha","gtk_color_selection_is_adjusting","gtk_color_selection_set_current_alpha","gtk_color_selection_set_current_rgba","gtk_color_selection_set_has_opacity_control","gtk_color_selection_set_has_palette","gtk_color_selection_set_previous_alpha","gtk_color_selection_set_previous_rgba"]
+  ignore_funcs = ["gtk_color_selection_get_current_color","gtk_color_selection_get_previous_color","gtk_color_selection_set_current_color","gtk_color_selection_set_previous_color"]
+  manual_funcs = []
+  name = "ColorSelection"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_color_selection_dialog_new","gtk_color_selection_dialog_get_color_selection"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ColorSelectionDialog"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ComboBoxAccessible"
+
+[[types]]
+  err_funcs = ["gtk_combo_box_text_insert_text"]
+  funcs = ["gtk_combo_box_text_new","gtk_combo_box_text_new_with_entry","gtk_combo_box_text_append","gtk_combo_box_text_append_text","gtk_combo_box_text_get_active_text","gtk_combo_box_text_insert","gtk_combo_box_text_prepend","gtk_combo_box_text_prepend_text","gtk_combo_box_text_remove","gtk_combo_box_text_remove_all"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ComboBoxText"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ContainerAccessible"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "WidgetAccessible"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "CheckMenuItemAccessible"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "MenuItemAccessible"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ButtonAccessible"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "CellAccessible"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_container_cell_accessible_new","gtk_container_cell_accessible_add_child","gtk_container_cell_accessible_get_children","gtk_container_cell_accessible_remove_child"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ContainerCellAccessible"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_css_provider_new","gtk_css_provider_load_from_data","gtk_css_provider_load_from_file","gtk_css_provider_load_from_path","gtk_css_provider_load_from_resource","gtk_css_provider_to_string","gtk_css_provider_get_default","gtk_css_provider_get_named"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "CssProvider"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_drawing_area_new"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "DrawingArea"
+
+[[types]]
+  err_funcs = ["gtk_entry_get_cursor_hadjustment","gtk_entry_get_icon_area","gtk_entry_get_invisible_char","gtk_entry_get_text_area","gtk_entry_set_invisible_char","gtk_entry_set_progress_pulse_step"]
+  funcs = ["gtk_entry_new","gtk_entry_new_with_buffer","gtk_entry_get_activates_default","gtk_entry_get_alignment","gtk_entry_get_attributes","gtk_entry_get_buffer","gtk_entry_get_completion","gtk_entry_get_current_icon_drag_source","gtk_entry_get_has_frame","gtk_entry_get_icon_activatable","gtk_entry_get_icon_at_pos","gtk_entry_get_icon_gicon","gtk_entry_get_icon_name","gtk_entry_get_icon_pixbuf","gtk_entry_get_icon_sensitive","gtk_entry_get_icon_storage_type","gtk_entry_get_icon_tooltip_markup","gtk_entry_get_icon_tooltip_text","gtk_entry_get_input_hints","gtk_entry_get_input_purpose","gtk_entry_get_layout","gtk_entry_get_layout_offsets","gtk_entry_get_max_length","gtk_entry_get_max_width_chars","gtk_entry_get_overwrite_mode","gtk_entry_get_placeholder_text","gtk_entry_get_progress_fraction","gtk_entry_get_progress_pulse_step","gtk_entry_get_tabs","gtk_entry_get_text","gtk_entry_get_text_length","gtk_entry_get_visibility","gtk_entry_get_width_chars","gtk_entry_grab_focus_without_selecting","gtk_entry_im_context_filter_keypress","gtk_entry_layout_index_to_text_index","gtk_entry_progress_pulse","gtk_entry_reset_im_context","gtk_entry_set_activates_default","gtk_entry_set_alignment","gtk_entry_set_attributes","gtk_entry_set_buffer","gtk_entry_set_completion","gtk_entry_set_cursor_hadjustment","gtk_entry_set_has_frame","gtk_entry_set_icon_activatable","gtk_entry_set_icon_drag_source","gtk_entry_set_icon_from_gicon","gtk_entry_set_icon_from_icon_name","gtk_entry_set_icon_from_pixbuf","gtk_entry_set_icon_sensitive","gtk_entry_set_icon_tooltip_markup","gtk_entry_set_icon_tooltip_text","gtk_entry_set_input_hints","gtk_entry_set_input_purpose","gtk_entry_set_max_length","gtk_entry_set_max_width_chars","gtk_entry_set_overwrite_mode","gtk_entry_set_placeholder_text","gtk_entry_set_progress_fraction","gtk_entry_set_tabs","gtk_entry_set_text","gtk_entry_set_visibility","gtk_entry_set_width_chars","gtk_entry_text_index_to_layout_index","gtk_entry_unset_invisible_char"]
+  ignore_funcs = ["gtk_entry_get_icon_stock","gtk_entry_get_inner_border","gtk_entry_set_icon_from_stock","gtk_entry_set_inner_border"]
+  manual_funcs = []
+  name = "Entry"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_entry_buffer_new","gtk_entry_buffer_delete_text","gtk_entry_buffer_emit_deleted_text","gtk_entry_buffer_emit_inserted_text","gtk_entry_buffer_get_bytes","gtk_entry_buffer_get_length","gtk_entry_buffer_get_max_length","gtk_entry_buffer_get_text","gtk_entry_buffer_insert_text","gtk_entry_buffer_set_max_length","gtk_entry_buffer_set_text"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "EntryBuffer"
+
+[[types]]
+  err_funcs = ["gtk_entry_completion_set_match_func"]
+  funcs = ["gtk_entry_completion_new","gtk_entry_completion_new_with_area","gtk_entry_completion_complete","gtk_entry_completion_compute_prefix","gtk_entry_completion_delete_action","gtk_entry_completion_get_completion_prefix","gtk_entry_completion_get_entry","gtk_entry_completion_get_inline_completion","gtk_entry_completion_get_inline_selection","gtk_entry_completion_get_minimum_key_length","gtk_entry_completion_get_model","gtk_entry_completion_get_popup_completion","gtk_entry_completion_get_popup_set_width","gtk_entry_completion_get_popup_single_match","gtk_entry_completion_get_text_column","gtk_entry_completion_insert_action_markup","gtk_entry_completion_insert_action_text","gtk_entry_completion_insert_prefix","gtk_entry_completion_set_inline_completion","gtk_entry_completion_set_inline_selection","gtk_entry_completion_set_minimum_key_length","gtk_entry_completion_set_model","gtk_entry_completion_set_popup_completion","gtk_entry_completion_set_popup_set_width","gtk_entry_completion_set_popup_single_match","gtk_entry_completion_set_text_column"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "EntryCompletion"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "EntryAccessible"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_event_box_new","gtk_event_box_get_above_child","gtk_event_box_get_visible_window","gtk_event_box_set_above_child","gtk_event_box_set_visible_window"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "EventBox"
+
+[[types]]
+  err_funcs = ["gtk_event_controller_handle_event"]
+  funcs = ["gtk_event_controller_get_propagation_phase","gtk_event_controller_get_widget","gtk_event_controller_reset","gtk_event_controller_set_propagation_phase"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "EventController"
+
+[[types]]
+  err_funcs = ["gtk_expander_new"]
+  funcs = ["gtk_expander_new_with_mnemonic","gtk_expander_get_expanded","gtk_expander_get_label","gtk_expander_get_label_fill","gtk_expander_get_label_widget","gtk_expander_get_resize_toplevel","gtk_expander_get_use_markup","gtk_expander_get_use_underline","gtk_expander_set_expanded","gtk_expander_set_label","gtk_expander_set_label_fill","gtk_expander_set_label_widget","gtk_expander_set_resize_toplevel","gtk_expander_set_use_markup","gtk_expander_set_use_underline"]
+  ignore_funcs = ["gtk_expander_get_spacing","gtk_expander_set_spacing"]
+  manual_funcs = []
+  name = "Expander"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "ExpanderAccessible"
+
+[[types]]
+  err_funcs = ["gtk_file_chooser_button_new_with_dialog"]
+  funcs = ["gtk_file_chooser_button_new","gtk_file_chooser_button_get_title","gtk_file_chooser_button_get_width_chars","gtk_file_chooser_button_set_title","gtk_file_chooser_button_set_width_chars"]
+  ignore_funcs = ["gtk_file_chooser_button_get_focus_on_click","gtk_file_chooser_button_set_focus_on_click"]
+  manual_funcs = []
+  name = "FileChooserButton"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = ["gtk_file_chooser_dialog_new"]
+  manual_funcs = []
+  name = "FileChooserDialog"
+
+[[types]]
+  err_funcs = ["gtk_file_chooser_native_new"]
+  funcs = ["gtk_file_chooser_native_get_accept_label","gtk_file_chooser_native_get_cancel_label","gtk_file_chooser_native_set_accept_label","gtk_file_chooser_native_set_cancel_label"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "FileChooserNative"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_native_dialog_destroy","gtk_native_dialog_get_modal","gtk_native_dialog_get_title","gtk_native_dialog_get_transient_for","gtk_native_dialog_get_visible","gtk_native_dialog_hide","gtk_native_dialog_run","gtk_native_dialog_set_modal","gtk_native_dialog_set_title","gtk_native_dialog_set_transient_for","gtk_native_dialog_show"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "NativeDialog"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_file_chooser_widget_new"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "FileChooserWidget"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_fixed_new","gtk_fixed_move","gtk_fixed_put"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Fixed"
+
+[[types]]
+  err_funcs = ["gtk_flow_box_bind_model","gtk_flow_box_selected_foreach","gtk_flow_box_set_filter_func","gtk_flow_box_set_sort_func"]
+  funcs = ["gtk_flow_box_new","gtk_flow_box_get_activate_on_single_click","gtk_flow_box_get_child_at_index","gtk_flow_box_get_child_at_pos","gtk_flow_box_get_column_spacing","gtk_flow_box_get_homogeneous","gtk_flow_box_get_max_children_per_line","gtk_flow_box_get_min_children_per_line","gtk_flow_box_get_row_spacing","gtk_flow_box_get_selected_children","gtk_flow_box_get_selection_mode","gtk_flow_box_insert","gtk_flow_box_invalidate_filter","gtk_flow_box_invalidate_sort","gtk_flow_box_select_all","gtk_flow_box_select_child","gtk_flow_box_set_activate_on_single_click","gtk_flow_box_set_column_spacing","gtk_flow_box_set_hadjustment","gtk_flow_box_set_homogeneous","gtk_flow_box_set_max_children_per_line","gtk_flow_box_set_min_children_per_line","gtk_flow_box_set_row_spacing","gtk_flow_box_set_selection_mode","gtk_flow_box_set_vadjustment","gtk_flow_box_unselect_all","gtk_flow_box_unselect_child"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "FlowBox"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_flow_box_child_new","gtk_flow_box_child_changed","gtk_flow_box_child_get_index","gtk_flow_box_child_is_selected"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "FlowBoxChild"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "FlowBoxAccessible"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "FlowBoxChildAccessible"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_font_button_new","gtk_font_button_new_with_font","gtk_font_button_get_font_name","gtk_font_button_get_show_size","gtk_font_button_get_show_style","gtk_font_button_get_title","gtk_font_button_get_use_font","gtk_font_button_get_use_size","gtk_font_button_set_font_name","gtk_font_button_set_show_size","gtk_font_button_set_show_style","gtk_font_button_set_title","gtk_font_button_set_use_font","gtk_font_button_set_use_size"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "FontButton"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_font_chooser_dialog_new"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "FontChooserDialog"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_font_chooser_widget_new"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "FontChooserWidget"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = ["gtk_font_selection_new","gtk_font_selection_get_face","gtk_font_selection_get_face_list","gtk_font_selection_get_family","gtk_font_selection_get_family_list","gtk_font_selection_get_font_name","gtk_font_selection_get_preview_entry","gtk_font_selection_get_preview_text","gtk_font_selection_get_size","gtk_font_selection_get_size_entry","gtk_font_selection_get_size_list","gtk_font_selection_set_font_name","gtk_font_selection_set_preview_text"]
+  manual_funcs = []
+  name = "FontSelection"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = ["gtk_font_selection_dialog_new","gtk_font_selection_dialog_get_cancel_button","gtk_font_selection_dialog_get_font_name","gtk_font_selection_dialog_get_font_selection","gtk_font_selection_dialog_get_ok_button","gtk_font_selection_dialog_get_preview_text","gtk_font_selection_dialog_set_font_name","gtk_font_selection_dialog_set_preview_text"]
+  manual_funcs = []
+  name = "FontSelectionDialog"
+
+[[types]]
+  err_funcs = []
+  funcs = []
+  ignore_funcs = []
+  manual_funcs = []
+  name = "FrameAccessible"
+
+[[types]]
+  err_funcs = []
+  funcs = ["gtk_gl_area_new","gtk_gl_area_attach_buffers","gtk_gl_area_get_auto_render","gtk_gl_area_get_context","gtk_gl_area_get_error","gtk_gl_area_get_has_alpha","gtk_gl_area_get_has_depth_buffer","gtk_gl_area_get_has_stencil_buffer","gtk_gl_area_get_required_version","gtk_gl_area_get_use_es","gtk_gl_area_make_current","gtk_gl_area_queue_render","gtk_gl_area_set_auto_render","gtk_gl_area_set_error","gtk_gl_area_set_has_alpha","gtk_gl_area_set_has_depth_buffer","gtk_gl_area_set_has_stencil_buffer","gtk_gl_area_set_required_version","gtk_gl_area_set_use_es"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "GLArea"
+
+[[types]]
+  err_funcs = ["gtk_gesture_get_bounding_box","gtk_gesture_get_last_event"]
+  funcs = ["gtk_gesture_get_bounding_box_center","gtk_gesture_get_device","gtk_gesture_get_group","gtk_gesture_get_last_updated_sequence","gtk_gesture_get_point","gtk_gesture_get_sequence_state"]
+  ignore_funcs = []
+  manual_funcs = []
+  name = "Gesture"
