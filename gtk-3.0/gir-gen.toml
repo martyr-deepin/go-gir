@@ -1,6 +1,6 @@
 callbacks = []
 cincludes = ["<gtk/gtk.h>","<gtk/gtk-a11y.h>","<gtk/gtkx.h>"]
-funcs = []
+funcs = ["gtk_main", "gtk_main_quit", "gtk_main_level", "gtk_main_iteration", "gtk_main_iteration_do"]
 ignore_types = ["Allocation","Activatable","Alignment","Action","ActionGroup","ArrowAccessible","Arrow","BooleanCellAccessible","EntryIconAccessible","StackAccessible"]
 namespace = "Gtk"
 version = "3.0"

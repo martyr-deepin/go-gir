@@ -27949,6 +27949,34 @@ func (v WindowAccessible) Window() atk.Window {
 	return atk.WrapWindow(v.Ptr) /*gir:Atk*/
 }
 
+// Main is a wrapper around gtk_main().
+func Main() {
+	C.gtk_main()
+}
+
+// MainIteration is a wrapper around gtk_main_iteration().
+func MainIteration() bool {
+	ret0 := C.gtk_main_iteration()
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// MainIterationDo is a wrapper around gtk_main_iteration_do().
+func MainIterationDo(blocking bool) bool {
+	ret0 := C.gtk_main_iteration_do(C.gboolean(util.Bool2Int(blocking)) /*go:.util*/)
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// MainLevel is a wrapper around gtk_main_level().
+func MainLevel() uint {
+	ret0 := C.gtk_main_level()
+	return uint(ret0)
+}
+
+// MainQuit is a wrapper around gtk_main_quit().
+func MainQuit() {
+	C.gtk_main_quit()
+}
+
 type Stock unsafe.Pointer
 type Align int
 
