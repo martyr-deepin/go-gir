@@ -1487,6 +1487,13 @@ func (text Text) GetOffsetAtPoint(x int, y int, coords CoordType) int {
 	return int(ret0)
 }
 
+// GetRangeExtents is a wrapper around atk_text_get_range_extents().
+func (text Text) GetRangeExtents(start_offset int, end_offset int, coord_type CoordType) TextRectangle {
+	var rect0 C.AtkTextRectangle
+	C.atk_text_get_range_extents(text.native(), C.gint(start_offset), C.gint(end_offset), C.AtkCoordType(coord_type), &rect0)
+	return wrapTextRectangle(&rect0)
+}
+
 // GetSelection is a wrapper around atk_text_get_selection().
 func (text Text) GetSelection(selection_num int) (string, int, int) {
 	var start_offset0 C.gint

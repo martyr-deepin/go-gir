@@ -779,6 +779,20 @@ func (rect1 Rectangle) Equal(rect2 Rectangle) bool {
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
+// Intersect is a wrapper around gdk_rectangle_intersect().
+func (src1 Rectangle) Intersect(src2 Rectangle) (bool, Rectangle) {
+	var dest0 C.GdkRectangle
+	ret0 := C.gdk_rectangle_intersect(src1.native(), src2.native(), &dest0)
+	return util.Int2Bool(int(ret0)) /*go:.util*/, wrapRectangle(&dest0)
+}
+
+// Union is a wrapper around gdk_rectangle_union().
+func (src1 Rectangle) Union(src2 Rectangle) Rectangle {
+	var dest0 C.GdkRectangle
+	C.gdk_rectangle_union(src1.native(), src2.native(), &dest0)
+	return wrapRectangle(&dest0)
+}
+
 // Struct TimeCoord
 type TimeCoord struct {
 	Ptr unsafe.Pointer
@@ -1771,6 +1785,13 @@ func (window Window) GetFrameClock() FrameClock {
 	return wrapFrameClock(ret0)
 }
 
+// GetFrameExtents is a wrapper around gdk_window_get_frame_extents().
+func (window Window) GetFrameExtents() Rectangle {
+	var rect0 C.GdkRectangle
+	C.gdk_window_get_frame_extents(window.native(), &rect0)
+	return wrapRectangle(&rect0)
+}
+
 // GetFullscreenMode is a wrapper around gdk_window_get_fullscreen_mode().
 func (window Window) GetFullscreenMode() FullscreenMode {
 	ret0 := C.gdk_window_get_fullscreen_mode(window.native())
@@ -2662,6 +2683,22 @@ func IWrapAtom(p unsafe.Pointer) interface{} {
 	return WrapAtom(p)
 }
 
+// AtomIntern is a wrapper around gdk_atom_intern().
+func AtomIntern(atom_name string, only_if_exists bool) Atom {
+	atom_name0 := (*C.gchar)(C.CString(atom_name))
+	ret0 := C.gdk_atom_intern(atom_name0, C.gboolean(util.Bool2Int(only_if_exists)) /*go:.util*/)
+	C.free(unsafe.Pointer(atom_name0)) /*ch:<stdlib.h>*/
+	return wrapAtom(&ret0)
+}
+
+// AtomInternStaticString is a wrapper around gdk_atom_intern_static_string().
+func AtomInternStaticString(atom_name string) Atom {
+	atom_name0 := (*C.gchar)(C.CString(atom_name))
+	ret0 := C.gdk_atom_intern_static_string(atom_name0)
+	C.free(unsafe.Pointer(atom_name0)) /*ch:<stdlib.h>*/
+	return wrapAtom(&ret0)
+}
+
 // Object DeviceManager
 type DeviceManager struct {
 	gobject.Object
@@ -2788,6 +2825,13 @@ func (monitor Monitor) GetDisplay() Display {
 	return wrapDisplay(ret0)
 }
 
+// GetGeometry is a wrapper around gdk_monitor_get_geometry().
+func (monitor Monitor) GetGeometry() Rectangle {
+	var geometry0 C.GdkRectangle
+	C.gdk_monitor_get_geometry(monitor.native(), &geometry0)
+	return wrapRectangle(&geometry0)
+}
+
 // GetHeightMm is a wrapper around gdk_monitor_get_height_mm().
 func (monitor Monitor) GetHeightMm() int {
 	ret0 := C.gdk_monitor_get_height_mm(monitor.native())
@@ -2830,6 +2874,13 @@ func (monitor Monitor) GetSubpixelLayout() SubpixelLayout {
 func (monitor Monitor) GetWidthMm() int {
 	ret0 := C.gdk_monitor_get_width_mm(monitor.native())
 	return int(ret0)
+}
+
+// GetWorkarea is a wrapper around gdk_monitor_get_workarea().
+func (monitor Monitor) GetWorkarea() Rectangle {
+	var workarea0 C.GdkRectangle
+	C.gdk_monitor_get_workarea(monitor.native(), &workarea0)
+	return wrapRectangle(&workarea0)
 }
 
 // IsPrimary is a wrapper around gdk_monitor_is_primary().

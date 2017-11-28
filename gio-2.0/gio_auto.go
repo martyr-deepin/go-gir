@@ -48,6 +48,9 @@ static void _g_file_enumerate_children_async(GFile* file, const char* attributes
 static void _g_file_find_enclosing_mount_async(GFile* file, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
     return g_file_find_enclosing_mount_async(file, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
 }
+static void _g_file_load_contents_async(GFile* file, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_load_contents_async(file, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
 static void _g_file_make_directory_async(GFile* file, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
     return g_file_make_directory_async(file, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
 }
@@ -83,6 +86,9 @@ static void _g_file_read_async(GFile* file, int io_priority, GCancellable* cance
 }
 static void _g_file_replace_async(GFile* file, const char* etag, gboolean make_backup, GFileCreateFlags flags, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
     return g_file_replace_async(file, etag, make_backup, flags, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_file_replace_readwrite_async(GFile* file, const char* etag, gboolean make_backup, GFileCreateFlags flags, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_file_replace_readwrite_async(file, etag, make_backup, flags, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
 }
 static void _g_file_set_attributes_async(GFile* file, GFileInfo* info, GFileQueryInfoFlags flags, int io_priority, GCancellable* cancellable, GClosure* user_data_for_callback) {
     return g_file_set_attributes_async(file, info, flags, io_priority, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
@@ -185,6 +191,9 @@ static void _g_dbus_connection_close(GDBusConnection* connection, GCancellable* 
 }
 static void _g_dbus_connection_flush(GDBusConnection* connection, GCancellable* cancellable, GClosure* user_data_for_callback) {
     return g_dbus_connection_flush(connection, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
+}
+static void _g_dbus_connection_send_message_with_reply(GDBusConnection* connection, GDBusMessage* message, GDBusSendMessageFlags flags, gint timeout_msec, volatile guint32* out_serial, GCancellable* cancellable, GClosure* user_data_for_callback) {
+    return g_dbus_connection_send_message_with_reply(connection, message, flags, timeout_msec, out_serial, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
 }
 static void _g_dbus_connection_new(GIOStream* stream, const gchar* guid, GDBusConnectionFlags flags, GDBusAuthObserver* observer, GCancellable* cancellable, GClosure* user_data_for_callback) {
     return g_dbus_connection_new(stream, guid, flags, observer, cancellable, AsyncReadyCallbackWrapper, user_data_for_callback);
@@ -1975,6 +1984,12 @@ func (file File) IsNative() bool {
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
+// LoadContentsAsync is a wrapper around g_file_load_contents_async().
+func (file File) LoadContentsAsync(cancellable Cancellable, callback AsyncReadyCallback) {
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_load_contents_async(file.native(), cancellable.native(), callback0)
+}
+
 // MakeDirectory is a wrapper around g_file_make_directory().
 func (file File) MakeDirectory(cancellable Cancellable) (bool, error) {
 	var err glib.Error
@@ -2348,6 +2363,20 @@ func (file File) ReplaceAsync(etag string, make_backup bool, flags FileCreateFla
 	C.free(unsafe.Pointer(etag0)) /*ch:<stdlib.h>*/
 }
 
+// ReplaceContentsFinish is a wrapper around g_file_replace_contents_finish().
+func (file File) ReplaceContentsFinish(res AsyncResult) (bool, string, error) {
+	var new_etag0 *C.char
+	var err glib.Error
+	ret0 := C.g_file_replace_contents_finish(file.native(), res.native(), &new_etag0, (**C.GError)(unsafe.Pointer(&err)))
+	new_etag := C.GoString(new_etag0)
+	defer C.g_free(C.gpointer(new_etag0))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, "", err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, new_etag, nil
+}
+
 // ReplaceFinish is a wrapper around g_file_replace_finish().
 func (file File) ReplaceFinish(res AsyncResult) (FileOutputStream, error) {
 	var err glib.Error
@@ -2370,6 +2399,14 @@ func (file File) ReplaceReadwrite(etag string, make_backup bool, flags FileCreat
 		return FileIOStream{}, err.GoValue()
 	}
 	return wrapFileIOStream(ret0), nil
+}
+
+// ReplaceReadwriteAsync is a wrapper around g_file_replace_readwrite_async().
+func (file File) ReplaceReadwriteAsync(etag string, make_backup bool, flags FileCreateFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+	etag0 := C.CString(etag)
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_file_replace_readwrite_async(file.native(), etag0, C.gboolean(util.Bool2Int(make_backup)) /*go:.util*/, C.GFileCreateFlags(flags), C.int(io_priority), cancellable.native(), callback0)
+	C.free(unsafe.Pointer(etag0)) /*ch:<stdlib.h>*/
 }
 
 // ReplaceReadwriteFinish is a wrapper around g_file_replace_readwrite_finish().
@@ -5857,6 +5894,28 @@ func (v DBusConnection) Initable() Initable {
 	return WrapInitable(v.Ptr)
 }
 
+// DBusConnectionNewFinish is a wrapper around g_dbus_connection_new_finish().
+func DBusConnectionNewFinish(res AsyncResult) (DBusConnection, error) {
+	var err glib.Error
+	ret0 := C.g_dbus_connection_new_finish(res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return DBusConnection{}, err.GoValue()
+	}
+	return wrapDBusConnection(ret0), nil
+}
+
+// DBusConnectionNewForAddressFinish is a wrapper around g_dbus_connection_new_for_address_finish().
+func DBusConnectionNewForAddressFinish(res AsyncResult) (DBusConnection, error) {
+	var err glib.Error
+	ret0 := C.g_dbus_connection_new_for_address_finish(res.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return DBusConnection{}, err.GoValue()
+	}
+	return wrapDBusConnection(ret0), nil
+}
+
 // DBusConnectionNewForAddressSync is a wrapper around g_dbus_connection_new_for_address_sync().
 func DBusConnectionNewForAddressSync(address string, flags DBusConnectionFlags, observer DBusAuthObserver, cancellable Cancellable) (DBusConnection, error) {
 	address0 := (*C.gchar)(C.CString(address))
@@ -6124,6 +6183,8 @@ func (connection DBusConnection) IsClosed() bool {
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
+// g_dbus_connection_register_object shadowed by register_object_with_closures
+
 // RegisterObject is a wrapper around g_dbus_connection_register_object_with_closures().
 func (connection DBusConnection) RegisterObject(object_path string, interface_info DBusInterfaceInfo, method_call_closure gobject.Closure, get_property_closure gobject.Closure, set_property_closure gobject.Closure) (uint, error) {
 	object_path0 := (*C.gchar)(C.CString(object_path))
@@ -6142,6 +6203,26 @@ func (connection DBusConnection) RemoveFilter(filter_id uint) {
 	C.g_dbus_connection_remove_filter(connection.native(), C.guint(filter_id))
 }
 
+// SendMessage is a wrapper around g_dbus_connection_send_message().
+func (connection DBusConnection) SendMessage(message DBusMessage, flags DBusSendMessageFlags) (bool, uint32, error) {
+	var out_serial0 C.guint32
+	var err glib.Error
+	ret0 := C.g_dbus_connection_send_message(connection.native(), message.native(), C.GDBusSendMessageFlags(flags), &out_serial0, (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return false, 0, err.GoValue()
+	}
+	return util.Int2Bool(int(ret0)) /*go:.util*/, uint32(out_serial0), nil
+}
+
+// SendMessageWithReply is a wrapper around g_dbus_connection_send_message_with_reply().
+func (connection DBusConnection) SendMessageWithReply(message DBusMessage, flags DBusSendMessageFlags, timeout_msec int, cancellable Cancellable, callback AsyncReadyCallback) uint32 {
+	var out_serial0 C.guint32
+	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
+	C._g_dbus_connection_send_message_with_reply(connection.native(), message.native(), C.GDBusSendMessageFlags(flags), C.gint(timeout_msec), &out_serial0, cancellable.native(), callback0)
+	return uint32(out_serial0)
+}
+
 // SendMessageWithReplyFinish is a wrapper around g_dbus_connection_send_message_with_reply_finish().
 func (connection DBusConnection) SendMessageWithReplyFinish(res AsyncResult) (DBusMessage, error) {
 	var err glib.Error
@@ -6151,6 +6232,18 @@ func (connection DBusConnection) SendMessageWithReplyFinish(res AsyncResult) (DB
 		return DBusMessage{}, err.GoValue()
 	}
 	return wrapDBusMessage(ret0), nil
+}
+
+// SendMessageWithReplySync is a wrapper around g_dbus_connection_send_message_with_reply_sync().
+func (connection DBusConnection) SendMessageWithReplySync(message DBusMessage, flags DBusSendMessageFlags, timeout_msec int, cancellable Cancellable) (DBusMessage, uint32, error) {
+	var out_serial0 C.guint32
+	var err glib.Error
+	ret0 := C.g_dbus_connection_send_message_with_reply_sync(connection.native(), message.native(), C.GDBusSendMessageFlags(flags), C.gint(timeout_msec), &out_serial0, cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
+	if err.Ptr != nil {
+		defer err.Free()
+		return DBusMessage{}, 0, err.GoValue()
+	}
+	return wrapDBusMessage(ret0), uint32(out_serial0), nil
 }
 
 // SetExitOnClose is a wrapper around g_dbus_connection_set_exit_on_close().
@@ -8045,6 +8138,12 @@ func (v ListModel) GetGValueGetter() gobject.GValueGetter {
 
 // g_list_model_get_item shadowed by get_object
 
+// GetItemType is a wrapper around g_list_model_get_item_type().
+func (list ListModel) GetItemType() /*Gir:GObject*/ gobject.Type {
+	ret0 := C.g_list_model_get_item_type(list.native())
+	return /*Gir:GObject*/ gobject.Type(ret0)
+}
+
 // GetNItems is a wrapper around g_list_model_get_n_items().
 func (list ListModel) GetNItems() uint {
 	ret0 := C.g_list_model_get_n_items(list.native())
@@ -8866,10 +8965,46 @@ func (v TlsBackend) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 
+// GetCertificateType is a wrapper around g_tls_backend_get_certificate_type().
+func (backend TlsBackend) GetCertificateType() /*Gir:GObject*/ gobject.Type {
+	ret0 := C.g_tls_backend_get_certificate_type(backend.native())
+	return /*Gir:GObject*/ gobject.Type(ret0)
+}
+
+// GetClientConnectionType is a wrapper around g_tls_backend_get_client_connection_type().
+func (backend TlsBackend) GetClientConnectionType() /*Gir:GObject*/ gobject.Type {
+	ret0 := C.g_tls_backend_get_client_connection_type(backend.native())
+	return /*Gir:GObject*/ gobject.Type(ret0)
+}
+
 // GetDefaultDatabase is a wrapper around g_tls_backend_get_default_database().
 func (backend TlsBackend) GetDefaultDatabase() TlsDatabase {
 	ret0 := C.g_tls_backend_get_default_database(backend.native())
 	return wrapTlsDatabase(ret0)
+}
+
+// GetDtlsClientConnectionType is a wrapper around g_tls_backend_get_dtls_client_connection_type().
+func (backend TlsBackend) GetDtlsClientConnectionType() /*Gir:GObject*/ gobject.Type {
+	ret0 := C.g_tls_backend_get_dtls_client_connection_type(backend.native())
+	return /*Gir:GObject*/ gobject.Type(ret0)
+}
+
+// GetDtlsServerConnectionType is a wrapper around g_tls_backend_get_dtls_server_connection_type().
+func (backend TlsBackend) GetDtlsServerConnectionType() /*Gir:GObject*/ gobject.Type {
+	ret0 := C.g_tls_backend_get_dtls_server_connection_type(backend.native())
+	return /*Gir:GObject*/ gobject.Type(ret0)
+}
+
+// GetFileDatabaseType is a wrapper around g_tls_backend_get_file_database_type().
+func (backend TlsBackend) GetFileDatabaseType() /*Gir:GObject*/ gobject.Type {
+	ret0 := C.g_tls_backend_get_file_database_type(backend.native())
+	return /*Gir:GObject*/ gobject.Type(ret0)
+}
+
+// GetServerConnectionType is a wrapper around g_tls_backend_get_server_connection_type().
+func (backend TlsBackend) GetServerConnectionType() /*Gir:GObject*/ gobject.Type {
+	ret0 := C.g_tls_backend_get_server_connection_type(backend.native())
+	return /*Gir:GObject*/ gobject.Type(ret0)
 }
 
 // SupportsDtls is a wrapper around g_tls_backend_supports_dtls().
@@ -12479,6 +12614,14 @@ func (v IOModule) TypePlugin() gobject.TypePlugin {
 	return gobject.WrapTypePlugin(v.Ptr) /*gir:GObject*/
 }
 
+// IOModuleNew is a wrapper around g_io_module_new().
+func IOModuleNew(filename string) IOModule {
+	filename0 := (*C.gchar)(C.CString(filename))
+	ret0 := C.g_io_module_new(filename0)
+	C.free(unsafe.Pointer(filename0)) /*ch:<stdlib.h>*/
+	return wrapIOModule(ret0)
+}
+
 // Object InetAddressMask
 type InetAddressMask struct {
 	gobject.Object
@@ -13113,6 +13256,26 @@ func (v NetworkAddress) SocketConnectable() SocketConnectable {
 	return WrapSocketConnectable(v.Ptr)
 }
 
+// GetHostname is a wrapper around g_network_address_get_hostname().
+func (addr NetworkAddress) GetHostname() string {
+	ret0 := C.g_network_address_get_hostname(addr.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// GetPort is a wrapper around g_network_address_get_port().
+func (addr NetworkAddress) GetPort() uint16 {
+	ret0 := C.g_network_address_get_port(addr.native())
+	return uint16(ret0)
+}
+
+// GetScheme is a wrapper around g_network_address_get_scheme().
+func (addr NetworkAddress) GetScheme() string {
+	ret0 := C.g_network_address_get_scheme(addr.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
 // Object VolumeMonitor
 type VolumeMonitor struct {
 	gobject.Object
@@ -13143,6 +13306,49 @@ func (v VolumeMonitor) GetGValueGetter() gobject.GValueGetter {
 		ptr := C.g_value_get_object((*C.GValue)(p))
 		return WrapVolumeMonitor(unsafe.Pointer(ptr)), nil
 	}
+}
+
+// GetConnectedDrives is a wrapper around g_volume_monitor_get_connected_drives().
+func (volume_monitor VolumeMonitor) GetConnectedDrives() glib.List {
+	ret0 := C.g_volume_monitor_get_connected_drives(volume_monitor.native())
+	return glib.WrapList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapDrive(p) }) /*gir:GLib*/
+}
+
+// GetMountForUuid is a wrapper around g_volume_monitor_get_mount_for_uuid().
+func (volume_monitor VolumeMonitor) GetMountForUuid(uuid string) Mount {
+	uuid0 := C.CString(uuid)
+	ret0 := C.g_volume_monitor_get_mount_for_uuid(volume_monitor.native(), uuid0)
+	C.free(unsafe.Pointer(uuid0)) /*ch:<stdlib.h>*/
+	return wrapMount(ret0)
+}
+
+// GetMounts is a wrapper around g_volume_monitor_get_mounts().
+func (volume_monitor VolumeMonitor) GetMounts() glib.List {
+	ret0 := C.g_volume_monitor_get_mounts(volume_monitor.native())
+	return glib.WrapList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapMount(p) }) /*gir:GLib*/
+}
+
+// GetVolumeForUuid is a wrapper around g_volume_monitor_get_volume_for_uuid().
+func (volume_monitor VolumeMonitor) GetVolumeForUuid(uuid string) Volume {
+	uuid0 := C.CString(uuid)
+	ret0 := C.g_volume_monitor_get_volume_for_uuid(volume_monitor.native(), uuid0)
+	C.free(unsafe.Pointer(uuid0)) /*ch:<stdlib.h>*/
+	return wrapVolume(ret0)
+}
+
+// GetVolumes is a wrapper around g_volume_monitor_get_volumes().
+func (volume_monitor VolumeMonitor) GetVolumes() glib.List {
+	ret0 := C.g_volume_monitor_get_volumes(volume_monitor.native())
+	return glib.WrapList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapVolume(p) }) /*gir:GLib*/
+}
+
+// VolumeMonitorGet is a wrapper around g_volume_monitor_get().
+func VolumeMonitorGet() VolumeMonitor {
+	ret0 := C.g_volume_monitor_get()
+	return wrapVolumeMonitor(ret0)
 }
 
 // Object NetworkService
@@ -13178,6 +13384,41 @@ func (v NetworkService) GetGValueGetter() gobject.GValueGetter {
 }
 func (v NetworkService) SocketConnectable() SocketConnectable {
 	return WrapSocketConnectable(v.Ptr)
+}
+
+// GetDomain is a wrapper around g_network_service_get_domain().
+func (srv NetworkService) GetDomain() string {
+	ret0 := C.g_network_service_get_domain(srv.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// GetProtocol is a wrapper around g_network_service_get_protocol().
+func (srv NetworkService) GetProtocol() string {
+	ret0 := C.g_network_service_get_protocol(srv.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// GetScheme is a wrapper around g_network_service_get_scheme().
+func (srv NetworkService) GetScheme() string {
+	ret0 := C.g_network_service_get_scheme(srv.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// GetService is a wrapper around g_network_service_get_service().
+func (srv NetworkService) GetService() string {
+	ret0 := C.g_network_service_get_service(srv.native())
+	ret := C.GoString((*C.char)(ret0))
+	return ret
+}
+
+// SetScheme is a wrapper around g_network_service_set_scheme().
+func (srv NetworkService) SetScheme(scheme string) {
+	scheme0 := (*C.gchar)(C.CString(scheme))
+	C.g_network_service_set_scheme(srv.native(), scheme0)
+	C.free(unsafe.Pointer(scheme0)) /*ch:<stdlib.h>*/
 }
 
 // Object Permission
@@ -14369,6 +14610,17 @@ func (connection SocketConnection) IsConnected() bool {
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
+// SocketConnectionFactoryLookupType is a wrapper around g_socket_connection_factory_lookup_type().
+func SocketConnectionFactoryLookupType(family SocketFamily, type_ SocketType, protocol_id int) /*Gir:GObject*/ gobject.Type {
+	ret0 := C.g_socket_connection_factory_lookup_type(C.GSocketFamily(family), C.GSocketType(type_), C.gint(protocol_id))
+	return /*Gir:GObject*/ gobject.Type(ret0)
+}
+
+// SocketConnectionFactoryRegisterType is a wrapper around g_socket_connection_factory_register_type().
+func SocketConnectionFactoryRegisterType(g_type /*Gir:GObject*/ gobject.Type, family SocketFamily, type_ SocketType, protocol int) {
+	C.g_socket_connection_factory_register_type(C.GType(g_type), C.GSocketFamily(family), C.GSocketType(type_), C.gint(protocol))
+}
+
 // Object SocketClient
 type SocketClient struct {
 	gobject.Object
@@ -14937,6 +15189,8 @@ func (v Subprocess) GetGValueGetter() gobject.GValueGetter {
 func (v Subprocess) Initable() Initable {
 	return WrapInitable(v.Ptr)
 }
+
+// g_subprocess_new shadowed by newv
 
 // SubprocessNew is a wrapper around g_subprocess_newv().
 func SubprocessNew(argv []string, flags SubprocessFlags) (Subprocess, error) {
@@ -15716,6 +15970,20 @@ func (icon ThemedIcon) AppendName(iconname string) {
 	C.free(unsafe.Pointer(iconname0)) /*ch:<stdlib.h>*/
 }
 
+// GetNames is a wrapper around g_themed_icon_get_names().
+func (icon ThemedIcon) GetNames() []string {
+	ret0 := C.g_themed_icon_get_names(icon.native())
+	var ret0Slice []*C.gchar
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString((*C.char)(elem))
+		ret[idx] = elemG
+	}
+	return ret
+}
+
 // PrependName is a wrapper around g_themed_icon_prepend_name().
 func (icon ThemedIcon) PrependName(iconname string) {
 	iconname0 := C.CString(iconname)
@@ -16290,6 +16558,20 @@ func (vfs Vfs) GetFileForUri(uri string) File {
 	ret0 := C.g_vfs_get_file_for_uri(vfs.native(), uri0)
 	C.free(unsafe.Pointer(uri0)) /*ch:<stdlib.h>*/
 	return wrapFile(ret0)
+}
+
+// GetSupportedUriSchemes is a wrapper around g_vfs_get_supported_uri_schemes().
+func (vfs Vfs) GetSupportedUriSchemes() []string {
+	ret0 := C.g_vfs_get_supported_uri_schemes(vfs.native())
+	var ret0Slice []*C.gchar
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString((*C.char)(elem))
+		ret[idx] = elemG
+	}
+	return ret
 }
 
 // IsActive is a wrapper around g_vfs_is_active().

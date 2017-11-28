@@ -526,6 +526,11 @@ func (pixbuf Pixbuf) Savev(filename string, type_ string, option_keys []string, 
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
 }
 
+// Scale is a wrapper around gdk_pixbuf_scale().
+func (src Pixbuf) Scale(dest Pixbuf, dest_x int, dest_y int, dest_width int, dest_height int, offset_x float64, offset_y float64, scale_x float64, scale_y float64, interp_type InterpType) {
+	C.gdk_pixbuf_scale(src.native(), dest.native(), C.int(dest_x), C.int(dest_y), C.int(dest_width), C.int(dest_height), C.double(offset_x), C.double(offset_y), C.double(scale_x), C.double(scale_y), C.GdkInterpType(interp_type))
+}
+
 // ScaleSimple is a wrapper around gdk_pixbuf_scale_simple().
 func (src Pixbuf) ScaleSimple(dest_width int, dest_height int, interp_type InterpType) Pixbuf {
 	ret0 := C.gdk_pixbuf_scale_simple(src.native(), C.int(dest_width), C.int(dest_height), C.GdkInterpType(interp_type))

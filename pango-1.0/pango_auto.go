@@ -1106,6 +1106,22 @@ func (string GlyphString) Copy() GlyphString {
 	return wrapGlyphString(ret0)
 }
 
+// Extents is a wrapper around pango_glyph_string_extents().
+func (glyphs GlyphString) Extents(font Font) (Rectangle, Rectangle) {
+	var ink_rect0 C.PangoRectangle
+	var logical_rect0 C.PangoRectangle
+	C.pango_glyph_string_extents(glyphs.native(), font.native(), &ink_rect0, &logical_rect0)
+	return wrapRectangle(&ink_rect0), wrapRectangle(&logical_rect0)
+}
+
+// ExtentsRange is a wrapper around pango_glyph_string_extents_range().
+func (glyphs GlyphString) ExtentsRange(start int, end int, font Font) (Rectangle, Rectangle) {
+	var ink_rect0 C.PangoRectangle
+	var logical_rect0 C.PangoRectangle
+	C.pango_glyph_string_extents_range(glyphs.native(), C.int(start), C.int(end), font.native(), &ink_rect0, &logical_rect0)
+	return wrapRectangle(&ink_rect0), wrapRectangle(&logical_rect0)
+}
+
 // Free is a wrapper around pango_glyph_string_free().
 func (string GlyphString) Free() {
 	C.pango_glyph_string_free(string.native())
@@ -1244,6 +1260,21 @@ func (iter LayoutIter) GetBaseline() int {
 	return int(ret0)
 }
 
+// GetCharExtents is a wrapper around pango_layout_iter_get_char_extents().
+func (iter LayoutIter) GetCharExtents() Rectangle {
+	var logical_rect0 C.PangoRectangle
+	C.pango_layout_iter_get_char_extents(iter.native(), &logical_rect0)
+	return wrapRectangle(&logical_rect0)
+}
+
+// GetClusterExtents is a wrapper around pango_layout_iter_get_cluster_extents().
+func (iter LayoutIter) GetClusterExtents() (Rectangle, Rectangle) {
+	var ink_rect0 C.PangoRectangle
+	var logical_rect0 C.PangoRectangle
+	C.pango_layout_iter_get_cluster_extents(iter.native(), &ink_rect0, &logical_rect0)
+	return wrapRectangle(&ink_rect0), wrapRectangle(&logical_rect0)
+}
+
 // GetIndex is a wrapper around pango_layout_iter_get_index().
 func (iter LayoutIter) GetIndex() int {
 	ret0 := C.pango_layout_iter_get_index(iter.native())
@@ -1256,10 +1287,26 @@ func (iter LayoutIter) GetLayout() Layout {
 	return wrapLayout(ret0)
 }
 
+// GetLayoutExtents is a wrapper around pango_layout_iter_get_layout_extents().
+func (iter LayoutIter) GetLayoutExtents() (Rectangle, Rectangle) {
+	var ink_rect0 C.PangoRectangle
+	var logical_rect0 C.PangoRectangle
+	C.pango_layout_iter_get_layout_extents(iter.native(), &ink_rect0, &logical_rect0)
+	return wrapRectangle(&ink_rect0), wrapRectangle(&logical_rect0)
+}
+
 // GetLine is a wrapper around pango_layout_iter_get_line().
 func (iter LayoutIter) GetLine() LayoutLine {
 	ret0 := C.pango_layout_iter_get_line(iter.native())
 	return wrapLayoutLine(ret0)
+}
+
+// GetLineExtents is a wrapper around pango_layout_iter_get_line_extents().
+func (iter LayoutIter) GetLineExtents() (Rectangle, Rectangle) {
+	var ink_rect0 C.PangoRectangle
+	var logical_rect0 C.PangoRectangle
+	C.pango_layout_iter_get_line_extents(iter.native(), &ink_rect0, &logical_rect0)
+	return wrapRectangle(&ink_rect0), wrapRectangle(&logical_rect0)
 }
 
 // GetLineReadonly is a wrapper around pango_layout_iter_get_line_readonly().
@@ -1274,6 +1321,38 @@ func (iter LayoutIter) GetLineYrange() (int, int) {
 	var y1_0 C.int
 	C.pango_layout_iter_get_line_yrange(iter.native(), &y0_0, &y1_0)
 	return int(y0_0), int(y1_0)
+}
+
+// GetRunExtents is a wrapper around pango_layout_iter_get_run_extents().
+func (iter LayoutIter) GetRunExtents() (Rectangle, Rectangle) {
+	var ink_rect0 C.PangoRectangle
+	var logical_rect0 C.PangoRectangle
+	C.pango_layout_iter_get_run_extents(iter.native(), &ink_rect0, &logical_rect0)
+	return wrapRectangle(&ink_rect0), wrapRectangle(&logical_rect0)
+}
+
+// NextChar is a wrapper around pango_layout_iter_next_char().
+func (iter LayoutIter) NextChar() bool {
+	ret0 := C.pango_layout_iter_next_char(iter.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// NextCluster is a wrapper around pango_layout_iter_next_cluster().
+func (iter LayoutIter) NextCluster() bool {
+	ret0 := C.pango_layout_iter_next_cluster(iter.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// NextLine is a wrapper around pango_layout_iter_next_line().
+func (iter LayoutIter) NextLine() bool {
+	ret0 := C.pango_layout_iter_next_line(iter.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// NextRun is a wrapper around pango_layout_iter_next_run().
+func (iter LayoutIter) NextRun() bool {
+	ret0 := C.pango_layout_iter_next_run(iter.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // Object Layout
@@ -1361,10 +1440,26 @@ func (layout Layout) GetContext() Context {
 	return wrapContext(ret0)
 }
 
+// GetCursorPos is a wrapper around pango_layout_get_cursor_pos().
+func (layout Layout) GetCursorPos(index_ int) (Rectangle, Rectangle) {
+	var strong_pos0 C.PangoRectangle
+	var weak_pos0 C.PangoRectangle
+	C.pango_layout_get_cursor_pos(layout.native(), C.int(index_), &strong_pos0, &weak_pos0)
+	return wrapRectangle(&strong_pos0), wrapRectangle(&weak_pos0)
+}
+
 // GetEllipsize is a wrapper around pango_layout_get_ellipsize().
 func (layout Layout) GetEllipsize() EllipsizeMode {
 	ret0 := C.pango_layout_get_ellipsize(layout.native())
 	return EllipsizeMode(ret0)
+}
+
+// GetExtents is a wrapper around pango_layout_get_extents().
+func (layout Layout) GetExtents() (Rectangle, Rectangle) {
+	var ink_rect0 C.PangoRectangle
+	var logical_rect0 C.PangoRectangle
+	C.pango_layout_get_extents(layout.native(), &ink_rect0, &logical_rect0)
+	return wrapRectangle(&ink_rect0), wrapRectangle(&logical_rect0)
 }
 
 // GetFontDescription is a wrapper around pango_layout_get_font_description().
@@ -1413,6 +1508,27 @@ func (layout Layout) GetLineCount() int {
 func (layout Layout) GetLineReadonly(line int) LayoutLine {
 	ret0 := C.pango_layout_get_line_readonly(layout.native(), C.int(line))
 	return wrapLayoutLine(ret0)
+}
+
+// GetLogAttrsReadonly is a wrapper around pango_layout_get_log_attrs_readonly().
+func (layout Layout) GetLogAttrsReadonly() []LogAttr {
+	var n_attrs0 C.gint
+	ret0 := C.pango_layout_get_log_attrs_readonly(layout.native(), &n_attrs0)
+	var ret0Slice []C.PangoLogAttr
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(n_attrs0)) /*go:.util*/
+	ret := make([]LogAttr, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		ret[idx] = wrapLogAttr(&elem)
+	}
+	return ret
+}
+
+// GetPixelExtents is a wrapper around pango_layout_get_pixel_extents().
+func (layout Layout) GetPixelExtents() (Rectangle, Rectangle) {
+	var ink_rect0 C.PangoRectangle
+	var logical_rect0 C.PangoRectangle
+	C.pango_layout_get_pixel_extents(layout.native(), &ink_rect0, &logical_rect0)
+	return wrapRectangle(&ink_rect0), wrapRectangle(&logical_rect0)
 }
 
 // GetPixelSize is a wrapper around pango_layout_get_pixel_size().
@@ -1486,6 +1602,13 @@ func (layout Layout) IndexToLineX(index_ int, trailing bool) (int, int) {
 	var x_pos0 C.int
 	C.pango_layout_index_to_line_x(layout.native(), C.int(index_), C.gboolean(util.Bool2Int(trailing)) /*go:.util*/, &line0, &x_pos0)
 	return int(line0), int(x_pos0)
+}
+
+// IndexToPos is a wrapper around pango_layout_index_to_pos().
+func (layout Layout) IndexToPos(index_ int) Rectangle {
+	var pos0 C.PangoRectangle
+	C.pango_layout_index_to_pos(layout.native(), C.int(index_), &pos0)
+	return wrapRectangle(&pos0)
 }
 
 // IsEllipsized is a wrapper around pango_layout_is_ellipsized().
@@ -1862,6 +1985,14 @@ func (font Font) GetFontMap() FontMap {
 	return wrapFontMap(ret0)
 }
 
+// GetGlyphExtents is a wrapper around pango_font_get_glyph_extents().
+func (font Font) GetGlyphExtents(glyph Glyph) (Rectangle, Rectangle) {
+	var ink_rect0 C.PangoRectangle
+	var logical_rect0 C.PangoRectangle
+	C.pango_font_get_glyph_extents(font.native(), C.PangoGlyph(glyph), &ink_rect0, &logical_rect0)
+	return wrapRectangle(&ink_rect0), wrapRectangle(&logical_rect0)
+}
+
 // GetMetrics is a wrapper around pango_font_get_metrics().
 func (font Font) GetMetrics(language Language) FontMetrics {
 	ret0 := C.pango_font_get_metrics(font.native(), language.native())
@@ -2086,6 +2217,22 @@ func IWrapLayoutLine(p unsafe.Pointer) interface{} {
 	return WrapLayoutLine(p)
 }
 
+// GetExtents is a wrapper around pango_layout_line_get_extents().
+func (line LayoutLine) GetExtents() (Rectangle, Rectangle) {
+	var ink_rect0 C.PangoRectangle
+	var logical_rect0 C.PangoRectangle
+	C.pango_layout_line_get_extents(line.native(), &ink_rect0, &logical_rect0)
+	return wrapRectangle(&ink_rect0), wrapRectangle(&logical_rect0)
+}
+
+// GetPixelExtents is a wrapper around pango_layout_line_get_pixel_extents().
+func (layout_line LayoutLine) GetPixelExtents() (Rectangle, Rectangle) {
+	var ink_rect0 C.PangoRectangle
+	var logical_rect0 C.PangoRectangle
+	C.pango_layout_line_get_pixel_extents(layout_line.native(), &ink_rect0, &logical_rect0)
+	return wrapRectangle(&ink_rect0), wrapRectangle(&logical_rect0)
+}
+
 // IndexToX is a wrapper around pango_layout_line_index_to_x().
 func (line LayoutLine) IndexToX(index_ int, trailing bool) int {
 	var x_pos0 C.int
@@ -2133,6 +2280,53 @@ func IWrapTabArray(p unsafe.Pointer) interface{} {
 	return WrapTabArray(p)
 }
 
+// TabArrayNew is a wrapper around pango_tab_array_new().
+func TabArrayNew(initial_size int, positions_in_pixels bool) TabArray {
+	ret0 := C.pango_tab_array_new(C.gint(initial_size), C.gboolean(util.Bool2Int(positions_in_pixels)) /*go:.util*/)
+	return wrapTabArray(ret0)
+}
+
+// Copy is a wrapper around pango_tab_array_copy().
+func (src TabArray) Copy() TabArray {
+	ret0 := C.pango_tab_array_copy(src.native())
+	return wrapTabArray(ret0)
+}
+
+// Free is a wrapper around pango_tab_array_free().
+func (tab_array TabArray) Free() {
+	C.pango_tab_array_free(tab_array.native())
+}
+
+// GetPositionsInPixels is a wrapper around pango_tab_array_get_positions_in_pixels().
+func (tab_array TabArray) GetPositionsInPixels() bool {
+	ret0 := C.pango_tab_array_get_positions_in_pixels(tab_array.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// GetSize is a wrapper around pango_tab_array_get_size().
+func (tab_array TabArray) GetSize() int {
+	ret0 := C.pango_tab_array_get_size(tab_array.native())
+	return int(ret0)
+}
+
+// GetTab is a wrapper around pango_tab_array_get_tab().
+func (tab_array TabArray) GetTab(tab_index int) (TabAlign, int) {
+	var alignment0 C.PangoTabAlign
+	var location0 C.gint
+	C.pango_tab_array_get_tab(tab_array.native(), C.gint(tab_index), &alignment0, &location0)
+	return TabAlign(alignment0), int(location0)
+}
+
+// Resize is a wrapper around pango_tab_array_resize().
+func (tab_array TabArray) Resize(new_size int) {
+	C.pango_tab_array_resize(tab_array.native(), C.gint(new_size))
+}
+
+// SetTab is a wrapper around pango_tab_array_set_tab().
+func (tab_array TabArray) SetTab(tab_index int, alignment TabAlign, location int) {
+	C.pango_tab_array_set_tab(tab_array.native(), C.gint(tab_index), C.PangoTabAlign(alignment), C.gint(location))
+}
+
 // Object FontFace
 type FontFace struct {
 	gobject.Object
@@ -2165,6 +2359,25 @@ func (v FontFace) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 
+// Describe is a wrapper around pango_font_face_describe().
+func (face FontFace) Describe() FontDescription {
+	ret0 := C.pango_font_face_describe(face.native())
+	return wrapFontDescription(ret0)
+}
+
+// GetFaceName is a wrapper around pango_font_face_get_face_name().
+func (face FontFace) GetFaceName() string {
+	ret0 := C.pango_font_face_get_face_name(face.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// IsSynthesized is a wrapper around pango_font_face_is_synthesized().
+func (face FontFace) IsSynthesized() bool {
+	ret0 := C.pango_font_face_is_synthesized(face.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
 // Object FontFamily
 type FontFamily struct {
 	gobject.Object
@@ -2195,6 +2408,19 @@ func (v FontFamily) GetGValueGetter() gobject.GValueGetter {
 		ptr := C.g_value_get_object((*C.GValue)(p))
 		return WrapFontFamily(unsafe.Pointer(ptr)), nil
 	}
+}
+
+// GetName is a wrapper around pango_font_family_get_name().
+func (family FontFamily) GetName() string {
+	ret0 := C.pango_font_family_get_name(family.native())
+	ret := C.GoString(ret0)
+	return ret
+}
+
+// IsMonospace is a wrapper around pango_font_family_is_monospace().
+func (family FontFamily) IsMonospace() bool {
+	ret0 := C.pango_font_family_is_monospace(family.native())
+	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // Object Renderer

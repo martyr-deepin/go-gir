@@ -1,5 +1,7 @@
 callbacks = ["ProgressCallback"]
+cincludes = []
 funcs = []
+ignore_types = []
 namespace = "Flatpak"
 version = "1.0"
 
@@ -18,8 +20,8 @@ version = "1.0"
   name = "Ref"
 
 [[types]]
-  err_funcs = ["flatpak_installed_ref_get_subpaths"]
-  funcs = ["flatpak_installed_ref_get_deploy_dir","flatpak_installed_ref_get_installed_size","flatpak_installed_ref_get_is_current","flatpak_installed_ref_get_latest_commit","flatpak_installed_ref_get_origin","flatpak_installed_ref_load_metadata"]
+  err_funcs = []
+  funcs = ["flatpak_installed_ref_get_deploy_dir","flatpak_installed_ref_get_installed_size","flatpak_installed_ref_get_is_current","flatpak_installed_ref_get_latest_commit","flatpak_installed_ref_get_origin","flatpak_installed_ref_load_metadata","flatpak_installed_ref_get_subpaths"]
   ignore_funcs = []
   manual_funcs = []
   name = "InstalledRef"
@@ -46,8 +48,8 @@ version = "1.0"
   name = "Remote"
 
 [[types]]
-  err_funcs = ["flatpak_related_ref_get_subpaths"]
-  funcs = ["flatpak_related_ref_should_delete","flatpak_related_ref_should_download"]
+  err_funcs = []
+  funcs = ["flatpak_related_ref_should_delete","flatpak_related_ref_should_download","flatpak_related_ref_get_subpaths"]
   ignore_funcs = []
   manual_funcs = []
   name = "RelatedRef"

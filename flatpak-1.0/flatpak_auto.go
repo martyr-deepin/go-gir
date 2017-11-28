@@ -572,6 +572,20 @@ func (self InstalledRef) GetOrigin() string {
 	return ret
 }
 
+// GetSubpaths is a wrapper around flatpak_installed_ref_get_subpaths().
+func (self InstalledRef) GetSubpaths() []string {
+	ret0 := C.flatpak_installed_ref_get_subpaths(self.native())
+	var ret0Slice []*C.char
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString(elem)
+		ret[idx] = elemG
+	}
+	return ret
+}
+
 // LoadMetadata is a wrapper around flatpak_installed_ref_load_metadata().
 func (self InstalledRef) LoadMetadata(cancellable gio.Cancellable) (glib.Bytes, error) {
 	var err glib.Error
@@ -909,6 +923,20 @@ func (v RelatedRef) GetGValueGetter() gobject.GValueGetter {
 		ptr := C.g_value_get_object((*C.GValue)(p))
 		return WrapRelatedRef(unsafe.Pointer(ptr)), nil
 	}
+}
+
+// GetSubpaths is a wrapper around flatpak_related_ref_get_subpaths().
+func (self RelatedRef) GetSubpaths() []string {
+	ret0 := C.flatpak_related_ref_get_subpaths(self.native())
+	var ret0Slice []*C.char
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+	ret := make([]string, len(ret0Slice))
+	for idx, elem := range ret0Slice {
+		elemG := C.GoString(elem)
+		ret[idx] = elemG
+	}
+	return ret
 }
 
 // ShouldDelete is a wrapper around flatpak_related_ref_should_delete().

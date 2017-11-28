@@ -1,4 +1,5 @@
 callbacks = []
+cincludes = []
 funcs = []
 ignore_types = ["LayoutRun","Engine","EngineInfo","EngineScriptInfo","IncludedModule","ScriptForLang","EngineLang","EngineShape","FontsetSimple"]
 namespace = "Pango"
@@ -180,8 +181,8 @@ version = "1.0"
   name = "GlyphItemIter"
 
 [[types]]
-  err_funcs = ["pango_glyph_string_extents","pango_glyph_string_extents_range"]
-  funcs = ["pango_glyph_string_new","pango_glyph_string_copy","pango_glyph_string_free","pango_glyph_string_get_logical_widths","pango_glyph_string_get_width","pango_glyph_string_index_to_x","pango_glyph_string_set_size","pango_glyph_string_x_to_index"]
+  err_funcs = []
+  funcs = ["pango_glyph_string_new","pango_glyph_string_copy","pango_glyph_string_free","pango_glyph_string_get_logical_widths","pango_glyph_string_get_width","pango_glyph_string_index_to_x","pango_glyph_string_set_size","pango_glyph_string_x_to_index","pango_glyph_string_extents","pango_glyph_string_extents_range"]
   ignore_funcs = []
   manual_funcs = []
   name = "GlyphString"
@@ -194,15 +195,15 @@ version = "1.0"
   name = "Item"
 
 [[types]]
-  err_funcs = ["pango_layout_iter_get_char_extents","pango_layout_iter_get_cluster_extents","pango_layout_iter_get_layout_extents","pango_layout_iter_get_line_extents","pango_layout_iter_get_run_extents","pango_layout_iter_get_run_readonly","pango_layout_iter_next_char","pango_layout_iter_next_cluster","pango_layout_iter_next_line","pango_layout_iter_next_run","pango_layout_iter_get_run"]
-  funcs = ["pango_layout_iter_at_last_line","pango_layout_iter_copy","pango_layout_iter_free","pango_layout_iter_get_baseline","pango_layout_iter_get_index","pango_layout_iter_get_layout","pango_layout_iter_get_line","pango_layout_iter_get_line_readonly","pango_layout_iter_get_line_yrange"]
+  err_funcs = ["pango_layout_iter_get_run_readonly","pango_layout_iter_get_run"]
+  funcs = ["pango_layout_iter_at_last_line","pango_layout_iter_copy","pango_layout_iter_free","pango_layout_iter_get_baseline","pango_layout_iter_get_index","pango_layout_iter_get_layout","pango_layout_iter_get_line","pango_layout_iter_get_line_readonly","pango_layout_iter_get_line_yrange","pango_layout_iter_get_char_extents","pango_layout_iter_get_cluster_extents","pango_layout_iter_get_layout_extents","pango_layout_iter_get_line_extents","pango_layout_iter_get_run_extents","pango_layout_iter_next_char","pango_layout_iter_next_cluster","pango_layout_iter_next_line","pango_layout_iter_next_run"]
   ignore_funcs = []
   manual_funcs = []
   name = "LayoutIter"
 
 [[types]]
-  err_funcs = ["pango_layout_get_cursor_pos","pango_layout_get_extents","pango_layout_get_lines","pango_layout_get_lines_readonly","pango_layout_get_log_attrs","pango_layout_get_log_attrs_readonly","pango_layout_get_pixel_extents","pango_layout_index_to_pos","pango_layout_set_markup_with_accel"]
-  funcs = ["pango_layout_new","pango_layout_context_changed","pango_layout_copy","pango_layout_get_alignment","pango_layout_get_attributes","pango_layout_get_auto_dir","pango_layout_get_baseline","pango_layout_get_character_count","pango_layout_get_context","pango_layout_get_ellipsize","pango_layout_get_font_description","pango_layout_get_height","pango_layout_get_indent","pango_layout_get_iter","pango_layout_get_justify","pango_layout_get_line","pango_layout_get_line_count","pango_layout_get_line_readonly","pango_layout_get_pixel_size","pango_layout_get_serial","pango_layout_get_single_paragraph_mode","pango_layout_get_size","pango_layout_get_spacing","pango_layout_get_tabs","pango_layout_get_text","pango_layout_get_unknown_glyphs_count","pango_layout_get_width","pango_layout_get_wrap","pango_layout_index_to_line_x","pango_layout_is_ellipsized","pango_layout_is_wrapped","pango_layout_move_cursor_visually","pango_layout_set_alignment","pango_layout_set_attributes","pango_layout_set_auto_dir","pango_layout_set_ellipsize","pango_layout_set_font_description","pango_layout_set_height","pango_layout_set_indent","pango_layout_set_justify","pango_layout_set_markup","pango_layout_set_single_paragraph_mode","pango_layout_set_spacing","pango_layout_set_tabs","pango_layout_set_text","pango_layout_set_width","pango_layout_set_wrap","pango_layout_xy_to_index"]
+  err_funcs = ["pango_layout_get_lines","pango_layout_get_lines_readonly","pango_layout_get_log_attrs","pango_layout_set_markup_with_accel"]
+  funcs = ["pango_layout_new","pango_layout_context_changed","pango_layout_copy","pango_layout_get_alignment","pango_layout_get_attributes","pango_layout_get_auto_dir","pango_layout_get_baseline","pango_layout_get_character_count","pango_layout_get_context","pango_layout_get_ellipsize","pango_layout_get_font_description","pango_layout_get_height","pango_layout_get_indent","pango_layout_get_iter","pango_layout_get_justify","pango_layout_get_line","pango_layout_get_line_count","pango_layout_get_line_readonly","pango_layout_get_pixel_size","pango_layout_get_serial","pango_layout_get_single_paragraph_mode","pango_layout_get_size","pango_layout_get_spacing","pango_layout_get_tabs","pango_layout_get_text","pango_layout_get_unknown_glyphs_count","pango_layout_get_width","pango_layout_get_wrap","pango_layout_index_to_line_x","pango_layout_is_ellipsized","pango_layout_is_wrapped","pango_layout_move_cursor_visually","pango_layout_set_alignment","pango_layout_set_attributes","pango_layout_set_auto_dir","pango_layout_set_ellipsize","pango_layout_set_font_description","pango_layout_set_height","pango_layout_set_indent","pango_layout_set_justify","pango_layout_set_markup","pango_layout_set_single_paragraph_mode","pango_layout_set_spacing","pango_layout_set_tabs","pango_layout_set_text","pango_layout_set_width","pango_layout_set_wrap","pango_layout_xy_to_index","pango_layout_get_cursor_pos","pango_layout_get_extents","pango_layout_get_log_attrs_readonly","pango_layout_get_pixel_extents","pango_layout_index_to_pos"]
   ignore_funcs = []
   manual_funcs = []
   name = "Layout"
@@ -222,8 +223,8 @@ version = "1.0"
   name = "FontMap"
 
 [[types]]
-  err_funcs = ["pango_font_find_shaper","pango_font_get_glyph_extents"]
-  funcs = ["pango_font_describe","pango_font_describe_with_absolute_size","pango_font_get_coverage","pango_font_get_font_map","pango_font_get_metrics","pango_font_descriptions_free"]
+  err_funcs = ["pango_font_find_shaper"]
+  funcs = ["pango_font_describe","pango_font_describe_with_absolute_size","pango_font_get_coverage","pango_font_get_font_map","pango_font_get_metrics","pango_font_descriptions_free","pango_font_get_glyph_extents"]
   ignore_funcs = []
   manual_funcs = []
   name = "Font"
@@ -250,29 +251,29 @@ version = "1.0"
   name = "Matrix"
 
 [[types]]
-  err_funcs = ["pango_layout_line_get_extents","pango_layout_line_get_pixel_extents","pango_layout_line_get_x_ranges"]
-  funcs = ["pango_layout_line_index_to_x","pango_layout_line_ref","pango_layout_line_unref","pango_layout_line_x_to_index"]
+  err_funcs = ["pango_layout_line_get_x_ranges"]
+  funcs = ["pango_layout_line_index_to_x","pango_layout_line_ref","pango_layout_line_unref","pango_layout_line_x_to_index","pango_layout_line_get_extents","pango_layout_line_get_pixel_extents"]
   ignore_funcs = []
   manual_funcs = []
   name = "LayoutLine"
 
 [[types]]
-  err_funcs = ["pango_tab_array_new","pango_tab_array_copy","pango_tab_array_free","pango_tab_array_get_positions_in_pixels","pango_tab_array_get_size","pango_tab_array_get_tab","pango_tab_array_get_tabs","pango_tab_array_resize","pango_tab_array_set_tab"]
-  funcs = []
+  err_funcs = ["pango_tab_array_get_tabs"]
+  funcs = ["pango_tab_array_new","pango_tab_array_copy","pango_tab_array_free","pango_tab_array_get_positions_in_pixels","pango_tab_array_get_size","pango_tab_array_get_tab","pango_tab_array_resize","pango_tab_array_set_tab"]
   ignore_funcs = ["pango_tab_array_new_with_positions"]
   manual_funcs = []
   name = "TabArray"
 
 [[types]]
-  err_funcs = ["pango_font_face_describe","pango_font_face_get_face_name","pango_font_face_is_synthesized","pango_font_face_list_sizes"]
-  funcs = []
+  err_funcs = ["pango_font_face_list_sizes"]
+  funcs = ["pango_font_face_describe","pango_font_face_get_face_name","pango_font_face_is_synthesized"]
   ignore_funcs = []
   manual_funcs = []
   name = "FontFace"
 
 [[types]]
-  err_funcs = ["pango_font_family_get_name","pango_font_family_is_monospace","pango_font_family_list_faces"]
-  funcs = []
+  err_funcs = ["pango_font_family_list_faces"]
+  funcs = ["pango_font_family_get_name","pango_font_family_is_monospace"]
   ignore_funcs = []
   manual_funcs = []
   name = "FontFamily"
