@@ -1088,9 +1088,9 @@ func (selection_data SelectionData) SetPixbuf(pixbuf gdkpixbuf.Pixbuf) bool {
 }
 
 // SetText is a wrapper around gtk_selection_data_set_text().
-func (selection_data SelectionData) SetText(str string, len int) bool {
+func (selection_data SelectionData) SetText(str string, len_ int) bool {
 	str0 := (*C.gchar)(C.CString(str))
-	ret0 := C.gtk_selection_data_set_text(selection_data.native(), str0, C.gint(len))
+	ret0 := C.gtk_selection_data_set_text(selection_data.native(), str0, C.gint(len_))
 	C.free(unsafe.Pointer(str0))    /*ch:<stdlib.h>*/
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
@@ -1353,16 +1353,16 @@ func (buffer TextBuffer) GetText(start TextIter, end TextIter, include_hidden_ch
 }
 
 // Insert is a wrapper around gtk_text_buffer_insert().
-func (buffer TextBuffer) Insert(iter TextIter, text string, len int) {
+func (buffer TextBuffer) Insert(iter TextIter, text string, len_ int) {
 	text0 := (*C.gchar)(C.CString(text))
-	C.gtk_text_buffer_insert(buffer.native(), iter.native(), text0, C.gint(len))
+	C.gtk_text_buffer_insert(buffer.native(), iter.native(), text0, C.gint(len_))
 	C.free(unsafe.Pointer(text0)) /*ch:<stdlib.h>*/
 }
 
 // InsertAtCursor is a wrapper around gtk_text_buffer_insert_at_cursor().
-func (buffer TextBuffer) InsertAtCursor(text string, len int) {
+func (buffer TextBuffer) InsertAtCursor(text string, len_ int) {
 	text0 := (*C.gchar)(C.CString(text))
-	C.gtk_text_buffer_insert_at_cursor(buffer.native(), text0, C.gint(len))
+	C.gtk_text_buffer_insert_at_cursor(buffer.native(), text0, C.gint(len_))
 	C.free(unsafe.Pointer(text0)) /*ch:<stdlib.h>*/
 }
 
@@ -1372,25 +1372,25 @@ func (buffer TextBuffer) InsertChildAnchor(iter TextIter, anchor TextChildAnchor
 }
 
 // InsertInteractive is a wrapper around gtk_text_buffer_insert_interactive().
-func (buffer TextBuffer) InsertInteractive(iter TextIter, text string, len int, default_editable bool) bool {
+func (buffer TextBuffer) InsertInteractive(iter TextIter, text string, len_ int, default_editable bool) bool {
 	text0 := (*C.gchar)(C.CString(text))
-	ret0 := C.gtk_text_buffer_insert_interactive(buffer.native(), iter.native(), text0, C.gint(len), C.gboolean(util.Bool2Int(default_editable)) /*go:.util*/)
+	ret0 := C.gtk_text_buffer_insert_interactive(buffer.native(), iter.native(), text0, C.gint(len_), C.gboolean(util.Bool2Int(default_editable)) /*go:.util*/)
 	C.free(unsafe.Pointer(text0))   /*ch:<stdlib.h>*/
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // InsertInteractiveAtCursor is a wrapper around gtk_text_buffer_insert_interactive_at_cursor().
-func (buffer TextBuffer) InsertInteractiveAtCursor(text string, len int, default_editable bool) bool {
+func (buffer TextBuffer) InsertInteractiveAtCursor(text string, len_ int, default_editable bool) bool {
 	text0 := (*C.gchar)(C.CString(text))
-	ret0 := C.gtk_text_buffer_insert_interactive_at_cursor(buffer.native(), text0, C.gint(len), C.gboolean(util.Bool2Int(default_editable)) /*go:.util*/)
+	ret0 := C.gtk_text_buffer_insert_interactive_at_cursor(buffer.native(), text0, C.gint(len_), C.gboolean(util.Bool2Int(default_editable)) /*go:.util*/)
 	C.free(unsafe.Pointer(text0))   /*ch:<stdlib.h>*/
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // InsertMarkup is a wrapper around gtk_text_buffer_insert_markup().
-func (buffer TextBuffer) InsertMarkup(iter TextIter, markup string, len int) {
+func (buffer TextBuffer) InsertMarkup(iter TextIter, markup string, len_ int) {
 	markup0 := (*C.gchar)(C.CString(markup))
-	C.gtk_text_buffer_insert_markup(buffer.native(), iter.native(), markup0, C.gint(len))
+	C.gtk_text_buffer_insert_markup(buffer.native(), iter.native(), markup0, C.gint(len_))
 	C.free(unsafe.Pointer(markup0)) /*ch:<stdlib.h>*/
 }
 
@@ -11634,9 +11634,9 @@ func (clipboard Clipboard) SetImage(pixbuf gdkpixbuf.Pixbuf) {
 }
 
 // SetText is a wrapper around gtk_clipboard_set_text().
-func (clipboard Clipboard) SetText(text string, len int) {
+func (clipboard Clipboard) SetText(text string, len_ int) {
 	text0 := (*C.gchar)(C.CString(text))
-	C.gtk_clipboard_set_text(clipboard.native(), text0, C.gint(len))
+	C.gtk_clipboard_set_text(clipboard.native(), text0, C.gint(len_))
 	C.free(unsafe.Pointer(text0)) /*ch:<stdlib.h>*/
 }
 
@@ -16639,9 +16639,9 @@ func (context IMContext) SetCursorLocation(area gdk.Rectangle) {
 }
 
 // SetSurrounding is a wrapper around gtk_im_context_set_surrounding().
-func (context IMContext) SetSurrounding(text string, len int, cursor_index int) {
+func (context IMContext) SetSurrounding(text string, len_ int, cursor_index int) {
 	text0 := (*C.gchar)(C.CString(text))
-	C.gtk_im_context_set_surrounding(context.native(), text0, C.gint(len), C.gint(cursor_index))
+	C.gtk_im_context_set_surrounding(context.native(), text0, C.gint(len_), C.gint(cursor_index))
 	C.free(unsafe.Pointer(text0)) /*ch:<stdlib.h>*/
 }
 

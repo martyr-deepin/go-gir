@@ -3380,6 +3380,13 @@ func (info FileInfo) GetIsSymlink() bool {
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
+// GetModificationTime is a wrapper around g_file_info_get_modification_time().
+func (info FileInfo) GetModificationTime() glib.TimeVal {
+	var result0 C.GTimeVal
+	C.g_file_info_get_modification_time(info.native(), &result0)
+	return glib.WrapTimeVal(unsafe.Pointer(&result0)) /*gir:GLib*/
+}
+
 // GetName is a wrapper around g_file_info_get_name().
 func (info FileInfo) GetName() string {
 	ret0 := C.g_file_info_get_name(info.native())
@@ -7620,8 +7627,8 @@ func (v SocketAddress) SocketConnectable() SocketConnectable {
 }
 
 // SocketAddressNewFromNative is a wrapper around g_socket_address_new_from_native().
-func SocketAddressNewFromNative(native unsafe.Pointer, len uint) SocketAddress {
-	ret0 := C.g_socket_address_new_from_native(C.gpointer(native), C.gsize(len))
+func SocketAddressNewFromNative(native unsafe.Pointer, len_ uint) SocketAddress {
+	ret0 := C.g_socket_address_new_from_native(C.gpointer(native), C.gsize(len_))
 	return wrapSocketAddress(ret0)
 }
 

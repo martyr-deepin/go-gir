@@ -231,8 +231,8 @@ func (list AttrList) Ref() AttrList {
 }
 
 // Splice is a wrapper around pango_attr_list_splice().
-func (list AttrList) Splice(other AttrList, pos int, len int) {
-	C.pango_attr_list_splice(list.native(), other.native(), C.gint(pos), C.gint(len))
+func (list AttrList) Splice(other AttrList, pos int, len_ int) {
+	C.pango_attr_list_splice(list.native(), other.native(), C.gint(pos), C.gint(len_))
 }
 
 // Unref is a wrapper around pango_attr_list_unref().
