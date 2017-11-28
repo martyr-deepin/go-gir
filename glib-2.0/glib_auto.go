@@ -663,9 +663,27 @@ func IWrapBytes(p unsafe.Pointer) interface{} {
 	return WrapBytes(p)
 }
 
+// Compare is a wrapper around g_bytes_compare().
+func (bytes1 Bytes) Compare(bytes2 Bytes) int {
+	ret0 := C.g_bytes_compare(C.gconstpointer(bytes1.native()), C.gconstpointer(bytes2.native()))
+	return int(ret0)
+}
+
+// Equal is a wrapper around g_bytes_equal().
+func (bytes1 Bytes) Equal(bytes2 Bytes) bool {
+	ret0 := C.g_bytes_equal(C.gconstpointer(bytes1.native()), C.gconstpointer(bytes2.native()))
+	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
 // GetSize is a wrapper around g_bytes_get_size().
 func (bytes Bytes) GetSize() uint {
 	ret0 := C.g_bytes_get_size(bytes.native())
+	return uint(ret0)
+}
+
+// Hash is a wrapper around g_bytes_hash().
+func (bytes Bytes) Hash() uint {
+	ret0 := C.g_bytes_hash(C.gconstpointer(bytes.native()))
 	return uint(ret0)
 }
 
@@ -1401,6 +1419,15 @@ func (time_ TimeVal) ToIso8601() string {
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
 	return ret
+}
+
+// TimeValFromIso8601 is a wrapper around g_time_val_from_iso8601().
+func TimeValFromIso8601(iso_date string) (bool, TimeVal) {
+	iso_date0 := (*C.gchar)(C.CString(iso_date))
+	var time_0 C.GTimeVal
+	ret0 := C.g_time_val_from_iso8601(iso_date0, &time_0)
+	C.free(unsafe.Pointer(iso_date0)) /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/, wrapTimeVal(&time_0)
 }
 
 // Struct KeyFile
@@ -2201,6 +2228,12 @@ func DateTimeNewUtc(year int, month int, day int, hour int, minute int, seconds 
 	return wrapDateTime(ret0)
 }
 
+// Add is a wrapper around g_date_time_add().
+func (datetime DateTime) Add(timespan TimeSpan) DateTime {
+	ret0 := C.g_date_time_add(datetime.native(), C.GTimeSpan(timespan))
+	return wrapDateTime(ret0)
+}
+
 // AddDays is a wrapper around g_date_time_add_days().
 func (datetime DateTime) AddDays(days int) DateTime {
 	ret0 := C.g_date_time_add_days(datetime.native(), C.gint(days))
@@ -2247,6 +2280,12 @@ func (datetime DateTime) AddWeeks(weeks int) DateTime {
 func (datetime DateTime) AddYears(years int) DateTime {
 	ret0 := C.g_date_time_add_years(datetime.native(), C.gint(years))
 	return wrapDateTime(ret0)
+}
+
+// Difference is a wrapper around g_date_time_difference().
+func (end DateTime) Difference(begin DateTime) TimeSpan {
+	ret0 := C.g_date_time_difference(end.native(), begin.native())
+	return TimeSpan(ret0)
 }
 
 // Format is a wrapper around g_date_time_format().
@@ -2318,6 +2357,12 @@ func (datetime DateTime) GetTimezoneAbbreviation() string {
 	ret0 := C.g_date_time_get_timezone_abbreviation(datetime.native())
 	ret := C.GoString((*C.char)(ret0))
 	return ret
+}
+
+// GetUtcOffset is a wrapper around g_date_time_get_utc_offset().
+func (datetime DateTime) GetUtcOffset() TimeSpan {
+	ret0 := C.g_date_time_get_utc_offset(datetime.native())
+	return TimeSpan(ret0)
 }
 
 // GetWeekNumberingYear is a wrapper around g_date_time_get_week_numbering_year().

@@ -1,5 +1,7 @@
 callbacks = []
+cincludes = []
 funcs = ["g_idle_source_new","g_timeout_source_new","g_timeout_source_new_seconds"]
+ignore_types = []
 namespace = "GLib"
 version = "2.0"
 
@@ -11,8 +13,8 @@ version = "2.0"
   name = "Variant"
 
 [[types]]
-  err_funcs = ["g_bytes_new","g_bytes_new_static","g_bytes_new_take","g_bytes_new_with_free_func","g_bytes_compare","g_bytes_equal","g_bytes_get_data","g_bytes_hash","g_bytes_unref_to_array","g_bytes_unref_to_data"]
-  funcs = ["g_bytes_new_from_bytes","g_bytes_get_size","g_bytes_ref","g_bytes_unref"]
+  err_funcs = ["g_bytes_new","g_bytes_new_static","g_bytes_new_take","g_bytes_new_with_free_func","g_bytes_get_data","g_bytes_unref_to_array","g_bytes_unref_to_data"]
+  funcs = ["g_bytes_new_from_bytes","g_bytes_get_size","g_bytes_ref","g_bytes_unref","g_bytes_compare","g_bytes_equal","g_bytes_hash"]
   ignore_funcs = []
   manual_funcs = []
   name = "Bytes"
@@ -67,8 +69,8 @@ version = "2.0"
   name = "PollFD"
 
 [[types]]
-  err_funcs = ["g_time_val_from_iso8601"]
-  funcs = ["g_time_val_add","g_time_val_to_iso8601"]
+  err_funcs = []
+  funcs = ["g_time_val_add","g_time_val_to_iso8601","g_time_val_from_iso8601"]
   ignore_funcs = []
   manual_funcs = []
   name = "TimeVal"
@@ -88,8 +90,8 @@ version = "2.0"
   name = "TimeZone"
 
 [[types]]
-  err_funcs = ["g_date_time_add","g_date_time_difference","g_date_time_get_utc_offset"]
-  funcs = ["g_date_time_new","g_date_time_new_from_timeval_local","g_date_time_new_from_timeval_utc","g_date_time_new_from_unix_local","g_date_time_new_from_unix_utc","g_date_time_new_local","g_date_time_new_now","g_date_time_new_now_local","g_date_time_new_now_utc","g_date_time_new_utc","g_date_time_add_days","g_date_time_add_full","g_date_time_add_hours","g_date_time_add_minutes","g_date_time_add_months","g_date_time_add_seconds","g_date_time_add_weeks","g_date_time_add_years","g_date_time_format","g_date_time_get_day_of_month","g_date_time_get_day_of_week","g_date_time_get_day_of_year","g_date_time_get_hour","g_date_time_get_microsecond","g_date_time_get_minute","g_date_time_get_month","g_date_time_get_second","g_date_time_get_seconds","g_date_time_get_timezone_abbreviation","g_date_time_get_week_numbering_year","g_date_time_get_week_of_year","g_date_time_get_year","g_date_time_get_ymd","g_date_time_is_daylight_savings","g_date_time_ref","g_date_time_to_local","g_date_time_to_timeval","g_date_time_to_timezone","g_date_time_to_unix","g_date_time_to_utc","g_date_time_unref","g_date_time_compare","g_date_time_equal","g_date_time_hash"]
+  err_funcs = []
+  funcs = ["g_date_time_new","g_date_time_new_from_timeval_local","g_date_time_new_from_timeval_utc","g_date_time_new_from_unix_local","g_date_time_new_from_unix_utc","g_date_time_new_local","g_date_time_new_now","g_date_time_new_now_local","g_date_time_new_now_utc","g_date_time_new_utc","g_date_time_add_days","g_date_time_add_full","g_date_time_add_hours","g_date_time_add_minutes","g_date_time_add_months","g_date_time_add_seconds","g_date_time_add_weeks","g_date_time_add_years","g_date_time_format","g_date_time_get_day_of_month","g_date_time_get_day_of_week","g_date_time_get_day_of_year","g_date_time_get_hour","g_date_time_get_microsecond","g_date_time_get_minute","g_date_time_get_month","g_date_time_get_second","g_date_time_get_seconds","g_date_time_get_timezone_abbreviation","g_date_time_get_week_numbering_year","g_date_time_get_week_of_year","g_date_time_get_year","g_date_time_get_ymd","g_date_time_is_daylight_savings","g_date_time_ref","g_date_time_to_local","g_date_time_to_timeval","g_date_time_to_timezone","g_date_time_to_unix","g_date_time_to_utc","g_date_time_unref","g_date_time_compare","g_date_time_equal","g_date_time_hash","g_date_time_add","g_date_time_difference","g_date_time_get_utc_offset"]
   ignore_funcs = []
   manual_funcs = []
   name = "DateTime"
