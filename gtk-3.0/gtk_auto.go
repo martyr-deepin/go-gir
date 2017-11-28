@@ -1266,6 +1266,14 @@ func (buffer TextBuffer) EndUserAction() {
 	C.gtk_text_buffer_end_user_action(buffer.native())
 }
 
+// GetBounds is a wrapper around gtk_text_buffer_get_bounds().
+func (buffer TextBuffer) GetBounds() (TextIter, TextIter) {
+	var start0 C.GtkTextIter
+	var end0 C.GtkTextIter
+	C.gtk_text_buffer_get_bounds(buffer.native(), &start0, &end0)
+	return wrapTextIter(&start0), wrapTextIter(&end0)
+}
+
 // GetCharCount is a wrapper around gtk_text_buffer_get_char_count().
 func (buffer TextBuffer) GetCharCount() int {
 	ret0 := C.gtk_text_buffer_get_char_count(buffer.native())
@@ -1449,13 +1457,6 @@ func (buffer TextBuffer) SelectRange(ins TextIter, bound TextIter) {
 // SetModified is a wrapper around gtk_text_buffer_set_modified().
 func (buffer TextBuffer) SetModified(setting bool) {
 	C.gtk_text_buffer_set_modified(buffer.native(), C.gboolean(util.Bool2Int(setting)) /*go:.util*/)
-}
-
-// SetText is a wrapper around gtk_text_buffer_set_text().
-func (buffer TextBuffer) SetText(text string, len int) {
-	text0 := (*C.gchar)(C.CString(text))
-	C.gtk_text_buffer_set_text(buffer.native(), text0, C.gint(len))
-	C.free(unsafe.Pointer(text0)) /*ch:<stdlib.h>*/
 }
 
 // Object TextTagTable
