@@ -28,10 +28,10 @@ func (v AccelGroupEntry) native() *C.GtkAccelGroupEntry {
 	return (*C.GtkAccelGroupEntry)(v.Ptr)
 }
 func wrapAccelGroupEntry(p *C.GtkAccelGroupEntry) AccelGroupEntry {
-	return AccelGroupEntry{unsafe.Pointer(p)}
+	return AccelGroupEntry{Ptr: unsafe.Pointer(p)}
 }
 func WrapAccelGroupEntry(p unsafe.Pointer) AccelGroupEntry {
-	return AccelGroupEntry{p}
+	return AccelGroupEntry{Ptr: p}
 }
 func (v AccelGroupEntry) IsNil() bool {
 	return v.Ptr == nil
@@ -49,10 +49,10 @@ func (v AccelKey) native() *C.GtkAccelKey {
 	return (*C.GtkAccelKey)(v.Ptr)
 }
 func wrapAccelKey(p *C.GtkAccelKey) AccelKey {
-	return AccelKey{unsafe.Pointer(p)}
+	return AccelKey{Ptr: unsafe.Pointer(p)}
 }
 func WrapAccelKey(p unsafe.Pointer) AccelKey {
-	return AccelKey{p}
+	return AccelKey{Ptr: p}
 }
 func (v AccelKey) IsNil() bool {
 	return v.Ptr == nil
@@ -70,10 +70,10 @@ func (v ActionEntry) native() *C.GtkActionEntry {
 	return (*C.GtkActionEntry)(v.Ptr)
 }
 func wrapActionEntry(p *C.GtkActionEntry) ActionEntry {
-	return ActionEntry{unsafe.Pointer(p)}
+	return ActionEntry{Ptr: unsafe.Pointer(p)}
 }
 func WrapActionEntry(p unsafe.Pointer) ActionEntry {
-	return ActionEntry{p}
+	return ActionEntry{Ptr: p}
 }
 func (v ActionEntry) IsNil() bool {
 	return v.Ptr == nil
@@ -91,10 +91,10 @@ func (v BindingArg) native() *C.GtkBindingArg {
 	return (*C.GtkBindingArg)(v.Ptr)
 }
 func wrapBindingArg(p *C.GtkBindingArg) BindingArg {
-	return BindingArg{unsafe.Pointer(p)}
+	return BindingArg{Ptr: unsafe.Pointer(p)}
 }
 func WrapBindingArg(p unsafe.Pointer) BindingArg {
-	return BindingArg{p}
+	return BindingArg{Ptr: p}
 }
 func (v BindingArg) IsNil() bool {
 	return v.Ptr == nil
@@ -112,10 +112,10 @@ func (v BindingEntry) native() *C.GtkBindingEntry {
 	return (*C.GtkBindingEntry)(v.Ptr)
 }
 func wrapBindingEntry(p *C.GtkBindingEntry) BindingEntry {
-	return BindingEntry{unsafe.Pointer(p)}
+	return BindingEntry{Ptr: unsafe.Pointer(p)}
 }
 func WrapBindingEntry(p unsafe.Pointer) BindingEntry {
-	return BindingEntry{p}
+	return BindingEntry{Ptr: p}
 }
 func (v BindingEntry) IsNil() bool {
 	return v.Ptr == nil
@@ -146,10 +146,10 @@ func (v BindingSet) native() *C.GtkBindingSet {
 	return (*C.GtkBindingSet)(v.Ptr)
 }
 func wrapBindingSet(p *C.GtkBindingSet) BindingSet {
-	return BindingSet{unsafe.Pointer(p)}
+	return BindingSet{Ptr: unsafe.Pointer(p)}
 }
 func WrapBindingSet(p unsafe.Pointer) BindingSet {
-	return BindingSet{p}
+	return BindingSet{Ptr: p}
 }
 func (v BindingSet) IsNil() bool {
 	return v.Ptr == nil
@@ -195,10 +195,10 @@ func (v BindingSignal) native() *C.GtkBindingSignal {
 	return (*C.GtkBindingSignal)(v.Ptr)
 }
 func wrapBindingSignal(p *C.GtkBindingSignal) BindingSignal {
-	return BindingSignal{unsafe.Pointer(p)}
+	return BindingSignal{Ptr: unsafe.Pointer(p)}
 }
 func WrapBindingSignal(p unsafe.Pointer) BindingSignal {
-	return BindingSignal{p}
+	return BindingSignal{Ptr: p}
 }
 func (v BindingSignal) IsNil() bool {
 	return v.Ptr == nil
@@ -216,10 +216,10 @@ func (v Border) native() *C.GtkBorder {
 	return (*C.GtkBorder)(v.Ptr)
 }
 func wrapBorder(p *C.GtkBorder) Border {
-	return Border{unsafe.Pointer(p)}
+	return Border{Ptr: unsafe.Pointer(p)}
 }
 func WrapBorder(p unsafe.Pointer) Border {
-	return Border{p}
+	return Border{Ptr: p}
 }
 func (v Border) IsNil() bool {
 	return v.Ptr == nil
@@ -254,10 +254,10 @@ func (v CssSection) native() *C.GtkCssSection {
 	return (*C.GtkCssSection)(v.Ptr)
 }
 func wrapCssSection(p *C.GtkCssSection) CssSection {
-	return CssSection{unsafe.Pointer(p)}
+	return CssSection{Ptr: unsafe.Pointer(p)}
 }
 func WrapCssSection(p unsafe.Pointer) CssSection {
-	return CssSection{p}
+	return CssSection{Ptr: p}
 }
 func (v CssSection) IsNil() bool {
 	return v.Ptr == nil
@@ -328,10 +328,10 @@ func (v FileFilterInfo) native() *C.GtkFileFilterInfo {
 	return (*C.GtkFileFilterInfo)(v.Ptr)
 }
 func wrapFileFilterInfo(p *C.GtkFileFilterInfo) FileFilterInfo {
-	return FileFilterInfo{unsafe.Pointer(p)}
+	return FileFilterInfo{Ptr: unsafe.Pointer(p)}
 }
 func WrapFileFilterInfo(p unsafe.Pointer) FileFilterInfo {
-	return FileFilterInfo{p}
+	return FileFilterInfo{Ptr: p}
 }
 func (v FileFilterInfo) IsNil() bool {
 	return v.Ptr == nil
@@ -349,10 +349,10 @@ func (v FixedChild) native() *C.GtkFixedChild {
 	return (*C.GtkFixedChild)(v.Ptr)
 }
 func wrapFixedChild(p *C.GtkFixedChild) FixedChild {
-	return FixedChild{unsafe.Pointer(p)}
+	return FixedChild{Ptr: unsafe.Pointer(p)}
 }
 func WrapFixedChild(p unsafe.Pointer) FixedChild {
-	return FixedChild{p}
+	return FixedChild{Ptr: p}
 }
 func (v FixedChild) IsNil() bool {
 	return v.Ptr == nil
@@ -370,10 +370,10 @@ func (v Gradient) native() *C.GtkGradient {
 	return (*C.GtkGradient)(v.Ptr)
 }
 func wrapGradient(p *C.GtkGradient) Gradient {
-	return Gradient{unsafe.Pointer(p)}
+	return Gradient{Ptr: unsafe.Pointer(p)}
 }
 func WrapGradient(p unsafe.Pointer) Gradient {
-	return Gradient{p}
+	return Gradient{Ptr: p}
 }
 func (v Gradient) IsNil() bool {
 	return v.Ptr == nil
@@ -391,10 +391,10 @@ func (v IMContextInfo) native() *C.GtkIMContextInfo {
 	return (*C.GtkIMContextInfo)(v.Ptr)
 }
 func wrapIMContextInfo(p *C.GtkIMContextInfo) IMContextInfo {
-	return IMContextInfo{unsafe.Pointer(p)}
+	return IMContextInfo{Ptr: unsafe.Pointer(p)}
 }
 func WrapIMContextInfo(p unsafe.Pointer) IMContextInfo {
-	return IMContextInfo{p}
+	return IMContextInfo{Ptr: p}
 }
 func (v IMContextInfo) IsNil() bool {
 	return v.Ptr == nil
@@ -412,10 +412,10 @@ func (v IconSet) native() *C.GtkIconSet {
 	return (*C.GtkIconSet)(v.Ptr)
 }
 func wrapIconSet(p *C.GtkIconSet) IconSet {
-	return IconSet{unsafe.Pointer(p)}
+	return IconSet{Ptr: unsafe.Pointer(p)}
 }
 func WrapIconSet(p unsafe.Pointer) IconSet {
-	return IconSet{p}
+	return IconSet{Ptr: p}
 }
 func (v IconSet) IsNil() bool {
 	return v.Ptr == nil
@@ -433,10 +433,10 @@ func (v IconSource) native() *C.GtkIconSource {
 	return (*C.GtkIconSource)(v.Ptr)
 }
 func wrapIconSource(p *C.GtkIconSource) IconSource {
-	return IconSource{unsafe.Pointer(p)}
+	return IconSource{Ptr: unsafe.Pointer(p)}
 }
 func WrapIconSource(p unsafe.Pointer) IconSource {
-	return IconSource{p}
+	return IconSource{Ptr: p}
 }
 func (v IconSource) IsNil() bool {
 	return v.Ptr == nil
@@ -454,10 +454,10 @@ func (v PadActionEntry) native() *C.GtkPadActionEntry {
 	return (*C.GtkPadActionEntry)(v.Ptr)
 }
 func wrapPadActionEntry(p *C.GtkPadActionEntry) PadActionEntry {
-	return PadActionEntry{unsafe.Pointer(p)}
+	return PadActionEntry{Ptr: unsafe.Pointer(p)}
 }
 func WrapPadActionEntry(p unsafe.Pointer) PadActionEntry {
-	return PadActionEntry{p}
+	return PadActionEntry{Ptr: p}
 }
 func (v PadActionEntry) IsNil() bool {
 	return v.Ptr == nil
@@ -475,10 +475,10 @@ func (v PageRange) native() *C.GtkPageRange {
 	return (*C.GtkPageRange)(v.Ptr)
 }
 func wrapPageRange(p *C.GtkPageRange) PageRange {
-	return PageRange{unsafe.Pointer(p)}
+	return PageRange{Ptr: unsafe.Pointer(p)}
 }
 func WrapPageRange(p unsafe.Pointer) PageRange {
-	return PageRange{p}
+	return PageRange{Ptr: p}
 }
 func (v PageRange) IsNil() bool {
 	return v.Ptr == nil
@@ -496,10 +496,10 @@ func (v PaperSize) native() *C.GtkPaperSize {
 	return (*C.GtkPaperSize)(v.Ptr)
 }
 func wrapPaperSize(p *C.GtkPaperSize) PaperSize {
-	return PaperSize{unsafe.Pointer(p)}
+	return PaperSize{Ptr: unsafe.Pointer(p)}
 }
 func WrapPaperSize(p unsafe.Pointer) PaperSize {
-	return PaperSize{p}
+	return PaperSize{Ptr: p}
 }
 func (v PaperSize) IsNil() bool {
 	return v.Ptr == nil
@@ -690,10 +690,10 @@ func (v RadioActionEntry) native() *C.GtkRadioActionEntry {
 	return (*C.GtkRadioActionEntry)(v.Ptr)
 }
 func wrapRadioActionEntry(p *C.GtkRadioActionEntry) RadioActionEntry {
-	return RadioActionEntry{unsafe.Pointer(p)}
+	return RadioActionEntry{Ptr: unsafe.Pointer(p)}
 }
 func WrapRadioActionEntry(p unsafe.Pointer) RadioActionEntry {
-	return RadioActionEntry{p}
+	return RadioActionEntry{Ptr: p}
 }
 func (v RadioActionEntry) IsNil() bool {
 	return v.Ptr == nil
@@ -711,10 +711,10 @@ func (v RcProperty) native() *C.GtkRcProperty {
 	return (*C.GtkRcProperty)(v.Ptr)
 }
 func wrapRcProperty(p *C.GtkRcProperty) RcProperty {
-	return RcProperty{unsafe.Pointer(p)}
+	return RcProperty{Ptr: unsafe.Pointer(p)}
 }
 func WrapRcProperty(p unsafe.Pointer) RcProperty {
-	return RcProperty{p}
+	return RcProperty{Ptr: p}
 }
 func (v RcProperty) IsNil() bool {
 	return v.Ptr == nil
@@ -732,10 +732,10 @@ func (v RecentData) native() *C.GtkRecentData {
 	return (*C.GtkRecentData)(v.Ptr)
 }
 func wrapRecentData(p *C.GtkRecentData) RecentData {
-	return RecentData{unsafe.Pointer(p)}
+	return RecentData{Ptr: unsafe.Pointer(p)}
 }
 func WrapRecentData(p unsafe.Pointer) RecentData {
-	return RecentData{p}
+	return RecentData{Ptr: p}
 }
 func (v RecentData) IsNil() bool {
 	return v.Ptr == nil
@@ -753,10 +753,10 @@ func (v RecentFilterInfo) native() *C.GtkRecentFilterInfo {
 	return (*C.GtkRecentFilterInfo)(v.Ptr)
 }
 func wrapRecentFilterInfo(p *C.GtkRecentFilterInfo) RecentFilterInfo {
-	return RecentFilterInfo{unsafe.Pointer(p)}
+	return RecentFilterInfo{Ptr: unsafe.Pointer(p)}
 }
 func WrapRecentFilterInfo(p unsafe.Pointer) RecentFilterInfo {
-	return RecentFilterInfo{p}
+	return RecentFilterInfo{Ptr: p}
 }
 func (v RecentFilterInfo) IsNil() bool {
 	return v.Ptr == nil
@@ -774,10 +774,10 @@ func (v RecentInfo) native() *C.GtkRecentInfo {
 	return (*C.GtkRecentInfo)(v.Ptr)
 }
 func wrapRecentInfo(p *C.GtkRecentInfo) RecentInfo {
-	return RecentInfo{unsafe.Pointer(p)}
+	return RecentInfo{Ptr: unsafe.Pointer(p)}
 }
 func WrapRecentInfo(p unsafe.Pointer) RecentInfo {
-	return RecentInfo{p}
+	return RecentInfo{Ptr: p}
 }
 func (v RecentInfo) IsNil() bool {
 	return v.Ptr == nil
@@ -961,10 +961,10 @@ func (v RequestedSize) native() *C.GtkRequestedSize {
 	return (*C.GtkRequestedSize)(v.Ptr)
 }
 func wrapRequestedSize(p *C.GtkRequestedSize) RequestedSize {
-	return RequestedSize{unsafe.Pointer(p)}
+	return RequestedSize{Ptr: unsafe.Pointer(p)}
 }
 func WrapRequestedSize(p unsafe.Pointer) RequestedSize {
-	return RequestedSize{p}
+	return RequestedSize{Ptr: p}
 }
 func (v RequestedSize) IsNil() bool {
 	return v.Ptr == nil
@@ -982,10 +982,10 @@ func (v Requisition) native() *C.GtkRequisition {
 	return (*C.GtkRequisition)(v.Ptr)
 }
 func wrapRequisition(p *C.GtkRequisition) Requisition {
-	return Requisition{unsafe.Pointer(p)}
+	return Requisition{Ptr: unsafe.Pointer(p)}
 }
 func WrapRequisition(p unsafe.Pointer) Requisition {
-	return Requisition{p}
+	return Requisition{Ptr: p}
 }
 func (v Requisition) IsNil() bool {
 	return v.Ptr == nil
@@ -1020,10 +1020,10 @@ func (v SelectionData) native() *C.GtkSelectionData {
 	return (*C.GtkSelectionData)(v.Ptr)
 }
 func wrapSelectionData(p *C.GtkSelectionData) SelectionData {
-	return SelectionData{unsafe.Pointer(p)}
+	return SelectionData{Ptr: unsafe.Pointer(p)}
 }
 func WrapSelectionData(p unsafe.Pointer) SelectionData {
-	return SelectionData{p}
+	return SelectionData{Ptr: p}
 }
 func (v SelectionData) IsNil() bool {
 	return v.Ptr == nil
@@ -1556,6 +1556,7 @@ func (buffer TextBuffer) SetModified(setting bool) {
 
 // Object TextTagTable
 type TextTagTable struct {
+	BuildableIface
 	gobject.Object
 }
 
@@ -1622,17 +1623,19 @@ func (table TextTagTable) Remove(tag TextTag) {
 
 // Interface Buildable
 type Buildable struct {
+	BuildableIface
 	Ptr unsafe.Pointer
 }
+type BuildableIface struct{}
 
-func (v Buildable) native() *C.GtkBuildable {
-	return (*C.GtkBuildable)(v.Ptr)
+func (v *BuildableIface) native() *C.GtkBuildable {
+	return (*C.GtkBuildable)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapBuildable(p *C.GtkBuildable) Buildable {
-	return Buildable{unsafe.Pointer(p)}
+	return Buildable{Ptr: unsafe.Pointer(p)}
 }
 func WrapBuildable(p unsafe.Pointer) Buildable {
-	return Buildable{p}
+	return Buildable{Ptr: p}
 }
 func (v Buildable) IsNil() bool {
 	return v.Ptr == nil
@@ -1651,14 +1654,14 @@ func (v Buildable) GetGValueGetter() gobject.GValueGetter {
 }
 
 // AddChild is a wrapper around gtk_buildable_add_child().
-func (buildable Buildable) AddChild(builder Builder, child gobject.Object, type_ string) {
+func (buildable *BuildableIface) AddChild(builder Builder, child gobject.Object, type_ string) {
 	type0 := (*C.gchar)(C.CString(type_))
 	C.gtk_buildable_add_child(buildable.native(), builder.native(), (*C.GObject)(child.Ptr), type0)
 	C.free(unsafe.Pointer(type0)) /*ch:<stdlib.h>*/
 }
 
 // ConstructChild is a wrapper around gtk_buildable_construct_child().
-func (buildable Buildable) ConstructChild(builder Builder, name string) gobject.Object {
+func (buildable *BuildableIface) ConstructChild(builder Builder, name string) gobject.Object {
 	name0 := (*C.gchar)(C.CString(name))
 	ret0 := C.gtk_buildable_construct_child(buildable.native(), builder.native(), name0)
 	C.free(unsafe.Pointer(name0))                   /*ch:<stdlib.h>*/
@@ -1666,14 +1669,14 @@ func (buildable Buildable) ConstructChild(builder Builder, name string) gobject.
 }
 
 // CustomFinished is a wrapper around gtk_buildable_custom_finished().
-func (buildable Buildable) CustomFinished(builder Builder, child gobject.Object, tagname string, data unsafe.Pointer) {
+func (buildable *BuildableIface) CustomFinished(builder Builder, child gobject.Object, tagname string, data unsafe.Pointer) {
 	tagname0 := (*C.gchar)(C.CString(tagname))
 	C.gtk_buildable_custom_finished(buildable.native(), builder.native(), (*C.GObject)(child.Ptr), tagname0, C.gpointer(data))
 	C.free(unsafe.Pointer(tagname0)) /*ch:<stdlib.h>*/
 }
 
 // GetInternalChild is a wrapper around gtk_buildable_get_internal_child().
-func (buildable Buildable) GetInternalChild(builder Builder, childname string) gobject.Object {
+func (buildable *BuildableIface) GetInternalChild(builder Builder, childname string) gobject.Object {
 	childname0 := (*C.gchar)(C.CString(childname))
 	ret0 := C.gtk_buildable_get_internal_child(buildable.native(), builder.native(), childname0)
 	C.free(unsafe.Pointer(childname0))              /*ch:<stdlib.h>*/
@@ -1681,26 +1684,26 @@ func (buildable Buildable) GetInternalChild(builder Builder, childname string) g
 }
 
 // GetName is a wrapper around gtk_buildable_get_name().
-func (buildable Buildable) GetName() string {
+func (buildable *BuildableIface) GetName() string {
 	ret0 := C.gtk_buildable_get_name(buildable.native())
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
 
 // ParserFinished is a wrapper around gtk_buildable_parser_finished().
-func (buildable Buildable) ParserFinished(builder Builder) {
+func (buildable *BuildableIface) ParserFinished(builder Builder) {
 	C.gtk_buildable_parser_finished(buildable.native(), builder.native())
 }
 
 // SetBuildableProperty is a wrapper around gtk_buildable_set_buildable_property().
-func (buildable Buildable) SetBuildableProperty(builder Builder, name string, value gobject.Value) {
+func (buildable *BuildableIface) SetBuildableProperty(builder Builder, name string, value gobject.Value) {
 	name0 := (*C.gchar)(C.CString(name))
 	C.gtk_buildable_set_buildable_property(buildable.native(), builder.native(), name0, (*C.GValue)(value.Ptr))
 	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
 }
 
 // SetName is a wrapper around gtk_buildable_set_name().
-func (buildable Buildable) SetName(name string) {
+func (buildable *BuildableIface) SetName(name string) {
 	name0 := (*C.gchar)(C.CString(name))
 	C.gtk_buildable_set_name(buildable.native(), name0)
 	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
@@ -1978,6 +1981,8 @@ func (builder Builder) ValueFromStringType(type_ /*Gir:GObject*/ gobject.Type, s
 
 // Object Widget
 type Widget struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	gobject.InitiallyUnowned
 }
 
@@ -2008,7 +2013,7 @@ func (v Widget) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Widget) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Widget) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -3059,10 +3064,10 @@ func (v SettingsValue) native() *C.GtkSettingsValue {
 	return (*C.GtkSettingsValue)(v.Ptr)
 }
 func wrapSettingsValue(p *C.GtkSettingsValue) SettingsValue {
-	return SettingsValue{unsafe.Pointer(p)}
+	return SettingsValue{Ptr: unsafe.Pointer(p)}
 }
 func WrapSettingsValue(p unsafe.Pointer) SettingsValue {
-	return SettingsValue{p}
+	return SettingsValue{Ptr: p}
 }
 func (v SettingsValue) IsNil() bool {
 	return v.Ptr == nil
@@ -3080,10 +3085,10 @@ func (v StockItem) native() *C.GtkStockItem {
 	return (*C.GtkStockItem)(v.Ptr)
 }
 func wrapStockItem(p *C.GtkStockItem) StockItem {
-	return StockItem{unsafe.Pointer(p)}
+	return StockItem{Ptr: unsafe.Pointer(p)}
 }
 func WrapStockItem(p unsafe.Pointer) StockItem {
-	return StockItem{p}
+	return StockItem{Ptr: p}
 }
 func (v StockItem) IsNil() bool {
 	return v.Ptr == nil
@@ -3101,10 +3106,10 @@ func (v SymbolicColor) native() *C.GtkSymbolicColor {
 	return (*C.GtkSymbolicColor)(v.Ptr)
 }
 func wrapSymbolicColor(p *C.GtkSymbolicColor) SymbolicColor {
-	return SymbolicColor{unsafe.Pointer(p)}
+	return SymbolicColor{Ptr: unsafe.Pointer(p)}
 }
 func WrapSymbolicColor(p unsafe.Pointer) SymbolicColor {
-	return SymbolicColor{p}
+	return SymbolicColor{Ptr: p}
 }
 func (v SymbolicColor) IsNil() bool {
 	return v.Ptr == nil
@@ -3122,10 +3127,10 @@ func (v TableChild) native() *C.GtkTableChild {
 	return (*C.GtkTableChild)(v.Ptr)
 }
 func wrapTableChild(p *C.GtkTableChild) TableChild {
-	return TableChild{unsafe.Pointer(p)}
+	return TableChild{Ptr: unsafe.Pointer(p)}
 }
 func WrapTableChild(p unsafe.Pointer) TableChild {
-	return TableChild{p}
+	return TableChild{Ptr: p}
 }
 func (v TableChild) IsNil() bool {
 	return v.Ptr == nil
@@ -3143,10 +3148,10 @@ func (v TableRowCol) native() *C.GtkTableRowCol {
 	return (*C.GtkTableRowCol)(v.Ptr)
 }
 func wrapTableRowCol(p *C.GtkTableRowCol) TableRowCol {
-	return TableRowCol{unsafe.Pointer(p)}
+	return TableRowCol{Ptr: unsafe.Pointer(p)}
 }
 func WrapTableRowCol(p unsafe.Pointer) TableRowCol {
-	return TableRowCol{p}
+	return TableRowCol{Ptr: p}
 }
 func (v TableRowCol) IsNil() bool {
 	return v.Ptr == nil
@@ -3164,10 +3169,10 @@ func (v TargetEntry) native() *C.GtkTargetEntry {
 	return (*C.GtkTargetEntry)(v.Ptr)
 }
 func wrapTargetEntry(p *C.GtkTargetEntry) TargetEntry {
-	return TargetEntry{unsafe.Pointer(p)}
+	return TargetEntry{Ptr: unsafe.Pointer(p)}
 }
 func WrapTargetEntry(p unsafe.Pointer) TargetEntry {
-	return TargetEntry{p}
+	return TargetEntry{Ptr: p}
 }
 func (v TargetEntry) IsNil() bool {
 	return v.Ptr == nil
@@ -3204,10 +3209,10 @@ func (v TargetList) native() *C.GtkTargetList {
 	return (*C.GtkTargetList)(v.Ptr)
 }
 func wrapTargetList(p *C.GtkTargetList) TargetList {
-	return TargetList{unsafe.Pointer(p)}
+	return TargetList{Ptr: unsafe.Pointer(p)}
 }
 func WrapTargetList(p unsafe.Pointer) TargetList {
-	return TargetList{p}
+	return TargetList{Ptr: p}
 }
 func (v TargetList) IsNil() bool {
 	return v.Ptr == nil
@@ -3256,10 +3261,10 @@ func (v TargetPair) native() *C.GtkTargetPair {
 	return (*C.GtkTargetPair)(v.Ptr)
 }
 func wrapTargetPair(p *C.GtkTargetPair) TargetPair {
-	return TargetPair{unsafe.Pointer(p)}
+	return TargetPair{Ptr: unsafe.Pointer(p)}
 }
 func WrapTargetPair(p unsafe.Pointer) TargetPair {
-	return TargetPair{p}
+	return TargetPair{Ptr: p}
 }
 func (v TargetPair) IsNil() bool {
 	return v.Ptr == nil
@@ -3277,10 +3282,10 @@ func (v TextAppearance) native() *C.GtkTextAppearance {
 	return (*C.GtkTextAppearance)(v.Ptr)
 }
 func wrapTextAppearance(p *C.GtkTextAppearance) TextAppearance {
-	return TextAppearance{unsafe.Pointer(p)}
+	return TextAppearance{Ptr: unsafe.Pointer(p)}
 }
 func WrapTextAppearance(p unsafe.Pointer) TextAppearance {
-	return TextAppearance{p}
+	return TextAppearance{Ptr: p}
 }
 func (v TextAppearance) IsNil() bool {
 	return v.Ptr == nil
@@ -3298,10 +3303,10 @@ func (v TextAttributes) native() *C.GtkTextAttributes {
 	return (*C.GtkTextAttributes)(v.Ptr)
 }
 func wrapTextAttributes(p *C.GtkTextAttributes) TextAttributes {
-	return TextAttributes{unsafe.Pointer(p)}
+	return TextAttributes{Ptr: unsafe.Pointer(p)}
 }
 func WrapTextAttributes(p unsafe.Pointer) TextAttributes {
-	return TextAttributes{p}
+	return TextAttributes{Ptr: p}
 }
 func (v TextAttributes) IsNil() bool {
 	return v.Ptr == nil
@@ -3347,10 +3352,10 @@ func (v TextIter) native() *C.GtkTextIter {
 	return (*C.GtkTextIter)(v.Ptr)
 }
 func wrapTextIter(p *C.GtkTextIter) TextIter {
-	return TextIter{unsafe.Pointer(p)}
+	return TextIter{Ptr: unsafe.Pointer(p)}
 }
 func WrapTextIter(p unsafe.Pointer) TextIter {
-	return TextIter{p}
+	return TextIter{Ptr: p}
 }
 func (v TextIter) IsNil() bool {
 	return v.Ptr == nil
@@ -3992,10 +3997,10 @@ func (v ToggleActionEntry) native() *C.GtkToggleActionEntry {
 	return (*C.GtkToggleActionEntry)(v.Ptr)
 }
 func wrapToggleActionEntry(p *C.GtkToggleActionEntry) ToggleActionEntry {
-	return ToggleActionEntry{unsafe.Pointer(p)}
+	return ToggleActionEntry{Ptr: unsafe.Pointer(p)}
 }
 func WrapToggleActionEntry(p unsafe.Pointer) ToggleActionEntry {
-	return ToggleActionEntry{p}
+	return ToggleActionEntry{Ptr: p}
 }
 func (v ToggleActionEntry) IsNil() bool {
 	return v.Ptr == nil
@@ -4013,10 +4018,10 @@ func (v TreeIter) native() *C.GtkTreeIter {
 	return (*C.GtkTreeIter)(v.Ptr)
 }
 func wrapTreeIter(p *C.GtkTreeIter) TreeIter {
-	return TreeIter{unsafe.Pointer(p)}
+	return TreeIter{Ptr: unsafe.Pointer(p)}
 }
 func WrapTreeIter(p unsafe.Pointer) TreeIter {
-	return TreeIter{p}
+	return TreeIter{Ptr: p}
 }
 func (v TreeIter) IsNil() bool {
 	return v.Ptr == nil
@@ -4045,10 +4050,10 @@ func (v TreePath) native() *C.GtkTreePath {
 	return (*C.GtkTreePath)(v.Ptr)
 }
 func wrapTreePath(p *C.GtkTreePath) TreePath {
-	return TreePath{unsafe.Pointer(p)}
+	return TreePath{Ptr: unsafe.Pointer(p)}
 }
 func WrapTreePath(p unsafe.Pointer) TreePath {
-	return TreePath{p}
+	return TreePath{Ptr: p}
 }
 func (v TreePath) IsNil() bool {
 	return v.Ptr == nil
@@ -4192,10 +4197,10 @@ func (v TreeRowReference) native() *C.GtkTreeRowReference {
 	return (*C.GtkTreeRowReference)(v.Ptr)
 }
 func wrapTreeRowReference(p *C.GtkTreeRowReference) TreeRowReference {
-	return TreeRowReference{unsafe.Pointer(p)}
+	return TreeRowReference{Ptr: unsafe.Pointer(p)}
 }
 func WrapTreeRowReference(p unsafe.Pointer) TreeRowReference {
-	return TreeRowReference{p}
+	return TreeRowReference{Ptr: p}
 }
 func (v TreeRowReference) IsNil() bool {
 	return v.Ptr == nil
@@ -4270,17 +4275,19 @@ func TreeRowReferenceReordered(proxy gobject.Object, path TreePath, iter TreeIte
 
 // Interface TreeModel
 type TreeModel struct {
+	TreeModelIface
 	Ptr unsafe.Pointer
 }
+type TreeModelIface struct{}
 
-func (v TreeModel) native() *C.GtkTreeModel {
-	return (*C.GtkTreeModel)(v.Ptr)
+func (v *TreeModelIface) native() *C.GtkTreeModel {
+	return (*C.GtkTreeModel)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapTreeModel(p *C.GtkTreeModel) TreeModel {
-	return TreeModel{unsafe.Pointer(p)}
+	return TreeModel{Ptr: unsafe.Pointer(p)}
 }
 func WrapTreeModel(p unsafe.Pointer) TreeModel {
-	return TreeModel{p}
+	return TreeModel{Ptr: p}
 }
 func (v TreeModel) IsNil() bool {
 	return v.Ptr == nil
@@ -4299,39 +4306,39 @@ func (v TreeModel) GetGValueGetter() gobject.GValueGetter {
 }
 
 // FilterNew is a wrapper around gtk_tree_model_filter_new().
-func (child_model TreeModel) FilterNew(root TreePath) TreeModel {
+func (child_model *TreeModelIface) FilterNew(root TreePath) TreeModel {
 	ret0 := C.gtk_tree_model_filter_new(child_model.native(), root.native())
 	return wrapTreeModel(ret0)
 }
 
 // GetColumnType is a wrapper around gtk_tree_model_get_column_type().
-func (tree_model TreeModel) GetColumnType(index_ int) /*Gir:GObject*/ gobject.Type {
+func (tree_model *TreeModelIface) GetColumnType(index_ int) /*Gir:GObject*/ gobject.Type {
 	ret0 := C.gtk_tree_model_get_column_type(tree_model.native(), C.gint(index_))
 	return /*Gir:GObject*/ gobject.Type(ret0)
 }
 
 // GetFlags is a wrapper around gtk_tree_model_get_flags().
-func (tree_model TreeModel) GetFlags() TreeModelFlags {
+func (tree_model *TreeModelIface) GetFlags() TreeModelFlags {
 	ret0 := C.gtk_tree_model_get_flags(tree_model.native())
 	return TreeModelFlags(ret0)
 }
 
 // GetIter is a wrapper around gtk_tree_model_get_iter().
-func (tree_model TreeModel) GetIter(path TreePath) (bool, TreeIter) {
+func (tree_model *TreeModelIface) GetIter(path TreePath) (bool, TreeIter) {
 	var iter0 C.GtkTreeIter
 	ret0 := C.gtk_tree_model_get_iter(tree_model.native(), &iter0, path.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/, wrapTreeIter(&iter0)
 }
 
 // GetIterFirst is a wrapper around gtk_tree_model_get_iter_first().
-func (tree_model TreeModel) GetIterFirst() (bool, TreeIter) {
+func (tree_model *TreeModelIface) GetIterFirst() (bool, TreeIter) {
 	var iter0 C.GtkTreeIter
 	ret0 := C.gtk_tree_model_get_iter_first(tree_model.native(), &iter0)
 	return util.Int2Bool(int(ret0)) /*go:.util*/, wrapTreeIter(&iter0)
 }
 
 // GetIterFromString is a wrapper around gtk_tree_model_get_iter_from_string().
-func (tree_model TreeModel) GetIterFromString(path_string string) (bool, TreeIter) {
+func (tree_model *TreeModelIface) GetIterFromString(path_string string) (bool, TreeIter) {
 	var iter0 C.GtkTreeIter
 	path_string0 := (*C.gchar)(C.CString(path_string))
 	ret0 := C.gtk_tree_model_get_iter_from_string(tree_model.native(), &iter0, path_string0)
@@ -4340,19 +4347,19 @@ func (tree_model TreeModel) GetIterFromString(path_string string) (bool, TreeIte
 }
 
 // GetNColumns is a wrapper around gtk_tree_model_get_n_columns().
-func (tree_model TreeModel) GetNColumns() int {
+func (tree_model *TreeModelIface) GetNColumns() int {
 	ret0 := C.gtk_tree_model_get_n_columns(tree_model.native())
 	return int(ret0)
 }
 
 // GetPath is a wrapper around gtk_tree_model_get_path().
-func (tree_model TreeModel) GetPath(iter TreeIter) TreePath {
+func (tree_model *TreeModelIface) GetPath(iter TreeIter) TreePath {
 	ret0 := C.gtk_tree_model_get_path(tree_model.native(), iter.native())
 	return wrapTreePath(ret0)
 }
 
 // GetStringFromIter is a wrapper around gtk_tree_model_get_string_from_iter().
-func (tree_model TreeModel) GetStringFromIter(iter TreeIter) string {
+func (tree_model *TreeModelIface) GetStringFromIter(iter TreeIter) string {
 	ret0 := C.gtk_tree_model_get_string_from_iter(tree_model.native(), iter.native())
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
@@ -4360,86 +4367,86 @@ func (tree_model TreeModel) GetStringFromIter(iter TreeIter) string {
 }
 
 // GetValue is a wrapper around gtk_tree_model_get_value().
-func (tree_model TreeModel) GetValue(iter TreeIter, column int) gobject.Value {
+func (tree_model *TreeModelIface) GetValue(iter TreeIter, column int) gobject.Value {
 	var value0 C.GValue
 	C.gtk_tree_model_get_value(tree_model.native(), iter.native(), C.gint(column), &value0)
 	return gobject.WrapValue(unsafe.Pointer(&value0)) /*gir:GObject*/
 }
 
 // IterChildren is a wrapper around gtk_tree_model_iter_children().
-func (tree_model TreeModel) IterChildren(parent TreeIter) (bool, TreeIter) {
+func (tree_model *TreeModelIface) IterChildren(parent TreeIter) (bool, TreeIter) {
 	var iter0 C.GtkTreeIter
 	ret0 := C.gtk_tree_model_iter_children(tree_model.native(), &iter0, parent.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/, wrapTreeIter(&iter0)
 }
 
 // IterHasChild is a wrapper around gtk_tree_model_iter_has_child().
-func (tree_model TreeModel) IterHasChild(iter TreeIter) bool {
+func (tree_model *TreeModelIface) IterHasChild(iter TreeIter) bool {
 	ret0 := C.gtk_tree_model_iter_has_child(tree_model.native(), iter.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // IterNChildren is a wrapper around gtk_tree_model_iter_n_children().
-func (tree_model TreeModel) IterNChildren(iter TreeIter) int {
+func (tree_model *TreeModelIface) IterNChildren(iter TreeIter) int {
 	ret0 := C.gtk_tree_model_iter_n_children(tree_model.native(), iter.native())
 	return int(ret0)
 }
 
 // IterNext is a wrapper around gtk_tree_model_iter_next().
-func (tree_model TreeModel) IterNext(iter TreeIter) bool {
+func (tree_model *TreeModelIface) IterNext(iter TreeIter) bool {
 	ret0 := C.gtk_tree_model_iter_next(tree_model.native(), iter.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // IterNthChild is a wrapper around gtk_tree_model_iter_nth_child().
-func (tree_model TreeModel) IterNthChild(parent TreeIter, n int) (bool, TreeIter) {
+func (tree_model *TreeModelIface) IterNthChild(parent TreeIter, n int) (bool, TreeIter) {
 	var iter0 C.GtkTreeIter
 	ret0 := C.gtk_tree_model_iter_nth_child(tree_model.native(), &iter0, parent.native(), C.gint(n))
 	return util.Int2Bool(int(ret0)) /*go:.util*/, wrapTreeIter(&iter0)
 }
 
 // IterParent is a wrapper around gtk_tree_model_iter_parent().
-func (tree_model TreeModel) IterParent(child TreeIter) (bool, TreeIter) {
+func (tree_model *TreeModelIface) IterParent(child TreeIter) (bool, TreeIter) {
 	var iter0 C.GtkTreeIter
 	ret0 := C.gtk_tree_model_iter_parent(tree_model.native(), &iter0, child.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/, wrapTreeIter(&iter0)
 }
 
 // IterPrevious is a wrapper around gtk_tree_model_iter_previous().
-func (tree_model TreeModel) IterPrevious(iter TreeIter) bool {
+func (tree_model *TreeModelIface) IterPrevious(iter TreeIter) bool {
 	ret0 := C.gtk_tree_model_iter_previous(tree_model.native(), iter.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // RefNode is a wrapper around gtk_tree_model_ref_node().
-func (tree_model TreeModel) RefNode(iter TreeIter) {
+func (tree_model *TreeModelIface) RefNode(iter TreeIter) {
 	C.gtk_tree_model_ref_node(tree_model.native(), iter.native())
 }
 
 // RowChanged is a wrapper around gtk_tree_model_row_changed().
-func (tree_model TreeModel) RowChanged(path TreePath, iter TreeIter) {
+func (tree_model *TreeModelIface) RowChanged(path TreePath, iter TreeIter) {
 	C.gtk_tree_model_row_changed(tree_model.native(), path.native(), iter.native())
 }
 
 // RowDeleted is a wrapper around gtk_tree_model_row_deleted().
-func (tree_model TreeModel) RowDeleted(path TreePath) {
+func (tree_model *TreeModelIface) RowDeleted(path TreePath) {
 	C.gtk_tree_model_row_deleted(tree_model.native(), path.native())
 }
 
 // RowHasChildToggled is a wrapper around gtk_tree_model_row_has_child_toggled().
-func (tree_model TreeModel) RowHasChildToggled(path TreePath, iter TreeIter) {
+func (tree_model *TreeModelIface) RowHasChildToggled(path TreePath, iter TreeIter) {
 	C.gtk_tree_model_row_has_child_toggled(tree_model.native(), path.native(), iter.native())
 }
 
 // RowInserted is a wrapper around gtk_tree_model_row_inserted().
-func (tree_model TreeModel) RowInserted(path TreePath, iter TreeIter) {
+func (tree_model *TreeModelIface) RowInserted(path TreePath, iter TreeIter) {
 	C.gtk_tree_model_row_inserted(tree_model.native(), path.native(), iter.native())
 }
 
 // gtk_tree_model_rows_reordered shadowed by rows_reordered_with_length
 
 // RowsReordered is a wrapper around gtk_tree_model_rows_reordered_with_length().
-func (tree_model TreeModel) RowsReordered(path TreePath, iter TreeIter, new_order []int) {
+func (tree_model *TreeModelIface) RowsReordered(path TreePath, iter TreeIter, new_order []int) {
 	new_order0 := make([]C.gint, len(new_order))
 	for idx, elemG := range new_order {
 		new_order0[idx] = C.gint(elemG)
@@ -4452,13 +4459,13 @@ func (tree_model TreeModel) RowsReordered(path TreePath, iter TreeIter, new_orde
 }
 
 // SortNewWithModel is a wrapper around gtk_tree_model_sort_new_with_model().
-func (child_model TreeModel) SortNewWithModel() TreeModel {
+func (child_model *TreeModelIface) SortNewWithModel() TreeModel {
 	ret0 := C.gtk_tree_model_sort_new_with_model(child_model.native())
 	return wrapTreeModel(ret0)
 }
 
 // UnrefNode is a wrapper around gtk_tree_model_unref_node().
-func (tree_model TreeModel) UnrefNode(iter TreeIter) {
+func (tree_model *TreeModelIface) UnrefNode(iter TreeIter) {
 	C.gtk_tree_model_unref_node(tree_model.native(), iter.native())
 }
 
@@ -4471,10 +4478,10 @@ func (v WidgetPath) native() *C.GtkWidgetPath {
 	return (*C.GtkWidgetPath)(v.Ptr)
 }
 func wrapWidgetPath(p *C.GtkWidgetPath) WidgetPath {
-	return WidgetPath{unsafe.Pointer(p)}
+	return WidgetPath{Ptr: unsafe.Pointer(p)}
 }
 func WrapWidgetPath(p unsafe.Pointer) WidgetPath {
-	return WidgetPath{p}
+	return WidgetPath{Ptr: p}
 }
 func (v WidgetPath) IsNil() bool {
 	return v.Ptr == nil
@@ -4677,17 +4684,19 @@ func (path WidgetPath) Unref() {
 
 // Interface Actionable
 type Actionable struct {
+	ActionableIface
 	Ptr unsafe.Pointer
 }
+type ActionableIface struct{}
 
-func (v Actionable) native() *C.GtkActionable {
-	return (*C.GtkActionable)(v.Ptr)
+func (v *ActionableIface) native() *C.GtkActionable {
+	return (*C.GtkActionable)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapActionable(p *C.GtkActionable) Actionable {
-	return Actionable{unsafe.Pointer(p)}
+	return Actionable{Ptr: unsafe.Pointer(p)}
 }
 func WrapActionable(p unsafe.Pointer) Actionable {
-	return Actionable{p}
+	return Actionable{Ptr: p}
 }
 func (v Actionable) IsNil() bool {
 	return v.Ptr == nil
@@ -4706,32 +4715,32 @@ func (v Actionable) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetActionName is a wrapper around gtk_actionable_get_action_name().
-func (actionable Actionable) GetActionName() string {
+func (actionable *ActionableIface) GetActionName() string {
 	ret0 := C.gtk_actionable_get_action_name(actionable.native())
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
 
 // GetActionTargetValue is a wrapper around gtk_actionable_get_action_target_value().
-func (actionable Actionable) GetActionTargetValue() glib.Variant {
+func (actionable *ActionableIface) GetActionTargetValue() glib.Variant {
 	ret0 := C.gtk_actionable_get_action_target_value(actionable.native())
 	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/
 }
 
 // SetActionName is a wrapper around gtk_actionable_set_action_name().
-func (actionable Actionable) SetActionName(action_name string) {
+func (actionable *ActionableIface) SetActionName(action_name string) {
 	action_name0 := (*C.gchar)(C.CString(action_name))
 	C.gtk_actionable_set_action_name(actionable.native(), action_name0)
 	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
 }
 
 // SetActionTargetValue is a wrapper around gtk_actionable_set_action_target_value().
-func (actionable Actionable) SetActionTargetValue(target_value glib.Variant) {
+func (actionable *ActionableIface) SetActionTargetValue(target_value glib.Variant) {
 	C.gtk_actionable_set_action_target_value(actionable.native(), (*C.GVariant)(target_value.Ptr))
 }
 
 // SetDetailedActionName is a wrapper around gtk_actionable_set_detailed_action_name().
-func (actionable Actionable) SetDetailedActionName(detailed_action_name string) {
+func (actionable *ActionableIface) SetDetailedActionName(detailed_action_name string) {
 	detailed_action_name0 := (*C.gchar)(C.CString(detailed_action_name))
 	C.gtk_actionable_set_detailed_action_name(actionable.native(), detailed_action_name0)
 	C.free(unsafe.Pointer(detailed_action_name0)) /*ch:<stdlib.h>*/
@@ -4739,17 +4748,19 @@ func (actionable Actionable) SetDetailedActionName(detailed_action_name string) 
 
 // Interface AppChooser
 type AppChooser struct {
+	AppChooserIface
 	Ptr unsafe.Pointer
 }
+type AppChooserIface struct{}
 
-func (v AppChooser) native() *C.GtkAppChooser {
-	return (*C.GtkAppChooser)(v.Ptr)
+func (v *AppChooserIface) native() *C.GtkAppChooser {
+	return (*C.GtkAppChooser)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapAppChooser(p *C.GtkAppChooser) AppChooser {
-	return AppChooser{unsafe.Pointer(p)}
+	return AppChooser{Ptr: unsafe.Pointer(p)}
 }
 func WrapAppChooser(p unsafe.Pointer) AppChooser {
-	return AppChooser{p}
+	return AppChooser{Ptr: p}
 }
 func (v AppChooser) IsNil() bool {
 	return v.Ptr == nil
@@ -4768,13 +4779,13 @@ func (v AppChooser) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetAppInfo is a wrapper around gtk_app_chooser_get_app_info().
-func (self AppChooser) GetAppInfo() gio.AppInfo {
+func (self *AppChooserIface) GetAppInfo() gio.AppInfo {
 	ret0 := C.gtk_app_chooser_get_app_info(self.native())
 	return gio.WrapAppInfo(unsafe.Pointer(ret0)) /*gir:Gio*/
 }
 
 // GetContentType is a wrapper around gtk_app_chooser_get_content_type().
-func (self AppChooser) GetContentType() string {
+func (self *AppChooserIface) GetContentType() string {
 	ret0 := C.gtk_app_chooser_get_content_type(self.native())
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
@@ -4782,23 +4793,25 @@ func (self AppChooser) GetContentType() string {
 }
 
 // Refresh is a wrapper around gtk_app_chooser_refresh().
-func (self AppChooser) Refresh() {
+func (self *AppChooserIface) Refresh() {
 	C.gtk_app_chooser_refresh(self.native())
 }
 
 // Interface CellEditable
 type CellEditable struct {
+	CellEditableIface
 	Ptr unsafe.Pointer
 }
+type CellEditableIface struct{}
 
-func (v CellEditable) native() *C.GtkCellEditable {
-	return (*C.GtkCellEditable)(v.Ptr)
+func (v *CellEditableIface) native() *C.GtkCellEditable {
+	return (*C.GtkCellEditable)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapCellEditable(p *C.GtkCellEditable) CellEditable {
-	return CellEditable{unsafe.Pointer(p)}
+	return CellEditable{Ptr: unsafe.Pointer(p)}
 }
 func WrapCellEditable(p unsafe.Pointer) CellEditable {
-	return CellEditable{p}
+	return CellEditable{Ptr: p}
 }
 func (v CellEditable) IsNil() bool {
 	return v.Ptr == nil
@@ -4817,28 +4830,30 @@ func (v CellEditable) GetGValueGetter() gobject.GValueGetter {
 }
 
 // EditingDone is a wrapper around gtk_cell_editable_editing_done().
-func (cell_editable CellEditable) EditingDone() {
+func (cell_editable *CellEditableIface) EditingDone() {
 	C.gtk_cell_editable_editing_done(cell_editable.native())
 }
 
 // RemoveWidget is a wrapper around gtk_cell_editable_remove_widget().
-func (cell_editable CellEditable) RemoveWidget() {
+func (cell_editable *CellEditableIface) RemoveWidget() {
 	C.gtk_cell_editable_remove_widget(cell_editable.native())
 }
 
 // Interface CellLayout
 type CellLayout struct {
+	CellLayoutIface
 	Ptr unsafe.Pointer
 }
+type CellLayoutIface struct{}
 
-func (v CellLayout) native() *C.GtkCellLayout {
-	return (*C.GtkCellLayout)(v.Ptr)
+func (v *CellLayoutIface) native() *C.GtkCellLayout {
+	return (*C.GtkCellLayout)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapCellLayout(p *C.GtkCellLayout) CellLayout {
-	return CellLayout{unsafe.Pointer(p)}
+	return CellLayout{Ptr: unsafe.Pointer(p)}
 }
 func WrapCellLayout(p unsafe.Pointer) CellLayout {
-	return CellLayout{p}
+	return CellLayout{Ptr: p}
 }
 func (v CellLayout) IsNil() bool {
 	return v.Ptr == nil
@@ -4857,47 +4872,47 @@ func (v CellLayout) GetGValueGetter() gobject.GValueGetter {
 }
 
 // AddAttribute is a wrapper around gtk_cell_layout_add_attribute().
-func (cell_layout CellLayout) AddAttribute(cell CellRenderer, attribute string, column int) {
+func (cell_layout *CellLayoutIface) AddAttribute(cell CellRenderer, attribute string, column int) {
 	attribute0 := (*C.gchar)(C.CString(attribute))
 	C.gtk_cell_layout_add_attribute(cell_layout.native(), cell.native(), attribute0, C.gint(column))
 	C.free(unsafe.Pointer(attribute0)) /*ch:<stdlib.h>*/
 }
 
 // Clear is a wrapper around gtk_cell_layout_clear().
-func (cell_layout CellLayout) Clear() {
+func (cell_layout *CellLayoutIface) Clear() {
 	C.gtk_cell_layout_clear(cell_layout.native())
 }
 
 // ClearAttributes is a wrapper around gtk_cell_layout_clear_attributes().
-func (cell_layout CellLayout) ClearAttributes(cell CellRenderer) {
+func (cell_layout *CellLayoutIface) ClearAttributes(cell CellRenderer) {
 	C.gtk_cell_layout_clear_attributes(cell_layout.native(), cell.native())
 }
 
 // GetArea is a wrapper around gtk_cell_layout_get_area().
-func (cell_layout CellLayout) GetArea() CellArea {
+func (cell_layout *CellLayoutIface) GetArea() CellArea {
 	ret0 := C.gtk_cell_layout_get_area(cell_layout.native())
 	return wrapCellArea(ret0)
 }
 
 // GetCells is a wrapper around gtk_cell_layout_get_cells().
-func (cell_layout CellLayout) GetCells() glib.List {
+func (cell_layout *CellLayoutIface) GetCells() glib.List {
 	ret0 := C.gtk_cell_layout_get_cells(cell_layout.native())
 	return glib.WrapList(unsafe.Pointer(ret0),
 		func(p unsafe.Pointer) interface{} { return WrapCellRenderer(p) }) /*gir:GLib*/
 }
 
 // PackEnd is a wrapper around gtk_cell_layout_pack_end().
-func (cell_layout CellLayout) PackEnd(cell CellRenderer, expand bool) {
+func (cell_layout *CellLayoutIface) PackEnd(cell CellRenderer, expand bool) {
 	C.gtk_cell_layout_pack_end(cell_layout.native(), cell.native(), C.gboolean(util.Bool2Int(expand)) /*go:.util*/)
 }
 
 // PackStart is a wrapper around gtk_cell_layout_pack_start().
-func (cell_layout CellLayout) PackStart(cell CellRenderer, expand bool) {
+func (cell_layout *CellLayoutIface) PackStart(cell CellRenderer, expand bool) {
 	C.gtk_cell_layout_pack_start(cell_layout.native(), cell.native(), C.gboolean(util.Bool2Int(expand)) /*go:.util*/)
 }
 
 // Reorder is a wrapper around gtk_cell_layout_reorder().
-func (cell_layout CellLayout) Reorder(cell CellRenderer, position int) {
+func (cell_layout *CellLayoutIface) Reorder(cell CellRenderer, position int) {
 	C.gtk_cell_layout_reorder(cell_layout.native(), cell.native(), C.gint(position))
 }
 
@@ -5066,6 +5081,8 @@ func (cell CellRenderer) StopEditing(canceled bool) {
 
 // Object CellArea
 type CellArea struct {
+	BuildableIface
+	CellLayoutIface
 	gobject.InitiallyUnowned
 }
 
@@ -5399,17 +5416,19 @@ func (context CellAreaContext) Reset() {
 
 // Interface ColorChooser
 type ColorChooser struct {
+	ColorChooserIface
 	Ptr unsafe.Pointer
 }
+type ColorChooserIface struct{}
 
-func (v ColorChooser) native() *C.GtkColorChooser {
-	return (*C.GtkColorChooser)(v.Ptr)
+func (v *ColorChooserIface) native() *C.GtkColorChooser {
+	return (*C.GtkColorChooser)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapColorChooser(p *C.GtkColorChooser) ColorChooser {
-	return ColorChooser{unsafe.Pointer(p)}
+	return ColorChooser{Ptr: unsafe.Pointer(p)}
 }
 func WrapColorChooser(p unsafe.Pointer) ColorChooser {
-	return ColorChooser{p}
+	return ColorChooser{Ptr: p}
 }
 func (v ColorChooser) IsNil() bool {
 	return v.Ptr == nil
@@ -5428,36 +5447,38 @@ func (v ColorChooser) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetRgba is a wrapper around gtk_color_chooser_get_rgba().
-func (chooser ColorChooser) GetRgba() gdk.RGBA {
+func (chooser *ColorChooserIface) GetRgba() gdk.RGBA {
 	var color0 C.GdkRGBA
 	C.gtk_color_chooser_get_rgba(chooser.native(), &color0)
 	return gdk.WrapRGBA(unsafe.Pointer(&color0)) /*gir:Gdk*/
 }
 
 // GetUseAlpha is a wrapper around gtk_color_chooser_get_use_alpha().
-func (chooser ColorChooser) GetUseAlpha() bool {
+func (chooser *ColorChooserIface) GetUseAlpha() bool {
 	ret0 := C.gtk_color_chooser_get_use_alpha(chooser.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // SetUseAlpha is a wrapper around gtk_color_chooser_set_use_alpha().
-func (chooser ColorChooser) SetUseAlpha(use_alpha bool) {
+func (chooser *ColorChooserIface) SetUseAlpha(use_alpha bool) {
 	C.gtk_color_chooser_set_use_alpha(chooser.native(), C.gboolean(util.Bool2Int(use_alpha)) /*go:.util*/)
 }
 
 // Interface Editable
 type Editable struct {
+	EditableIface
 	Ptr unsafe.Pointer
 }
+type EditableIface struct{}
 
-func (v Editable) native() *C.GtkEditable {
-	return (*C.GtkEditable)(v.Ptr)
+func (v *EditableIface) native() *C.GtkEditable {
+	return (*C.GtkEditable)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapEditable(p *C.GtkEditable) Editable {
-	return Editable{unsafe.Pointer(p)}
+	return Editable{Ptr: unsafe.Pointer(p)}
 }
 func WrapEditable(p unsafe.Pointer) Editable {
-	return Editable{p}
+	return Editable{Ptr: p}
 }
 func (v Editable) IsNil() bool {
 	return v.Ptr == nil
@@ -5476,27 +5497,27 @@ func (v Editable) GetGValueGetter() gobject.GValueGetter {
 }
 
 // CopyClipboard is a wrapper around gtk_editable_copy_clipboard().
-func (editable Editable) CopyClipboard() {
+func (editable *EditableIface) CopyClipboard() {
 	C.gtk_editable_copy_clipboard(editable.native())
 }
 
 // CutClipboard is a wrapper around gtk_editable_cut_clipboard().
-func (editable Editable) CutClipboard() {
+func (editable *EditableIface) CutClipboard() {
 	C.gtk_editable_cut_clipboard(editable.native())
 }
 
 // DeleteSelection is a wrapper around gtk_editable_delete_selection().
-func (editable Editable) DeleteSelection() {
+func (editable *EditableIface) DeleteSelection() {
 	C.gtk_editable_delete_selection(editable.native())
 }
 
 // DeleteText is a wrapper around gtk_editable_delete_text().
-func (editable Editable) DeleteText(start_pos int, end_pos int) {
+func (editable *EditableIface) DeleteText(start_pos int, end_pos int) {
 	C.gtk_editable_delete_text(editable.native(), C.gint(start_pos), C.gint(end_pos))
 }
 
 // GetChars is a wrapper around gtk_editable_get_chars().
-func (editable Editable) GetChars(start_pos int, end_pos int) string {
+func (editable *EditableIface) GetChars(start_pos int, end_pos int) string {
 	ret0 := C.gtk_editable_get_chars(editable.native(), C.gint(start_pos), C.gint(end_pos))
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
@@ -5504,19 +5525,19 @@ func (editable Editable) GetChars(start_pos int, end_pos int) string {
 }
 
 // GetEditable is a wrapper around gtk_editable_get_editable().
-func (editable Editable) GetEditable() bool {
+func (editable *EditableIface) GetEditable() bool {
 	ret0 := C.gtk_editable_get_editable(editable.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetPosition is a wrapper around gtk_editable_get_position().
-func (editable Editable) GetPosition() int {
+func (editable *EditableIface) GetPosition() int {
 	ret0 := C.gtk_editable_get_position(editable.native())
 	return int(ret0)
 }
 
 // GetSelectionBounds is a wrapper around gtk_editable_get_selection_bounds().
-func (editable Editable) GetSelectionBounds() (bool, int, int) {
+func (editable *EditableIface) GetSelectionBounds() (bool, int, int) {
 	var start_pos0 C.gint
 	var end_pos0 C.gint
 	ret0 := C.gtk_editable_get_selection_bounds(editable.native(), &start_pos0, &end_pos0)
@@ -5524,38 +5545,40 @@ func (editable Editable) GetSelectionBounds() (bool, int, int) {
 }
 
 // PasteClipboard is a wrapper around gtk_editable_paste_clipboard().
-func (editable Editable) PasteClipboard() {
+func (editable *EditableIface) PasteClipboard() {
 	C.gtk_editable_paste_clipboard(editable.native())
 }
 
 // SelectRegion is a wrapper around gtk_editable_select_region().
-func (editable Editable) SelectRegion(start_pos int, end_pos int) {
+func (editable *EditableIface) SelectRegion(start_pos int, end_pos int) {
 	C.gtk_editable_select_region(editable.native(), C.gint(start_pos), C.gint(end_pos))
 }
 
 // SetEditable is a wrapper around gtk_editable_set_editable().
-func (editable Editable) SetEditable(is_editable bool) {
+func (editable *EditableIface) SetEditable(is_editable bool) {
 	C.gtk_editable_set_editable(editable.native(), C.gboolean(util.Bool2Int(is_editable)) /*go:.util*/)
 }
 
 // SetPosition is a wrapper around gtk_editable_set_position().
-func (editable Editable) SetPosition(position int) {
+func (editable *EditableIface) SetPosition(position int) {
 	C.gtk_editable_set_position(editable.native(), C.gint(position))
 }
 
 // Interface FileChooser
 type FileChooser struct {
+	FileChooserIface
 	Ptr unsafe.Pointer
 }
+type FileChooserIface struct{}
 
-func (v FileChooser) native() *C.GtkFileChooser {
-	return (*C.GtkFileChooser)(v.Ptr)
+func (v *FileChooserIface) native() *C.GtkFileChooser {
+	return (*C.GtkFileChooser)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapFileChooser(p *C.GtkFileChooser) FileChooser {
-	return FileChooser{unsafe.Pointer(p)}
+	return FileChooser{Ptr: unsafe.Pointer(p)}
 }
 func WrapFileChooser(p unsafe.Pointer) FileChooser {
-	return FileChooser{p}
+	return FileChooser{Ptr: p}
 }
 func (v FileChooser) IsNil() bool {
 	return v.Ptr == nil
@@ -5574,12 +5597,12 @@ func (v FileChooser) GetGValueGetter() gobject.GValueGetter {
 }
 
 // AddFilter is a wrapper around gtk_file_chooser_add_filter().
-func (chooser FileChooser) AddFilter(filter FileFilter) {
+func (chooser *FileChooserIface) AddFilter(filter FileFilter) {
 	C.gtk_file_chooser_add_filter(chooser.native(), filter.native())
 }
 
 // AddShortcutFolder is a wrapper around gtk_file_chooser_add_shortcut_folder().
-func (chooser FileChooser) AddShortcutFolder(folder string) (bool, error) {
+func (chooser *FileChooserIface) AddShortcutFolder(folder string) (bool, error) {
 	folder0 := C.CString(folder)
 	var err glib.Error
 	ret0 := C.gtk_file_chooser_add_shortcut_folder(chooser.native(), folder0, (**C.GError)(unsafe.Pointer(&err)))
@@ -5592,7 +5615,7 @@ func (chooser FileChooser) AddShortcutFolder(folder string) (bool, error) {
 }
 
 // AddShortcutFolderUri is a wrapper around gtk_file_chooser_add_shortcut_folder_uri().
-func (chooser FileChooser) AddShortcutFolderUri(uri string) (bool, error) {
+func (chooser *FileChooserIface) AddShortcutFolderUri(uri string) (bool, error) {
 	uri0 := C.CString(uri)
 	var err glib.Error
 	ret0 := C.gtk_file_chooser_add_shortcut_folder_uri(chooser.native(), uri0, (**C.GError)(unsafe.Pointer(&err)))
@@ -5605,13 +5628,13 @@ func (chooser FileChooser) AddShortcutFolderUri(uri string) (bool, error) {
 }
 
 // GetAction is a wrapper around gtk_file_chooser_get_action().
-func (chooser FileChooser) GetAction() FileChooserAction {
+func (chooser *FileChooserIface) GetAction() FileChooserAction {
 	ret0 := C.gtk_file_chooser_get_action(chooser.native())
 	return FileChooserAction(ret0)
 }
 
 // GetChoice is a wrapper around gtk_file_chooser_get_choice().
-func (chooser FileChooser) GetChoice(id string) string {
+func (chooser *FileChooserIface) GetChoice(id string) string {
 	id0 := C.CString(id)
 	ret0 := C.gtk_file_chooser_get_choice(chooser.native(), id0)
 	C.free(unsafe.Pointer(id0)) /*ch:<stdlib.h>*/
@@ -5620,13 +5643,13 @@ func (chooser FileChooser) GetChoice(id string) string {
 }
 
 // GetCreateFolders is a wrapper around gtk_file_chooser_get_create_folders().
-func (chooser FileChooser) GetCreateFolders() bool {
+func (chooser *FileChooserIface) GetCreateFolders() bool {
 	ret0 := C.gtk_file_chooser_get_create_folders(chooser.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetCurrentFolder is a wrapper around gtk_file_chooser_get_current_folder().
-func (chooser FileChooser) GetCurrentFolder() string {
+func (chooser *FileChooserIface) GetCurrentFolder() string {
 	ret0 := C.gtk_file_chooser_get_current_folder(chooser.native())
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
@@ -5634,13 +5657,13 @@ func (chooser FileChooser) GetCurrentFolder() string {
 }
 
 // GetCurrentFolderFile is a wrapper around gtk_file_chooser_get_current_folder_file().
-func (chooser FileChooser) GetCurrentFolderFile() gio.File {
+func (chooser *FileChooserIface) GetCurrentFolderFile() gio.File {
 	ret0 := C.gtk_file_chooser_get_current_folder_file(chooser.native())
 	return gio.WrapFile(unsafe.Pointer(ret0)) /*gir:Gio*/
 }
 
 // GetCurrentFolderUri is a wrapper around gtk_file_chooser_get_current_folder_uri().
-func (chooser FileChooser) GetCurrentFolderUri() string {
+func (chooser *FileChooserIface) GetCurrentFolderUri() string {
 	ret0 := C.gtk_file_chooser_get_current_folder_uri(chooser.native())
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
@@ -5648,7 +5671,7 @@ func (chooser FileChooser) GetCurrentFolderUri() string {
 }
 
 // GetCurrentName is a wrapper around gtk_file_chooser_get_current_name().
-func (chooser FileChooser) GetCurrentName() string {
+func (chooser *FileChooserIface) GetCurrentName() string {
 	ret0 := C.gtk_file_chooser_get_current_name(chooser.native())
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
@@ -5656,25 +5679,25 @@ func (chooser FileChooser) GetCurrentName() string {
 }
 
 // GetDoOverwriteConfirmation is a wrapper around gtk_file_chooser_get_do_overwrite_confirmation().
-func (chooser FileChooser) GetDoOverwriteConfirmation() bool {
+func (chooser *FileChooserIface) GetDoOverwriteConfirmation() bool {
 	ret0 := C.gtk_file_chooser_get_do_overwrite_confirmation(chooser.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetExtraWidget is a wrapper around gtk_file_chooser_get_extra_widget().
-func (chooser FileChooser) GetExtraWidget() Widget {
+func (chooser *FileChooserIface) GetExtraWidget() Widget {
 	ret0 := C.gtk_file_chooser_get_extra_widget(chooser.native())
 	return wrapWidget(ret0)
 }
 
 // GetFile is a wrapper around gtk_file_chooser_get_file().
-func (chooser FileChooser) GetFile() gio.File {
+func (chooser *FileChooserIface) GetFile() gio.File {
 	ret0 := C.gtk_file_chooser_get_file(chooser.native())
 	return gio.WrapFile(unsafe.Pointer(ret0)) /*gir:Gio*/
 }
 
 // GetFilename is a wrapper around gtk_file_chooser_get_filename().
-func (chooser FileChooser) GetFilename() string {
+func (chooser *FileChooserIface) GetFilename() string {
 	ret0 := C.gtk_file_chooser_get_filename(chooser.native())
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
@@ -5682,25 +5705,25 @@ func (chooser FileChooser) GetFilename() string {
 }
 
 // GetFilter is a wrapper around gtk_file_chooser_get_filter().
-func (chooser FileChooser) GetFilter() FileFilter {
+func (chooser *FileChooserIface) GetFilter() FileFilter {
 	ret0 := C.gtk_file_chooser_get_filter(chooser.native())
 	return wrapFileFilter(ret0)
 }
 
 // GetLocalOnly is a wrapper around gtk_file_chooser_get_local_only().
-func (chooser FileChooser) GetLocalOnly() bool {
+func (chooser *FileChooserIface) GetLocalOnly() bool {
 	ret0 := C.gtk_file_chooser_get_local_only(chooser.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetPreviewFile is a wrapper around gtk_file_chooser_get_preview_file().
-func (chooser FileChooser) GetPreviewFile() gio.File {
+func (chooser *FileChooserIface) GetPreviewFile() gio.File {
 	ret0 := C.gtk_file_chooser_get_preview_file(chooser.native())
 	return gio.WrapFile(unsafe.Pointer(ret0)) /*gir:Gio*/
 }
 
 // GetPreviewFilename is a wrapper around gtk_file_chooser_get_preview_filename().
-func (chooser FileChooser) GetPreviewFilename() string {
+func (chooser *FileChooserIface) GetPreviewFilename() string {
 	ret0 := C.gtk_file_chooser_get_preview_filename(chooser.native())
 	ret := C.GoString(ret0)
 	C.g_free(C.gpointer(ret0))
@@ -5708,7 +5731,7 @@ func (chooser FileChooser) GetPreviewFilename() string {
 }
 
 // GetPreviewUri is a wrapper around gtk_file_chooser_get_preview_uri().
-func (chooser FileChooser) GetPreviewUri() string {
+func (chooser *FileChooserIface) GetPreviewUri() string {
 	ret0 := C.gtk_file_chooser_get_preview_uri(chooser.native())
 	ret := C.GoString(ret0)
 	C.g_free(C.gpointer(ret0))
@@ -5716,31 +5739,31 @@ func (chooser FileChooser) GetPreviewUri() string {
 }
 
 // GetPreviewWidget is a wrapper around gtk_file_chooser_get_preview_widget().
-func (chooser FileChooser) GetPreviewWidget() Widget {
+func (chooser *FileChooserIface) GetPreviewWidget() Widget {
 	ret0 := C.gtk_file_chooser_get_preview_widget(chooser.native())
 	return wrapWidget(ret0)
 }
 
 // GetPreviewWidgetActive is a wrapper around gtk_file_chooser_get_preview_widget_active().
-func (chooser FileChooser) GetPreviewWidgetActive() bool {
+func (chooser *FileChooserIface) GetPreviewWidgetActive() bool {
 	ret0 := C.gtk_file_chooser_get_preview_widget_active(chooser.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetSelectMultiple is a wrapper around gtk_file_chooser_get_select_multiple().
-func (chooser FileChooser) GetSelectMultiple() bool {
+func (chooser *FileChooserIface) GetSelectMultiple() bool {
 	ret0 := C.gtk_file_chooser_get_select_multiple(chooser.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetShowHidden is a wrapper around gtk_file_chooser_get_show_hidden().
-func (chooser FileChooser) GetShowHidden() bool {
+func (chooser *FileChooserIface) GetShowHidden() bool {
 	ret0 := C.gtk_file_chooser_get_show_hidden(chooser.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetUri is a wrapper around gtk_file_chooser_get_uri().
-func (chooser FileChooser) GetUri() string {
+func (chooser *FileChooserIface) GetUri() string {
 	ret0 := C.gtk_file_chooser_get_uri(chooser.native())
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
@@ -5748,25 +5771,25 @@ func (chooser FileChooser) GetUri() string {
 }
 
 // GetUsePreviewLabel is a wrapper around gtk_file_chooser_get_use_preview_label().
-func (chooser FileChooser) GetUsePreviewLabel() bool {
+func (chooser *FileChooserIface) GetUsePreviewLabel() bool {
 	ret0 := C.gtk_file_chooser_get_use_preview_label(chooser.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // RemoveChoice is a wrapper around gtk_file_chooser_remove_choice().
-func (chooser FileChooser) RemoveChoice(id string) {
+func (chooser *FileChooserIface) RemoveChoice(id string) {
 	id0 := C.CString(id)
 	C.gtk_file_chooser_remove_choice(chooser.native(), id0)
 	C.free(unsafe.Pointer(id0)) /*ch:<stdlib.h>*/
 }
 
 // RemoveFilter is a wrapper around gtk_file_chooser_remove_filter().
-func (chooser FileChooser) RemoveFilter(filter FileFilter) {
+func (chooser *FileChooserIface) RemoveFilter(filter FileFilter) {
 	C.gtk_file_chooser_remove_filter(chooser.native(), filter.native())
 }
 
 // RemoveShortcutFolder is a wrapper around gtk_file_chooser_remove_shortcut_folder().
-func (chooser FileChooser) RemoveShortcutFolder(folder string) (bool, error) {
+func (chooser *FileChooserIface) RemoveShortcutFolder(folder string) (bool, error) {
 	folder0 := C.CString(folder)
 	var err glib.Error
 	ret0 := C.gtk_file_chooser_remove_shortcut_folder(chooser.native(), folder0, (**C.GError)(unsafe.Pointer(&err)))
@@ -5779,7 +5802,7 @@ func (chooser FileChooser) RemoveShortcutFolder(folder string) (bool, error) {
 }
 
 // RemoveShortcutFolderUri is a wrapper around gtk_file_chooser_remove_shortcut_folder_uri().
-func (chooser FileChooser) RemoveShortcutFolderUri(uri string) (bool, error) {
+func (chooser *FileChooserIface) RemoveShortcutFolderUri(uri string) (bool, error) {
 	uri0 := C.CString(uri)
 	var err glib.Error
 	ret0 := C.gtk_file_chooser_remove_shortcut_folder_uri(chooser.native(), uri0, (**C.GError)(unsafe.Pointer(&err)))
@@ -5792,12 +5815,12 @@ func (chooser FileChooser) RemoveShortcutFolderUri(uri string) (bool, error) {
 }
 
 // SelectAll is a wrapper around gtk_file_chooser_select_all().
-func (chooser FileChooser) SelectAll() {
+func (chooser *FileChooserIface) SelectAll() {
 	C.gtk_file_chooser_select_all(chooser.native())
 }
 
 // SelectFile is a wrapper around gtk_file_chooser_select_file().
-func (chooser FileChooser) SelectFile(file gio.File) (bool, error) {
+func (chooser *FileChooserIface) SelectFile(file gio.File) (bool, error) {
 	var err glib.Error
 	ret0 := C.gtk_file_chooser_select_file(chooser.native(), (*C.GFile)(file.Ptr), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -5808,7 +5831,7 @@ func (chooser FileChooser) SelectFile(file gio.File) (bool, error) {
 }
 
 // SelectFilename is a wrapper around gtk_file_chooser_select_filename().
-func (chooser FileChooser) SelectFilename(filename string) bool {
+func (chooser *FileChooserIface) SelectFilename(filename string) bool {
 	filename0 := C.CString(filename)
 	ret0 := C.gtk_file_chooser_select_filename(chooser.native(), filename0)
 	C.free(unsafe.Pointer(filename0)) /*ch:<stdlib.h>*/
@@ -5816,7 +5839,7 @@ func (chooser FileChooser) SelectFilename(filename string) bool {
 }
 
 // SelectUri is a wrapper around gtk_file_chooser_select_uri().
-func (chooser FileChooser) SelectUri(uri string) bool {
+func (chooser *FileChooserIface) SelectUri(uri string) bool {
 	uri0 := C.CString(uri)
 	ret0 := C.gtk_file_chooser_select_uri(chooser.native(), uri0)
 	C.free(unsafe.Pointer(uri0))    /*ch:<stdlib.h>*/
@@ -5824,12 +5847,12 @@ func (chooser FileChooser) SelectUri(uri string) bool {
 }
 
 // SetAction is a wrapper around gtk_file_chooser_set_action().
-func (chooser FileChooser) SetAction(action FileChooserAction) {
+func (chooser *FileChooserIface) SetAction(action FileChooserAction) {
 	C.gtk_file_chooser_set_action(chooser.native(), C.GtkFileChooserAction(action))
 }
 
 // SetChoice is a wrapper around gtk_file_chooser_set_choice().
-func (chooser FileChooser) SetChoice(id string, option string) {
+func (chooser *FileChooserIface) SetChoice(id string, option string) {
 	id0 := C.CString(id)
 	option0 := C.CString(option)
 	C.gtk_file_chooser_set_choice(chooser.native(), id0, option0)
@@ -5838,12 +5861,12 @@ func (chooser FileChooser) SetChoice(id string, option string) {
 }
 
 // SetCreateFolders is a wrapper around gtk_file_chooser_set_create_folders().
-func (chooser FileChooser) SetCreateFolders(create_folders bool) {
+func (chooser *FileChooserIface) SetCreateFolders(create_folders bool) {
 	C.gtk_file_chooser_set_create_folders(chooser.native(), C.gboolean(util.Bool2Int(create_folders)) /*go:.util*/)
 }
 
 // SetCurrentFolder is a wrapper around gtk_file_chooser_set_current_folder().
-func (chooser FileChooser) SetCurrentFolder(filename string) bool {
+func (chooser *FileChooserIface) SetCurrentFolder(filename string) bool {
 	filename0 := (*C.gchar)(C.CString(filename))
 	ret0 := C.gtk_file_chooser_set_current_folder(chooser.native(), filename0)
 	C.free(unsafe.Pointer(filename0)) /*ch:<stdlib.h>*/
@@ -5851,7 +5874,7 @@ func (chooser FileChooser) SetCurrentFolder(filename string) bool {
 }
 
 // SetCurrentFolderFile is a wrapper around gtk_file_chooser_set_current_folder_file().
-func (chooser FileChooser) SetCurrentFolderFile(file gio.File) (bool, error) {
+func (chooser *FileChooserIface) SetCurrentFolderFile(file gio.File) (bool, error) {
 	var err glib.Error
 	ret0 := C.gtk_file_chooser_set_current_folder_file(chooser.native(), (*C.GFile)(file.Ptr), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -5862,7 +5885,7 @@ func (chooser FileChooser) SetCurrentFolderFile(file gio.File) (bool, error) {
 }
 
 // SetCurrentFolderUri is a wrapper around gtk_file_chooser_set_current_folder_uri().
-func (chooser FileChooser) SetCurrentFolderUri(uri string) bool {
+func (chooser *FileChooserIface) SetCurrentFolderUri(uri string) bool {
 	uri0 := (*C.gchar)(C.CString(uri))
 	ret0 := C.gtk_file_chooser_set_current_folder_uri(chooser.native(), uri0)
 	C.free(unsafe.Pointer(uri0))    /*ch:<stdlib.h>*/
@@ -5870,24 +5893,24 @@ func (chooser FileChooser) SetCurrentFolderUri(uri string) bool {
 }
 
 // SetCurrentName is a wrapper around gtk_file_chooser_set_current_name().
-func (chooser FileChooser) SetCurrentName(name string) {
+func (chooser *FileChooserIface) SetCurrentName(name string) {
 	name0 := (*C.gchar)(C.CString(name))
 	C.gtk_file_chooser_set_current_name(chooser.native(), name0)
 	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
 }
 
 // SetDoOverwriteConfirmation is a wrapper around gtk_file_chooser_set_do_overwrite_confirmation().
-func (chooser FileChooser) SetDoOverwriteConfirmation(do_overwrite_confirmation bool) {
+func (chooser *FileChooserIface) SetDoOverwriteConfirmation(do_overwrite_confirmation bool) {
 	C.gtk_file_chooser_set_do_overwrite_confirmation(chooser.native(), C.gboolean(util.Bool2Int(do_overwrite_confirmation)) /*go:.util*/)
 }
 
 // SetExtraWidget is a wrapper around gtk_file_chooser_set_extra_widget().
-func (chooser FileChooser) SetExtraWidget(extra_widget Widget) {
+func (chooser *FileChooserIface) SetExtraWidget(extra_widget Widget) {
 	C.gtk_file_chooser_set_extra_widget(chooser.native(), extra_widget.native())
 }
 
 // SetFile is a wrapper around gtk_file_chooser_set_file().
-func (chooser FileChooser) SetFile(file gio.File) (bool, error) {
+func (chooser *FileChooserIface) SetFile(file gio.File) (bool, error) {
 	var err glib.Error
 	ret0 := C.gtk_file_chooser_set_file(chooser.native(), (*C.GFile)(file.Ptr), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -5898,7 +5921,7 @@ func (chooser FileChooser) SetFile(file gio.File) (bool, error) {
 }
 
 // SetFilename is a wrapper around gtk_file_chooser_set_filename().
-func (chooser FileChooser) SetFilename(filename string) bool {
+func (chooser *FileChooserIface) SetFilename(filename string) bool {
 	filename0 := C.CString(filename)
 	ret0 := C.gtk_file_chooser_set_filename(chooser.native(), filename0)
 	C.free(unsafe.Pointer(filename0)) /*ch:<stdlib.h>*/
@@ -5906,37 +5929,37 @@ func (chooser FileChooser) SetFilename(filename string) bool {
 }
 
 // SetFilter is a wrapper around gtk_file_chooser_set_filter().
-func (chooser FileChooser) SetFilter(filter FileFilter) {
+func (chooser *FileChooserIface) SetFilter(filter FileFilter) {
 	C.gtk_file_chooser_set_filter(chooser.native(), filter.native())
 }
 
 // SetLocalOnly is a wrapper around gtk_file_chooser_set_local_only().
-func (chooser FileChooser) SetLocalOnly(local_only bool) {
+func (chooser *FileChooserIface) SetLocalOnly(local_only bool) {
 	C.gtk_file_chooser_set_local_only(chooser.native(), C.gboolean(util.Bool2Int(local_only)) /*go:.util*/)
 }
 
 // SetPreviewWidget is a wrapper around gtk_file_chooser_set_preview_widget().
-func (chooser FileChooser) SetPreviewWidget(preview_widget Widget) {
+func (chooser *FileChooserIface) SetPreviewWidget(preview_widget Widget) {
 	C.gtk_file_chooser_set_preview_widget(chooser.native(), preview_widget.native())
 }
 
 // SetPreviewWidgetActive is a wrapper around gtk_file_chooser_set_preview_widget_active().
-func (chooser FileChooser) SetPreviewWidgetActive(active bool) {
+func (chooser *FileChooserIface) SetPreviewWidgetActive(active bool) {
 	C.gtk_file_chooser_set_preview_widget_active(chooser.native(), C.gboolean(util.Bool2Int(active)) /*go:.util*/)
 }
 
 // SetSelectMultiple is a wrapper around gtk_file_chooser_set_select_multiple().
-func (chooser FileChooser) SetSelectMultiple(select_multiple bool) {
+func (chooser *FileChooserIface) SetSelectMultiple(select_multiple bool) {
 	C.gtk_file_chooser_set_select_multiple(chooser.native(), C.gboolean(util.Bool2Int(select_multiple)) /*go:.util*/)
 }
 
 // SetShowHidden is a wrapper around gtk_file_chooser_set_show_hidden().
-func (chooser FileChooser) SetShowHidden(show_hidden bool) {
+func (chooser *FileChooserIface) SetShowHidden(show_hidden bool) {
 	C.gtk_file_chooser_set_show_hidden(chooser.native(), C.gboolean(util.Bool2Int(show_hidden)) /*go:.util*/)
 }
 
 // SetUri is a wrapper around gtk_file_chooser_set_uri().
-func (chooser FileChooser) SetUri(uri string) bool {
+func (chooser *FileChooserIface) SetUri(uri string) bool {
 	uri0 := C.CString(uri)
 	ret0 := C.gtk_file_chooser_set_uri(chooser.native(), uri0)
 	C.free(unsafe.Pointer(uri0))    /*ch:<stdlib.h>*/
@@ -5944,29 +5967,29 @@ func (chooser FileChooser) SetUri(uri string) bool {
 }
 
 // SetUsePreviewLabel is a wrapper around gtk_file_chooser_set_use_preview_label().
-func (chooser FileChooser) SetUsePreviewLabel(use_label bool) {
+func (chooser *FileChooserIface) SetUsePreviewLabel(use_label bool) {
 	C.gtk_file_chooser_set_use_preview_label(chooser.native(), C.gboolean(util.Bool2Int(use_label)) /*go:.util*/)
 }
 
 // UnselectAll is a wrapper around gtk_file_chooser_unselect_all().
-func (chooser FileChooser) UnselectAll() {
+func (chooser *FileChooserIface) UnselectAll() {
 	C.gtk_file_chooser_unselect_all(chooser.native())
 }
 
 // UnselectFile is a wrapper around gtk_file_chooser_unselect_file().
-func (chooser FileChooser) UnselectFile(file gio.File) {
+func (chooser *FileChooserIface) UnselectFile(file gio.File) {
 	C.gtk_file_chooser_unselect_file(chooser.native(), (*C.GFile)(file.Ptr))
 }
 
 // UnselectFilename is a wrapper around gtk_file_chooser_unselect_filename().
-func (chooser FileChooser) UnselectFilename(filename string) {
+func (chooser *FileChooserIface) UnselectFilename(filename string) {
 	filename0 := C.CString(filename)
 	C.gtk_file_chooser_unselect_filename(chooser.native(), filename0)
 	C.free(unsafe.Pointer(filename0)) /*ch:<stdlib.h>*/
 }
 
 // UnselectUri is a wrapper around gtk_file_chooser_unselect_uri().
-func (chooser FileChooser) UnselectUri(uri string) {
+func (chooser *FileChooserIface) UnselectUri(uri string) {
 	uri0 := C.CString(uri)
 	C.gtk_file_chooser_unselect_uri(chooser.native(), uri0)
 	C.free(unsafe.Pointer(uri0)) /*ch:<stdlib.h>*/
@@ -5974,17 +5997,19 @@ func (chooser FileChooser) UnselectUri(uri string) {
 
 // Interface FontChooser
 type FontChooser struct {
+	FontChooserIface
 	Ptr unsafe.Pointer
 }
+type FontChooserIface struct{}
 
-func (v FontChooser) native() *C.GtkFontChooser {
-	return (*C.GtkFontChooser)(v.Ptr)
+func (v *FontChooserIface) native() *C.GtkFontChooser {
+	return (*C.GtkFontChooser)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapFontChooser(p *C.GtkFontChooser) FontChooser {
-	return FontChooser{unsafe.Pointer(p)}
+	return FontChooser{Ptr: unsafe.Pointer(p)}
 }
 func WrapFontChooser(p unsafe.Pointer) FontChooser {
-	return FontChooser{p}
+	return FontChooser{Ptr: p}
 }
 func (v FontChooser) IsNil() bool {
 	return v.Ptr == nil
@@ -6003,7 +6028,7 @@ func (v FontChooser) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetFont is a wrapper around gtk_font_chooser_get_font().
-func (fontchooser FontChooser) GetFont() string {
+func (fontchooser *FontChooserIface) GetFont() string {
 	ret0 := C.gtk_font_chooser_get_font(fontchooser.native())
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
@@ -6011,37 +6036,37 @@ func (fontchooser FontChooser) GetFont() string {
 }
 
 // GetFontDesc is a wrapper around gtk_font_chooser_get_font_desc().
-func (fontchooser FontChooser) GetFontDesc() pango.FontDescription {
+func (fontchooser *FontChooserIface) GetFontDesc() pango.FontDescription {
 	ret0 := C.gtk_font_chooser_get_font_desc(fontchooser.native())
 	return pango.WrapFontDescription(unsafe.Pointer(ret0)) /*gir:Pango*/
 }
 
 // GetFontFace is a wrapper around gtk_font_chooser_get_font_face().
-func (fontchooser FontChooser) GetFontFace() pango.FontFace {
+func (fontchooser *FontChooserIface) GetFontFace() pango.FontFace {
 	ret0 := C.gtk_font_chooser_get_font_face(fontchooser.native())
 	return pango.WrapFontFace(unsafe.Pointer(ret0)) /*gir:Pango*/
 }
 
 // GetFontFamily is a wrapper around gtk_font_chooser_get_font_family().
-func (fontchooser FontChooser) GetFontFamily() pango.FontFamily {
+func (fontchooser *FontChooserIface) GetFontFamily() pango.FontFamily {
 	ret0 := C.gtk_font_chooser_get_font_family(fontchooser.native())
 	return pango.WrapFontFamily(unsafe.Pointer(ret0)) /*gir:Pango*/
 }
 
 // GetFontMap is a wrapper around gtk_font_chooser_get_font_map().
-func (fontchooser FontChooser) GetFontMap() pango.FontMap {
+func (fontchooser *FontChooserIface) GetFontMap() pango.FontMap {
 	ret0 := C.gtk_font_chooser_get_font_map(fontchooser.native())
 	return pango.WrapFontMap(unsafe.Pointer(ret0)) /*gir:Pango*/
 }
 
 // GetFontSize is a wrapper around gtk_font_chooser_get_font_size().
-func (fontchooser FontChooser) GetFontSize() int {
+func (fontchooser *FontChooserIface) GetFontSize() int {
 	ret0 := C.gtk_font_chooser_get_font_size(fontchooser.native())
 	return int(ret0)
 }
 
 // GetPreviewText is a wrapper around gtk_font_chooser_get_preview_text().
-func (fontchooser FontChooser) GetPreviewText() string {
+func (fontchooser *FontChooserIface) GetPreviewText() string {
 	ret0 := C.gtk_font_chooser_get_preview_text(fontchooser.native())
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
@@ -6049,53 +6074,55 @@ func (fontchooser FontChooser) GetPreviewText() string {
 }
 
 // GetShowPreviewEntry is a wrapper around gtk_font_chooser_get_show_preview_entry().
-func (fontchooser FontChooser) GetShowPreviewEntry() bool {
+func (fontchooser *FontChooserIface) GetShowPreviewEntry() bool {
 	ret0 := C.gtk_font_chooser_get_show_preview_entry(fontchooser.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // SetFont is a wrapper around gtk_font_chooser_set_font().
-func (fontchooser FontChooser) SetFont(fontname string) {
+func (fontchooser *FontChooserIface) SetFont(fontname string) {
 	fontname0 := (*C.gchar)(C.CString(fontname))
 	C.gtk_font_chooser_set_font(fontchooser.native(), fontname0)
 	C.free(unsafe.Pointer(fontname0)) /*ch:<stdlib.h>*/
 }
 
 // SetFontDesc is a wrapper around gtk_font_chooser_set_font_desc().
-func (fontchooser FontChooser) SetFontDesc(font_desc pango.FontDescription) {
+func (fontchooser *FontChooserIface) SetFontDesc(font_desc pango.FontDescription) {
 	C.gtk_font_chooser_set_font_desc(fontchooser.native(), (*C.PangoFontDescription)(font_desc.Ptr))
 }
 
 // SetFontMap is a wrapper around gtk_font_chooser_set_font_map().
-func (fontchooser FontChooser) SetFontMap(fontmap pango.FontMap) {
+func (fontchooser *FontChooserIface) SetFontMap(fontmap pango.FontMap) {
 	C.gtk_font_chooser_set_font_map(fontchooser.native(), (*C.PangoFontMap)(fontmap.Ptr))
 }
 
 // SetPreviewText is a wrapper around gtk_font_chooser_set_preview_text().
-func (fontchooser FontChooser) SetPreviewText(text string) {
+func (fontchooser *FontChooserIface) SetPreviewText(text string) {
 	text0 := (*C.gchar)(C.CString(text))
 	C.gtk_font_chooser_set_preview_text(fontchooser.native(), text0)
 	C.free(unsafe.Pointer(text0)) /*ch:<stdlib.h>*/
 }
 
 // SetShowPreviewEntry is a wrapper around gtk_font_chooser_set_show_preview_entry().
-func (fontchooser FontChooser) SetShowPreviewEntry(show_preview_entry bool) {
+func (fontchooser *FontChooserIface) SetShowPreviewEntry(show_preview_entry bool) {
 	C.gtk_font_chooser_set_show_preview_entry(fontchooser.native(), C.gboolean(util.Bool2Int(show_preview_entry)) /*go:.util*/)
 }
 
 // Interface Orientable
 type Orientable struct {
+	OrientableIface
 	Ptr unsafe.Pointer
 }
+type OrientableIface struct{}
 
-func (v Orientable) native() *C.GtkOrientable {
-	return (*C.GtkOrientable)(v.Ptr)
+func (v *OrientableIface) native() *C.GtkOrientable {
+	return (*C.GtkOrientable)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapOrientable(p *C.GtkOrientable) Orientable {
-	return Orientable{unsafe.Pointer(p)}
+	return Orientable{Ptr: unsafe.Pointer(p)}
 }
 func WrapOrientable(p unsafe.Pointer) Orientable {
-	return Orientable{p}
+	return Orientable{Ptr: p}
 }
 func (v Orientable) IsNil() bool {
 	return v.Ptr == nil
@@ -6114,29 +6141,31 @@ func (v Orientable) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetOrientation is a wrapper around gtk_orientable_get_orientation().
-func (orientable Orientable) GetOrientation() Orientation {
+func (orientable *OrientableIface) GetOrientation() Orientation {
 	ret0 := C.gtk_orientable_get_orientation(orientable.native())
 	return Orientation(ret0)
 }
 
 // SetOrientation is a wrapper around gtk_orientable_set_orientation().
-func (orientable Orientable) SetOrientation(orientation Orientation) {
+func (orientable *OrientableIface) SetOrientation(orientation Orientation) {
 	C.gtk_orientable_set_orientation(orientable.native(), C.GtkOrientation(orientation))
 }
 
 // Interface PrintOperationPreview
 type PrintOperationPreview struct {
+	PrintOperationPreviewIface
 	Ptr unsafe.Pointer
 }
+type PrintOperationPreviewIface struct{}
 
-func (v PrintOperationPreview) native() *C.GtkPrintOperationPreview {
-	return (*C.GtkPrintOperationPreview)(v.Ptr)
+func (v *PrintOperationPreviewIface) native() *C.GtkPrintOperationPreview {
+	return (*C.GtkPrintOperationPreview)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapPrintOperationPreview(p *C.GtkPrintOperationPreview) PrintOperationPreview {
-	return PrintOperationPreview{unsafe.Pointer(p)}
+	return PrintOperationPreview{Ptr: unsafe.Pointer(p)}
 }
 func WrapPrintOperationPreview(p unsafe.Pointer) PrintOperationPreview {
-	return PrintOperationPreview{p}
+	return PrintOperationPreview{Ptr: p}
 }
 func (v PrintOperationPreview) IsNil() bool {
 	return v.Ptr == nil
@@ -6155,34 +6184,36 @@ func (v PrintOperationPreview) GetGValueGetter() gobject.GValueGetter {
 }
 
 // EndPreview is a wrapper around gtk_print_operation_preview_end_preview().
-func (preview PrintOperationPreview) EndPreview() {
+func (preview *PrintOperationPreviewIface) EndPreview() {
 	C.gtk_print_operation_preview_end_preview(preview.native())
 }
 
 // IsSelected is a wrapper around gtk_print_operation_preview_is_selected().
-func (preview PrintOperationPreview) IsSelected(page_nr int) bool {
+func (preview *PrintOperationPreviewIface) IsSelected(page_nr int) bool {
 	ret0 := C.gtk_print_operation_preview_is_selected(preview.native(), C.gint(page_nr))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // RenderPage is a wrapper around gtk_print_operation_preview_render_page().
-func (preview PrintOperationPreview) RenderPage(page_nr int) {
+func (preview *PrintOperationPreviewIface) RenderPage(page_nr int) {
 	C.gtk_print_operation_preview_render_page(preview.native(), C.gint(page_nr))
 }
 
 // Interface Scrollable
 type Scrollable struct {
+	ScrollableIface
 	Ptr unsafe.Pointer
 }
+type ScrollableIface struct{}
 
-func (v Scrollable) native() *C.GtkScrollable {
-	return (*C.GtkScrollable)(v.Ptr)
+func (v *ScrollableIface) native() *C.GtkScrollable {
+	return (*C.GtkScrollable)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapScrollable(p *C.GtkScrollable) Scrollable {
-	return Scrollable{unsafe.Pointer(p)}
+	return Scrollable{Ptr: unsafe.Pointer(p)}
 }
 func WrapScrollable(p unsafe.Pointer) Scrollable {
-	return Scrollable{p}
+	return Scrollable{Ptr: p}
 }
 func (v Scrollable) IsNil() bool {
 	return v.Ptr == nil
@@ -6201,69 +6232,71 @@ func (v Scrollable) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetBorder is a wrapper around gtk_scrollable_get_border().
-func (scrollable Scrollable) GetBorder() (bool, Border) {
+func (scrollable *ScrollableIface) GetBorder() (bool, Border) {
 	var border0 C.GtkBorder
 	ret0 := C.gtk_scrollable_get_border(scrollable.native(), &border0)
 	return util.Int2Bool(int(ret0)) /*go:.util*/, wrapBorder(&border0)
 }
 
 // GetHadjustment is a wrapper around gtk_scrollable_get_hadjustment().
-func (scrollable Scrollable) GetHadjustment() Adjustment {
+func (scrollable *ScrollableIface) GetHadjustment() Adjustment {
 	ret0 := C.gtk_scrollable_get_hadjustment(scrollable.native())
 	return wrapAdjustment(ret0)
 }
 
 // GetHscrollPolicy is a wrapper around gtk_scrollable_get_hscroll_policy().
-func (scrollable Scrollable) GetHscrollPolicy() ScrollablePolicy {
+func (scrollable *ScrollableIface) GetHscrollPolicy() ScrollablePolicy {
 	ret0 := C.gtk_scrollable_get_hscroll_policy(scrollable.native())
 	return ScrollablePolicy(ret0)
 }
 
 // GetVadjustment is a wrapper around gtk_scrollable_get_vadjustment().
-func (scrollable Scrollable) GetVadjustment() Adjustment {
+func (scrollable *ScrollableIface) GetVadjustment() Adjustment {
 	ret0 := C.gtk_scrollable_get_vadjustment(scrollable.native())
 	return wrapAdjustment(ret0)
 }
 
 // GetVscrollPolicy is a wrapper around gtk_scrollable_get_vscroll_policy().
-func (scrollable Scrollable) GetVscrollPolicy() ScrollablePolicy {
+func (scrollable *ScrollableIface) GetVscrollPolicy() ScrollablePolicy {
 	ret0 := C.gtk_scrollable_get_vscroll_policy(scrollable.native())
 	return ScrollablePolicy(ret0)
 }
 
 // SetHadjustment is a wrapper around gtk_scrollable_set_hadjustment().
-func (scrollable Scrollable) SetHadjustment(hadjustment Adjustment) {
+func (scrollable *ScrollableIface) SetHadjustment(hadjustment Adjustment) {
 	C.gtk_scrollable_set_hadjustment(scrollable.native(), hadjustment.native())
 }
 
 // SetHscrollPolicy is a wrapper around gtk_scrollable_set_hscroll_policy().
-func (scrollable Scrollable) SetHscrollPolicy(policy ScrollablePolicy) {
+func (scrollable *ScrollableIface) SetHscrollPolicy(policy ScrollablePolicy) {
 	C.gtk_scrollable_set_hscroll_policy(scrollable.native(), C.GtkScrollablePolicy(policy))
 }
 
 // SetVadjustment is a wrapper around gtk_scrollable_set_vadjustment().
-func (scrollable Scrollable) SetVadjustment(vadjustment Adjustment) {
+func (scrollable *ScrollableIface) SetVadjustment(vadjustment Adjustment) {
 	C.gtk_scrollable_set_vadjustment(scrollable.native(), vadjustment.native())
 }
 
 // SetVscrollPolicy is a wrapper around gtk_scrollable_set_vscroll_policy().
-func (scrollable Scrollable) SetVscrollPolicy(policy ScrollablePolicy) {
+func (scrollable *ScrollableIface) SetVscrollPolicy(policy ScrollablePolicy) {
 	C.gtk_scrollable_set_vscroll_policy(scrollable.native(), C.GtkScrollablePolicy(policy))
 }
 
 // Interface StyleProvider
 type StyleProvider struct {
+	StyleProviderIface
 	Ptr unsafe.Pointer
 }
+type StyleProviderIface struct{}
 
-func (v StyleProvider) native() *C.GtkStyleProvider {
-	return (*C.GtkStyleProvider)(v.Ptr)
+func (v *StyleProviderIface) native() *C.GtkStyleProvider {
+	return (*C.GtkStyleProvider)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapStyleProvider(p *C.GtkStyleProvider) StyleProvider {
-	return StyleProvider{unsafe.Pointer(p)}
+	return StyleProvider{Ptr: unsafe.Pointer(p)}
 }
 func WrapStyleProvider(p unsafe.Pointer) StyleProvider {
-	return StyleProvider{p}
+	return StyleProvider{Ptr: p}
 }
 func (v StyleProvider) IsNil() bool {
 	return v.Ptr == nil
@@ -6282,7 +6315,7 @@ func (v StyleProvider) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetStyleProperty is a wrapper around gtk_style_provider_get_style_property().
-func (provider StyleProvider) GetStyleProperty(path WidgetPath, state StateFlags, pspec gobject.ParamSpec) (bool, gobject.Value) {
+func (provider *StyleProviderIface) GetStyleProperty(path WidgetPath, state StateFlags, pspec gobject.ParamSpec) (bool, gobject.Value) {
 	var value0 C.GValue
 	ret0 := C.gtk_style_provider_get_style_property(provider.native(), path.native(), C.GtkStateFlags(state), (*C.GParamSpec)(pspec.Ptr), &value0)
 	return util.Int2Bool(int(ret0)) /*go:.util*/, gobject.WrapValue(unsafe.Pointer(&value0)) /*gir:GObject*/
@@ -6290,17 +6323,19 @@ func (provider StyleProvider) GetStyleProperty(path WidgetPath, state StateFlags
 
 // Interface ToolShell
 type ToolShell struct {
+	ToolShellIface
 	Ptr unsafe.Pointer
 }
+type ToolShellIface struct{}
 
-func (v ToolShell) native() *C.GtkToolShell {
-	return (*C.GtkToolShell)(v.Ptr)
+func (v *ToolShellIface) native() *C.GtkToolShell {
+	return (*C.GtkToolShell)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapToolShell(p *C.GtkToolShell) ToolShell {
-	return ToolShell{unsafe.Pointer(p)}
+	return ToolShell{Ptr: unsafe.Pointer(p)}
 }
 func WrapToolShell(p unsafe.Pointer) ToolShell {
-	return ToolShell{p}
+	return ToolShell{Ptr: p}
 }
 func (v ToolShell) IsNil() bool {
 	return v.Ptr == nil
@@ -6319,65 +6354,67 @@ func (v ToolShell) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetEllipsizeMode is a wrapper around gtk_tool_shell_get_ellipsize_mode().
-func (shell ToolShell) GetEllipsizeMode() /*gir:Pango*/ pango.EllipsizeMode {
+func (shell *ToolShellIface) GetEllipsizeMode() /*gir:Pango*/ pango.EllipsizeMode {
 	ret0 := C.gtk_tool_shell_get_ellipsize_mode(shell.native())
 	return /*gir:Pango*/ pango.EllipsizeMode(ret0)
 }
 
 // GetOrientation is a wrapper around gtk_tool_shell_get_orientation().
-func (shell ToolShell) GetOrientation() Orientation {
+func (shell *ToolShellIface) GetOrientation() Orientation {
 	ret0 := C.gtk_tool_shell_get_orientation(shell.native())
 	return Orientation(ret0)
 }
 
 // GetReliefStyle is a wrapper around gtk_tool_shell_get_relief_style().
-func (shell ToolShell) GetReliefStyle() ReliefStyle {
+func (shell *ToolShellIface) GetReliefStyle() ReliefStyle {
 	ret0 := C.gtk_tool_shell_get_relief_style(shell.native())
 	return ReliefStyle(ret0)
 }
 
 // GetStyle is a wrapper around gtk_tool_shell_get_style().
-func (shell ToolShell) GetStyle() ToolbarStyle {
+func (shell *ToolShellIface) GetStyle() ToolbarStyle {
 	ret0 := C.gtk_tool_shell_get_style(shell.native())
 	return ToolbarStyle(ret0)
 }
 
 // GetTextAlignment is a wrapper around gtk_tool_shell_get_text_alignment().
-func (shell ToolShell) GetTextAlignment() float32 {
+func (shell *ToolShellIface) GetTextAlignment() float32 {
 	ret0 := C.gtk_tool_shell_get_text_alignment(shell.native())
 	return float32(ret0)
 }
 
 // GetTextOrientation is a wrapper around gtk_tool_shell_get_text_orientation().
-func (shell ToolShell) GetTextOrientation() Orientation {
+func (shell *ToolShellIface) GetTextOrientation() Orientation {
 	ret0 := C.gtk_tool_shell_get_text_orientation(shell.native())
 	return Orientation(ret0)
 }
 
 // GetTextSizeGroup is a wrapper around gtk_tool_shell_get_text_size_group().
-func (shell ToolShell) GetTextSizeGroup() SizeGroup {
+func (shell *ToolShellIface) GetTextSizeGroup() SizeGroup {
 	ret0 := C.gtk_tool_shell_get_text_size_group(shell.native())
 	return wrapSizeGroup(ret0)
 }
 
 // RebuildMenu is a wrapper around gtk_tool_shell_rebuild_menu().
-func (shell ToolShell) RebuildMenu() {
+func (shell *ToolShellIface) RebuildMenu() {
 	C.gtk_tool_shell_rebuild_menu(shell.native())
 }
 
 // Interface TreeDragDest
 type TreeDragDest struct {
+	TreeDragDestIface
 	Ptr unsafe.Pointer
 }
+type TreeDragDestIface struct{}
 
-func (v TreeDragDest) native() *C.GtkTreeDragDest {
-	return (*C.GtkTreeDragDest)(v.Ptr)
+func (v *TreeDragDestIface) native() *C.GtkTreeDragDest {
+	return (*C.GtkTreeDragDest)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapTreeDragDest(p *C.GtkTreeDragDest) TreeDragDest {
-	return TreeDragDest{unsafe.Pointer(p)}
+	return TreeDragDest{Ptr: unsafe.Pointer(p)}
 }
 func WrapTreeDragDest(p unsafe.Pointer) TreeDragDest {
-	return TreeDragDest{p}
+	return TreeDragDest{Ptr: p}
 }
 func (v TreeDragDest) IsNil() bool {
 	return v.Ptr == nil
@@ -6396,30 +6433,32 @@ func (v TreeDragDest) GetGValueGetter() gobject.GValueGetter {
 }
 
 // DragDataReceived is a wrapper around gtk_tree_drag_dest_drag_data_received().
-func (drag_dest TreeDragDest) DragDataReceived(dest TreePath, selection_data SelectionData) bool {
+func (drag_dest *TreeDragDestIface) DragDataReceived(dest TreePath, selection_data SelectionData) bool {
 	ret0 := C.gtk_tree_drag_dest_drag_data_received(drag_dest.native(), dest.native(), selection_data.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // RowDropPossible is a wrapper around gtk_tree_drag_dest_row_drop_possible().
-func (drag_dest TreeDragDest) RowDropPossible(dest_path TreePath, selection_data SelectionData) bool {
+func (drag_dest *TreeDragDestIface) RowDropPossible(dest_path TreePath, selection_data SelectionData) bool {
 	ret0 := C.gtk_tree_drag_dest_row_drop_possible(drag_dest.native(), dest_path.native(), selection_data.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // Interface TreeDragSource
 type TreeDragSource struct {
+	TreeDragSourceIface
 	Ptr unsafe.Pointer
 }
+type TreeDragSourceIface struct{}
 
-func (v TreeDragSource) native() *C.GtkTreeDragSource {
-	return (*C.GtkTreeDragSource)(v.Ptr)
+func (v *TreeDragSourceIface) native() *C.GtkTreeDragSource {
+	return (*C.GtkTreeDragSource)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapTreeDragSource(p *C.GtkTreeDragSource) TreeDragSource {
-	return TreeDragSource{unsafe.Pointer(p)}
+	return TreeDragSource{Ptr: unsafe.Pointer(p)}
 }
 func WrapTreeDragSource(p unsafe.Pointer) TreeDragSource {
-	return TreeDragSource{p}
+	return TreeDragSource{Ptr: p}
 }
 func (v TreeDragSource) IsNil() bool {
 	return v.Ptr == nil
@@ -6438,36 +6477,38 @@ func (v TreeDragSource) GetGValueGetter() gobject.GValueGetter {
 }
 
 // DragDataDelete is a wrapper around gtk_tree_drag_source_drag_data_delete().
-func (drag_source TreeDragSource) DragDataDelete(path TreePath) bool {
+func (drag_source *TreeDragSourceIface) DragDataDelete(path TreePath) bool {
 	ret0 := C.gtk_tree_drag_source_drag_data_delete(drag_source.native(), path.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // DragDataGet is a wrapper around gtk_tree_drag_source_drag_data_get().
-func (drag_source TreeDragSource) DragDataGet(path TreePath, selection_data SelectionData) bool {
+func (drag_source *TreeDragSourceIface) DragDataGet(path TreePath, selection_data SelectionData) bool {
 	ret0 := C.gtk_tree_drag_source_drag_data_get(drag_source.native(), path.native(), selection_data.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // RowDraggable is a wrapper around gtk_tree_drag_source_row_draggable().
-func (drag_source TreeDragSource) RowDraggable(path TreePath) bool {
+func (drag_source *TreeDragSourceIface) RowDraggable(path TreePath) bool {
 	ret0 := C.gtk_tree_drag_source_row_draggable(drag_source.native(), path.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // Interface TreeSortable
 type TreeSortable struct {
+	TreeSortableIface
 	Ptr unsafe.Pointer
 }
+type TreeSortableIface struct{}
 
-func (v TreeSortable) native() *C.GtkTreeSortable {
-	return (*C.GtkTreeSortable)(v.Ptr)
+func (v *TreeSortableIface) native() *C.GtkTreeSortable {
+	return (*C.GtkTreeSortable)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapTreeSortable(p *C.GtkTreeSortable) TreeSortable {
-	return TreeSortable{unsafe.Pointer(p)}
+	return TreeSortable{Ptr: unsafe.Pointer(p)}
 }
 func WrapTreeSortable(p unsafe.Pointer) TreeSortable {
-	return TreeSortable{p}
+	return TreeSortable{Ptr: p}
 }
 func (v TreeSortable) IsNil() bool {
 	return v.Ptr == nil
@@ -6486,7 +6527,7 @@ func (v TreeSortable) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetSortColumnId is a wrapper around gtk_tree_sortable_get_sort_column_id().
-func (sortable TreeSortable) GetSortColumnId() (bool, int, SortType) {
+func (sortable *TreeSortableIface) GetSortColumnId() (bool, int, SortType) {
 	var sort_column_id0 C.gint
 	var order0 C.GtkSortType
 	ret0 := C.gtk_tree_sortable_get_sort_column_id(sortable.native(), &sort_column_id0, &order0)
@@ -6494,18 +6535,18 @@ func (sortable TreeSortable) GetSortColumnId() (bool, int, SortType) {
 }
 
 // HasDefaultSortFunc is a wrapper around gtk_tree_sortable_has_default_sort_func().
-func (sortable TreeSortable) HasDefaultSortFunc() bool {
+func (sortable *TreeSortableIface) HasDefaultSortFunc() bool {
 	ret0 := C.gtk_tree_sortable_has_default_sort_func(sortable.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // SetSortColumnId is a wrapper around gtk_tree_sortable_set_sort_column_id().
-func (sortable TreeSortable) SetSortColumnId(sort_column_id int, order SortType) {
+func (sortable *TreeSortableIface) SetSortColumnId(sort_column_id int, order SortType) {
 	C.gtk_tree_sortable_set_sort_column_id(sortable.native(), C.gint(sort_column_id), C.GtkSortType(order))
 }
 
 // SortColumnChanged is a wrapper around gtk_tree_sortable_sort_column_changed().
-func (sortable TreeSortable) SortColumnChanged() {
+func (sortable *TreeSortableIface) SortColumnChanged() {
 	C.gtk_tree_sortable_sort_column_changed(sortable.native())
 }
 
@@ -6877,6 +6918,9 @@ func (adjustment Adjustment) SetValue(value float64) {
 
 // Object AppChooserDialog
 type AppChooserDialog struct {
+	atk.ImplementorIfaceIface
+	AppChooserIface
+	BuildableIface
 	Dialog
 }
 
@@ -6907,7 +6951,7 @@ func (v AppChooserDialog) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v AppChooserDialog) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v AppChooserDialog) AppChooser() AppChooser {
 	return WrapAppChooser(v.Ptr)
@@ -6952,6 +6996,8 @@ func (self AppChooserDialog) SetHeading(heading string) {
 
 // Object Application
 type Application struct {
+	gio.ActionGroupIface
+	gio.ActionMapIface
 	gio.Application
 }
 
@@ -6982,10 +7028,10 @@ func (v Application) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Application) ActionGroup() gio.ActionGroup {
-	return gio.WrapActionGroup(v.Ptr) /*gir:Gio*/
+	return gio.WrapActionGroup(v.Ptr)
 }
 func (v Application) ActionMap() gio.ActionMap {
-	return gio.WrapActionMap(v.Ptr) /*gir:Gio*/
+	return gio.WrapActionMap(v.Ptr)
 }
 
 // ApplicationNew is a wrapper around gtk_application_new().
@@ -7153,6 +7199,8 @@ func (application Application) Uninhibit(cookie uint) {
 
 // Object Bin
 type Bin struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Container
 }
 
@@ -7183,7 +7231,7 @@ func (v Bin) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Bin) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Bin) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -7197,6 +7245,8 @@ func (bin Bin) GetChild() Widget {
 
 // Object Container
 type Container struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Widget
 }
 
@@ -7227,7 +7277,7 @@ func (v Container) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Container) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Container) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -7349,6 +7399,8 @@ func (container Container) UnsetFocusChain() {
 
 // Object Dialog
 type Dialog struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Window
 }
 
@@ -7379,7 +7431,7 @@ func (v Dialog) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Dialog) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Dialog) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -7445,6 +7497,8 @@ func (dialog Dialog) SetResponseSensitive(response_id int, setting bool) {
 
 // Object Window
 type Window struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Bin
 }
 
@@ -7475,7 +7529,7 @@ func (v Window) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Window) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Window) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -8124,6 +8178,8 @@ func (window_group WindowGroup) RemoveWindow(window Window) {
 
 // Object AboutDialog
 type AboutDialog struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Dialog
 }
 
@@ -8154,7 +8210,7 @@ func (v AboutDialog) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v AboutDialog) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v AboutDialog) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -8439,6 +8495,8 @@ func (about AboutDialog) SetWrapLicense(wrap_license bool) {
 
 // Object ActionBar
 type ActionBar struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Bin
 }
 
@@ -8469,7 +8527,7 @@ func (v ActionBar) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ActionBar) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ActionBar) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -8504,6 +8562,10 @@ func (action_bar ActionBar) SetCenterWidget(center_widget Widget) {
 
 // Object ApplicationWindow
 type ApplicationWindow struct {
+	atk.ImplementorIfaceIface
+	gio.ActionGroupIface
+	gio.ActionMapIface
+	BuildableIface
 	Window
 }
 
@@ -8534,13 +8596,13 @@ func (v ApplicationWindow) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ApplicationWindow) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ApplicationWindow) ActionGroup() gio.ActionGroup {
-	return gio.WrapActionGroup(v.Ptr) /*gir:Gio*/
+	return gio.WrapActionGroup(v.Ptr)
 }
 func (v ApplicationWindow) ActionMap() gio.ActionMap {
-	return gio.WrapActionMap(v.Ptr) /*gir:Gio*/
+	return gio.WrapActionMap(v.Ptr)
 }
 func (v ApplicationWindow) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -8582,6 +8644,8 @@ func (window ApplicationWindow) SetShowMenubar(show_menubar bool) {
 
 // Object AspectFrame
 type AspectFrame struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Frame
 }
 
@@ -8612,7 +8676,7 @@ func (v AspectFrame) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v AspectFrame) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v AspectFrame) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -8633,6 +8697,8 @@ func (aspect_frame AspectFrame) Set(xalign float32, yalign float32, ratio float3
 
 // Object Frame
 type Frame struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Bin
 }
 
@@ -8663,7 +8729,7 @@ func (v Frame) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Frame) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Frame) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -8728,6 +8794,7 @@ func (frame Frame) SetShadowType(type_ ShadowType) {
 
 // Object FileFilter
 type FileFilter struct {
+	BuildableIface
 	gobject.InitiallyUnowned
 }
 
@@ -8826,17 +8893,19 @@ func (filter FileFilter) ToGvariant() glib.Variant {
 
 // Interface RecentChooser
 type RecentChooser struct {
+	RecentChooserIface
 	Ptr unsafe.Pointer
 }
+type RecentChooserIface struct{}
 
-func (v RecentChooser) native() *C.GtkRecentChooser {
-	return (*C.GtkRecentChooser)(v.Ptr)
+func (v *RecentChooserIface) native() *C.GtkRecentChooser {
+	return (*C.GtkRecentChooser)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapRecentChooser(p *C.GtkRecentChooser) RecentChooser {
-	return RecentChooser{unsafe.Pointer(p)}
+	return RecentChooser{Ptr: unsafe.Pointer(p)}
 }
 func WrapRecentChooser(p unsafe.Pointer) RecentChooser {
-	return RecentChooser{p}
+	return RecentChooser{Ptr: p}
 }
 func (v RecentChooser) IsNil() bool {
 	return v.Ptr == nil
@@ -8855,18 +8924,18 @@ func (v RecentChooser) GetGValueGetter() gobject.GValueGetter {
 }
 
 // AddFilter is a wrapper around gtk_recent_chooser_add_filter().
-func (chooser RecentChooser) AddFilter(filter RecentFilter) {
+func (chooser *RecentChooserIface) AddFilter(filter RecentFilter) {
 	C.gtk_recent_chooser_add_filter(chooser.native(), filter.native())
 }
 
 // GetCurrentItem is a wrapper around gtk_recent_chooser_get_current_item().
-func (chooser RecentChooser) GetCurrentItem() RecentInfo {
+func (chooser *RecentChooserIface) GetCurrentItem() RecentInfo {
 	ret0 := C.gtk_recent_chooser_get_current_item(chooser.native())
 	return wrapRecentInfo(ret0)
 }
 
 // GetCurrentUri is a wrapper around gtk_recent_chooser_get_current_uri().
-func (chooser RecentChooser) GetCurrentUri() string {
+func (chooser *RecentChooserIface) GetCurrentUri() string {
 	ret0 := C.gtk_recent_chooser_get_current_uri(chooser.native())
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
@@ -8874,68 +8943,68 @@ func (chooser RecentChooser) GetCurrentUri() string {
 }
 
 // GetFilter is a wrapper around gtk_recent_chooser_get_filter().
-func (chooser RecentChooser) GetFilter() RecentFilter {
+func (chooser *RecentChooserIface) GetFilter() RecentFilter {
 	ret0 := C.gtk_recent_chooser_get_filter(chooser.native())
 	return wrapRecentFilter(ret0)
 }
 
 // GetItems is a wrapper around gtk_recent_chooser_get_items().
-func (chooser RecentChooser) GetItems() glib.List {
+func (chooser *RecentChooserIface) GetItems() glib.List {
 	ret0 := C.gtk_recent_chooser_get_items(chooser.native())
 	return glib.WrapList(unsafe.Pointer(ret0),
 		func(p unsafe.Pointer) interface{} { return WrapRecentInfo(p) }) /*gir:GLib*/
 }
 
 // GetLimit is a wrapper around gtk_recent_chooser_get_limit().
-func (chooser RecentChooser) GetLimit() int {
+func (chooser *RecentChooserIface) GetLimit() int {
 	ret0 := C.gtk_recent_chooser_get_limit(chooser.native())
 	return int(ret0)
 }
 
 // GetLocalOnly is a wrapper around gtk_recent_chooser_get_local_only().
-func (chooser RecentChooser) GetLocalOnly() bool {
+func (chooser *RecentChooserIface) GetLocalOnly() bool {
 	ret0 := C.gtk_recent_chooser_get_local_only(chooser.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetSelectMultiple is a wrapper around gtk_recent_chooser_get_select_multiple().
-func (chooser RecentChooser) GetSelectMultiple() bool {
+func (chooser *RecentChooserIface) GetSelectMultiple() bool {
 	ret0 := C.gtk_recent_chooser_get_select_multiple(chooser.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetShowIcons is a wrapper around gtk_recent_chooser_get_show_icons().
-func (chooser RecentChooser) GetShowIcons() bool {
+func (chooser *RecentChooserIface) GetShowIcons() bool {
 	ret0 := C.gtk_recent_chooser_get_show_icons(chooser.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetShowNotFound is a wrapper around gtk_recent_chooser_get_show_not_found().
-func (chooser RecentChooser) GetShowNotFound() bool {
+func (chooser *RecentChooserIface) GetShowNotFound() bool {
 	ret0 := C.gtk_recent_chooser_get_show_not_found(chooser.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetShowPrivate is a wrapper around gtk_recent_chooser_get_show_private().
-func (chooser RecentChooser) GetShowPrivate() bool {
+func (chooser *RecentChooserIface) GetShowPrivate() bool {
 	ret0 := C.gtk_recent_chooser_get_show_private(chooser.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetShowTips is a wrapper around gtk_recent_chooser_get_show_tips().
-func (chooser RecentChooser) GetShowTips() bool {
+func (chooser *RecentChooserIface) GetShowTips() bool {
 	ret0 := C.gtk_recent_chooser_get_show_tips(chooser.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetSortType is a wrapper around gtk_recent_chooser_get_sort_type().
-func (chooser RecentChooser) GetSortType() RecentSortType {
+func (chooser *RecentChooserIface) GetSortType() RecentSortType {
 	ret0 := C.gtk_recent_chooser_get_sort_type(chooser.native())
 	return RecentSortType(ret0)
 }
 
 // GetUris is a wrapper around gtk_recent_chooser_get_uris().
-func (chooser RecentChooser) GetUris() []string {
+func (chooser *RecentChooserIface) GetUris() []string {
 	var length0 C.gsize
 	ret0 := C.gtk_recent_chooser_get_uris(chooser.native(), &length0)
 	var ret0Slice []*C.gchar
@@ -8951,17 +9020,17 @@ func (chooser RecentChooser) GetUris() []string {
 }
 
 // RemoveFilter is a wrapper around gtk_recent_chooser_remove_filter().
-func (chooser RecentChooser) RemoveFilter(filter RecentFilter) {
+func (chooser *RecentChooserIface) RemoveFilter(filter RecentFilter) {
 	C.gtk_recent_chooser_remove_filter(chooser.native(), filter.native())
 }
 
 // SelectAll is a wrapper around gtk_recent_chooser_select_all().
-func (chooser RecentChooser) SelectAll() {
+func (chooser *RecentChooserIface) SelectAll() {
 	C.gtk_recent_chooser_select_all(chooser.native())
 }
 
 // SelectUri is a wrapper around gtk_recent_chooser_select_uri().
-func (chooser RecentChooser) SelectUri(uri string) (bool, error) {
+func (chooser *RecentChooserIface) SelectUri(uri string) (bool, error) {
 	uri0 := (*C.gchar)(C.CString(uri))
 	var err glib.Error
 	ret0 := C.gtk_recent_chooser_select_uri(chooser.native(), uri0, (**C.GError)(unsafe.Pointer(&err)))
@@ -8974,7 +9043,7 @@ func (chooser RecentChooser) SelectUri(uri string) (bool, error) {
 }
 
 // SetCurrentUri is a wrapper around gtk_recent_chooser_set_current_uri().
-func (chooser RecentChooser) SetCurrentUri(uri string) (bool, error) {
+func (chooser *RecentChooserIface) SetCurrentUri(uri string) (bool, error) {
 	uri0 := (*C.gchar)(C.CString(uri))
 	var err glib.Error
 	ret0 := C.gtk_recent_chooser_set_current_uri(chooser.native(), uri0, (**C.GError)(unsafe.Pointer(&err)))
@@ -8987,57 +9056,57 @@ func (chooser RecentChooser) SetCurrentUri(uri string) (bool, error) {
 }
 
 // SetFilter is a wrapper around gtk_recent_chooser_set_filter().
-func (chooser RecentChooser) SetFilter(filter RecentFilter) {
+func (chooser *RecentChooserIface) SetFilter(filter RecentFilter) {
 	C.gtk_recent_chooser_set_filter(chooser.native(), filter.native())
 }
 
 // SetLimit is a wrapper around gtk_recent_chooser_set_limit().
-func (chooser RecentChooser) SetLimit(limit int) {
+func (chooser *RecentChooserIface) SetLimit(limit int) {
 	C.gtk_recent_chooser_set_limit(chooser.native(), C.gint(limit))
 }
 
 // SetLocalOnly is a wrapper around gtk_recent_chooser_set_local_only().
-func (chooser RecentChooser) SetLocalOnly(local_only bool) {
+func (chooser *RecentChooserIface) SetLocalOnly(local_only bool) {
 	C.gtk_recent_chooser_set_local_only(chooser.native(), C.gboolean(util.Bool2Int(local_only)) /*go:.util*/)
 }
 
 // SetSelectMultiple is a wrapper around gtk_recent_chooser_set_select_multiple().
-func (chooser RecentChooser) SetSelectMultiple(select_multiple bool) {
+func (chooser *RecentChooserIface) SetSelectMultiple(select_multiple bool) {
 	C.gtk_recent_chooser_set_select_multiple(chooser.native(), C.gboolean(util.Bool2Int(select_multiple)) /*go:.util*/)
 }
 
 // SetShowIcons is a wrapper around gtk_recent_chooser_set_show_icons().
-func (chooser RecentChooser) SetShowIcons(show_icons bool) {
+func (chooser *RecentChooserIface) SetShowIcons(show_icons bool) {
 	C.gtk_recent_chooser_set_show_icons(chooser.native(), C.gboolean(util.Bool2Int(show_icons)) /*go:.util*/)
 }
 
 // SetShowNotFound is a wrapper around gtk_recent_chooser_set_show_not_found().
-func (chooser RecentChooser) SetShowNotFound(show_not_found bool) {
+func (chooser *RecentChooserIface) SetShowNotFound(show_not_found bool) {
 	C.gtk_recent_chooser_set_show_not_found(chooser.native(), C.gboolean(util.Bool2Int(show_not_found)) /*go:.util*/)
 }
 
 // SetShowPrivate is a wrapper around gtk_recent_chooser_set_show_private().
-func (chooser RecentChooser) SetShowPrivate(show_private bool) {
+func (chooser *RecentChooserIface) SetShowPrivate(show_private bool) {
 	C.gtk_recent_chooser_set_show_private(chooser.native(), C.gboolean(util.Bool2Int(show_private)) /*go:.util*/)
 }
 
 // SetShowTips is a wrapper around gtk_recent_chooser_set_show_tips().
-func (chooser RecentChooser) SetShowTips(show_tips bool) {
+func (chooser *RecentChooserIface) SetShowTips(show_tips bool) {
 	C.gtk_recent_chooser_set_show_tips(chooser.native(), C.gboolean(util.Bool2Int(show_tips)) /*go:.util*/)
 }
 
 // SetSortType is a wrapper around gtk_recent_chooser_set_sort_type().
-func (chooser RecentChooser) SetSortType(sort_type RecentSortType) {
+func (chooser *RecentChooserIface) SetSortType(sort_type RecentSortType) {
 	C.gtk_recent_chooser_set_sort_type(chooser.native(), C.GtkRecentSortType(sort_type))
 }
 
 // UnselectAll is a wrapper around gtk_recent_chooser_unselect_all().
-func (chooser RecentChooser) UnselectAll() {
+func (chooser *RecentChooserIface) UnselectAll() {
 	C.gtk_recent_chooser_unselect_all(chooser.native())
 }
 
 // UnselectUri is a wrapper around gtk_recent_chooser_unselect_uri().
-func (chooser RecentChooser) UnselectUri(uri string) {
+func (chooser *RecentChooserIface) UnselectUri(uri string) {
 	uri0 := (*C.gchar)(C.CString(uri))
 	C.gtk_recent_chooser_unselect_uri(chooser.native(), uri0)
 	C.free(unsafe.Pointer(uri0)) /*ch:<stdlib.h>*/
@@ -9045,6 +9114,7 @@ func (chooser RecentChooser) UnselectUri(uri string) {
 
 // Object RecentFilter
 type RecentFilter struct {
+	BuildableIface
 	gobject.InitiallyUnowned
 }
 
@@ -9150,6 +9220,7 @@ func (filter RecentFilter) SetName(name string) {
 
 // Object SizeGroup
 type SizeGroup struct {
+	BuildableIface
 	gobject.Object
 }
 
@@ -9212,6 +9283,8 @@ func (size_group SizeGroup) SetMode(mode SizeGroupMode) {
 
 // Object AccelLabel
 type AccelLabel struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Label
 }
 
@@ -9242,7 +9315,7 @@ func (v AccelLabel) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v AccelLabel) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v AccelLabel) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -9299,6 +9372,8 @@ func (accel_label AccelLabel) SetAccelWidget(accel_widget Widget) {
 
 // Object Label
 type Label struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Misc
 }
 
@@ -9329,7 +9404,7 @@ func (v Label) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Label) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Label) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -9636,6 +9711,8 @@ func (label Label) SetYalign(yalign float32) {
 
 // Object Misc
 type Misc struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Widget
 }
 
@@ -9666,7 +9743,7 @@ func (v Misc) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Misc) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Misc) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -9674,6 +9751,11 @@ func (v Misc) Buildable() Buildable {
 
 // Object AppChooserButton
 type AppChooserButton struct {
+	atk.ImplementorIfaceIface
+	AppChooserIface
+	BuildableIface
+	CellEditableIface
+	CellLayoutIface
 	ComboBox
 }
 
@@ -9704,7 +9786,7 @@ func (v AppChooserButton) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v AppChooserButton) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v AppChooserButton) AppChooser() AppChooser {
 	return WrapAppChooser(v.Ptr)
@@ -9786,6 +9868,10 @@ func (self AppChooserButton) SetShowDialogItem(setting bool) {
 
 // Object ComboBox
 type ComboBox struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	CellEditableIface
+	CellLayoutIface
 	Bin
 }
 
@@ -9816,7 +9902,7 @@ func (v ComboBox) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ComboBox) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ComboBox) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -10019,6 +10105,10 @@ func (combo_box ComboBox) SetWrapWidth(width int) {
 
 // Object AppChooserWidget
 type AppChooserWidget struct {
+	atk.ImplementorIfaceIface
+	AppChooserIface
+	BuildableIface
+	OrientableIface
 	Box
 }
 
@@ -10049,7 +10139,7 @@ func (v AppChooserWidget) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v AppChooserWidget) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v AppChooserWidget) AppChooser() AppChooser {
 	return WrapAppChooser(v.Ptr)
@@ -10140,6 +10230,9 @@ func (self AppChooserWidget) SetShowRecommended(setting bool) {
 
 // Object Box
 type Box struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Container
 }
 
@@ -10170,7 +10263,7 @@ func (v Box) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Box) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Box) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -10261,6 +10354,8 @@ func (box Box) SetSpacing(spacing int) {
 
 // Object ShortcutsWindow
 type ShortcutsWindow struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Window
 }
 
@@ -10291,7 +10386,7 @@ func (v ShortcutsWindow) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ShortcutsWindow) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ShortcutsWindow) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -10299,6 +10394,8 @@ func (v ShortcutsWindow) Buildable() Buildable {
 
 // Object Assistant
 type Assistant struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Window
 }
 
@@ -10329,7 +10426,7 @@ func (v Assistant) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Assistant) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Assistant) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -10466,6 +10563,10 @@ func (assistant Assistant) UpdateButtonsState() {
 
 // Object Button
 type Button struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
 	Bin
 }
 
@@ -10496,7 +10597,7 @@ func (v Button) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Button) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Button) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -10612,17 +10713,19 @@ func (button Button) SetUseUnderline(use_underline bool) {
 
 // Interface Activatable
 type Activatable struct {
+	ActivatableIface
 	Ptr unsafe.Pointer
 }
+type ActivatableIface struct{}
 
-func (v Activatable) native() *C.GtkActivatable {
-	return (*C.GtkActivatable)(v.Ptr)
+func (v *ActivatableIface) native() *C.GtkActivatable {
+	return (*C.GtkActivatable)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapActivatable(p *C.GtkActivatable) Activatable {
-	return Activatable{unsafe.Pointer(p)}
+	return Activatable{Ptr: unsafe.Pointer(p)}
 }
 func WrapActivatable(p unsafe.Pointer) Activatable {
-	return Activatable{p}
+	return Activatable{Ptr: p}
 }
 func (v Activatable) IsNil() bool {
 	return v.Ptr == nil
@@ -10642,6 +10745,9 @@ func (v Activatable) GetGValueGetter() gobject.GValueGetter {
 
 // Object ButtonBox
 type ButtonBox struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Box
 }
 
@@ -10672,7 +10778,7 @@ func (v ButtonBox) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ButtonBox) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ButtonBox) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -10722,6 +10828,8 @@ func (widget ButtonBox) SetLayout(layout_style ButtonBoxStyle) {
 
 // Object Calendar
 type Calendar struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Widget
 }
 
@@ -10752,7 +10860,7 @@ func (v Calendar) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Calendar) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Calendar) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -10839,6 +10947,9 @@ func (calendar Calendar) UnmarkDay(day uint) {
 
 // Object CellAreaBox
 type CellAreaBox struct {
+	BuildableIface
+	CellLayoutIface
+	OrientableIface
 	CellArea
 }
 
@@ -11064,6 +11175,7 @@ func CellRendererPixbufNew() CellRenderer {
 
 // Object CellRendererProgress
 type CellRendererProgress struct {
+	OrientableIface
 	CellRenderer
 }
 
@@ -11252,6 +11364,10 @@ func (toggle CellRendererToggle) SetRadio(radio bool) {
 
 // Object CellView
 type CellView struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	CellLayoutIface
+	OrientableIface
 	Widget
 }
 
@@ -11282,7 +11398,7 @@ func (v CellView) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v CellView) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v CellView) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -11379,6 +11495,10 @@ func (cell_view CellView) SetModel(model TreeModel) {
 
 // Object CheckButton
 type CheckButton struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
 	ToggleButton
 }
 
@@ -11409,7 +11529,7 @@ func (v CheckButton) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v CheckButton) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v CheckButton) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -11445,6 +11565,10 @@ func CheckButtonNewWithMnemonic(label string) Widget {
 
 // Object ToggleButton
 type ToggleButton struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
 	Button
 }
 
@@ -11475,7 +11599,7 @@ func (v ToggleButton) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ToggleButton) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ToggleButton) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -11549,6 +11673,10 @@ func (toggle_button ToggleButton) Toggled() {
 
 // Object CheckMenuItem
 type CheckMenuItem struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
 	MenuItem
 }
 
@@ -11579,7 +11707,7 @@ func (v CheckMenuItem) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v CheckMenuItem) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v CheckMenuItem) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -11653,6 +11781,10 @@ func (check_menu_item CheckMenuItem) Toggled() {
 
 // Object MenuItem
 type MenuItem struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
 	Bin
 }
 
@@ -11683,7 +11815,7 @@ func (v MenuItem) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v MenuItem) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v MenuItem) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -11795,6 +11927,8 @@ func (menu_item MenuItem) ToggleSizeAllocate(allocation int) {
 
 // Object Menu
 type Menu struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	MenuShell
 }
 
@@ -11825,7 +11959,7 @@ func (v Menu) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Menu) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Menu) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -11941,6 +12075,8 @@ func MenuGetForAttachWidget(widget Widget) glib.List {
 
 // Object MenuShell
 type MenuShell struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Container
 }
 
@@ -11971,7 +12107,7 @@ func (v MenuShell) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v MenuShell) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v MenuShell) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -12190,6 +12326,11 @@ func ClipboardGetDefault(display gdk.Display) Clipboard {
 
 // Object ColorButton
 type ColorButton struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
+	ColorChooserIface
 	Button
 }
 
@@ -12220,7 +12361,7 @@ func (v ColorButton) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ColorButton) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ColorButton) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -12263,6 +12404,9 @@ func (button ColorButton) SetTitle(title string) {
 
 // Object ColorChooserDialog
 type ColorChooserDialog struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	ColorChooserIface
 	Dialog
 }
 
@@ -12293,7 +12437,7 @@ func (v ColorChooserDialog) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ColorChooserDialog) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ColorChooserDialog) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -12312,6 +12456,10 @@ func ColorChooserDialogNew(title string, parent Window) Widget {
 
 // Object ColorChooserWidget
 type ColorChooserWidget struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	ColorChooserIface
+	OrientableIface
 	Box
 }
 
@@ -12342,7 +12490,7 @@ func (v ColorChooserWidget) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ColorChooserWidget) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ColorChooserWidget) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -12362,6 +12510,9 @@ func ColorChooserWidgetNew() Widget {
 
 // Object ColorSelection
 type ColorSelection struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Box
 }
 
@@ -12392,7 +12543,7 @@ func (v ColorSelection) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ColorSelection) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ColorSelection) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -12469,6 +12620,8 @@ func (colorsel ColorSelection) SetPreviousRgba(rgba gdk.RGBA) {
 
 // Object ColorSelectionDialog
 type ColorSelectionDialog struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Dialog
 }
 
@@ -12499,7 +12652,7 @@ func (v ColorSelectionDialog) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ColorSelectionDialog) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ColorSelectionDialog) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -12521,6 +12674,9 @@ func (colorsel ColorSelectionDialog) GetColorSelection() Widget {
 
 // Object ComboBoxAccessible
 type ComboBoxAccessible struct {
+	atk.ActionIface
+	atk.ComponentIface
+	atk.SelectionIface
 	ContainerAccessible
 }
 
@@ -12551,17 +12707,21 @@ func (v ComboBoxAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ComboBoxAccessible) Action() atk.Action {
-	return atk.WrapAction(v.Ptr) /*gir:Atk*/
+	return atk.WrapAction(v.Ptr)
 }
 func (v ComboBoxAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v ComboBoxAccessible) Selection() atk.Selection {
-	return atk.WrapSelection(v.Ptr) /*gir:Atk*/
+	return atk.WrapSelection(v.Ptr)
 }
 
 // Object ComboBoxText
 type ComboBoxText struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	CellEditableIface
+	CellLayoutIface
 	ComboBox
 }
 
@@ -12592,7 +12752,7 @@ func (v ComboBoxText) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ComboBoxText) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ComboBoxText) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -12684,6 +12844,7 @@ func (combo_box ComboBoxText) RemoveAll() {
 
 // Object ContainerAccessible
 type ContainerAccessible struct {
+	atk.ComponentIface
 	WidgetAccessible
 }
 
@@ -12714,11 +12875,12 @@ func (v ContainerAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ContainerAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 
 // Object WidgetAccessible
 type WidgetAccessible struct {
+	atk.ComponentIface
 	Accessible
 }
 
@@ -12749,11 +12911,14 @@ func (v WidgetAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v WidgetAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 
 // Object CheckMenuItemAccessible
 type CheckMenuItemAccessible struct {
+	atk.ActionIface
+	atk.ComponentIface
+	atk.SelectionIface
 	MenuItemAccessible
 }
 
@@ -12784,17 +12949,20 @@ func (v CheckMenuItemAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v CheckMenuItemAccessible) Action() atk.Action {
-	return atk.WrapAction(v.Ptr) /*gir:Atk*/
+	return atk.WrapAction(v.Ptr)
 }
 func (v CheckMenuItemAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v CheckMenuItemAccessible) Selection() atk.Selection {
-	return atk.WrapSelection(v.Ptr) /*gir:Atk*/
+	return atk.WrapSelection(v.Ptr)
 }
 
 // Object MenuItemAccessible
 type MenuItemAccessible struct {
+	atk.ActionIface
+	atk.ComponentIface
+	atk.SelectionIface
 	ContainerAccessible
 }
 
@@ -12825,17 +12993,20 @@ func (v MenuItemAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v MenuItemAccessible) Action() atk.Action {
-	return atk.WrapAction(v.Ptr) /*gir:Atk*/
+	return atk.WrapAction(v.Ptr)
 }
 func (v MenuItemAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v MenuItemAccessible) Selection() atk.Selection {
-	return atk.WrapSelection(v.Ptr) /*gir:Atk*/
+	return atk.WrapSelection(v.Ptr)
 }
 
 // Object ButtonAccessible
 type ButtonAccessible struct {
+	atk.ActionIface
+	atk.ComponentIface
+	atk.ImageIface
 	ContainerAccessible
 }
 
@@ -12866,17 +13037,19 @@ func (v ButtonAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ButtonAccessible) Action() atk.Action {
-	return atk.WrapAction(v.Ptr) /*gir:Atk*/
+	return atk.WrapAction(v.Ptr)
 }
 func (v ButtonAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v ButtonAccessible) Image() atk.Image {
-	return atk.WrapImage(v.Ptr) /*gir:Atk*/
+	return atk.WrapImage(v.Ptr)
 }
 
 // Object CellAccessible
 type CellAccessible struct {
+	atk.ActionIface
+	atk.ComponentIface
 	Accessible
 }
 
@@ -12907,14 +13080,16 @@ func (v CellAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v CellAccessible) Action() atk.Action {
-	return atk.WrapAction(v.Ptr) /*gir:Atk*/
+	return atk.WrapAction(v.Ptr)
 }
 func (v CellAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 
 // Object ContainerCellAccessible
 type ContainerCellAccessible struct {
+	atk.ActionIface
+	atk.ComponentIface
 	CellAccessible
 }
 
@@ -12945,10 +13120,10 @@ func (v ContainerCellAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ContainerCellAccessible) Action() atk.Action {
-	return atk.WrapAction(v.Ptr) /*gir:Atk*/
+	return atk.WrapAction(v.Ptr)
 }
 func (v ContainerCellAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 
 // ContainerCellAccessibleNew is a wrapper around gtk_container_cell_accessible_new().
@@ -12976,6 +13151,7 @@ func (container ContainerCellAccessible) RemoveChild(child CellAccessible) {
 
 // Object CssProvider
 type CssProvider struct {
+	StyleProviderIface
 	gobject.Object
 }
 
@@ -13091,6 +13267,8 @@ func CssProviderGetNamed(name string, variant string) CssProvider {
 
 // Object DrawingArea
 type DrawingArea struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Widget
 }
 
@@ -13121,7 +13299,7 @@ func (v DrawingArea) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v DrawingArea) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v DrawingArea) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -13135,6 +13313,10 @@ func DrawingAreaNew() Widget {
 
 // Object Entry
 type Entry struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	CellEditableIface
+	EditableIface
 	Widget
 }
 
@@ -13165,7 +13347,7 @@ func (v Entry) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Entry) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Entry) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -13678,6 +13860,8 @@ func (buffer EntryBuffer) SetText(chars string, n_chars int) {
 
 // Object EntryCompletion
 type EntryCompletion struct {
+	BuildableIface
+	CellLayoutIface
 	gobject.Object
 }
 
@@ -13868,6 +14052,10 @@ func (completion EntryCompletion) SetTextColumn(column int) {
 
 // Object EntryAccessible
 type EntryAccessible struct {
+	atk.ActionIface
+	atk.ComponentIface
+	atk.EditableTextIface
+	atk.TextIface
 	WidgetAccessible
 }
 
@@ -13898,20 +14086,22 @@ func (v EntryAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v EntryAccessible) Action() atk.Action {
-	return atk.WrapAction(v.Ptr) /*gir:Atk*/
+	return atk.WrapAction(v.Ptr)
 }
 func (v EntryAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v EntryAccessible) EditableText() atk.EditableText {
-	return atk.WrapEditableText(v.Ptr) /*gir:Atk*/
+	return atk.WrapEditableText(v.Ptr)
 }
 func (v EntryAccessible) Text() atk.Text {
-	return atk.WrapText(v.Ptr) /*gir:Atk*/
+	return atk.WrapText(v.Ptr)
 }
 
 // Object EventBox
 type EventBox struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Bin
 }
 
@@ -13942,7 +14132,7 @@ func (v EventBox) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v EventBox) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v EventBox) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -14032,6 +14222,8 @@ func (controller EventController) SetPropagationPhase(phase PropagationPhase) {
 
 // Object Expander
 type Expander struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Bin
 }
 
@@ -14062,7 +14254,7 @@ func (v Expander) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Expander) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Expander) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -14166,6 +14358,8 @@ func (expander Expander) SetUseUnderline(use_underline bool) {
 
 // Object ExpanderAccessible
 type ExpanderAccessible struct {
+	atk.ActionIface
+	atk.ComponentIface
 	ContainerAccessible
 }
 
@@ -14196,14 +14390,18 @@ func (v ExpanderAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ExpanderAccessible) Action() atk.Action {
-	return atk.WrapAction(v.Ptr) /*gir:Atk*/
+	return atk.WrapAction(v.Ptr)
 }
 func (v ExpanderAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 
 // Object FileChooserButton
 type FileChooserButton struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	FileChooserIface
+	OrientableIface
 	Box
 }
 
@@ -14234,7 +14432,7 @@ func (v FileChooserButton) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v FileChooserButton) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v FileChooserButton) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -14281,6 +14479,9 @@ func (button FileChooserButton) SetWidthChars(n_chars int) {
 
 // Object FileChooserDialog
 type FileChooserDialog struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	FileChooserIface
 	Dialog
 }
 
@@ -14311,7 +14512,7 @@ func (v FileChooserDialog) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v FileChooserDialog) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v FileChooserDialog) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -14322,6 +14523,7 @@ func (v FileChooserDialog) FileChooser() FileChooser {
 
 // Object FileChooserNative
 type FileChooserNative struct {
+	FileChooserIface
 	NativeDialog
 }
 
@@ -14492,6 +14694,10 @@ func (self NativeDialog) Show() {
 
 // Object FileChooserWidget
 type FileChooserWidget struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	FileChooserIface
+	OrientableIface
 	Box
 }
 
@@ -14522,7 +14728,7 @@ func (v FileChooserWidget) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v FileChooserWidget) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v FileChooserWidget) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -14542,6 +14748,8 @@ func FileChooserWidgetNew(action FileChooserAction) Widget {
 
 // Object Fixed
 type Fixed struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Container
 }
 
@@ -14572,7 +14780,7 @@ func (v Fixed) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Fixed) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Fixed) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -14596,6 +14804,9 @@ func (fixed Fixed) Put(widget Widget, x int, y int) {
 
 // Object FlowBox
 type FlowBox struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Container
 }
 
@@ -14626,7 +14837,7 @@ func (v FlowBox) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v FlowBox) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v FlowBox) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -14784,6 +14995,8 @@ func (box FlowBox) UnselectChild(child FlowBoxChild) {
 
 // Object FlowBoxChild
 type FlowBoxChild struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Bin
 }
 
@@ -14814,7 +15027,7 @@ func (v FlowBoxChild) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v FlowBoxChild) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v FlowBoxChild) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -14845,6 +15058,8 @@ func (child FlowBoxChild) IsSelected() bool {
 
 // Object FlowBoxAccessible
 type FlowBoxAccessible struct {
+	atk.ComponentIface
+	atk.SelectionIface
 	ContainerAccessible
 }
 
@@ -14875,14 +15090,15 @@ func (v FlowBoxAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v FlowBoxAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v FlowBoxAccessible) Selection() atk.Selection {
-	return atk.WrapSelection(v.Ptr) /*gir:Atk*/
+	return atk.WrapSelection(v.Ptr)
 }
 
 // Object FlowBoxChildAccessible
 type FlowBoxChildAccessible struct {
+	atk.ComponentIface
 	ContainerAccessible
 }
 
@@ -14913,11 +15129,16 @@ func (v FlowBoxChildAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v FlowBoxChildAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 
 // Object FontButton
 type FontButton struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
+	FontChooserIface
 	Button
 }
 
@@ -14948,7 +15169,7 @@ func (v FontButton) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v FontButton) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v FontButton) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -15052,6 +15273,9 @@ func (font_button FontButton) SetUseSize(use_size bool) {
 
 // Object FontChooserDialog
 type FontChooserDialog struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	FontChooserIface
 	Dialog
 }
 
@@ -15082,7 +15306,7 @@ func (v FontChooserDialog) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v FontChooserDialog) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v FontChooserDialog) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -15101,6 +15325,10 @@ func FontChooserDialogNew(title string, parent Window) Widget {
 
 // Object FontChooserWidget
 type FontChooserWidget struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	FontChooserIface
+	OrientableIface
 	Box
 }
 
@@ -15131,7 +15359,7 @@ func (v FontChooserWidget) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v FontChooserWidget) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v FontChooserWidget) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -15151,6 +15379,9 @@ func FontChooserWidgetNew() Widget {
 
 // Object FontSelection
 type FontSelection struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Box
 }
 
@@ -15181,7 +15412,7 @@ func (v FontSelection) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v FontSelection) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v FontSelection) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -15192,6 +15423,8 @@ func (v FontSelection) Orientable() Orientable {
 
 // Object FontSelectionDialog
 type FontSelectionDialog struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Dialog
 }
 
@@ -15222,7 +15455,7 @@ func (v FontSelectionDialog) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v FontSelectionDialog) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v FontSelectionDialog) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -15230,6 +15463,7 @@ func (v FontSelectionDialog) Buildable() Buildable {
 
 // Object FrameAccessible
 type FrameAccessible struct {
+	atk.ComponentIface
 	ContainerAccessible
 }
 
@@ -15260,11 +15494,13 @@ func (v FrameAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v FrameAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 
 // Object GLArea
 type GLArea struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Widget
 }
 
@@ -15295,7 +15531,7 @@ func (v GLArea) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v GLArea) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v GLArea) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -15948,6 +16184,9 @@ func (gesture GestureZoom) GetScaleDelta() float64 {
 
 // Object Grid
 type Grid struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Container
 }
 
@@ -15978,7 +16217,7 @@ func (v Grid) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Grid) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Grid) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -16102,6 +16341,9 @@ func (grid Grid) SetRowSpacing(spacing uint) {
 
 // Object HBox
 type HBox struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Box
 }
 
@@ -16132,7 +16374,7 @@ func (v HBox) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v HBox) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v HBox) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -16143,6 +16385,9 @@ func (v HBox) Orientable() Orientable {
 
 // Object HButtonBox
 type HButtonBox struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	ButtonBox
 }
 
@@ -16173,7 +16418,7 @@ func (v HButtonBox) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v HButtonBox) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v HButtonBox) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -16184,6 +16429,9 @@ func (v HButtonBox) Orientable() Orientable {
 
 // Object HPaned
 type HPaned struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Paned
 }
 
@@ -16214,7 +16462,7 @@ func (v HPaned) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v HPaned) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v HPaned) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -16225,6 +16473,8 @@ func (v HPaned) Orientable() Orientable {
 
 // Object HSV
 type HSV struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Widget
 }
 
@@ -16255,7 +16505,7 @@ func (v HSV) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v HSV) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v HSV) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -16311,6 +16561,9 @@ func HSVToRgb(h float64, s float64, v float64) (float64, float64, float64) {
 
 // Object Paned
 type Paned struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Container
 }
 
@@ -16341,7 +16594,7 @@ func (v Paned) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Paned) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Paned) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -16418,6 +16671,9 @@ func (paned Paned) SetWideHandle(wide bool) {
 
 // Object HScale
 type HScale struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Scale
 }
 
@@ -16448,7 +16704,7 @@ func (v HScale) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v HScale) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v HScale) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -16459,6 +16715,9 @@ func (v HScale) Orientable() Orientable {
 
 // Object HScrollbar
 type HScrollbar struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Scrollbar
 }
 
@@ -16489,7 +16748,7 @@ func (v HScrollbar) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v HScrollbar) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v HScrollbar) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -16500,6 +16759,9 @@ func (v HScrollbar) Orientable() Orientable {
 
 // Object HSeparator
 type HSeparator struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Separator
 }
 
@@ -16530,7 +16792,7 @@ func (v HSeparator) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v HSeparator) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v HSeparator) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -16541,6 +16803,8 @@ func (v HSeparator) Orientable() Orientable {
 
 // Object HandleBox
 type HandleBox struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Bin
 }
 
@@ -16571,7 +16835,7 @@ func (v HandleBox) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v HandleBox) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v HandleBox) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -16579,6 +16843,8 @@ func (v HandleBox) Buildable() Buildable {
 
 // Object HeaderBar
 type HeaderBar struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Container
 }
 
@@ -16609,7 +16875,7 @@ func (v HeaderBar) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v HeaderBar) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v HeaderBar) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -16708,6 +16974,9 @@ func (bar HeaderBar) SetTitle(title string) {
 
 // Object Scale
 type Scale struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Range
 }
 
@@ -16738,7 +17007,7 @@ func (v Scale) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Scale) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Scale) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -16831,6 +17100,9 @@ func (scale Scale) SetValuePos(pos PositionType) {
 
 // Object Range
 type Range struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Widget
 }
 
@@ -16861,7 +17133,7 @@ func (v Range) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Range) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Range) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -17011,6 +17283,9 @@ func (range_ Range) SetValue(value float64) {
 
 // Object Scrollbar
 type Scrollbar struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Range
 }
 
@@ -17041,7 +17316,7 @@ func (v Scrollbar) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Scrollbar) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Scrollbar) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -17058,6 +17333,9 @@ func ScrollbarNew(orientation Orientation, adjustment Adjustment) Widget {
 
 // Object Separator
 type Separator struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Widget
 }
 
@@ -17088,7 +17366,7 @@ func (v Separator) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Separator) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Separator) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -17317,6 +17595,7 @@ func (context IMMulticontext) SetContextId(context_id string) {
 
 // Object IconFactory
 type IconFactory struct {
+	BuildableIface
 	gobject.Object
 }
 
@@ -17909,6 +18188,10 @@ func StyleContextResetWidgets(screen gdk.Screen) {
 
 // Object IconView
 type IconView struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	CellLayoutIface
+	ScrollableIface
 	Container
 }
 
@@ -17939,7 +18222,7 @@ func (v IconView) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v IconView) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v IconView) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -18365,6 +18648,8 @@ func TooltipTriggerTooltipQuery(display gdk.Display) {
 
 // Object IconViewAccessible
 type IconViewAccessible struct {
+	atk.ComponentIface
+	atk.SelectionIface
 	ContainerAccessible
 }
 
@@ -18395,14 +18680,16 @@ func (v IconViewAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v IconViewAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v IconViewAccessible) Selection() atk.Selection {
-	return atk.WrapSelection(v.Ptr) /*gir:Atk*/
+	return atk.WrapSelection(v.Ptr)
 }
 
 // Object Image
 type Image struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Misc
 }
 
@@ -18433,7 +18720,7 @@ func (v Image) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Image) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Image) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -18511,6 +18798,8 @@ func (image Image) SetPixelSize(pixel_size int) {
 
 // Object ImageAccessible
 type ImageAccessible struct {
+	atk.ComponentIface
+	atk.ImageIface
 	WidgetAccessible
 }
 
@@ -18541,14 +18830,17 @@ func (v ImageAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ImageAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v ImageAccessible) Image() atk.Image {
-	return atk.WrapImage(v.Ptr) /*gir:Atk*/
+	return atk.WrapImage(v.Ptr)
 }
 
 // Object ImageCellAccessible
 type ImageCellAccessible struct {
+	atk.ActionIface
+	atk.ComponentIface
+	atk.ImageIface
 	RendererCellAccessible
 }
 
@@ -18579,17 +18871,21 @@ func (v ImageCellAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ImageCellAccessible) Action() atk.Action {
-	return atk.WrapAction(v.Ptr) /*gir:Atk*/
+	return atk.WrapAction(v.Ptr)
 }
 func (v ImageCellAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v ImageCellAccessible) Image() atk.Image {
-	return atk.WrapImage(v.Ptr) /*gir:Atk*/
+	return atk.WrapImage(v.Ptr)
 }
 
 // Object ImageMenuItem
 type ImageMenuItem struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
 	MenuItem
 }
 
@@ -18620,7 +18916,7 @@ func (v ImageMenuItem) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ImageMenuItem) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ImageMenuItem) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -18634,6 +18930,8 @@ func (v ImageMenuItem) Buildable() Buildable {
 
 // Object RendererCellAccessible
 type RendererCellAccessible struct {
+	atk.ActionIface
+	atk.ComponentIface
 	CellAccessible
 }
 
@@ -18664,10 +18962,10 @@ func (v RendererCellAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v RendererCellAccessible) Action() atk.Action {
-	return atk.WrapAction(v.Ptr) /*gir:Atk*/
+	return atk.WrapAction(v.Ptr)
 }
 func (v RendererCellAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 
 // RendererCellAccessibleNew is a wrapper around gtk_renderer_cell_accessible_new().
@@ -18678,6 +18976,9 @@ func RendererCellAccessibleNew(renderer CellRenderer) atk.Object {
 
 // Object InfoBar
 type InfoBar struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Box
 }
 
@@ -18708,7 +19009,7 @@ func (v InfoBar) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v InfoBar) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v InfoBar) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -18779,6 +19080,8 @@ func (info_bar InfoBar) SetShowCloseButton(setting bool) {
 
 // Object Invisible
 type Invisible struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Widget
 }
 
@@ -18809,7 +19112,7 @@ func (v Invisible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Invisible) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Invisible) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -18829,6 +19132,9 @@ func (invisible Invisible) GetScreen() gdk.Screen {
 
 // Object LabelAccessible
 type LabelAccessible struct {
+	atk.ComponentIface
+	atk.HypertextIface
+	atk.TextIface
 	WidgetAccessible
 }
 
@@ -18859,17 +19165,20 @@ func (v LabelAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v LabelAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v LabelAccessible) Hypertext() atk.Hypertext {
-	return atk.WrapHypertext(v.Ptr) /*gir:Atk*/
+	return atk.WrapHypertext(v.Ptr)
 }
 func (v LabelAccessible) Text() atk.Text {
-	return atk.WrapText(v.Ptr) /*gir:Atk*/
+	return atk.WrapText(v.Ptr)
 }
 
 // Object Layout
 type Layout struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	ScrollableIface
 	Container
 }
 
@@ -18900,7 +19209,7 @@ func (v Layout) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Layout) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Layout) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -18940,6 +19249,9 @@ func (layout Layout) SetSize(width uint, height uint) {
 
 // Object LevelBar
 type LevelBar struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Widget
 }
 
@@ -18970,7 +19282,7 @@ func (v LevelBar) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v LevelBar) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v LevelBar) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -19071,6 +19383,8 @@ func (self LevelBar) SetValue(value float64) {
 
 // Object LevelBarAccessible
 type LevelBarAccessible struct {
+	atk.ComponentIface
+	atk.ValueIface
 	WidgetAccessible
 }
 
@@ -19101,14 +19415,18 @@ func (v LevelBarAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v LevelBarAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v LevelBarAccessible) Value() atk.Value {
-	return atk.WrapValue(v.Ptr) /*gir:Atk*/
+	return atk.WrapValue(v.Ptr)
 }
 
 // Object LinkButton
 type LinkButton struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
 	Button
 }
 
@@ -19139,7 +19457,7 @@ func (v LinkButton) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v LinkButton) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v LinkButton) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -19196,6 +19514,10 @@ func (link_button LinkButton) SetVisited(visited bool) {
 
 // Object LinkButtonAccessible
 type LinkButtonAccessible struct {
+	atk.ActionIface
+	atk.ComponentIface
+	atk.HyperlinkImplIface
+	atk.ImageIface
 	ButtonAccessible
 }
 
@@ -19226,20 +19548,22 @@ func (v LinkButtonAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v LinkButtonAccessible) Action() atk.Action {
-	return atk.WrapAction(v.Ptr) /*gir:Atk*/
+	return atk.WrapAction(v.Ptr)
 }
 func (v LinkButtonAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v LinkButtonAccessible) HyperlinkImpl() atk.HyperlinkImpl {
-	return atk.WrapHyperlinkImpl(v.Ptr) /*gir:Atk*/
+	return atk.WrapHyperlinkImpl(v.Ptr)
 }
 func (v LinkButtonAccessible) Image() atk.Image {
-	return atk.WrapImage(v.Ptr) /*gir:Atk*/
+	return atk.WrapImage(v.Ptr)
 }
 
 // Object ListBox
 type ListBox struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Container
 }
 
@@ -19270,7 +19594,7 @@ func (v ListBox) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ListBox) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ListBox) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -19402,6 +19726,8 @@ func (box ListBox) UnselectRow(row ListBoxRow) {
 
 // Object ListBoxRow
 type ListBoxRow struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Bin
 }
 
@@ -19432,7 +19758,7 @@ func (v ListBoxRow) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ListBoxRow) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ListBoxRow) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -19496,6 +19822,8 @@ func (row ListBoxRow) SetSelectable(selectable bool) {
 
 // Object ListBoxAccessible
 type ListBoxAccessible struct {
+	atk.ComponentIface
+	atk.SelectionIface
 	ContainerAccessible
 }
 
@@ -19526,14 +19854,15 @@ func (v ListBoxAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ListBoxAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v ListBoxAccessible) Selection() atk.Selection {
-	return atk.WrapSelection(v.Ptr) /*gir:Atk*/
+	return atk.WrapSelection(v.Ptr)
 }
 
 // Object ListBoxRowAccessible
 type ListBoxRowAccessible struct {
+	atk.ComponentIface
 	ContainerAccessible
 }
 
@@ -19564,11 +19893,16 @@ func (v ListBoxRowAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ListBoxRowAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 
 // Object ListStore
 type ListStore struct {
+	BuildableIface
+	TreeDragDestIface
+	TreeDragSourceIface
+	TreeModelIface
+	TreeSortableIface
 	gobject.Object
 }
 
@@ -19732,6 +20066,10 @@ func (store ListStore) Swap(a TreeIter, b TreeIter) {
 
 // Object LockButton
 type LockButton struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
 	Button
 }
 
@@ -19762,7 +20100,7 @@ func (v LockButton) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v LockButton) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v LockButton) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -19793,6 +20131,9 @@ func (button LockButton) SetPermission(permission gio.Permission) {
 
 // Object LockButtonAccessible
 type LockButtonAccessible struct {
+	atk.ActionIface
+	atk.ComponentIface
+	atk.ImageIface
 	ButtonAccessible
 }
 
@@ -19823,17 +20164,19 @@ func (v LockButtonAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v LockButtonAccessible) Action() atk.Action {
-	return atk.WrapAction(v.Ptr) /*gir:Atk*/
+	return atk.WrapAction(v.Ptr)
 }
 func (v LockButtonAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v LockButtonAccessible) Image() atk.Image {
-	return atk.WrapImage(v.Ptr) /*gir:Atk*/
+	return atk.WrapImage(v.Ptr)
 }
 
 // Object MenuAccessible
 type MenuAccessible struct {
+	atk.ComponentIface
+	atk.SelectionIface
 	MenuShellAccessible
 }
 
@@ -19864,14 +20207,16 @@ func (v MenuAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v MenuAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v MenuAccessible) Selection() atk.Selection {
-	return atk.WrapSelection(v.Ptr) /*gir:Atk*/
+	return atk.WrapSelection(v.Ptr)
 }
 
 // Object MenuShellAccessible
 type MenuShellAccessible struct {
+	atk.ComponentIface
+	atk.SelectionIface
 	ContainerAccessible
 }
 
@@ -19902,14 +20247,16 @@ func (v MenuShellAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v MenuShellAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v MenuShellAccessible) Selection() atk.Selection {
-	return atk.WrapSelection(v.Ptr) /*gir:Atk*/
+	return atk.WrapSelection(v.Ptr)
 }
 
 // Object MenuBar
 type MenuBar struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	MenuShell
 }
 
@@ -19940,7 +20287,7 @@ func (v MenuBar) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v MenuBar) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v MenuBar) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -19982,6 +20329,10 @@ func (menubar MenuBar) SetPackDirection(pack_dir PackDirection) {
 
 // Object MenuButton
 type MenuButton struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
 	ToggleButton
 }
 
@@ -20012,7 +20363,7 @@ func (v MenuButton) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v MenuButton) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v MenuButton) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -20098,6 +20449,8 @@ func (menu_button MenuButton) SetUsePopover(use_popover bool) {
 
 // Object Popover
 type Popover struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Bin
 }
 
@@ -20128,7 +20481,7 @@ func (v Popover) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Popover) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Popover) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -20220,6 +20573,9 @@ func (popover Popover) SetRelativeTo(relative_to Widget) {
 
 // Object MenuButtonAccessible
 type MenuButtonAccessible struct {
+	atk.ActionIface
+	atk.ComponentIface
+	atk.ImageIface
 	ToggleButtonAccessible
 }
 
@@ -20250,17 +20606,20 @@ func (v MenuButtonAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v MenuButtonAccessible) Action() atk.Action {
-	return atk.WrapAction(v.Ptr) /*gir:Atk*/
+	return atk.WrapAction(v.Ptr)
 }
 func (v MenuButtonAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v MenuButtonAccessible) Image() atk.Image {
-	return atk.WrapImage(v.Ptr) /*gir:Atk*/
+	return atk.WrapImage(v.Ptr)
 }
 
 // Object ToggleButtonAccessible
 type ToggleButtonAccessible struct {
+	atk.ActionIface
+	atk.ComponentIface
+	atk.ImageIface
 	ButtonAccessible
 }
 
@@ -20291,17 +20650,20 @@ func (v ToggleButtonAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ToggleButtonAccessible) Action() atk.Action {
-	return atk.WrapAction(v.Ptr) /*gir:Atk*/
+	return atk.WrapAction(v.Ptr)
 }
 func (v ToggleButtonAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v ToggleButtonAccessible) Image() atk.Image {
-	return atk.WrapImage(v.Ptr) /*gir:Atk*/
+	return atk.WrapImage(v.Ptr)
 }
 
 // Object ToolItem
 type ToolItem struct {
+	atk.ImplementorIfaceIface
+	ActivatableIface
+	BuildableIface
 	Bin
 }
 
@@ -20332,7 +20694,7 @@ func (v ToolItem) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ToolItem) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ToolItem) Activatable() Activatable {
 	return WrapActivatable(v.Ptr)
@@ -20502,6 +20864,10 @@ func (tool_item ToolItem) ToolbarReconfigured() {
 
 // Object ToolButton
 type ToolButton struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
 	ToolItem
 }
 
@@ -20532,7 +20898,7 @@ func (v ToolButton) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ToolButton) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ToolButton) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -20615,6 +20981,10 @@ func (button ToolButton) SetUseUnderline(use_underline bool) {
 
 // Object MenuToolButton
 type MenuToolButton struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
 	ToolButton
 }
 
@@ -20645,7 +21015,7 @@ func (v MenuToolButton) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v MenuToolButton) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v MenuToolButton) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -20692,6 +21062,8 @@ func (button MenuToolButton) SetMenu(menu Widget) {
 
 // Object MessageDialog
 type MessageDialog struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Dialog
 }
 
@@ -20722,7 +21094,7 @@ func (v MessageDialog) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v MessageDialog) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v MessageDialog) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -20743,6 +21115,10 @@ func (message_dialog MessageDialog) SetMarkup(str string) {
 
 // Object ModelButton
 type ModelButton struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
 	Button
 }
 
@@ -20773,7 +21149,7 @@ func (v ModelButton) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ModelButton) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ModelButton) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -20848,6 +21224,8 @@ func (op MountOperation) SetParent(parent Window) {
 
 // Object Notebook
 type Notebook struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Container
 }
 
@@ -20878,7 +21256,7 @@ func (v Notebook) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Notebook) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Notebook) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -21133,6 +21511,8 @@ func (notebook Notebook) SetTabReorderable(child Widget, reorderable bool) {
 
 // Object NotebookAccessible
 type NotebookAccessible struct {
+	atk.ComponentIface
+	atk.SelectionIface
 	ContainerAccessible
 }
 
@@ -21163,14 +21543,15 @@ func (v NotebookAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v NotebookAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v NotebookAccessible) Selection() atk.Selection {
-	return atk.WrapSelection(v.Ptr) /*gir:Atk*/
+	return atk.WrapSelection(v.Ptr)
 }
 
 // Object NotebookPageAccessible
 type NotebookPageAccessible struct {
+	atk.ComponentIface
 	atk.Object
 }
 
@@ -21201,7 +21582,7 @@ func (v NotebookPageAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v NotebookPageAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 
 // NotebookPageAccessibleNew is a wrapper around gtk_notebook_page_accessible_new().
@@ -21217,6 +21598,7 @@ func (page NotebookPageAccessible) Invalidate() {
 
 // Object NumerableIcon
 type NumerableIcon struct {
+	gio.IconIface
 	gio.EmblemedIcon
 }
 
@@ -21247,11 +21629,13 @@ func (v NumerableIcon) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v NumerableIcon) Icon() gio.Icon {
-	return gio.WrapIcon(v.Ptr) /*gir:Gio*/
+	return gio.WrapIcon(v.Ptr)
 }
 
 // Object OffscreenWindow
 type OffscreenWindow struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Window
 }
 
@@ -21282,7 +21666,7 @@ func (v OffscreenWindow) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v OffscreenWindow) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v OffscreenWindow) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -21308,6 +21692,8 @@ func (offscreen OffscreenWindow) GetSurface() cairo.Surface {
 
 // Object Overlay
 type Overlay struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Bin
 }
 
@@ -21338,7 +21724,7 @@ func (v Overlay) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Overlay) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Overlay) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -21624,6 +22010,8 @@ func (setup PageSetup) ToGvariant() glib.Variant {
 
 // Object PanedAccessible
 type PanedAccessible struct {
+	atk.ComponentIface
+	atk.ValueIface
 	ContainerAccessible
 }
 
@@ -21654,14 +22042,16 @@ func (v PanedAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v PanedAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v PanedAccessible) Value() atk.Value {
-	return atk.WrapValue(v.Ptr) /*gir:Atk*/
+	return atk.WrapValue(v.Ptr)
 }
 
 // Object ScrolledWindow
 type ScrolledWindow struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Bin
 }
 
@@ -21692,7 +22082,7 @@ func (v ScrolledWindow) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ScrolledWindow) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ScrolledWindow) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -21879,6 +22269,8 @@ func (scrolled_window ScrolledWindow) UnsetPlacement() {
 
 // Object PlacesSidebar
 type PlacesSidebar struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	ScrolledWindow
 }
 
@@ -21909,7 +22301,7 @@ func (v PlacesSidebar) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v PlacesSidebar) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v PlacesSidebar) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -22027,6 +22419,8 @@ func (sidebar PlacesSidebar) SetShowTrash(show_trash bool) {
 
 // Object Plug
 type Plug struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Window
 }
 
@@ -22057,7 +22451,7 @@ func (v Plug) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Plug) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Plug) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -22071,6 +22465,7 @@ func (plug Plug) GetEmbedded() bool {
 
 // Object PopoverAccessible
 type PopoverAccessible struct {
+	atk.ComponentIface
 	ContainerAccessible
 }
 
@@ -22101,11 +22496,13 @@ func (v PopoverAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v PopoverAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 
 // Object PopoverMenu
 type PopoverMenu struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Popover
 }
 
@@ -22136,7 +22533,7 @@ func (v PopoverMenu) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v PopoverMenu) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v PopoverMenu) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -22253,6 +22650,7 @@ func (context PrintContext) GetWidth() float64 {
 
 // Object PrintOperation
 type PrintOperation struct {
+	PrintOperationPreviewIface
 	gobject.Object
 }
 
@@ -22971,6 +23369,9 @@ func (settings PrintSettings) Unset(key string) {
 
 // Object ProgressBar
 type ProgressBar struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Widget
 }
 
@@ -23001,7 +23402,7 @@ func (v ProgressBar) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ProgressBar) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ProgressBar) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -23092,6 +23493,8 @@ func (pbar ProgressBar) SetText(text string) {
 
 // Object ProgressBarAccessible
 type ProgressBarAccessible struct {
+	atk.ComponentIface
+	atk.ValueIface
 	WidgetAccessible
 }
 
@@ -23122,14 +23525,15 @@ func (v ProgressBarAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ProgressBarAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v ProgressBarAccessible) Value() atk.Value {
-	return atk.WrapValue(v.Ptr) /*gir:Atk*/
+	return atk.WrapValue(v.Ptr)
 }
 
 // Object RadioAction
 type RadioAction struct {
+	BuildableIface
 	ToggleAction
 }
 
@@ -23165,6 +23569,7 @@ func (v RadioAction) Buildable() Buildable {
 
 // Object ToggleAction
 type ToggleAction struct {
+	BuildableIface
 	Action
 }
 
@@ -23200,6 +23605,7 @@ func (v ToggleAction) Buildable() Buildable {
 
 // Object Action
 type Action struct {
+	BuildableIface
 	gobject.Object
 }
 
@@ -23235,6 +23641,10 @@ func (v Action) Buildable() Buildable {
 
 // Object RadioButton
 type RadioButton struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
 	CheckButton
 }
 
@@ -23265,7 +23675,7 @@ func (v RadioButton) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v RadioButton) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v RadioButton) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -23306,6 +23716,9 @@ func (radio_button RadioButton) JoinGroup(group_source RadioButton) {
 
 // Object RadioButtonAccessible
 type RadioButtonAccessible struct {
+	atk.ActionIface
+	atk.ComponentIface
+	atk.ImageIface
 	ToggleButtonAccessible
 }
 
@@ -23336,17 +23749,21 @@ func (v RadioButtonAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v RadioButtonAccessible) Action() atk.Action {
-	return atk.WrapAction(v.Ptr) /*gir:Atk*/
+	return atk.WrapAction(v.Ptr)
 }
 func (v RadioButtonAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v RadioButtonAccessible) Image() atk.Image {
-	return atk.WrapImage(v.Ptr) /*gir:Atk*/
+	return atk.WrapImage(v.Ptr)
 }
 
 // Object RadioMenuItem
 type RadioMenuItem struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
 	CheckMenuItem
 }
 
@@ -23377,7 +23794,7 @@ func (v RadioMenuItem) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v RadioMenuItem) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v RadioMenuItem) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -23418,6 +23835,9 @@ func (radio_menu_item RadioMenuItem) JoinGroup(group_source RadioMenuItem) {
 
 // Object RadioMenuItemAccessible
 type RadioMenuItemAccessible struct {
+	atk.ActionIface
+	atk.ComponentIface
+	atk.SelectionIface
 	CheckMenuItemAccessible
 }
 
@@ -23448,17 +23868,21 @@ func (v RadioMenuItemAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v RadioMenuItemAccessible) Action() atk.Action {
-	return atk.WrapAction(v.Ptr) /*gir:Atk*/
+	return atk.WrapAction(v.Ptr)
 }
 func (v RadioMenuItemAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v RadioMenuItemAccessible) Selection() atk.Selection {
-	return atk.WrapSelection(v.Ptr) /*gir:Atk*/
+	return atk.WrapSelection(v.Ptr)
 }
 
 // Object ToggleToolButton
 type ToggleToolButton struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
 	ToolButton
 }
 
@@ -23489,7 +23913,7 @@ func (v ToggleToolButton) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ToggleToolButton) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ToggleToolButton) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -23520,6 +23944,10 @@ func (button ToggleToolButton) SetActive(is_active bool) {
 
 // Object RadioToolButton
 type RadioToolButton struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
 	ToggleToolButton
 }
 
@@ -23550,7 +23978,7 @@ func (v RadioToolButton) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v RadioToolButton) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v RadioToolButton) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -23570,6 +23998,8 @@ func RadioToolButtonNewFromWidget(group RadioToolButton) ToolItem {
 
 // Object RangeAccessible
 type RangeAccessible struct {
+	atk.ComponentIface
+	atk.ValueIface
 	WidgetAccessible
 }
 
@@ -23600,10 +24030,10 @@ func (v RangeAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v RangeAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v RangeAccessible) Value() atk.Value {
-	return atk.WrapValue(v.Ptr) /*gir:Atk*/
+	return atk.WrapValue(v.Ptr)
 }
 
 // Object RcStyle
@@ -23640,6 +24070,8 @@ func (v RcStyle) GetGValueGetter() gobject.GValueGetter {
 
 // Object RecentAction
 type RecentAction struct {
+	BuildableIface
+	RecentChooserIface
 	Action
 }
 
@@ -23678,6 +24110,9 @@ func (v RecentAction) RecentChooser() RecentChooser {
 
 // Object RecentChooserDialog
 type RecentChooserDialog struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	RecentChooserIface
 	Dialog
 }
 
@@ -23708,7 +24143,7 @@ func (v RecentChooserDialog) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v RecentChooserDialog) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v RecentChooserDialog) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -23719,6 +24154,10 @@ func (v RecentChooserDialog) RecentChooser() RecentChooser {
 
 // Object RecentChooserMenu
 type RecentChooserMenu struct {
+	atk.ImplementorIfaceIface
+	ActivatableIface
+	BuildableIface
+	RecentChooserIface
 	Menu
 }
 
@@ -23749,7 +24188,7 @@ func (v RecentChooserMenu) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v RecentChooserMenu) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v RecentChooserMenu) Activatable() Activatable {
 	return WrapActivatable(v.Ptr)
@@ -23913,6 +24352,10 @@ func RecentManagerGetDefault() RecentManager {
 
 // Object RecentChooserWidget
 type RecentChooserWidget struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
+	RecentChooserIface
 	Box
 }
 
@@ -23943,7 +24386,7 @@ func (v RecentChooserWidget) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v RecentChooserWidget) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v RecentChooserWidget) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -23969,6 +24412,8 @@ func RecentChooserWidgetNewForManager(manager RecentManager) Widget {
 
 // Object Revealer
 type Revealer struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Bin
 }
 
@@ -23999,7 +24444,7 @@ func (v Revealer) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Revealer) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Revealer) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -24052,6 +24497,8 @@ func (revealer Revealer) SetTransitionType(transition RevealerTransitionType) {
 
 // Object ScaleAccessible
 type ScaleAccessible struct {
+	atk.ComponentIface
+	atk.ValueIface
 	RangeAccessible
 }
 
@@ -24082,14 +24529,19 @@ func (v ScaleAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ScaleAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v ScaleAccessible) Value() atk.Value {
-	return atk.WrapValue(v.Ptr) /*gir:Atk*/
+	return atk.WrapValue(v.Ptr)
 }
 
 // Object ScaleButton
 type ScaleButton struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
+	OrientableIface
 	Button
 }
 
@@ -24120,7 +24572,7 @@ func (v ScaleButton) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ScaleButton) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ScaleButton) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -24182,6 +24634,10 @@ func (button ScaleButton) SetValue(value float64) {
 
 // Object ScaleButtonAccessible
 type ScaleButtonAccessible struct {
+	atk.ActionIface
+	atk.ComponentIface
+	atk.ImageIface
+	atk.ValueIface
 	ButtonAccessible
 }
 
@@ -24212,20 +24668,21 @@ func (v ScaleButtonAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ScaleButtonAccessible) Action() atk.Action {
-	return atk.WrapAction(v.Ptr) /*gir:Atk*/
+	return atk.WrapAction(v.Ptr)
 }
 func (v ScaleButtonAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v ScaleButtonAccessible) Image() atk.Image {
-	return atk.WrapImage(v.Ptr) /*gir:Atk*/
+	return atk.WrapImage(v.Ptr)
 }
 func (v ScaleButtonAccessible) Value() atk.Value {
-	return atk.WrapValue(v.Ptr) /*gir:Atk*/
+	return atk.WrapValue(v.Ptr)
 }
 
 // Object ScrolledWindowAccessible
 type ScrolledWindowAccessible struct {
+	atk.ComponentIface
 	ContainerAccessible
 }
 
@@ -24256,11 +24713,13 @@ func (v ScrolledWindowAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ScrolledWindowAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 
 // Object SearchBar
 type SearchBar struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Bin
 }
 
@@ -24291,7 +24750,7 @@ func (v SearchBar) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v SearchBar) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v SearchBar) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -24332,6 +24791,10 @@ func (bar SearchBar) SetShowCloseButton(visible bool) {
 
 // Object SearchEntry
 type SearchEntry struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	CellEditableIface
+	EditableIface
 	Entry
 }
 
@@ -24362,7 +24825,7 @@ func (v SearchEntry) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v SearchEntry) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v SearchEntry) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -24382,6 +24845,10 @@ func SearchEntryNew() Widget {
 
 // Object SeparatorMenuItem
 type SeparatorMenuItem struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
 	MenuItem
 }
 
@@ -24412,7 +24879,7 @@ func (v SeparatorMenuItem) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v SeparatorMenuItem) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v SeparatorMenuItem) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -24432,6 +24899,9 @@ func SeparatorMenuItemNew() Widget {
 
 // Object SeparatorToolItem
 type SeparatorToolItem struct {
+	atk.ImplementorIfaceIface
+	ActivatableIface
+	BuildableIface
 	ToolItem
 }
 
@@ -24462,7 +24932,7 @@ func (v SeparatorToolItem) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v SeparatorToolItem) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v SeparatorToolItem) Activatable() Activatable {
 	return WrapActivatable(v.Ptr)
@@ -24490,6 +24960,7 @@ func (item SeparatorToolItem) SetDraw(draw bool) {
 
 // Object Settings
 type Settings struct {
+	StyleProviderIface
 	gobject.Object
 }
 
@@ -24538,6 +25009,9 @@ func SettingsGetDefault() Settings {
 
 // Object ShortcutLabel
 type ShortcutLabel struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Box
 }
 
@@ -24568,7 +25042,7 @@ func (v ShortcutLabel) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ShortcutLabel) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ShortcutLabel) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -24615,6 +25089,9 @@ func (self ShortcutLabel) SetDisabledText(disabled_text string) {
 
 // Object ShortcutsGroup
 type ShortcutsGroup struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Box
 }
 
@@ -24645,7 +25122,7 @@ func (v ShortcutsGroup) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ShortcutsGroup) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ShortcutsGroup) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -24656,6 +25133,9 @@ func (v ShortcutsGroup) Orientable() Orientable {
 
 // Object ShortcutsSection
 type ShortcutsSection struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Box
 }
 
@@ -24686,7 +25166,7 @@ func (v ShortcutsSection) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ShortcutsSection) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ShortcutsSection) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -24697,6 +25177,9 @@ func (v ShortcutsSection) Orientable() Orientable {
 
 // Object ShortcutsShortcut
 type ShortcutsShortcut struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Box
 }
 
@@ -24727,7 +25210,7 @@ func (v ShortcutsShortcut) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ShortcutsShortcut) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ShortcutsShortcut) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -24738,6 +25221,8 @@ func (v ShortcutsShortcut) Orientable() Orientable {
 
 // Object Socket
 type Socket struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Container
 }
 
@@ -24768,7 +25253,7 @@ func (v Socket) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Socket) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Socket) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -24788,6 +25273,11 @@ func (socket_ Socket) GetPlugWindow() gdk.Window {
 
 // Object SpinButton
 type SpinButton struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	CellEditableIface
+	EditableIface
+	OrientableIface
 	Entry
 }
 
@@ -24818,7 +25308,7 @@ func (v SpinButton) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v SpinButton) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v SpinButton) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -24971,6 +25461,11 @@ func (spin_button SpinButton) Update() {
 
 // Object SpinButtonAccessible
 type SpinButtonAccessible struct {
+	atk.ActionIface
+	atk.ComponentIface
+	atk.EditableTextIface
+	atk.TextIface
+	atk.ValueIface
 	EntryAccessible
 }
 
@@ -25001,23 +25496,25 @@ func (v SpinButtonAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v SpinButtonAccessible) Action() atk.Action {
-	return atk.WrapAction(v.Ptr) /*gir:Atk*/
+	return atk.WrapAction(v.Ptr)
 }
 func (v SpinButtonAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v SpinButtonAccessible) EditableText() atk.EditableText {
-	return atk.WrapEditableText(v.Ptr) /*gir:Atk*/
+	return atk.WrapEditableText(v.Ptr)
 }
 func (v SpinButtonAccessible) Text() atk.Text {
-	return atk.WrapText(v.Ptr) /*gir:Atk*/
+	return atk.WrapText(v.Ptr)
 }
 func (v SpinButtonAccessible) Value() atk.Value {
-	return atk.WrapValue(v.Ptr) /*gir:Atk*/
+	return atk.WrapValue(v.Ptr)
 }
 
 // Object Spinner
 type Spinner struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Widget
 }
 
@@ -25048,7 +25545,7 @@ func (v Spinner) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Spinner) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Spinner) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -25072,6 +25569,8 @@ func (spinner Spinner) Stop() {
 
 // Object SpinnerAccessible
 type SpinnerAccessible struct {
+	atk.ComponentIface
+	atk.ImageIface
 	WidgetAccessible
 }
 
@@ -25102,14 +25601,16 @@ func (v SpinnerAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v SpinnerAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v SpinnerAccessible) Image() atk.Image {
-	return atk.WrapImage(v.Ptr) /*gir:Atk*/
+	return atk.WrapImage(v.Ptr)
 }
 
 // Object Stack
 type Stack struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Container
 }
 
@@ -25140,7 +25641,7 @@ func (v Stack) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Stack) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Stack) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -25282,6 +25783,8 @@ func (stack Stack) SetVisibleChildName(name string) {
 
 // Object StackSidebar
 type StackSidebar struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Bin
 }
 
@@ -25312,7 +25815,7 @@ func (v StackSidebar) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v StackSidebar) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v StackSidebar) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -25337,6 +25840,9 @@ func (sidebar StackSidebar) SetStack(stack Stack) {
 
 // Object StackSwitcher
 type StackSwitcher struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Box
 }
 
@@ -25367,7 +25873,7 @@ func (v StackSwitcher) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v StackSwitcher) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v StackSwitcher) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -25427,6 +25933,9 @@ func (v StatusIcon) GetGValueGetter() gobject.GValueGetter {
 
 // Object Statusbar
 type Statusbar struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Box
 }
 
@@ -25457,7 +25966,7 @@ func (v Statusbar) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Statusbar) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Statusbar) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -25505,6 +26014,7 @@ func (statusbar Statusbar) RemoveAll(context_id uint) {
 
 // Object StatusbarAccessible
 type StatusbarAccessible struct {
+	atk.ComponentIface
 	ContainerAccessible
 }
 
@@ -25535,7 +26045,7 @@ func (v StatusbarAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v StatusbarAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 
 // Object Style
@@ -25587,6 +26097,7 @@ func (style Style) HasContext() bool {
 
 // Object StyleProperties
 type StyleProperties struct {
+	StyleProviderIface
 	gobject.Object
 }
 
@@ -25622,6 +26133,10 @@ func (v StyleProperties) StyleProvider() StyleProvider {
 
 // Object Switch
 type Switch struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
 	Widget
 }
 
@@ -25652,7 +26167,7 @@ func (v Switch) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Switch) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Switch) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -25694,6 +26209,8 @@ func (sw Switch) SetState(state bool) {
 
 // Object SwitchAccessible
 type SwitchAccessible struct {
+	atk.ActionIface
+	atk.ComponentIface
 	WidgetAccessible
 }
 
@@ -25724,14 +26241,16 @@ func (v SwitchAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v SwitchAccessible) Action() atk.Action {
-	return atk.WrapAction(v.Ptr) /*gir:Atk*/
+	return atk.WrapAction(v.Ptr)
 }
 func (v SwitchAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 
 // Object Table
 type Table struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
 	Container
 }
 
@@ -25762,7 +26281,7 @@ func (v Table) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Table) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Table) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -25770,6 +26289,10 @@ func (v Table) Buildable() Buildable {
 
 // Object TearoffMenuItem
 type TearoffMenuItem struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
 	MenuItem
 }
 
@@ -25800,7 +26323,7 @@ func (v TearoffMenuItem) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v TearoffMenuItem) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v TearoffMenuItem) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -25890,6 +26413,9 @@ func (mark TextMark) SetVisible(setting bool) {
 
 // Object TextCellAccessible
 type TextCellAccessible struct {
+	atk.ActionIface
+	atk.ComponentIface
+	atk.TextIface
 	RendererCellAccessible
 }
 
@@ -25920,17 +26446,20 @@ func (v TextCellAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v TextCellAccessible) Action() atk.Action {
-	return atk.WrapAction(v.Ptr) /*gir:Atk*/
+	return atk.WrapAction(v.Ptr)
 }
 func (v TextCellAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v TextCellAccessible) Text() atk.Text {
-	return atk.WrapText(v.Ptr) /*gir:Atk*/
+	return atk.WrapText(v.Ptr)
 }
 
 // Object TextView
 type TextView struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	ScrollableIface
 	Container
 }
 
@@ -25961,7 +26490,7 @@ func (v TextView) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v TextView) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v TextView) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -26348,6 +26877,10 @@ func (text_view TextView) WindowToBufferCoords(win TextWindowType, window_x int,
 
 // Object TextViewAccessible
 type TextViewAccessible struct {
+	atk.ComponentIface
+	atk.EditableTextIface
+	atk.StreamableContentIface
+	atk.TextIface
 	ContainerAccessible
 }
 
@@ -26378,16 +26911,16 @@ func (v TextViewAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v TextViewAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v TextViewAccessible) EditableText() atk.EditableText {
-	return atk.WrapEditableText(v.Ptr) /*gir:Atk*/
+	return atk.WrapEditableText(v.Ptr)
 }
 func (v TextViewAccessible) StreamableContent() atk.StreamableContent {
-	return atk.WrapStreamableContent(v.Ptr) /*gir:Atk*/
+	return atk.WrapStreamableContent(v.Ptr)
 }
 func (v TextViewAccessible) Text() atk.Text {
-	return atk.WrapText(v.Ptr) /*gir:Atk*/
+	return atk.WrapText(v.Ptr)
 }
 
 // Object ThemingEngine
@@ -26424,6 +26957,9 @@ func (v ThemingEngine) GetGValueGetter() gobject.GValueGetter {
 
 // Object ToolItemGroup
 type ToolItemGroup struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	ToolShellIface
 	Container
 }
 
@@ -26454,7 +26990,7 @@ func (v ToolItemGroup) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ToolItemGroup) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ToolItemGroup) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -26565,6 +27101,10 @@ func (group ToolItemGroup) SetLabelWidget(label_widget Widget) {
 
 // Object ToolPalette
 type ToolPalette struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
+	ScrollableIface
 	Container
 }
 
@@ -26595,7 +27135,7 @@ func (v ToolPalette) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v ToolPalette) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v ToolPalette) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -26709,6 +27249,10 @@ func ToolPaletteGetDragTargetItem() TargetEntry {
 
 // Object Toolbar
 type Toolbar struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
+	ToolShellIface
 	Container
 }
 
@@ -26739,7 +27283,7 @@ func (v Toolbar) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Toolbar) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Toolbar) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -26881,6 +27425,8 @@ func (accessible ToplevelAccessible) GetChildren() glib.List {
 
 // Object TreeModelFilter
 type TreeModelFilter struct {
+	TreeDragSourceIface
+	TreeModelIface
 	gobject.Object
 }
 
@@ -26966,6 +27512,9 @@ func (filter TreeModelFilter) SetVisibleColumn(column int) {
 
 // Object TreeModelSort
 type TreeModelSort struct {
+	TreeDragSourceIface
+	TreeModelIface
+	TreeSortableIface
 	gobject.Object
 }
 
@@ -27184,6 +27733,9 @@ func (selection TreeSelection) UnselectRange(start_path TreePath, end_path TreeP
 
 // Object TreeView
 type TreeView struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	ScrollableIface
 	Container
 }
 
@@ -27214,7 +27766,7 @@ func (v TreeView) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v TreeView) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v TreeView) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -27690,6 +28242,8 @@ func (tree_view TreeView) UnsetRowsDragSource() {
 
 // Object TreeViewColumn
 type TreeViewColumn struct {
+	BuildableIface
+	CellLayoutIface
 	gobject.InitiallyUnowned
 }
 
@@ -28004,6 +28558,11 @@ func (tree_column TreeViewColumn) SetWidget(widget Widget) {
 
 // Object TreeStore
 type TreeStore struct {
+	BuildableIface
+	TreeDragDestIface
+	TreeDragSourceIface
+	TreeModelIface
+	TreeSortableIface
 	gobject.Object
 }
 
@@ -28175,6 +28734,10 @@ func (tree_store TreeStore) Swap(a TreeIter, b TreeIter) {
 
 // Object TreeViewAccessible
 type TreeViewAccessible struct {
+	atk.ComponentIface
+	atk.SelectionIface
+	atk.TableIface
+	CellAccessibleParentIface
 	ContainerAccessible
 }
 
@@ -28205,13 +28768,13 @@ func (v TreeViewAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v TreeViewAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v TreeViewAccessible) Selection() atk.Selection {
-	return atk.WrapSelection(v.Ptr) /*gir:Atk*/
+	return atk.WrapSelection(v.Ptr)
 }
 func (v TreeViewAccessible) Table() atk.Table {
-	return atk.WrapTable(v.Ptr) /*gir:Atk*/
+	return atk.WrapTable(v.Ptr)
 }
 func (v TreeViewAccessible) CellAccessibleParent() CellAccessibleParent {
 	return WrapCellAccessibleParent(v.Ptr)
@@ -28219,6 +28782,7 @@ func (v TreeViewAccessible) CellAccessibleParent() CellAccessibleParent {
 
 // Object UIManager
 type UIManager struct {
+	BuildableIface
 	gobject.Object
 }
 
@@ -28254,6 +28818,9 @@ func (v UIManager) Buildable() Buildable {
 
 // Object VBox
 type VBox struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Box
 }
 
@@ -28284,7 +28851,7 @@ func (v VBox) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v VBox) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v VBox) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -28295,6 +28862,9 @@ func (v VBox) Orientable() Orientable {
 
 // Object VButtonBox
 type VButtonBox struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	ButtonBox
 }
 
@@ -28325,7 +28895,7 @@ func (v VButtonBox) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v VButtonBox) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v VButtonBox) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -28336,6 +28906,9 @@ func (v VButtonBox) Orientable() Orientable {
 
 // Object VPaned
 type VPaned struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Paned
 }
 
@@ -28366,7 +28939,7 @@ func (v VPaned) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v VPaned) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v VPaned) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -28377,6 +28950,9 @@ func (v VPaned) Orientable() Orientable {
 
 // Object VScale
 type VScale struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Scale
 }
 
@@ -28407,7 +28983,7 @@ func (v VScale) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v VScale) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v VScale) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -28418,6 +28994,9 @@ func (v VScale) Orientable() Orientable {
 
 // Object VScrollbar
 type VScrollbar struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Scrollbar
 }
 
@@ -28448,7 +29027,7 @@ func (v VScrollbar) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v VScrollbar) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v VScrollbar) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -28459,6 +29038,9 @@ func (v VScrollbar) Orientable() Orientable {
 
 // Object VSeparator
 type VSeparator struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	OrientableIface
 	Separator
 }
 
@@ -28489,7 +29071,7 @@ func (v VSeparator) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v VSeparator) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v VSeparator) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -28500,17 +29082,19 @@ func (v VSeparator) Orientable() Orientable {
 
 // Interface CellAccessibleParent
 type CellAccessibleParent struct {
+	CellAccessibleParentIface
 	Ptr unsafe.Pointer
 }
+type CellAccessibleParentIface struct{}
 
-func (v CellAccessibleParent) native() *C.GtkCellAccessibleParent {
-	return (*C.GtkCellAccessibleParent)(v.Ptr)
+func (v *CellAccessibleParentIface) native() *C.GtkCellAccessibleParent {
+	return (*C.GtkCellAccessibleParent)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapCellAccessibleParent(p *C.GtkCellAccessibleParent) CellAccessibleParent {
-	return CellAccessibleParent{unsafe.Pointer(p)}
+	return CellAccessibleParent{Ptr: unsafe.Pointer(p)}
 }
 func WrapCellAccessibleParent(p unsafe.Pointer) CellAccessibleParent {
-	return CellAccessibleParent{p}
+	return CellAccessibleParent{Ptr: p}
 }
 func (v CellAccessibleParent) IsNil() bool {
 	return v.Ptr == nil
@@ -28529,45 +29113,48 @@ func (v CellAccessibleParent) GetGValueGetter() gobject.GValueGetter {
 }
 
 // Activate is a wrapper around gtk_cell_accessible_parent_activate().
-func (parent CellAccessibleParent) Activate(cell CellAccessible) {
+func (parent *CellAccessibleParentIface) Activate(cell CellAccessible) {
 	C.gtk_cell_accessible_parent_activate(parent.native(), cell.native())
 }
 
 // Edit is a wrapper around gtk_cell_accessible_parent_edit().
-func (parent CellAccessibleParent) Edit(cell CellAccessible) {
+func (parent *CellAccessibleParentIface) Edit(cell CellAccessible) {
 	C.gtk_cell_accessible_parent_edit(parent.native(), cell.native())
 }
 
 // ExpandCollapse is a wrapper around gtk_cell_accessible_parent_expand_collapse().
-func (parent CellAccessibleParent) ExpandCollapse(cell CellAccessible) {
+func (parent *CellAccessibleParentIface) ExpandCollapse(cell CellAccessible) {
 	C.gtk_cell_accessible_parent_expand_collapse(parent.native(), cell.native())
 }
 
 // GetChildIndex is a wrapper around gtk_cell_accessible_parent_get_child_index().
-func (parent CellAccessibleParent) GetChildIndex(cell CellAccessible) int {
+func (parent *CellAccessibleParentIface) GetChildIndex(cell CellAccessible) int {
 	ret0 := C.gtk_cell_accessible_parent_get_child_index(parent.native(), cell.native())
 	return int(ret0)
 }
 
 // GetRendererState is a wrapper around gtk_cell_accessible_parent_get_renderer_state().
-func (parent CellAccessibleParent) GetRendererState(cell CellAccessible) CellRendererState {
+func (parent *CellAccessibleParentIface) GetRendererState(cell CellAccessible) CellRendererState {
 	ret0 := C.gtk_cell_accessible_parent_get_renderer_state(parent.native(), cell.native())
 	return CellRendererState(ret0)
 }
 
 // GrabFocus is a wrapper around gtk_cell_accessible_parent_grab_focus().
-func (parent CellAccessibleParent) GrabFocus(cell CellAccessible) bool {
+func (parent *CellAccessibleParentIface) GrabFocus(cell CellAccessible) bool {
 	ret0 := C.gtk_cell_accessible_parent_grab_focus(parent.native(), cell.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // UpdateRelationset is a wrapper around gtk_cell_accessible_parent_update_relationset().
-func (parent CellAccessibleParent) UpdateRelationset(cell CellAccessible, relationset atk.RelationSet) {
+func (parent *CellAccessibleParentIface) UpdateRelationset(cell CellAccessible, relationset atk.RelationSet) {
 	C.gtk_cell_accessible_parent_update_relationset(parent.native(), cell.native(), (*C.AtkRelationSet)(relationset.Ptr))
 }
 
 // Object Viewport
 type Viewport struct {
+	atk.ImplementorIfaceIface
+	BuildableIface
+	ScrollableIface
 	Bin
 }
 
@@ -28598,7 +29185,7 @@ func (v Viewport) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Viewport) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v Viewport) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
@@ -28638,6 +29225,11 @@ func (viewport Viewport) SetShadowType(type_ ShadowType) {
 
 // Object VolumeButton
 type VolumeButton struct {
+	atk.ImplementorIfaceIface
+	ActionableIface
+	ActivatableIface
+	BuildableIface
+	OrientableIface
 	ScaleButton
 }
 
@@ -28668,7 +29260,7 @@ func (v VolumeButton) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v VolumeButton) ImplementorIface() atk.ImplementorIface {
-	return atk.WrapImplementorIface(v.Ptr) /*gir:Atk*/
+	return atk.WrapImplementorIface(v.Ptr)
 }
 func (v VolumeButton) Actionable() Actionable {
 	return WrapActionable(v.Ptr)
@@ -28691,6 +29283,8 @@ func VolumeButtonNew() Widget {
 
 // Object WindowAccessible
 type WindowAccessible struct {
+	atk.ComponentIface
+	atk.WindowIface
 	ContainerAccessible
 }
 
@@ -28721,10 +29315,10 @@ func (v WindowAccessible) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v WindowAccessible) Component() atk.Component {
-	return atk.WrapComponent(v.Ptr) /*gir:Atk*/
+	return atk.WrapComponent(v.Ptr)
 }
 func (v WindowAccessible) Window() atk.Window {
-	return atk.WrapWindow(v.Ptr) /*gir:Atk*/
+	return atk.WrapWindow(v.Ptr)
 }
 
 // Main is a wrapper around gtk_main().

@@ -19,10 +19,10 @@ func (v Value) native() *C.GValue {
 	return (*C.GValue)(v.Ptr)
 }
 func wrapValue(p *C.GValue) Value {
-	return Value{unsafe.Pointer(p)}
+	return Value{Ptr: unsafe.Pointer(p)}
 }
 func WrapValue(p unsafe.Pointer) Value {
-	return Value{p}
+	return Value{Ptr: p}
 }
 func (v Value) IsNil() bool {
 	return v.Ptr == nil
@@ -367,10 +367,10 @@ func (v Object) native() *C.GObject {
 	return (*C.GObject)(v.Ptr)
 }
 func wrapObject(p *C.GObject) Object {
-	return Object{unsafe.Pointer(p)}
+	return Object{Ptr: unsafe.Pointer(p)}
 }
 func WrapObject(p unsafe.Pointer) Object {
-	return Object{p}
+	return Object{Ptr: p}
 }
 func (v Object) IsNil() bool {
 	return v.Ptr == nil
@@ -558,10 +558,10 @@ func (v Closure) native() *C.GClosure {
 	return (*C.GClosure)(v.Ptr)
 }
 func wrapClosure(p *C.GClosure) Closure {
-	return Closure{unsafe.Pointer(p)}
+	return Closure{Ptr: unsafe.Pointer(p)}
 }
 func WrapClosure(p unsafe.Pointer) Closure {
-	return Closure{p}
+	return Closure{Ptr: p}
 }
 func (v Closure) IsNil() bool {
 	return v.Ptr == nil
@@ -681,10 +681,10 @@ func (v ParamSpec) native() *C.GParamSpec {
 	return (*C.GParamSpec)(v.Ptr)
 }
 func wrapParamSpec(p *C.GParamSpec) ParamSpec {
-	return ParamSpec{unsafe.Pointer(p)}
+	return ParamSpec{Ptr: unsafe.Pointer(p)}
 }
 func WrapParamSpec(p unsafe.Pointer) ParamSpec {
-	return ParamSpec{p}
+	return ParamSpec{Ptr: p}
 }
 func (v ParamSpec) IsNil() bool {
 	return v.Ptr == nil
@@ -786,10 +786,10 @@ func (v TypeInterface) native() *C.GTypeInterface {
 	return (*C.GTypeInterface)(v.Ptr)
 }
 func wrapTypeInterface(p *C.GTypeInterface) TypeInterface {
-	return TypeInterface{unsafe.Pointer(p)}
+	return TypeInterface{Ptr: unsafe.Pointer(p)}
 }
 func WrapTypeInterface(p unsafe.Pointer) TypeInterface {
-	return TypeInterface{p}
+	return TypeInterface{Ptr: p}
 }
 func (v TypeInterface) IsNil() bool {
 	return v.Ptr == nil
@@ -813,10 +813,10 @@ func (v TypeInstance) native() *C.GTypeInstance {
 	return (*C.GTypeInstance)(v.Ptr)
 }
 func wrapTypeInstance(p *C.GTypeInstance) TypeInstance {
-	return TypeInstance{unsafe.Pointer(p)}
+	return TypeInstance{Ptr: unsafe.Pointer(p)}
 }
 func WrapTypeInstance(p unsafe.Pointer) TypeInstance {
-	return TypeInstance{p}
+	return TypeInstance{Ptr: p}
 }
 func (v TypeInstance) IsNil() bool {
 	return v.Ptr == nil
@@ -834,10 +834,10 @@ func (v ValueArray) native() *C.GValueArray {
 	return (*C.GValueArray)(v.Ptr)
 }
 func wrapValueArray(p *C.GValueArray) ValueArray {
-	return ValueArray{unsafe.Pointer(p)}
+	return ValueArray{Ptr: unsafe.Pointer(p)}
 }
 func WrapValueArray(p unsafe.Pointer) ValueArray {
-	return ValueArray{p}
+	return ValueArray{Ptr: p}
 }
 func (v ValueArray) IsNil() bool {
 	return v.Ptr == nil
@@ -848,6 +848,7 @@ func IWrapValueArray(p unsafe.Pointer) interface{} {
 
 // Object TypeModule
 type TypeModule struct {
+	TypePluginIface
 	Object
 }
 
@@ -901,17 +902,19 @@ func (module TypeModule) Use() bool {
 
 // Interface TypePlugin
 type TypePlugin struct {
+	TypePluginIface
 	Ptr unsafe.Pointer
 }
+type TypePluginIface struct{}
 
-func (v TypePlugin) native() *C.GTypePlugin {
-	return (*C.GTypePlugin)(v.Ptr)
+func (v *TypePluginIface) native() *C.GTypePlugin {
+	return (*C.GTypePlugin)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapTypePlugin(p *C.GTypePlugin) TypePlugin {
-	return TypePlugin{unsafe.Pointer(p)}
+	return TypePlugin{Ptr: unsafe.Pointer(p)}
 }
 func WrapTypePlugin(p unsafe.Pointer) TypePlugin {
-	return TypePlugin{p}
+	return TypePlugin{Ptr: p}
 }
 func (v TypePlugin) IsNil() bool {
 	return v.Ptr == nil
@@ -930,12 +933,12 @@ func (v TypePlugin) GetGValueGetter() GValueGetter {
 }
 
 // Unuse is a wrapper around g_type_plugin_unuse().
-func (plugin TypePlugin) Unuse() {
+func (plugin *TypePluginIface) Unuse() {
 	C.g_type_plugin_unuse(plugin.native())
 }
 
 // Use is a wrapper around g_type_plugin_use().
-func (plugin TypePlugin) Use() {
+func (plugin *TypePluginIface) Use() {
 	C.g_type_plugin_use(plugin.native())
 }
 

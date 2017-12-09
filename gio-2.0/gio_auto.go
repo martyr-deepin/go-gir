@@ -377,17 +377,19 @@ import "unsafe"
 
 // Interface AppInfo
 type AppInfo struct {
+	AppInfoIface
 	Ptr unsafe.Pointer
 }
+type AppInfoIface struct{}
 
-func (v AppInfo) native() *C.GAppInfo {
-	return (*C.GAppInfo)(v.Ptr)
+func (v *AppInfoIface) native() *C.GAppInfo {
+	return (*C.GAppInfo)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapAppInfo(p *C.GAppInfo) AppInfo {
-	return AppInfo{unsafe.Pointer(p)}
+	return AppInfo{Ptr: unsafe.Pointer(p)}
 }
 func WrapAppInfo(p unsafe.Pointer) AppInfo {
-	return AppInfo{p}
+	return AppInfo{Ptr: p}
 }
 func (v AppInfo) IsNil() bool {
 	return v.Ptr == nil
@@ -406,7 +408,7 @@ func (v AppInfo) GetGValueGetter() gobject.GValueGetter {
 }
 
 // AddSupportsType is a wrapper around g_app_info_add_supports_type().
-func (appinfo AppInfo) AddSupportsType(content_type string) (bool, error) {
+func (appinfo *AppInfoIface) AddSupportsType(content_type string) (bool, error) {
 	content_type0 := C.CString(content_type)
 	var err glib.Error
 	ret0 := C.g_app_info_add_supports_type(appinfo.native(), content_type0, (**C.GError)(unsafe.Pointer(&err)))
@@ -419,85 +421,85 @@ func (appinfo AppInfo) AddSupportsType(content_type string) (bool, error) {
 }
 
 // CanDelete is a wrapper around g_app_info_can_delete().
-func (appinfo AppInfo) CanDelete() bool {
+func (appinfo *AppInfoIface) CanDelete() bool {
 	ret0 := C.g_app_info_can_delete(appinfo.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // CanRemoveSupportsType is a wrapper around g_app_info_can_remove_supports_type().
-func (appinfo AppInfo) CanRemoveSupportsType() bool {
+func (appinfo *AppInfoIface) CanRemoveSupportsType() bool {
 	ret0 := C.g_app_info_can_remove_supports_type(appinfo.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // Delete is a wrapper around g_app_info_delete().
-func (appinfo AppInfo) Delete() bool {
+func (appinfo *AppInfoIface) Delete() bool {
 	ret0 := C.g_app_info_delete(appinfo.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // Dup is a wrapper around g_app_info_dup().
-func (appinfo AppInfo) Dup() AppInfo {
+func (appinfo *AppInfoIface) Dup() AppInfo {
 	ret0 := C.g_app_info_dup(appinfo.native())
 	return wrapAppInfo(ret0)
 }
 
 // Equal is a wrapper around g_app_info_equal().
-func (appinfo1 AppInfo) Equal(appinfo2 AppInfo) bool {
+func (appinfo1 *AppInfoIface) Equal(appinfo2 AppInfo) bool {
 	ret0 := C.g_app_info_equal(appinfo1.native(), appinfo2.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetCommandline is a wrapper around g_app_info_get_commandline().
-func (appinfo AppInfo) GetCommandline() string {
+func (appinfo *AppInfoIface) GetCommandline() string {
 	ret0 := C.g_app_info_get_commandline(appinfo.native())
 	ret := C.GoString(ret0)
 	return ret
 }
 
 // GetDescription is a wrapper around g_app_info_get_description().
-func (appinfo AppInfo) GetDescription() string {
+func (appinfo *AppInfoIface) GetDescription() string {
 	ret0 := C.g_app_info_get_description(appinfo.native())
 	ret := C.GoString(ret0)
 	return ret
 }
 
 // GetDisplayName is a wrapper around g_app_info_get_display_name().
-func (appinfo AppInfo) GetDisplayName() string {
+func (appinfo *AppInfoIface) GetDisplayName() string {
 	ret0 := C.g_app_info_get_display_name(appinfo.native())
 	ret := C.GoString(ret0)
 	return ret
 }
 
 // GetExecutable is a wrapper around g_app_info_get_executable().
-func (appinfo AppInfo) GetExecutable() string {
+func (appinfo *AppInfoIface) GetExecutable() string {
 	ret0 := C.g_app_info_get_executable(appinfo.native())
 	ret := C.GoString(ret0)
 	return ret
 }
 
 // GetIcon is a wrapper around g_app_info_get_icon().
-func (appinfo AppInfo) GetIcon() Icon {
+func (appinfo *AppInfoIface) GetIcon() Icon {
 	ret0 := C.g_app_info_get_icon(appinfo.native())
 	return wrapIcon(ret0)
 }
 
 // GetId is a wrapper around g_app_info_get_id().
-func (appinfo AppInfo) GetId() string {
+func (appinfo *AppInfoIface) GetId() string {
 	ret0 := C.g_app_info_get_id(appinfo.native())
 	ret := C.GoString(ret0)
 	return ret
 }
 
 // GetName is a wrapper around g_app_info_get_name().
-func (appinfo AppInfo) GetName() string {
+func (appinfo *AppInfoIface) GetName() string {
 	ret0 := C.g_app_info_get_name(appinfo.native())
 	ret := C.GoString(ret0)
 	return ret
 }
 
 // GetSupportedTypes is a wrapper around g_app_info_get_supported_types().
-func (appinfo AppInfo) GetSupportedTypes() []string {
+func (appinfo *AppInfoIface) GetSupportedTypes() []string {
 	ret0 := C.g_app_info_get_supported_types(appinfo.native())
 	var ret0Slice []*C.char
 	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
@@ -511,7 +513,7 @@ func (appinfo AppInfo) GetSupportedTypes() []string {
 }
 
 // Launch is a wrapper around g_app_info_launch().
-func (appinfo AppInfo) Launch(files glib.List, launch_context AppLaunchContext) (bool, error) {
+func (appinfo *AppInfoIface) Launch(files glib.List, launch_context AppLaunchContext) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_app_info_launch(appinfo.native(), (*C.GList)(files.Ptr), launch_context.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -522,7 +524,7 @@ func (appinfo AppInfo) Launch(files glib.List, launch_context AppLaunchContext) 
 }
 
 // LaunchUris is a wrapper around g_app_info_launch_uris().
-func (appinfo AppInfo) LaunchUris(uris glib.List, launch_context AppLaunchContext) (bool, error) {
+func (appinfo *AppInfoIface) LaunchUris(uris glib.List, launch_context AppLaunchContext) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_app_info_launch_uris(appinfo.native(), (*C.GList)(uris.Ptr), launch_context.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -533,7 +535,7 @@ func (appinfo AppInfo) LaunchUris(uris glib.List, launch_context AppLaunchContex
 }
 
 // RemoveSupportsType is a wrapper around g_app_info_remove_supports_type().
-func (appinfo AppInfo) RemoveSupportsType(content_type string) (bool, error) {
+func (appinfo *AppInfoIface) RemoveSupportsType(content_type string) (bool, error) {
 	content_type0 := C.CString(content_type)
 	var err glib.Error
 	ret0 := C.g_app_info_remove_supports_type(appinfo.native(), content_type0, (**C.GError)(unsafe.Pointer(&err)))
@@ -546,7 +548,7 @@ func (appinfo AppInfo) RemoveSupportsType(content_type string) (bool, error) {
 }
 
 // SetAsDefaultForExtension is a wrapper around g_app_info_set_as_default_for_extension().
-func (appinfo AppInfo) SetAsDefaultForExtension(extension string) (bool, error) {
+func (appinfo *AppInfoIface) SetAsDefaultForExtension(extension string) (bool, error) {
 	extension0 := C.CString(extension)
 	var err glib.Error
 	ret0 := C.g_app_info_set_as_default_for_extension(appinfo.native(), extension0, (**C.GError)(unsafe.Pointer(&err)))
@@ -559,7 +561,7 @@ func (appinfo AppInfo) SetAsDefaultForExtension(extension string) (bool, error) 
 }
 
 // SetAsDefaultForType is a wrapper around g_app_info_set_as_default_for_type().
-func (appinfo AppInfo) SetAsDefaultForType(content_type string) (bool, error) {
+func (appinfo *AppInfoIface) SetAsDefaultForType(content_type string) (bool, error) {
 	content_type0 := C.CString(content_type)
 	var err glib.Error
 	ret0 := C.g_app_info_set_as_default_for_type(appinfo.native(), content_type0, (**C.GError)(unsafe.Pointer(&err)))
@@ -572,7 +574,7 @@ func (appinfo AppInfo) SetAsDefaultForType(content_type string) (bool, error) {
 }
 
 // SetAsLastUsedForType is a wrapper around g_app_info_set_as_last_used_for_type().
-func (appinfo AppInfo) SetAsLastUsedForType(content_type string) (bool, error) {
+func (appinfo *AppInfoIface) SetAsLastUsedForType(content_type string) (bool, error) {
 	content_type0 := C.CString(content_type)
 	var err glib.Error
 	ret0 := C.g_app_info_set_as_last_used_for_type(appinfo.native(), content_type0, (**C.GError)(unsafe.Pointer(&err)))
@@ -585,19 +587,19 @@ func (appinfo AppInfo) SetAsLastUsedForType(content_type string) (bool, error) {
 }
 
 // ShouldShow is a wrapper around g_app_info_should_show().
-func (appinfo AppInfo) ShouldShow() bool {
+func (appinfo *AppInfoIface) ShouldShow() bool {
 	ret0 := C.g_app_info_should_show(appinfo.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // SupportsFiles is a wrapper around g_app_info_supports_files().
-func (appinfo AppInfo) SupportsFiles() bool {
+func (appinfo *AppInfoIface) SupportsFiles() bool {
 	ret0 := C.g_app_info_supports_files(appinfo.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // SupportsUris is a wrapper around g_app_info_supports_uris().
-func (appinfo AppInfo) SupportsUris() bool {
+func (appinfo *AppInfoIface) SupportsUris() bool {
 	ret0 := C.g_app_info_supports_uris(appinfo.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
@@ -708,6 +710,7 @@ func AppInfoResetTypeAssociations(content_type string) {
 
 // Object DesktopAppInfo
 type DesktopAppInfo struct {
+	AppInfoIface
 	gobject.Object
 }
 
@@ -1385,10 +1388,10 @@ func (v SettingsSchema) native() *C.GSettingsSchema {
 	return (*C.GSettingsSchema)(v.Ptr)
 }
 func wrapSettingsSchema(p *C.GSettingsSchema) SettingsSchema {
-	return SettingsSchema{unsafe.Pointer(p)}
+	return SettingsSchema{Ptr: unsafe.Pointer(p)}
 }
 func WrapSettingsSchema(p unsafe.Pointer) SettingsSchema {
-	return SettingsSchema{p}
+	return SettingsSchema{Ptr: p}
 }
 func (v SettingsSchema) IsNil() bool {
 	return v.Ptr == nil
@@ -1479,10 +1482,10 @@ func (v SettingsBackend) native() *C.GSettingsBackend {
 	return (*C.GSettingsBackend)(v.Ptr)
 }
 func wrapSettingsBackend(p *C.GSettingsBackend) SettingsBackend {
-	return SettingsBackend{unsafe.Pointer(p)}
+	return SettingsBackend{Ptr: unsafe.Pointer(p)}
 }
 func WrapSettingsBackend(p unsafe.Pointer) SettingsBackend {
-	return SettingsBackend{p}
+	return SettingsBackend{Ptr: p}
 }
 func (v SettingsBackend) IsNil() bool {
 	return v.Ptr == nil
@@ -1493,17 +1496,19 @@ func IWrapSettingsBackend(p unsafe.Pointer) interface{} {
 
 // Interface Action
 type Action struct {
+	ActionIface
 	Ptr unsafe.Pointer
 }
+type ActionIface struct{}
 
-func (v Action) native() *C.GAction {
-	return (*C.GAction)(v.Ptr)
+func (v *ActionIface) native() *C.GAction {
+	return (*C.GAction)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapAction(p *C.GAction) Action {
-	return Action{unsafe.Pointer(p)}
+	return Action{Ptr: unsafe.Pointer(p)}
 }
 func WrapAction(p unsafe.Pointer) Action {
-	return Action{p}
+	return Action{Ptr: p}
 }
 func (v Action) IsNil() bool {
 	return v.Ptr == nil
@@ -1522,48 +1527,48 @@ func (v Action) GetGValueGetter() gobject.GValueGetter {
 }
 
 // Activate is a wrapper around g_action_activate().
-func (action Action) Activate(parameter glib.Variant) {
+func (action *ActionIface) Activate(parameter glib.Variant) {
 	C.g_action_activate(action.native(), (*C.GVariant)(parameter.Ptr))
 }
 
 // ChangeState is a wrapper around g_action_change_state().
-func (action Action) ChangeState(value glib.Variant) {
+func (action *ActionIface) ChangeState(value glib.Variant) {
 	C.g_action_change_state(action.native(), (*C.GVariant)(value.Ptr))
 }
 
 // GetEnabled is a wrapper around g_action_get_enabled().
-func (action Action) GetEnabled() bool {
+func (action *ActionIface) GetEnabled() bool {
 	ret0 := C.g_action_get_enabled(action.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetName is a wrapper around g_action_get_name().
-func (action Action) GetName() string {
+func (action *ActionIface) GetName() string {
 	ret0 := C.g_action_get_name(action.native())
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
 
 // GetParameterType is a wrapper around g_action_get_parameter_type().
-func (action Action) GetParameterType() glib.VariantType {
+func (action *ActionIface) GetParameterType() glib.VariantType {
 	ret0 := C.g_action_get_parameter_type(action.native())
 	return glib.WrapVariantType(unsafe.Pointer(ret0)) /*gir:GLib*/
 }
 
 // GetState is a wrapper around g_action_get_state().
-func (action Action) GetState() glib.Variant {
+func (action *ActionIface) GetState() glib.Variant {
 	ret0 := C.g_action_get_state(action.native())
 	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/
 }
 
 // GetStateHint is a wrapper around g_action_get_state_hint().
-func (action Action) GetStateHint() glib.Variant {
+func (action *ActionIface) GetStateHint() glib.Variant {
 	ret0 := C.g_action_get_state_hint(action.native())
 	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/
 }
 
 // GetStateType is a wrapper around g_action_get_state_type().
-func (action Action) GetStateType() glib.VariantType {
+func (action *ActionIface) GetStateType() glib.VariantType {
 	ret0 := C.g_action_get_state_type(action.native())
 	return glib.WrapVariantType(unsafe.Pointer(ret0)) /*gir:GLib*/
 }
@@ -1605,17 +1610,19 @@ func ActionPrintDetailedName(action_name string, target_value glib.Variant) stri
 
 // Interface File
 type File struct {
+	FileIface
 	Ptr unsafe.Pointer
 }
+type FileIface struct{}
 
-func (v File) native() *C.GFile {
-	return (*C.GFile)(v.Ptr)
+func (v *FileIface) native() *C.GFile {
+	return (*C.GFile)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapFile(p *C.GFile) File {
-	return File{unsafe.Pointer(p)}
+	return File{Ptr: unsafe.Pointer(p)}
 }
 func WrapFile(p unsafe.Pointer) File {
-	return File{p}
+	return File{Ptr: p}
 }
 func (v File) IsNil() bool {
 	return v.Ptr == nil
@@ -1634,7 +1641,7 @@ func (v File) GetGValueGetter() gobject.GValueGetter {
 }
 
 // AppendTo is a wrapper around g_file_append_to().
-func (file File) AppendTo(flags FileCreateFlags, cancellable Cancellable) (FileOutputStream, error) {
+func (file *FileIface) AppendTo(flags FileCreateFlags, cancellable Cancellable) (FileOutputStream, error) {
 	var err glib.Error
 	ret0 := C.g_file_append_to(file.native(), C.GFileCreateFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -1645,13 +1652,13 @@ func (file File) AppendTo(flags FileCreateFlags, cancellable Cancellable) (FileO
 }
 
 // AppendToAsync is a wrapper around g_file_append_to_async().
-func (file File) AppendToAsync(flags FileCreateFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) AppendToAsync(flags FileCreateFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_append_to_async(file.native(), C.GFileCreateFlags(flags), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // AppendToFinish is a wrapper around g_file_append_to_finish().
-func (file File) AppendToFinish(res AsyncResult) (FileOutputStream, error) {
+func (file *FileIface) AppendToFinish(res AsyncResult) (FileOutputStream, error) {
 	var err glib.Error
 	ret0 := C.g_file_append_to_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -1662,7 +1669,7 @@ func (file File) AppendToFinish(res AsyncResult) (FileOutputStream, error) {
 }
 
 // Copy is a wrapper around g_file_copy().
-func (source File) Copy(destination File, flags FileCopyFlags, cancellable Cancellable, progress_callback FileProgressCallback) (bool, error) {
+func (source *FileIface) Copy(destination File, flags FileCopyFlags, cancellable Cancellable, progress_callback FileProgressCallback) (bool, error) {
 	progress_callback0 := (*C.GClosure)(gobject.ClosureNew(progress_callback).Ptr) /*gir:GObject*/
 	var err glib.Error
 	ret0 := C._g_file_copy(source.native(), destination.native(), C.GFileCopyFlags(flags), cancellable.native(), progress_callback0, (**C.GError)(unsafe.Pointer(&err)))
@@ -1675,7 +1682,7 @@ func (source File) Copy(destination File, flags FileCopyFlags, cancellable Cance
 }
 
 // CopyAsync is a wrapper around g_file_copy_async().
-func (source File) CopyAsync(destination File, flags FileCopyFlags, io_priority int, cancellable Cancellable, progress_callback FileProgressCallback, callback AsyncReadyCallback) {
+func (source *FileIface) CopyAsync(destination File, flags FileCopyFlags, io_priority int, cancellable Cancellable, progress_callback FileProgressCallback, callback AsyncReadyCallback) {
 	progress_callback0 := (*C.GClosure)(gobject.ClosureNew(progress_callback).Ptr) /*gir:GObject*/
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr)                   /*gir:GObject*/
 	C._g_file_copy_async(source.native(), destination.native(), C.GFileCopyFlags(flags), C.int(io_priority), cancellable.native(), progress_callback0, callback0)
@@ -1683,7 +1690,7 @@ func (source File) CopyAsync(destination File, flags FileCopyFlags, io_priority 
 }
 
 // CopyAttributes is a wrapper around g_file_copy_attributes().
-func (source File) CopyAttributes(destination File, flags FileCopyFlags, cancellable Cancellable) (bool, error) {
+func (source *FileIface) CopyAttributes(destination File, flags FileCopyFlags, cancellable Cancellable) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_file_copy_attributes(source.native(), destination.native(), C.GFileCopyFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -1694,7 +1701,7 @@ func (source File) CopyAttributes(destination File, flags FileCopyFlags, cancell
 }
 
 // CopyFinish is a wrapper around g_file_copy_finish().
-func (file File) CopyFinish(res AsyncResult) (bool, error) {
+func (file *FileIface) CopyFinish(res AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_file_copy_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -1705,7 +1712,7 @@ func (file File) CopyFinish(res AsyncResult) (bool, error) {
 }
 
 // Create is a wrapper around g_file_create().
-func (file File) Create(flags FileCreateFlags, cancellable Cancellable) (FileOutputStream, error) {
+func (file *FileIface) Create(flags FileCreateFlags, cancellable Cancellable) (FileOutputStream, error) {
 	var err glib.Error
 	ret0 := C.g_file_create(file.native(), C.GFileCreateFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -1716,13 +1723,13 @@ func (file File) Create(flags FileCreateFlags, cancellable Cancellable) (FileOut
 }
 
 // CreateAsync is a wrapper around g_file_create_async().
-func (file File) CreateAsync(flags FileCreateFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) CreateAsync(flags FileCreateFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_create_async(file.native(), C.GFileCreateFlags(flags), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // CreateFinish is a wrapper around g_file_create_finish().
-func (file File) CreateFinish(res AsyncResult) (FileOutputStream, error) {
+func (file *FileIface) CreateFinish(res AsyncResult) (FileOutputStream, error) {
 	var err glib.Error
 	ret0 := C.g_file_create_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -1733,7 +1740,7 @@ func (file File) CreateFinish(res AsyncResult) (FileOutputStream, error) {
 }
 
 // CreateReadwrite is a wrapper around g_file_create_readwrite().
-func (file File) CreateReadwrite(flags FileCreateFlags, cancellable Cancellable) (FileIOStream, error) {
+func (file *FileIface) CreateReadwrite(flags FileCreateFlags, cancellable Cancellable) (FileIOStream, error) {
 	var err glib.Error
 	ret0 := C.g_file_create_readwrite(file.native(), C.GFileCreateFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -1744,13 +1751,13 @@ func (file File) CreateReadwrite(flags FileCreateFlags, cancellable Cancellable)
 }
 
 // CreateReadwriteAsync is a wrapper around g_file_create_readwrite_async().
-func (file File) CreateReadwriteAsync(flags FileCreateFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) CreateReadwriteAsync(flags FileCreateFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_create_readwrite_async(file.native(), C.GFileCreateFlags(flags), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // CreateReadwriteFinish is a wrapper around g_file_create_readwrite_finish().
-func (file File) CreateReadwriteFinish(res AsyncResult) (FileIOStream, error) {
+func (file *FileIface) CreateReadwriteFinish(res AsyncResult) (FileIOStream, error) {
 	var err glib.Error
 	ret0 := C.g_file_create_readwrite_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -1761,7 +1768,7 @@ func (file File) CreateReadwriteFinish(res AsyncResult) (FileIOStream, error) {
 }
 
 // Delete is a wrapper around g_file_delete().
-func (file File) Delete(cancellable Cancellable) (bool, error) {
+func (file *FileIface) Delete(cancellable Cancellable) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_file_delete(file.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -1772,13 +1779,13 @@ func (file File) Delete(cancellable Cancellable) (bool, error) {
 }
 
 // DeleteAsync is a wrapper around g_file_delete_async().
-func (file File) DeleteAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) DeleteAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_delete_async(file.native(), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // DeleteFinish is a wrapper around g_file_delete_finish().
-func (file File) DeleteFinish(result AsyncResult) (bool, error) {
+func (file *FileIface) DeleteFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_file_delete_finish(file.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -1789,19 +1796,19 @@ func (file File) DeleteFinish(result AsyncResult) (bool, error) {
 }
 
 // Dup is a wrapper around g_file_dup().
-func (file File) Dup() File {
+func (file *FileIface) Dup() File {
 	ret0 := C.g_file_dup(file.native())
 	return wrapFile(ret0)
 }
 
 // EjectMountableWithOperation is a wrapper around g_file_eject_mountable_with_operation().
-func (file File) EjectMountableWithOperation(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) EjectMountableWithOperation(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_eject_mountable_with_operation(file.native(), C.GMountUnmountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
 }
 
 // EjectMountableWithOperationFinish is a wrapper around g_file_eject_mountable_with_operation_finish().
-func (file File) EjectMountableWithOperationFinish(result AsyncResult) (bool, error) {
+func (file *FileIface) EjectMountableWithOperationFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_file_eject_mountable_with_operation_finish(file.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -1812,7 +1819,7 @@ func (file File) EjectMountableWithOperationFinish(result AsyncResult) (bool, er
 }
 
 // EnumerateChildren is a wrapper around g_file_enumerate_children().
-func (file File) EnumerateChildren(attributes string, flags FileQueryInfoFlags, cancellable Cancellable) (FileEnumerator, error) {
+func (file *FileIface) EnumerateChildren(attributes string, flags FileQueryInfoFlags, cancellable Cancellable) (FileEnumerator, error) {
 	attributes0 := C.CString(attributes)
 	var err glib.Error
 	ret0 := C.g_file_enumerate_children(file.native(), attributes0, C.GFileQueryInfoFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
@@ -1825,7 +1832,7 @@ func (file File) EnumerateChildren(attributes string, flags FileQueryInfoFlags, 
 }
 
 // EnumerateChildrenAsync is a wrapper around g_file_enumerate_children_async().
-func (file File) EnumerateChildrenAsync(attributes string, flags FileQueryInfoFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) EnumerateChildrenAsync(attributes string, flags FileQueryInfoFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
 	attributes0 := C.CString(attributes)
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_enumerate_children_async(file.native(), attributes0, C.GFileQueryInfoFlags(flags), C.int(io_priority), cancellable.native(), callback0)
@@ -1833,7 +1840,7 @@ func (file File) EnumerateChildrenAsync(attributes string, flags FileQueryInfoFl
 }
 
 // EnumerateChildrenFinish is a wrapper around g_file_enumerate_children_finish().
-func (file File) EnumerateChildrenFinish(res AsyncResult) (FileEnumerator, error) {
+func (file *FileIface) EnumerateChildrenFinish(res AsyncResult) (FileEnumerator, error) {
 	var err glib.Error
 	ret0 := C.g_file_enumerate_children_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -1844,13 +1851,13 @@ func (file File) EnumerateChildrenFinish(res AsyncResult) (FileEnumerator, error
 }
 
 // Equal is a wrapper around g_file_equal().
-func (file1 File) Equal(file2 File) bool {
+func (file1 *FileIface) Equal(file2 File) bool {
 	ret0 := C.g_file_equal(file1.native(), file2.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // FindEnclosingMount is a wrapper around g_file_find_enclosing_mount().
-func (file File) FindEnclosingMount(cancellable Cancellable) (Mount, error) {
+func (file *FileIface) FindEnclosingMount(cancellable Cancellable) (Mount, error) {
 	var err glib.Error
 	ret0 := C.g_file_find_enclosing_mount(file.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -1861,13 +1868,13 @@ func (file File) FindEnclosingMount(cancellable Cancellable) (Mount, error) {
 }
 
 // FindEnclosingMountAsync is a wrapper around g_file_find_enclosing_mount_async().
-func (file File) FindEnclosingMountAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) FindEnclosingMountAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_find_enclosing_mount_async(file.native(), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // FindEnclosingMountFinish is a wrapper around g_file_find_enclosing_mount_finish().
-func (file File) FindEnclosingMountFinish(res AsyncResult) (Mount, error) {
+func (file *FileIface) FindEnclosingMountFinish(res AsyncResult) (Mount, error) {
 	var err glib.Error
 	ret0 := C.g_file_find_enclosing_mount_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -1878,7 +1885,7 @@ func (file File) FindEnclosingMountFinish(res AsyncResult) (Mount, error) {
 }
 
 // GetBasename is a wrapper around g_file_get_basename().
-func (file File) GetBasename() string {
+func (file *FileIface) GetBasename() string {
 	ret0 := C.g_file_get_basename(file.native())
 	ret := C.GoString(ret0)
 	C.g_free(C.gpointer(ret0))
@@ -1886,7 +1893,7 @@ func (file File) GetBasename() string {
 }
 
 // GetChild is a wrapper around g_file_get_child().
-func (file File) GetChild(name string) File {
+func (file *FileIface) GetChild(name string) File {
 	name0 := C.CString(name)
 	ret0 := C.g_file_get_child(file.native(), name0)
 	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
@@ -1894,7 +1901,7 @@ func (file File) GetChild(name string) File {
 }
 
 // GetChildForDisplayName is a wrapper around g_file_get_child_for_display_name().
-func (file File) GetChildForDisplayName(display_name string) (File, error) {
+func (file *FileIface) GetChildForDisplayName(display_name string) (File, error) {
 	display_name0 := C.CString(display_name)
 	var err glib.Error
 	ret0 := C.g_file_get_child_for_display_name(file.native(), display_name0, (**C.GError)(unsafe.Pointer(&err)))
@@ -1907,13 +1914,13 @@ func (file File) GetChildForDisplayName(display_name string) (File, error) {
 }
 
 // GetParent is a wrapper around g_file_get_parent().
-func (file File) GetParent() File {
+func (file *FileIface) GetParent() File {
 	ret0 := C.g_file_get_parent(file.native())
 	return wrapFile(ret0)
 }
 
 // GetParseName is a wrapper around g_file_get_parse_name().
-func (file File) GetParseName() string {
+func (file *FileIface) GetParseName() string {
 	ret0 := C.g_file_get_parse_name(file.native())
 	ret := C.GoString(ret0)
 	C.g_free(C.gpointer(ret0))
@@ -1921,7 +1928,7 @@ func (file File) GetParseName() string {
 }
 
 // GetPath is a wrapper around g_file_get_path().
-func (file File) GetPath() string {
+func (file *FileIface) GetPath() string {
 	ret0 := C.g_file_get_path(file.native())
 	ret := C.GoString(ret0)
 	C.g_free(C.gpointer(ret0))
@@ -1929,7 +1936,7 @@ func (file File) GetPath() string {
 }
 
 // GetRelativePath is a wrapper around g_file_get_relative_path().
-func (parent File) GetRelativePath(descendant File) string {
+func (parent *FileIface) GetRelativePath(descendant File) string {
 	ret0 := C.g_file_get_relative_path(parent.native(), descendant.native())
 	ret := C.GoString(ret0)
 	C.g_free(C.gpointer(ret0))
@@ -1937,7 +1944,7 @@ func (parent File) GetRelativePath(descendant File) string {
 }
 
 // GetUri is a wrapper around g_file_get_uri().
-func (file File) GetUri() string {
+func (file *FileIface) GetUri() string {
 	ret0 := C.g_file_get_uri(file.native())
 	ret := C.GoString(ret0)
 	C.g_free(C.gpointer(ret0))
@@ -1945,7 +1952,7 @@ func (file File) GetUri() string {
 }
 
 // GetUriScheme is a wrapper around g_file_get_uri_scheme().
-func (file File) GetUriScheme() string {
+func (file *FileIface) GetUriScheme() string {
 	ret0 := C.g_file_get_uri_scheme(file.native())
 	ret := C.GoString(ret0)
 	C.g_free(C.gpointer(ret0))
@@ -1953,19 +1960,19 @@ func (file File) GetUriScheme() string {
 }
 
 // HasParent is a wrapper around g_file_has_parent().
-func (file File) HasParent(parent File) bool {
+func (file *FileIface) HasParent(parent File) bool {
 	ret0 := C.g_file_has_parent(file.native(), parent.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // HasPrefix is a wrapper around g_file_has_prefix().
-func (file File) HasPrefix(prefix File) bool {
+func (file *FileIface) HasPrefix(prefix File) bool {
 	ret0 := C.g_file_has_prefix(file.native(), prefix.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // HasUriScheme is a wrapper around g_file_has_uri_scheme().
-func (file File) HasUriScheme(uri_scheme string) bool {
+func (file *FileIface) HasUriScheme(uri_scheme string) bool {
 	uri_scheme0 := C.CString(uri_scheme)
 	ret0 := C.g_file_has_uri_scheme(file.native(), uri_scheme0)
 	C.free(unsafe.Pointer(uri_scheme0)) /*ch:<stdlib.h>*/
@@ -1973,25 +1980,25 @@ func (file File) HasUriScheme(uri_scheme string) bool {
 }
 
 // Hash is a wrapper around g_file_hash().
-func (file File) Hash() uint {
+func (file *FileIface) Hash() uint {
 	ret0 := C.g_file_hash(C.gconstpointer(file.native()))
 	return uint(ret0)
 }
 
 // IsNative is a wrapper around g_file_is_native().
-func (file File) IsNative() bool {
+func (file *FileIface) IsNative() bool {
 	ret0 := C.g_file_is_native(file.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // LoadContentsAsync is a wrapper around g_file_load_contents_async().
-func (file File) LoadContentsAsync(cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) LoadContentsAsync(cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_load_contents_async(file.native(), cancellable.native(), callback0)
 }
 
 // MakeDirectory is a wrapper around g_file_make_directory().
-func (file File) MakeDirectory(cancellable Cancellable) (bool, error) {
+func (file *FileIface) MakeDirectory(cancellable Cancellable) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_file_make_directory(file.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2002,13 +2009,13 @@ func (file File) MakeDirectory(cancellable Cancellable) (bool, error) {
 }
 
 // MakeDirectoryAsync is a wrapper around g_file_make_directory_async().
-func (file File) MakeDirectoryAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) MakeDirectoryAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_make_directory_async(file.native(), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // MakeDirectoryFinish is a wrapper around g_file_make_directory_finish().
-func (file File) MakeDirectoryFinish(result AsyncResult) (bool, error) {
+func (file *FileIface) MakeDirectoryFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_file_make_directory_finish(file.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2019,7 +2026,7 @@ func (file File) MakeDirectoryFinish(result AsyncResult) (bool, error) {
 }
 
 // MakeDirectoryWithParents is a wrapper around g_file_make_directory_with_parents().
-func (file File) MakeDirectoryWithParents(cancellable Cancellable) (bool, error) {
+func (file *FileIface) MakeDirectoryWithParents(cancellable Cancellable) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_file_make_directory_with_parents(file.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2030,7 +2037,7 @@ func (file File) MakeDirectoryWithParents(cancellable Cancellable) (bool, error)
 }
 
 // MakeSymbolicLink is a wrapper around g_file_make_symbolic_link().
-func (file File) MakeSymbolicLink(symlink_value string, cancellable Cancellable) (bool, error) {
+func (file *FileIface) MakeSymbolicLink(symlink_value string, cancellable Cancellable) (bool, error) {
 	symlink_value0 := C.CString(symlink_value)
 	var err glib.Error
 	ret0 := C.g_file_make_symbolic_link(file.native(), symlink_value0, cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
@@ -2043,7 +2050,7 @@ func (file File) MakeSymbolicLink(symlink_value string, cancellable Cancellable)
 }
 
 // MeasureDiskUsage is a wrapper around g_file_measure_disk_usage().
-func (file File) MeasureDiskUsage(flags FileMeasureFlags, cancellable Cancellable, progress_callback FileMeasureProgressCallback) (bool, uint64, uint64, uint64, error) {
+func (file *FileIface) MeasureDiskUsage(flags FileMeasureFlags, cancellable Cancellable, progress_callback FileMeasureProgressCallback) (bool, uint64, uint64, uint64, error) {
 	progress_callback0 := (*C.GClosure)(gobject.ClosureNew(progress_callback).Ptr) /*gir:GObject*/
 	var disk_usage0 C.guint64
 	var num_dirs0 C.guint64
@@ -2059,7 +2066,7 @@ func (file File) MeasureDiskUsage(flags FileMeasureFlags, cancellable Cancellabl
 }
 
 // MeasureDiskUsageAsync is a wrapper around g_file_measure_disk_usage_async().
-func (file File) MeasureDiskUsageAsync(flags FileMeasureFlags, io_priority int, cancellable Cancellable, progress_callback FileMeasureProgressCallback, callback AsyncReadyCallback) {
+func (file *FileIface) MeasureDiskUsageAsync(flags FileMeasureFlags, io_priority int, cancellable Cancellable, progress_callback FileMeasureProgressCallback, callback AsyncReadyCallback) {
 	progress_callback0 := (*C.GClosure)(gobject.ClosureNew(progress_callback).Ptr) /*gir:GObject*/
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr)                   /*gir:GObject*/
 	C._g_file_measure_disk_usage_async(file.native(), C.GFileMeasureFlags(flags), C.gint(io_priority), cancellable.native(), progress_callback0, callback0)
@@ -2067,7 +2074,7 @@ func (file File) MeasureDiskUsageAsync(flags FileMeasureFlags, io_priority int, 
 }
 
 // MeasureDiskUsageFinish is a wrapper around g_file_measure_disk_usage_finish().
-func (file File) MeasureDiskUsageFinish(result AsyncResult) (bool, uint64, uint64, uint64, error) {
+func (file *FileIface) MeasureDiskUsageFinish(result AsyncResult) (bool, uint64, uint64, uint64, error) {
 	var disk_usage0 C.guint64
 	var num_dirs0 C.guint64
 	var num_files0 C.guint64
@@ -2081,7 +2088,7 @@ func (file File) MeasureDiskUsageFinish(result AsyncResult) (bool, uint64, uint6
 }
 
 // Monitor is a wrapper around g_file_monitor().
-func (file File) Monitor(flags FileMonitorFlags, cancellable Cancellable) (FileMonitor, error) {
+func (file *FileIface) Monitor(flags FileMonitorFlags, cancellable Cancellable) (FileMonitor, error) {
 	var err glib.Error
 	ret0 := C.g_file_monitor(file.native(), C.GFileMonitorFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2092,7 +2099,7 @@ func (file File) Monitor(flags FileMonitorFlags, cancellable Cancellable) (FileM
 }
 
 // MonitorDirectory is a wrapper around g_file_monitor_directory().
-func (file File) MonitorDirectory(flags FileMonitorFlags, cancellable Cancellable) (FileMonitor, error) {
+func (file *FileIface) MonitorDirectory(flags FileMonitorFlags, cancellable Cancellable) (FileMonitor, error) {
 	var err glib.Error
 	ret0 := C.g_file_monitor_directory(file.native(), C.GFileMonitorFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2103,7 +2110,7 @@ func (file File) MonitorDirectory(flags FileMonitorFlags, cancellable Cancellabl
 }
 
 // MonitorFile is a wrapper around g_file_monitor_file().
-func (file File) MonitorFile(flags FileMonitorFlags, cancellable Cancellable) (FileMonitor, error) {
+func (file *FileIface) MonitorFile(flags FileMonitorFlags, cancellable Cancellable) (FileMonitor, error) {
 	var err glib.Error
 	ret0 := C.g_file_monitor_file(file.native(), C.GFileMonitorFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2114,13 +2121,13 @@ func (file File) MonitorFile(flags FileMonitorFlags, cancellable Cancellable) (F
 }
 
 // MountEnclosingVolume is a wrapper around g_file_mount_enclosing_volume().
-func (location File) MountEnclosingVolume(flags MountMountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+func (location *FileIface) MountEnclosingVolume(flags MountMountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_mount_enclosing_volume(location.native(), C.GMountMountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
 }
 
 // MountEnclosingVolumeFinish is a wrapper around g_file_mount_enclosing_volume_finish().
-func (location File) MountEnclosingVolumeFinish(result AsyncResult) (bool, error) {
+func (location *FileIface) MountEnclosingVolumeFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_file_mount_enclosing_volume_finish(location.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2131,13 +2138,13 @@ func (location File) MountEnclosingVolumeFinish(result AsyncResult) (bool, error
 }
 
 // MountMountable is a wrapper around g_file_mount_mountable().
-func (file File) MountMountable(flags MountMountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) MountMountable(flags MountMountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_mount_mountable(file.native(), C.GMountMountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
 }
 
 // MountMountableFinish is a wrapper around g_file_mount_mountable_finish().
-func (file File) MountMountableFinish(result AsyncResult) (File, error) {
+func (file *FileIface) MountMountableFinish(result AsyncResult) (File, error) {
 	var err glib.Error
 	ret0 := C.g_file_mount_mountable_finish(file.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2148,7 +2155,7 @@ func (file File) MountMountableFinish(result AsyncResult) (File, error) {
 }
 
 // Move is a wrapper around g_file_move().
-func (source File) Move(destination File, flags FileCopyFlags, cancellable Cancellable, progress_callback FileProgressCallback) (bool, error) {
+func (source *FileIface) Move(destination File, flags FileCopyFlags, cancellable Cancellable, progress_callback FileProgressCallback) (bool, error) {
 	progress_callback0 := (*C.GClosure)(gobject.ClosureNew(progress_callback).Ptr) /*gir:GObject*/
 	var err glib.Error
 	ret0 := C._g_file_move(source.native(), destination.native(), C.GFileCopyFlags(flags), cancellable.native(), progress_callback0, (**C.GError)(unsafe.Pointer(&err)))
@@ -2161,7 +2168,7 @@ func (source File) Move(destination File, flags FileCopyFlags, cancellable Cance
 }
 
 // OpenReadwrite is a wrapper around g_file_open_readwrite().
-func (file File) OpenReadwrite(cancellable Cancellable) (FileIOStream, error) {
+func (file *FileIface) OpenReadwrite(cancellable Cancellable) (FileIOStream, error) {
 	var err glib.Error
 	ret0 := C.g_file_open_readwrite(file.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2172,13 +2179,13 @@ func (file File) OpenReadwrite(cancellable Cancellable) (FileIOStream, error) {
 }
 
 // OpenReadwriteAsync is a wrapper around g_file_open_readwrite_async().
-func (file File) OpenReadwriteAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) OpenReadwriteAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_open_readwrite_async(file.native(), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // OpenReadwriteFinish is a wrapper around g_file_open_readwrite_finish().
-func (file File) OpenReadwriteFinish(res AsyncResult) (FileIOStream, error) {
+func (file *FileIface) OpenReadwriteFinish(res AsyncResult) (FileIOStream, error) {
 	var err glib.Error
 	ret0 := C.g_file_open_readwrite_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2189,13 +2196,13 @@ func (file File) OpenReadwriteFinish(res AsyncResult) (FileIOStream, error) {
 }
 
 // PollMountable is a wrapper around g_file_poll_mountable().
-func (file File) PollMountable(cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) PollMountable(cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_poll_mountable(file.native(), cancellable.native(), callback0)
 }
 
 // PollMountableFinish is a wrapper around g_file_poll_mountable_finish().
-func (file File) PollMountableFinish(result AsyncResult) (bool, error) {
+func (file *FileIface) PollMountableFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_file_poll_mountable_finish(file.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2206,7 +2213,7 @@ func (file File) PollMountableFinish(result AsyncResult) (bool, error) {
 }
 
 // QueryDefaultHandler is a wrapper around g_file_query_default_handler().
-func (file File) QueryDefaultHandler(cancellable Cancellable) (AppInfo, error) {
+func (file *FileIface) QueryDefaultHandler(cancellable Cancellable) (AppInfo, error) {
 	var err glib.Error
 	ret0 := C.g_file_query_default_handler(file.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2217,19 +2224,19 @@ func (file File) QueryDefaultHandler(cancellable Cancellable) (AppInfo, error) {
 }
 
 // QueryExists is a wrapper around g_file_query_exists().
-func (file File) QueryExists(cancellable Cancellable) bool {
+func (file *FileIface) QueryExists(cancellable Cancellable) bool {
 	ret0 := C.g_file_query_exists(file.native(), cancellable.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // QueryFileType is a wrapper around g_file_query_file_type().
-func (file File) QueryFileType(flags FileQueryInfoFlags, cancellable Cancellable) FileType {
+func (file *FileIface) QueryFileType(flags FileQueryInfoFlags, cancellable Cancellable) FileType {
 	ret0 := C.g_file_query_file_type(file.native(), C.GFileQueryInfoFlags(flags), cancellable.native())
 	return FileType(ret0)
 }
 
 // QueryFilesystemInfo is a wrapper around g_file_query_filesystem_info().
-func (file File) QueryFilesystemInfo(attributes string, cancellable Cancellable) (FileInfo, error) {
+func (file *FileIface) QueryFilesystemInfo(attributes string, cancellable Cancellable) (FileInfo, error) {
 	attributes0 := C.CString(attributes)
 	var err glib.Error
 	ret0 := C.g_file_query_filesystem_info(file.native(), attributes0, cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
@@ -2242,7 +2249,7 @@ func (file File) QueryFilesystemInfo(attributes string, cancellable Cancellable)
 }
 
 // QueryFilesystemInfoAsync is a wrapper around g_file_query_filesystem_info_async().
-func (file File) QueryFilesystemInfoAsync(attributes string, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) QueryFilesystemInfoAsync(attributes string, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
 	attributes0 := C.CString(attributes)
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_query_filesystem_info_async(file.native(), attributes0, C.int(io_priority), cancellable.native(), callback0)
@@ -2250,7 +2257,7 @@ func (file File) QueryFilesystemInfoAsync(attributes string, io_priority int, ca
 }
 
 // QueryFilesystemInfoFinish is a wrapper around g_file_query_filesystem_info_finish().
-func (file File) QueryFilesystemInfoFinish(res AsyncResult) (FileInfo, error) {
+func (file *FileIface) QueryFilesystemInfoFinish(res AsyncResult) (FileInfo, error) {
 	var err glib.Error
 	ret0 := C.g_file_query_filesystem_info_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2261,7 +2268,7 @@ func (file File) QueryFilesystemInfoFinish(res AsyncResult) (FileInfo, error) {
 }
 
 // QueryInfo is a wrapper around g_file_query_info().
-func (file File) QueryInfo(attributes string, flags FileQueryInfoFlags, cancellable Cancellable) (FileInfo, error) {
+func (file *FileIface) QueryInfo(attributes string, flags FileQueryInfoFlags, cancellable Cancellable) (FileInfo, error) {
 	attributes0 := C.CString(attributes)
 	var err glib.Error
 	ret0 := C.g_file_query_info(file.native(), attributes0, C.GFileQueryInfoFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
@@ -2274,7 +2281,7 @@ func (file File) QueryInfo(attributes string, flags FileQueryInfoFlags, cancella
 }
 
 // QueryInfoAsync is a wrapper around g_file_query_info_async().
-func (file File) QueryInfoAsync(attributes string, flags FileQueryInfoFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) QueryInfoAsync(attributes string, flags FileQueryInfoFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
 	attributes0 := C.CString(attributes)
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_query_info_async(file.native(), attributes0, C.GFileQueryInfoFlags(flags), C.int(io_priority), cancellable.native(), callback0)
@@ -2282,7 +2289,7 @@ func (file File) QueryInfoAsync(attributes string, flags FileQueryInfoFlags, io_
 }
 
 // QueryInfoFinish is a wrapper around g_file_query_info_finish().
-func (file File) QueryInfoFinish(res AsyncResult) (FileInfo, error) {
+func (file *FileIface) QueryInfoFinish(res AsyncResult) (FileInfo, error) {
 	var err glib.Error
 	ret0 := C.g_file_query_info_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2293,7 +2300,7 @@ func (file File) QueryInfoFinish(res AsyncResult) (FileInfo, error) {
 }
 
 // QuerySettableAttributes is a wrapper around g_file_query_settable_attributes().
-func (file File) QuerySettableAttributes(cancellable Cancellable) (FileAttributeInfoList, error) {
+func (file *FileIface) QuerySettableAttributes(cancellable Cancellable) (FileAttributeInfoList, error) {
 	var err glib.Error
 	ret0 := C.g_file_query_settable_attributes(file.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2304,7 +2311,7 @@ func (file File) QuerySettableAttributes(cancellable Cancellable) (FileAttribute
 }
 
 // QueryWritableNamespaces is a wrapper around g_file_query_writable_namespaces().
-func (file File) QueryWritableNamespaces(cancellable Cancellable) (FileAttributeInfoList, error) {
+func (file *FileIface) QueryWritableNamespaces(cancellable Cancellable) (FileAttributeInfoList, error) {
 	var err glib.Error
 	ret0 := C.g_file_query_writable_namespaces(file.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2315,7 +2322,7 @@ func (file File) QueryWritableNamespaces(cancellable Cancellable) (FileAttribute
 }
 
 // Read is a wrapper around g_file_read().
-func (file File) Read(cancellable Cancellable) (FileInputStream, error) {
+func (file *FileIface) Read(cancellable Cancellable) (FileInputStream, error) {
 	var err glib.Error
 	ret0 := C.g_file_read(file.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2326,13 +2333,13 @@ func (file File) Read(cancellable Cancellable) (FileInputStream, error) {
 }
 
 // ReadAsync is a wrapper around g_file_read_async().
-func (file File) ReadAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) ReadAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_read_async(file.native(), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // ReadFinish is a wrapper around g_file_read_finish().
-func (file File) ReadFinish(res AsyncResult) (FileInputStream, error) {
+func (file *FileIface) ReadFinish(res AsyncResult) (FileInputStream, error) {
 	var err glib.Error
 	ret0 := C.g_file_read_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2343,7 +2350,7 @@ func (file File) ReadFinish(res AsyncResult) (FileInputStream, error) {
 }
 
 // Replace is a wrapper around g_file_replace().
-func (file File) Replace(etag string, make_backup bool, flags FileCreateFlags, cancellable Cancellable) (FileOutputStream, error) {
+func (file *FileIface) Replace(etag string, make_backup bool, flags FileCreateFlags, cancellable Cancellable) (FileOutputStream, error) {
 	etag0 := C.CString(etag)
 	var err glib.Error
 	ret0 := C.g_file_replace(file.native(), etag0, C.gboolean(util.Bool2Int(make_backup)) /*go:.util*/, C.GFileCreateFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
@@ -2356,7 +2363,7 @@ func (file File) Replace(etag string, make_backup bool, flags FileCreateFlags, c
 }
 
 // ReplaceAsync is a wrapper around g_file_replace_async().
-func (file File) ReplaceAsync(etag string, make_backup bool, flags FileCreateFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) ReplaceAsync(etag string, make_backup bool, flags FileCreateFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
 	etag0 := C.CString(etag)
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_replace_async(file.native(), etag0, C.gboolean(util.Bool2Int(make_backup)) /*go:.util*/, C.GFileCreateFlags(flags), C.int(io_priority), cancellable.native(), callback0)
@@ -2364,7 +2371,7 @@ func (file File) ReplaceAsync(etag string, make_backup bool, flags FileCreateFla
 }
 
 // ReplaceContentsFinish is a wrapper around g_file_replace_contents_finish().
-func (file File) ReplaceContentsFinish(res AsyncResult) (bool, string, error) {
+func (file *FileIface) ReplaceContentsFinish(res AsyncResult) (bool, string, error) {
 	var new_etag0 *C.char
 	var err glib.Error
 	ret0 := C.g_file_replace_contents_finish(file.native(), res.native(), &new_etag0, (**C.GError)(unsafe.Pointer(&err)))
@@ -2378,7 +2385,7 @@ func (file File) ReplaceContentsFinish(res AsyncResult) (bool, string, error) {
 }
 
 // ReplaceFinish is a wrapper around g_file_replace_finish().
-func (file File) ReplaceFinish(res AsyncResult) (FileOutputStream, error) {
+func (file *FileIface) ReplaceFinish(res AsyncResult) (FileOutputStream, error) {
 	var err glib.Error
 	ret0 := C.g_file_replace_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2389,7 +2396,7 @@ func (file File) ReplaceFinish(res AsyncResult) (FileOutputStream, error) {
 }
 
 // ReplaceReadwrite is a wrapper around g_file_replace_readwrite().
-func (file File) ReplaceReadwrite(etag string, make_backup bool, flags FileCreateFlags, cancellable Cancellable) (FileIOStream, error) {
+func (file *FileIface) ReplaceReadwrite(etag string, make_backup bool, flags FileCreateFlags, cancellable Cancellable) (FileIOStream, error) {
 	etag0 := C.CString(etag)
 	var err glib.Error
 	ret0 := C.g_file_replace_readwrite(file.native(), etag0, C.gboolean(util.Bool2Int(make_backup)) /*go:.util*/, C.GFileCreateFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
@@ -2402,7 +2409,7 @@ func (file File) ReplaceReadwrite(etag string, make_backup bool, flags FileCreat
 }
 
 // ReplaceReadwriteAsync is a wrapper around g_file_replace_readwrite_async().
-func (file File) ReplaceReadwriteAsync(etag string, make_backup bool, flags FileCreateFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) ReplaceReadwriteAsync(etag string, make_backup bool, flags FileCreateFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
 	etag0 := C.CString(etag)
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_replace_readwrite_async(file.native(), etag0, C.gboolean(util.Bool2Int(make_backup)) /*go:.util*/, C.GFileCreateFlags(flags), C.int(io_priority), cancellable.native(), callback0)
@@ -2410,7 +2417,7 @@ func (file File) ReplaceReadwriteAsync(etag string, make_backup bool, flags File
 }
 
 // ReplaceReadwriteFinish is a wrapper around g_file_replace_readwrite_finish().
-func (file File) ReplaceReadwriteFinish(res AsyncResult) (FileIOStream, error) {
+func (file *FileIface) ReplaceReadwriteFinish(res AsyncResult) (FileIOStream, error) {
 	var err glib.Error
 	ret0 := C.g_file_replace_readwrite_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2421,7 +2428,7 @@ func (file File) ReplaceReadwriteFinish(res AsyncResult) (FileIOStream, error) {
 }
 
 // ResolveRelativePath is a wrapper around g_file_resolve_relative_path().
-func (file File) ResolveRelativePath(relative_path string) File {
+func (file *FileIface) ResolveRelativePath(relative_path string) File {
 	relative_path0 := C.CString(relative_path)
 	ret0 := C.g_file_resolve_relative_path(file.native(), relative_path0)
 	C.free(unsafe.Pointer(relative_path0)) /*ch:<stdlib.h>*/
@@ -2429,7 +2436,7 @@ func (file File) ResolveRelativePath(relative_path string) File {
 }
 
 // SetAttribute is a wrapper around g_file_set_attribute().
-func (file File) SetAttribute(attribute string, type_ FileAttributeType, value_p unsafe.Pointer, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
+func (file *FileIface) SetAttribute(attribute string, type_ FileAttributeType, value_p unsafe.Pointer, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
 	attribute0 := C.CString(attribute)
 	var err glib.Error
 	ret0 := C.g_file_set_attribute(file.native(), attribute0, C.GFileAttributeType(type_), C.gpointer(value_p), C.GFileQueryInfoFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
@@ -2442,7 +2449,7 @@ func (file File) SetAttribute(attribute string, type_ FileAttributeType, value_p
 }
 
 // SetAttributeByteString is a wrapper around g_file_set_attribute_byte_string().
-func (file File) SetAttributeByteString(attribute string, value string, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
+func (file *FileIface) SetAttributeByteString(attribute string, value string, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
 	attribute0 := C.CString(attribute)
 	value0 := C.CString(value)
 	var err glib.Error
@@ -2457,7 +2464,7 @@ func (file File) SetAttributeByteString(attribute string, value string, flags Fi
 }
 
 // SetAttributeInt32 is a wrapper around g_file_set_attribute_int32().
-func (file File) SetAttributeInt32(attribute string, value int32, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
+func (file *FileIface) SetAttributeInt32(attribute string, value int32, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
 	attribute0 := C.CString(attribute)
 	var err glib.Error
 	ret0 := C.g_file_set_attribute_int32(file.native(), attribute0, C.gint32(value), C.GFileQueryInfoFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
@@ -2470,7 +2477,7 @@ func (file File) SetAttributeInt32(attribute string, value int32, flags FileQuer
 }
 
 // SetAttributeInt64 is a wrapper around g_file_set_attribute_int64().
-func (file File) SetAttributeInt64(attribute string, value int64, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
+func (file *FileIface) SetAttributeInt64(attribute string, value int64, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
 	attribute0 := C.CString(attribute)
 	var err glib.Error
 	ret0 := C.g_file_set_attribute_int64(file.native(), attribute0, C.gint64(value), C.GFileQueryInfoFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
@@ -2483,7 +2490,7 @@ func (file File) SetAttributeInt64(attribute string, value int64, flags FileQuer
 }
 
 // SetAttributeString is a wrapper around g_file_set_attribute_string().
-func (file File) SetAttributeString(attribute string, value string, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
+func (file *FileIface) SetAttributeString(attribute string, value string, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
 	attribute0 := C.CString(attribute)
 	value0 := C.CString(value)
 	var err glib.Error
@@ -2498,7 +2505,7 @@ func (file File) SetAttributeString(attribute string, value string, flags FileQu
 }
 
 // SetAttributeUint32 is a wrapper around g_file_set_attribute_uint32().
-func (file File) SetAttributeUint32(attribute string, value uint32, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
+func (file *FileIface) SetAttributeUint32(attribute string, value uint32, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
 	attribute0 := C.CString(attribute)
 	var err glib.Error
 	ret0 := C.g_file_set_attribute_uint32(file.native(), attribute0, C.guint32(value), C.GFileQueryInfoFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
@@ -2511,7 +2518,7 @@ func (file File) SetAttributeUint32(attribute string, value uint32, flags FileQu
 }
 
 // SetAttributeUint64 is a wrapper around g_file_set_attribute_uint64().
-func (file File) SetAttributeUint64(attribute string, value uint64, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
+func (file *FileIface) SetAttributeUint64(attribute string, value uint64, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
 	attribute0 := C.CString(attribute)
 	var err glib.Error
 	ret0 := C.g_file_set_attribute_uint64(file.native(), attribute0, C.guint64(value), C.GFileQueryInfoFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
@@ -2524,13 +2531,13 @@ func (file File) SetAttributeUint64(attribute string, value uint64, flags FileQu
 }
 
 // SetAttributesAsync is a wrapper around g_file_set_attributes_async().
-func (file File) SetAttributesAsync(info FileInfo, flags FileQueryInfoFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) SetAttributesAsync(info FileInfo, flags FileQueryInfoFlags, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_set_attributes_async(file.native(), info.native(), C.GFileQueryInfoFlags(flags), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // SetAttributesFinish is a wrapper around g_file_set_attributes_finish().
-func (file File) SetAttributesFinish(result AsyncResult) (bool, FileInfo, error) {
+func (file *FileIface) SetAttributesFinish(result AsyncResult) (bool, FileInfo, error) {
 	var info0 *C.GFileInfo
 	var err glib.Error
 	ret0 := C.g_file_set_attributes_finish(file.native(), result.native(), &info0, (**C.GError)(unsafe.Pointer(&err)))
@@ -2542,7 +2549,7 @@ func (file File) SetAttributesFinish(result AsyncResult) (bool, FileInfo, error)
 }
 
 // SetAttributesFromInfo is a wrapper around g_file_set_attributes_from_info().
-func (file File) SetAttributesFromInfo(info FileInfo, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
+func (file *FileIface) SetAttributesFromInfo(info FileInfo, flags FileQueryInfoFlags, cancellable Cancellable) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_file_set_attributes_from_info(file.native(), info.native(), C.GFileQueryInfoFlags(flags), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2553,7 +2560,7 @@ func (file File) SetAttributesFromInfo(info FileInfo, flags FileQueryInfoFlags, 
 }
 
 // SetDisplayName is a wrapper around g_file_set_display_name().
-func (file File) SetDisplayName(display_name string, cancellable Cancellable) (File, error) {
+func (file *FileIface) SetDisplayName(display_name string, cancellable Cancellable) (File, error) {
 	display_name0 := C.CString(display_name)
 	var err glib.Error
 	ret0 := C.g_file_set_display_name(file.native(), display_name0, cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
@@ -2566,7 +2573,7 @@ func (file File) SetDisplayName(display_name string, cancellable Cancellable) (F
 }
 
 // SetDisplayNameAsync is a wrapper around g_file_set_display_name_async().
-func (file File) SetDisplayNameAsync(display_name string, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) SetDisplayNameAsync(display_name string, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
 	display_name0 := C.CString(display_name)
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_set_display_name_async(file.native(), display_name0, C.int(io_priority), cancellable.native(), callback0)
@@ -2574,7 +2581,7 @@ func (file File) SetDisplayNameAsync(display_name string, io_priority int, cance
 }
 
 // SetDisplayNameFinish is a wrapper around g_file_set_display_name_finish().
-func (file File) SetDisplayNameFinish(res AsyncResult) (File, error) {
+func (file *FileIface) SetDisplayNameFinish(res AsyncResult) (File, error) {
 	var err glib.Error
 	ret0 := C.g_file_set_display_name_finish(file.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2585,13 +2592,13 @@ func (file File) SetDisplayNameFinish(res AsyncResult) (File, error) {
 }
 
 // StartMountable is a wrapper around g_file_start_mountable().
-func (file File) StartMountable(flags DriveStartFlags, start_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) StartMountable(flags DriveStartFlags, start_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_start_mountable(file.native(), C.GDriveStartFlags(flags), start_operation.native(), cancellable.native(), callback0)
 }
 
 // StartMountableFinish is a wrapper around g_file_start_mountable_finish().
-func (file File) StartMountableFinish(result AsyncResult) (bool, error) {
+func (file *FileIface) StartMountableFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_file_start_mountable_finish(file.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2602,13 +2609,13 @@ func (file File) StartMountableFinish(result AsyncResult) (bool, error) {
 }
 
 // StopMountable is a wrapper around g_file_stop_mountable().
-func (file File) StopMountable(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) StopMountable(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_stop_mountable(file.native(), C.GMountUnmountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
 }
 
 // StopMountableFinish is a wrapper around g_file_stop_mountable_finish().
-func (file File) StopMountableFinish(result AsyncResult) (bool, error) {
+func (file *FileIface) StopMountableFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_file_stop_mountable_finish(file.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2619,13 +2626,13 @@ func (file File) StopMountableFinish(result AsyncResult) (bool, error) {
 }
 
 // SupportsThreadContexts is a wrapper around g_file_supports_thread_contexts().
-func (file File) SupportsThreadContexts() bool {
+func (file *FileIface) SupportsThreadContexts() bool {
 	ret0 := C.g_file_supports_thread_contexts(file.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // Trash is a wrapper around g_file_trash().
-func (file File) Trash(cancellable Cancellable) (bool, error) {
+func (file *FileIface) Trash(cancellable Cancellable) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_file_trash(file.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2636,13 +2643,13 @@ func (file File) Trash(cancellable Cancellable) (bool, error) {
 }
 
 // TrashAsync is a wrapper around g_file_trash_async().
-func (file File) TrashAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) TrashAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_trash_async(file.native(), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // TrashFinish is a wrapper around g_file_trash_finish().
-func (file File) TrashFinish(result AsyncResult) (bool, error) {
+func (file *FileIface) TrashFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_file_trash_finish(file.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -2653,13 +2660,13 @@ func (file File) TrashFinish(result AsyncResult) (bool, error) {
 }
 
 // UnmountMountableWithOperation is a wrapper around g_file_unmount_mountable_with_operation().
-func (file File) UnmountMountableWithOperation(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+func (file *FileIface) UnmountMountableWithOperation(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_file_unmount_mountable_with_operation(file.native(), C.GMountUnmountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
 }
 
 // UnmountMountableWithOperationFinish is a wrapper around g_file_unmount_mountable_with_operation_finish().
-func (file File) UnmountMountableWithOperationFinish(result AsyncResult) (bool, error) {
+func (file *FileIface) UnmountMountableWithOperationFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_file_unmount_mountable_with_operation_finish(file.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -3037,6 +3044,7 @@ func (stream OutputStream) WriteFinish(result AsyncResult) (int, error) {
 
 // Object FileOutputStream
 type FileOutputStream struct {
+	SeekableIface
 	OutputStream
 }
 
@@ -3112,17 +3120,19 @@ func (stream FileOutputStream) QueryInfoFinish(result AsyncResult) (FileInfo, er
 
 // Interface Seekable
 type Seekable struct {
+	SeekableIface
 	Ptr unsafe.Pointer
 }
+type SeekableIface struct{}
 
-func (v Seekable) native() *C.GSeekable {
-	return (*C.GSeekable)(v.Ptr)
+func (v *SeekableIface) native() *C.GSeekable {
+	return (*C.GSeekable)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapSeekable(p *C.GSeekable) Seekable {
-	return Seekable{unsafe.Pointer(p)}
+	return Seekable{Ptr: unsafe.Pointer(p)}
 }
 func WrapSeekable(p unsafe.Pointer) Seekable {
-	return Seekable{p}
+	return Seekable{Ptr: p}
 }
 func (v Seekable) IsNil() bool {
 	return v.Ptr == nil
@@ -3141,19 +3151,19 @@ func (v Seekable) GetGValueGetter() gobject.GValueGetter {
 }
 
 // CanSeek is a wrapper around g_seekable_can_seek().
-func (seekable Seekable) CanSeek() bool {
+func (seekable *SeekableIface) CanSeek() bool {
 	ret0 := C.g_seekable_can_seek(seekable.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // CanTruncate is a wrapper around g_seekable_can_truncate().
-func (seekable Seekable) CanTruncate() bool {
+func (seekable *SeekableIface) CanTruncate() bool {
 	ret0 := C.g_seekable_can_truncate(seekable.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // Seek is a wrapper around g_seekable_seek().
-func (seekable Seekable) Seek(offset int64, type_ /*gir:GLib*/ glib.SeekType, cancellable Cancellable) (bool, error) {
+func (seekable *SeekableIface) Seek(offset int64, type_ /*gir:GLib*/ glib.SeekType, cancellable Cancellable) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_seekable_seek(seekable.native(), C.goffset(offset), C.GSeekType(type_), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -3164,13 +3174,13 @@ func (seekable Seekable) Seek(offset int64, type_ /*gir:GLib*/ glib.SeekType, ca
 }
 
 // Tell is a wrapper around g_seekable_tell().
-func (seekable Seekable) Tell() int64 {
+func (seekable *SeekableIface) Tell() int64 {
 	ret0 := C.g_seekable_tell(seekable.native())
 	return int64(ret0)
 }
 
 // Truncate is a wrapper around g_seekable_truncate().
-func (seekable Seekable) Truncate(offset int64, cancellable Cancellable) (bool, error) {
+func (seekable *SeekableIface) Truncate(offset int64, cancellable Cancellable) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_seekable_truncate(seekable.native(), C.goffset(offset), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -3678,6 +3688,8 @@ func (info FileInfo) UnsetAttributeMask() {
 
 // Object Application
 type Application struct {
+	ActionGroupIface
+	ActionMapIface
 	gobject.Object
 }
 
@@ -3931,17 +3943,19 @@ func ApplicationIdIsValid(application_id string) bool {
 
 // Interface ActionMap
 type ActionMap struct {
+	ActionMapIface
 	Ptr unsafe.Pointer
 }
+type ActionMapIface struct{}
 
-func (v ActionMap) native() *C.GActionMap {
-	return (*C.GActionMap)(v.Ptr)
+func (v *ActionMapIface) native() *C.GActionMap {
+	return (*C.GActionMap)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapActionMap(p *C.GActionMap) ActionMap {
-	return ActionMap{unsafe.Pointer(p)}
+	return ActionMap{Ptr: unsafe.Pointer(p)}
 }
 func WrapActionMap(p unsafe.Pointer) ActionMap {
-	return ActionMap{p}
+	return ActionMap{Ptr: p}
 }
 func (v ActionMap) IsNil() bool {
 	return v.Ptr == nil
@@ -3960,12 +3974,12 @@ func (v ActionMap) GetGValueGetter() gobject.GValueGetter {
 }
 
 // AddAction is a wrapper around g_action_map_add_action().
-func (action_map ActionMap) AddAction(action Action) {
+func (action_map *ActionMapIface) AddAction(action Action) {
 	C.g_action_map_add_action(action_map.native(), action.native())
 }
 
 // LookupAction is a wrapper around g_action_map_lookup_action().
-func (action_map ActionMap) LookupAction(action_name string) Action {
+func (action_map *ActionMapIface) LookupAction(action_name string) Action {
 	action_name0 := (*C.gchar)(C.CString(action_name))
 	ret0 := C.g_action_map_lookup_action(action_map.native(), action_name0)
 	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
@@ -3973,7 +3987,7 @@ func (action_map ActionMap) LookupAction(action_name string) Action {
 }
 
 // RemoveAction is a wrapper around g_action_map_remove_action().
-func (action_map ActionMap) RemoveAction(action_name string) {
+func (action_map *ActionMapIface) RemoveAction(action_name string) {
 	action_name0 := (*C.gchar)(C.CString(action_name))
 	C.g_action_map_remove_action(action_map.native(), action_name0)
 	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
@@ -3981,17 +3995,19 @@ func (action_map ActionMap) RemoveAction(action_name string) {
 
 // Interface ActionGroup
 type ActionGroup struct {
+	ActionGroupIface
 	Ptr unsafe.Pointer
 }
+type ActionGroupIface struct{}
 
-func (v ActionGroup) native() *C.GActionGroup {
-	return (*C.GActionGroup)(v.Ptr)
+func (v *ActionGroupIface) native() *C.GActionGroup {
+	return (*C.GActionGroup)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapActionGroup(p *C.GActionGroup) ActionGroup {
-	return ActionGroup{unsafe.Pointer(p)}
+	return ActionGroup{Ptr: unsafe.Pointer(p)}
 }
 func WrapActionGroup(p unsafe.Pointer) ActionGroup {
-	return ActionGroup{p}
+	return ActionGroup{Ptr: p}
 }
 func (v ActionGroup) IsNil() bool {
 	return v.Ptr == nil
@@ -4010,49 +4026,49 @@ func (v ActionGroup) GetGValueGetter() gobject.GValueGetter {
 }
 
 // ActionAdded is a wrapper around g_action_group_action_added().
-func (action_group ActionGroup) ActionAdded(action_name string) {
+func (action_group *ActionGroupIface) ActionAdded(action_name string) {
 	action_name0 := (*C.gchar)(C.CString(action_name))
 	C.g_action_group_action_added(action_group.native(), action_name0)
 	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
 }
 
 // ActionEnabledChanged is a wrapper around g_action_group_action_enabled_changed().
-func (action_group ActionGroup) ActionEnabledChanged(action_name string, enabled bool) {
+func (action_group *ActionGroupIface) ActionEnabledChanged(action_name string, enabled bool) {
 	action_name0 := (*C.gchar)(C.CString(action_name))
 	C.g_action_group_action_enabled_changed(action_group.native(), action_name0, C.gboolean(util.Bool2Int(enabled)) /*go:.util*/)
 	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
 }
 
 // ActionRemoved is a wrapper around g_action_group_action_removed().
-func (action_group ActionGroup) ActionRemoved(action_name string) {
+func (action_group *ActionGroupIface) ActionRemoved(action_name string) {
 	action_name0 := (*C.gchar)(C.CString(action_name))
 	C.g_action_group_action_removed(action_group.native(), action_name0)
 	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
 }
 
 // ActionStateChanged is a wrapper around g_action_group_action_state_changed().
-func (action_group ActionGroup) ActionStateChanged(action_name string, state glib.Variant) {
+func (action_group *ActionGroupIface) ActionStateChanged(action_name string, state glib.Variant) {
 	action_name0 := (*C.gchar)(C.CString(action_name))
 	C.g_action_group_action_state_changed(action_group.native(), action_name0, (*C.GVariant)(state.Ptr))
 	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
 }
 
 // ActivateAction is a wrapper around g_action_group_activate_action().
-func (action_group ActionGroup) ActivateAction(action_name string, parameter glib.Variant) {
+func (action_group *ActionGroupIface) ActivateAction(action_name string, parameter glib.Variant) {
 	action_name0 := (*C.gchar)(C.CString(action_name))
 	C.g_action_group_activate_action(action_group.native(), action_name0, (*C.GVariant)(parameter.Ptr))
 	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
 }
 
 // ChangeActionState is a wrapper around g_action_group_change_action_state().
-func (action_group ActionGroup) ChangeActionState(action_name string, value glib.Variant) {
+func (action_group *ActionGroupIface) ChangeActionState(action_name string, value glib.Variant) {
 	action_name0 := (*C.gchar)(C.CString(action_name))
 	C.g_action_group_change_action_state(action_group.native(), action_name0, (*C.GVariant)(value.Ptr))
 	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
 }
 
 // GetActionEnabled is a wrapper around g_action_group_get_action_enabled().
-func (action_group ActionGroup) GetActionEnabled(action_name string) bool {
+func (action_group *ActionGroupIface) GetActionEnabled(action_name string) bool {
 	action_name0 := (*C.gchar)(C.CString(action_name))
 	ret0 := C.g_action_group_get_action_enabled(action_group.native(), action_name0)
 	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
@@ -4060,7 +4076,7 @@ func (action_group ActionGroup) GetActionEnabled(action_name string) bool {
 }
 
 // GetActionParameterType is a wrapper around g_action_group_get_action_parameter_type().
-func (action_group ActionGroup) GetActionParameterType(action_name string) glib.VariantType {
+func (action_group *ActionGroupIface) GetActionParameterType(action_name string) glib.VariantType {
 	action_name0 := (*C.gchar)(C.CString(action_name))
 	ret0 := C.g_action_group_get_action_parameter_type(action_group.native(), action_name0)
 	C.free(unsafe.Pointer(action_name0))              /*ch:<stdlib.h>*/
@@ -4068,7 +4084,7 @@ func (action_group ActionGroup) GetActionParameterType(action_name string) glib.
 }
 
 // GetActionState is a wrapper around g_action_group_get_action_state().
-func (action_group ActionGroup) GetActionState(action_name string) glib.Variant {
+func (action_group *ActionGroupIface) GetActionState(action_name string) glib.Variant {
 	action_name0 := (*C.gchar)(C.CString(action_name))
 	ret0 := C.g_action_group_get_action_state(action_group.native(), action_name0)
 	C.free(unsafe.Pointer(action_name0))          /*ch:<stdlib.h>*/
@@ -4076,7 +4092,7 @@ func (action_group ActionGroup) GetActionState(action_name string) glib.Variant 
 }
 
 // GetActionStateHint is a wrapper around g_action_group_get_action_state_hint().
-func (action_group ActionGroup) GetActionStateHint(action_name string) glib.Variant {
+func (action_group *ActionGroupIface) GetActionStateHint(action_name string) glib.Variant {
 	action_name0 := (*C.gchar)(C.CString(action_name))
 	ret0 := C.g_action_group_get_action_state_hint(action_group.native(), action_name0)
 	C.free(unsafe.Pointer(action_name0))          /*ch:<stdlib.h>*/
@@ -4084,7 +4100,7 @@ func (action_group ActionGroup) GetActionStateHint(action_name string) glib.Vari
 }
 
 // GetActionStateType is a wrapper around g_action_group_get_action_state_type().
-func (action_group ActionGroup) GetActionStateType(action_name string) glib.VariantType {
+func (action_group *ActionGroupIface) GetActionStateType(action_name string) glib.VariantType {
 	action_name0 := (*C.gchar)(C.CString(action_name))
 	ret0 := C.g_action_group_get_action_state_type(action_group.native(), action_name0)
 	C.free(unsafe.Pointer(action_name0))              /*ch:<stdlib.h>*/
@@ -4092,7 +4108,7 @@ func (action_group ActionGroup) GetActionStateType(action_name string) glib.Vari
 }
 
 // HasAction is a wrapper around g_action_group_has_action().
-func (action_group ActionGroup) HasAction(action_name string) bool {
+func (action_group *ActionGroupIface) HasAction(action_name string) bool {
 	action_name0 := (*C.gchar)(C.CString(action_name))
 	ret0 := C.g_action_group_has_action(action_group.native(), action_name0)
 	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
@@ -4100,7 +4116,7 @@ func (action_group ActionGroup) HasAction(action_name string) bool {
 }
 
 // ListActions is a wrapper around g_action_group_list_actions().
-func (action_group ActionGroup) ListActions() []string {
+func (action_group *ActionGroupIface) ListActions() []string {
 	ret0 := C.g_action_group_list_actions(action_group.native())
 	var ret0Slice []*C.gchar
 	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
@@ -4116,7 +4132,7 @@ func (action_group ActionGroup) ListActions() []string {
 }
 
 // QueryAction is a wrapper around g_action_group_query_action().
-func (action_group ActionGroup) QueryAction(action_name string) (bool, bool, glib.VariantType, glib.VariantType, glib.Variant, glib.Variant) {
+func (action_group *ActionGroupIface) QueryAction(action_name string) (bool, bool, glib.VariantType, glib.VariantType, glib.Variant, glib.Variant) {
 	action_name0 := (*C.gchar)(C.CString(action_name))
 	var enabled0 C.gboolean
 	var parameter_type0 *C.GVariantType
@@ -4130,6 +4146,8 @@ func (action_group ActionGroup) QueryAction(action_name string) (bool, bool, gli
 
 // Object SimpleActionGroup
 type SimpleActionGroup struct {
+	ActionGroupIface
+	ActionMapIface
 	gobject.Object
 }
 
@@ -4270,17 +4288,19 @@ func (notification Notification) SetTitle(title string) {
 
 // Interface Icon
 type Icon struct {
+	IconIface
 	Ptr unsafe.Pointer
 }
+type IconIface struct{}
 
-func (v Icon) native() *C.GIcon {
-	return (*C.GIcon)(v.Ptr)
+func (v *IconIface) native() *C.GIcon {
+	return (*C.GIcon)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapIcon(p *C.GIcon) Icon {
-	return Icon{unsafe.Pointer(p)}
+	return Icon{Ptr: unsafe.Pointer(p)}
 }
 func WrapIcon(p unsafe.Pointer) Icon {
-	return Icon{p}
+	return Icon{Ptr: p}
 }
 func (v Icon) IsNil() bool {
 	return v.Ptr == nil
@@ -4299,19 +4319,19 @@ func (v Icon) GetGValueGetter() gobject.GValueGetter {
 }
 
 // Equal is a wrapper around g_icon_equal().
-func (icon1 Icon) Equal(icon2 Icon) bool {
+func (icon1 *IconIface) Equal(icon2 Icon) bool {
 	ret0 := C.g_icon_equal(icon1.native(), icon2.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // Serialize is a wrapper around g_icon_serialize().
-func (icon Icon) Serialize() glib.Variant {
+func (icon *IconIface) Serialize() glib.Variant {
 	ret0 := C.g_icon_serialize(icon.native())
 	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/
 }
 
 // ToString is a wrapper around g_icon_to_string().
-func (icon Icon) ToString() string {
+func (icon *IconIface) ToString() string {
 	ret0 := C.g_icon_to_string(icon.native())
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
@@ -4345,17 +4365,19 @@ func IconNewForString(str string) (Icon, error) {
 
 // Interface AsyncResult
 type AsyncResult struct {
+	AsyncResultIface
 	Ptr unsafe.Pointer
 }
+type AsyncResultIface struct{}
 
-func (v AsyncResult) native() *C.GAsyncResult {
-	return (*C.GAsyncResult)(v.Ptr)
+func (v *AsyncResultIface) native() *C.GAsyncResult {
+	return (*C.GAsyncResult)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapAsyncResult(p *C.GAsyncResult) AsyncResult {
-	return AsyncResult{unsafe.Pointer(p)}
+	return AsyncResult{Ptr: unsafe.Pointer(p)}
 }
 func WrapAsyncResult(p unsafe.Pointer) AsyncResult {
-	return AsyncResult{p}
+	return AsyncResult{Ptr: p}
 }
 func (v AsyncResult) IsNil() bool {
 	return v.Ptr == nil
@@ -4374,25 +4396,25 @@ func (v AsyncResult) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetSourceObject is a wrapper around g_async_result_get_source_object().
-func (res AsyncResult) GetSourceObject() gobject.Object {
+func (res *AsyncResultIface) GetSourceObject() gobject.Object {
 	ret0 := C.g_async_result_get_source_object(res.native())
 	return gobject.WrapObject(unsafe.Pointer(ret0)) /*gir:GObject*/
 }
 
 // GetUserData is a wrapper around g_async_result_get_user_data().
-func (res AsyncResult) GetUserData() unsafe.Pointer {
+func (res *AsyncResultIface) GetUserData() unsafe.Pointer {
 	ret0 := C.g_async_result_get_user_data(res.native())
 	return unsafe.Pointer(ret0)
 }
 
 // IsTagged is a wrapper around g_async_result_is_tagged().
-func (res AsyncResult) IsTagged(source_tag unsafe.Pointer) bool {
+func (res *AsyncResultIface) IsTagged(source_tag unsafe.Pointer) bool {
 	ret0 := C.g_async_result_is_tagged(res.native(), C.gpointer(source_tag))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // LegacyPropagateError is a wrapper around g_async_result_legacy_propagate_error().
-func (res AsyncResult) LegacyPropagateError() (bool, error) {
+func (res *AsyncResultIface) LegacyPropagateError() (bool, error) {
 	var err glib.Error
 	ret0 := C.g_async_result_legacy_propagate_error(res.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -4688,6 +4710,7 @@ func (stream InputStream) SkipFinish(result AsyncResult) (int, error) {
 
 // Object FileIOStream
 type FileIOStream struct {
+	SeekableIface
 	IOStream
 }
 
@@ -4894,17 +4917,19 @@ func (enumerator FileEnumerator) SetPending(pending bool) {
 
 // Interface Mount
 type Mount struct {
+	MountIface
 	Ptr unsafe.Pointer
 }
+type MountIface struct{}
 
-func (v Mount) native() *C.GMount {
-	return (*C.GMount)(v.Ptr)
+func (v *MountIface) native() *C.GMount {
+	return (*C.GMount)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapMount(p *C.GMount) Mount {
-	return Mount{unsafe.Pointer(p)}
+	return Mount{Ptr: unsafe.Pointer(p)}
 }
 func WrapMount(p unsafe.Pointer) Mount {
-	return Mount{p}
+	return Mount{Ptr: p}
 }
 func (v Mount) IsNil() bool {
 	return v.Ptr == nil
@@ -4923,25 +4948,25 @@ func (v Mount) GetGValueGetter() gobject.GValueGetter {
 }
 
 // CanEject is a wrapper around g_mount_can_eject().
-func (mount Mount) CanEject() bool {
+func (mount *MountIface) CanEject() bool {
 	ret0 := C.g_mount_can_eject(mount.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // CanUnmount is a wrapper around g_mount_can_unmount().
-func (mount Mount) CanUnmount() bool {
+func (mount *MountIface) CanUnmount() bool {
 	ret0 := C.g_mount_can_unmount(mount.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // EjectWithOperation is a wrapper around g_mount_eject_with_operation().
-func (mount Mount) EjectWithOperation(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+func (mount *MountIface) EjectWithOperation(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_mount_eject_with_operation(mount.native(), C.GMountUnmountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
 }
 
 // EjectWithOperationFinish is a wrapper around g_mount_eject_with_operation_finish().
-func (mount Mount) EjectWithOperationFinish(result AsyncResult) (bool, error) {
+func (mount *MountIface) EjectWithOperationFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_mount_eject_with_operation_finish(mount.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -4952,25 +4977,25 @@ func (mount Mount) EjectWithOperationFinish(result AsyncResult) (bool, error) {
 }
 
 // GetDefaultLocation is a wrapper around g_mount_get_default_location().
-func (mount Mount) GetDefaultLocation() File {
+func (mount *MountIface) GetDefaultLocation() File {
 	ret0 := C.g_mount_get_default_location(mount.native())
 	return wrapFile(ret0)
 }
 
 // GetDrive is a wrapper around g_mount_get_drive().
-func (mount Mount) GetDrive() Drive {
+func (mount *MountIface) GetDrive() Drive {
 	ret0 := C.g_mount_get_drive(mount.native())
 	return wrapDrive(ret0)
 }
 
 // GetIcon is a wrapper around g_mount_get_icon().
-func (mount Mount) GetIcon() Icon {
+func (mount *MountIface) GetIcon() Icon {
 	ret0 := C.g_mount_get_icon(mount.native())
 	return wrapIcon(ret0)
 }
 
 // GetName is a wrapper around g_mount_get_name().
-func (mount Mount) GetName() string {
+func (mount *MountIface) GetName() string {
 	ret0 := C.g_mount_get_name(mount.native())
 	ret := C.GoString(ret0)
 	C.g_free(C.gpointer(ret0))
@@ -4978,26 +5003,26 @@ func (mount Mount) GetName() string {
 }
 
 // GetRoot is a wrapper around g_mount_get_root().
-func (mount Mount) GetRoot() File {
+func (mount *MountIface) GetRoot() File {
 	ret0 := C.g_mount_get_root(mount.native())
 	return wrapFile(ret0)
 }
 
 // GetSortKey is a wrapper around g_mount_get_sort_key().
-func (mount Mount) GetSortKey() string {
+func (mount *MountIface) GetSortKey() string {
 	ret0 := C.g_mount_get_sort_key(mount.native())
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
 
 // GetSymbolicIcon is a wrapper around g_mount_get_symbolic_icon().
-func (mount Mount) GetSymbolicIcon() Icon {
+func (mount *MountIface) GetSymbolicIcon() Icon {
 	ret0 := C.g_mount_get_symbolic_icon(mount.native())
 	return wrapIcon(ret0)
 }
 
 // GetUuid is a wrapper around g_mount_get_uuid().
-func (mount Mount) GetUuid() string {
+func (mount *MountIface) GetUuid() string {
 	ret0 := C.g_mount_get_uuid(mount.native())
 	ret := C.GoString(ret0)
 	C.g_free(C.gpointer(ret0))
@@ -5005,19 +5030,19 @@ func (mount Mount) GetUuid() string {
 }
 
 // GetVolume is a wrapper around g_mount_get_volume().
-func (mount Mount) GetVolume() Volume {
+func (mount *MountIface) GetVolume() Volume {
 	ret0 := C.g_mount_get_volume(mount.native())
 	return wrapVolume(ret0)
 }
 
 // GuessContentType is a wrapper around g_mount_guess_content_type().
-func (mount Mount) GuessContentType(force_rescan bool, cancellable Cancellable, callback AsyncReadyCallback) {
+func (mount *MountIface) GuessContentType(force_rescan bool, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_mount_guess_content_type(mount.native(), C.gboolean(util.Bool2Int(force_rescan)) /*go:.util*/, cancellable.native(), callback0)
 }
 
 // GuessContentTypeFinish is a wrapper around g_mount_guess_content_type_finish().
-func (mount Mount) GuessContentTypeFinish(result AsyncResult) ([]string, error) {
+func (mount *MountIface) GuessContentTypeFinish(result AsyncResult) ([]string, error) {
 	var err glib.Error
 	ret0 := C.g_mount_guess_content_type_finish(mount.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	var ret0Slice []*C.gchar
@@ -5038,7 +5063,7 @@ func (mount Mount) GuessContentTypeFinish(result AsyncResult) ([]string, error) 
 }
 
 // GuessContentTypeSync is a wrapper around g_mount_guess_content_type_sync().
-func (mount Mount) GuessContentTypeSync(force_rescan bool, cancellable Cancellable) ([]string, error) {
+func (mount *MountIface) GuessContentTypeSync(force_rescan bool, cancellable Cancellable) ([]string, error) {
 	var err glib.Error
 	ret0 := C.g_mount_guess_content_type_sync(mount.native(), C.gboolean(util.Bool2Int(force_rescan)) /*go:.util*/, cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	var ret0Slice []*C.gchar
@@ -5059,19 +5084,19 @@ func (mount Mount) GuessContentTypeSync(force_rescan bool, cancellable Cancellab
 }
 
 // IsShadowed is a wrapper around g_mount_is_shadowed().
-func (mount Mount) IsShadowed() bool {
+func (mount *MountIface) IsShadowed() bool {
 	ret0 := C.g_mount_is_shadowed(mount.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // Remount is a wrapper around g_mount_remount().
-func (mount Mount) Remount(flags MountMountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+func (mount *MountIface) Remount(flags MountMountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_mount_remount(mount.native(), C.GMountMountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
 }
 
 // RemountFinish is a wrapper around g_mount_remount_finish().
-func (mount Mount) RemountFinish(result AsyncResult) (bool, error) {
+func (mount *MountIface) RemountFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_mount_remount_finish(mount.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -5082,18 +5107,18 @@ func (mount Mount) RemountFinish(result AsyncResult) (bool, error) {
 }
 
 // Shadow is a wrapper around g_mount_shadow().
-func (mount Mount) Shadow() {
+func (mount *MountIface) Shadow() {
 	C.g_mount_shadow(mount.native())
 }
 
 // UnmountWithOperation is a wrapper around g_mount_unmount_with_operation().
-func (mount Mount) UnmountWithOperation(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+func (mount *MountIface) UnmountWithOperation(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_mount_unmount_with_operation(mount.native(), C.GMountUnmountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
 }
 
 // UnmountWithOperationFinish is a wrapper around g_mount_unmount_with_operation_finish().
-func (mount Mount) UnmountWithOperationFinish(result AsyncResult) (bool, error) {
+func (mount *MountIface) UnmountWithOperationFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_mount_unmount_with_operation_finish(mount.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -5104,23 +5129,25 @@ func (mount Mount) UnmountWithOperationFinish(result AsyncResult) (bool, error) 
 }
 
 // Unshadow is a wrapper around g_mount_unshadow().
-func (mount Mount) Unshadow() {
+func (mount *MountIface) Unshadow() {
 	C.g_mount_unshadow(mount.native())
 }
 
 // Interface Drive
 type Drive struct {
+	DriveIface
 	Ptr unsafe.Pointer
 }
+type DriveIface struct{}
 
-func (v Drive) native() *C.GDrive {
-	return (*C.GDrive)(v.Ptr)
+func (v *DriveIface) native() *C.GDrive {
+	return (*C.GDrive)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapDrive(p *C.GDrive) Drive {
-	return Drive{unsafe.Pointer(p)}
+	return Drive{Ptr: unsafe.Pointer(p)}
 }
 func WrapDrive(p unsafe.Pointer) Drive {
-	return Drive{p}
+	return Drive{Ptr: p}
 }
 func (v Drive) IsNil() bool {
 	return v.Ptr == nil
@@ -5139,43 +5166,43 @@ func (v Drive) GetGValueGetter() gobject.GValueGetter {
 }
 
 // CanEject is a wrapper around g_drive_can_eject().
-func (drive Drive) CanEject() bool {
+func (drive *DriveIface) CanEject() bool {
 	ret0 := C.g_drive_can_eject(drive.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // CanPollForMedia is a wrapper around g_drive_can_poll_for_media().
-func (drive Drive) CanPollForMedia() bool {
+func (drive *DriveIface) CanPollForMedia() bool {
 	ret0 := C.g_drive_can_poll_for_media(drive.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // CanStart is a wrapper around g_drive_can_start().
-func (drive Drive) CanStart() bool {
+func (drive *DriveIface) CanStart() bool {
 	ret0 := C.g_drive_can_start(drive.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // CanStartDegraded is a wrapper around g_drive_can_start_degraded().
-func (drive Drive) CanStartDegraded() bool {
+func (drive *DriveIface) CanStartDegraded() bool {
 	ret0 := C.g_drive_can_start_degraded(drive.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // CanStop is a wrapper around g_drive_can_stop().
-func (drive Drive) CanStop() bool {
+func (drive *DriveIface) CanStop() bool {
 	ret0 := C.g_drive_can_stop(drive.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // EjectWithOperation is a wrapper around g_drive_eject_with_operation().
-func (drive Drive) EjectWithOperation(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+func (drive *DriveIface) EjectWithOperation(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_drive_eject_with_operation(drive.native(), C.GMountUnmountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
 }
 
 // EjectWithOperationFinish is a wrapper around g_drive_eject_with_operation_finish().
-func (drive Drive) EjectWithOperationFinish(result AsyncResult) (bool, error) {
+func (drive *DriveIface) EjectWithOperationFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_drive_eject_with_operation_finish(drive.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -5186,7 +5213,7 @@ func (drive Drive) EjectWithOperationFinish(result AsyncResult) (bool, error) {
 }
 
 // EnumerateIdentifiers is a wrapper around g_drive_enumerate_identifiers().
-func (drive Drive) EnumerateIdentifiers() []string {
+func (drive *DriveIface) EnumerateIdentifiers() []string {
 	ret0 := C.g_drive_enumerate_identifiers(drive.native())
 	var ret0Slice []*C.char
 	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
@@ -5202,13 +5229,13 @@ func (drive Drive) EnumerateIdentifiers() []string {
 }
 
 // GetIcon is a wrapper around g_drive_get_icon().
-func (drive Drive) GetIcon() Icon {
+func (drive *DriveIface) GetIcon() Icon {
 	ret0 := C.g_drive_get_icon(drive.native())
 	return wrapIcon(ret0)
 }
 
 // GetIdentifier is a wrapper around g_drive_get_identifier().
-func (drive Drive) GetIdentifier(kind string) string {
+func (drive *DriveIface) GetIdentifier(kind string) string {
 	kind0 := C.CString(kind)
 	ret0 := C.g_drive_get_identifier(drive.native(), kind0)
 	C.free(unsafe.Pointer(kind0)) /*ch:<stdlib.h>*/
@@ -5218,7 +5245,7 @@ func (drive Drive) GetIdentifier(kind string) string {
 }
 
 // GetName is a wrapper around g_drive_get_name().
-func (drive Drive) GetName() string {
+func (drive *DriveIface) GetName() string {
 	ret0 := C.g_drive_get_name(drive.native())
 	ret := C.GoString(ret0)
 	C.g_free(C.gpointer(ret0))
@@ -5226,69 +5253,69 @@ func (drive Drive) GetName() string {
 }
 
 // GetSortKey is a wrapper around g_drive_get_sort_key().
-func (drive Drive) GetSortKey() string {
+func (drive *DriveIface) GetSortKey() string {
 	ret0 := C.g_drive_get_sort_key(drive.native())
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
 
 // GetStartStopType is a wrapper around g_drive_get_start_stop_type().
-func (drive Drive) GetStartStopType() DriveStartStopType {
+func (drive *DriveIface) GetStartStopType() DriveStartStopType {
 	ret0 := C.g_drive_get_start_stop_type(drive.native())
 	return DriveStartStopType(ret0)
 }
 
 // GetSymbolicIcon is a wrapper around g_drive_get_symbolic_icon().
-func (drive Drive) GetSymbolicIcon() Icon {
+func (drive *DriveIface) GetSymbolicIcon() Icon {
 	ret0 := C.g_drive_get_symbolic_icon(drive.native())
 	return wrapIcon(ret0)
 }
 
 // GetVolumes is a wrapper around g_drive_get_volumes().
-func (drive Drive) GetVolumes() glib.List {
+func (drive *DriveIface) GetVolumes() glib.List {
 	ret0 := C.g_drive_get_volumes(drive.native())
 	return glib.WrapList(unsafe.Pointer(ret0),
 		func(p unsafe.Pointer) interface{} { return WrapVolume(p) }) /*gir:GLib*/
 }
 
 // HasMedia is a wrapper around g_drive_has_media().
-func (drive Drive) HasMedia() bool {
+func (drive *DriveIface) HasMedia() bool {
 	ret0 := C.g_drive_has_media(drive.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // HasVolumes is a wrapper around g_drive_has_volumes().
-func (drive Drive) HasVolumes() bool {
+func (drive *DriveIface) HasVolumes() bool {
 	ret0 := C.g_drive_has_volumes(drive.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // IsMediaCheckAutomatic is a wrapper around g_drive_is_media_check_automatic().
-func (drive Drive) IsMediaCheckAutomatic() bool {
+func (drive *DriveIface) IsMediaCheckAutomatic() bool {
 	ret0 := C.g_drive_is_media_check_automatic(drive.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // IsMediaRemovable is a wrapper around g_drive_is_media_removable().
-func (drive Drive) IsMediaRemovable() bool {
+func (drive *DriveIface) IsMediaRemovable() bool {
 	ret0 := C.g_drive_is_media_removable(drive.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // IsRemovable is a wrapper around g_drive_is_removable().
-func (drive Drive) IsRemovable() bool {
+func (drive *DriveIface) IsRemovable() bool {
 	ret0 := C.g_drive_is_removable(drive.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // PollForMedia is a wrapper around g_drive_poll_for_media().
-func (drive Drive) PollForMedia(cancellable Cancellable, callback AsyncReadyCallback) {
+func (drive *DriveIface) PollForMedia(cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_drive_poll_for_media(drive.native(), cancellable.native(), callback0)
 }
 
 // PollForMediaFinish is a wrapper around g_drive_poll_for_media_finish().
-func (drive Drive) PollForMediaFinish(result AsyncResult) (bool, error) {
+func (drive *DriveIface) PollForMediaFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_drive_poll_for_media_finish(drive.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -5299,13 +5326,13 @@ func (drive Drive) PollForMediaFinish(result AsyncResult) (bool, error) {
 }
 
 // Start is a wrapper around g_drive_start().
-func (drive Drive) Start(flags DriveStartFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+func (drive *DriveIface) Start(flags DriveStartFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_drive_start(drive.native(), C.GDriveStartFlags(flags), mount_operation.native(), cancellable.native(), callback0)
 }
 
 // StartFinish is a wrapper around g_drive_start_finish().
-func (drive Drive) StartFinish(result AsyncResult) (bool, error) {
+func (drive *DriveIface) StartFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_drive_start_finish(drive.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -5316,13 +5343,13 @@ func (drive Drive) StartFinish(result AsyncResult) (bool, error) {
 }
 
 // Stop is a wrapper around g_drive_stop().
-func (drive Drive) Stop(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+func (drive *DriveIface) Stop(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_drive_stop(drive.native(), C.GMountUnmountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
 }
 
 // StopFinish is a wrapper around g_drive_stop_finish().
-func (drive Drive) StopFinish(result AsyncResult) (bool, error) {
+func (drive *DriveIface) StopFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_drive_stop_finish(drive.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -5334,17 +5361,19 @@ func (drive Drive) StopFinish(result AsyncResult) (bool, error) {
 
 // Interface Volume
 type Volume struct {
+	VolumeIface
 	Ptr unsafe.Pointer
 }
+type VolumeIface struct{}
 
-func (v Volume) native() *C.GVolume {
-	return (*C.GVolume)(v.Ptr)
+func (v *VolumeIface) native() *C.GVolume {
+	return (*C.GVolume)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapVolume(p *C.GVolume) Volume {
-	return Volume{unsafe.Pointer(p)}
+	return Volume{Ptr: unsafe.Pointer(p)}
 }
 func WrapVolume(p unsafe.Pointer) Volume {
-	return Volume{p}
+	return Volume{Ptr: p}
 }
 func (v Volume) IsNil() bool {
 	return v.Ptr == nil
@@ -5363,25 +5392,25 @@ func (v Volume) GetGValueGetter() gobject.GValueGetter {
 }
 
 // CanEject is a wrapper around g_volume_can_eject().
-func (volume Volume) CanEject() bool {
+func (volume *VolumeIface) CanEject() bool {
 	ret0 := C.g_volume_can_eject(volume.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // CanMount is a wrapper around g_volume_can_mount().
-func (volume Volume) CanMount() bool {
+func (volume *VolumeIface) CanMount() bool {
 	ret0 := C.g_volume_can_mount(volume.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // EjectWithOperation is a wrapper around g_volume_eject_with_operation().
-func (volume Volume) EjectWithOperation(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+func (volume *VolumeIface) EjectWithOperation(flags MountUnmountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_volume_eject_with_operation(volume.native(), C.GMountUnmountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
 }
 
 // EjectWithOperationFinish is a wrapper around g_volume_eject_with_operation_finish().
-func (volume Volume) EjectWithOperationFinish(result AsyncResult) (bool, error) {
+func (volume *VolumeIface) EjectWithOperationFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_volume_eject_with_operation_finish(volume.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -5392,7 +5421,7 @@ func (volume Volume) EjectWithOperationFinish(result AsyncResult) (bool, error) 
 }
 
 // EnumerateIdentifiers is a wrapper around g_volume_enumerate_identifiers().
-func (volume Volume) EnumerateIdentifiers() []string {
+func (volume *VolumeIface) EnumerateIdentifiers() []string {
 	ret0 := C.g_volume_enumerate_identifiers(volume.native())
 	var ret0Slice []*C.char
 	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
@@ -5408,25 +5437,25 @@ func (volume Volume) EnumerateIdentifiers() []string {
 }
 
 // GetActivationRoot is a wrapper around g_volume_get_activation_root().
-func (volume Volume) GetActivationRoot() File {
+func (volume *VolumeIface) GetActivationRoot() File {
 	ret0 := C.g_volume_get_activation_root(volume.native())
 	return wrapFile(ret0)
 }
 
 // GetDrive is a wrapper around g_volume_get_drive().
-func (volume Volume) GetDrive() Drive {
+func (volume *VolumeIface) GetDrive() Drive {
 	ret0 := C.g_volume_get_drive(volume.native())
 	return wrapDrive(ret0)
 }
 
 // GetIcon is a wrapper around g_volume_get_icon().
-func (volume Volume) GetIcon() Icon {
+func (volume *VolumeIface) GetIcon() Icon {
 	ret0 := C.g_volume_get_icon(volume.native())
 	return wrapIcon(ret0)
 }
 
 // GetIdentifier is a wrapper around g_volume_get_identifier().
-func (volume Volume) GetIdentifier(kind string) string {
+func (volume *VolumeIface) GetIdentifier(kind string) string {
 	kind0 := C.CString(kind)
 	ret0 := C.g_volume_get_identifier(volume.native(), kind0)
 	C.free(unsafe.Pointer(kind0)) /*ch:<stdlib.h>*/
@@ -5436,13 +5465,13 @@ func (volume Volume) GetIdentifier(kind string) string {
 }
 
 // GetMount is a wrapper around g_volume_get_mount().
-func (volume Volume) GetMount() Mount {
+func (volume *VolumeIface) GetMount() Mount {
 	ret0 := C.g_volume_get_mount(volume.native())
 	return wrapMount(ret0)
 }
 
 // GetName is a wrapper around g_volume_get_name().
-func (volume Volume) GetName() string {
+func (volume *VolumeIface) GetName() string {
 	ret0 := C.g_volume_get_name(volume.native())
 	ret := C.GoString(ret0)
 	C.g_free(C.gpointer(ret0))
@@ -5450,20 +5479,20 @@ func (volume Volume) GetName() string {
 }
 
 // GetSortKey is a wrapper around g_volume_get_sort_key().
-func (volume Volume) GetSortKey() string {
+func (volume *VolumeIface) GetSortKey() string {
 	ret0 := C.g_volume_get_sort_key(volume.native())
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
 
 // GetSymbolicIcon is a wrapper around g_volume_get_symbolic_icon().
-func (volume Volume) GetSymbolicIcon() Icon {
+func (volume *VolumeIface) GetSymbolicIcon() Icon {
 	ret0 := C.g_volume_get_symbolic_icon(volume.native())
 	return wrapIcon(ret0)
 }
 
 // GetUuid is a wrapper around g_volume_get_uuid().
-func (volume Volume) GetUuid() string {
+func (volume *VolumeIface) GetUuid() string {
 	ret0 := C.g_volume_get_uuid(volume.native())
 	ret := C.GoString(ret0)
 	C.g_free(C.gpointer(ret0))
@@ -5471,13 +5500,13 @@ func (volume Volume) GetUuid() string {
 }
 
 // Mount is a wrapper around g_volume_mount().
-func (volume Volume) Mount(flags MountMountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
+func (volume *VolumeIface) Mount(flags MountMountFlags, mount_operation MountOperation, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_volume_mount(volume.native(), C.GMountMountFlags(flags), mount_operation.native(), cancellable.native(), callback0)
 }
 
 // MountFinish is a wrapper around g_volume_mount_finish().
-func (volume Volume) MountFinish(result AsyncResult) (bool, error) {
+func (volume *VolumeIface) MountFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_volume_mount_finish(volume.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -5488,7 +5517,7 @@ func (volume Volume) MountFinish(result AsyncResult) (bool, error) {
 }
 
 // ShouldAutomount is a wrapper around g_volume_should_automount().
-func (volume Volume) ShouldAutomount() bool {
+func (volume *VolumeIface) ShouldAutomount() bool {
 	ret0 := C.g_volume_should_automount(volume.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
@@ -5556,10 +5585,10 @@ func (v FileAttributeInfoList) native() *C.GFileAttributeInfoList {
 	return (*C.GFileAttributeInfoList)(v.Ptr)
 }
 func wrapFileAttributeInfoList(p *C.GFileAttributeInfoList) FileAttributeInfoList {
-	return FileAttributeInfoList{unsafe.Pointer(p)}
+	return FileAttributeInfoList{Ptr: unsafe.Pointer(p)}
 }
 func WrapFileAttributeInfoList(p unsafe.Pointer) FileAttributeInfoList {
-	return FileAttributeInfoList{p}
+	return FileAttributeInfoList{Ptr: p}
 }
 func (v FileAttributeInfoList) IsNil() bool {
 	return v.Ptr == nil
@@ -5615,10 +5644,10 @@ func (v FileAttributeInfo) native() *C.GFileAttributeInfo {
 	return (*C.GFileAttributeInfo)(v.Ptr)
 }
 func wrapFileAttributeInfo(p *C.GFileAttributeInfo) FileAttributeInfo {
-	return FileAttributeInfo{unsafe.Pointer(p)}
+	return FileAttributeInfo{Ptr: unsafe.Pointer(p)}
 }
 func WrapFileAttributeInfo(p unsafe.Pointer) FileAttributeInfo {
-	return FileAttributeInfo{p}
+	return FileAttributeInfo{Ptr: p}
 }
 func (v FileAttributeInfo) IsNil() bool {
 	return v.Ptr == nil
@@ -5629,6 +5658,7 @@ func IWrapFileAttributeInfo(p unsafe.Pointer) interface{} {
 
 // Object FileInputStream
 type FileInputStream struct {
+	SeekableIface
 	InputStream
 }
 
@@ -5703,10 +5733,10 @@ func (v SettingsSchemaKey) native() *C.GSettingsSchemaKey {
 	return (*C.GSettingsSchemaKey)(v.Ptr)
 }
 func wrapSettingsSchemaKey(p *C.GSettingsSchemaKey) SettingsSchemaKey {
-	return SettingsSchemaKey{unsafe.Pointer(p)}
+	return SettingsSchemaKey{Ptr: unsafe.Pointer(p)}
 }
 func WrapSettingsSchemaKey(p unsafe.Pointer) SettingsSchemaKey {
-	return SettingsSchemaKey{p}
+	return SettingsSchemaKey{Ptr: p}
 }
 func (v SettingsSchemaKey) IsNil() bool {
 	return v.Ptr == nil
@@ -5780,10 +5810,10 @@ func (v FileAttributeMatcher) native() *C.GFileAttributeMatcher {
 	return (*C.GFileAttributeMatcher)(v.Ptr)
 }
 func wrapFileAttributeMatcher(p *C.GFileAttributeMatcher) FileAttributeMatcher {
-	return FileAttributeMatcher{unsafe.Pointer(p)}
+	return FileAttributeMatcher{Ptr: unsafe.Pointer(p)}
 }
 func WrapFileAttributeMatcher(p unsafe.Pointer) FileAttributeMatcher {
-	return FileAttributeMatcher{p}
+	return FileAttributeMatcher{Ptr: p}
 }
 func (v FileAttributeMatcher) IsNil() bool {
 	return v.Ptr == nil
@@ -5858,6 +5888,8 @@ func (matcher FileAttributeMatcher) Unref() {
 
 // Object DBusConnection
 type DBusConnection struct {
+	AsyncInitableIface
+	InitableIface
 	gobject.Object
 }
 
@@ -6301,17 +6333,19 @@ func DBusConnectionNewForAddress(address string, flags DBusConnectionFlags, obse
 
 // Interface AsyncInitable
 type AsyncInitable struct {
+	AsyncInitableIface
 	Ptr unsafe.Pointer
 }
+type AsyncInitableIface struct{}
 
-func (v AsyncInitable) native() *C.GAsyncInitable {
-	return (*C.GAsyncInitable)(v.Ptr)
+func (v *AsyncInitableIface) native() *C.GAsyncInitable {
+	return (*C.GAsyncInitable)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapAsyncInitable(p *C.GAsyncInitable) AsyncInitable {
-	return AsyncInitable{unsafe.Pointer(p)}
+	return AsyncInitable{Ptr: unsafe.Pointer(p)}
 }
 func WrapAsyncInitable(p unsafe.Pointer) AsyncInitable {
-	return AsyncInitable{p}
+	return AsyncInitable{Ptr: p}
 }
 func (v AsyncInitable) IsNil() bool {
 	return v.Ptr == nil
@@ -6330,13 +6364,13 @@ func (v AsyncInitable) GetGValueGetter() gobject.GValueGetter {
 }
 
 // InitAsync is a wrapper around g_async_initable_init_async().
-func (initable AsyncInitable) InitAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (initable *AsyncInitableIface) InitAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_async_initable_init_async(initable.native(), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // InitFinish is a wrapper around g_async_initable_init_finish().
-func (initable AsyncInitable) InitFinish(res AsyncResult) (bool, error) {
+func (initable *AsyncInitableIface) InitFinish(res AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_async_initable_init_finish(initable.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -6347,7 +6381,7 @@ func (initable AsyncInitable) InitFinish(res AsyncResult) (bool, error) {
 }
 
 // NewFinish is a wrapper around g_async_initable_new_finish().
-func (initable AsyncInitable) NewFinish(res AsyncResult) (gobject.Object, error) {
+func (initable *AsyncInitableIface) NewFinish(res AsyncResult) (gobject.Object, error) {
 	var err glib.Error
 	ret0 := C.g_async_initable_new_finish(initable.native(), res.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -6359,17 +6393,19 @@ func (initable AsyncInitable) NewFinish(res AsyncResult) (gobject.Object, error)
 
 // Interface Initable
 type Initable struct {
+	InitableIface
 	Ptr unsafe.Pointer
 }
+type InitableIface struct{}
 
-func (v Initable) native() *C.GInitable {
-	return (*C.GInitable)(v.Ptr)
+func (v *InitableIface) native() *C.GInitable {
+	return (*C.GInitable)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapInitable(p *C.GInitable) Initable {
-	return Initable{unsafe.Pointer(p)}
+	return Initable{Ptr: unsafe.Pointer(p)}
 }
 func WrapInitable(p unsafe.Pointer) Initable {
-	return Initable{p}
+	return Initable{Ptr: p}
 }
 func (v Initable) IsNil() bool {
 	return v.Ptr == nil
@@ -6388,7 +6424,7 @@ func (v Initable) GetGValueGetter() gobject.GValueGetter {
 }
 
 // Init is a wrapper around g_initable_init().
-func (initable Initable) Init(cancellable Cancellable) (bool, error) {
+func (initable *InitableIface) Init(cancellable Cancellable) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_initable_init(initable.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -6525,10 +6561,10 @@ func (v ActionEntry) native() *C.GActionEntry {
 	return (*C.GActionEntry)(v.Ptr)
 }
 func wrapActionEntry(p *C.GActionEntry) ActionEntry {
-	return ActionEntry{unsafe.Pointer(p)}
+	return ActionEntry{Ptr: unsafe.Pointer(p)}
 }
 func WrapActionEntry(p unsafe.Pointer) ActionEntry {
-	return ActionEntry{p}
+	return ActionEntry{Ptr: p}
 }
 func (v ActionEntry) IsNil() bool {
 	return v.Ptr == nil
@@ -6546,10 +6582,10 @@ func (v DBusAnnotationInfo) native() *C.GDBusAnnotationInfo {
 	return (*C.GDBusAnnotationInfo)(v.Ptr)
 }
 func wrapDBusAnnotationInfo(p *C.GDBusAnnotationInfo) DBusAnnotationInfo {
-	return DBusAnnotationInfo{unsafe.Pointer(p)}
+	return DBusAnnotationInfo{Ptr: unsafe.Pointer(p)}
 }
 func WrapDBusAnnotationInfo(p unsafe.Pointer) DBusAnnotationInfo {
-	return DBusAnnotationInfo{p}
+	return DBusAnnotationInfo{Ptr: p}
 }
 func (v DBusAnnotationInfo) IsNil() bool {
 	return v.Ptr == nil
@@ -6595,10 +6631,10 @@ func (v DBusArgInfo) native() *C.GDBusArgInfo {
 	return (*C.GDBusArgInfo)(v.Ptr)
 }
 func wrapDBusArgInfo(p *C.GDBusArgInfo) DBusArgInfo {
-	return DBusArgInfo{unsafe.Pointer(p)}
+	return DBusArgInfo{Ptr: unsafe.Pointer(p)}
 }
 func WrapDBusArgInfo(p unsafe.Pointer) DBusArgInfo {
-	return DBusArgInfo{p}
+	return DBusArgInfo{Ptr: p}
 }
 func (v DBusArgInfo) IsNil() bool {
 	return v.Ptr == nil
@@ -6627,10 +6663,10 @@ func (v DBusErrorEntry) native() *C.GDBusErrorEntry {
 	return (*C.GDBusErrorEntry)(v.Ptr)
 }
 func wrapDBusErrorEntry(p *C.GDBusErrorEntry) DBusErrorEntry {
-	return DBusErrorEntry{unsafe.Pointer(p)}
+	return DBusErrorEntry{Ptr: unsafe.Pointer(p)}
 }
 func WrapDBusErrorEntry(p unsafe.Pointer) DBusErrorEntry {
-	return DBusErrorEntry{p}
+	return DBusErrorEntry{Ptr: p}
 }
 func (v DBusErrorEntry) IsNil() bool {
 	return v.Ptr == nil
@@ -6648,10 +6684,10 @@ func (v DBusInterfaceInfo) native() *C.GDBusInterfaceInfo {
 	return (*C.GDBusInterfaceInfo)(v.Ptr)
 }
 func wrapDBusInterfaceInfo(p *C.GDBusInterfaceInfo) DBusInterfaceInfo {
-	return DBusInterfaceInfo{unsafe.Pointer(p)}
+	return DBusInterfaceInfo{Ptr: unsafe.Pointer(p)}
 }
 func WrapDBusInterfaceInfo(p unsafe.Pointer) DBusInterfaceInfo {
-	return DBusInterfaceInfo{p}
+	return DBusInterfaceInfo{Ptr: p}
 }
 func (v DBusInterfaceInfo) IsNil() bool {
 	return v.Ptr == nil
@@ -6714,10 +6750,10 @@ func (v DBusMethodInfo) native() *C.GDBusMethodInfo {
 	return (*C.GDBusMethodInfo)(v.Ptr)
 }
 func wrapDBusMethodInfo(p *C.GDBusMethodInfo) DBusMethodInfo {
-	return DBusMethodInfo{unsafe.Pointer(p)}
+	return DBusMethodInfo{Ptr: unsafe.Pointer(p)}
 }
 func WrapDBusMethodInfo(p unsafe.Pointer) DBusMethodInfo {
-	return DBusMethodInfo{p}
+	return DBusMethodInfo{Ptr: p}
 }
 func (v DBusMethodInfo) IsNil() bool {
 	return v.Ptr == nil
@@ -6746,10 +6782,10 @@ func (v DBusPropertyInfo) native() *C.GDBusPropertyInfo {
 	return (*C.GDBusPropertyInfo)(v.Ptr)
 }
 func wrapDBusPropertyInfo(p *C.GDBusPropertyInfo) DBusPropertyInfo {
-	return DBusPropertyInfo{unsafe.Pointer(p)}
+	return DBusPropertyInfo{Ptr: unsafe.Pointer(p)}
 }
 func WrapDBusPropertyInfo(p unsafe.Pointer) DBusPropertyInfo {
-	return DBusPropertyInfo{p}
+	return DBusPropertyInfo{Ptr: p}
 }
 func (v DBusPropertyInfo) IsNil() bool {
 	return v.Ptr == nil
@@ -6778,10 +6814,10 @@ func (v DBusInterfaceVTable) native() *C.GDBusInterfaceVTable {
 	return (*C.GDBusInterfaceVTable)(v.Ptr)
 }
 func wrapDBusInterfaceVTable(p *C.GDBusInterfaceVTable) DBusInterfaceVTable {
-	return DBusInterfaceVTable{unsafe.Pointer(p)}
+	return DBusInterfaceVTable{Ptr: unsafe.Pointer(p)}
 }
 func WrapDBusInterfaceVTable(p unsafe.Pointer) DBusInterfaceVTable {
-	return DBusInterfaceVTable{p}
+	return DBusInterfaceVTable{Ptr: p}
 }
 func (v DBusInterfaceVTable) IsNil() bool {
 	return v.Ptr == nil
@@ -6799,10 +6835,10 @@ func (v DBusNodeInfo) native() *C.GDBusNodeInfo {
 	return (*C.GDBusNodeInfo)(v.Ptr)
 }
 func wrapDBusNodeInfo(p *C.GDBusNodeInfo) DBusNodeInfo {
-	return DBusNodeInfo{unsafe.Pointer(p)}
+	return DBusNodeInfo{Ptr: unsafe.Pointer(p)}
 }
 func WrapDBusNodeInfo(p unsafe.Pointer) DBusNodeInfo {
-	return DBusNodeInfo{p}
+	return DBusNodeInfo{Ptr: p}
 }
 func (v DBusNodeInfo) IsNil() bool {
 	return v.Ptr == nil
@@ -6852,10 +6888,10 @@ func (v DBusSignalInfo) native() *C.GDBusSignalInfo {
 	return (*C.GDBusSignalInfo)(v.Ptr)
 }
 func wrapDBusSignalInfo(p *C.GDBusSignalInfo) DBusSignalInfo {
-	return DBusSignalInfo{unsafe.Pointer(p)}
+	return DBusSignalInfo{Ptr: unsafe.Pointer(p)}
 }
 func WrapDBusSignalInfo(p unsafe.Pointer) DBusSignalInfo {
-	return DBusSignalInfo{p}
+	return DBusSignalInfo{Ptr: p}
 }
 func (v DBusSignalInfo) IsNil() bool {
 	return v.Ptr == nil
@@ -6884,10 +6920,10 @@ func (v DBusSubtreeVTable) native() *C.GDBusSubtreeVTable {
 	return (*C.GDBusSubtreeVTable)(v.Ptr)
 }
 func wrapDBusSubtreeVTable(p *C.GDBusSubtreeVTable) DBusSubtreeVTable {
-	return DBusSubtreeVTable{unsafe.Pointer(p)}
+	return DBusSubtreeVTable{Ptr: unsafe.Pointer(p)}
 }
 func WrapDBusSubtreeVTable(p unsafe.Pointer) DBusSubtreeVTable {
-	return DBusSubtreeVTable{p}
+	return DBusSubtreeVTable{Ptr: p}
 }
 func (v DBusSubtreeVTable) IsNil() bool {
 	return v.Ptr == nil
@@ -6905,10 +6941,10 @@ func (v InputMessage) native() *C.GInputMessage {
 	return (*C.GInputMessage)(v.Ptr)
 }
 func wrapInputMessage(p *C.GInputMessage) InputMessage {
-	return InputMessage{unsafe.Pointer(p)}
+	return InputMessage{Ptr: unsafe.Pointer(p)}
 }
 func WrapInputMessage(p unsafe.Pointer) InputMessage {
-	return InputMessage{p}
+	return InputMessage{Ptr: p}
 }
 func (v InputMessage) IsNil() bool {
 	return v.Ptr == nil
@@ -6926,10 +6962,10 @@ func (v InputVector) native() *C.GInputVector {
 	return (*C.GInputVector)(v.Ptr)
 }
 func wrapInputVector(p *C.GInputVector) InputVector {
-	return InputVector{unsafe.Pointer(p)}
+	return InputVector{Ptr: unsafe.Pointer(p)}
 }
 func WrapInputVector(p unsafe.Pointer) InputVector {
-	return InputVector{p}
+	return InputVector{Ptr: p}
 }
 func (v InputVector) IsNil() bool {
 	return v.Ptr == nil
@@ -6947,10 +6983,10 @@ func (v Resource) native() *C.GResource {
 	return (*C.GResource)(v.Ptr)
 }
 func wrapResource(p *C.GResource) Resource {
-	return Resource{unsafe.Pointer(p)}
+	return Resource{Ptr: unsafe.Pointer(p)}
 }
 func WrapResource(p unsafe.Pointer) Resource {
-	return Resource{p}
+	return Resource{Ptr: p}
 }
 func (v Resource) IsNil() bool {
 	return v.Ptr == nil
@@ -7077,10 +7113,10 @@ func (v OutputMessage) native() *C.GOutputMessage {
 	return (*C.GOutputMessage)(v.Ptr)
 }
 func wrapOutputMessage(p *C.GOutputMessage) OutputMessage {
-	return OutputMessage{unsafe.Pointer(p)}
+	return OutputMessage{Ptr: unsafe.Pointer(p)}
 }
 func WrapOutputMessage(p unsafe.Pointer) OutputMessage {
-	return OutputMessage{p}
+	return OutputMessage{Ptr: p}
 }
 func (v OutputMessage) IsNil() bool {
 	return v.Ptr == nil
@@ -7098,10 +7134,10 @@ func (v OutputVector) native() *C.GOutputVector {
 	return (*C.GOutputVector)(v.Ptr)
 }
 func wrapOutputVector(p *C.GOutputVector) OutputVector {
-	return OutputVector{unsafe.Pointer(p)}
+	return OutputVector{Ptr: unsafe.Pointer(p)}
 }
 func WrapOutputVector(p unsafe.Pointer) OutputVector {
-	return OutputVector{p}
+	return OutputVector{Ptr: p}
 }
 func (v OutputVector) IsNil() bool {
 	return v.Ptr == nil
@@ -7119,10 +7155,10 @@ func (v SettingsSchemaSource) native() *C.GSettingsSchemaSource {
 	return (*C.GSettingsSchemaSource)(v.Ptr)
 }
 func wrapSettingsSchemaSource(p *C.GSettingsSchemaSource) SettingsSchemaSource {
-	return SettingsSchemaSource{unsafe.Pointer(p)}
+	return SettingsSchemaSource{Ptr: unsafe.Pointer(p)}
 }
 func WrapSettingsSchemaSource(p unsafe.Pointer) SettingsSchemaSource {
-	return SettingsSchemaSource{p}
+	return SettingsSchemaSource{Ptr: p}
 }
 func (v SettingsSchemaSource) IsNil() bool {
 	return v.Ptr == nil
@@ -7178,10 +7214,10 @@ func (v SrvTarget) native() *C.GSrvTarget {
 	return (*C.GSrvTarget)(v.Ptr)
 }
 func wrapSrvTarget(p *C.GSrvTarget) SrvTarget {
-	return SrvTarget{unsafe.Pointer(p)}
+	return SrvTarget{Ptr: unsafe.Pointer(p)}
 }
 func WrapSrvTarget(p unsafe.Pointer) SrvTarget {
-	return SrvTarget{p}
+	return SrvTarget{Ptr: p}
 }
 func (v SrvTarget) IsNil() bool {
 	return v.Ptr == nil
@@ -7243,10 +7279,10 @@ func (v StaticResource) native() *C.GStaticResource {
 	return (*C.GStaticResource)(v.Ptr)
 }
 func wrapStaticResource(p *C.GStaticResource) StaticResource {
-	return StaticResource{unsafe.Pointer(p)}
+	return StaticResource{Ptr: unsafe.Pointer(p)}
 }
 func WrapStaticResource(p unsafe.Pointer) StaticResource {
-	return StaticResource{p}
+	return StaticResource{Ptr: p}
 }
 func (v StaticResource) IsNil() bool {
 	return v.Ptr == nil
@@ -7273,17 +7309,19 @@ func (static_resource StaticResource) Init() {
 
 // Interface Converter
 type Converter struct {
+	ConverterIface
 	Ptr unsafe.Pointer
 }
+type ConverterIface struct{}
 
-func (v Converter) native() *C.GConverter {
-	return (*C.GConverter)(v.Ptr)
+func (v *ConverterIface) native() *C.GConverter {
+	return (*C.GConverter)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapConverter(p *C.GConverter) Converter {
-	return Converter{unsafe.Pointer(p)}
+	return Converter{Ptr: unsafe.Pointer(p)}
 }
 func WrapConverter(p unsafe.Pointer) Converter {
-	return Converter{p}
+	return Converter{Ptr: p}
 }
 func (v Converter) IsNil() bool {
 	return v.Ptr == nil
@@ -7302,23 +7340,25 @@ func (v Converter) GetGValueGetter() gobject.GValueGetter {
 }
 
 // Reset is a wrapper around g_converter_reset().
-func (converter Converter) Reset() {
+func (converter *ConverterIface) Reset() {
 	C.g_converter_reset(converter.native())
 }
 
 // Interface DBusObjectManager
 type DBusObjectManager struct {
+	DBusObjectManagerIface
 	Ptr unsafe.Pointer
 }
+type DBusObjectManagerIface struct{}
 
-func (v DBusObjectManager) native() *C.GDBusObjectManager {
-	return (*C.GDBusObjectManager)(v.Ptr)
+func (v *DBusObjectManagerIface) native() *C.GDBusObjectManager {
+	return (*C.GDBusObjectManager)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapDBusObjectManager(p *C.GDBusObjectManager) DBusObjectManager {
-	return DBusObjectManager{unsafe.Pointer(p)}
+	return DBusObjectManager{Ptr: unsafe.Pointer(p)}
 }
 func WrapDBusObjectManager(p unsafe.Pointer) DBusObjectManager {
-	return DBusObjectManager{p}
+	return DBusObjectManager{Ptr: p}
 }
 func (v DBusObjectManager) IsNil() bool {
 	return v.Ptr == nil
@@ -7337,7 +7377,7 @@ func (v DBusObjectManager) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetInterface is a wrapper around g_dbus_object_manager_get_interface().
-func (manager DBusObjectManager) GetInterface(object_path string, interface_name string) DBusInterface {
+func (manager *DBusObjectManagerIface) GetInterface(object_path string, interface_name string) DBusInterface {
 	object_path0 := (*C.gchar)(C.CString(object_path))
 	interface_name0 := (*C.gchar)(C.CString(interface_name))
 	ret0 := C.g_dbus_object_manager_get_interface(manager.native(), object_path0, interface_name0)
@@ -7347,7 +7387,7 @@ func (manager DBusObjectManager) GetInterface(object_path string, interface_name
 }
 
 // GetObject is a wrapper around g_dbus_object_manager_get_object().
-func (manager DBusObjectManager) GetObject(object_path string) DBusObject {
+func (manager *DBusObjectManagerIface) GetObject(object_path string) DBusObject {
 	object_path0 := (*C.gchar)(C.CString(object_path))
 	ret0 := C.g_dbus_object_manager_get_object(manager.native(), object_path0)
 	C.free(unsafe.Pointer(object_path0)) /*ch:<stdlib.h>*/
@@ -7355,14 +7395,14 @@ func (manager DBusObjectManager) GetObject(object_path string) DBusObject {
 }
 
 // GetObjectPath is a wrapper around g_dbus_object_manager_get_object_path().
-func (manager DBusObjectManager) GetObjectPath() string {
+func (manager *DBusObjectManagerIface) GetObjectPath() string {
 	ret0 := C.g_dbus_object_manager_get_object_path(manager.native())
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
 
 // GetObjects is a wrapper around g_dbus_object_manager_get_objects().
-func (manager DBusObjectManager) GetObjects() glib.List {
+func (manager *DBusObjectManagerIface) GetObjects() glib.List {
 	ret0 := C.g_dbus_object_manager_get_objects(manager.native())
 	return glib.WrapList(unsafe.Pointer(ret0),
 		func(p unsafe.Pointer) interface{} { return WrapDBusObject(p) }) /*gir:GLib*/
@@ -7370,17 +7410,19 @@ func (manager DBusObjectManager) GetObjects() glib.List {
 
 // Interface DBusInterface
 type DBusInterface struct {
+	DBusInterfaceIface
 	Ptr unsafe.Pointer
 }
+type DBusInterfaceIface struct{}
 
-func (v DBusInterface) native() *C.GDBusInterface {
-	return (*C.GDBusInterface)(v.Ptr)
+func (v *DBusInterfaceIface) native() *C.GDBusInterface {
+	return (*C.GDBusInterface)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapDBusInterface(p *C.GDBusInterface) DBusInterface {
-	return DBusInterface{unsafe.Pointer(p)}
+	return DBusInterface{Ptr: unsafe.Pointer(p)}
 }
 func WrapDBusInterface(p unsafe.Pointer) DBusInterface {
-	return DBusInterface{p}
+	return DBusInterface{Ptr: p}
 }
 func (v DBusInterface) IsNil() bool {
 	return v.Ptr == nil
@@ -7399,13 +7441,13 @@ func (v DBusInterface) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetObject is a wrapper around g_dbus_interface_dup_object().
-func (interface_ DBusInterface) GetObject() DBusObject {
+func (interface_ *DBusInterfaceIface) GetObject() DBusObject {
 	ret0 := C.g_dbus_interface_dup_object(interface_.native())
 	return wrapDBusObject(ret0)
 }
 
 // GetInfo is a wrapper around g_dbus_interface_get_info().
-func (interface_ DBusInterface) GetInfo() DBusInterfaceInfo {
+func (interface_ *DBusInterfaceIface) GetInfo() DBusInterfaceInfo {
 	ret0 := C.g_dbus_interface_get_info(interface_.native())
 	return wrapDBusInterfaceInfo(ret0)
 }
@@ -7413,23 +7455,25 @@ func (interface_ DBusInterface) GetInfo() DBusInterfaceInfo {
 // g_dbus_interface_get_object shadowed by dup_object
 
 // SetObject is a wrapper around g_dbus_interface_set_object().
-func (interface_ DBusInterface) SetObject(object DBusObject) {
+func (interface_ *DBusInterfaceIface) SetObject(object DBusObject) {
 	C.g_dbus_interface_set_object(interface_.native(), object.native())
 }
 
 // Interface DBusObject
 type DBusObject struct {
+	DBusObjectIface
 	Ptr unsafe.Pointer
 }
+type DBusObjectIface struct{}
 
-func (v DBusObject) native() *C.GDBusObject {
-	return (*C.GDBusObject)(v.Ptr)
+func (v *DBusObjectIface) native() *C.GDBusObject {
+	return (*C.GDBusObject)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapDBusObject(p *C.GDBusObject) DBusObject {
-	return DBusObject{unsafe.Pointer(p)}
+	return DBusObject{Ptr: unsafe.Pointer(p)}
 }
 func WrapDBusObject(p unsafe.Pointer) DBusObject {
-	return DBusObject{p}
+	return DBusObject{Ptr: p}
 }
 func (v DBusObject) IsNil() bool {
 	return v.Ptr == nil
@@ -7448,7 +7492,7 @@ func (v DBusObject) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetInterface is a wrapper around g_dbus_object_get_interface().
-func (object DBusObject) GetInterface(interface_name string) DBusInterface {
+func (object *DBusObjectIface) GetInterface(interface_name string) DBusInterface {
 	interface_name0 := (*C.gchar)(C.CString(interface_name))
 	ret0 := C.g_dbus_object_get_interface(object.native(), interface_name0)
 	C.free(unsafe.Pointer(interface_name0)) /*ch:<stdlib.h>*/
@@ -7456,14 +7500,14 @@ func (object DBusObject) GetInterface(interface_name string) DBusInterface {
 }
 
 // GetInterfaces is a wrapper around g_dbus_object_get_interfaces().
-func (object DBusObject) GetInterfaces() glib.List {
+func (object *DBusObjectIface) GetInterfaces() glib.List {
 	ret0 := C.g_dbus_object_get_interfaces(object.native())
 	return glib.WrapList(unsafe.Pointer(ret0),
 		func(p unsafe.Pointer) interface{} { return WrapDBusInterface(p) }) /*gir:GLib*/
 }
 
 // GetObjectPath is a wrapper around g_dbus_object_get_object_path().
-func (object DBusObject) GetObjectPath() string {
+func (object *DBusObjectIface) GetObjectPath() string {
 	ret0 := C.g_dbus_object_get_object_path(object.native())
 	ret := C.GoString((*C.char)(ret0))
 	return ret
@@ -7471,17 +7515,19 @@ func (object DBusObject) GetObjectPath() string {
 
 // Interface DatagramBased
 type DatagramBased struct {
+	DatagramBasedIface
 	Ptr unsafe.Pointer
 }
+type DatagramBasedIface struct{}
 
-func (v DatagramBased) native() *C.GDatagramBased {
-	return (*C.GDatagramBased)(v.Ptr)
+func (v *DatagramBasedIface) native() *C.GDatagramBased {
+	return (*C.GDatagramBased)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapDatagramBased(p *C.GDatagramBased) DatagramBased {
-	return DatagramBased{unsafe.Pointer(p)}
+	return DatagramBased{Ptr: unsafe.Pointer(p)}
 }
 func WrapDatagramBased(p unsafe.Pointer) DatagramBased {
-	return DatagramBased{p}
+	return DatagramBased{Ptr: p}
 }
 func (v DatagramBased) IsNil() bool {
 	return v.Ptr == nil
@@ -7500,13 +7546,13 @@ func (v DatagramBased) GetGValueGetter() gobject.GValueGetter {
 }
 
 // ConditionCheck is a wrapper around g_datagram_based_condition_check().
-func (datagram_based DatagramBased) ConditionCheck(condition /*gir:GLib*/ glib.IOCondition) /*gir:GLib*/ glib.IOCondition {
+func (datagram_based *DatagramBasedIface) ConditionCheck(condition /*gir:GLib*/ glib.IOCondition) /*gir:GLib*/ glib.IOCondition {
 	ret0 := C.g_datagram_based_condition_check(datagram_based.native(), C.GIOCondition(condition))
 	return /*gir:GLib*/ glib.IOCondition(ret0)
 }
 
 // ConditionWait is a wrapper around g_datagram_based_condition_wait().
-func (datagram_based DatagramBased) ConditionWait(condition /*gir:GLib*/ glib.IOCondition, timeout int64, cancellable Cancellable) (bool, error) {
+func (datagram_based *DatagramBasedIface) ConditionWait(condition /*gir:GLib*/ glib.IOCondition, timeout int64, cancellable Cancellable) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_datagram_based_condition_wait(datagram_based.native(), C.GIOCondition(condition), C.gint64(timeout), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -7517,24 +7563,26 @@ func (datagram_based DatagramBased) ConditionWait(condition /*gir:GLib*/ glib.IO
 }
 
 // CreateSource is a wrapper around g_datagram_based_create_source().
-func (datagram_based DatagramBased) CreateSource(condition /*gir:GLib*/ glib.IOCondition, cancellable Cancellable) glib.Source {
+func (datagram_based *DatagramBasedIface) CreateSource(condition /*gir:GLib*/ glib.IOCondition, cancellable Cancellable) glib.Source {
 	ret0 := C.g_datagram_based_create_source(datagram_based.native(), C.GIOCondition(condition), cancellable.native())
 	return glib.WrapSource(unsafe.Pointer(ret0)) /*gir:GLib*/
 }
 
 // Interface DtlsClientConnection
 type DtlsClientConnection struct {
+	DtlsClientConnectionIface
 	Ptr unsafe.Pointer
 }
+type DtlsClientConnectionIface struct{}
 
-func (v DtlsClientConnection) native() *C.GDtlsClientConnection {
-	return (*C.GDtlsClientConnection)(v.Ptr)
+func (v *DtlsClientConnectionIface) native() *C.GDtlsClientConnection {
+	return (*C.GDtlsClientConnection)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapDtlsClientConnection(p *C.GDtlsClientConnection) DtlsClientConnection {
-	return DtlsClientConnection{unsafe.Pointer(p)}
+	return DtlsClientConnection{Ptr: unsafe.Pointer(p)}
 }
 func WrapDtlsClientConnection(p unsafe.Pointer) DtlsClientConnection {
-	return DtlsClientConnection{p}
+	return DtlsClientConnection{Ptr: p}
 }
 func (v DtlsClientConnection) IsNil() bool {
 	return v.Ptr == nil
@@ -7553,40 +7601,42 @@ func (v DtlsClientConnection) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetServerIdentity is a wrapper around g_dtls_client_connection_get_server_identity().
-func (conn DtlsClientConnection) GetServerIdentity() SocketConnectable {
+func (conn *DtlsClientConnectionIface) GetServerIdentity() SocketConnectable {
 	ret0 := C.g_dtls_client_connection_get_server_identity(conn.native())
 	return wrapSocketConnectable(ret0)
 }
 
 // GetValidationFlags is a wrapper around g_dtls_client_connection_get_validation_flags().
-func (conn DtlsClientConnection) GetValidationFlags() TlsCertificateFlags {
+func (conn *DtlsClientConnectionIface) GetValidationFlags() TlsCertificateFlags {
 	ret0 := C.g_dtls_client_connection_get_validation_flags(conn.native())
 	return TlsCertificateFlags(ret0)
 }
 
 // SetServerIdentity is a wrapper around g_dtls_client_connection_set_server_identity().
-func (conn DtlsClientConnection) SetServerIdentity(identity SocketConnectable) {
+func (conn *DtlsClientConnectionIface) SetServerIdentity(identity SocketConnectable) {
 	C.g_dtls_client_connection_set_server_identity(conn.native(), identity.native())
 }
 
 // SetValidationFlags is a wrapper around g_dtls_client_connection_set_validation_flags().
-func (conn DtlsClientConnection) SetValidationFlags(flags TlsCertificateFlags) {
+func (conn *DtlsClientConnectionIface) SetValidationFlags(flags TlsCertificateFlags) {
 	C.g_dtls_client_connection_set_validation_flags(conn.native(), C.GTlsCertificateFlags(flags))
 }
 
 // Interface SocketConnectable
 type SocketConnectable struct {
+	SocketConnectableIface
 	Ptr unsafe.Pointer
 }
+type SocketConnectableIface struct{}
 
-func (v SocketConnectable) native() *C.GSocketConnectable {
-	return (*C.GSocketConnectable)(v.Ptr)
+func (v *SocketConnectableIface) native() *C.GSocketConnectable {
+	return (*C.GSocketConnectable)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapSocketConnectable(p *C.GSocketConnectable) SocketConnectable {
-	return SocketConnectable{unsafe.Pointer(p)}
+	return SocketConnectable{Ptr: unsafe.Pointer(p)}
 }
 func WrapSocketConnectable(p unsafe.Pointer) SocketConnectable {
-	return SocketConnectable{p}
+	return SocketConnectable{Ptr: p}
 }
 func (v SocketConnectable) IsNil() bool {
 	return v.Ptr == nil
@@ -7605,19 +7655,19 @@ func (v SocketConnectable) GetGValueGetter() gobject.GValueGetter {
 }
 
 // Enumerate is a wrapper around g_socket_connectable_enumerate().
-func (connectable SocketConnectable) Enumerate() SocketAddressEnumerator {
+func (connectable *SocketConnectableIface) Enumerate() SocketAddressEnumerator {
 	ret0 := C.g_socket_connectable_enumerate(connectable.native())
 	return wrapSocketAddressEnumerator(ret0)
 }
 
 // ProxyEnumerate is a wrapper around g_socket_connectable_proxy_enumerate().
-func (connectable SocketConnectable) ProxyEnumerate() SocketAddressEnumerator {
+func (connectable *SocketConnectableIface) ProxyEnumerate() SocketAddressEnumerator {
 	ret0 := C.g_socket_connectable_proxy_enumerate(connectable.native())
 	return wrapSocketAddressEnumerator(ret0)
 }
 
 // ToString is a wrapper around g_socket_connectable_to_string().
-func (connectable SocketConnectable) ToString() string {
+func (connectable *SocketConnectableIface) ToString() string {
 	ret0 := C.g_socket_connectable_to_string(connectable.native())
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
@@ -7686,6 +7736,7 @@ func (enumerator SocketAddressEnumerator) NextFinish(result AsyncResult) (Socket
 
 // Object SocketAddress
 type SocketAddress struct {
+	SocketConnectableIface
 	gobject.Object
 }
 
@@ -7750,17 +7801,19 @@ func (address SocketAddress) ToNative(dest unsafe.Pointer, destlen uint) (bool, 
 
 // Interface DtlsConnection
 type DtlsConnection struct {
+	DtlsConnectionIface
 	Ptr unsafe.Pointer
 }
+type DtlsConnectionIface struct{}
 
-func (v DtlsConnection) native() *C.GDtlsConnection {
-	return (*C.GDtlsConnection)(v.Ptr)
+func (v *DtlsConnectionIface) native() *C.GDtlsConnection {
+	return (*C.GDtlsConnection)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapDtlsConnection(p *C.GDtlsConnection) DtlsConnection {
-	return DtlsConnection{unsafe.Pointer(p)}
+	return DtlsConnection{Ptr: unsafe.Pointer(p)}
 }
 func WrapDtlsConnection(p unsafe.Pointer) DtlsConnection {
-	return DtlsConnection{p}
+	return DtlsConnection{Ptr: p}
 }
 func (v DtlsConnection) IsNil() bool {
 	return v.Ptr == nil
@@ -7779,7 +7832,7 @@ func (v DtlsConnection) GetGValueGetter() gobject.GValueGetter {
 }
 
 // Close is a wrapper around g_dtls_connection_close().
-func (conn DtlsConnection) Close(cancellable Cancellable) (bool, error) {
+func (conn *DtlsConnectionIface) Close(cancellable Cancellable) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_dtls_connection_close(conn.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -7790,13 +7843,13 @@ func (conn DtlsConnection) Close(cancellable Cancellable) (bool, error) {
 }
 
 // CloseAsync is a wrapper around g_dtls_connection_close_async().
-func (conn DtlsConnection) CloseAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (conn *DtlsConnectionIface) CloseAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_dtls_connection_close_async(conn.native(), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // CloseFinish is a wrapper around g_dtls_connection_close_finish().
-func (conn DtlsConnection) CloseFinish(result AsyncResult) (bool, error) {
+func (conn *DtlsConnectionIface) CloseFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_dtls_connection_close_finish(conn.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -7807,55 +7860,55 @@ func (conn DtlsConnection) CloseFinish(result AsyncResult) (bool, error) {
 }
 
 // EmitAcceptCertificate is a wrapper around g_dtls_connection_emit_accept_certificate().
-func (conn DtlsConnection) EmitAcceptCertificate(peer_cert TlsCertificate, errors TlsCertificateFlags) bool {
+func (conn *DtlsConnectionIface) EmitAcceptCertificate(peer_cert TlsCertificate, errors TlsCertificateFlags) bool {
 	ret0 := C.g_dtls_connection_emit_accept_certificate(conn.native(), peer_cert.native(), C.GTlsCertificateFlags(errors))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetCertificate is a wrapper around g_dtls_connection_get_certificate().
-func (conn DtlsConnection) GetCertificate() TlsCertificate {
+func (conn *DtlsConnectionIface) GetCertificate() TlsCertificate {
 	ret0 := C.g_dtls_connection_get_certificate(conn.native())
 	return wrapTlsCertificate(ret0)
 }
 
 // GetDatabase is a wrapper around g_dtls_connection_get_database().
-func (conn DtlsConnection) GetDatabase() TlsDatabase {
+func (conn *DtlsConnectionIface) GetDatabase() TlsDatabase {
 	ret0 := C.g_dtls_connection_get_database(conn.native())
 	return wrapTlsDatabase(ret0)
 }
 
 // GetInteraction is a wrapper around g_dtls_connection_get_interaction().
-func (conn DtlsConnection) GetInteraction() TlsInteraction {
+func (conn *DtlsConnectionIface) GetInteraction() TlsInteraction {
 	ret0 := C.g_dtls_connection_get_interaction(conn.native())
 	return wrapTlsInteraction(ret0)
 }
 
 // GetPeerCertificate is a wrapper around g_dtls_connection_get_peer_certificate().
-func (conn DtlsConnection) GetPeerCertificate() TlsCertificate {
+func (conn *DtlsConnectionIface) GetPeerCertificate() TlsCertificate {
 	ret0 := C.g_dtls_connection_get_peer_certificate(conn.native())
 	return wrapTlsCertificate(ret0)
 }
 
 // GetPeerCertificateErrors is a wrapper around g_dtls_connection_get_peer_certificate_errors().
-func (conn DtlsConnection) GetPeerCertificateErrors() TlsCertificateFlags {
+func (conn *DtlsConnectionIface) GetPeerCertificateErrors() TlsCertificateFlags {
 	ret0 := C.g_dtls_connection_get_peer_certificate_errors(conn.native())
 	return TlsCertificateFlags(ret0)
 }
 
 // GetRehandshakeMode is a wrapper around g_dtls_connection_get_rehandshake_mode().
-func (conn DtlsConnection) GetRehandshakeMode() TlsRehandshakeMode {
+func (conn *DtlsConnectionIface) GetRehandshakeMode() TlsRehandshakeMode {
 	ret0 := C.g_dtls_connection_get_rehandshake_mode(conn.native())
 	return TlsRehandshakeMode(ret0)
 }
 
 // GetRequireCloseNotify is a wrapper around g_dtls_connection_get_require_close_notify().
-func (conn DtlsConnection) GetRequireCloseNotify() bool {
+func (conn *DtlsConnectionIface) GetRequireCloseNotify() bool {
 	ret0 := C.g_dtls_connection_get_require_close_notify(conn.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // Handshake is a wrapper around g_dtls_connection_handshake().
-func (conn DtlsConnection) Handshake(cancellable Cancellable) (bool, error) {
+func (conn *DtlsConnectionIface) Handshake(cancellable Cancellable) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_dtls_connection_handshake(conn.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -7866,13 +7919,13 @@ func (conn DtlsConnection) Handshake(cancellable Cancellable) (bool, error) {
 }
 
 // HandshakeAsync is a wrapper around g_dtls_connection_handshake_async().
-func (conn DtlsConnection) HandshakeAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (conn *DtlsConnectionIface) HandshakeAsync(io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_dtls_connection_handshake_async(conn.native(), C.int(io_priority), cancellable.native(), callback0)
 }
 
 // HandshakeFinish is a wrapper around g_dtls_connection_handshake_finish().
-func (conn DtlsConnection) HandshakeFinish(result AsyncResult) (bool, error) {
+func (conn *DtlsConnectionIface) HandshakeFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_dtls_connection_handshake_finish(conn.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -7883,32 +7936,32 @@ func (conn DtlsConnection) HandshakeFinish(result AsyncResult) (bool, error) {
 }
 
 // SetCertificate is a wrapper around g_dtls_connection_set_certificate().
-func (conn DtlsConnection) SetCertificate(certificate TlsCertificate) {
+func (conn *DtlsConnectionIface) SetCertificate(certificate TlsCertificate) {
 	C.g_dtls_connection_set_certificate(conn.native(), certificate.native())
 }
 
 // SetDatabase is a wrapper around g_dtls_connection_set_database().
-func (conn DtlsConnection) SetDatabase(database TlsDatabase) {
+func (conn *DtlsConnectionIface) SetDatabase(database TlsDatabase) {
 	C.g_dtls_connection_set_database(conn.native(), database.native())
 }
 
 // SetInteraction is a wrapper around g_dtls_connection_set_interaction().
-func (conn DtlsConnection) SetInteraction(interaction TlsInteraction) {
+func (conn *DtlsConnectionIface) SetInteraction(interaction TlsInteraction) {
 	C.g_dtls_connection_set_interaction(conn.native(), interaction.native())
 }
 
 // SetRehandshakeMode is a wrapper around g_dtls_connection_set_rehandshake_mode().
-func (conn DtlsConnection) SetRehandshakeMode(mode TlsRehandshakeMode) {
+func (conn *DtlsConnectionIface) SetRehandshakeMode(mode TlsRehandshakeMode) {
 	C.g_dtls_connection_set_rehandshake_mode(conn.native(), C.GTlsRehandshakeMode(mode))
 }
 
 // SetRequireCloseNotify is a wrapper around g_dtls_connection_set_require_close_notify().
-func (conn DtlsConnection) SetRequireCloseNotify(require_close_notify bool) {
+func (conn *DtlsConnectionIface) SetRequireCloseNotify(require_close_notify bool) {
 	C.g_dtls_connection_set_require_close_notify(conn.native(), C.gboolean(util.Bool2Int(require_close_notify)) /*go:.util*/)
 }
 
 // Shutdown is a wrapper around g_dtls_connection_shutdown().
-func (conn DtlsConnection) Shutdown(shutdown_read bool, shutdown_write bool, cancellable Cancellable) (bool, error) {
+func (conn *DtlsConnectionIface) Shutdown(shutdown_read bool, shutdown_write bool, cancellable Cancellable) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_dtls_connection_shutdown(conn.native(), C.gboolean(util.Bool2Int(shutdown_read)) /*go:.util*/, C.gboolean(util.Bool2Int(shutdown_write)) /*go:.util*/, cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -7919,13 +7972,13 @@ func (conn DtlsConnection) Shutdown(shutdown_read bool, shutdown_write bool, can
 }
 
 // ShutdownAsync is a wrapper around g_dtls_connection_shutdown_async().
-func (conn DtlsConnection) ShutdownAsync(shutdown_read bool, shutdown_write bool, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (conn *DtlsConnectionIface) ShutdownAsync(shutdown_read bool, shutdown_write bool, io_priority int, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_dtls_connection_shutdown_async(conn.native(), C.gboolean(util.Bool2Int(shutdown_read)) /*go:.util*/, C.gboolean(util.Bool2Int(shutdown_write)) /*go:.util*/, C.int(io_priority), cancellable.native(), callback0)
 }
 
 // ShutdownFinish is a wrapper around g_dtls_connection_shutdown_finish().
-func (conn DtlsConnection) ShutdownFinish(result AsyncResult) (bool, error) {
+func (conn *DtlsConnectionIface) ShutdownFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_dtls_connection_shutdown_finish(conn.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -8042,17 +8095,19 @@ func TlsCertificateListNewFromFile(file string) (glib.List, error) {
 
 // Interface DtlsServerConnection
 type DtlsServerConnection struct {
+	DtlsServerConnectionIface
 	Ptr unsafe.Pointer
 }
+type DtlsServerConnectionIface struct{}
 
-func (v DtlsServerConnection) native() *C.GDtlsServerConnection {
-	return (*C.GDtlsServerConnection)(v.Ptr)
+func (v *DtlsServerConnectionIface) native() *C.GDtlsServerConnection {
+	return (*C.GDtlsServerConnection)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapDtlsServerConnection(p *C.GDtlsServerConnection) DtlsServerConnection {
-	return DtlsServerConnection{unsafe.Pointer(p)}
+	return DtlsServerConnection{Ptr: unsafe.Pointer(p)}
 }
 func WrapDtlsServerConnection(p unsafe.Pointer) DtlsServerConnection {
-	return DtlsServerConnection{p}
+	return DtlsServerConnection{Ptr: p}
 }
 func (v DtlsServerConnection) IsNil() bool {
 	return v.Ptr == nil
@@ -8072,17 +8127,19 @@ func (v DtlsServerConnection) GetGValueGetter() gobject.GValueGetter {
 
 // Interface FileDescriptorBased
 type FileDescriptorBased struct {
+	FileDescriptorBasedIface
 	Ptr unsafe.Pointer
 }
+type FileDescriptorBasedIface struct{}
 
-func (v FileDescriptorBased) native() *C.GFileDescriptorBased {
-	return (*C.GFileDescriptorBased)(v.Ptr)
+func (v *FileDescriptorBasedIface) native() *C.GFileDescriptorBased {
+	return (*C.GFileDescriptorBased)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapFileDescriptorBased(p *C.GFileDescriptorBased) FileDescriptorBased {
-	return FileDescriptorBased{unsafe.Pointer(p)}
+	return FileDescriptorBased{Ptr: unsafe.Pointer(p)}
 }
 func WrapFileDescriptorBased(p unsafe.Pointer) FileDescriptorBased {
-	return FileDescriptorBased{p}
+	return FileDescriptorBased{Ptr: p}
 }
 func (v FileDescriptorBased) IsNil() bool {
 	return v.Ptr == nil
@@ -8101,24 +8158,26 @@ func (v FileDescriptorBased) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetFd is a wrapper around g_file_descriptor_based_get_fd().
-func (fd_based FileDescriptorBased) GetFd() int {
+func (fd_based *FileDescriptorBasedIface) GetFd() int {
 	ret0 := C.g_file_descriptor_based_get_fd(fd_based.native())
 	return int(ret0)
 }
 
 // Interface ListModel
 type ListModel struct {
+	ListModelIface
 	Ptr unsafe.Pointer
 }
+type ListModelIface struct{}
 
-func (v ListModel) native() *C.GListModel {
-	return (*C.GListModel)(v.Ptr)
+func (v *ListModelIface) native() *C.GListModel {
+	return (*C.GListModel)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapListModel(p *C.GListModel) ListModel {
-	return ListModel{unsafe.Pointer(p)}
+	return ListModel{Ptr: unsafe.Pointer(p)}
 }
 func WrapListModel(p unsafe.Pointer) ListModel {
-	return ListModel{p}
+	return ListModel{Ptr: p}
 }
 func (v ListModel) IsNil() bool {
 	return v.Ptr == nil
@@ -8139,41 +8198,43 @@ func (v ListModel) GetGValueGetter() gobject.GValueGetter {
 // g_list_model_get_item shadowed by get_object
 
 // GetItemType is a wrapper around g_list_model_get_item_type().
-func (list ListModel) GetItemType() /*Gir:GObject*/ gobject.Type {
+func (list *ListModelIface) GetItemType() /*Gir:GObject*/ gobject.Type {
 	ret0 := C.g_list_model_get_item_type(list.native())
 	return /*Gir:GObject*/ gobject.Type(ret0)
 }
 
 // GetNItems is a wrapper around g_list_model_get_n_items().
-func (list ListModel) GetNItems() uint {
+func (list *ListModelIface) GetNItems() uint {
 	ret0 := C.g_list_model_get_n_items(list.native())
 	return uint(ret0)
 }
 
 // GetItem is a wrapper around g_list_model_get_object().
-func (list ListModel) GetItem(position uint) gobject.Object {
+func (list *ListModelIface) GetItem(position uint) gobject.Object {
 	ret0 := C.g_list_model_get_object(list.native(), C.guint(position))
 	return gobject.WrapObject(unsafe.Pointer(ret0)) /*gir:GObject*/
 }
 
 // ItemsChanged is a wrapper around g_list_model_items_changed().
-func (list ListModel) ItemsChanged(position uint, removed uint, added uint) {
+func (list *ListModelIface) ItemsChanged(position uint, removed uint, added uint) {
 	C.g_list_model_items_changed(list.native(), C.guint(position), C.guint(removed), C.guint(added))
 }
 
 // Interface LoadableIcon
 type LoadableIcon struct {
+	LoadableIconIface
 	Ptr unsafe.Pointer
 }
+type LoadableIconIface struct{}
 
-func (v LoadableIcon) native() *C.GLoadableIcon {
-	return (*C.GLoadableIcon)(v.Ptr)
+func (v *LoadableIconIface) native() *C.GLoadableIcon {
+	return (*C.GLoadableIcon)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapLoadableIcon(p *C.GLoadableIcon) LoadableIcon {
-	return LoadableIcon{unsafe.Pointer(p)}
+	return LoadableIcon{Ptr: unsafe.Pointer(p)}
 }
 func WrapLoadableIcon(p unsafe.Pointer) LoadableIcon {
-	return LoadableIcon{p}
+	return LoadableIcon{Ptr: p}
 }
 func (v LoadableIcon) IsNil() bool {
 	return v.Ptr == nil
@@ -8192,7 +8253,7 @@ func (v LoadableIcon) GetGValueGetter() gobject.GValueGetter {
 }
 
 // Load is a wrapper around g_loadable_icon_load().
-func (icon LoadableIcon) Load(size int, cancellable Cancellable) (InputStream, string, error) {
+func (icon *LoadableIconIface) Load(size int, cancellable Cancellable) (InputStream, string, error) {
 	var type0 *C.char
 	var err glib.Error
 	ret0 := C.g_loadable_icon_load(icon.native(), C.int(size), &type0, cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
@@ -8206,13 +8267,13 @@ func (icon LoadableIcon) Load(size int, cancellable Cancellable) (InputStream, s
 }
 
 // LoadAsync is a wrapper around g_loadable_icon_load_async().
-func (icon LoadableIcon) LoadAsync(size int, cancellable Cancellable, callback AsyncReadyCallback) {
+func (icon *LoadableIconIface) LoadAsync(size int, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_loadable_icon_load_async(icon.native(), C.int(size), cancellable.native(), callback0)
 }
 
 // LoadFinish is a wrapper around g_loadable_icon_load_finish().
-func (icon LoadableIcon) LoadFinish(res AsyncResult) (InputStream, string, error) {
+func (icon *LoadableIconIface) LoadFinish(res AsyncResult) (InputStream, string, error) {
 	var type0 *C.char
 	var err glib.Error
 	ret0 := C.g_loadable_icon_load_finish(icon.native(), res.native(), &type0, (**C.GError)(unsafe.Pointer(&err)))
@@ -8227,17 +8288,19 @@ func (icon LoadableIcon) LoadFinish(res AsyncResult) (InputStream, string, error
 
 // Interface NetworkMonitor
 type NetworkMonitor struct {
+	NetworkMonitorIface
 	Ptr unsafe.Pointer
 }
+type NetworkMonitorIface struct{}
 
-func (v NetworkMonitor) native() *C.GNetworkMonitor {
-	return (*C.GNetworkMonitor)(v.Ptr)
+func (v *NetworkMonitorIface) native() *C.GNetworkMonitor {
+	return (*C.GNetworkMonitor)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapNetworkMonitor(p *C.GNetworkMonitor) NetworkMonitor {
-	return NetworkMonitor{unsafe.Pointer(p)}
+	return NetworkMonitor{Ptr: unsafe.Pointer(p)}
 }
 func WrapNetworkMonitor(p unsafe.Pointer) NetworkMonitor {
-	return NetworkMonitor{p}
+	return NetworkMonitor{Ptr: p}
 }
 func (v NetworkMonitor) IsNil() bool {
 	return v.Ptr == nil
@@ -8256,7 +8319,7 @@ func (v NetworkMonitor) GetGValueGetter() gobject.GValueGetter {
 }
 
 // CanReach is a wrapper around g_network_monitor_can_reach().
-func (monitor NetworkMonitor) CanReach(connectable SocketConnectable, cancellable Cancellable) (bool, error) {
+func (monitor *NetworkMonitorIface) CanReach(connectable SocketConnectable, cancellable Cancellable) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_network_monitor_can_reach(monitor.native(), connectable.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -8267,13 +8330,13 @@ func (monitor NetworkMonitor) CanReach(connectable SocketConnectable, cancellabl
 }
 
 // CanReachAsync is a wrapper around g_network_monitor_can_reach_async().
-func (monitor NetworkMonitor) CanReachAsync(connectable SocketConnectable, cancellable Cancellable, callback AsyncReadyCallback) {
+func (monitor *NetworkMonitorIface) CanReachAsync(connectable SocketConnectable, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_network_monitor_can_reach_async(monitor.native(), connectable.native(), cancellable.native(), callback0)
 }
 
 // CanReachFinish is a wrapper around g_network_monitor_can_reach_finish().
-func (monitor NetworkMonitor) CanReachFinish(result AsyncResult) (bool, error) {
+func (monitor *NetworkMonitorIface) CanReachFinish(result AsyncResult) (bool, error) {
 	var err glib.Error
 	ret0 := C.g_network_monitor_can_reach_finish(monitor.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -8284,19 +8347,19 @@ func (monitor NetworkMonitor) CanReachFinish(result AsyncResult) (bool, error) {
 }
 
 // GetConnectivity is a wrapper around g_network_monitor_get_connectivity().
-func (monitor NetworkMonitor) GetConnectivity() NetworkConnectivity {
+func (monitor *NetworkMonitorIface) GetConnectivity() NetworkConnectivity {
 	ret0 := C.g_network_monitor_get_connectivity(monitor.native())
 	return NetworkConnectivity(ret0)
 }
 
 // GetNetworkAvailable is a wrapper around g_network_monitor_get_network_available().
-func (monitor NetworkMonitor) GetNetworkAvailable() bool {
+func (monitor *NetworkMonitorIface) GetNetworkAvailable() bool {
 	ret0 := C.g_network_monitor_get_network_available(monitor.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetNetworkMetered is a wrapper around g_network_monitor_get_network_metered().
-func (monitor NetworkMonitor) GetNetworkMetered() bool {
+func (monitor *NetworkMonitorIface) GetNetworkMetered() bool {
 	ret0 := C.g_network_monitor_get_network_metered(monitor.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
@@ -8309,17 +8372,19 @@ func NetworkMonitorGetDefault() NetworkMonitor {
 
 // Interface PollableInputStream
 type PollableInputStream struct {
+	PollableInputStreamIface
 	Ptr unsafe.Pointer
 }
+type PollableInputStreamIface struct{}
 
-func (v PollableInputStream) native() *C.GPollableInputStream {
-	return (*C.GPollableInputStream)(v.Ptr)
+func (v *PollableInputStreamIface) native() *C.GPollableInputStream {
+	return (*C.GPollableInputStream)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapPollableInputStream(p *C.GPollableInputStream) PollableInputStream {
-	return PollableInputStream{unsafe.Pointer(p)}
+	return PollableInputStream{Ptr: unsafe.Pointer(p)}
 }
 func WrapPollableInputStream(p unsafe.Pointer) PollableInputStream {
-	return PollableInputStream{p}
+	return PollableInputStream{Ptr: p}
 }
 func (v PollableInputStream) IsNil() bool {
 	return v.Ptr == nil
@@ -8338,36 +8403,38 @@ func (v PollableInputStream) GetGValueGetter() gobject.GValueGetter {
 }
 
 // CanPoll is a wrapper around g_pollable_input_stream_can_poll().
-func (stream PollableInputStream) CanPoll() bool {
+func (stream *PollableInputStreamIface) CanPoll() bool {
 	ret0 := C.g_pollable_input_stream_can_poll(stream.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // CreateSource is a wrapper around g_pollable_input_stream_create_source().
-func (stream PollableInputStream) CreateSource(cancellable Cancellable) glib.Source {
+func (stream *PollableInputStreamIface) CreateSource(cancellable Cancellable) glib.Source {
 	ret0 := C.g_pollable_input_stream_create_source(stream.native(), cancellable.native())
 	return glib.WrapSource(unsafe.Pointer(ret0)) /*gir:GLib*/
 }
 
 // IsReadable is a wrapper around g_pollable_input_stream_is_readable().
-func (stream PollableInputStream) IsReadable() bool {
+func (stream *PollableInputStreamIface) IsReadable() bool {
 	ret0 := C.g_pollable_input_stream_is_readable(stream.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // Interface PollableOutputStream
 type PollableOutputStream struct {
+	PollableOutputStreamIface
 	Ptr unsafe.Pointer
 }
+type PollableOutputStreamIface struct{}
 
-func (v PollableOutputStream) native() *C.GPollableOutputStream {
-	return (*C.GPollableOutputStream)(v.Ptr)
+func (v *PollableOutputStreamIface) native() *C.GPollableOutputStream {
+	return (*C.GPollableOutputStream)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapPollableOutputStream(p *C.GPollableOutputStream) PollableOutputStream {
-	return PollableOutputStream{unsafe.Pointer(p)}
+	return PollableOutputStream{Ptr: unsafe.Pointer(p)}
 }
 func WrapPollableOutputStream(p unsafe.Pointer) PollableOutputStream {
-	return PollableOutputStream{p}
+	return PollableOutputStream{Ptr: p}
 }
 func (v PollableOutputStream) IsNil() bool {
 	return v.Ptr == nil
@@ -8386,36 +8453,38 @@ func (v PollableOutputStream) GetGValueGetter() gobject.GValueGetter {
 }
 
 // CanPoll is a wrapper around g_pollable_output_stream_can_poll().
-func (stream PollableOutputStream) CanPoll() bool {
+func (stream *PollableOutputStreamIface) CanPoll() bool {
 	ret0 := C.g_pollable_output_stream_can_poll(stream.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // CreateSource is a wrapper around g_pollable_output_stream_create_source().
-func (stream PollableOutputStream) CreateSource(cancellable Cancellable) glib.Source {
+func (stream *PollableOutputStreamIface) CreateSource(cancellable Cancellable) glib.Source {
 	ret0 := C.g_pollable_output_stream_create_source(stream.native(), cancellable.native())
 	return glib.WrapSource(unsafe.Pointer(ret0)) /*gir:GLib*/
 }
 
 // IsWritable is a wrapper around g_pollable_output_stream_is_writable().
-func (stream PollableOutputStream) IsWritable() bool {
+func (stream *PollableOutputStreamIface) IsWritable() bool {
 	ret0 := C.g_pollable_output_stream_is_writable(stream.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // Interface Proxy
 type Proxy struct {
+	ProxyIface
 	Ptr unsafe.Pointer
 }
+type ProxyIface struct{}
 
-func (v Proxy) native() *C.GProxy {
-	return (*C.GProxy)(v.Ptr)
+func (v *ProxyIface) native() *C.GProxy {
+	return (*C.GProxy)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapProxy(p *C.GProxy) Proxy {
-	return Proxy{unsafe.Pointer(p)}
+	return Proxy{Ptr: unsafe.Pointer(p)}
 }
 func WrapProxy(p unsafe.Pointer) Proxy {
-	return Proxy{p}
+	return Proxy{Ptr: p}
 }
 func (v Proxy) IsNil() bool {
 	return v.Ptr == nil
@@ -8434,7 +8503,7 @@ func (v Proxy) GetGValueGetter() gobject.GValueGetter {
 }
 
 // Connect is a wrapper around g_proxy_connect().
-func (proxy Proxy) Connect(connection IOStream, proxy_address ProxyAddress, cancellable Cancellable) (IOStream, error) {
+func (proxy *ProxyIface) Connect(connection IOStream, proxy_address ProxyAddress, cancellable Cancellable) (IOStream, error) {
 	var err glib.Error
 	ret0 := C.g_proxy_connect(proxy.native(), connection.native(), proxy_address.native(), cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -8445,13 +8514,13 @@ func (proxy Proxy) Connect(connection IOStream, proxy_address ProxyAddress, canc
 }
 
 // ConnectAsync is a wrapper around g_proxy_connect_async().
-func (proxy Proxy) ConnectAsync(connection IOStream, proxy_address ProxyAddress, cancellable Cancellable, callback AsyncReadyCallback) {
+func (proxy *ProxyIface) ConnectAsync(connection IOStream, proxy_address ProxyAddress, cancellable Cancellable, callback AsyncReadyCallback) {
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_proxy_connect_async(proxy.native(), connection.native(), proxy_address.native(), cancellable.native(), callback0)
 }
 
 // ConnectFinish is a wrapper around g_proxy_connect_finish().
-func (proxy Proxy) ConnectFinish(result AsyncResult) (IOStream, error) {
+func (proxy *ProxyIface) ConnectFinish(result AsyncResult) (IOStream, error) {
 	var err glib.Error
 	ret0 := C.g_proxy_connect_finish(proxy.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
@@ -8462,7 +8531,7 @@ func (proxy Proxy) ConnectFinish(result AsyncResult) (IOStream, error) {
 }
 
 // SupportsHostname is a wrapper around g_proxy_supports_hostname().
-func (proxy Proxy) SupportsHostname() bool {
+func (proxy *ProxyIface) SupportsHostname() bool {
 	ret0 := C.g_proxy_supports_hostname(proxy.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
@@ -8477,6 +8546,7 @@ func ProxyGetDefaultForProtocol(protocol string) Proxy {
 
 // Object ProxyAddress
 type ProxyAddress struct {
+	SocketConnectableIface
 	InetSocketAddress
 }
 
@@ -8574,6 +8644,7 @@ func (proxy ProxyAddress) GetUsername() string {
 
 // Object InetSocketAddress
 type InetSocketAddress struct {
+	SocketConnectableIface
 	SocketAddress
 }
 
@@ -8799,17 +8870,19 @@ func (address InetAddress) ToString() string {
 
 // Interface ProxyResolver
 type ProxyResolver struct {
+	ProxyResolverIface
 	Ptr unsafe.Pointer
 }
+type ProxyResolverIface struct{}
 
-func (v ProxyResolver) native() *C.GProxyResolver {
-	return (*C.GProxyResolver)(v.Ptr)
+func (v *ProxyResolverIface) native() *C.GProxyResolver {
+	return (*C.GProxyResolver)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapProxyResolver(p *C.GProxyResolver) ProxyResolver {
-	return ProxyResolver{unsafe.Pointer(p)}
+	return ProxyResolver{Ptr: unsafe.Pointer(p)}
 }
 func WrapProxyResolver(p unsafe.Pointer) ProxyResolver {
-	return ProxyResolver{p}
+	return ProxyResolver{Ptr: p}
 }
 func (v ProxyResolver) IsNil() bool {
 	return v.Ptr == nil
@@ -8828,13 +8901,13 @@ func (v ProxyResolver) GetGValueGetter() gobject.GValueGetter {
 }
 
 // IsSupported is a wrapper around g_proxy_resolver_is_supported().
-func (resolver ProxyResolver) IsSupported() bool {
+func (resolver *ProxyResolverIface) IsSupported() bool {
 	ret0 := C.g_proxy_resolver_is_supported(resolver.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // Lookup is a wrapper around g_proxy_resolver_lookup().
-func (resolver ProxyResolver) Lookup(uri string, cancellable Cancellable) ([]string, error) {
+func (resolver *ProxyResolverIface) Lookup(uri string, cancellable Cancellable) ([]string, error) {
 	uri0 := (*C.gchar)(C.CString(uri))
 	var err glib.Error
 	ret0 := C.g_proxy_resolver_lookup(resolver.native(), uri0, cancellable.native(), (**C.GError)(unsafe.Pointer(&err)))
@@ -8857,7 +8930,7 @@ func (resolver ProxyResolver) Lookup(uri string, cancellable Cancellable) ([]str
 }
 
 // LookupAsync is a wrapper around g_proxy_resolver_lookup_async().
-func (resolver ProxyResolver) LookupAsync(uri string, cancellable Cancellable, callback AsyncReadyCallback) {
+func (resolver *ProxyResolverIface) LookupAsync(uri string, cancellable Cancellable, callback AsyncReadyCallback) {
 	uri0 := (*C.gchar)(C.CString(uri))
 	callback0 := (*C.GClosure)(gobject.ClosureNew(callback).Ptr) /*gir:GObject*/
 	C._g_proxy_resolver_lookup_async(resolver.native(), uri0, cancellable.native(), callback0)
@@ -8865,7 +8938,7 @@ func (resolver ProxyResolver) LookupAsync(uri string, cancellable Cancellable, c
 }
 
 // LookupFinish is a wrapper around g_proxy_resolver_lookup_finish().
-func (resolver ProxyResolver) LookupFinish(result AsyncResult) ([]string, error) {
+func (resolver *ProxyResolverIface) LookupFinish(result AsyncResult) ([]string, error) {
 	var err glib.Error
 	ret0 := C.g_proxy_resolver_lookup_finish(resolver.native(), result.native(), (**C.GError)(unsafe.Pointer(&err)))
 	var ret0Slice []*C.gchar
@@ -8893,17 +8966,19 @@ func ProxyResolverGetDefault() ProxyResolver {
 
 // Interface RemoteActionGroup
 type RemoteActionGroup struct {
+	RemoteActionGroupIface
 	Ptr unsafe.Pointer
 }
+type RemoteActionGroupIface struct{}
 
-func (v RemoteActionGroup) native() *C.GRemoteActionGroup {
-	return (*C.GRemoteActionGroup)(v.Ptr)
+func (v *RemoteActionGroupIface) native() *C.GRemoteActionGroup {
+	return (*C.GRemoteActionGroup)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapRemoteActionGroup(p *C.GRemoteActionGroup) RemoteActionGroup {
-	return RemoteActionGroup{unsafe.Pointer(p)}
+	return RemoteActionGroup{Ptr: unsafe.Pointer(p)}
 }
 func WrapRemoteActionGroup(p unsafe.Pointer) RemoteActionGroup {
-	return RemoteActionGroup{p}
+	return RemoteActionGroup{Ptr: p}
 }
 func (v RemoteActionGroup) IsNil() bool {
 	return v.Ptr == nil
@@ -8922,14 +8997,14 @@ func (v RemoteActionGroup) GetGValueGetter() gobject.GValueGetter {
 }
 
 // ActivateActionFull is a wrapper around g_remote_action_group_activate_action_full().
-func (remote RemoteActionGroup) ActivateActionFull(action_name string, parameter glib.Variant, platform_data glib.Variant) {
+func (remote *RemoteActionGroupIface) ActivateActionFull(action_name string, parameter glib.Variant, platform_data glib.Variant) {
 	action_name0 := (*C.gchar)(C.CString(action_name))
 	C.g_remote_action_group_activate_action_full(remote.native(), action_name0, (*C.GVariant)(parameter.Ptr), (*C.GVariant)(platform_data.Ptr))
 	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
 }
 
 // ChangeActionStateFull is a wrapper around g_remote_action_group_change_action_state_full().
-func (remote RemoteActionGroup) ChangeActionStateFull(action_name string, value glib.Variant, platform_data glib.Variant) {
+func (remote *RemoteActionGroupIface) ChangeActionStateFull(action_name string, value glib.Variant, platform_data glib.Variant) {
 	action_name0 := (*C.gchar)(C.CString(action_name))
 	C.g_remote_action_group_change_action_state_full(remote.native(), action_name0, (*C.GVariant)(value.Ptr), (*C.GVariant)(platform_data.Ptr))
 	C.free(unsafe.Pointer(action_name0)) /*ch:<stdlib.h>*/
@@ -8937,17 +9012,19 @@ func (remote RemoteActionGroup) ChangeActionStateFull(action_name string, value 
 
 // Interface TlsBackend
 type TlsBackend struct {
+	TlsBackendIface
 	Ptr unsafe.Pointer
 }
+type TlsBackendIface struct{}
 
-func (v TlsBackend) native() *C.GTlsBackend {
-	return (*C.GTlsBackend)(v.Ptr)
+func (v *TlsBackendIface) native() *C.GTlsBackend {
+	return (*C.GTlsBackend)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapTlsBackend(p *C.GTlsBackend) TlsBackend {
-	return TlsBackend{unsafe.Pointer(p)}
+	return TlsBackend{Ptr: unsafe.Pointer(p)}
 }
 func WrapTlsBackend(p unsafe.Pointer) TlsBackend {
-	return TlsBackend{p}
+	return TlsBackend{Ptr: p}
 }
 func (v TlsBackend) IsNil() bool {
 	return v.Ptr == nil
@@ -8966,55 +9043,55 @@ func (v TlsBackend) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetCertificateType is a wrapper around g_tls_backend_get_certificate_type().
-func (backend TlsBackend) GetCertificateType() /*Gir:GObject*/ gobject.Type {
+func (backend *TlsBackendIface) GetCertificateType() /*Gir:GObject*/ gobject.Type {
 	ret0 := C.g_tls_backend_get_certificate_type(backend.native())
 	return /*Gir:GObject*/ gobject.Type(ret0)
 }
 
 // GetClientConnectionType is a wrapper around g_tls_backend_get_client_connection_type().
-func (backend TlsBackend) GetClientConnectionType() /*Gir:GObject*/ gobject.Type {
+func (backend *TlsBackendIface) GetClientConnectionType() /*Gir:GObject*/ gobject.Type {
 	ret0 := C.g_tls_backend_get_client_connection_type(backend.native())
 	return /*Gir:GObject*/ gobject.Type(ret0)
 }
 
 // GetDefaultDatabase is a wrapper around g_tls_backend_get_default_database().
-func (backend TlsBackend) GetDefaultDatabase() TlsDatabase {
+func (backend *TlsBackendIface) GetDefaultDatabase() TlsDatabase {
 	ret0 := C.g_tls_backend_get_default_database(backend.native())
 	return wrapTlsDatabase(ret0)
 }
 
 // GetDtlsClientConnectionType is a wrapper around g_tls_backend_get_dtls_client_connection_type().
-func (backend TlsBackend) GetDtlsClientConnectionType() /*Gir:GObject*/ gobject.Type {
+func (backend *TlsBackendIface) GetDtlsClientConnectionType() /*Gir:GObject*/ gobject.Type {
 	ret0 := C.g_tls_backend_get_dtls_client_connection_type(backend.native())
 	return /*Gir:GObject*/ gobject.Type(ret0)
 }
 
 // GetDtlsServerConnectionType is a wrapper around g_tls_backend_get_dtls_server_connection_type().
-func (backend TlsBackend) GetDtlsServerConnectionType() /*Gir:GObject*/ gobject.Type {
+func (backend *TlsBackendIface) GetDtlsServerConnectionType() /*Gir:GObject*/ gobject.Type {
 	ret0 := C.g_tls_backend_get_dtls_server_connection_type(backend.native())
 	return /*Gir:GObject*/ gobject.Type(ret0)
 }
 
 // GetFileDatabaseType is a wrapper around g_tls_backend_get_file_database_type().
-func (backend TlsBackend) GetFileDatabaseType() /*Gir:GObject*/ gobject.Type {
+func (backend *TlsBackendIface) GetFileDatabaseType() /*Gir:GObject*/ gobject.Type {
 	ret0 := C.g_tls_backend_get_file_database_type(backend.native())
 	return /*Gir:GObject*/ gobject.Type(ret0)
 }
 
 // GetServerConnectionType is a wrapper around g_tls_backend_get_server_connection_type().
-func (backend TlsBackend) GetServerConnectionType() /*Gir:GObject*/ gobject.Type {
+func (backend *TlsBackendIface) GetServerConnectionType() /*Gir:GObject*/ gobject.Type {
 	ret0 := C.g_tls_backend_get_server_connection_type(backend.native())
 	return /*Gir:GObject*/ gobject.Type(ret0)
 }
 
 // SupportsDtls is a wrapper around g_tls_backend_supports_dtls().
-func (backend TlsBackend) SupportsDtls() bool {
+func (backend *TlsBackendIface) SupportsDtls() bool {
 	ret0 := C.g_tls_backend_supports_dtls(backend.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // SupportsTls is a wrapper around g_tls_backend_supports_tls().
-func (backend TlsBackend) SupportsTls() bool {
+func (backend *TlsBackendIface) SupportsTls() bool {
 	ret0 := C.g_tls_backend_supports_tls(backend.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
@@ -9403,17 +9480,19 @@ func (conn TlsConnection) SetRequireCloseNotify(require_close_notify bool) {
 
 // Interface TlsClientConnection
 type TlsClientConnection struct {
+	TlsClientConnectionIface
 	Ptr unsafe.Pointer
 }
+type TlsClientConnectionIface struct{}
 
-func (v TlsClientConnection) native() *C.GTlsClientConnection {
-	return (*C.GTlsClientConnection)(v.Ptr)
+func (v *TlsClientConnectionIface) native() *C.GTlsClientConnection {
+	return (*C.GTlsClientConnection)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapTlsClientConnection(p *C.GTlsClientConnection) TlsClientConnection {
-	return TlsClientConnection{unsafe.Pointer(p)}
+	return TlsClientConnection{Ptr: unsafe.Pointer(p)}
 }
 func WrapTlsClientConnection(p unsafe.Pointer) TlsClientConnection {
-	return TlsClientConnection{p}
+	return TlsClientConnection{Ptr: p}
 }
 func (v TlsClientConnection) IsNil() bool {
 	return v.Ptr == nil
@@ -9432,56 +9511,58 @@ func (v TlsClientConnection) GetGValueGetter() gobject.GValueGetter {
 }
 
 // CopySessionState is a wrapper around g_tls_client_connection_copy_session_state().
-func (conn TlsClientConnection) CopySessionState(source TlsClientConnection) {
+func (conn *TlsClientConnectionIface) CopySessionState(source TlsClientConnection) {
 	C.g_tls_client_connection_copy_session_state(conn.native(), source.native())
 }
 
 // GetServerIdentity is a wrapper around g_tls_client_connection_get_server_identity().
-func (conn TlsClientConnection) GetServerIdentity() SocketConnectable {
+func (conn *TlsClientConnectionIface) GetServerIdentity() SocketConnectable {
 	ret0 := C.g_tls_client_connection_get_server_identity(conn.native())
 	return wrapSocketConnectable(ret0)
 }
 
 // GetUseSsl3 is a wrapper around g_tls_client_connection_get_use_ssl3().
-func (conn TlsClientConnection) GetUseSsl3() bool {
+func (conn *TlsClientConnectionIface) GetUseSsl3() bool {
 	ret0 := C.g_tls_client_connection_get_use_ssl3(conn.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetValidationFlags is a wrapper around g_tls_client_connection_get_validation_flags().
-func (conn TlsClientConnection) GetValidationFlags() TlsCertificateFlags {
+func (conn *TlsClientConnectionIface) GetValidationFlags() TlsCertificateFlags {
 	ret0 := C.g_tls_client_connection_get_validation_flags(conn.native())
 	return TlsCertificateFlags(ret0)
 }
 
 // SetServerIdentity is a wrapper around g_tls_client_connection_set_server_identity().
-func (conn TlsClientConnection) SetServerIdentity(identity SocketConnectable) {
+func (conn *TlsClientConnectionIface) SetServerIdentity(identity SocketConnectable) {
 	C.g_tls_client_connection_set_server_identity(conn.native(), identity.native())
 }
 
 // SetUseSsl3 is a wrapper around g_tls_client_connection_set_use_ssl3().
-func (conn TlsClientConnection) SetUseSsl3(use_ssl3 bool) {
+func (conn *TlsClientConnectionIface) SetUseSsl3(use_ssl3 bool) {
 	C.g_tls_client_connection_set_use_ssl3(conn.native(), C.gboolean(util.Bool2Int(use_ssl3)) /*go:.util*/)
 }
 
 // SetValidationFlags is a wrapper around g_tls_client_connection_set_validation_flags().
-func (conn TlsClientConnection) SetValidationFlags(flags TlsCertificateFlags) {
+func (conn *TlsClientConnectionIface) SetValidationFlags(flags TlsCertificateFlags) {
 	C.g_tls_client_connection_set_validation_flags(conn.native(), C.GTlsCertificateFlags(flags))
 }
 
 // Interface TlsFileDatabase
 type TlsFileDatabase struct {
+	TlsFileDatabaseIface
 	Ptr unsafe.Pointer
 }
+type TlsFileDatabaseIface struct{}
 
-func (v TlsFileDatabase) native() *C.GTlsFileDatabase {
-	return (*C.GTlsFileDatabase)(v.Ptr)
+func (v *TlsFileDatabaseIface) native() *C.GTlsFileDatabase {
+	return (*C.GTlsFileDatabase)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapTlsFileDatabase(p *C.GTlsFileDatabase) TlsFileDatabase {
-	return TlsFileDatabase{unsafe.Pointer(p)}
+	return TlsFileDatabase{Ptr: unsafe.Pointer(p)}
 }
 func WrapTlsFileDatabase(p unsafe.Pointer) TlsFileDatabase {
-	return TlsFileDatabase{p}
+	return TlsFileDatabase{Ptr: p}
 }
 func (v TlsFileDatabase) IsNil() bool {
 	return v.Ptr == nil
@@ -9501,17 +9582,19 @@ func (v TlsFileDatabase) GetGValueGetter() gobject.GValueGetter {
 
 // Interface TlsServerConnection
 type TlsServerConnection struct {
+	TlsServerConnectionIface
 	Ptr unsafe.Pointer
 }
+type TlsServerConnectionIface struct{}
 
-func (v TlsServerConnection) native() *C.GTlsServerConnection {
-	return (*C.GTlsServerConnection)(v.Ptr)
+func (v *TlsServerConnectionIface) native() *C.GTlsServerConnection {
+	return (*C.GTlsServerConnection)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapTlsServerConnection(p *C.GTlsServerConnection) TlsServerConnection {
-	return TlsServerConnection{unsafe.Pointer(p)}
+	return TlsServerConnection{Ptr: unsafe.Pointer(p)}
 }
 func WrapTlsServerConnection(p unsafe.Pointer) TlsServerConnection {
-	return TlsServerConnection{p}
+	return TlsServerConnection{Ptr: p}
 }
 func (v TlsServerConnection) IsNil() bool {
 	return v.Ptr == nil
@@ -9684,6 +9767,7 @@ func (cmdline ApplicationCommandLine) SetExitStatus(exit_status int) {
 
 // Object BufferedInputStream
 type BufferedInputStream struct {
+	SeekableIface
 	FilterInputStream
 }
 
@@ -9836,6 +9920,7 @@ func (stream FilterInputStream) SetCloseBaseStream(close_base bool) {
 
 // Object BufferedOutputStream
 type BufferedOutputStream struct {
+	SeekableIface
 	FilterOutputStream
 }
 
@@ -9954,6 +10039,8 @@ func (stream FilterOutputStream) SetCloseBaseStream(close_base bool) {
 
 // Object BytesIcon
 type BytesIcon struct {
+	IconIface
+	LoadableIconIface
 	gobject.Object
 }
 
@@ -9998,6 +10085,8 @@ func (icon BytesIcon) GetBytes() glib.Bytes {
 
 // Object CharsetConverter
 type CharsetConverter struct {
+	ConverterIface
+	InitableIface
 	gobject.Object
 }
 
@@ -10068,6 +10157,7 @@ func (converter CharsetConverter) SetUseFallback(use_fallback bool) {
 
 // Object ConverterInputStream
 type ConverterInputStream struct {
+	PollableInputStreamIface
 	FilterInputStream
 }
 
@@ -10115,6 +10205,7 @@ func (converter_stream ConverterInputStream) GetConverter() Converter {
 
 // Object ConverterOutputStream
 type ConverterOutputStream struct {
+	PollableOutputStreamIface
 	FilterOutputStream
 }
 
@@ -10230,6 +10321,8 @@ func (credentials Credentials) ToString() string {
 
 // Object DBusActionGroup
 type DBusActionGroup struct {
+	ActionGroupIface
+	RemoteActionGroupIface
 	gobject.Object
 }
 
@@ -10330,6 +10423,7 @@ func (observer DBusAuthObserver) AuthorizeAuthenticatedPeer(stream IOStream, cre
 
 // Object DBusInterfaceSkeleton
 type DBusInterfaceSkeleton struct {
+	DBusInterfaceIface
 	gobject.Object
 }
 
@@ -11323,6 +11417,9 @@ func (invocation DBusMethodInvocation) TakeError(error glib.Error) {
 
 // Object DBusObjectManagerClient
 type DBusObjectManagerClient struct {
+	AsyncInitableIface
+	DBusObjectManagerIface
+	InitableIface
 	gobject.Object
 }
 
@@ -11391,6 +11488,7 @@ func (manager DBusObjectManagerClient) GetNameOwner() string {
 
 // Object DBusObjectManagerServer
 type DBusObjectManagerServer struct {
+	DBusObjectManagerIface
 	gobject.Object
 }
 
@@ -11469,6 +11567,7 @@ func (manager DBusObjectManagerServer) Unexport(object_path string) bool {
 
 // Object DBusObjectSkeleton
 type DBusObjectSkeleton struct {
+	DBusObjectIface
 	gobject.Object
 }
 
@@ -11541,6 +11640,7 @@ func (object DBusObjectSkeleton) SetObjectPath(object_path string) {
 
 // Object DBusObjectProxy
 type DBusObjectProxy struct {
+	DBusObjectIface
 	gobject.Object
 }
 
@@ -11590,6 +11690,9 @@ func (proxy DBusObjectProxy) GetConnection() DBusConnection {
 
 // Object DBusProxy
 type DBusProxy struct {
+	AsyncInitableIface
+	DBusInterfaceIface
+	InitableIface
 	gobject.Object
 }
 
@@ -11871,6 +11974,7 @@ func DBusProxyNewForBus(bus_type BusType, flags DBusProxyFlags, info DBusInterfa
 
 // Object DBusServer
 type DBusServer struct {
+	InitableIface
 	gobject.Object
 }
 
@@ -11957,6 +12061,7 @@ func (server DBusServer) Stop() {
 
 // Object DataInputStream
 type DataInputStream struct {
+	SeekableIface
 	BufferedInputStream
 }
 
@@ -12207,6 +12312,7 @@ func (stream DataInputStream) SetNewlineType(type_ DataStreamNewlineType) {
 
 // Object DataOutputStream
 type DataOutputStream struct {
+	SeekableIface
 	FilterOutputStream
 }
 
@@ -12349,6 +12455,7 @@ func (stream DataOutputStream) SetByteOrder(order DataStreamByteOrder) {
 
 // Object Emblem
 type Emblem struct {
+	IconIface
 	gobject.Object
 }
 
@@ -12408,6 +12515,7 @@ func (emblem Emblem) GetOrigin() EmblemOrigin {
 
 // Object EmblemedIcon
 type EmblemedIcon struct {
+	IconIface
 	gobject.Object
 }
 
@@ -12466,6 +12574,8 @@ func (emblemed EmblemedIcon) GetIcon() Icon {
 
 // Object FileIcon
 type FileIcon struct {
+	IconIface
+	LoadableIconIface
 	gobject.Object
 }
 
@@ -12581,6 +12691,7 @@ func (completer FilenameCompleter) SetDirsOnly(dirs_only bool) {
 
 // Object IOModule
 type IOModule struct {
+	gobject.TypePluginIface
 	gobject.TypeModule
 }
 
@@ -12611,7 +12722,7 @@ func (v IOModule) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v IOModule) TypePlugin() gobject.TypePlugin {
-	return gobject.WrapTypePlugin(v.Ptr) /*gir:GObject*/
+	return gobject.WrapTypePlugin(v.Ptr)
 }
 
 // IOModuleNew is a wrapper around g_io_module_new().
@@ -12624,6 +12735,7 @@ func IOModuleNew(filename string) IOModule {
 
 // Object InetAddressMask
 type InetAddressMask struct {
+	InitableIface
 	gobject.Object
 }
 
@@ -12721,6 +12833,7 @@ func (mask InetAddressMask) ToString() string {
 
 // Object ListStore
 type ListStore struct {
+	ListModelIface
 	gobject.Object
 }
 
@@ -12795,6 +12908,8 @@ func (store ListStore) Splice(position uint, n_removals uint, additions []gobjec
 
 // Object MemoryInputStream
 type MemoryInputStream struct {
+	PollableInputStreamIface
+	SeekableIface
 	InputStream
 }
 
@@ -12850,6 +12965,8 @@ func (stream MemoryInputStream) AddBytes(bytes glib.Bytes) {
 
 // Object MemoryOutputStream
 type MemoryOutputStream struct {
+	PollableOutputStreamIface
+	SeekableIface
 	OutputStream
 }
 
@@ -13223,6 +13340,7 @@ func (v NativeVolumeMonitor) GetGValueGetter() gobject.GValueGetter {
 
 // Object NetworkAddress
 type NetworkAddress struct {
+	SocketConnectableIface
 	gobject.Object
 }
 
@@ -13353,6 +13471,7 @@ func VolumeMonitorGet() VolumeMonitor {
 
 // Object NetworkService
 type NetworkService struct {
+	SocketConnectableIface
 	gobject.Object
 }
 
@@ -13534,6 +13653,7 @@ func (permission Permission) ReleaseFinish(result AsyncResult) (bool, error) {
 
 // Object PropertyAction
 type PropertyAction struct {
+	ActionIface
 	gobject.Object
 }
 
@@ -13780,6 +13900,7 @@ func ResolverGetDefault() Resolver {
 
 // Object SimpleAction
 type SimpleAction struct {
+	ActionIface
 	gobject.Object
 }
 
@@ -13846,6 +13967,7 @@ func (simple SimpleAction) SetStateHint(state_hint glib.Variant) {
 
 // Object SimpleAsyncResult
 type SimpleAsyncResult struct {
+	AsyncResultIface
 	gobject.Object
 }
 
@@ -13957,6 +14079,7 @@ func SimplePermissionNew(allowed bool) Permission {
 
 // Object SimpleProxyResolver
 type SimpleProxyResolver struct {
+	ProxyResolverIface
 	gobject.Object
 }
 
@@ -14008,6 +14131,8 @@ func (resolver SimpleProxyResolver) SetUriProxy(uri_scheme string, proxy string)
 
 // Object Socket
 type Socket struct {
+	DatagramBasedIface
+	InitableIface
 	gobject.Object
 }
 
@@ -15157,6 +15282,7 @@ func (service SocketService) Stop() {
 
 // Object Subprocess
 type Subprocess struct {
+	InitableIface
 	gobject.Object
 }
 
@@ -15576,6 +15702,7 @@ func (self SubprocessLauncher) Unsetenv(variable string) {
 
 // Object Task
 type Task struct {
+	AsyncResultIface
 	gobject.Object
 }
 
@@ -15930,6 +16057,7 @@ func TestDBusUnset() {
 
 // Object ThemedIcon
 type ThemedIcon struct {
+	IconIface
 	gobject.Object
 }
 
@@ -16272,6 +16400,8 @@ func (message UnixFDMessage) StealFds() []int {
 
 // Object UnixInputStream
 type UnixInputStream struct {
+	FileDescriptorBasedIface
+	PollableInputStreamIface
 	InputStream
 }
 
@@ -16371,6 +16501,8 @@ func UnixMountMonitorGet() UnixMountMonitor {
 
 // Object UnixOutputStream
 type UnixOutputStream struct {
+	FileDescriptorBasedIface
+	PollableOutputStreamIface
 	OutputStream
 }
 
@@ -16432,6 +16564,7 @@ func (stream UnixOutputStream) SetCloseFd(close_fd bool) {
 
 // Object UnixSocketAddress
 type UnixSocketAddress struct {
+	SocketConnectableIface
 	SocketAddress
 }
 
@@ -16610,6 +16743,7 @@ func VfsGetLocal() Vfs {
 
 // Object ZlibCompressor
 type ZlibCompressor struct {
+	ConverterIface
 	gobject.Object
 }
 
@@ -16662,6 +16796,7 @@ func (compressor ZlibCompressor) SetFileInfo(file_info FileInfo) {
 
 // Object ZlibDecompressor
 type ZlibDecompressor struct {
+	ConverterIface
 	gobject.Object
 }
 

@@ -18,10 +18,10 @@ func (v Variant) native() *C.GVariant {
 	return (*C.GVariant)(v.Ptr)
 }
 func wrapVariant(p *C.GVariant) Variant {
-	return Variant{unsafe.Pointer(p)}
+	return Variant{Ptr: unsafe.Pointer(p)}
 }
 func WrapVariant(p unsafe.Pointer) Variant {
-	return Variant{p}
+	return Variant{Ptr: p}
 }
 func (v Variant) IsNil() bool {
 	return v.Ptr == nil
@@ -651,10 +651,10 @@ func (v Bytes) native() *C.GBytes {
 	return (*C.GBytes)(v.Ptr)
 }
 func wrapBytes(p *C.GBytes) Bytes {
-	return Bytes{unsafe.Pointer(p)}
+	return Bytes{Ptr: unsafe.Pointer(p)}
 }
 func WrapBytes(p unsafe.Pointer) Bytes {
-	return Bytes{p}
+	return Bytes{Ptr: p}
 }
 func (v Bytes) IsNil() bool {
 	return v.Ptr == nil
@@ -713,10 +713,10 @@ func (v VariantType) native() *C.GVariantType {
 	return (*C.GVariantType)(v.Ptr)
 }
 func wrapVariantType(p *C.GVariantType) VariantType {
-	return VariantType{unsafe.Pointer(p)}
+	return VariantType{Ptr: unsafe.Pointer(p)}
 }
 func WrapVariantType(p unsafe.Pointer) VariantType {
-	return VariantType{p}
+	return VariantType{Ptr: p}
 }
 func (v VariantType) IsNil() bool {
 	return v.Ptr == nil
@@ -937,10 +937,10 @@ func (v Error) native() *C.GError {
 	return (*C.GError)(v.Ptr)
 }
 func wrapError(p *C.GError) Error {
-	return Error{unsafe.Pointer(p)}
+	return Error{Ptr: unsafe.Pointer(p)}
 }
 func WrapError(p unsafe.Pointer) Error {
-	return Error{p}
+	return Error{Ptr: p}
 }
 func (v Error) IsNil() bool {
 	return v.Ptr == nil
@@ -963,10 +963,10 @@ func (v MainLoop) native() *C.GMainLoop {
 	return (*C.GMainLoop)(v.Ptr)
 }
 func wrapMainLoop(p *C.GMainLoop) MainLoop {
-	return MainLoop{unsafe.Pointer(p)}
+	return MainLoop{Ptr: unsafe.Pointer(p)}
 }
 func WrapMainLoop(p unsafe.Pointer) MainLoop {
-	return MainLoop{p}
+	return MainLoop{Ptr: p}
 }
 func (v MainLoop) IsNil() bool {
 	return v.Ptr == nil
@@ -1023,10 +1023,10 @@ func (v MainContext) native() *C.GMainContext {
 	return (*C.GMainContext)(v.Ptr)
 }
 func wrapMainContext(p *C.GMainContext) MainContext {
-	return MainContext{unsafe.Pointer(p)}
+	return MainContext{Ptr: unsafe.Pointer(p)}
 }
 func WrapMainContext(p unsafe.Pointer) MainContext {
-	return MainContext{p}
+	return MainContext{Ptr: p}
 }
 func (v MainContext) IsNil() bool {
 	return v.Ptr == nil
@@ -1150,10 +1150,10 @@ func (v Source) native() *C.GSource {
 	return (*C.GSource)(v.Ptr)
 }
 func wrapSource(p *C.GSource) Source {
-	return Source{unsafe.Pointer(p)}
+	return Source{Ptr: unsafe.Pointer(p)}
 }
 func WrapSource(p unsafe.Pointer) Source {
-	return Source{p}
+	return Source{Ptr: p}
 }
 func (v Source) IsNil() bool {
 	return v.Ptr == nil
@@ -1325,10 +1325,10 @@ func (v VariantIter) native() *C.GVariantIter {
 	return (*C.GVariantIter)(v.Ptr)
 }
 func wrapVariantIter(p *C.GVariantIter) VariantIter {
-	return VariantIter{unsafe.Pointer(p)}
+	return VariantIter{Ptr: unsafe.Pointer(p)}
 }
 func WrapVariantIter(p unsafe.Pointer) VariantIter {
-	return VariantIter{p}
+	return VariantIter{Ptr: p}
 }
 func (v VariantIter) IsNil() bool {
 	return v.Ptr == nil
@@ -1375,10 +1375,10 @@ func (v PollFD) native() *C.GPollFD {
 	return (*C.GPollFD)(v.Ptr)
 }
 func wrapPollFD(p *C.GPollFD) PollFD {
-	return PollFD{unsafe.Pointer(p)}
+	return PollFD{Ptr: unsafe.Pointer(p)}
 }
 func WrapPollFD(p unsafe.Pointer) PollFD {
-	return PollFD{p}
+	return PollFD{Ptr: p}
 }
 func (v PollFD) IsNil() bool {
 	return v.Ptr == nil
@@ -1396,10 +1396,10 @@ func (v TimeVal) native() *C.GTimeVal {
 	return (*C.GTimeVal)(v.Ptr)
 }
 func wrapTimeVal(p *C.GTimeVal) TimeVal {
-	return TimeVal{unsafe.Pointer(p)}
+	return TimeVal{Ptr: unsafe.Pointer(p)}
 }
 func WrapTimeVal(p unsafe.Pointer) TimeVal {
-	return TimeVal{p}
+	return TimeVal{Ptr: p}
 }
 func (v TimeVal) IsNil() bool {
 	return v.Ptr == nil
@@ -1439,10 +1439,10 @@ func (v KeyFile) native() *C.GKeyFile {
 	return (*C.GKeyFile)(v.Ptr)
 }
 func wrapKeyFile(p *C.GKeyFile) KeyFile {
-	return KeyFile{unsafe.Pointer(p)}
+	return KeyFile{Ptr: unsafe.Pointer(p)}
 }
 func WrapKeyFile(p unsafe.Pointer) KeyFile {
-	return KeyFile{p}
+	return KeyFile{Ptr: p}
 }
 func (v KeyFile) IsNil() bool {
 	return v.Ptr == nil
@@ -2079,10 +2079,10 @@ func (v TimeZone) native() *C.GTimeZone {
 	return (*C.GTimeZone)(v.Ptr)
 }
 func wrapTimeZone(p *C.GTimeZone) TimeZone {
-	return TimeZone{unsafe.Pointer(p)}
+	return TimeZone{Ptr: unsafe.Pointer(p)}
 }
 func WrapTimeZone(p unsafe.Pointer) TimeZone {
-	return TimeZone{p}
+	return TimeZone{Ptr: p}
 }
 func (v TimeZone) IsNil() bool {
 	return v.Ptr == nil
@@ -2156,10 +2156,10 @@ func (v DateTime) native() *C.GDateTime {
 	return (*C.GDateTime)(v.Ptr)
 }
 func wrapDateTime(p *C.GDateTime) DateTime {
-	return DateTime{unsafe.Pointer(p)}
+	return DateTime{Ptr: unsafe.Pointer(p)}
 }
 func WrapDateTime(p unsafe.Pointer) DateTime {
-	return DateTime{p}
+	return DateTime{Ptr: p}
 }
 func (v DateTime) IsNil() bool {
 	return v.Ptr == nil
@@ -2466,10 +2466,10 @@ func (v OptionGroup) native() *C.GOptionGroup {
 	return (*C.GOptionGroup)(v.Ptr)
 }
 func wrapOptionGroup(p *C.GOptionGroup) OptionGroup {
-	return OptionGroup{unsafe.Pointer(p)}
+	return OptionGroup{Ptr: unsafe.Pointer(p)}
 }
 func WrapOptionGroup(p unsafe.Pointer) OptionGroup {
-	return OptionGroup{p}
+	return OptionGroup{Ptr: p}
 }
 func (v OptionGroup) IsNil() bool {
 	return v.Ptr == nil
@@ -2510,10 +2510,10 @@ func (v OptionEntry) native() *C.GOptionEntry {
 	return (*C.GOptionEntry)(v.Ptr)
 }
 func wrapOptionEntry(p *C.GOptionEntry) OptionEntry {
-	return OptionEntry{unsafe.Pointer(p)}
+	return OptionEntry{Ptr: unsafe.Pointer(p)}
 }
 func WrapOptionEntry(p unsafe.Pointer) OptionEntry {
-	return OptionEntry{p}
+	return OptionEntry{Ptr: p}
 }
 func (v OptionEntry) IsNil() bool {
 	return v.Ptr == nil
@@ -2531,10 +2531,10 @@ func (v VariantBuilder) native() *C.GVariantBuilder {
 	return (*C.GVariantBuilder)(v.Ptr)
 }
 func wrapVariantBuilder(p *C.GVariantBuilder) VariantBuilder {
-	return VariantBuilder{unsafe.Pointer(p)}
+	return VariantBuilder{Ptr: unsafe.Pointer(p)}
 }
 func WrapVariantBuilder(p unsafe.Pointer) VariantBuilder {
-	return VariantBuilder{p}
+	return VariantBuilder{Ptr: p}
 }
 func (v VariantBuilder) IsNil() bool {
 	return v.Ptr == nil

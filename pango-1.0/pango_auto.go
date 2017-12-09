@@ -19,10 +19,10 @@ func (v GlyphItem) native() *C.PangoGlyphItem {
 	return (*C.PangoGlyphItem)(v.Ptr)
 }
 func wrapGlyphItem(p *C.PangoGlyphItem) GlyphItem {
-	return GlyphItem{unsafe.Pointer(p)}
+	return GlyphItem{Ptr: unsafe.Pointer(p)}
 }
 func WrapGlyphItem(p unsafe.Pointer) GlyphItem {
-	return GlyphItem{p}
+	return GlyphItem{Ptr: p}
 }
 func (v GlyphItem) IsNil() bool {
 	return v.Ptr == nil
@@ -74,10 +74,10 @@ func (v Analysis) native() *C.PangoAnalysis {
 	return (*C.PangoAnalysis)(v.Ptr)
 }
 func wrapAnalysis(p *C.PangoAnalysis) Analysis {
-	return Analysis{unsafe.Pointer(p)}
+	return Analysis{Ptr: unsafe.Pointer(p)}
 }
 func WrapAnalysis(p unsafe.Pointer) Analysis {
-	return Analysis{p}
+	return Analysis{Ptr: p}
 }
 func (v Analysis) IsNil() bool {
 	return v.Ptr == nil
@@ -95,10 +95,10 @@ func (v AttrClass) native() *C.PangoAttrClass {
 	return (*C.PangoAttrClass)(v.Ptr)
 }
 func wrapAttrClass(p *C.PangoAttrClass) AttrClass {
-	return AttrClass{unsafe.Pointer(p)}
+	return AttrClass{Ptr: unsafe.Pointer(p)}
 }
 func WrapAttrClass(p unsafe.Pointer) AttrClass {
-	return AttrClass{p}
+	return AttrClass{Ptr: p}
 }
 func (v AttrClass) IsNil() bool {
 	return v.Ptr == nil
@@ -116,10 +116,10 @@ func (v AttrColor) native() *C.PangoAttrColor {
 	return (*C.PangoAttrColor)(v.Ptr)
 }
 func wrapAttrColor(p *C.PangoAttrColor) AttrColor {
-	return AttrColor{unsafe.Pointer(p)}
+	return AttrColor{Ptr: unsafe.Pointer(p)}
 }
 func WrapAttrColor(p unsafe.Pointer) AttrColor {
-	return AttrColor{p}
+	return AttrColor{Ptr: p}
 }
 func (v AttrColor) IsNil() bool {
 	return v.Ptr == nil
@@ -137,10 +137,10 @@ func (v AttrFloat) native() *C.PangoAttrFloat {
 	return (*C.PangoAttrFloat)(v.Ptr)
 }
 func wrapAttrFloat(p *C.PangoAttrFloat) AttrFloat {
-	return AttrFloat{unsafe.Pointer(p)}
+	return AttrFloat{Ptr: unsafe.Pointer(p)}
 }
 func WrapAttrFloat(p unsafe.Pointer) AttrFloat {
-	return AttrFloat{p}
+	return AttrFloat{Ptr: p}
 }
 func (v AttrFloat) IsNil() bool {
 	return v.Ptr == nil
@@ -158,10 +158,10 @@ func (v AttrInt) native() *C.PangoAttrInt {
 	return (*C.PangoAttrInt)(v.Ptr)
 }
 func wrapAttrInt(p *C.PangoAttrInt) AttrInt {
-	return AttrInt{unsafe.Pointer(p)}
+	return AttrInt{Ptr: unsafe.Pointer(p)}
 }
 func WrapAttrInt(p unsafe.Pointer) AttrInt {
-	return AttrInt{p}
+	return AttrInt{Ptr: p}
 }
 func (v AttrInt) IsNil() bool {
 	return v.Ptr == nil
@@ -179,10 +179,10 @@ func (v AttrList) native() *C.PangoAttrList {
 	return (*C.PangoAttrList)(v.Ptr)
 }
 func wrapAttrList(p *C.PangoAttrList) AttrList {
-	return AttrList{unsafe.Pointer(p)}
+	return AttrList{Ptr: unsafe.Pointer(p)}
 }
 func WrapAttrList(p unsafe.Pointer) AttrList {
-	return AttrList{p}
+	return AttrList{Ptr: p}
 }
 func (v AttrList) IsNil() bool {
 	return v.Ptr == nil
@@ -249,10 +249,10 @@ func (v AttrString) native() *C.PangoAttrString {
 	return (*C.PangoAttrString)(v.Ptr)
 }
 func wrapAttrString(p *C.PangoAttrString) AttrString {
-	return AttrString{unsafe.Pointer(p)}
+	return AttrString{Ptr: unsafe.Pointer(p)}
 }
 func WrapAttrString(p unsafe.Pointer) AttrString {
-	return AttrString{p}
+	return AttrString{Ptr: p}
 }
 func (v AttrString) IsNil() bool {
 	return v.Ptr == nil
@@ -270,10 +270,10 @@ func (v Attribute) native() *C.PangoAttribute {
 	return (*C.PangoAttribute)(v.Ptr)
 }
 func wrapAttribute(p *C.PangoAttribute) Attribute {
-	return Attribute{unsafe.Pointer(p)}
+	return Attribute{Ptr: unsafe.Pointer(p)}
 }
 func WrapAttribute(p unsafe.Pointer) Attribute {
-	return Attribute{p}
+	return Attribute{Ptr: p}
 }
 func (v Attribute) IsNil() bool {
 	return v.Ptr == nil
@@ -313,10 +313,10 @@ func (v Color) native() *C.PangoColor {
 	return (*C.PangoColor)(v.Ptr)
 }
 func wrapColor(p *C.PangoColor) Color {
-	return Color{unsafe.Pointer(p)}
+	return Color{Ptr: unsafe.Pointer(p)}
 }
 func WrapColor(p unsafe.Pointer) Color {
-	return Color{p}
+	return Color{Ptr: p}
 }
 func (v Color) IsNil() bool {
 	return v.Ptr == nil
@@ -361,10 +361,10 @@ func (v GlyphGeometry) native() *C.PangoGlyphGeometry {
 	return (*C.PangoGlyphGeometry)(v.Ptr)
 }
 func wrapGlyphGeometry(p *C.PangoGlyphGeometry) GlyphGeometry {
-	return GlyphGeometry{unsafe.Pointer(p)}
+	return GlyphGeometry{Ptr: unsafe.Pointer(p)}
 }
 func WrapGlyphGeometry(p unsafe.Pointer) GlyphGeometry {
-	return GlyphGeometry{p}
+	return GlyphGeometry{Ptr: p}
 }
 func (v GlyphGeometry) IsNil() bool {
 	return v.Ptr == nil
@@ -382,10 +382,10 @@ func (v GlyphInfo) native() *C.PangoGlyphInfo {
 	return (*C.PangoGlyphInfo)(v.Ptr)
 }
 func wrapGlyphInfo(p *C.PangoGlyphInfo) GlyphInfo {
-	return GlyphInfo{unsafe.Pointer(p)}
+	return GlyphInfo{Ptr: unsafe.Pointer(p)}
 }
 func WrapGlyphInfo(p unsafe.Pointer) GlyphInfo {
-	return GlyphInfo{p}
+	return GlyphInfo{Ptr: p}
 }
 func (v GlyphInfo) IsNil() bool {
 	return v.Ptr == nil
@@ -403,10 +403,10 @@ func (v GlyphVisAttr) native() *C.PangoGlyphVisAttr {
 	return (*C.PangoGlyphVisAttr)(v.Ptr)
 }
 func wrapGlyphVisAttr(p *C.PangoGlyphVisAttr) GlyphVisAttr {
-	return GlyphVisAttr{unsafe.Pointer(p)}
+	return GlyphVisAttr{Ptr: unsafe.Pointer(p)}
 }
 func WrapGlyphVisAttr(p unsafe.Pointer) GlyphVisAttr {
-	return GlyphVisAttr{p}
+	return GlyphVisAttr{Ptr: p}
 }
 func (v GlyphVisAttr) IsNil() bool {
 	return v.Ptr == nil
@@ -424,10 +424,10 @@ func (v LogAttr) native() *C.PangoLogAttr {
 	return (*C.PangoLogAttr)(v.Ptr)
 }
 func wrapLogAttr(p *C.PangoLogAttr) LogAttr {
-	return LogAttr{unsafe.Pointer(p)}
+	return LogAttr{Ptr: unsafe.Pointer(p)}
 }
 func WrapLogAttr(p unsafe.Pointer) LogAttr {
-	return LogAttr{p}
+	return LogAttr{Ptr: p}
 }
 func (v LogAttr) IsNil() bool {
 	return v.Ptr == nil
@@ -445,10 +445,10 @@ func (v Rectangle) native() *C.PangoRectangle {
 	return (*C.PangoRectangle)(v.Ptr)
 }
 func wrapRectangle(p *C.PangoRectangle) Rectangle {
-	return Rectangle{unsafe.Pointer(p)}
+	return Rectangle{Ptr: unsafe.Pointer(p)}
 }
 func WrapRectangle(p unsafe.Pointer) Rectangle {
-	return Rectangle{p}
+	return Rectangle{Ptr: p}
 }
 func (v Rectangle) IsNil() bool {
 	return v.Ptr == nil
@@ -466,10 +466,10 @@ func (v AttrFontDesc) native() *C.PangoAttrFontDesc {
 	return (*C.PangoAttrFontDesc)(v.Ptr)
 }
 func wrapAttrFontDesc(p *C.PangoAttrFontDesc) AttrFontDesc {
-	return AttrFontDesc{unsafe.Pointer(p)}
+	return AttrFontDesc{Ptr: unsafe.Pointer(p)}
 }
 func WrapAttrFontDesc(p unsafe.Pointer) AttrFontDesc {
-	return AttrFontDesc{p}
+	return AttrFontDesc{Ptr: p}
 }
 func (v AttrFontDesc) IsNil() bool {
 	return v.Ptr == nil
@@ -493,10 +493,10 @@ func (v FontDescription) native() *C.PangoFontDescription {
 	return (*C.PangoFontDescription)(v.Ptr)
 }
 func wrapFontDescription(p *C.PangoFontDescription) FontDescription {
-	return FontDescription{unsafe.Pointer(p)}
+	return FontDescription{Ptr: unsafe.Pointer(p)}
 }
 func WrapFontDescription(p unsafe.Pointer) FontDescription {
-	return FontDescription{p}
+	return FontDescription{Ptr: p}
 }
 func (v FontDescription) IsNil() bool {
 	return v.Ptr == nil
@@ -698,10 +698,10 @@ func (v AttrFontFeatures) native() *C.PangoAttrFontFeatures {
 	return (*C.PangoAttrFontFeatures)(v.Ptr)
 }
 func wrapAttrFontFeatures(p *C.PangoAttrFontFeatures) AttrFontFeatures {
-	return AttrFontFeatures{unsafe.Pointer(p)}
+	return AttrFontFeatures{Ptr: unsafe.Pointer(p)}
 }
 func WrapAttrFontFeatures(p unsafe.Pointer) AttrFontFeatures {
-	return AttrFontFeatures{p}
+	return AttrFontFeatures{Ptr: p}
 }
 func (v AttrFontFeatures) IsNil() bool {
 	return v.Ptr == nil
@@ -727,10 +727,10 @@ func (v AttrLanguage) native() *C.PangoAttrLanguage {
 	return (*C.PangoAttrLanguage)(v.Ptr)
 }
 func wrapAttrLanguage(p *C.PangoAttrLanguage) AttrLanguage {
-	return AttrLanguage{unsafe.Pointer(p)}
+	return AttrLanguage{Ptr: unsafe.Pointer(p)}
 }
 func WrapAttrLanguage(p unsafe.Pointer) AttrLanguage {
-	return AttrLanguage{p}
+	return AttrLanguage{Ptr: p}
 }
 func (v AttrLanguage) IsNil() bool {
 	return v.Ptr == nil
@@ -754,10 +754,10 @@ func (v Language) native() *C.PangoLanguage {
 	return (*C.PangoLanguage)(v.Ptr)
 }
 func wrapLanguage(p *C.PangoLanguage) Language {
-	return Language{unsafe.Pointer(p)}
+	return Language{Ptr: unsafe.Pointer(p)}
 }
 func WrapLanguage(p unsafe.Pointer) Language {
-	return Language{p}
+	return Language{Ptr: p}
 }
 func (v Language) IsNil() bool {
 	return v.Ptr == nil
@@ -830,10 +830,10 @@ func (v AttrIterator) native() *C.PangoAttrIterator {
 	return (*C.PangoAttrIterator)(v.Ptr)
 }
 func wrapAttrIterator(p *C.PangoAttrIterator) AttrIterator {
-	return AttrIterator{unsafe.Pointer(p)}
+	return AttrIterator{Ptr: unsafe.Pointer(p)}
 }
 func WrapAttrIterator(p unsafe.Pointer) AttrIterator {
-	return AttrIterator{p}
+	return AttrIterator{Ptr: p}
 }
 func (v AttrIterator) IsNil() bool {
 	return v.Ptr == nil
@@ -882,10 +882,10 @@ func (v AttrShape) native() *C.PangoAttrShape {
 	return (*C.PangoAttrShape)(v.Ptr)
 }
 func wrapAttrShape(p *C.PangoAttrShape) AttrShape {
-	return AttrShape{unsafe.Pointer(p)}
+	return AttrShape{Ptr: unsafe.Pointer(p)}
 }
 func WrapAttrShape(p unsafe.Pointer) AttrShape {
-	return AttrShape{p}
+	return AttrShape{Ptr: p}
 }
 func (v AttrShape) IsNil() bool {
 	return v.Ptr == nil
@@ -909,10 +909,10 @@ func (v AttrSize) native() *C.PangoAttrSize {
 	return (*C.PangoAttrSize)(v.Ptr)
 }
 func wrapAttrSize(p *C.PangoAttrSize) AttrSize {
-	return AttrSize{unsafe.Pointer(p)}
+	return AttrSize{Ptr: unsafe.Pointer(p)}
 }
 func WrapAttrSize(p unsafe.Pointer) AttrSize {
-	return AttrSize{p}
+	return AttrSize{Ptr: p}
 }
 func (v AttrSize) IsNil() bool {
 	return v.Ptr == nil
@@ -942,10 +942,10 @@ func (v FontMetrics) native() *C.PangoFontMetrics {
 	return (*C.PangoFontMetrics)(v.Ptr)
 }
 func wrapFontMetrics(p *C.PangoFontMetrics) FontMetrics {
-	return FontMetrics{unsafe.Pointer(p)}
+	return FontMetrics{Ptr: unsafe.Pointer(p)}
 }
 func WrapFontMetrics(p unsafe.Pointer) FontMetrics {
-	return FontMetrics{p}
+	return FontMetrics{Ptr: p}
 }
 func (v FontMetrics) IsNil() bool {
 	return v.Ptr == nil
@@ -1022,10 +1022,10 @@ func (v GlyphItemIter) native() *C.PangoGlyphItemIter {
 	return (*C.PangoGlyphItemIter)(v.Ptr)
 }
 func wrapGlyphItemIter(p *C.PangoGlyphItemIter) GlyphItemIter {
-	return GlyphItemIter{unsafe.Pointer(p)}
+	return GlyphItemIter{Ptr: unsafe.Pointer(p)}
 }
 func WrapGlyphItemIter(p unsafe.Pointer) GlyphItemIter {
-	return GlyphItemIter{p}
+	return GlyphItemIter{Ptr: p}
 }
 func (v GlyphItemIter) IsNil() bool {
 	return v.Ptr == nil
@@ -1082,10 +1082,10 @@ func (v GlyphString) native() *C.PangoGlyphString {
 	return (*C.PangoGlyphString)(v.Ptr)
 }
 func wrapGlyphString(p *C.PangoGlyphString) GlyphString {
-	return GlyphString{unsafe.Pointer(p)}
+	return GlyphString{Ptr: unsafe.Pointer(p)}
 }
 func WrapGlyphString(p unsafe.Pointer) GlyphString {
-	return GlyphString{p}
+	return GlyphString{Ptr: p}
 }
 func (v GlyphString) IsNil() bool {
 	return v.Ptr == nil
@@ -1181,10 +1181,10 @@ func (v Item) native() *C.PangoItem {
 	return (*C.PangoItem)(v.Ptr)
 }
 func wrapItem(p *C.PangoItem) Item {
-	return Item{unsafe.Pointer(p)}
+	return Item{Ptr: unsafe.Pointer(p)}
 }
 func WrapItem(p unsafe.Pointer) Item {
-	return Item{p}
+	return Item{Ptr: p}
 }
 func (v Item) IsNil() bool {
 	return v.Ptr == nil
@@ -1225,10 +1225,10 @@ func (v LayoutIter) native() *C.PangoLayoutIter {
 	return (*C.PangoLayoutIter)(v.Ptr)
 }
 func wrapLayoutIter(p *C.PangoLayoutIter) LayoutIter {
-	return LayoutIter{unsafe.Pointer(p)}
+	return LayoutIter{Ptr: unsafe.Pointer(p)}
 }
 func WrapLayoutIter(p unsafe.Pointer) LayoutIter {
-	return LayoutIter{p}
+	return LayoutIter{Ptr: p}
 }
 func (v LayoutIter) IsNil() bool {
 	return v.Ptr == nil
@@ -2021,10 +2021,10 @@ func (v Coverage) native() *C.PangoCoverage {
 	return (*C.PangoCoverage)(v.Ptr)
 }
 func wrapCoverage(p *C.PangoCoverage) Coverage {
-	return Coverage{unsafe.Pointer(p)}
+	return Coverage{Ptr: unsafe.Pointer(p)}
 }
 func WrapCoverage(p unsafe.Pointer) Coverage {
-	return Coverage{p}
+	return Coverage{Ptr: p}
 }
 func (v Coverage) IsNil() bool {
 	return v.Ptr == nil
@@ -2139,10 +2139,10 @@ func (v Matrix) native() *C.PangoMatrix {
 	return (*C.PangoMatrix)(v.Ptr)
 }
 func wrapMatrix(p *C.PangoMatrix) Matrix {
-	return Matrix{unsafe.Pointer(p)}
+	return Matrix{Ptr: unsafe.Pointer(p)}
 }
 func WrapMatrix(p unsafe.Pointer) Matrix {
-	return Matrix{p}
+	return Matrix{Ptr: p}
 }
 func (v Matrix) IsNil() bool {
 	return v.Ptr == nil
@@ -2205,10 +2205,10 @@ func (v LayoutLine) native() *C.PangoLayoutLine {
 	return (*C.PangoLayoutLine)(v.Ptr)
 }
 func wrapLayoutLine(p *C.PangoLayoutLine) LayoutLine {
-	return LayoutLine{unsafe.Pointer(p)}
+	return LayoutLine{Ptr: unsafe.Pointer(p)}
 }
 func WrapLayoutLine(p unsafe.Pointer) LayoutLine {
-	return LayoutLine{p}
+	return LayoutLine{Ptr: p}
 }
 func (v LayoutLine) IsNil() bool {
 	return v.Ptr == nil
@@ -2268,10 +2268,10 @@ func (v TabArray) native() *C.PangoTabArray {
 	return (*C.PangoTabArray)(v.Ptr)
 }
 func wrapTabArray(p *C.PangoTabArray) TabArray {
-	return TabArray{unsafe.Pointer(p)}
+	return TabArray{Ptr: unsafe.Pointer(p)}
 }
 func WrapTabArray(p unsafe.Pointer) TabArray {
-	return TabArray{p}
+	return TabArray{Ptr: p}
 }
 func (v TabArray) IsNil() bool {
 	return v.Ptr == nil

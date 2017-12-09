@@ -19,10 +19,10 @@ func (v Attribute) native() *C.AtkAttribute {
 	return (*C.AtkAttribute)(v.Ptr)
 }
 func wrapAttribute(p *C.AtkAttribute) Attribute {
-	return Attribute{unsafe.Pointer(p)}
+	return Attribute{Ptr: unsafe.Pointer(p)}
 }
 func WrapAttribute(p unsafe.Pointer) Attribute {
-	return Attribute{p}
+	return Attribute{Ptr: p}
 }
 func (v Attribute) IsNil() bool {
 	return v.Ptr == nil
@@ -40,10 +40,10 @@ func (v KeyEventStruct) native() *C.AtkKeyEventStruct {
 	return (*C.AtkKeyEventStruct)(v.Ptr)
 }
 func wrapKeyEventStruct(p *C.AtkKeyEventStruct) KeyEventStruct {
-	return KeyEventStruct{unsafe.Pointer(p)}
+	return KeyEventStruct{Ptr: unsafe.Pointer(p)}
 }
 func WrapKeyEventStruct(p unsafe.Pointer) KeyEventStruct {
-	return KeyEventStruct{p}
+	return KeyEventStruct{Ptr: p}
 }
 func (v KeyEventStruct) IsNil() bool {
 	return v.Ptr == nil
@@ -61,10 +61,10 @@ func (v PropertyValues) native() *C.AtkPropertyValues {
 	return (*C.AtkPropertyValues)(v.Ptr)
 }
 func wrapPropertyValues(p *C.AtkPropertyValues) PropertyValues {
-	return PropertyValues{unsafe.Pointer(p)}
+	return PropertyValues{Ptr: unsafe.Pointer(p)}
 }
 func WrapPropertyValues(p unsafe.Pointer) PropertyValues {
-	return PropertyValues{p}
+	return PropertyValues{Ptr: p}
 }
 func (v PropertyValues) IsNil() bool {
 	return v.Ptr == nil
@@ -82,10 +82,10 @@ func (v Rectangle) native() *C.AtkRectangle {
 	return (*C.AtkRectangle)(v.Ptr)
 }
 func wrapRectangle(p *C.AtkRectangle) Rectangle {
-	return Rectangle{unsafe.Pointer(p)}
+	return Rectangle{Ptr: unsafe.Pointer(p)}
 }
 func WrapRectangle(p unsafe.Pointer) Rectangle {
-	return Rectangle{p}
+	return Rectangle{Ptr: p}
 }
 func (v Rectangle) IsNil() bool {
 	return v.Ptr == nil
@@ -103,10 +103,10 @@ func (v TextRange) native() *C.AtkTextRange {
 	return (*C.AtkTextRange)(v.Ptr)
 }
 func wrapTextRange(p *C.AtkTextRange) TextRange {
-	return TextRange{unsafe.Pointer(p)}
+	return TextRange{Ptr: unsafe.Pointer(p)}
 }
 func WrapTextRange(p unsafe.Pointer) TextRange {
-	return TextRange{p}
+	return TextRange{Ptr: p}
 }
 func (v TextRange) IsNil() bool {
 	return v.Ptr == nil
@@ -124,10 +124,10 @@ func (v TextRectangle) native() *C.AtkTextRectangle {
 	return (*C.AtkTextRectangle)(v.Ptr)
 }
 func wrapTextRectangle(p *C.AtkTextRectangle) TextRectangle {
-	return TextRectangle{unsafe.Pointer(p)}
+	return TextRectangle{Ptr: unsafe.Pointer(p)}
 }
 func WrapTextRectangle(p unsafe.Pointer) TextRectangle {
-	return TextRectangle{p}
+	return TextRectangle{Ptr: p}
 }
 func (v TextRectangle) IsNil() bool {
 	return v.Ptr == nil
@@ -138,17 +138,19 @@ func IWrapTextRectangle(p unsafe.Pointer) interface{} {
 
 // Interface Component
 type Component struct {
+	ComponentIface
 	Ptr unsafe.Pointer
 }
+type ComponentIface struct{}
 
-func (v Component) native() *C.AtkComponent {
-	return (*C.AtkComponent)(v.Ptr)
+func (v *ComponentIface) native() *C.AtkComponent {
+	return (*C.AtkComponent)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapComponent(p *C.AtkComponent) Component {
-	return Component{unsafe.Pointer(p)}
+	return Component{Ptr: unsafe.Pointer(p)}
 }
 func WrapComponent(p unsafe.Pointer) Component {
-	return Component{p}
+	return Component{Ptr: p}
 }
 func (v Component) IsNil() bool {
 	return v.Ptr == nil
@@ -167,19 +169,19 @@ func (v Component) GetGValueGetter() gobject.GValueGetter {
 }
 
 // Contains is a wrapper around atk_component_contains().
-func (component Component) Contains(x int, y int, coord_type CoordType) bool {
+func (component *ComponentIface) Contains(x int, y int, coord_type CoordType) bool {
 	ret0 := C.atk_component_contains(component.native(), C.gint(x), C.gint(y), C.AtkCoordType(coord_type))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetAlpha is a wrapper around atk_component_get_alpha().
-func (component Component) GetAlpha() float64 {
+func (component *ComponentIface) GetAlpha() float64 {
 	ret0 := C.atk_component_get_alpha(component.native())
 	return float64(ret0)
 }
 
 // GetExtents is a wrapper around atk_component_get_extents().
-func (component Component) GetExtents(coord_type CoordType) (int, int, int, int) {
+func (component *ComponentIface) GetExtents(coord_type CoordType) (int, int, int, int) {
 	var x0 C.gint
 	var y0 C.gint
 	var width0 C.gint
@@ -189,60 +191,62 @@ func (component Component) GetExtents(coord_type CoordType) (int, int, int, int)
 }
 
 // GetLayer is a wrapper around atk_component_get_layer().
-func (component Component) GetLayer() Layer {
+func (component *ComponentIface) GetLayer() Layer {
 	ret0 := C.atk_component_get_layer(component.native())
 	return Layer(ret0)
 }
 
 // GetMdiZorder is a wrapper around atk_component_get_mdi_zorder().
-func (component Component) GetMdiZorder() int {
+func (component *ComponentIface) GetMdiZorder() int {
 	ret0 := C.atk_component_get_mdi_zorder(component.native())
 	return int(ret0)
 }
 
 // GrabFocus is a wrapper around atk_component_grab_focus().
-func (component Component) GrabFocus() bool {
+func (component *ComponentIface) GrabFocus() bool {
 	ret0 := C.atk_component_grab_focus(component.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // RefAccessibleAtPoint is a wrapper around atk_component_ref_accessible_at_point().
-func (component Component) RefAccessibleAtPoint(x int, y int, coord_type CoordType) Object {
+func (component *ComponentIface) RefAccessibleAtPoint(x int, y int, coord_type CoordType) Object {
 	ret0 := C.atk_component_ref_accessible_at_point(component.native(), C.gint(x), C.gint(y), C.AtkCoordType(coord_type))
 	return wrapObject(ret0)
 }
 
 // SetExtents is a wrapper around atk_component_set_extents().
-func (component Component) SetExtents(x int, y int, width int, height int, coord_type CoordType) bool {
+func (component *ComponentIface) SetExtents(x int, y int, width int, height int, coord_type CoordType) bool {
 	ret0 := C.atk_component_set_extents(component.native(), C.gint(x), C.gint(y), C.gint(width), C.gint(height), C.AtkCoordType(coord_type))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // SetPosition is a wrapper around atk_component_set_position().
-func (component Component) SetPosition(x int, y int, coord_type CoordType) bool {
+func (component *ComponentIface) SetPosition(x int, y int, coord_type CoordType) bool {
 	ret0 := C.atk_component_set_position(component.native(), C.gint(x), C.gint(y), C.AtkCoordType(coord_type))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // SetSize is a wrapper around atk_component_set_size().
-func (component Component) SetSize(width int, height int) bool {
+func (component *ComponentIface) SetSize(width int, height int) bool {
 	ret0 := C.atk_component_set_size(component.native(), C.gint(width), C.gint(height))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // Interface EditableText
 type EditableText struct {
+	EditableTextIface
 	Ptr unsafe.Pointer
 }
+type EditableTextIface struct{}
 
-func (v EditableText) native() *C.AtkEditableText {
-	return (*C.AtkEditableText)(v.Ptr)
+func (v *EditableTextIface) native() *C.AtkEditableText {
+	return (*C.AtkEditableText)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapEditableText(p *C.AtkEditableText) EditableText {
-	return EditableText{unsafe.Pointer(p)}
+	return EditableText{Ptr: unsafe.Pointer(p)}
 }
 func WrapEditableText(p unsafe.Pointer) EditableText {
-	return EditableText{p}
+	return EditableText{Ptr: p}
 }
 func (v EditableText) IsNil() bool {
 	return v.Ptr == nil
@@ -261,27 +265,27 @@ func (v EditableText) GetGValueGetter() gobject.GValueGetter {
 }
 
 // CopyText is a wrapper around atk_editable_text_copy_text().
-func (text EditableText) CopyText(start_pos int, end_pos int) {
+func (text *EditableTextIface) CopyText(start_pos int, end_pos int) {
 	C.atk_editable_text_copy_text(text.native(), C.gint(start_pos), C.gint(end_pos))
 }
 
 // CutText is a wrapper around atk_editable_text_cut_text().
-func (text EditableText) CutText(start_pos int, end_pos int) {
+func (text *EditableTextIface) CutText(start_pos int, end_pos int) {
 	C.atk_editable_text_cut_text(text.native(), C.gint(start_pos), C.gint(end_pos))
 }
 
 // DeleteText is a wrapper around atk_editable_text_delete_text().
-func (text EditableText) DeleteText(start_pos int, end_pos int) {
+func (text *EditableTextIface) DeleteText(start_pos int, end_pos int) {
 	C.atk_editable_text_delete_text(text.native(), C.gint(start_pos), C.gint(end_pos))
 }
 
 // PasteText is a wrapper around atk_editable_text_paste_text().
-func (text EditableText) PasteText(position int) {
+func (text *EditableTextIface) PasteText(position int) {
 	C.atk_editable_text_paste_text(text.native(), C.gint(position))
 }
 
 // SetTextContents is a wrapper around atk_editable_text_set_text_contents().
-func (text EditableText) SetTextContents(string string) {
+func (text *EditableTextIface) SetTextContents(string string) {
 	string0 := (*C.gchar)(C.CString(string))
 	C.atk_editable_text_set_text_contents(text.native(), string0)
 	C.free(unsafe.Pointer(string0)) /*ch:<stdlib.h>*/
@@ -296,10 +300,10 @@ func (v Range) native() *C.AtkRange {
 	return (*C.AtkRange)(v.Ptr)
 }
 func wrapRange(p *C.AtkRange) Range {
-	return Range{unsafe.Pointer(p)}
+	return Range{Ptr: unsafe.Pointer(p)}
 }
 func WrapRange(p unsafe.Pointer) Range {
-	return Range{p}
+	return Range{Ptr: p}
 }
 func (v Range) IsNil() bool {
 	return v.Ptr == nil
@@ -348,17 +352,19 @@ func (range_ Range) GetUpperLimit() float64 {
 
 // Interface Action
 type Action struct {
+	ActionIface
 	Ptr unsafe.Pointer
 }
+type ActionIface struct{}
 
-func (v Action) native() *C.AtkAction {
-	return (*C.AtkAction)(v.Ptr)
+func (v *ActionIface) native() *C.AtkAction {
+	return (*C.AtkAction)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapAction(p *C.AtkAction) Action {
-	return Action{unsafe.Pointer(p)}
+	return Action{Ptr: unsafe.Pointer(p)}
 }
 func WrapAction(p unsafe.Pointer) Action {
-	return Action{p}
+	return Action{Ptr: p}
 }
 func (v Action) IsNil() bool {
 	return v.Ptr == nil
@@ -377,47 +383,47 @@ func (v Action) GetGValueGetter() gobject.GValueGetter {
 }
 
 // DoAction is a wrapper around atk_action_do_action().
-func (action Action) DoAction(i int) bool {
+func (action *ActionIface) DoAction(i int) bool {
 	ret0 := C.atk_action_do_action(action.native(), C.gint(i))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetDescription is a wrapper around atk_action_get_description().
-func (action Action) GetDescription(i int) string {
+func (action *ActionIface) GetDescription(i int) string {
 	ret0 := C.atk_action_get_description(action.native(), C.gint(i))
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
 
 // GetKeybinding is a wrapper around atk_action_get_keybinding().
-func (action Action) GetKeybinding(i int) string {
+func (action *ActionIface) GetKeybinding(i int) string {
 	ret0 := C.atk_action_get_keybinding(action.native(), C.gint(i))
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
 
 // GetLocalizedName is a wrapper around atk_action_get_localized_name().
-func (action Action) GetLocalizedName(i int) string {
+func (action *ActionIface) GetLocalizedName(i int) string {
 	ret0 := C.atk_action_get_localized_name(action.native(), C.gint(i))
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
 
 // GetNActions is a wrapper around atk_action_get_n_actions().
-func (action Action) GetNActions() int {
+func (action *ActionIface) GetNActions() int {
 	ret0 := C.atk_action_get_n_actions(action.native())
 	return int(ret0)
 }
 
 // GetName is a wrapper around atk_action_get_name().
-func (action Action) GetName(i int) string {
+func (action *ActionIface) GetName(i int) string {
 	ret0 := C.atk_action_get_name(action.native(), C.gint(i))
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
 
 // SetDescription is a wrapper around atk_action_set_description().
-func (action Action) SetDescription(i int, desc string) bool {
+func (action *ActionIface) SetDescription(i int, desc string) bool {
 	desc0 := (*C.gchar)(C.CString(desc))
 	ret0 := C.atk_action_set_description(action.native(), C.gint(i), desc0)
 	C.free(unsafe.Pointer(desc0))   /*ch:<stdlib.h>*/
@@ -719,17 +725,19 @@ func (relation Relation) RemoveTarget(target Object) bool {
 
 // Interface Document
 type Document struct {
+	DocumentIface
 	Ptr unsafe.Pointer
 }
+type DocumentIface struct{}
 
-func (v Document) native() *C.AtkDocument {
-	return (*C.AtkDocument)(v.Ptr)
+func (v *DocumentIface) native() *C.AtkDocument {
+	return (*C.AtkDocument)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapDocument(p *C.AtkDocument) Document {
-	return Document{unsafe.Pointer(p)}
+	return Document{Ptr: unsafe.Pointer(p)}
 }
 func WrapDocument(p unsafe.Pointer) Document {
-	return Document{p}
+	return Document{Ptr: p}
 }
 func (v Document) IsNil() bool {
 	return v.Ptr == nil
@@ -748,7 +756,7 @@ func (v Document) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetAttributeValue is a wrapper around atk_document_get_attribute_value().
-func (document Document) GetAttributeValue(attribute_name string) string {
+func (document *DocumentIface) GetAttributeValue(attribute_name string) string {
 	attribute_name0 := (*C.gchar)(C.CString(attribute_name))
 	ret0 := C.atk_document_get_attribute_value(document.native(), attribute_name0)
 	C.free(unsafe.Pointer(attribute_name0)) /*ch:<stdlib.h>*/
@@ -757,19 +765,19 @@ func (document Document) GetAttributeValue(attribute_name string) string {
 }
 
 // GetCurrentPageNumber is a wrapper around atk_document_get_current_page_number().
-func (document Document) GetCurrentPageNumber() int {
+func (document *DocumentIface) GetCurrentPageNumber() int {
 	ret0 := C.atk_document_get_current_page_number(document.native())
 	return int(ret0)
 }
 
 // GetPageCount is a wrapper around atk_document_get_page_count().
-func (document Document) GetPageCount() int {
+func (document *DocumentIface) GetPageCount() int {
 	ret0 := C.atk_document_get_page_count(document.native())
 	return int(ret0)
 }
 
 // SetAttributeValue is a wrapper around atk_document_set_attribute_value().
-func (document Document) SetAttributeValue(attribute_name string, attribute_value string) bool {
+func (document *DocumentIface) SetAttributeValue(attribute_name string, attribute_value string) bool {
 	attribute_name0 := (*C.gchar)(C.CString(attribute_name))
 	attribute_value0 := (*C.gchar)(C.CString(attribute_value))
 	ret0 := C.atk_document_set_attribute_value(document.native(), attribute_name0, attribute_value0)
@@ -780,17 +788,19 @@ func (document Document) SetAttributeValue(attribute_name string, attribute_valu
 
 // Interface HyperlinkImpl
 type HyperlinkImpl struct {
+	HyperlinkImplIface
 	Ptr unsafe.Pointer
 }
+type HyperlinkImplIface struct{}
 
-func (v HyperlinkImpl) native() *C.AtkHyperlinkImpl {
-	return (*C.AtkHyperlinkImpl)(v.Ptr)
+func (v *HyperlinkImplIface) native() *C.AtkHyperlinkImpl {
+	return (*C.AtkHyperlinkImpl)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapHyperlinkImpl(p *C.AtkHyperlinkImpl) HyperlinkImpl {
-	return HyperlinkImpl{unsafe.Pointer(p)}
+	return HyperlinkImpl{Ptr: unsafe.Pointer(p)}
 }
 func WrapHyperlinkImpl(p unsafe.Pointer) HyperlinkImpl {
-	return HyperlinkImpl{p}
+	return HyperlinkImpl{Ptr: p}
 }
 func (v HyperlinkImpl) IsNil() bool {
 	return v.Ptr == nil
@@ -809,13 +819,14 @@ func (v HyperlinkImpl) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetHyperlink is a wrapper around atk_hyperlink_impl_get_hyperlink().
-func (impl HyperlinkImpl) GetHyperlink() Hyperlink {
+func (impl *HyperlinkImplIface) GetHyperlink() Hyperlink {
 	ret0 := C.atk_hyperlink_impl_get_hyperlink(impl.native())
 	return wrapHyperlink(ret0)
 }
 
 // Object Hyperlink
 type Hyperlink struct {
+	ActionIface
 	gobject.Object
 }
 
@@ -895,17 +906,19 @@ func (link_ Hyperlink) IsValid() bool {
 
 // Interface Hypertext
 type Hypertext struct {
+	HypertextIface
 	Ptr unsafe.Pointer
 }
+type HypertextIface struct{}
 
-func (v Hypertext) native() *C.AtkHypertext {
-	return (*C.AtkHypertext)(v.Ptr)
+func (v *HypertextIface) native() *C.AtkHypertext {
+	return (*C.AtkHypertext)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapHypertext(p *C.AtkHypertext) Hypertext {
-	return Hypertext{unsafe.Pointer(p)}
+	return Hypertext{Ptr: unsafe.Pointer(p)}
 }
 func WrapHypertext(p unsafe.Pointer) Hypertext {
-	return Hypertext{p}
+	return Hypertext{Ptr: p}
 }
 func (v Hypertext) IsNil() bool {
 	return v.Ptr == nil
@@ -924,36 +937,38 @@ func (v Hypertext) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetLink is a wrapper around atk_hypertext_get_link().
-func (hypertext Hypertext) GetLink(link_index int) Hyperlink {
+func (hypertext *HypertextIface) GetLink(link_index int) Hyperlink {
 	ret0 := C.atk_hypertext_get_link(hypertext.native(), C.gint(link_index))
 	return wrapHyperlink(ret0)
 }
 
 // GetLinkIndex is a wrapper around atk_hypertext_get_link_index().
-func (hypertext Hypertext) GetLinkIndex(char_index int) int {
+func (hypertext *HypertextIface) GetLinkIndex(char_index int) int {
 	ret0 := C.atk_hypertext_get_link_index(hypertext.native(), C.gint(char_index))
 	return int(ret0)
 }
 
 // GetNLinks is a wrapper around atk_hypertext_get_n_links().
-func (hypertext Hypertext) GetNLinks() int {
+func (hypertext *HypertextIface) GetNLinks() int {
 	ret0 := C.atk_hypertext_get_n_links(hypertext.native())
 	return int(ret0)
 }
 
 // Interface Image
 type Image struct {
+	ImageIface
 	Ptr unsafe.Pointer
 }
+type ImageIface struct{}
 
-func (v Image) native() *C.AtkImage {
-	return (*C.AtkImage)(v.Ptr)
+func (v *ImageIface) native() *C.AtkImage {
+	return (*C.AtkImage)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapImage(p *C.AtkImage) Image {
-	return Image{unsafe.Pointer(p)}
+	return Image{Ptr: unsafe.Pointer(p)}
 }
 func WrapImage(p unsafe.Pointer) Image {
-	return Image{p}
+	return Image{Ptr: p}
 }
 func (v Image) IsNil() bool {
 	return v.Ptr == nil
@@ -972,21 +987,21 @@ func (v Image) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetImageDescription is a wrapper around atk_image_get_image_description().
-func (image Image) GetImageDescription() string {
+func (image *ImageIface) GetImageDescription() string {
 	ret0 := C.atk_image_get_image_description(image.native())
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
 
 // GetImageLocale is a wrapper around atk_image_get_image_locale().
-func (image Image) GetImageLocale() string {
+func (image *ImageIface) GetImageLocale() string {
 	ret0 := C.atk_image_get_image_locale(image.native())
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
 
 // GetImagePosition is a wrapper around atk_image_get_image_position().
-func (image Image) GetImagePosition(coord_type CoordType) (int, int) {
+func (image *ImageIface) GetImagePosition(coord_type CoordType) (int, int) {
 	var x0 C.gint
 	var y0 C.gint
 	C.atk_image_get_image_position(image.native(), &x0, &y0, C.AtkCoordType(coord_type))
@@ -994,7 +1009,7 @@ func (image Image) GetImagePosition(coord_type CoordType) (int, int) {
 }
 
 // GetImageSize is a wrapper around atk_image_get_image_size().
-func (image Image) GetImageSize() (int, int) {
+func (image *ImageIface) GetImageSize() (int, int) {
 	var width0 C.gint
 	var height0 C.gint
 	C.atk_image_get_image_size(image.native(), &width0, &height0)
@@ -1002,7 +1017,7 @@ func (image Image) GetImageSize() (int, int) {
 }
 
 // SetImageDescription is a wrapper around atk_image_set_image_description().
-func (image Image) SetImageDescription(description string) bool {
+func (image *ImageIface) SetImageDescription(description string) bool {
 	description0 := (*C.gchar)(C.CString(description))
 	ret0 := C.atk_image_set_image_description(image.native(), description0)
 	C.free(unsafe.Pointer(description0)) /*ch:<stdlib.h>*/
@@ -1011,17 +1026,19 @@ func (image Image) SetImageDescription(description string) bool {
 
 // Interface ImplementorIface
 type ImplementorIface struct {
+	ImplementorIfaceIface
 	Ptr unsafe.Pointer
 }
+type ImplementorIfaceIface struct{}
 
-func (v ImplementorIface) native() *C.AtkImplementorIface {
-	return (*C.AtkImplementorIface)(v.Ptr)
+func (v *ImplementorIfaceIface) native() *C.AtkImplementorIface {
+	return (*C.AtkImplementorIface)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapImplementorIface(p *C.AtkImplementorIface) ImplementorIface {
-	return ImplementorIface{unsafe.Pointer(p)}
+	return ImplementorIface{Ptr: unsafe.Pointer(p)}
 }
 func WrapImplementorIface(p unsafe.Pointer) ImplementorIface {
-	return ImplementorIface{p}
+	return ImplementorIface{Ptr: p}
 }
 func (v ImplementorIface) IsNil() bool {
 	return v.Ptr == nil
@@ -1041,17 +1058,19 @@ func (v ImplementorIface) GetGValueGetter() gobject.GValueGetter {
 
 // Interface Selection
 type Selection struct {
+	SelectionIface
 	Ptr unsafe.Pointer
 }
+type SelectionIface struct{}
 
-func (v Selection) native() *C.AtkSelection {
-	return (*C.AtkSelection)(v.Ptr)
+func (v *SelectionIface) native() *C.AtkSelection {
+	return (*C.AtkSelection)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapSelection(p *C.AtkSelection) Selection {
-	return Selection{unsafe.Pointer(p)}
+	return Selection{Ptr: unsafe.Pointer(p)}
 }
 func WrapSelection(p unsafe.Pointer) Selection {
-	return Selection{p}
+	return Selection{Ptr: p}
 }
 func (v Selection) IsNil() bool {
 	return v.Ptr == nil
@@ -1070,60 +1089,62 @@ func (v Selection) GetGValueGetter() gobject.GValueGetter {
 }
 
 // AddSelection is a wrapper around atk_selection_add_selection().
-func (selection Selection) AddSelection(i int) bool {
+func (selection *SelectionIface) AddSelection(i int) bool {
 	ret0 := C.atk_selection_add_selection(selection.native(), C.gint(i))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // ClearSelection is a wrapper around atk_selection_clear_selection().
-func (selection Selection) ClearSelection() bool {
+func (selection *SelectionIface) ClearSelection() bool {
 	ret0 := C.atk_selection_clear_selection(selection.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetSelectionCount is a wrapper around atk_selection_get_selection_count().
-func (selection Selection) GetSelectionCount() int {
+func (selection *SelectionIface) GetSelectionCount() int {
 	ret0 := C.atk_selection_get_selection_count(selection.native())
 	return int(ret0)
 }
 
 // IsChildSelected is a wrapper around atk_selection_is_child_selected().
-func (selection Selection) IsChildSelected(i int) bool {
+func (selection *SelectionIface) IsChildSelected(i int) bool {
 	ret0 := C.atk_selection_is_child_selected(selection.native(), C.gint(i))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // RefSelection is a wrapper around atk_selection_ref_selection().
-func (selection Selection) RefSelection(i int) Object {
+func (selection *SelectionIface) RefSelection(i int) Object {
 	ret0 := C.atk_selection_ref_selection(selection.native(), C.gint(i))
 	return wrapObject(ret0)
 }
 
 // RemoveSelection is a wrapper around atk_selection_remove_selection().
-func (selection Selection) RemoveSelection(i int) bool {
+func (selection *SelectionIface) RemoveSelection(i int) bool {
 	ret0 := C.atk_selection_remove_selection(selection.native(), C.gint(i))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // SelectAllSelection is a wrapper around atk_selection_select_all_selection().
-func (selection Selection) SelectAllSelection() bool {
+func (selection *SelectionIface) SelectAllSelection() bool {
 	ret0 := C.atk_selection_select_all_selection(selection.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // Interface StreamableContent
 type StreamableContent struct {
+	StreamableContentIface
 	Ptr unsafe.Pointer
 }
+type StreamableContentIface struct{}
 
-func (v StreamableContent) native() *C.AtkStreamableContent {
-	return (*C.AtkStreamableContent)(v.Ptr)
+func (v *StreamableContentIface) native() *C.AtkStreamableContent {
+	return (*C.AtkStreamableContent)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapStreamableContent(p *C.AtkStreamableContent) StreamableContent {
-	return StreamableContent{unsafe.Pointer(p)}
+	return StreamableContent{Ptr: unsafe.Pointer(p)}
 }
 func WrapStreamableContent(p unsafe.Pointer) StreamableContent {
-	return StreamableContent{p}
+	return StreamableContent{Ptr: p}
 }
 func (v StreamableContent) IsNil() bool {
 	return v.Ptr == nil
@@ -1142,20 +1163,20 @@ func (v StreamableContent) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetMimeType is a wrapper around atk_streamable_content_get_mime_type().
-func (streamable StreamableContent) GetMimeType(i int) string {
+func (streamable *StreamableContentIface) GetMimeType(i int) string {
 	ret0 := C.atk_streamable_content_get_mime_type(streamable.native(), C.gint(i))
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
 
 // GetNMimeTypes is a wrapper around atk_streamable_content_get_n_mime_types().
-func (streamable StreamableContent) GetNMimeTypes() int {
+func (streamable *StreamableContentIface) GetNMimeTypes() int {
 	ret0 := C.atk_streamable_content_get_n_mime_types(streamable.native())
 	return int(ret0)
 }
 
 // GetUri is a wrapper around atk_streamable_content_get_uri().
-func (streamable StreamableContent) GetUri(mime_type string) string {
+func (streamable *StreamableContentIface) GetUri(mime_type string) string {
 	mime_type0 := (*C.gchar)(C.CString(mime_type))
 	ret0 := C.atk_streamable_content_get_uri(streamable.native(), mime_type0)
 	C.free(unsafe.Pointer(mime_type0)) /*ch:<stdlib.h>*/
@@ -1165,17 +1186,19 @@ func (streamable StreamableContent) GetUri(mime_type string) string {
 
 // Interface Table
 type Table struct {
+	TableIface
 	Ptr unsafe.Pointer
 }
+type TableIface struct{}
 
-func (v Table) native() *C.AtkTable {
-	return (*C.AtkTable)(v.Ptr)
+func (v *TableIface) native() *C.AtkTable {
+	return (*C.AtkTable)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapTable(p *C.AtkTable) Table {
-	return Table{unsafe.Pointer(p)}
+	return Table{Ptr: unsafe.Pointer(p)}
 }
 func WrapTable(p unsafe.Pointer) Table {
-	return Table{p}
+	return Table{Ptr: p}
 }
 func (v Table) IsNil() bool {
 	return v.Ptr == nil
@@ -1194,162 +1217,164 @@ func (v Table) GetGValueGetter() gobject.GValueGetter {
 }
 
 // AddColumnSelection is a wrapper around atk_table_add_column_selection().
-func (table Table) AddColumnSelection(column int) bool {
+func (table *TableIface) AddColumnSelection(column int) bool {
 	ret0 := C.atk_table_add_column_selection(table.native(), C.gint(column))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // AddRowSelection is a wrapper around atk_table_add_row_selection().
-func (table Table) AddRowSelection(row int) bool {
+func (table *TableIface) AddRowSelection(row int) bool {
 	ret0 := C.atk_table_add_row_selection(table.native(), C.gint(row))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetCaption is a wrapper around atk_table_get_caption().
-func (table Table) GetCaption() Object {
+func (table *TableIface) GetCaption() Object {
 	ret0 := C.atk_table_get_caption(table.native())
 	return wrapObject(ret0)
 }
 
 // GetColumnDescription is a wrapper around atk_table_get_column_description().
-func (table Table) GetColumnDescription(column int) string {
+func (table *TableIface) GetColumnDescription(column int) string {
 	ret0 := C.atk_table_get_column_description(table.native(), C.gint(column))
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
 
 // GetColumnExtentAt is a wrapper around atk_table_get_column_extent_at().
-func (table Table) GetColumnExtentAt(row int, column int) int {
+func (table *TableIface) GetColumnExtentAt(row int, column int) int {
 	ret0 := C.atk_table_get_column_extent_at(table.native(), C.gint(row), C.gint(column))
 	return int(ret0)
 }
 
 // GetColumnHeader is a wrapper around atk_table_get_column_header().
-func (table Table) GetColumnHeader(column int) Object {
+func (table *TableIface) GetColumnHeader(column int) Object {
 	ret0 := C.atk_table_get_column_header(table.native(), C.gint(column))
 	return wrapObject(ret0)
 }
 
 // GetNColumns is a wrapper around atk_table_get_n_columns().
-func (table Table) GetNColumns() int {
+func (table *TableIface) GetNColumns() int {
 	ret0 := C.atk_table_get_n_columns(table.native())
 	return int(ret0)
 }
 
 // GetNRows is a wrapper around atk_table_get_n_rows().
-func (table Table) GetNRows() int {
+func (table *TableIface) GetNRows() int {
 	ret0 := C.atk_table_get_n_rows(table.native())
 	return int(ret0)
 }
 
 // GetRowDescription is a wrapper around atk_table_get_row_description().
-func (table Table) GetRowDescription(row int) string {
+func (table *TableIface) GetRowDescription(row int) string {
 	ret0 := C.atk_table_get_row_description(table.native(), C.gint(row))
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
 
 // GetRowExtentAt is a wrapper around atk_table_get_row_extent_at().
-func (table Table) GetRowExtentAt(row int, column int) int {
+func (table *TableIface) GetRowExtentAt(row int, column int) int {
 	ret0 := C.atk_table_get_row_extent_at(table.native(), C.gint(row), C.gint(column))
 	return int(ret0)
 }
 
 // GetRowHeader is a wrapper around atk_table_get_row_header().
-func (table Table) GetRowHeader(row int) Object {
+func (table *TableIface) GetRowHeader(row int) Object {
 	ret0 := C.atk_table_get_row_header(table.native(), C.gint(row))
 	return wrapObject(ret0)
 }
 
 // GetSummary is a wrapper around atk_table_get_summary().
-func (table Table) GetSummary() Object {
+func (table *TableIface) GetSummary() Object {
 	ret0 := C.atk_table_get_summary(table.native())
 	return wrapObject(ret0)
 }
 
 // IsColumnSelected is a wrapper around atk_table_is_column_selected().
-func (table Table) IsColumnSelected(column int) bool {
+func (table *TableIface) IsColumnSelected(column int) bool {
 	ret0 := C.atk_table_is_column_selected(table.native(), C.gint(column))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // IsRowSelected is a wrapper around atk_table_is_row_selected().
-func (table Table) IsRowSelected(row int) bool {
+func (table *TableIface) IsRowSelected(row int) bool {
 	ret0 := C.atk_table_is_row_selected(table.native(), C.gint(row))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // IsSelected is a wrapper around atk_table_is_selected().
-func (table Table) IsSelected(row int, column int) bool {
+func (table *TableIface) IsSelected(row int, column int) bool {
 	ret0 := C.atk_table_is_selected(table.native(), C.gint(row), C.gint(column))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // RefAt is a wrapper around atk_table_ref_at().
-func (table Table) RefAt(row int, column int) Object {
+func (table *TableIface) RefAt(row int, column int) Object {
 	ret0 := C.atk_table_ref_at(table.native(), C.gint(row), C.gint(column))
 	return wrapObject(ret0)
 }
 
 // RemoveColumnSelection is a wrapper around atk_table_remove_column_selection().
-func (table Table) RemoveColumnSelection(column int) bool {
+func (table *TableIface) RemoveColumnSelection(column int) bool {
 	ret0 := C.atk_table_remove_column_selection(table.native(), C.gint(column))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // RemoveRowSelection is a wrapper around atk_table_remove_row_selection().
-func (table Table) RemoveRowSelection(row int) bool {
+func (table *TableIface) RemoveRowSelection(row int) bool {
 	ret0 := C.atk_table_remove_row_selection(table.native(), C.gint(row))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // SetCaption is a wrapper around atk_table_set_caption().
-func (table Table) SetCaption(caption Object) {
+func (table *TableIface) SetCaption(caption Object) {
 	C.atk_table_set_caption(table.native(), caption.native())
 }
 
 // SetColumnDescription is a wrapper around atk_table_set_column_description().
-func (table Table) SetColumnDescription(column int, description string) {
+func (table *TableIface) SetColumnDescription(column int, description string) {
 	description0 := (*C.gchar)(C.CString(description))
 	C.atk_table_set_column_description(table.native(), C.gint(column), description0)
 	C.free(unsafe.Pointer(description0)) /*ch:<stdlib.h>*/
 }
 
 // SetColumnHeader is a wrapper around atk_table_set_column_header().
-func (table Table) SetColumnHeader(column int, header Object) {
+func (table *TableIface) SetColumnHeader(column int, header Object) {
 	C.atk_table_set_column_header(table.native(), C.gint(column), header.native())
 }
 
 // SetRowDescription is a wrapper around atk_table_set_row_description().
-func (table Table) SetRowDescription(row int, description string) {
+func (table *TableIface) SetRowDescription(row int, description string) {
 	description0 := (*C.gchar)(C.CString(description))
 	C.atk_table_set_row_description(table.native(), C.gint(row), description0)
 	C.free(unsafe.Pointer(description0)) /*ch:<stdlib.h>*/
 }
 
 // SetRowHeader is a wrapper around atk_table_set_row_header().
-func (table Table) SetRowHeader(row int, header Object) {
+func (table *TableIface) SetRowHeader(row int, header Object) {
 	C.atk_table_set_row_header(table.native(), C.gint(row), header.native())
 }
 
 // SetSummary is a wrapper around atk_table_set_summary().
-func (table Table) SetSummary(accessible Object) {
+func (table *TableIface) SetSummary(accessible Object) {
 	C.atk_table_set_summary(table.native(), accessible.native())
 }
 
 // Interface TableCell
 type TableCell struct {
+	TableCellIface
 	Ptr unsafe.Pointer
 }
+type TableCellIface struct{}
 
-func (v TableCell) native() *C.AtkTableCell {
-	return (*C.AtkTableCell)(v.Ptr)
+func (v *TableCellIface) native() *C.AtkTableCell {
+	return (*C.AtkTableCell)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapTableCell(p *C.AtkTableCell) TableCell {
-	return TableCell{unsafe.Pointer(p)}
+	return TableCell{Ptr: unsafe.Pointer(p)}
 }
 func WrapTableCell(p unsafe.Pointer) TableCell {
-	return TableCell{p}
+	return TableCell{Ptr: p}
 }
 func (v TableCell) IsNil() bool {
 	return v.Ptr == nil
@@ -1368,13 +1393,13 @@ func (v TableCell) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetColumnSpan is a wrapper around atk_table_cell_get_column_span().
-func (cell TableCell) GetColumnSpan() int {
+func (cell *TableCellIface) GetColumnSpan() int {
 	ret0 := C.atk_table_cell_get_column_span(cell.native())
 	return int(ret0)
 }
 
 // GetPosition is a wrapper around atk_table_cell_get_position().
-func (cell TableCell) GetPosition() (bool, int, int) {
+func (cell *TableCellIface) GetPosition() (bool, int, int) {
 	var row0 C.gint
 	var column0 C.gint
 	ret0 := C.atk_table_cell_get_position(cell.native(), &row0, &column0)
@@ -1382,7 +1407,7 @@ func (cell TableCell) GetPosition() (bool, int, int) {
 }
 
 // GetRowColumnSpan is a wrapper around atk_table_cell_get_row_column_span().
-func (cell TableCell) GetRowColumnSpan() (bool, int, int, int, int) {
+func (cell *TableCellIface) GetRowColumnSpan() (bool, int, int, int, int) {
 	var row0 C.gint
 	var column0 C.gint
 	var row_span0 C.gint
@@ -1392,30 +1417,32 @@ func (cell TableCell) GetRowColumnSpan() (bool, int, int, int, int) {
 }
 
 // GetRowSpan is a wrapper around atk_table_cell_get_row_span().
-func (cell TableCell) GetRowSpan() int {
+func (cell *TableCellIface) GetRowSpan() int {
 	ret0 := C.atk_table_cell_get_row_span(cell.native())
 	return int(ret0)
 }
 
 // GetTable is a wrapper around atk_table_cell_get_table().
-func (cell TableCell) GetTable() Object {
+func (cell *TableCellIface) GetTable() Object {
 	ret0 := C.atk_table_cell_get_table(cell.native())
 	return wrapObject(ret0)
 }
 
 // Interface Text
 type Text struct {
+	TextIface
 	Ptr unsafe.Pointer
 }
+type TextIface struct{}
 
-func (v Text) native() *C.AtkText {
-	return (*C.AtkText)(v.Ptr)
+func (v *TextIface) native() *C.AtkText {
+	return (*C.AtkText)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapText(p *C.AtkText) Text {
-	return Text{unsafe.Pointer(p)}
+	return Text{Ptr: unsafe.Pointer(p)}
 }
 func WrapText(p unsafe.Pointer) Text {
-	return Text{p}
+	return Text{Ptr: p}
 }
 func (v Text) IsNil() bool {
 	return v.Ptr == nil
@@ -1434,13 +1461,13 @@ func (v Text) GetGValueGetter() gobject.GValueGetter {
 }
 
 // AddSelection is a wrapper around atk_text_add_selection().
-func (text Text) AddSelection(start_offset int, end_offset int) bool {
+func (text *TextIface) AddSelection(start_offset int, end_offset int) bool {
 	ret0 := C.atk_text_add_selection(text.native(), C.gint(start_offset), C.gint(end_offset))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // GetBoundedRanges is a wrapper around atk_text_get_bounded_ranges().
-func (text Text) GetBoundedRanges(rect TextRectangle, coord_type CoordType, x_clip_type TextClipType, y_clip_type TextClipType) []TextRange {
+func (text *TextIface) GetBoundedRanges(rect TextRectangle, coord_type CoordType, x_clip_type TextClipType, y_clip_type TextClipType) []TextRange {
 	ret0 := C.atk_text_get_bounded_ranges(text.native(), rect.native(), C.AtkCoordType(coord_type), C.AtkTextClipType(x_clip_type), C.AtkTextClipType(y_clip_type))
 	var ret0Slice []*C.AtkTextRange
 	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
@@ -1454,19 +1481,19 @@ func (text Text) GetBoundedRanges(rect TextRectangle, coord_type CoordType, x_cl
 }
 
 // GetCaretOffset is a wrapper around atk_text_get_caret_offset().
-func (text Text) GetCaretOffset() int {
+func (text *TextIface) GetCaretOffset() int {
 	ret0 := C.atk_text_get_caret_offset(text.native())
 	return int(ret0)
 }
 
 // GetCharacterCount is a wrapper around atk_text_get_character_count().
-func (text Text) GetCharacterCount() int {
+func (text *TextIface) GetCharacterCount() int {
 	ret0 := C.atk_text_get_character_count(text.native())
 	return int(ret0)
 }
 
 // GetCharacterExtents is a wrapper around atk_text_get_character_extents().
-func (text Text) GetCharacterExtents(offset int, coords CoordType) (int, int, int, int) {
+func (text *TextIface) GetCharacterExtents(offset int, coords CoordType) (int, int, int, int) {
 	var x0 C.gint
 	var y0 C.gint
 	var width0 C.gint
@@ -1476,26 +1503,26 @@ func (text Text) GetCharacterExtents(offset int, coords CoordType) (int, int, in
 }
 
 // GetNSelections is a wrapper around atk_text_get_n_selections().
-func (text Text) GetNSelections() int {
+func (text *TextIface) GetNSelections() int {
 	ret0 := C.atk_text_get_n_selections(text.native())
 	return int(ret0)
 }
 
 // GetOffsetAtPoint is a wrapper around atk_text_get_offset_at_point().
-func (text Text) GetOffsetAtPoint(x int, y int, coords CoordType) int {
+func (text *TextIface) GetOffsetAtPoint(x int, y int, coords CoordType) int {
 	ret0 := C.atk_text_get_offset_at_point(text.native(), C.gint(x), C.gint(y), C.AtkCoordType(coords))
 	return int(ret0)
 }
 
 // GetRangeExtents is a wrapper around atk_text_get_range_extents().
-func (text Text) GetRangeExtents(start_offset int, end_offset int, coord_type CoordType) TextRectangle {
+func (text *TextIface) GetRangeExtents(start_offset int, end_offset int, coord_type CoordType) TextRectangle {
 	var rect0 C.AtkTextRectangle
 	C.atk_text_get_range_extents(text.native(), C.gint(start_offset), C.gint(end_offset), C.AtkCoordType(coord_type), &rect0)
 	return wrapTextRectangle(&rect0)
 }
 
 // GetSelection is a wrapper around atk_text_get_selection().
-func (text Text) GetSelection(selection_num int) (string, int, int) {
+func (text *TextIface) GetSelection(selection_num int) (string, int, int) {
 	var start_offset0 C.gint
 	var end_offset0 C.gint
 	ret0 := C.atk_text_get_selection(text.native(), C.gint(selection_num), &start_offset0, &end_offset0)
@@ -1505,7 +1532,7 @@ func (text Text) GetSelection(selection_num int) (string, int, int) {
 }
 
 // GetStringAtOffset is a wrapper around atk_text_get_string_at_offset().
-func (text Text) GetStringAtOffset(offset int, granularity TextGranularity) (string, int, int) {
+func (text *TextIface) GetStringAtOffset(offset int, granularity TextGranularity) (string, int, int) {
 	var start_offset0 C.gint
 	var end_offset0 C.gint
 	ret0 := C.atk_text_get_string_at_offset(text.native(), C.gint(offset), C.AtkTextGranularity(granularity), &start_offset0, &end_offset0)
@@ -1515,7 +1542,7 @@ func (text Text) GetStringAtOffset(offset int, granularity TextGranularity) (str
 }
 
 // GetText is a wrapper around atk_text_get_text().
-func (text Text) GetText(start_offset int, end_offset int) string {
+func (text *TextIface) GetText(start_offset int, end_offset int) string {
 	ret0 := C.atk_text_get_text(text.native(), C.gint(start_offset), C.gint(end_offset))
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
@@ -1523,19 +1550,19 @@ func (text Text) GetText(start_offset int, end_offset int) string {
 }
 
 // RemoveSelection is a wrapper around atk_text_remove_selection().
-func (text Text) RemoveSelection(selection_num int) bool {
+func (text *TextIface) RemoveSelection(selection_num int) bool {
 	ret0 := C.atk_text_remove_selection(text.native(), C.gint(selection_num))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // SetCaretOffset is a wrapper around atk_text_set_caret_offset().
-func (text Text) SetCaretOffset(offset int) bool {
+func (text *TextIface) SetCaretOffset(offset int) bool {
 	ret0 := C.atk_text_set_caret_offset(text.native(), C.gint(offset))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
 // SetSelection is a wrapper around atk_text_set_selection().
-func (text Text) SetSelection(selection_num int, start_offset int, end_offset int) bool {
+func (text *TextIface) SetSelection(selection_num int, start_offset int, end_offset int) bool {
 	ret0 := C.atk_text_set_selection(text.native(), C.gint(selection_num), C.gint(start_offset), C.gint(end_offset))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
@@ -1555,17 +1582,19 @@ func TextFreeRanges(ranges []TextRange) {
 
 // Interface Value
 type Value struct {
+	ValueIface
 	Ptr unsafe.Pointer
 }
+type ValueIface struct{}
 
-func (v Value) native() *C.AtkValue {
-	return (*C.AtkValue)(v.Ptr)
+func (v *ValueIface) native() *C.AtkValue {
+	return (*C.AtkValue)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapValue(p *C.AtkValue) Value {
-	return Value{unsafe.Pointer(p)}
+	return Value{Ptr: unsafe.Pointer(p)}
 }
 func WrapValue(p unsafe.Pointer) Value {
-	return Value{p}
+	return Value{Ptr: p}
 }
 func (v Value) IsNil() bool {
 	return v.Ptr == nil
@@ -1584,19 +1613,19 @@ func (v Value) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetIncrement is a wrapper around atk_value_get_increment().
-func (obj Value) GetIncrement() float64 {
+func (obj *ValueIface) GetIncrement() float64 {
 	ret0 := C.atk_value_get_increment(obj.native())
 	return float64(ret0)
 }
 
 // GetRange is a wrapper around atk_value_get_range().
-func (obj Value) GetRange() Range {
+func (obj *ValueIface) GetRange() Range {
 	ret0 := C.atk_value_get_range(obj.native())
 	return wrapRange(ret0)
 }
 
 // GetValueAndText is a wrapper around atk_value_get_value_and_text().
-func (obj Value) GetValueAndText() (float64, string) {
+func (obj *ValueIface) GetValueAndText() (float64, string) {
 	var value0 C.gdouble
 	var text0 *C.gchar
 	C.atk_value_get_value_and_text(obj.native(), &value0, &text0)
@@ -1606,23 +1635,25 @@ func (obj Value) GetValueAndText() (float64, string) {
 }
 
 // SetValue is a wrapper around atk_value_set_value().
-func (obj Value) SetValue(new_value float64) {
+func (obj *ValueIface) SetValue(new_value float64) {
 	C.atk_value_set_value(obj.native(), C.gdouble(new_value))
 }
 
 // Interface Window
 type Window struct {
+	WindowIface
 	Ptr unsafe.Pointer
 }
+type WindowIface struct{}
 
-func (v Window) native() *C.AtkWindow {
-	return (*C.AtkWindow)(v.Ptr)
+func (v *WindowIface) native() *C.AtkWindow {
+	return (*C.AtkWindow)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapWindow(p *C.AtkWindow) Window {
-	return Window{unsafe.Pointer(p)}
+	return Window{Ptr: unsafe.Pointer(p)}
 }
 func WrapWindow(p unsafe.Pointer) Window {
-	return Window{p}
+	return Window{Ptr: p}
 }
 func (v Window) IsNil() bool {
 	return v.Ptr == nil
@@ -1686,6 +1717,18 @@ func GObjectAccessibleForObject(obj gobject.Object) Object {
 
 // Object NoOpObject
 type NoOpObject struct {
+	ActionIface
+	ComponentIface
+	DocumentIface
+	EditableTextIface
+	HypertextIface
+	ImageIface
+	SelectionIface
+	TableIface
+	TableCellIface
+	TextIface
+	ValueIface
+	WindowIface
 	Object
 }
 
@@ -1959,6 +2002,7 @@ func (set StateSet) XorSets(compare_set StateSet) StateSet {
 
 // Object Plug
 type Plug struct {
+	ComponentIface
 	Object
 }
 
@@ -2057,6 +2101,7 @@ func (registry Registry) SetFactoryType(type_ /*Gir:GObject*/ gobject.Type, fact
 
 // Object Socket
 type Socket struct {
+	ComponentIface
 	Object
 }
 

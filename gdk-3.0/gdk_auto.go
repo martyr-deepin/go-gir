@@ -24,10 +24,10 @@ func (v Color) native() *C.GdkColor {
 	return (*C.GdkColor)(v.Ptr)
 }
 func wrapColor(p *C.GdkColor) Color {
-	return Color{unsafe.Pointer(p)}
+	return Color{Ptr: unsafe.Pointer(p)}
 }
 func WrapColor(p unsafe.Pointer) Color {
-	return Color{p}
+	return Color{Ptr: p}
 }
 func (v Color) IsNil() bool {
 	return v.Ptr == nil
@@ -45,10 +45,10 @@ func (v EventAny) native() *C.GdkEventAny {
 	return (*C.GdkEventAny)(v.Ptr)
 }
 func wrapEventAny(p *C.GdkEventAny) EventAny {
-	return EventAny{unsafe.Pointer(p)}
+	return EventAny{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventAny(p unsafe.Pointer) EventAny {
-	return EventAny{p}
+	return EventAny{Ptr: p}
 }
 func (v EventAny) IsNil() bool {
 	return v.Ptr == nil
@@ -66,10 +66,10 @@ func (v EventButton) native() *C.GdkEventButton {
 	return (*C.GdkEventButton)(v.Ptr)
 }
 func wrapEventButton(p *C.GdkEventButton) EventButton {
-	return EventButton{unsafe.Pointer(p)}
+	return EventButton{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventButton(p unsafe.Pointer) EventButton {
-	return EventButton{p}
+	return EventButton{Ptr: p}
 }
 func (v EventButton) IsNil() bool {
 	return v.Ptr == nil
@@ -87,10 +87,10 @@ func (v EventConfigure) native() *C.GdkEventConfigure {
 	return (*C.GdkEventConfigure)(v.Ptr)
 }
 func wrapEventConfigure(p *C.GdkEventConfigure) EventConfigure {
-	return EventConfigure{unsafe.Pointer(p)}
+	return EventConfigure{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventConfigure(p unsafe.Pointer) EventConfigure {
-	return EventConfigure{p}
+	return EventConfigure{Ptr: p}
 }
 func (v EventConfigure) IsNil() bool {
 	return v.Ptr == nil
@@ -108,10 +108,10 @@ func (v EventCrossing) native() *C.GdkEventCrossing {
 	return (*C.GdkEventCrossing)(v.Ptr)
 }
 func wrapEventCrossing(p *C.GdkEventCrossing) EventCrossing {
-	return EventCrossing{unsafe.Pointer(p)}
+	return EventCrossing{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventCrossing(p unsafe.Pointer) EventCrossing {
-	return EventCrossing{p}
+	return EventCrossing{Ptr: p}
 }
 func (v EventCrossing) IsNil() bool {
 	return v.Ptr == nil
@@ -129,10 +129,10 @@ func (v EventDND) native() *C.GdkEventDND {
 	return (*C.GdkEventDND)(v.Ptr)
 }
 func wrapEventDND(p *C.GdkEventDND) EventDND {
-	return EventDND{unsafe.Pointer(p)}
+	return EventDND{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventDND(p unsafe.Pointer) EventDND {
-	return EventDND{p}
+	return EventDND{Ptr: p}
 }
 func (v EventDND) IsNil() bool {
 	return v.Ptr == nil
@@ -150,10 +150,10 @@ func (v EventExpose) native() *C.GdkEventExpose {
 	return (*C.GdkEventExpose)(v.Ptr)
 }
 func wrapEventExpose(p *C.GdkEventExpose) EventExpose {
-	return EventExpose{unsafe.Pointer(p)}
+	return EventExpose{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventExpose(p unsafe.Pointer) EventExpose {
-	return EventExpose{p}
+	return EventExpose{Ptr: p}
 }
 func (v EventExpose) IsNil() bool {
 	return v.Ptr == nil
@@ -171,10 +171,10 @@ func (v EventFocus) native() *C.GdkEventFocus {
 	return (*C.GdkEventFocus)(v.Ptr)
 }
 func wrapEventFocus(p *C.GdkEventFocus) EventFocus {
-	return EventFocus{unsafe.Pointer(p)}
+	return EventFocus{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventFocus(p unsafe.Pointer) EventFocus {
-	return EventFocus{p}
+	return EventFocus{Ptr: p}
 }
 func (v EventFocus) IsNil() bool {
 	return v.Ptr == nil
@@ -192,10 +192,10 @@ func (v EventGrabBroken) native() *C.GdkEventGrabBroken {
 	return (*C.GdkEventGrabBroken)(v.Ptr)
 }
 func wrapEventGrabBroken(p *C.GdkEventGrabBroken) EventGrabBroken {
-	return EventGrabBroken{unsafe.Pointer(p)}
+	return EventGrabBroken{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventGrabBroken(p unsafe.Pointer) EventGrabBroken {
-	return EventGrabBroken{p}
+	return EventGrabBroken{Ptr: p}
 }
 func (v EventGrabBroken) IsNil() bool {
 	return v.Ptr == nil
@@ -213,10 +213,10 @@ func (v EventKey) native() *C.GdkEventKey {
 	return (*C.GdkEventKey)(v.Ptr)
 }
 func wrapEventKey(p *C.GdkEventKey) EventKey {
-	return EventKey{unsafe.Pointer(p)}
+	return EventKey{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventKey(p unsafe.Pointer) EventKey {
-	return EventKey{p}
+	return EventKey{Ptr: p}
 }
 func (v EventKey) IsNil() bool {
 	return v.Ptr == nil
@@ -234,10 +234,10 @@ func (v EventMotion) native() *C.GdkEventMotion {
 	return (*C.GdkEventMotion)(v.Ptr)
 }
 func wrapEventMotion(p *C.GdkEventMotion) EventMotion {
-	return EventMotion{unsafe.Pointer(p)}
+	return EventMotion{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventMotion(p unsafe.Pointer) EventMotion {
-	return EventMotion{p}
+	return EventMotion{Ptr: p}
 }
 func (v EventMotion) IsNil() bool {
 	return v.Ptr == nil
@@ -255,10 +255,10 @@ func (v EventOwnerChange) native() *C.GdkEventOwnerChange {
 	return (*C.GdkEventOwnerChange)(v.Ptr)
 }
 func wrapEventOwnerChange(p *C.GdkEventOwnerChange) EventOwnerChange {
-	return EventOwnerChange{unsafe.Pointer(p)}
+	return EventOwnerChange{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventOwnerChange(p unsafe.Pointer) EventOwnerChange {
-	return EventOwnerChange{p}
+	return EventOwnerChange{Ptr: p}
 }
 func (v EventOwnerChange) IsNil() bool {
 	return v.Ptr == nil
@@ -276,10 +276,10 @@ func (v EventPadAxis) native() *C.GdkEventPadAxis {
 	return (*C.GdkEventPadAxis)(v.Ptr)
 }
 func wrapEventPadAxis(p *C.GdkEventPadAxis) EventPadAxis {
-	return EventPadAxis{unsafe.Pointer(p)}
+	return EventPadAxis{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventPadAxis(p unsafe.Pointer) EventPadAxis {
-	return EventPadAxis{p}
+	return EventPadAxis{Ptr: p}
 }
 func (v EventPadAxis) IsNil() bool {
 	return v.Ptr == nil
@@ -297,10 +297,10 @@ func (v EventPadButton) native() *C.GdkEventPadButton {
 	return (*C.GdkEventPadButton)(v.Ptr)
 }
 func wrapEventPadButton(p *C.GdkEventPadButton) EventPadButton {
-	return EventPadButton{unsafe.Pointer(p)}
+	return EventPadButton{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventPadButton(p unsafe.Pointer) EventPadButton {
-	return EventPadButton{p}
+	return EventPadButton{Ptr: p}
 }
 func (v EventPadButton) IsNil() bool {
 	return v.Ptr == nil
@@ -318,10 +318,10 @@ func (v EventPadGroupMode) native() *C.GdkEventPadGroupMode {
 	return (*C.GdkEventPadGroupMode)(v.Ptr)
 }
 func wrapEventPadGroupMode(p *C.GdkEventPadGroupMode) EventPadGroupMode {
-	return EventPadGroupMode{unsafe.Pointer(p)}
+	return EventPadGroupMode{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventPadGroupMode(p unsafe.Pointer) EventPadGroupMode {
-	return EventPadGroupMode{p}
+	return EventPadGroupMode{Ptr: p}
 }
 func (v EventPadGroupMode) IsNil() bool {
 	return v.Ptr == nil
@@ -339,10 +339,10 @@ func (v EventProperty) native() *C.GdkEventProperty {
 	return (*C.GdkEventProperty)(v.Ptr)
 }
 func wrapEventProperty(p *C.GdkEventProperty) EventProperty {
-	return EventProperty{unsafe.Pointer(p)}
+	return EventProperty{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventProperty(p unsafe.Pointer) EventProperty {
-	return EventProperty{p}
+	return EventProperty{Ptr: p}
 }
 func (v EventProperty) IsNil() bool {
 	return v.Ptr == nil
@@ -360,10 +360,10 @@ func (v EventProximity) native() *C.GdkEventProximity {
 	return (*C.GdkEventProximity)(v.Ptr)
 }
 func wrapEventProximity(p *C.GdkEventProximity) EventProximity {
-	return EventProximity{unsafe.Pointer(p)}
+	return EventProximity{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventProximity(p unsafe.Pointer) EventProximity {
-	return EventProximity{p}
+	return EventProximity{Ptr: p}
 }
 func (v EventProximity) IsNil() bool {
 	return v.Ptr == nil
@@ -381,10 +381,10 @@ func (v EventScroll) native() *C.GdkEventScroll {
 	return (*C.GdkEventScroll)(v.Ptr)
 }
 func wrapEventScroll(p *C.GdkEventScroll) EventScroll {
-	return EventScroll{unsafe.Pointer(p)}
+	return EventScroll{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventScroll(p unsafe.Pointer) EventScroll {
-	return EventScroll{p}
+	return EventScroll{Ptr: p}
 }
 func (v EventScroll) IsNil() bool {
 	return v.Ptr == nil
@@ -402,10 +402,10 @@ func (v EventSelection) native() *C.GdkEventSelection {
 	return (*C.GdkEventSelection)(v.Ptr)
 }
 func wrapEventSelection(p *C.GdkEventSelection) EventSelection {
-	return EventSelection{unsafe.Pointer(p)}
+	return EventSelection{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventSelection(p unsafe.Pointer) EventSelection {
-	return EventSelection{p}
+	return EventSelection{Ptr: p}
 }
 func (v EventSelection) IsNil() bool {
 	return v.Ptr == nil
@@ -423,10 +423,10 @@ func (v EventSequence) native() *C.GdkEventSequence {
 	return (*C.GdkEventSequence)(v.Ptr)
 }
 func wrapEventSequence(p *C.GdkEventSequence) EventSequence {
-	return EventSequence{unsafe.Pointer(p)}
+	return EventSequence{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventSequence(p unsafe.Pointer) EventSequence {
-	return EventSequence{p}
+	return EventSequence{Ptr: p}
 }
 func (v EventSequence) IsNil() bool {
 	return v.Ptr == nil
@@ -444,10 +444,10 @@ func (v EventSetting) native() *C.GdkEventSetting {
 	return (*C.GdkEventSetting)(v.Ptr)
 }
 func wrapEventSetting(p *C.GdkEventSetting) EventSetting {
-	return EventSetting{unsafe.Pointer(p)}
+	return EventSetting{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventSetting(p unsafe.Pointer) EventSetting {
-	return EventSetting{p}
+	return EventSetting{Ptr: p}
 }
 func (v EventSetting) IsNil() bool {
 	return v.Ptr == nil
@@ -465,10 +465,10 @@ func (v EventTouch) native() *C.GdkEventTouch {
 	return (*C.GdkEventTouch)(v.Ptr)
 }
 func wrapEventTouch(p *C.GdkEventTouch) EventTouch {
-	return EventTouch{unsafe.Pointer(p)}
+	return EventTouch{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventTouch(p unsafe.Pointer) EventTouch {
-	return EventTouch{p}
+	return EventTouch{Ptr: p}
 }
 func (v EventTouch) IsNil() bool {
 	return v.Ptr == nil
@@ -486,10 +486,10 @@ func (v EventTouchpadPinch) native() *C.GdkEventTouchpadPinch {
 	return (*C.GdkEventTouchpadPinch)(v.Ptr)
 }
 func wrapEventTouchpadPinch(p *C.GdkEventTouchpadPinch) EventTouchpadPinch {
-	return EventTouchpadPinch{unsafe.Pointer(p)}
+	return EventTouchpadPinch{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventTouchpadPinch(p unsafe.Pointer) EventTouchpadPinch {
-	return EventTouchpadPinch{p}
+	return EventTouchpadPinch{Ptr: p}
 }
 func (v EventTouchpadPinch) IsNil() bool {
 	return v.Ptr == nil
@@ -507,10 +507,10 @@ func (v EventTouchpadSwipe) native() *C.GdkEventTouchpadSwipe {
 	return (*C.GdkEventTouchpadSwipe)(v.Ptr)
 }
 func wrapEventTouchpadSwipe(p *C.GdkEventTouchpadSwipe) EventTouchpadSwipe {
-	return EventTouchpadSwipe{unsafe.Pointer(p)}
+	return EventTouchpadSwipe{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventTouchpadSwipe(p unsafe.Pointer) EventTouchpadSwipe {
-	return EventTouchpadSwipe{p}
+	return EventTouchpadSwipe{Ptr: p}
 }
 func (v EventTouchpadSwipe) IsNil() bool {
 	return v.Ptr == nil
@@ -528,10 +528,10 @@ func (v EventVisibility) native() *C.GdkEventVisibility {
 	return (*C.GdkEventVisibility)(v.Ptr)
 }
 func wrapEventVisibility(p *C.GdkEventVisibility) EventVisibility {
-	return EventVisibility{unsafe.Pointer(p)}
+	return EventVisibility{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventVisibility(p unsafe.Pointer) EventVisibility {
-	return EventVisibility{p}
+	return EventVisibility{Ptr: p}
 }
 func (v EventVisibility) IsNil() bool {
 	return v.Ptr == nil
@@ -549,10 +549,10 @@ func (v EventWindowState) native() *C.GdkEventWindowState {
 	return (*C.GdkEventWindowState)(v.Ptr)
 }
 func wrapEventWindowState(p *C.GdkEventWindowState) EventWindowState {
-	return EventWindowState{unsafe.Pointer(p)}
+	return EventWindowState{Ptr: unsafe.Pointer(p)}
 }
 func WrapEventWindowState(p unsafe.Pointer) EventWindowState {
-	return EventWindowState{p}
+	return EventWindowState{Ptr: p}
 }
 func (v EventWindowState) IsNil() bool {
 	return v.Ptr == nil
@@ -570,10 +570,10 @@ func (v FrameTimings) native() *C.GdkFrameTimings {
 	return (*C.GdkFrameTimings)(v.Ptr)
 }
 func wrapFrameTimings(p *C.GdkFrameTimings) FrameTimings {
-	return FrameTimings{unsafe.Pointer(p)}
+	return FrameTimings{Ptr: unsafe.Pointer(p)}
 }
 func WrapFrameTimings(p unsafe.Pointer) FrameTimings {
-	return FrameTimings{p}
+	return FrameTimings{Ptr: p}
 }
 func (v FrameTimings) IsNil() bool {
 	return v.Ptr == nil
@@ -638,10 +638,10 @@ func (v Geometry) native() *C.GdkGeometry {
 	return (*C.GdkGeometry)(v.Ptr)
 }
 func wrapGeometry(p *C.GdkGeometry) Geometry {
-	return Geometry{unsafe.Pointer(p)}
+	return Geometry{Ptr: unsafe.Pointer(p)}
 }
 func WrapGeometry(p unsafe.Pointer) Geometry {
-	return Geometry{p}
+	return Geometry{Ptr: p}
 }
 func (v Geometry) IsNil() bool {
 	return v.Ptr == nil
@@ -659,10 +659,10 @@ func (v KeymapKey) native() *C.GdkKeymapKey {
 	return (*C.GdkKeymapKey)(v.Ptr)
 }
 func wrapKeymapKey(p *C.GdkKeymapKey) KeymapKey {
-	return KeymapKey{unsafe.Pointer(p)}
+	return KeymapKey{Ptr: unsafe.Pointer(p)}
 }
 func WrapKeymapKey(p unsafe.Pointer) KeymapKey {
-	return KeymapKey{p}
+	return KeymapKey{Ptr: p}
 }
 func (v KeymapKey) IsNil() bool {
 	return v.Ptr == nil
@@ -680,10 +680,10 @@ func (v Point) native() *C.GdkPoint {
 	return (*C.GdkPoint)(v.Ptr)
 }
 func wrapPoint(p *C.GdkPoint) Point {
-	return Point{unsafe.Pointer(p)}
+	return Point{Ptr: unsafe.Pointer(p)}
 }
 func WrapPoint(p unsafe.Pointer) Point {
-	return Point{p}
+	return Point{Ptr: p}
 }
 func (v Point) IsNil() bool {
 	return v.Ptr == nil
@@ -701,10 +701,10 @@ func (v RGBA) native() *C.GdkRGBA {
 	return (*C.GdkRGBA)(v.Ptr)
 }
 func wrapRGBA(p *C.GdkRGBA) RGBA {
-	return RGBA{unsafe.Pointer(p)}
+	return RGBA{Ptr: unsafe.Pointer(p)}
 }
 func WrapRGBA(p unsafe.Pointer) RGBA {
-	return RGBA{p}
+	return RGBA{Ptr: p}
 }
 func (v RGBA) IsNil() bool {
 	return v.Ptr == nil
@@ -761,10 +761,10 @@ func (v Rectangle) native() *C.GdkRectangle {
 	return (*C.GdkRectangle)(v.Ptr)
 }
 func wrapRectangle(p *C.GdkRectangle) Rectangle {
-	return Rectangle{unsafe.Pointer(p)}
+	return Rectangle{Ptr: unsafe.Pointer(p)}
 }
 func WrapRectangle(p unsafe.Pointer) Rectangle {
-	return Rectangle{p}
+	return Rectangle{Ptr: p}
 }
 func (v Rectangle) IsNil() bool {
 	return v.Ptr == nil
@@ -802,10 +802,10 @@ func (v TimeCoord) native() *C.GdkTimeCoord {
 	return (*C.GdkTimeCoord)(v.Ptr)
 }
 func wrapTimeCoord(p *C.GdkTimeCoord) TimeCoord {
-	return TimeCoord{unsafe.Pointer(p)}
+	return TimeCoord{Ptr: unsafe.Pointer(p)}
 }
 func WrapTimeCoord(p unsafe.Pointer) TimeCoord {
-	return TimeCoord{p}
+	return TimeCoord{Ptr: p}
 }
 func (v TimeCoord) IsNil() bool {
 	return v.Ptr == nil
@@ -823,10 +823,10 @@ func (v WindowAttr) native() *C.GdkWindowAttr {
 	return (*C.GdkWindowAttr)(v.Ptr)
 }
 func wrapWindowAttr(p *C.GdkWindowAttr) WindowAttr {
-	return WindowAttr{unsafe.Pointer(p)}
+	return WindowAttr{Ptr: unsafe.Pointer(p)}
 }
 func WrapWindowAttr(p unsafe.Pointer) WindowAttr {
-	return WindowAttr{p}
+	return WindowAttr{Ptr: p}
 }
 func (v WindowAttr) IsNil() bool {
 	return v.Ptr == nil
@@ -837,17 +837,19 @@ func IWrapWindowAttr(p unsafe.Pointer) interface{} {
 
 // Interface DevicePad
 type DevicePad struct {
+	DevicePadIface
 	Ptr unsafe.Pointer
 }
+type DevicePadIface struct{}
 
-func (v DevicePad) native() *C.GdkDevicePad {
-	return (*C.GdkDevicePad)(v.Ptr)
+func (v *DevicePadIface) native() *C.GdkDevicePad {
+	return (*C.GdkDevicePad)(*(*unsafe.Pointer)(unsafe.Pointer(v)))
 }
 func wrapDevicePad(p *C.GdkDevicePad) DevicePad {
-	return DevicePad{unsafe.Pointer(p)}
+	return DevicePad{Ptr: unsafe.Pointer(p)}
 }
 func WrapDevicePad(p unsafe.Pointer) DevicePad {
-	return DevicePad{p}
+	return DevicePad{Ptr: p}
 }
 func (v DevicePad) IsNil() bool {
 	return v.Ptr == nil
@@ -866,25 +868,25 @@ func (v DevicePad) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetFeatureGroup is a wrapper around gdk_device_pad_get_feature_group().
-func (pad DevicePad) GetFeatureGroup(feature DevicePadFeature, feature_idx int) int {
+func (pad *DevicePadIface) GetFeatureGroup(feature DevicePadFeature, feature_idx int) int {
 	ret0 := C.gdk_device_pad_get_feature_group(pad.native(), C.GdkDevicePadFeature(feature), C.gint(feature_idx))
 	return int(ret0)
 }
 
 // GetGroupNModes is a wrapper around gdk_device_pad_get_group_n_modes().
-func (pad DevicePad) GetGroupNModes(group_idx int) int {
+func (pad *DevicePadIface) GetGroupNModes(group_idx int) int {
 	ret0 := C.gdk_device_pad_get_group_n_modes(pad.native(), C.gint(group_idx))
 	return int(ret0)
 }
 
 // GetNFeatures is a wrapper around gdk_device_pad_get_n_features().
-func (pad DevicePad) GetNFeatures(feature DevicePadFeature) int {
+func (pad *DevicePadIface) GetNFeatures(feature DevicePadFeature) int {
 	ret0 := C.gdk_device_pad_get_n_features(pad.native(), C.GdkDevicePadFeature(feature))
 	return int(ret0)
 }
 
 // GetNGroups is a wrapper around gdk_device_pad_get_n_groups().
-func (pad DevicePad) GetNGroups() int {
+func (pad *DevicePadIface) GetNGroups() int {
 	ret0 := C.gdk_device_pad_get_n_groups(pad.native())
 	return int(ret0)
 }
@@ -2671,10 +2673,10 @@ func (v Atom) native() *C.GdkAtom {
 	return (*C.GdkAtom)(v.Ptr)
 }
 func wrapAtom(p *C.GdkAtom) Atom {
-	return Atom{unsafe.Pointer(p)}
+	return Atom{Ptr: unsafe.Pointer(p)}
 }
 func WrapAtom(p unsafe.Pointer) Atom {
-	return Atom{p}
+	return Atom{Ptr: p}
 }
 func (v Atom) IsNil() bool {
 	return v.Ptr == nil

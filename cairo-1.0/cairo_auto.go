@@ -16,10 +16,10 @@ func (v Context) native() *C.cairo_t {
 	return (*C.cairo_t)(v.Ptr)
 }
 func wrapContext(p *C.cairo_t) Context {
-	return Context{unsafe.Pointer(p)}
+	return Context{Ptr: unsafe.Pointer(p)}
 }
 func WrapContext(p unsafe.Pointer) Context {
-	return Context{p}
+	return Context{Ptr: p}
 }
 func (v Context) IsNil() bool {
 	return v.Ptr == nil
@@ -37,10 +37,10 @@ func (v Surface) native() *C.cairo_surface_t {
 	return (*C.cairo_surface_t)(v.Ptr)
 }
 func wrapSurface(p *C.cairo_surface_t) Surface {
-	return Surface{unsafe.Pointer(p)}
+	return Surface{Ptr: unsafe.Pointer(p)}
 }
 func WrapSurface(p unsafe.Pointer) Surface {
-	return Surface{p}
+	return Surface{Ptr: p}
 }
 func (v Surface) IsNil() bool {
 	return v.Ptr == nil
@@ -58,10 +58,10 @@ func (v Matrix) native() *C.cairo_matrix_t {
 	return (*C.cairo_matrix_t)(v.Ptr)
 }
 func wrapMatrix(p *C.cairo_matrix_t) Matrix {
-	return Matrix{unsafe.Pointer(p)}
+	return Matrix{Ptr: unsafe.Pointer(p)}
 }
 func WrapMatrix(p unsafe.Pointer) Matrix {
-	return Matrix{p}
+	return Matrix{Ptr: p}
 }
 func (v Matrix) IsNil() bool {
 	return v.Ptr == nil
@@ -79,10 +79,10 @@ func (v Pattern) native() *C.cairo_pattern_t {
 	return (*C.cairo_pattern_t)(v.Ptr)
 }
 func wrapPattern(p *C.cairo_pattern_t) Pattern {
-	return Pattern{unsafe.Pointer(p)}
+	return Pattern{Ptr: unsafe.Pointer(p)}
 }
 func WrapPattern(p unsafe.Pointer) Pattern {
-	return Pattern{p}
+	return Pattern{Ptr: p}
 }
 func (v Pattern) IsNil() bool {
 	return v.Ptr == nil
@@ -100,10 +100,10 @@ func (v Region) native() *C.cairo_region_t {
 	return (*C.cairo_region_t)(v.Ptr)
 }
 func wrapRegion(p *C.cairo_region_t) Region {
-	return Region{unsafe.Pointer(p)}
+	return Region{Ptr: unsafe.Pointer(p)}
 }
 func WrapRegion(p unsafe.Pointer) Region {
-	return Region{p}
+	return Region{Ptr: p}
 }
 func (v Region) IsNil() bool {
 	return v.Ptr == nil
@@ -121,10 +121,10 @@ func (v FontOptions) native() *C.cairo_font_options_t {
 	return (*C.cairo_font_options_t)(v.Ptr)
 }
 func wrapFontOptions(p *C.cairo_font_options_t) FontOptions {
-	return FontOptions{unsafe.Pointer(p)}
+	return FontOptions{Ptr: unsafe.Pointer(p)}
 }
 func WrapFontOptions(p unsafe.Pointer) FontOptions {
-	return FontOptions{p}
+	return FontOptions{Ptr: p}
 }
 func (v FontOptions) IsNil() bool {
 	return v.Ptr == nil
@@ -142,10 +142,10 @@ func (v FontType) native() *C.cairo_font_type_t {
 	return (*C.cairo_font_type_t)(v.Ptr)
 }
 func wrapFontType(p *C.cairo_font_type_t) FontType {
-	return FontType{unsafe.Pointer(p)}
+	return FontType{Ptr: unsafe.Pointer(p)}
 }
 func WrapFontType(p unsafe.Pointer) FontType {
-	return FontType{p}
+	return FontType{Ptr: p}
 }
 func (v FontType) IsNil() bool {
 	return v.Ptr == nil
@@ -163,10 +163,10 @@ func (v FontFace) native() *C.cairo_font_face_t {
 	return (*C.cairo_font_face_t)(v.Ptr)
 }
 func wrapFontFace(p *C.cairo_font_face_t) FontFace {
-	return FontFace{unsafe.Pointer(p)}
+	return FontFace{Ptr: unsafe.Pointer(p)}
 }
 func WrapFontFace(p unsafe.Pointer) FontFace {
-	return FontFace{p}
+	return FontFace{Ptr: p}
 }
 func (v FontFace) IsNil() bool {
 	return v.Ptr == nil
@@ -184,10 +184,10 @@ func (v ScaledFont) native() *C.cairo_scaled_font_t {
 	return (*C.cairo_scaled_font_t)(v.Ptr)
 }
 func wrapScaledFont(p *C.cairo_scaled_font_t) ScaledFont {
-	return ScaledFont{unsafe.Pointer(p)}
+	return ScaledFont{Ptr: unsafe.Pointer(p)}
 }
 func WrapScaledFont(p unsafe.Pointer) ScaledFont {
-	return ScaledFont{p}
+	return ScaledFont{Ptr: p}
 }
 func (v ScaledFont) IsNil() bool {
 	return v.Ptr == nil
@@ -205,10 +205,10 @@ func (v Path) native() *C.cairo_path_t {
 	return (*C.cairo_path_t)(v.Ptr)
 }
 func wrapPath(p *C.cairo_path_t) Path {
-	return Path{unsafe.Pointer(p)}
+	return Path{Ptr: unsafe.Pointer(p)}
 }
 func WrapPath(p unsafe.Pointer) Path {
-	return Path{p}
+	return Path{Ptr: p}
 }
 func (v Path) IsNil() bool {
 	return v.Ptr == nil
@@ -226,10 +226,10 @@ func (v RectangleInt) native() *C.cairo_rectangle_int_t {
 	return (*C.cairo_rectangle_int_t)(v.Ptr)
 }
 func wrapRectangleInt(p *C.cairo_rectangle_int_t) RectangleInt {
-	return RectangleInt{unsafe.Pointer(p)}
+	return RectangleInt{Ptr: unsafe.Pointer(p)}
 }
 func WrapRectangleInt(p unsafe.Pointer) RectangleInt {
-	return RectangleInt{p}
+	return RectangleInt{Ptr: p}
 }
 func (v RectangleInt) IsNil() bool {
 	return v.Ptr == nil

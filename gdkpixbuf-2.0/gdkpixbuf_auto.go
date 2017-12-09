@@ -21,10 +21,10 @@ func (v PixbufFormat) native() *C.GdkPixbufFormat {
 	return (*C.GdkPixbufFormat)(v.Ptr)
 }
 func wrapPixbufFormat(p *C.GdkPixbufFormat) PixbufFormat {
-	return PixbufFormat{unsafe.Pointer(p)}
+	return PixbufFormat{Ptr: unsafe.Pointer(p)}
 }
 func WrapPixbufFormat(p unsafe.Pointer) PixbufFormat {
-	return PixbufFormat{p}
+	return PixbufFormat{Ptr: p}
 }
 func (v PixbufFormat) IsNil() bool {
 	return v.Ptr == nil
@@ -133,6 +133,8 @@ func (format PixbufFormat) SetDisabled(disabled bool) {
 
 // Object Pixbuf
 type Pixbuf struct {
+	gio.IconIface
+	gio.LoadableIconIface
 	gobject.Object
 }
 
@@ -163,10 +165,10 @@ func (v Pixbuf) GetGValueGetter() gobject.GValueGetter {
 	}
 }
 func (v Pixbuf) Icon() gio.Icon {
-	return gio.WrapIcon(v.Ptr) /*gir:Gio*/
+	return gio.WrapIcon(v.Ptr)
 }
 func (v Pixbuf) LoadableIcon() gio.LoadableIcon {
-	return gio.WrapLoadableIcon(v.Ptr) /*gir:Gio*/
+	return gio.WrapLoadableIcon(v.Ptr)
 }
 
 // PixbufNew is a wrapper around gdk_pixbuf_new().
