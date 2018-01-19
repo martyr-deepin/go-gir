@@ -1502,6 +1502,11 @@ func (buffer TextBuffer) InsertMarkup(iter TextIter, markup string, len_ int) {
 	C.free(unsafe.Pointer(markup0))
 }
 
+// InsertPixbuf is a wrapper around gtk_text_buffer_insert_pixbuf().
+func (buffer TextBuffer) InsertPixbuf(iter TextIter, pixbuf gdkpixbuf.Pixbuf) {
+	C.gtk_text_buffer_insert_pixbuf(buffer.native(), iter.native(), (*C.GdkPixbuf)(pixbuf.Ptr))
+}
+
 // InsertRange is a wrapper around gtk_text_buffer_insert_range().
 func (buffer TextBuffer) InsertRange(iter TextIter, start TextIter, end TextIter) {
 	C.gtk_text_buffer_insert_range(buffer.native(), iter.native(), start.native(), end.native())
@@ -2200,6 +2205,11 @@ func (widget Widget) DragSourceSetIconName(icon_name string) {
 	C.free(unsafe.Pointer(icon_name0))
 }
 
+// DragSourceSetIconPixbuf is a wrapper around gtk_drag_source_set_icon_pixbuf().
+func (widget Widget) DragSourceSetIconPixbuf(pixbuf gdkpixbuf.Pixbuf) {
+	C.gtk_drag_source_set_icon_pixbuf(widget.native(), (*C.GdkPixbuf)(pixbuf.Ptr))
+}
+
 // DragSourceSetTargetList is a wrapper around gtk_drag_source_set_target_list().
 func (widget Widget) DragSourceSetTargetList(target_list TargetList) {
 	C.gtk_drag_source_set_target_list(widget.native(), target_list.native())
@@ -2213,6 +2223,11 @@ func (widget Widget) DragSourceUnset() {
 // DragUnhighlight is a wrapper around gtk_drag_unhighlight().
 func (widget Widget) DragUnhighlight() {
 	C.gtk_drag_unhighlight(widget.native())
+}
+
+// Draw is a wrapper around gtk_widget_draw().
+func (widget Widget) Draw(cr cairo.Context) {
+	C.gtk_widget_draw(widget.native(), (*C.cairo_t)(cr.Ptr))
 }
 
 // ErrorBell is a wrapper around gtk_widget_error_bell().
@@ -2622,6 +2637,12 @@ func (widget Widget) GetVisual() gdk.Visual {
 	return gdk.WrapVisual(unsafe.Pointer(ret0))
 }
 
+// GetWindow is a wrapper around gtk_widget_get_window().
+func (widget Widget) GetWindow() gdk.Window {
+	ret0 := C.gtk_widget_get_window(widget.native())
+	return gdk.WrapWindow(unsafe.Pointer(ret0))
+}
+
 // GrabAdd is a wrapper around gtk_grab_add().
 func (widget Widget) GrabAdd() {
 	C.gtk_grab_add(widget.native())
@@ -2694,11 +2715,23 @@ func (widget Widget) InitTemplate() {
 	C.gtk_widget_init_template(widget.native())
 }
 
+// InputShapeCombineRegion is a wrapper around gtk_widget_input_shape_combine_region().
+func (widget Widget) InputShapeCombineRegion(region cairo.Region) {
+	C.gtk_widget_input_shape_combine_region(widget.native(), (*C.cairo_region_t)(region.Ptr))
+}
+
 // InsertActionGroup is a wrapper around gtk_widget_insert_action_group().
 func (widget Widget) InsertActionGroup(name string, group gio.ActionGroup) {
 	name0 := (*C.gchar)(C.CString(name))
 	C.gtk_widget_insert_action_group(widget.native(), name0, (*C.GActionGroup)(group.Ptr))
 	C.free(unsafe.Pointer(name0))
+}
+
+// Intersect is a wrapper around gtk_widget_intersect().
+func (widget Widget) Intersect(area gdk.Rectangle) (bool, gdk.Rectangle) {
+	var intersection0 C.GdkRectangle
+	ret0 := C.gtk_widget_intersect(widget.native(), (*C.GdkRectangle)(area.Ptr), &intersection0)
+	return util.Int2Bool(int(ret0)), gdk.WrapRectangle(unsafe.Pointer(&intersection0))
 }
 
 // IsAncestor is a wrapper around gtk_widget_is_ancestor().
@@ -2796,6 +2829,11 @@ func (widget Widget) QueueDrawArea(x int, y int, width int, height int) {
 	C.gtk_widget_queue_draw_area(widget.native(), C.gint(x), C.gint(y), C.gint(width), C.gint(height))
 }
 
+// QueueDrawRegion is a wrapper around gtk_widget_queue_draw_region().
+func (widget Widget) QueueDrawRegion(region cairo.Region) {
+	C.gtk_widget_queue_draw_region(widget.native(), (*C.cairo_region_t)(region.Ptr))
+}
+
 // QueueResize is a wrapper around gtk_widget_queue_resize().
 func (widget Widget) QueueResize() {
 	C.gtk_widget_queue_resize(widget.native())
@@ -2809,6 +2847,12 @@ func (widget Widget) QueueResizeNoRedraw() {
 // Realize is a wrapper around gtk_widget_realize().
 func (widget Widget) Realize() {
 	C.gtk_widget_realize(widget.native())
+}
+
+// RemoveAccelerator is a wrapper around gtk_widget_remove_accelerator().
+func (widget Widget) RemoveAccelerator(accel_group AccelGroup, accel_key uint, accel_mods gdk.ModifierType) bool {
+	ret0 := C.gtk_widget_remove_accelerator(widget.native(), accel_group.native(), C.guint(accel_key), C.GdkModifierType(accel_mods))
+	return util.Int2Bool(int(ret0))
 }
 
 // RemoveMnemonicLabel is a wrapper around gtk_widget_remove_mnemonic_label().
@@ -2853,6 +2897,11 @@ func (widget Widget) SetChildVisible(is_visible bool) {
 	C.gtk_widget_set_child_visible(widget.native(), C.gboolean(util.Bool2Int(is_visible)))
 }
 
+// SetDeviceEnabled is a wrapper around gtk_widget_set_device_enabled().
+func (widget Widget) SetDeviceEnabled(device gdk.Device, enabled bool) {
+	C.gtk_widget_set_device_enabled(widget.native(), (*C.GdkDevice)(device.Ptr), C.gboolean(util.Bool2Int(enabled)))
+}
+
 // SetDeviceEvents is a wrapper around gtk_widget_set_device_events().
 func (widget Widget) SetDeviceEvents(device gdk.Device, events gdk.EventMask) {
 	C.gtk_widget_set_device_events(widget.native(), (*C.GdkDevice)(device.Ptr), C.GdkEventMask(events))
@@ -2871,6 +2920,16 @@ func (widget Widget) SetEvents(events int) {
 // SetFocusOnClick is a wrapper around gtk_widget_set_focus_on_click().
 func (widget Widget) SetFocusOnClick(focus_on_click bool) {
 	C.gtk_widget_set_focus_on_click(widget.native(), C.gboolean(util.Bool2Int(focus_on_click)))
+}
+
+// SetFontMap is a wrapper around gtk_widget_set_font_map().
+func (widget Widget) SetFontMap(font_map pango.FontMap) {
+	C.gtk_widget_set_font_map(widget.native(), (*C.PangoFontMap)(font_map.Ptr))
+}
+
+// SetFontOptions is a wrapper around gtk_widget_set_font_options().
+func (widget Widget) SetFontOptions(options cairo.FontOptions) {
+	C.gtk_widget_set_font_options(widget.native(), (*C.cairo_font_options_t)(options.Ptr))
 }
 
 // SetHalign is a wrapper around gtk_widget_set_halign().
@@ -3017,6 +3076,16 @@ func (widget Widget) SetVexpandSet(set bool) {
 // SetVisible is a wrapper around gtk_widget_set_visible().
 func (widget Widget) SetVisible(visible bool) {
 	C.gtk_widget_set_visible(widget.native(), C.gboolean(util.Bool2Int(visible)))
+}
+
+// SetVisual is a wrapper around gtk_widget_set_visual().
+func (widget Widget) SetVisual(visual gdk.Visual) {
+	C.gtk_widget_set_visual(widget.native(), (*C.GdkVisual)(visual.Ptr))
+}
+
+// ShapeCombineRegion is a wrapper around gtk_widget_shape_combine_region().
+func (widget Widget) ShapeCombineRegion(region cairo.Region) {
+	C.gtk_widget_shape_combine_region(widget.native(), (*C.cairo_region_t)(region.Ptr))
 }
 
 // Show is a wrapper around gtk_widget_show().
@@ -7404,6 +7473,11 @@ func (container Container) GetPathForChild(child Widget) WidgetPath {
 	return wrapWidgetPath(ret0)
 }
 
+// PropagateDraw is a wrapper around gtk_container_propagate_draw().
+func (container Container) PropagateDraw(child Widget, cr cairo.Context) {
+	C.gtk_container_propagate_draw(container.native(), child.native(), (*C.cairo_t)(cr.Ptr))
+}
+
 // Remove is a wrapper around gtk_container_remove().
 func (container Container) Remove(widget Widget) {
 	C.gtk_container_remove(container.native(), widget.native())
@@ -7891,6 +7965,12 @@ func (window Window) PresentWithTime(timestamp uint32) {
 	C.gtk_window_present_with_time(window.native(), C.guint32(timestamp))
 }
 
+// PropagateKeyEvent is a wrapper around gtk_window_propagate_key_event().
+func (window Window) PropagateKeyEvent(event gdk.EventKey) bool {
+	ret0 := C.gtk_window_propagate_key_event(window.native(), (*C.GdkEventKey)(event.Ptr))
+	return util.Int2Bool(int(ret0))
+}
+
 // RemoveAccelGroup is a wrapper around gtk_window_remove_accel_group().
 func (window Window) RemoveAccelGroup(accel_group AccelGroup) {
 	C.gtk_window_remove_accel_group(window.native(), accel_group.native())
@@ -7979,6 +8059,11 @@ func (window Window) SetHasUserRefCount(setting bool) {
 // SetHideTitlebarWhenMaximized is a wrapper around gtk_window_set_hide_titlebar_when_maximized().
 func (window Window) SetHideTitlebarWhenMaximized(setting bool) {
 	C.gtk_window_set_hide_titlebar_when_maximized(window.native(), C.gboolean(util.Bool2Int(setting)))
+}
+
+// SetIcon is a wrapper around gtk_window_set_icon().
+func (window Window) SetIcon(icon gdkpixbuf.Pixbuf) {
+	C.gtk_window_set_icon(window.native(), (*C.GdkPixbuf)(icon.Ptr))
 }
 
 // SetIconFromFile is a wrapper around gtk_window_set_icon_from_file().
@@ -8129,6 +8214,11 @@ func WindowListToplevels() glib.List {
 // WindowSetAutoStartupNotification is a wrapper around gtk_window_set_auto_startup_notification().
 func WindowSetAutoStartupNotification(setting bool) {
 	C.gtk_window_set_auto_startup_notification(C.gboolean(util.Bool2Int(setting)))
+}
+
+// WindowSetDefaultIcon is a wrapper around gtk_window_set_default_icon().
+func WindowSetDefaultIcon(icon gdkpixbuf.Pixbuf) {
+	C.gtk_window_set_default_icon((*C.GdkPixbuf)(icon.Ptr))
 }
 
 // WindowSetDefaultIconFromFile is a wrapper around gtk_window_set_default_icon_from_file().
@@ -12076,6 +12166,11 @@ func (menu Menu) GetReserveToggleSize() bool {
 	return util.Int2Bool(int(ret0))
 }
 
+// PlaceOnMonitor is a wrapper around gtk_menu_place_on_monitor().
+func (menu Menu) PlaceOnMonitor(monitor gdk.Monitor) {
+	C.gtk_menu_place_on_monitor(menu.native(), (*C.GdkMonitor)(monitor.Ptr))
+}
+
 // Popdown is a wrapper around gtk_menu_popdown().
 func (menu Menu) Popdown() {
 	C.gtk_menu_popdown(menu.native())
@@ -12116,6 +12211,11 @@ func (menu Menu) SetMonitor(monitor_num int) {
 // SetReserveToggleSize is a wrapper around gtk_menu_set_reserve_toggle_size().
 func (menu Menu) SetReserveToggleSize(reserve_toggle_size bool) {
 	C.gtk_menu_set_reserve_toggle_size(menu.native(), C.gboolean(util.Bool2Int(reserve_toggle_size)))
+}
+
+// SetScreen is a wrapper around gtk_menu_set_screen().
+func (menu Menu) SetScreen(screen gdk.Screen) {
+	C.gtk_menu_set_screen(menu.native(), (*C.GdkScreen)(screen.Ptr))
 }
 
 // MenuGetForAttachWidget is a wrapper around gtk_menu_get_for_attach_widget().
@@ -12620,6 +12720,13 @@ func ColorSelectionNew() Widget {
 func (colorsel ColorSelection) GetCurrentAlpha() uint16 {
 	ret0 := C.gtk_color_selection_get_current_alpha(colorsel.native())
 	return uint16(ret0)
+}
+
+// GetCurrentRgba is a wrapper around gtk_color_selection_get_current_rgba().
+func (colorsel ColorSelection) GetCurrentRgba() gdk.RGBA {
+	var rgba0 C.GdkRGBA
+	C.gtk_color_selection_get_current_rgba(colorsel.native(), &rgba0)
+	return gdk.WrapRGBA(unsafe.Pointer(&rgba0))
 }
 
 // GetHasOpacityControl is a wrapper around gtk_color_selection_get_has_opacity_control().
@@ -18076,6 +18183,13 @@ func (context StyleContext) GetBorder(state StateFlags) Border {
 	return wrapBorder(&border0)
 }
 
+// GetColor is a wrapper around gtk_style_context_get_color().
+func (context StyleContext) GetColor(state StateFlags) gdk.RGBA {
+	var color0 C.GdkRGBA
+	C.gtk_style_context_get_color(context.native(), C.GtkStateFlags(state), &color0)
+	return gdk.WrapRGBA(unsafe.Pointer(&color0))
+}
+
 // GetFrameClock is a wrapper around gtk_style_context_get_frame_clock().
 func (context StyleContext) GetFrameClock() gdk.FrameClock {
 	ret0 := C.gtk_style_context_get_frame_clock(context.native())
@@ -18799,6 +18913,12 @@ func ImageNew() Widget {
 	return wrapWidget(ret0)
 }
 
+// ImageNewFromAnimation is a wrapper around gtk_image_new_from_animation().
+func ImageNewFromAnimation(animation gdkpixbuf.PixbufAnimation) Widget {
+	ret0 := C.gtk_image_new_from_animation((*C.GdkPixbufAnimation)(animation.Ptr))
+	return wrapWidget(ret0)
+}
+
 // ImageNewFromFile is a wrapper around gtk_image_new_from_file().
 func ImageNewFromFile(filename string) Widget {
 	filename0 := (*C.gchar)(C.CString(filename))
@@ -18807,11 +18927,23 @@ func ImageNewFromFile(filename string) Widget {
 	return wrapWidget(ret0)
 }
 
+// ImageNewFromPixbuf is a wrapper around gtk_image_new_from_pixbuf().
+func ImageNewFromPixbuf(pixbuf gdkpixbuf.Pixbuf) Widget {
+	ret0 := C.gtk_image_new_from_pixbuf((*C.GdkPixbuf)(pixbuf.Ptr))
+	return wrapWidget(ret0)
+}
+
 // ImageNewFromResource is a wrapper around gtk_image_new_from_resource().
 func ImageNewFromResource(resource_path string) Widget {
 	resource_path0 := (*C.gchar)(C.CString(resource_path))
 	ret0 := C.gtk_image_new_from_resource(resource_path0)
 	C.free(unsafe.Pointer(resource_path0))
+	return wrapWidget(ret0)
+}
+
+// ImageNewFromSurface is a wrapper around gtk_image_new_from_surface().
+func ImageNewFromSurface(surface cairo.Surface) Widget {
+	ret0 := C.gtk_image_new_from_surface((*C.cairo_surface_t)(surface.Ptr))
 	return wrapWidget(ret0)
 }
 
@@ -18844,6 +18976,11 @@ func (image Image) GetStorageType() ImageType {
 	return ImageType(ret0)
 }
 
+// SetFromAnimation is a wrapper around gtk_image_set_from_animation().
+func (image Image) SetFromAnimation(animation gdkpixbuf.PixbufAnimation) {
+	C.gtk_image_set_from_animation(image.native(), (*C.GdkPixbufAnimation)(animation.Ptr))
+}
+
 // SetFromFile is a wrapper around gtk_image_set_from_file().
 func (image Image) SetFromFile(filename string) {
 	filename0 := (*C.gchar)(C.CString(filename))
@@ -18851,11 +18988,21 @@ func (image Image) SetFromFile(filename string) {
 	C.free(unsafe.Pointer(filename0))
 }
 
+// SetFromPixbuf is a wrapper around gtk_image_set_from_pixbuf().
+func (image Image) SetFromPixbuf(pixbuf gdkpixbuf.Pixbuf) {
+	C.gtk_image_set_from_pixbuf(image.native(), (*C.GdkPixbuf)(pixbuf.Ptr))
+}
+
 // SetFromResource is a wrapper around gtk_image_set_from_resource().
 func (image Image) SetFromResource(resource_path string) {
 	resource_path0 := (*C.gchar)(C.CString(resource_path))
 	C.gtk_image_set_from_resource(image.native(), resource_path0)
 	C.free(unsafe.Pointer(resource_path0))
+}
+
+// SetFromSurface is a wrapper around gtk_image_set_from_surface().
+func (image Image) SetFromSurface(surface cairo.Surface) {
+	C.gtk_image_set_from_surface(image.native(), (*C.cairo_surface_t)(surface.Ptr))
 }
 
 // SetPixelSize is a wrapper around gtk_image_set_pixel_size().
@@ -21302,6 +21449,11 @@ func (op MountOperation) SetParent(parent Window) {
 	C.gtk_mount_operation_set_parent(op.native(), parent.native())
 }
 
+// SetScreen is a wrapper around gtk_mount_operation_set_screen().
+func (op MountOperation) SetScreen(screen gdk.Screen) {
+	C.gtk_mount_operation_set_screen(op.native(), (*C.GdkScreen)(screen.Ptr))
+}
+
 // Object Notebook
 type Notebook struct {
 	atk.ImplementorIfaceIface
@@ -21929,6 +22081,12 @@ func PageSetupNewFromFile(file_name string) (PageSetup, error) {
 	return wrapPageSetup(ret0), nil
 }
 
+// PageSetupNewFromGvariant is a wrapper around gtk_page_setup_new_from_gvariant().
+func PageSetupNewFromGvariant(variant glib.Variant) PageSetup {
+	ret0 := C.gtk_page_setup_new_from_gvariant((*C.GVariant)(variant.Ptr))
+	return wrapPageSetup(ret0)
+}
+
 // PageSetupNewFromKeyFile is a wrapper around gtk_page_setup_new_from_key_file().
 func PageSetupNewFromKeyFile(key_file glib.KeyFile, group_name string) (PageSetup, error) {
 	group_name0 := (*C.gchar)(C.CString(group_name))
@@ -22086,6 +22244,13 @@ func (setup PageSetup) ToFile(file_name string) (bool, error) {
 func (setup PageSetup) ToGvariant() glib.Variant {
 	ret0 := C.gtk_page_setup_to_gvariant(setup.native())
 	return glib.WrapVariant(unsafe.Pointer(ret0))
+}
+
+// ToKeyFile is a wrapper around gtk_page_setup_to_key_file().
+func (setup PageSetup) ToKeyFile(key_file glib.KeyFile, group_name string) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	C.gtk_page_setup_to_key_file(setup.native(), (*C.GKeyFile)(key_file.Ptr), group_name0)
+	C.free(unsafe.Pointer(group_name0))
 }
 
 // Object PanedAccessible
@@ -22728,6 +22893,11 @@ func (context PrintContext) GetWidth() float64 {
 	return float64(ret0)
 }
 
+// SetCairoContext is a wrapper around gtk_print_context_set_cairo_context().
+func (context PrintContext) SetCairoContext(cr cairo.Context, dpi_x float64, dpi_y float64) {
+	C.gtk_print_context_set_cairo_context(context.native(), (*C.cairo_t)(cr.Ptr), C.double(dpi_x), C.double(dpi_y))
+}
+
 // Object PrintOperation
 type PrintOperation struct {
 	PrintOperationPreviewIface
@@ -22970,6 +23140,12 @@ func PrintSettingsNewFromFile(file_name string) (PrintSettings, error) {
 		return PrintSettings{}, err.GoValue()
 	}
 	return wrapPrintSettings(ret0), nil
+}
+
+// PrintSettingsNewFromGvariant is a wrapper around gtk_print_settings_new_from_gvariant().
+func PrintSettingsNewFromGvariant(variant glib.Variant) PrintSettings {
+	ret0 := C.gtk_print_settings_new_from_gvariant((*C.GVariant)(variant.Ptr))
+	return wrapPrintSettings(ret0)
 }
 
 // PrintSettingsNewFromKeyFile is a wrapper around gtk_print_settings_new_from_key_file().
@@ -23438,6 +23614,13 @@ func (settings PrintSettings) ToFile(file_name string) (bool, error) {
 func (settings PrintSettings) ToGvariant() glib.Variant {
 	ret0 := C.gtk_print_settings_to_gvariant(settings.native())
 	return glib.WrapVariant(unsafe.Pointer(ret0))
+}
+
+// ToKeyFile is a wrapper around gtk_print_settings_to_key_file().
+func (settings PrintSettings) ToKeyFile(key_file glib.KeyFile, group_name string) {
+	group_name0 := (*C.gchar)(C.CString(group_name))
+	C.gtk_print_settings_to_key_file(settings.native(), (*C.GKeyFile)(key_file.Ptr), group_name0)
+	C.free(unsafe.Pointer(group_name0))
 }
 
 // Unset is a wrapper around gtk_print_settings_unset().
@@ -26863,6 +27046,12 @@ func (text_view TextView) GetVisibleRect() gdk.Rectangle {
 	return gdk.WrapRectangle(unsafe.Pointer(&visible_rect0))
 }
 
+// GetWindowType is a wrapper around gtk_text_view_get_window_type().
+func (text_view TextView) GetWindowType(window gdk.Window) TextWindowType {
+	ret0 := C.gtk_text_view_get_window_type(text_view.native(), (*C.GdkWindow)(window.Ptr))
+	return TextWindowType(ret0)
+}
+
 // GetWrapMode is a wrapper around gtk_text_view_get_wrap_mode().
 func (text_view TextView) GetWrapMode() WrapMode {
 	ret0 := C.gtk_text_view_get_wrap_mode(text_view.native())
@@ -27001,6 +27190,11 @@ func (text_view TextView) SetPixelsInsideWrap(pixels_inside_wrap int) {
 // SetRightMargin is a wrapper around gtk_text_view_set_right_margin().
 func (text_view TextView) SetRightMargin(right_margin int) {
 	C.gtk_text_view_set_right_margin(text_view.native(), C.gint(right_margin))
+}
+
+// SetTabs is a wrapper around gtk_text_view_set_tabs().
+func (text_view TextView) SetTabs(tabs pango.TabArray) {
+	C.gtk_text_view_set_tabs(text_view.native(), (*C.PangoTabArray)(tabs.Ptr))
 }
 
 // SetTopMargin is a wrapper around gtk_text_view_set_top_margin().
