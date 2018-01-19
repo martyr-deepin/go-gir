@@ -56,7 +56,7 @@ func ClientNew(subsystems []string) Client {
 	}
 	ret0 := C.g_udev_client_new(subsystems0Ptr)
 	for _, elem := range subsystems0 {
-		C.free(unsafe.Pointer(elem)) /*ch:<stdlib.h>*/
+		C.free(unsafe.Pointer(elem))
 	}
 	return wrapClient(ret0)
 }
@@ -65,7 +65,7 @@ func ClientNew(subsystems []string) Client {
 func (client Client) QueryByDeviceFile(device_file string) Device {
 	device_file0 := (*C.gchar)(C.CString(device_file))
 	ret0 := C.g_udev_client_query_by_device_file(client.native(), device_file0)
-	C.free(unsafe.Pointer(device_file0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(device_file0))
 	return wrapDevice(ret0)
 }
 
@@ -79,9 +79,9 @@ func (client Client) QueryByDeviceNumber(type_ DeviceType, number DeviceNumber) 
 func (client Client) QueryBySubsystem(subsystem string) glib.List {
 	subsystem0 := (*C.gchar)(C.CString(subsystem))
 	ret0 := C.g_udev_client_query_by_subsystem(client.native(), subsystem0)
-	C.free(unsafe.Pointer(subsystem0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(subsystem0))
 	return glib.WrapList(unsafe.Pointer(ret0),
-		func(p unsafe.Pointer) interface{} { return WrapDevice(p) }) /*gir:GLib*/
+		func(p unsafe.Pointer) interface{} { return WrapDevice(p) })
 }
 
 // QueryBySubsystemAndName is a wrapper around g_udev_client_query_by_subsystem_and_name().
@@ -89,8 +89,8 @@ func (client Client) QueryBySubsystemAndName(subsystem string, name string) Devi
 	subsystem0 := (*C.gchar)(C.CString(subsystem))
 	name0 := (*C.gchar)(C.CString(name))
 	ret0 := C.g_udev_client_query_by_subsystem_and_name(client.native(), subsystem0, name0)
-	C.free(unsafe.Pointer(subsystem0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(name0))      /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(subsystem0))
+	C.free(unsafe.Pointer(name0))
 	return wrapDevice(ret0)
 }
 
@@ -98,7 +98,7 @@ func (client Client) QueryBySubsystemAndName(subsystem string, name string) Devi
 func (client Client) QueryBySysfsPath(sysfs_path string) Device {
 	sysfs_path0 := (*C.gchar)(C.CString(sysfs_path))
 	ret0 := C.g_udev_client_query_by_sysfs_path(client.native(), sysfs_path0)
-	C.free(unsafe.Pointer(sysfs_path0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(sysfs_path0))
 	return wrapDevice(ret0)
 }
 
@@ -153,7 +153,7 @@ func (device Device) GetDeviceFileSymlinks() []string {
 	ret0 := C.g_udev_device_get_device_file_symlinks(device.native())
 	var ret0Slice []*C.gchar
 	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
-		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))))
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
@@ -191,7 +191,7 @@ func (device Device) GetDriver() string {
 // GetIsInitialized is a wrapper around g_udev_device_get_is_initialized().
 func (device Device) GetIsInitialized() bool {
 	ret0 := C.g_udev_device_get_is_initialized(device.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetName is a wrapper around g_udev_device_get_name().
@@ -219,8 +219,8 @@ func (device Device) GetParentWithSubsystem(subsystem string, devtype string) De
 	subsystem0 := (*C.gchar)(C.CString(subsystem))
 	devtype0 := (*C.gchar)(C.CString(devtype))
 	ret0 := C.g_udev_device_get_parent_with_subsystem(device.native(), subsystem0, devtype0)
-	C.free(unsafe.Pointer(subsystem0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(devtype0))   /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(subsystem0))
+	C.free(unsafe.Pointer(devtype0))
 	return wrapDevice(ret0)
 }
 
@@ -228,7 +228,7 @@ func (device Device) GetParentWithSubsystem(subsystem string, devtype string) De
 func (device Device) GetProperty(key string) string {
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_udev_device_get_property(device.native(), key0)
-	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
@@ -237,15 +237,15 @@ func (device Device) GetProperty(key string) string {
 func (device Device) GetPropertyAsBoolean(key string) bool {
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_udev_device_get_property_as_boolean(device.native(), key0)
-	C.free(unsafe.Pointer(key0))    /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	C.free(unsafe.Pointer(key0))
+	return util.Int2Bool(int(ret0))
 }
 
 // GetPropertyAsDouble is a wrapper around g_udev_device_get_property_as_double().
 func (device Device) GetPropertyAsDouble(key string) float64 {
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_udev_device_get_property_as_double(device.native(), key0)
-	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))
 	return float64(ret0)
 }
 
@@ -253,7 +253,7 @@ func (device Device) GetPropertyAsDouble(key string) float64 {
 func (device Device) GetPropertyAsInt(key string) int {
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_udev_device_get_property_as_int(device.native(), key0)
-	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))
 	return int(ret0)
 }
 
@@ -261,10 +261,10 @@ func (device Device) GetPropertyAsInt(key string) int {
 func (device Device) GetPropertyAsStrv(key string) []string {
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_udev_device_get_property_as_strv(device.native(), key0)
-	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))
 	var ret0Slice []*C.gchar
 	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
-		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))))
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
@@ -277,7 +277,7 @@ func (device Device) GetPropertyAsStrv(key string) []string {
 func (device Device) GetPropertyAsUint64(key string) uint64 {
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_udev_device_get_property_as_uint64(device.native(), key0)
-	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))
 	return uint64(ret0)
 }
 
@@ -286,7 +286,7 @@ func (device Device) GetPropertyKeys() []string {
 	ret0 := C.g_udev_device_get_property_keys(device.native())
 	var ret0Slice []*C.gchar
 	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
-		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))))
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
@@ -312,7 +312,7 @@ func (device Device) GetSubsystem() string {
 func (device Device) GetSysfsAttr(name string) string {
 	name0 := (*C.gchar)(C.CString(name))
 	ret0 := C.g_udev_device_get_sysfs_attr(device.native(), name0)
-	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
@@ -321,15 +321,15 @@ func (device Device) GetSysfsAttr(name string) string {
 func (device Device) GetSysfsAttrAsBoolean(name string) bool {
 	name0 := (*C.gchar)(C.CString(name))
 	ret0 := C.g_udev_device_get_sysfs_attr_as_boolean(device.native(), name0)
-	C.free(unsafe.Pointer(name0))   /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	C.free(unsafe.Pointer(name0))
+	return util.Int2Bool(int(ret0))
 }
 
 // GetSysfsAttrAsDouble is a wrapper around g_udev_device_get_sysfs_attr_as_double().
 func (device Device) GetSysfsAttrAsDouble(name string) float64 {
 	name0 := (*C.gchar)(C.CString(name))
 	ret0 := C.g_udev_device_get_sysfs_attr_as_double(device.native(), name0)
-	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
 	return float64(ret0)
 }
 
@@ -337,7 +337,7 @@ func (device Device) GetSysfsAttrAsDouble(name string) float64 {
 func (device Device) GetSysfsAttrAsInt(name string) int {
 	name0 := (*C.gchar)(C.CString(name))
 	ret0 := C.g_udev_device_get_sysfs_attr_as_int(device.native(), name0)
-	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
 	return int(ret0)
 }
 
@@ -345,10 +345,10 @@ func (device Device) GetSysfsAttrAsInt(name string) int {
 func (device Device) GetSysfsAttrAsStrv(name string) []string {
 	name0 := (*C.gchar)(C.CString(name))
 	ret0 := C.g_udev_device_get_sysfs_attr_as_strv(device.native(), name0)
-	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
 	var ret0Slice []*C.gchar
 	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
-		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))))
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
@@ -361,7 +361,7 @@ func (device Device) GetSysfsAttrAsStrv(name string) []string {
 func (device Device) GetSysfsAttrAsUint64(name string) uint64 {
 	name0 := (*C.gchar)(C.CString(name))
 	ret0 := C.g_udev_device_get_sysfs_attr_as_uint64(device.native(), name0)
-	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
 	return uint64(ret0)
 }
 
@@ -370,7 +370,7 @@ func (device Device) GetSysfsAttrKeys() []string {
 	ret0 := C.g_udev_device_get_sysfs_attr_keys(device.native())
 	var ret0Slice []*C.gchar
 	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
-		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))))
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
@@ -391,7 +391,7 @@ func (device Device) GetTags() []string {
 	ret0 := C.g_udev_device_get_tags(device.native())
 	var ret0Slice []*C.gchar
 	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
-		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))))
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
@@ -410,16 +410,16 @@ func (device Device) GetUsecSinceInitialized() uint64 {
 func (device Device) HasProperty(key string) bool {
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_udev_device_has_property(device.native(), key0)
-	C.free(unsafe.Pointer(key0))    /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	C.free(unsafe.Pointer(key0))
+	return util.Int2Bool(int(ret0))
 }
 
 // HasSysfsAttr is a wrapper around g_udev_device_has_sysfs_attr().
 func (device Device) HasSysfsAttr(key string) bool {
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_udev_device_has_sysfs_attr(device.native(), key0)
-	C.free(unsafe.Pointer(key0))    /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	C.free(unsafe.Pointer(key0))
+	return util.Int2Bool(int(ret0))
 }
 
 // Object Enumerator
@@ -470,7 +470,7 @@ func (enumerator Enumerator) AddMatchIsInitialized() Enumerator {
 func (enumerator Enumerator) AddMatchName(name string) Enumerator {
 	name0 := (*C.gchar)(C.CString(name))
 	ret0 := C.g_udev_enumerator_add_match_name(enumerator.native(), name0)
-	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
 	return wrapEnumerator(ret0)
 }
 
@@ -479,8 +479,8 @@ func (enumerator Enumerator) AddMatchProperty(name string, value string) Enumera
 	name0 := (*C.gchar)(C.CString(name))
 	value0 := (*C.gchar)(C.CString(value))
 	ret0 := C.g_udev_enumerator_add_match_property(enumerator.native(), name0, value0)
-	C.free(unsafe.Pointer(name0))  /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(value0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
+	C.free(unsafe.Pointer(value0))
 	return wrapEnumerator(ret0)
 }
 
@@ -488,7 +488,7 @@ func (enumerator Enumerator) AddMatchProperty(name string, value string) Enumera
 func (enumerator Enumerator) AddMatchSubsystem(subsystem string) Enumerator {
 	subsystem0 := (*C.gchar)(C.CString(subsystem))
 	ret0 := C.g_udev_enumerator_add_match_subsystem(enumerator.native(), subsystem0)
-	C.free(unsafe.Pointer(subsystem0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(subsystem0))
 	return wrapEnumerator(ret0)
 }
 
@@ -497,8 +497,8 @@ func (enumerator Enumerator) AddMatchSysfsAttr(name string, value string) Enumer
 	name0 := (*C.gchar)(C.CString(name))
 	value0 := (*C.gchar)(C.CString(value))
 	ret0 := C.g_udev_enumerator_add_match_sysfs_attr(enumerator.native(), name0, value0)
-	C.free(unsafe.Pointer(name0))  /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(value0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
+	C.free(unsafe.Pointer(value0))
 	return wrapEnumerator(ret0)
 }
 
@@ -506,7 +506,7 @@ func (enumerator Enumerator) AddMatchSysfsAttr(name string, value string) Enumer
 func (enumerator Enumerator) AddMatchTag(tag string) Enumerator {
 	tag0 := (*C.gchar)(C.CString(tag))
 	ret0 := C.g_udev_enumerator_add_match_tag(enumerator.native(), tag0)
-	C.free(unsafe.Pointer(tag0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(tag0))
 	return wrapEnumerator(ret0)
 }
 
@@ -514,7 +514,7 @@ func (enumerator Enumerator) AddMatchTag(tag string) Enumerator {
 func (enumerator Enumerator) AddNomatchSubsystem(subsystem string) Enumerator {
 	subsystem0 := (*C.gchar)(C.CString(subsystem))
 	ret0 := C.g_udev_enumerator_add_nomatch_subsystem(enumerator.native(), subsystem0)
-	C.free(unsafe.Pointer(subsystem0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(subsystem0))
 	return wrapEnumerator(ret0)
 }
 
@@ -523,8 +523,8 @@ func (enumerator Enumerator) AddNomatchSysfsAttr(name string, value string) Enum
 	name0 := (*C.gchar)(C.CString(name))
 	value0 := (*C.gchar)(C.CString(value))
 	ret0 := C.g_udev_enumerator_add_nomatch_sysfs_attr(enumerator.native(), name0, value0)
-	C.free(unsafe.Pointer(name0))  /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(value0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
+	C.free(unsafe.Pointer(value0))
 	return wrapEnumerator(ret0)
 }
 
@@ -532,7 +532,7 @@ func (enumerator Enumerator) AddNomatchSysfsAttr(name string, value string) Enum
 func (enumerator Enumerator) AddSysfsPath(sysfs_path string) Enumerator {
 	sysfs_path0 := (*C.gchar)(C.CString(sysfs_path))
 	ret0 := C.g_udev_enumerator_add_sysfs_path(enumerator.native(), sysfs_path0)
-	C.free(unsafe.Pointer(sysfs_path0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(sysfs_path0))
 	return wrapEnumerator(ret0)
 }
 
@@ -540,7 +540,7 @@ func (enumerator Enumerator) AddSysfsPath(sysfs_path string) Enumerator {
 func (enumerator Enumerator) Execute() glib.List {
 	ret0 := C.g_udev_enumerator_execute(enumerator.native())
 	return glib.WrapList(unsafe.Pointer(ret0),
-		func(p unsafe.Pointer) interface{} { return WrapDevice(p) }) /*gir:GLib*/
+		func(p unsafe.Pointer) interface{} { return WrapDevice(p) })
 }
 
 type DeviceNumber uint64

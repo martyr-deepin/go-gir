@@ -57,7 +57,7 @@ func (format PixbufFormat) GetExtensions() []string {
 	ret0 := C.gdk_pixbuf_format_get_extensions(format.native())
 	var ret0Slice []*C.gchar
 	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
-		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))))
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
@@ -81,7 +81,7 @@ func (format PixbufFormat) GetMimeTypes() []string {
 	ret0 := C.gdk_pixbuf_format_get_mime_types(format.native())
 	var ret0Slice []*C.gchar
 	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
-		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))))
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
@@ -103,32 +103,32 @@ func (format PixbufFormat) GetName() string {
 // IsDisabled is a wrapper around gdk_pixbuf_format_is_disabled().
 func (format PixbufFormat) IsDisabled() bool {
 	ret0 := C.gdk_pixbuf_format_is_disabled(format.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsSaveOptionSupported is a wrapper around gdk_pixbuf_format_is_save_option_supported().
 func (format PixbufFormat) IsSaveOptionSupported(option_key string) bool {
 	option_key0 := (*C.gchar)(C.CString(option_key))
 	ret0 := C.gdk_pixbuf_format_is_save_option_supported(format.native(), option_key0)
-	C.free(unsafe.Pointer(option_key0)) /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0))     /*go:.util*/
+	C.free(unsafe.Pointer(option_key0))
+	return util.Int2Bool(int(ret0))
 }
 
 // IsScalable is a wrapper around gdk_pixbuf_format_is_scalable().
 func (format PixbufFormat) IsScalable() bool {
 	ret0 := C.gdk_pixbuf_format_is_scalable(format.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsWritable is a wrapper around gdk_pixbuf_format_is_writable().
 func (format PixbufFormat) IsWritable() bool {
 	ret0 := C.gdk_pixbuf_format_is_writable(format.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // SetDisabled is a wrapper around gdk_pixbuf_format_set_disabled().
 func (format PixbufFormat) SetDisabled(disabled bool) {
-	C.gdk_pixbuf_format_set_disabled(format.native(), C.gboolean(util.Bool2Int(disabled)) /*go:.util*/)
+	C.gdk_pixbuf_format_set_disabled(format.native(), C.gboolean(util.Bool2Int(disabled)))
 }
 
 // Object Pixbuf
@@ -173,7 +173,13 @@ func (v Pixbuf) LoadableIcon() gio.LoadableIcon {
 
 // PixbufNew is a wrapper around gdk_pixbuf_new().
 func PixbufNew(colorspace Colorspace, has_alpha bool, bits_per_sample int, width int, height int) Pixbuf {
-	ret0 := C.gdk_pixbuf_new(C.GdkColorspace(colorspace), C.gboolean(util.Bool2Int(has_alpha)) /*go:.util*/, C.int(bits_per_sample), C.int(width), C.int(height))
+	ret0 := C.gdk_pixbuf_new(C.GdkColorspace(colorspace), C.gboolean(util.Bool2Int(has_alpha)), C.int(bits_per_sample), C.int(width), C.int(height))
+	return wrapPixbuf(ret0)
+}
+
+// PixbufNewFromBytes is a wrapper around gdk_pixbuf_new_from_bytes().
+func PixbufNewFromBytes(data glib.Bytes, colorspace Colorspace, has_alpha bool, bits_per_sample int, width int, height int, rowstride int) Pixbuf {
+	ret0 := C.gdk_pixbuf_new_from_bytes((*C.GBytes)(data.Ptr), C.GdkColorspace(colorspace), C.gboolean(util.Bool2Int(has_alpha)), C.int(bits_per_sample), C.int(width), C.int(height), C.int(rowstride))
 	return wrapPixbuf(ret0)
 }
 
@@ -182,7 +188,7 @@ func PixbufNewFromFile(filename string) (Pixbuf, error) {
 	filename0 := C.CString(filename)
 	var err glib.Error
 	ret0 := C.gdk_pixbuf_new_from_file(filename0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(filename0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(filename0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return Pixbuf{}, err.GoValue()
@@ -194,8 +200,8 @@ func PixbufNewFromFile(filename string) (Pixbuf, error) {
 func PixbufNewFromFileAtScale(filename string, width int, height int, preserve_aspect_ratio bool) (Pixbuf, error) {
 	filename0 := C.CString(filename)
 	var err glib.Error
-	ret0 := C.gdk_pixbuf_new_from_file_at_scale(filename0, C.int(width), C.int(height), C.gboolean(util.Bool2Int(preserve_aspect_ratio)) /*go:.util*/, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(filename0)) /*ch:<stdlib.h>*/
+	ret0 := C.gdk_pixbuf_new_from_file_at_scale(filename0, C.int(width), C.int(height), C.gboolean(util.Bool2Int(preserve_aspect_ratio)), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(filename0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return Pixbuf{}, err.GoValue()
@@ -208,7 +214,7 @@ func PixbufNewFromFileAtSize(filename string, width int, height int) (Pixbuf, er
 	filename0 := C.CString(filename)
 	var err glib.Error
 	ret0 := C.gdk_pixbuf_new_from_file_at_size(filename0, C.int(width), C.int(height), (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(filename0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(filename0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return Pixbuf{}, err.GoValue()
@@ -221,7 +227,7 @@ func PixbufNewFromResource(resource_path string) (Pixbuf, error) {
 	resource_path0 := C.CString(resource_path)
 	var err glib.Error
 	ret0 := C.gdk_pixbuf_new_from_resource(resource_path0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(resource_path0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(resource_path0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return Pixbuf{}, err.GoValue()
@@ -233,8 +239,8 @@ func PixbufNewFromResource(resource_path string) (Pixbuf, error) {
 func PixbufNewFromResourceAtScale(resource_path string, width int, height int, preserve_aspect_ratio bool) (Pixbuf, error) {
 	resource_path0 := C.CString(resource_path)
 	var err glib.Error
-	ret0 := C.gdk_pixbuf_new_from_resource_at_scale(resource_path0, C.int(width), C.int(height), C.gboolean(util.Bool2Int(preserve_aspect_ratio)) /*go:.util*/, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(resource_path0)) /*ch:<stdlib.h>*/
+	ret0 := C.gdk_pixbuf_new_from_resource_at_scale(resource_path0, C.int(width), C.int(height), C.gboolean(util.Bool2Int(preserve_aspect_ratio)), (**C.GError)(unsafe.Pointer(&err)))
+	C.free(unsafe.Pointer(resource_path0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return Pixbuf{}, err.GoValue()
@@ -256,7 +262,7 @@ func PixbufNewFromStream(stream gio.InputStream, cancellable gio.Cancellable) (P
 // PixbufNewFromStreamAtScale is a wrapper around gdk_pixbuf_new_from_stream_at_scale().
 func PixbufNewFromStreamAtScale(stream gio.InputStream, width int, height int, preserve_aspect_ratio bool, cancellable gio.Cancellable) (Pixbuf, error) {
 	var err glib.Error
-	ret0 := C.gdk_pixbuf_new_from_stream_at_scale((*C.GInputStream)(stream.Ptr), C.gint(width), C.gint(height), C.gboolean(util.Bool2Int(preserve_aspect_ratio)) /*go:.util*/, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
+	ret0 := C.gdk_pixbuf_new_from_stream_at_scale((*C.GInputStream)(stream.Ptr), C.gint(width), C.gint(height), C.gboolean(util.Bool2Int(preserve_aspect_ratio)), (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
 		defer err.Free()
 		return Pixbuf{}, err.GoValue()
@@ -288,14 +294,14 @@ func PixbufNewFromXpmData(data []string) Pixbuf {
 	}
 	ret0 := C.gdk_pixbuf_new_from_xpm_data(data0Ptr)
 	for _, elem := range data0 {
-		C.free(unsafe.Pointer(elem)) /*ch:<stdlib.h>*/
+		C.free(unsafe.Pointer(elem))
 	}
 	return wrapPixbuf(ret0)
 }
 
 // AddAlpha is a wrapper around gdk_pixbuf_add_alpha().
 func (pixbuf Pixbuf) AddAlpha(substitute_color bool, r byte, g byte, b byte) Pixbuf {
-	ret0 := C.gdk_pixbuf_add_alpha(pixbuf.native(), C.gboolean(util.Bool2Int(substitute_color)) /*go:.util*/, C.guchar(r), C.guchar(g), C.guchar(b))
+	ret0 := C.gdk_pixbuf_add_alpha(pixbuf.native(), C.gboolean(util.Bool2Int(substitute_color)), C.guchar(r), C.guchar(g), C.guchar(b))
 	return wrapPixbuf(ret0)
 }
 
@@ -335,7 +341,7 @@ func (src_pixbuf Pixbuf) CopyArea(src_x int, src_y int, width int, height int, d
 // CopyOptions is a wrapper around gdk_pixbuf_copy_options().
 func (src_pixbuf Pixbuf) CopyOptions(dest_pixbuf Pixbuf) bool {
 	ret0 := C.gdk_pixbuf_copy_options(src_pixbuf.native(), dest_pixbuf.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Fill is a wrapper around gdk_pixbuf_fill().
@@ -345,7 +351,7 @@ func (pixbuf Pixbuf) Fill(pixel uint32) {
 
 // Flip is a wrapper around gdk_pixbuf_flip().
 func (src Pixbuf) Flip(horizontal bool) Pixbuf {
-	ret0 := C.gdk_pixbuf_flip(src.native(), C.gboolean(util.Bool2Int(horizontal)) /*go:.util*/)
+	ret0 := C.gdk_pixbuf_flip(src.native(), C.gboolean(util.Bool2Int(horizontal)))
 	return wrapPixbuf(ret0)
 }
 
@@ -370,7 +376,7 @@ func (pixbuf Pixbuf) GetColorspace() Colorspace {
 // GetHasAlpha is a wrapper around gdk_pixbuf_get_has_alpha().
 func (pixbuf Pixbuf) GetHasAlpha() bool {
 	ret0 := C.gdk_pixbuf_get_has_alpha(pixbuf.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetHeight is a wrapper around gdk_pixbuf_get_height().
@@ -389,7 +395,7 @@ func (pixbuf Pixbuf) GetNChannels() int {
 func (pixbuf Pixbuf) GetOption(key string) string {
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.gdk_pixbuf_get_option(pixbuf.native(), key0)
-	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
@@ -401,7 +407,7 @@ func (pixbuf Pixbuf) GetPixels() []byte {
 	var length0 C.guint
 	ret0 := C.gdk_pixbuf_get_pixels_with_length(pixbuf.native(), &length0)
 	var ret0Slice []C.guchar
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0))
 	ret := make([]byte, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		ret[idx] = byte(elem)
@@ -430,15 +436,15 @@ func (src_pixbuf Pixbuf) NewSubpixbuf(src_x int, src_y int, width int, height in
 // ReadPixelBytes is a wrapper around gdk_pixbuf_read_pixel_bytes().
 func (pixbuf Pixbuf) ReadPixelBytes() glib.Bytes {
 	ret0 := C.gdk_pixbuf_read_pixel_bytes(pixbuf.native())
-	return glib.WrapBytes(unsafe.Pointer(ret0)) /*gir:GLib*/
+	return glib.WrapBytes(unsafe.Pointer(ret0))
 }
 
 // RemoveOption is a wrapper around gdk_pixbuf_remove_option().
 func (pixbuf Pixbuf) RemoveOption(key string) bool {
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.gdk_pixbuf_remove_option(pixbuf.native(), key0)
-	C.free(unsafe.Pointer(key0))    /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	C.free(unsafe.Pointer(key0))
+	return util.Int2Bool(int(ret0))
 }
 
 // RotateSimple is a wrapper around gdk_pixbuf_rotate_simple().
@@ -449,7 +455,7 @@ func (src Pixbuf) RotateSimple(angle PixbufRotation) Pixbuf {
 
 // SaturateAndPixelate is a wrapper around gdk_pixbuf_saturate_and_pixelate().
 func (src Pixbuf) SaturateAndPixelate(dest Pixbuf, saturation float32, pixelate bool) {
-	C.gdk_pixbuf_saturate_and_pixelate(src.native(), dest.native(), C.gfloat(saturation), C.gboolean(util.Bool2Int(pixelate)) /*go:.util*/)
+	C.gdk_pixbuf_saturate_and_pixelate(src.native(), dest.native(), C.gfloat(saturation), C.gboolean(util.Bool2Int(pixelate)))
 }
 
 // SaveToStreamv is a wrapper around gdk_pixbuf_save_to_streamv().
@@ -475,18 +481,18 @@ func (pixbuf Pixbuf) SaveToStreamv(stream gio.OutputStream, type_ string, option
 	}
 	var err glib.Error
 	ret0 := C.gdk_pixbuf_save_to_streamv(pixbuf.native(), (*C.GOutputStream)(stream.Ptr), type0, option_keys0Ptr, option_values0Ptr, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(type0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(type0))
 	for _, elem := range option_keys0 {
-		C.free(unsafe.Pointer(elem)) /*ch:<stdlib.h>*/
+		C.free(unsafe.Pointer(elem))
 	}
 	for _, elem := range option_values0 {
-		C.free(unsafe.Pointer(elem)) /*ch:<stdlib.h>*/
+		C.free(unsafe.Pointer(elem))
 	}
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // Savev is a wrapper around gdk_pixbuf_savev().
@@ -513,19 +519,19 @@ func (pixbuf Pixbuf) Savev(filename string, type_ string, option_keys []string, 
 	}
 	var err glib.Error
 	ret0 := C.gdk_pixbuf_savev(pixbuf.native(), filename0, type0, option_keys0Ptr, option_values0Ptr, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(filename0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(type0))     /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(filename0))
+	C.free(unsafe.Pointer(type0))
 	for _, elem := range option_keys0 {
-		C.free(unsafe.Pointer(elem)) /*ch:<stdlib.h>*/
+		C.free(unsafe.Pointer(elem))
 	}
 	for _, elem := range option_values0 {
-		C.free(unsafe.Pointer(elem)) /*ch:<stdlib.h>*/
+		C.free(unsafe.Pointer(elem))
 	}
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // Scale is a wrapper around gdk_pixbuf_scale().
@@ -544,9 +550,9 @@ func (pixbuf Pixbuf) SetOption(key string, value string) bool {
 	key0 := (*C.gchar)(C.CString(key))
 	value0 := (*C.gchar)(C.CString(value))
 	ret0 := C.gdk_pixbuf_set_option(pixbuf.native(), key0, value0)
-	C.free(unsafe.Pointer(key0))    /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(value0))  /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	C.free(unsafe.Pointer(key0))
+	C.free(unsafe.Pointer(value0))
+	return util.Int2Bool(int(ret0))
 }
 
 // PixbufGetFileInfo is a wrapper around gdk_pixbuf_get_file_info().
@@ -555,7 +561,7 @@ func PixbufGetFileInfo(filename string) (PixbufFormat, int, int) {
 	var width0 C.gint
 	var height0 C.gint
 	ret0 := C.gdk_pixbuf_get_file_info(filename0, &width0, &height0)
-	C.free(unsafe.Pointer(filename0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(filename0))
 	return wrapPixbufFormat(ret0), int(width0), int(height0)
 }
 
@@ -580,7 +586,7 @@ func PixbufSaveToStreamFinish(async_result gio.AsyncResult) (bool, error) {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // Object PixbufAnimation
@@ -620,7 +626,7 @@ func PixbufAnimationNewFromFile(filename string) (PixbufAnimation, error) {
 	filename0 := C.CString(filename)
 	var err glib.Error
 	ret0 := C.gdk_pixbuf_animation_new_from_file(filename0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(filename0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(filename0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return PixbufAnimation{}, err.GoValue()
@@ -633,7 +639,7 @@ func PixbufAnimationNewFromResource(resource_path string) (PixbufAnimation, erro
 	resource_path0 := C.CString(resource_path)
 	var err glib.Error
 	ret0 := C.gdk_pixbuf_animation_new_from_resource(resource_path0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(resource_path0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(resource_path0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return PixbufAnimation{}, err.GoValue()
@@ -690,7 +696,7 @@ func (animation PixbufAnimation) GetWidth() int {
 // IsStaticImage is a wrapper around gdk_pixbuf_animation_is_static_image().
 func (animation PixbufAnimation) IsStaticImage() bool {
 	ret0 := C.gdk_pixbuf_animation_is_static_image(animation.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Object PixbufAnimationIter
@@ -728,7 +734,7 @@ func (v PixbufAnimationIter) GetGValueGetter() gobject.GValueGetter {
 // Advance is a wrapper around gdk_pixbuf_animation_iter_advance().
 func (iter PixbufAnimationIter) Advance(current_time glib.TimeVal) bool {
 	ret0 := C.gdk_pixbuf_animation_iter_advance(iter.native(), (*C.GTimeVal)(current_time.Ptr))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetDelayTime is a wrapper around gdk_pixbuf_animation_iter_get_delay_time().
@@ -746,7 +752,7 @@ func (iter PixbufAnimationIter) GetPixbuf() Pixbuf {
 // OnCurrentlyLoadingFrame is a wrapper around gdk_pixbuf_animation_iter_on_currently_loading_frame().
 func (iter PixbufAnimationIter) OnCurrentlyLoadingFrame() bool {
 	ret0 := C.gdk_pixbuf_animation_iter_on_currently_loading_frame(iter.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Object PixbufLoader
@@ -792,7 +798,7 @@ func PixbufLoaderNewWithMimeType(mime_type string) (PixbufLoader, error) {
 	mime_type0 := C.CString(mime_type)
 	var err glib.Error
 	ret0 := C.gdk_pixbuf_loader_new_with_mime_type(mime_type0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(mime_type0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(mime_type0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return PixbufLoader{}, err.GoValue()
@@ -805,7 +811,7 @@ func PixbufLoaderNewWithType(image_type string) (PixbufLoader, error) {
 	image_type0 := C.CString(image_type)
 	var err glib.Error
 	ret0 := C.gdk_pixbuf_loader_new_with_type(image_type0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(image_type0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(image_type0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return PixbufLoader{}, err.GoValue()
@@ -821,7 +827,7 @@ func (loader PixbufLoader) Close() (bool, error) {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // GetAnimation is a wrapper around gdk_pixbuf_loader_get_animation().
@@ -863,7 +869,7 @@ func (loader PixbufLoader) Write(buf []byte) (bool, error) {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // WriteBytes is a wrapper around gdk_pixbuf_loader_write_bytes().
@@ -874,7 +880,7 @@ func (loader PixbufLoader) WriteBytes(buffer glib.Bytes) (bool, error) {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // Object PixbufSimpleAnim
@@ -923,12 +929,12 @@ func (animation PixbufSimpleAnim) AddFrame(pixbuf Pixbuf) {
 // GetLoop is a wrapper around gdk_pixbuf_simple_anim_get_loop().
 func (animation PixbufSimpleAnim) GetLoop() bool {
 	ret0 := C.gdk_pixbuf_simple_anim_get_loop(animation.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // SetLoop is a wrapper around gdk_pixbuf_simple_anim_set_loop().
 func (animation PixbufSimpleAnim) SetLoop(loop bool) {
-	C.gdk_pixbuf_simple_anim_set_loop(animation.native(), C.gboolean(util.Bool2Int(loop)) /*go:.util*/)
+	C.gdk_pixbuf_simple_anim_set_loop(animation.native(), C.gboolean(util.Bool2Int(loop)))
 }
 
 type Colorspace int

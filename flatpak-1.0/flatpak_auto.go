@@ -73,7 +73,7 @@ func (v Installation) GetGValueGetter() gobject.GValueGetter {
 // InstallationNewForPath is a wrapper around flatpak_installation_new_for_path().
 func InstallationNewForPath(path gio.File, user bool, cancellable gio.Cancellable) (Installation, error) {
 	var err glib.Error
-	ret0 := C.flatpak_installation_new_for_path((*C.GFile)(path.Ptr), C.gboolean(util.Bool2Int(user)) /*go:.util*/, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
+	ret0 := C.flatpak_installation_new_for_path((*C.GFile)(path.Ptr), C.gboolean(util.Bool2Int(user)), (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
 	if err.Ptr != nil {
 		defer err.Free()
 		return Installation{}, err.GoValue()
@@ -97,7 +97,7 @@ func InstallationNewSystemWithId(id string, cancellable gio.Cancellable) (Instal
 	id0 := C.CString(id)
 	var err glib.Error
 	ret0 := C.flatpak_installation_new_system_with_id(id0, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(id0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(id0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return Installation{}, err.GoValue()
@@ -124,7 +124,7 @@ func (self Installation) CreateMonitor(cancellable gio.Cancellable) (gio.FileMon
 		defer err.Free()
 		return gio.FileMonitor{}, err.GoValue()
 	}
-	return gio.WrapFileMonitor(unsafe.Pointer(ret0)) /*gir:Gio*/, nil
+	return gio.WrapFileMonitor(unsafe.Pointer(ret0)), nil
 }
 
 // DropCaches is a wrapper around flatpak_installation_drop_caches().
@@ -135,7 +135,7 @@ func (self Installation) DropCaches(cancellable gio.Cancellable) (bool, error) {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // FetchRemoteMetadataSync is a wrapper around flatpak_installation_fetch_remote_metadata_sync().
@@ -143,12 +143,12 @@ func (self Installation) FetchRemoteMetadataSync(remote_name string, ref Ref, ca
 	remote_name0 := C.CString(remote_name)
 	var err glib.Error
 	ret0 := C.flatpak_installation_fetch_remote_metadata_sync(self.native(), remote_name0, ref.native(), (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(remote_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(remote_name0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return glib.Bytes{}, err.GoValue()
 	}
-	return glib.WrapBytes(unsafe.Pointer(ret0)) /*gir:GLib*/, nil
+	return glib.WrapBytes(unsafe.Pointer(ret0)), nil
 }
 
 // FetchRemoteRefSync is a wrapper around flatpak_installation_fetch_remote_ref_sync().
@@ -159,10 +159,10 @@ func (self Installation) FetchRemoteRefSync(remote_name string, kind RefKind, na
 	branch0 := C.CString(branch)
 	var err glib.Error
 	ret0 := C.flatpak_installation_fetch_remote_ref_sync(self.native(), remote_name0, C.FlatpakRefKind(kind), name0, arch0, branch0, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(remote_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(name0))        /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(arch0))        /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(branch0))      /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(remote_name0))
+	C.free(unsafe.Pointer(name0))
+	C.free(unsafe.Pointer(arch0))
+	C.free(unsafe.Pointer(branch0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return RemoteRef{}, err.GoValue()
@@ -177,12 +177,12 @@ func (self Installation) FetchRemoteSizeSync(remote_name string, ref Ref, cancel
 	var installed_size0 C.guint64
 	var err glib.Error
 	ret0 := C.flatpak_installation_fetch_remote_size_sync(self.native(), remote_name0, ref.native(), &download_size0, &installed_size0, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(remote_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(remote_name0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, 0, 0, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, uint64(download_size0), uint64(installed_size0), nil
+	return util.Int2Bool(int(ret0)), uint64(download_size0), uint64(installed_size0), nil
 }
 
 // GetCurrentInstalledApp is a wrapper around flatpak_installation_get_current_installed_app().
@@ -190,7 +190,7 @@ func (self Installation) GetCurrentInstalledApp(name string, cancellable gio.Can
 	name0 := C.CString(name)
 	var err glib.Error
 	ret0 := C.flatpak_installation_get_current_installed_app(self.native(), name0, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return InstalledRef{}, err.GoValue()
@@ -219,9 +219,9 @@ func (self Installation) GetInstalledRef(kind RefKind, name string, arch string,
 	branch0 := C.CString(branch)
 	var err glib.Error
 	ret0 := C.flatpak_installation_get_installed_ref(self.native(), C.FlatpakRefKind(kind), name0, arch0, branch0, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(name0))   /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(arch0))   /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(branch0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
+	C.free(unsafe.Pointer(arch0))
+	C.free(unsafe.Pointer(branch0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return InstalledRef{}, err.GoValue()
@@ -232,13 +232,13 @@ func (self Installation) GetInstalledRef(kind RefKind, name string, arch string,
 // GetIsUser is a wrapper around flatpak_installation_get_is_user().
 func (self Installation) GetIsUser() bool {
 	ret0 := C.flatpak_installation_get_is_user(self.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetPath is a wrapper around flatpak_installation_get_path().
 func (self Installation) GetPath() gio.File {
 	ret0 := C.flatpak_installation_get_path(self.native())
-	return gio.WrapFile(unsafe.Pointer(ret0)) /*gir:Gio*/
+	return gio.WrapFile(unsafe.Pointer(ret0))
 }
 
 // GetPriority is a wrapper around flatpak_installation_get_priority().
@@ -252,7 +252,7 @@ func (self Installation) GetRemoteByName(name string, cancellable gio.Cancellabl
 	name0 := (*C.gchar)(C.CString(name))
 	var err glib.Error
 	ret0 := C.flatpak_installation_get_remote_by_name(self.native(), name0, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return Remote{}, err.GoValue()
@@ -272,13 +272,13 @@ func (self Installation) Install(remote_name string, kind RefKind, name string, 
 	name0 := C.CString(name)
 	arch0 := C.CString(arch)
 	branch0 := C.CString(branch)
-	progress0 := (*C.GClosure)(gobject.ClosureNew(progress).Ptr) /*gir:GObject*/
+	progress0 := (*C.GClosure)(gobject.ClosureNew(progress).Ptr)
 	var err glib.Error
 	ret0 := C._flatpak_installation_install(self.native(), remote_name0, C.FlatpakRefKind(kind), name0, arch0, branch0, progress0, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(remote_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(name0))        /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(arch0))        /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(branch0))      /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(remote_name0))
+	C.free(unsafe.Pointer(name0))
+	C.free(unsafe.Pointer(arch0))
+	C.free(unsafe.Pointer(branch0))
 	C.g_closure_unref(progress0)
 	if err.Ptr != nil {
 		defer err.Free()
@@ -289,7 +289,7 @@ func (self Installation) Install(remote_name string, kind RefKind, name string, 
 
 // InstallBundle is a wrapper around flatpak_installation_install_bundle().
 func (self Installation) InstallBundle(file gio.File, progress ProgressCallback, cancellable gio.Cancellable) (InstalledRef, error) {
-	progress0 := (*C.GClosure)(gobject.ClosureNew(progress).Ptr) /*gir:GObject*/
+	progress0 := (*C.GClosure)(gobject.ClosureNew(progress).Ptr)
 	var err glib.Error
 	ret0 := C._flatpak_installation_install_bundle(self.native(), (*C.GFile)(file.Ptr), progress0, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
 	C.g_closure_unref(progress0)
@@ -319,15 +319,15 @@ func (self Installation) Launch(name string, arch string, branch string, commit 
 	commit0 := C.CString(commit)
 	var err glib.Error
 	ret0 := C.flatpak_installation_launch(self.native(), name0, arch0, branch0, commit0, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(name0))   /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(arch0))   /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(branch0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(commit0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
+	C.free(unsafe.Pointer(arch0))
+	C.free(unsafe.Pointer(branch0))
+	C.free(unsafe.Pointer(commit0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // LoadAppOverrides is a wrapper around flatpak_installation_load_app_overrides().
@@ -335,7 +335,7 @@ func (self Installation) LoadAppOverrides(app_id string, cancellable gio.Cancell
 	app_id0 := C.CString(app_id)
 	var err glib.Error
 	ret0 := C.flatpak_installation_load_app_overrides(self.native(), app_id0, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(app_id0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(app_id0))
 	ret := C.GoString(ret0)
 	C.g_free(C.gpointer(ret0))
 	if err.Ptr != nil {
@@ -353,7 +353,7 @@ func (self Installation) ModifyRemote(remote Remote, cancellable gio.Cancellable
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // RemoveRemote is a wrapper around flatpak_installation_remove_remote().
@@ -361,12 +361,12 @@ func (self Installation) RemoveRemote(name string, cancellable gio.Cancellable) 
 	name0 := C.CString(name)
 	var err glib.Error
 	ret0 := C.flatpak_installation_remove_remote(self.native(), name0, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // Uninstall is a wrapper around flatpak_installation_uninstall().
@@ -374,18 +374,18 @@ func (self Installation) Uninstall(kind RefKind, name string, arch string, branc
 	name0 := C.CString(name)
 	arch0 := C.CString(arch)
 	branch0 := C.CString(branch)
-	progress0 := (*C.GClosure)(gobject.ClosureNew(progress).Ptr) /*gir:GObject*/
+	progress0 := (*C.GClosure)(gobject.ClosureNew(progress).Ptr)
 	var err glib.Error
 	ret0 := C._flatpak_installation_uninstall(self.native(), C.FlatpakRefKind(kind), name0, arch0, branch0, progress0, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(name0))   /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(arch0))   /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(branch0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
+	C.free(unsafe.Pointer(arch0))
+	C.free(unsafe.Pointer(branch0))
 	C.g_closure_unref(progress0)
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // Update is a wrapper around flatpak_installation_update().
@@ -393,12 +393,12 @@ func (self Installation) Update(flags UpdateFlags, kind RefKind, name string, ar
 	name0 := C.CString(name)
 	arch0 := C.CString(arch)
 	branch0 := C.CString(branch)
-	progress0 := (*C.GClosure)(gobject.ClosureNew(progress).Ptr) /*gir:GObject*/
+	progress0 := (*C.GClosure)(gobject.ClosureNew(progress).Ptr)
 	var err glib.Error
 	ret0 := C._flatpak_installation_update(self.native(), C.FlatpakUpdateFlags(flags), C.FlatpakRefKind(kind), name0, arch0, branch0, progress0, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(name0))   /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(arch0))   /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(branch0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
+	C.free(unsafe.Pointer(arch0))
+	C.free(unsafe.Pointer(branch0))
 	C.g_closure_unref(progress0)
 	if err.Ptr != nil {
 		defer err.Free()
@@ -412,12 +412,12 @@ func (self Installation) UpdateRemoteSync(name string, cancellable gio.Cancellab
 	name0 := C.CString(name)
 	var err glib.Error
 	ret0 := C.flatpak_installation_update_remote_sync(self.native(), name0, (*C.GCancellable)(cancellable.Ptr), (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // Object Ref
@@ -499,7 +499,7 @@ func RefParse(ref string) (Ref, error) {
 	ref0 := C.CString(ref)
 	var err glib.Error
 	ret0 := C.flatpak_ref_parse(ref0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(ref0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(ref0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return Ref{}, err.GoValue()
@@ -555,7 +555,7 @@ func (self InstalledRef) GetInstalledSize() uint64 {
 // GetIsCurrent is a wrapper around flatpak_installed_ref_get_is_current().
 func (self InstalledRef) GetIsCurrent() bool {
 	ret0 := C.flatpak_installed_ref_get_is_current(self.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetLatestCommit is a wrapper around flatpak_installed_ref_get_latest_commit().
@@ -577,7 +577,7 @@ func (self InstalledRef) GetSubpaths() []string {
 	ret0 := C.flatpak_installed_ref_get_subpaths(self.native())
 	var ret0Slice []*C.char
 	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
-		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))))
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString(elem)
@@ -594,7 +594,7 @@ func (self InstalledRef) LoadMetadata(cancellable gio.Cancellable) (glib.Bytes, 
 		defer err.Free()
 		return glib.Bytes{}, err.GoValue()
 	}
-	return glib.WrapBytes(unsafe.Pointer(ret0)) /*gir:GLib*/, nil
+	return glib.WrapBytes(unsafe.Pointer(ret0)), nil
 }
 
 // Object RemoteRef
@@ -682,19 +682,19 @@ func BundleRefNew(file gio.File) (BundleRef, error) {
 // GetAppstream is a wrapper around flatpak_bundle_ref_get_appstream().
 func (self BundleRef) GetAppstream() glib.Bytes {
 	ret0 := C.flatpak_bundle_ref_get_appstream(self.native())
-	return glib.WrapBytes(unsafe.Pointer(ret0)) /*gir:GLib*/
+	return glib.WrapBytes(unsafe.Pointer(ret0))
 }
 
 // GetFile is a wrapper around flatpak_bundle_ref_get_file().
 func (self BundleRef) GetFile() gio.File {
 	ret0 := C.flatpak_bundle_ref_get_file(self.native())
-	return gio.WrapFile(unsafe.Pointer(ret0)) /*gir:Gio*/
+	return gio.WrapFile(unsafe.Pointer(ret0))
 }
 
 // GetIcon is a wrapper around flatpak_bundle_ref_get_icon().
 func (self BundleRef) GetIcon(size int) glib.Bytes {
 	ret0 := C.flatpak_bundle_ref_get_icon(self.native(), C.int(size))
-	return glib.WrapBytes(unsafe.Pointer(ret0)) /*gir:GLib*/
+	return glib.WrapBytes(unsafe.Pointer(ret0))
 }
 
 // GetInstalledSize is a wrapper around flatpak_bundle_ref_get_installed_size().
@@ -706,7 +706,7 @@ func (self BundleRef) GetInstalledSize() uint64 {
 // GetMetadata is a wrapper around flatpak_bundle_ref_get_metadata().
 func (self BundleRef) GetMetadata() glib.Bytes {
 	ret0 := C.flatpak_bundle_ref_get_metadata(self.native())
-	return glib.WrapBytes(unsafe.Pointer(ret0)) /*gir:GLib*/
+	return glib.WrapBytes(unsafe.Pointer(ret0))
 }
 
 // GetOrigin is a wrapper around flatpak_bundle_ref_get_origin().
@@ -761,7 +761,7 @@ func (v Remote) GetGValueGetter() gobject.GValueGetter {
 func RemoteNew(name string) Remote {
 	name0 := C.CString(name)
 	ret0 := C.flatpak_remote_new(name0)
-	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
 	return wrapRemote(ret0)
 }
 
@@ -769,16 +769,16 @@ func RemoteNew(name string) Remote {
 func (self Remote) GetAppstreamDir(arch string) gio.File {
 	arch0 := C.CString(arch)
 	ret0 := C.flatpak_remote_get_appstream_dir(self.native(), arch0)
-	C.free(unsafe.Pointer(arch0))             /*ch:<stdlib.h>*/
-	return gio.WrapFile(unsafe.Pointer(ret0)) /*gir:Gio*/
+	C.free(unsafe.Pointer(arch0))
+	return gio.WrapFile(unsafe.Pointer(ret0))
 }
 
 // GetAppstreamTimestamp is a wrapper around flatpak_remote_get_appstream_timestamp().
 func (self Remote) GetAppstreamTimestamp(arch string) gio.File {
 	arch0 := C.CString(arch)
 	ret0 := C.flatpak_remote_get_appstream_timestamp(self.native(), arch0)
-	C.free(unsafe.Pointer(arch0))             /*ch:<stdlib.h>*/
-	return gio.WrapFile(unsafe.Pointer(ret0)) /*gir:Gio*/
+	C.free(unsafe.Pointer(arch0))
+	return gio.WrapFile(unsafe.Pointer(ret0))
 }
 
 // GetDefaultBranch is a wrapper around flatpak_remote_get_default_branch().
@@ -792,13 +792,13 @@ func (self Remote) GetDefaultBranch() string {
 // GetDisabled is a wrapper around flatpak_remote_get_disabled().
 func (self Remote) GetDisabled() bool {
 	ret0 := C.flatpak_remote_get_disabled(self.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetGpgVerify is a wrapper around flatpak_remote_get_gpg_verify().
 func (self Remote) GetGpgVerify() bool {
 	ret0 := C.flatpak_remote_get_gpg_verify(self.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetName is a wrapper around flatpak_remote_get_name().
@@ -811,13 +811,13 @@ func (self Remote) GetName() string {
 // GetNodeps is a wrapper around flatpak_remote_get_nodeps().
 func (self Remote) GetNodeps() bool {
 	ret0 := C.flatpak_remote_get_nodeps(self.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetNoenumerate is a wrapper around flatpak_remote_get_noenumerate().
 func (self Remote) GetNoenumerate() bool {
 	ret0 := C.flatpak_remote_get_noenumerate(self.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetPrio is a wrapper around flatpak_remote_get_prio().
@@ -846,12 +846,12 @@ func (self Remote) GetUrl() string {
 func (self Remote) SetDefaultBranch(default_branch string) {
 	default_branch0 := C.CString(default_branch)
 	C.flatpak_remote_set_default_branch(self.native(), default_branch0)
-	C.free(unsafe.Pointer(default_branch0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(default_branch0))
 }
 
 // SetDisabled is a wrapper around flatpak_remote_set_disabled().
 func (self Remote) SetDisabled(disabled bool) {
-	C.flatpak_remote_set_disabled(self.native(), C.gboolean(util.Bool2Int(disabled)) /*go:.util*/)
+	C.flatpak_remote_set_disabled(self.native(), C.gboolean(util.Bool2Int(disabled)))
 }
 
 // SetGpgKey is a wrapper around flatpak_remote_set_gpg_key().
@@ -861,17 +861,17 @@ func (self Remote) SetGpgKey(gpg_key glib.Bytes) {
 
 // SetGpgVerify is a wrapper around flatpak_remote_set_gpg_verify().
 func (self Remote) SetGpgVerify(gpg_verify bool) {
-	C.flatpak_remote_set_gpg_verify(self.native(), C.gboolean(util.Bool2Int(gpg_verify)) /*go:.util*/)
+	C.flatpak_remote_set_gpg_verify(self.native(), C.gboolean(util.Bool2Int(gpg_verify)))
 }
 
 // SetNodeps is a wrapper around flatpak_remote_set_nodeps().
 func (self Remote) SetNodeps(nodeps bool) {
-	C.flatpak_remote_set_nodeps(self.native(), C.gboolean(util.Bool2Int(nodeps)) /*go:.util*/)
+	C.flatpak_remote_set_nodeps(self.native(), C.gboolean(util.Bool2Int(nodeps)))
 }
 
 // SetNoenumerate is a wrapper around flatpak_remote_set_noenumerate().
 func (self Remote) SetNoenumerate(noenumerate bool) {
-	C.flatpak_remote_set_noenumerate(self.native(), C.gboolean(util.Bool2Int(noenumerate)) /*go:.util*/)
+	C.flatpak_remote_set_noenumerate(self.native(), C.gboolean(util.Bool2Int(noenumerate)))
 }
 
 // SetPrio is a wrapper around flatpak_remote_set_prio().
@@ -883,14 +883,14 @@ func (self Remote) SetPrio(prio int) {
 func (self Remote) SetTitle(title string) {
 	title0 := C.CString(title)
 	C.flatpak_remote_set_title(self.native(), title0)
-	C.free(unsafe.Pointer(title0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(title0))
 }
 
 // SetUrl is a wrapper around flatpak_remote_set_url().
 func (self Remote) SetUrl(url string) {
 	url0 := C.CString(url)
 	C.flatpak_remote_set_url(self.native(), url0)
-	C.free(unsafe.Pointer(url0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(url0))
 }
 
 // Object RelatedRef
@@ -930,7 +930,7 @@ func (self RelatedRef) GetSubpaths() []string {
 	ret0 := C.flatpak_related_ref_get_subpaths(self.native())
 	var ret0Slice []*C.char
 	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
-		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))))
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString(elem)
@@ -942,13 +942,13 @@ func (self RelatedRef) GetSubpaths() []string {
 // ShouldDelete is a wrapper around flatpak_related_ref_should_delete().
 func (self RelatedRef) ShouldDelete() bool {
 	ret0 := C.flatpak_related_ref_should_delete(self.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // ShouldDownload is a wrapper around flatpak_related_ref_should_download().
 func (self RelatedRef) ShouldDownload() bool {
 	ret0 := C.flatpak_related_ref_should_download(self.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 type ProgressCallback func(status string, progress uint, estimating bool)

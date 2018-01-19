@@ -93,7 +93,7 @@ func goMarshal(closure *C.GClosure, retValue *C.GValue,
 	// the total number of marshaled parameters, a warning will be printed
 	// to stderr, and the callback will not be run.
 	nCbParams := cc.rf.Type().NumIn()
-	println("nCbParams:", nCbParams)
+	//println("nCbParams:", nCbParams)
 	if nCbParams > nTotalParams {
 		fmt.Fprintf(os.Stderr,
 			"too many closure args: have %d, max allowed %d\n",
@@ -119,7 +119,7 @@ func goMarshal(closure *C.GClosure, retValue *C.GValue,
 				"no suitable Go value for arg %d: %v\n", i, err)
 			return
 		}
-		fmt.Printf("i: %d, val: %#v\n", i, val)
+		//fmt.Printf("i: %d, val: %#v\n", i, val)
 		rv := reflect.ValueOf(val)
 		args = append(args, rv.Convert(cc.rf.Type().In(i)))
 	}
@@ -173,7 +173,7 @@ func ClosureNew(f interface{}) Closure {
 	fType := rf.Type()
 	for i := 0; i < fType.NumIn(); i++ {
 		argType := fType.In(i)
-		fmt.Printf("i: %d, argType: %v\n", i, argType)
+		//fmt.Printf("i: %d, argType: %v\n", i, argType)
 		if argType.Implements(cgtIfc) {
 			argEmptyValue := reflect.New(argType)
 			cctm := argEmptyValue.Interface().(CanGetTypeAndGValueGetter)

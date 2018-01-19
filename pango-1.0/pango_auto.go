@@ -54,14 +54,14 @@ func (glyph_item GlyphItem) GetLogicalWidths(text string, logical_widths []int) 
 		logical_widths0Ptr = &logical_widths0[0]
 	}
 	C.pango_glyph_item_get_logical_widths(glyph_item.native(), text0, logical_widths0Ptr)
-	C.free(unsafe.Pointer(text0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(text0))
 }
 
 // Split is a wrapper around pango_glyph_item_split().
 func (orig GlyphItem) Split(text string, split_index int) GlyphItem {
 	text0 := C.CString(text)
 	ret0 := C.pango_glyph_item_split(orig.native(), text0, C.int(split_index))
-	C.free(unsafe.Pointer(text0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(text0))
 	return wrapGlyphItem(ret0)
 }
 
@@ -296,7 +296,7 @@ func (attr Attribute) Destroy() {
 // Equal is a wrapper around pango_attribute_equal().
 func (attr1 Attribute) Equal(attr2 Attribute) bool {
 	ret0 := C.pango_attribute_equal(attr1.native(), attr2.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Init is a wrapper around pango_attribute_init().
@@ -340,8 +340,8 @@ func (color Color) Free() {
 func (color Color) Parse(spec string) bool {
 	spec0 := C.CString(spec)
 	ret0 := C.pango_color_parse(color.native(), spec0)
-	C.free(unsafe.Pointer(spec0))   /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	C.free(unsafe.Pointer(spec0))
+	return util.Int2Bool(int(ret0))
 }
 
 // ToString is a wrapper around pango_color_to_string().
@@ -514,7 +514,7 @@ func FontDescriptionNew() FontDescription {
 // BetterMatch is a wrapper around pango_font_description_better_match().
 func (desc FontDescription) BetterMatch(old_match FontDescription, new_match FontDescription) bool {
 	ret0 := C.pango_font_description_better_match(desc.native(), old_match.native(), new_match.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Copy is a wrapper around pango_font_description_copy().
@@ -532,7 +532,7 @@ func (desc FontDescription) CopyStatic() FontDescription {
 // Equal is a wrapper around pango_font_description_equal().
 func (desc1 FontDescription) Equal(desc2 FontDescription) bool {
 	ret0 := C.pango_font_description_equal(desc1.native(), desc2.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Free is a wrapper around pango_font_description_free().
@@ -568,7 +568,7 @@ func (desc FontDescription) GetSize() int {
 // GetSizeIsAbsolute is a wrapper around pango_font_description_get_size_is_absolute().
 func (desc FontDescription) GetSizeIsAbsolute() bool {
 	ret0 := C.pango_font_description_get_size_is_absolute(desc.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetStretch is a wrapper around pango_font_description_get_stretch().
@@ -603,12 +603,12 @@ func (desc FontDescription) Hash() uint {
 
 // Merge is a wrapper around pango_font_description_merge().
 func (desc FontDescription) Merge(desc_to_merge FontDescription, replace_existing bool) {
-	C.pango_font_description_merge(desc.native(), desc_to_merge.native(), C.gboolean(util.Bool2Int(replace_existing)) /*go:.util*/)
+	C.pango_font_description_merge(desc.native(), desc_to_merge.native(), C.gboolean(util.Bool2Int(replace_existing)))
 }
 
 // MergeStatic is a wrapper around pango_font_description_merge_static().
 func (desc FontDescription) MergeStatic(desc_to_merge FontDescription, replace_existing bool) {
-	C.pango_font_description_merge_static(desc.native(), desc_to_merge.native(), C.gboolean(util.Bool2Int(replace_existing)) /*go:.util*/)
+	C.pango_font_description_merge_static(desc.native(), desc_to_merge.native(), C.gboolean(util.Bool2Int(replace_existing)))
 }
 
 // SetAbsoluteSize is a wrapper around pango_font_description_set_absolute_size().
@@ -620,14 +620,14 @@ func (desc FontDescription) SetAbsoluteSize(size float64) {
 func (desc FontDescription) SetFamily(family string) {
 	family0 := C.CString(family)
 	C.pango_font_description_set_family(desc.native(), family0)
-	C.free(unsafe.Pointer(family0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(family0))
 }
 
 // SetFamilyStatic is a wrapper around pango_font_description_set_family_static().
 func (desc FontDescription) SetFamilyStatic(family string) {
 	family0 := C.CString(family)
 	C.pango_font_description_set_family_static(desc.native(), family0)
-	C.free(unsafe.Pointer(family0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(family0))
 }
 
 // SetGravity is a wrapper around pango_font_description_set_gravity().
@@ -685,7 +685,7 @@ func (desc FontDescription) UnsetFields(to_unset FontMask) {
 func FontDescriptionFromString(str string) FontDescription {
 	str0 := C.CString(str)
 	ret0 := C.pango_font_description_from_string(str0)
-	C.free(unsafe.Pointer(str0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(str0))
 	return wrapFontDescription(ret0)
 }
 
@@ -714,7 +714,7 @@ func IWrapAttrFontFeatures(p unsafe.Pointer) interface{} {
 func AttrFontFeaturesNew(features string) Attribute {
 	features0 := (*C.gchar)(C.CString(features))
 	ret0 := C.pango_attr_font_features_new(features0)
-	C.free(unsafe.Pointer(features0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(features0))
 	return wrapAttribute(ret0)
 }
 
@@ -778,7 +778,7 @@ func (language Language) GetScripts() []Script {
 	var num_scripts0 C.int
 	ret0 := C.pango_language_get_scripts(language.native(), &num_scripts0)
 	var ret0Slice []C.PangoScript
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(num_scripts0)) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(num_scripts0))
 	ret := make([]Script, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		ret[idx] = Script(elem)
@@ -789,15 +789,15 @@ func (language Language) GetScripts() []Script {
 // IncludesScript is a wrapper around pango_language_includes_script().
 func (language Language) IncludesScript(script Script) bool {
 	ret0 := C.pango_language_includes_script(language.native(), C.PangoScript(script))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Matches is a wrapper around pango_language_matches().
 func (language Language) Matches(range_list string) bool {
 	range_list0 := C.CString(range_list)
 	ret0 := C.pango_language_matches(language.native(), range_list0)
-	C.free(unsafe.Pointer(range_list0)) /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0))     /*go:.util*/
+	C.free(unsafe.Pointer(range_list0))
+	return util.Int2Bool(int(ret0))
 }
 
 // ToString is a wrapper around pango_language_to_string().
@@ -811,7 +811,7 @@ func (language Language) ToString() string {
 func LanguageFromString(language string) Language {
 	language0 := C.CString(language)
 	ret0 := C.pango_language_from_string(language0)
-	C.free(unsafe.Pointer(language0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(language0))
 	return wrapLanguage(ret0)
 }
 
@@ -862,7 +862,7 @@ func (iterator AttrIterator) Get(type_ AttrType) Attribute {
 // Next is a wrapper around pango_attr_iterator_next().
 func (iterator AttrIterator) Next() bool {
 	ret0 := C.pango_attr_iterator_next(iterator.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Range is a wrapper around pango_attr_iterator_range().
@@ -1049,28 +1049,28 @@ func (iter GlyphItemIter) Free() {
 func (iter GlyphItemIter) InitEnd(glyph_item GlyphItem, text string) bool {
 	text0 := C.CString(text)
 	ret0 := C.pango_glyph_item_iter_init_end(iter.native(), glyph_item.native(), text0)
-	C.free(unsafe.Pointer(text0))   /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	C.free(unsafe.Pointer(text0))
+	return util.Int2Bool(int(ret0))
 }
 
 // InitStart is a wrapper around pango_glyph_item_iter_init_start().
 func (iter GlyphItemIter) InitStart(glyph_item GlyphItem, text string) bool {
 	text0 := C.CString(text)
 	ret0 := C.pango_glyph_item_iter_init_start(iter.native(), glyph_item.native(), text0)
-	C.free(unsafe.Pointer(text0))   /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	C.free(unsafe.Pointer(text0))
+	return util.Int2Bool(int(ret0))
 }
 
 // NextCluster is a wrapper around pango_glyph_item_iter_next_cluster().
 func (iter GlyphItemIter) NextCluster() bool {
 	ret0 := C.pango_glyph_item_iter_next_cluster(iter.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // PrevCluster is a wrapper around pango_glyph_item_iter_prev_cluster().
 func (iter GlyphItemIter) PrevCluster() bool {
 	ret0 := C.pango_glyph_item_iter_prev_cluster(iter.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Struct GlyphString
@@ -1139,7 +1139,7 @@ func (glyphs GlyphString) GetLogicalWidths(text string, length int, embedding_le
 		logical_widths0Ptr = &logical_widths0[0]
 	}
 	C.pango_glyph_string_get_logical_widths(glyphs.native(), text0, C.int(length), C.int(embedding_level), logical_widths0Ptr)
-	C.free(unsafe.Pointer(text0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(text0))
 }
 
 // GetWidth is a wrapper around pango_glyph_string_get_width().
@@ -1152,8 +1152,8 @@ func (glyphs GlyphString) GetWidth() int {
 func (glyphs GlyphString) IndexToX(text string, length int, analysis Analysis, index_ int, trailing bool) int {
 	text0 := C.CString(text)
 	var x_pos0 C.int
-	C.pango_glyph_string_index_to_x(glyphs.native(), text0, C.int(length), analysis.native(), C.int(index_), C.gboolean(util.Bool2Int(trailing)) /*go:.util*/, &x_pos0)
-	C.free(unsafe.Pointer(text0)) /*ch:<stdlib.h>*/
+	C.pango_glyph_string_index_to_x(glyphs.native(), text0, C.int(length), analysis.native(), C.int(index_), C.gboolean(util.Bool2Int(trailing)), &x_pos0)
+	C.free(unsafe.Pointer(text0))
 	return int(x_pos0)
 }
 
@@ -1168,7 +1168,7 @@ func (glyphs GlyphString) XToIndex(text string, length int, analysis Analysis, x
 	var index_0 C.int
 	var trailing0 C.int
 	C.pango_glyph_string_x_to_index(glyphs.native(), text0, C.int(length), analysis.native(), C.int(x_pos), &index_0, &trailing0)
-	C.free(unsafe.Pointer(text0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(text0))
 	return int(index_0), int(trailing0)
 }
 
@@ -1240,7 +1240,7 @@ func IWrapLayoutIter(p unsafe.Pointer) interface{} {
 // AtLastLine is a wrapper around pango_layout_iter_at_last_line().
 func (iter LayoutIter) AtLastLine() bool {
 	ret0 := C.pango_layout_iter_at_last_line(iter.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Copy is a wrapper around pango_layout_iter_copy().
@@ -1334,25 +1334,25 @@ func (iter LayoutIter) GetRunExtents() (Rectangle, Rectangle) {
 // NextChar is a wrapper around pango_layout_iter_next_char().
 func (iter LayoutIter) NextChar() bool {
 	ret0 := C.pango_layout_iter_next_char(iter.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // NextCluster is a wrapper around pango_layout_iter_next_cluster().
 func (iter LayoutIter) NextCluster() bool {
 	ret0 := C.pango_layout_iter_next_cluster(iter.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // NextLine is a wrapper around pango_layout_iter_next_line().
 func (iter LayoutIter) NextLine() bool {
 	ret0 := C.pango_layout_iter_next_line(iter.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // NextRun is a wrapper around pango_layout_iter_next_run().
 func (iter LayoutIter) NextRun() bool {
 	ret0 := C.pango_layout_iter_next_run(iter.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Object Layout
@@ -1419,7 +1419,7 @@ func (layout Layout) GetAttributes() AttrList {
 // GetAutoDir is a wrapper around pango_layout_get_auto_dir().
 func (layout Layout) GetAutoDir() bool {
 	ret0 := C.pango_layout_get_auto_dir(layout.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetBaseline is a wrapper around pango_layout_get_baseline().
@@ -1489,7 +1489,7 @@ func (layout Layout) GetIter() LayoutIter {
 // GetJustify is a wrapper around pango_layout_get_justify().
 func (layout Layout) GetJustify() bool {
 	ret0 := C.pango_layout_get_justify(layout.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetLine is a wrapper around pango_layout_get_line().
@@ -1515,7 +1515,7 @@ func (layout Layout) GetLogAttrsReadonly() []LogAttr {
 	var n_attrs0 C.gint
 	ret0 := C.pango_layout_get_log_attrs_readonly(layout.native(), &n_attrs0)
 	var ret0Slice []C.PangoLogAttr
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(n_attrs0)) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(n_attrs0))
 	ret := make([]LogAttr, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		ret[idx] = wrapLogAttr(&elem)
@@ -1548,7 +1548,7 @@ func (layout Layout) GetSerial() uint {
 // GetSingleParagraphMode is a wrapper around pango_layout_get_single_paragraph_mode().
 func (layout Layout) GetSingleParagraphMode() bool {
 	ret0 := C.pango_layout_get_single_paragraph_mode(layout.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetSize is a wrapper around pango_layout_get_size().
@@ -1600,7 +1600,7 @@ func (layout Layout) GetWrap() WrapMode {
 func (layout Layout) IndexToLineX(index_ int, trailing bool) (int, int) {
 	var line0 C.int
 	var x_pos0 C.int
-	C.pango_layout_index_to_line_x(layout.native(), C.int(index_), C.gboolean(util.Bool2Int(trailing)) /*go:.util*/, &line0, &x_pos0)
+	C.pango_layout_index_to_line_x(layout.native(), C.int(index_), C.gboolean(util.Bool2Int(trailing)), &line0, &x_pos0)
 	return int(line0), int(x_pos0)
 }
 
@@ -1614,20 +1614,20 @@ func (layout Layout) IndexToPos(index_ int) Rectangle {
 // IsEllipsized is a wrapper around pango_layout_is_ellipsized().
 func (layout Layout) IsEllipsized() bool {
 	ret0 := C.pango_layout_is_ellipsized(layout.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsWrapped is a wrapper around pango_layout_is_wrapped().
 func (layout Layout) IsWrapped() bool {
 	ret0 := C.pango_layout_is_wrapped(layout.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // MoveCursorVisually is a wrapper around pango_layout_move_cursor_visually().
 func (layout Layout) MoveCursorVisually(strong bool, old_index int, old_trailing int, direction int) (int, int) {
 	var new_index0 C.int
 	var new_trailing0 C.int
-	C.pango_layout_move_cursor_visually(layout.native(), C.gboolean(util.Bool2Int(strong)) /*go:.util*/, C.int(old_index), C.int(old_trailing), C.int(direction), &new_index0, &new_trailing0)
+	C.pango_layout_move_cursor_visually(layout.native(), C.gboolean(util.Bool2Int(strong)), C.int(old_index), C.int(old_trailing), C.int(direction), &new_index0, &new_trailing0)
 	return int(new_index0), int(new_trailing0)
 }
 
@@ -1643,7 +1643,7 @@ func (layout Layout) SetAttributes(attrs AttrList) {
 
 // SetAutoDir is a wrapper around pango_layout_set_auto_dir().
 func (layout Layout) SetAutoDir(auto_dir bool) {
-	C.pango_layout_set_auto_dir(layout.native(), C.gboolean(util.Bool2Int(auto_dir)) /*go:.util*/)
+	C.pango_layout_set_auto_dir(layout.native(), C.gboolean(util.Bool2Int(auto_dir)))
 }
 
 // SetEllipsize is a wrapper around pango_layout_set_ellipsize().
@@ -1668,19 +1668,19 @@ func (layout Layout) SetIndent(indent int) {
 
 // SetJustify is a wrapper around pango_layout_set_justify().
 func (layout Layout) SetJustify(justify bool) {
-	C.pango_layout_set_justify(layout.native(), C.gboolean(util.Bool2Int(justify)) /*go:.util*/)
+	C.pango_layout_set_justify(layout.native(), C.gboolean(util.Bool2Int(justify)))
 }
 
 // SetMarkup is a wrapper around pango_layout_set_markup().
 func (layout Layout) SetMarkup(markup string, length int) {
 	markup0 := C.CString(markup)
 	C.pango_layout_set_markup(layout.native(), markup0, C.int(length))
-	C.free(unsafe.Pointer(markup0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(markup0))
 }
 
 // SetSingleParagraphMode is a wrapper around pango_layout_set_single_paragraph_mode().
 func (layout Layout) SetSingleParagraphMode(setting bool) {
-	C.pango_layout_set_single_paragraph_mode(layout.native(), C.gboolean(util.Bool2Int(setting)) /*go:.util*/)
+	C.pango_layout_set_single_paragraph_mode(layout.native(), C.gboolean(util.Bool2Int(setting)))
 }
 
 // SetSpacing is a wrapper around pango_layout_set_spacing().
@@ -1697,7 +1697,7 @@ func (layout Layout) SetTabs(tabs TabArray) {
 func (layout Layout) SetText(text string, length int) {
 	text0 := C.CString(text)
 	C.pango_layout_set_text(layout.native(), text0, C.int(length))
-	C.free(unsafe.Pointer(text0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(text0))
 }
 
 // SetWidth is a wrapper around pango_layout_set_width().
@@ -1715,7 +1715,7 @@ func (layout Layout) XyToIndex(x int, y int) (bool, int, int) {
 	var index_0 C.int
 	var trailing0 C.int
 	ret0 := C.pango_layout_xy_to_index(layout.native(), C.int(x), C.int(y), &index_0, &trailing0)
-	return util.Int2Bool(int(ret0)) /*go:.util*/, int(index_0), int(trailing0)
+	return util.Int2Bool(int(ret0)), int(index_0), int(trailing0)
 }
 
 // Object Context
@@ -2236,7 +2236,7 @@ func (layout_line LayoutLine) GetPixelExtents() (Rectangle, Rectangle) {
 // IndexToX is a wrapper around pango_layout_line_index_to_x().
 func (line LayoutLine) IndexToX(index_ int, trailing bool) int {
 	var x_pos0 C.int
-	C.pango_layout_line_index_to_x(line.native(), C.int(index_), C.gboolean(util.Bool2Int(trailing)) /*go:.util*/, &x_pos0)
+	C.pango_layout_line_index_to_x(line.native(), C.int(index_), C.gboolean(util.Bool2Int(trailing)), &x_pos0)
 	return int(x_pos0)
 }
 
@@ -2256,7 +2256,7 @@ func (line LayoutLine) XToIndex(x_pos int) (bool, int, int) {
 	var index_0 C.int
 	var trailing0 C.int
 	ret0 := C.pango_layout_line_x_to_index(line.native(), C.int(x_pos), &index_0, &trailing0)
-	return util.Int2Bool(int(ret0)) /*go:.util*/, int(index_0), int(trailing0)
+	return util.Int2Bool(int(ret0)), int(index_0), int(trailing0)
 }
 
 // Struct TabArray
@@ -2282,7 +2282,7 @@ func IWrapTabArray(p unsafe.Pointer) interface{} {
 
 // TabArrayNew is a wrapper around pango_tab_array_new().
 func TabArrayNew(initial_size int, positions_in_pixels bool) TabArray {
-	ret0 := C.pango_tab_array_new(C.gint(initial_size), C.gboolean(util.Bool2Int(positions_in_pixels)) /*go:.util*/)
+	ret0 := C.pango_tab_array_new(C.gint(initial_size), C.gboolean(util.Bool2Int(positions_in_pixels)))
 	return wrapTabArray(ret0)
 }
 
@@ -2300,7 +2300,7 @@ func (tab_array TabArray) Free() {
 // GetPositionsInPixels is a wrapper around pango_tab_array_get_positions_in_pixels().
 func (tab_array TabArray) GetPositionsInPixels() bool {
 	ret0 := C.pango_tab_array_get_positions_in_pixels(tab_array.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetSize is a wrapper around pango_tab_array_get_size().
@@ -2375,7 +2375,7 @@ func (face FontFace) GetFaceName() string {
 // IsSynthesized is a wrapper around pango_font_face_is_synthesized().
 func (face FontFace) IsSynthesized() bool {
 	ret0 := C.pango_font_face_is_synthesized(face.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Object FontFamily
@@ -2420,7 +2420,7 @@ func (family FontFamily) GetName() string {
 // IsMonospace is a wrapper around pango_font_family_is_monospace().
 func (family FontFamily) IsMonospace() bool {
 	ret0 := C.pango_font_family_is_monospace(family.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Object Renderer
@@ -2479,7 +2479,7 @@ func (renderer Renderer) DrawGlyph(font Font, glyph Glyph, x float64, y float64)
 func (renderer Renderer) DrawGlyphItem(text string, glyph_item GlyphItem, x int, y int) {
 	text0 := C.CString(text)
 	C.pango_renderer_draw_glyph_item(renderer.native(), text0, glyph_item.native(), C.int(x), C.int(y))
-	C.free(unsafe.Pointer(text0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(text0))
 }
 
 // DrawGlyphs is a wrapper around pango_renderer_draw_glyphs().

@@ -98,6 +98,11 @@ func (v List) Insert(data unsafe.Pointer, position int) List {
 	return wrapList(list, v.DataWrap)
 }
 
+type SList struct {
+	Ptr unsafe.Pointer
+	DataWrap DataWrapFunc
+}
+
 // TimeVal
 func TimeValNew() TimeVal {
 	ptr := C.g_malloc0(C.gsize(C.sizeof_GTimeVal))

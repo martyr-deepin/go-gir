@@ -46,7 +46,7 @@ func VariantNewArray(child_type VariantType, children []Variant) Variant {
 
 // VariantNewBoolean is a wrapper around g_variant_new_boolean().
 func VariantNewBoolean(value bool) Variant {
-	ret0 := C.g_variant_new_boolean(C.gboolean(util.Bool2Int(value)) /*go:.util*/)
+	ret0 := C.g_variant_new_boolean(C.gboolean(util.Bool2Int(value)))
 	return wrapVariant(ret0)
 }
 
@@ -83,7 +83,7 @@ func VariantNewBytestringArray(strv []string) Variant {
 	}
 	ret0 := C.g_variant_new_bytestring_array(strv0Ptr, C.gssize(len(strv)))
 	for _, elem := range strv0 {
-		C.free(unsafe.Pointer(elem)) /*ch:<stdlib.h>*/
+		C.free(unsafe.Pointer(elem))
 	}
 	return wrapVariant(ret0)
 }
@@ -108,7 +108,7 @@ func VariantNewFixedArray(element_type VariantType, elements unsafe.Pointer, n_e
 
 // VariantNewFromBytes is a wrapper around g_variant_new_from_bytes().
 func VariantNewFromBytes(type_ VariantType, bytes Bytes, trusted bool) Variant {
-	ret0 := C.g_variant_new_from_bytes(type_.native(), bytes.native(), C.gboolean(util.Bool2Int(trusted)) /*go:.util*/)
+	ret0 := C.g_variant_new_from_bytes(type_.native(), bytes.native(), C.gboolean(util.Bool2Int(trusted)))
 	return wrapVariant(ret0)
 }
 
@@ -146,7 +146,7 @@ func VariantNewMaybe(child_type VariantType, child Variant) Variant {
 func VariantNewObjectPath(object_path string) Variant {
 	object_path0 := (*C.gchar)(C.CString(object_path))
 	ret0 := C.g_variant_new_object_path(object_path0)
-	C.free(unsafe.Pointer(object_path0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(object_path0))
 	return wrapVariant(ret0)
 }
 
@@ -163,7 +163,7 @@ func VariantNewObjv(strv []string) Variant {
 	}
 	ret0 := C.g_variant_new_objv(strv0Ptr, C.gssize(len(strv)))
 	for _, elem := range strv0 {
-		C.free(unsafe.Pointer(elem)) /*ch:<stdlib.h>*/
+		C.free(unsafe.Pointer(elem))
 	}
 	return wrapVariant(ret0)
 }
@@ -172,7 +172,7 @@ func VariantNewObjv(strv []string) Variant {
 func VariantNewSignature(signature string) Variant {
 	signature0 := (*C.gchar)(C.CString(signature))
 	ret0 := C.g_variant_new_signature(signature0)
-	C.free(unsafe.Pointer(signature0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(signature0))
 	return wrapVariant(ret0)
 }
 
@@ -180,7 +180,7 @@ func VariantNewSignature(signature string) Variant {
 func VariantNewString(string string) Variant {
 	string0 := (*C.gchar)(C.CString(string))
 	ret0 := C.g_variant_new_string(string0)
-	C.free(unsafe.Pointer(string0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(string0))
 	return wrapVariant(ret0)
 }
 
@@ -197,7 +197,7 @@ func VariantNewStrv(strv []string) Variant {
 	}
 	ret0 := C.g_variant_new_strv(strv0Ptr, C.gssize(len(strv)))
 	for _, elem := range strv0 {
-		C.free(unsafe.Pointer(elem)) /*ch:<stdlib.h>*/
+		C.free(unsafe.Pointer(elem))
 	}
 	return wrapVariant(ret0)
 }
@@ -206,7 +206,7 @@ func VariantNewStrv(strv []string) Variant {
 func VariantNewTakeString(string string) Variant {
 	string0 := (*C.gchar)(C.CString(string))
 	ret0 := C.g_variant_new_take_string(string0)
-	C.free(unsafe.Pointer(string0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(string0))
 	return wrapVariant(ret0)
 }
 
@@ -257,9 +257,9 @@ func (value Variant) Byteswap() Variant {
 // CheckFormatString is a wrapper around g_variant_check_format_string().
 func (value Variant) CheckFormatString(format_string string, copy_only bool) bool {
 	format_string0 := (*C.gchar)(C.CString(format_string))
-	ret0 := C.g_variant_check_format_string(value.native(), format_string0, C.gboolean(util.Bool2Int(copy_only)) /*go:.util*/)
-	C.free(unsafe.Pointer(format_string0)) /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0))        /*go:.util*/
+	ret0 := C.g_variant_check_format_string(value.native(), format_string0, C.gboolean(util.Bool2Int(copy_only)))
+	C.free(unsafe.Pointer(format_string0))
+	return util.Int2Bool(int(ret0))
 }
 
 // Classify is a wrapper around g_variant_classify().
@@ -279,7 +279,7 @@ func (value Variant) DupBytestring() []byte {
 	var length0 C.gsize
 	ret0 := C.g_variant_dup_bytestring(value.native(), &length0)
 	var ret0Slice []C.gchar
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0))
 	ret := make([]byte, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		ret[idx] = byte(elem)
@@ -293,7 +293,7 @@ func (value Variant) DupBytestringArray() []string {
 	var length0 C.gsize
 	ret0 := C.g_variant_dup_bytestring_array(value.native(), &length0)
 	var ret0Slice []*C.gchar
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0))
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
@@ -309,7 +309,7 @@ func (value Variant) DupObjv() []string {
 	var length0 C.gsize
 	ret0 := C.g_variant_dup_objv(value.native(), &length0)
 	var ret0Slice []*C.gchar
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0))
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
@@ -334,7 +334,7 @@ func (value Variant) DupStrv() []string {
 	var length0 C.gsize
 	ret0 := C.g_variant_dup_strv(value.native(), &length0)
 	var ret0Slice []*C.gchar
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0))
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
@@ -348,13 +348,13 @@ func (value Variant) DupStrv() []string {
 // Equal is a wrapper around g_variant_equal().
 func (one Variant) Equal(two Variant) bool {
 	ret0 := C.g_variant_equal(C.gconstpointer(one.native()), C.gconstpointer(two.native()))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetBoolean is a wrapper around g_variant_get_boolean().
 func (value Variant) GetBoolean() bool {
 	ret0 := C.g_variant_get_boolean(value.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetByte is a wrapper around g_variant_get_byte().
@@ -368,7 +368,7 @@ func (value Variant) GetBytestring() []byte {
 	ret0 := C.g_variant_get_bytestring(value.native())
 	var ret0Slice []C.gchar
 	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
-		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(C.gchar(0))) /*go:.util*/) /*go:.util*/
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(C.gchar(0))))
 	ret := make([]byte, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		ret[idx] = byte(elem)
@@ -381,7 +381,7 @@ func (value Variant) GetBytestringArray() []string {
 	var length0 C.gsize
 	ret0 := C.g_variant_get_bytestring_array(value.native(), &length0)
 	var ret0Slice []*C.gchar
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0))
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
@@ -456,7 +456,7 @@ func (value Variant) GetObjv() []string {
 	var length0 C.gsize
 	ret0 := C.g_variant_get_objv(value.native(), &length0)
 	var ret0Slice []*C.gchar
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0))
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
@@ -477,7 +477,7 @@ func (value Variant) GetStrv() []string {
 	var length0 C.gsize
 	ret0 := C.g_variant_get_strv(value.native(), &length0)
 	var ret0Slice []*C.gchar
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0))
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
@@ -533,25 +533,25 @@ func (value Variant) Hash() uint {
 // IsContainer is a wrapper around g_variant_is_container().
 func (value Variant) IsContainer() bool {
 	ret0 := C.g_variant_is_container(value.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsFloating is a wrapper around g_variant_is_floating().
 func (value Variant) IsFloating() bool {
 	ret0 := C.g_variant_is_floating(value.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsNormalForm is a wrapper around g_variant_is_normal_form().
 func (value Variant) IsNormalForm() bool {
 	ret0 := C.g_variant_is_normal_form(value.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsOfType is a wrapper around g_variant_is_of_type().
 func (value Variant) IsOfType(type_ VariantType) bool {
 	ret0 := C.g_variant_is_of_type(value.native(), type_.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IterNew is a wrapper around g_variant_iter_new().
@@ -564,7 +564,7 @@ func (value Variant) IterNew() VariantIter {
 func (dictionary Variant) LookupValue(key string, expected_type VariantType) Variant {
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_variant_lookup_value(dictionary.native(), key0, expected_type.native())
-	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))
 	return wrapVariant(ret0)
 }
 
@@ -576,7 +576,7 @@ func (value Variant) NChildren() uint {
 
 // Print is a wrapper around g_variant_print().
 func (value Variant) Print(type_annotate bool) string {
-	ret0 := C.g_variant_print(value.native(), C.gboolean(util.Bool2Int(type_annotate)) /*go:.util*/)
+	ret0 := C.g_variant_print(value.native(), C.gboolean(util.Bool2Int(type_annotate)))
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
 	return ret
@@ -614,23 +614,23 @@ func (value Variant) Unref() {
 func VariantIsObjectPath(string string) bool {
 	string0 := (*C.gchar)(C.CString(string))
 	ret0 := C.g_variant_is_object_path(string0)
-	C.free(unsafe.Pointer(string0)) /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	C.free(unsafe.Pointer(string0))
+	return util.Int2Bool(int(ret0))
 }
 
 // VariantIsSignature is a wrapper around g_variant_is_signature().
 func VariantIsSignature(string string) bool {
 	string0 := (*C.gchar)(C.CString(string))
 	ret0 := C.g_variant_is_signature(string0)
-	C.free(unsafe.Pointer(string0)) /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	C.free(unsafe.Pointer(string0))
+	return util.Int2Bool(int(ret0))
 }
 
 // VariantParseErrorPrintContext is a wrapper around g_variant_parse_error_print_context().
 func VariantParseErrorPrintContext(error Error, source_str string) string {
 	source_str0 := (*C.gchar)(C.CString(source_str))
 	ret0 := C.g_variant_parse_error_print_context(error.native(), source_str0)
-	C.free(unsafe.Pointer(source_str0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(source_str0))
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
 	return ret
@@ -672,7 +672,7 @@ func (bytes1 Bytes) Compare(bytes2 Bytes) int {
 // Equal is a wrapper around g_bytes_equal().
 func (bytes1 Bytes) Equal(bytes2 Bytes) bool {
 	ret0 := C.g_bytes_equal(C.gconstpointer(bytes1.native()), C.gconstpointer(bytes2.native()))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetSize is a wrapper around g_bytes_get_size().
@@ -729,7 +729,7 @@ func IWrapVariantType(p unsafe.Pointer) interface{} {
 func VariantTypeNew(type_string string) VariantType {
 	type_string0 := (*C.gchar)(C.CString(type_string))
 	ret0 := C.g_variant_type_new(type_string0)
-	C.free(unsafe.Pointer(type_string0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(type_string0))
 	return wrapVariantType(ret0)
 }
 
@@ -788,7 +788,7 @@ func (type_ VariantType) Element() VariantType {
 // Equal is a wrapper around g_variant_type_equal().
 func (type1 VariantType) Equal(type2 VariantType) bool {
 	ret0 := C.g_variant_type_equal(C.gconstpointer(type1.native()), C.gconstpointer(type2.native()))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // First is a wrapper around g_variant_type_first().
@@ -817,55 +817,55 @@ func (type_ VariantType) Hash() uint {
 // IsArray is a wrapper around g_variant_type_is_array().
 func (type_ VariantType) IsArray() bool {
 	ret0 := C.g_variant_type_is_array(type_.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsBasic is a wrapper around g_variant_type_is_basic().
 func (type_ VariantType) IsBasic() bool {
 	ret0 := C.g_variant_type_is_basic(type_.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsContainer is a wrapper around g_variant_type_is_container().
 func (type_ VariantType) IsContainer() bool {
 	ret0 := C.g_variant_type_is_container(type_.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsDefinite is a wrapper around g_variant_type_is_definite().
 func (type_ VariantType) IsDefinite() bool {
 	ret0 := C.g_variant_type_is_definite(type_.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsDictEntry is a wrapper around g_variant_type_is_dict_entry().
 func (type_ VariantType) IsDictEntry() bool {
 	ret0 := C.g_variant_type_is_dict_entry(type_.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsMaybe is a wrapper around g_variant_type_is_maybe().
 func (type_ VariantType) IsMaybe() bool {
 	ret0 := C.g_variant_type_is_maybe(type_.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsSubtypeOf is a wrapper around g_variant_type_is_subtype_of().
 func (type_ VariantType) IsSubtypeOf(supertype VariantType) bool {
 	ret0 := C.g_variant_type_is_subtype_of(type_.native(), supertype.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsTuple is a wrapper around g_variant_type_is_tuple().
 func (type_ VariantType) IsTuple() bool {
 	ret0 := C.g_variant_type_is_tuple(type_.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsVariant is a wrapper around g_variant_type_is_variant().
 func (type_ VariantType) IsVariant() bool {
 	ret0 := C.g_variant_type_is_variant(type_.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Key is a wrapper around g_variant_type_key().
@@ -903,7 +903,7 @@ func (type_ VariantType) Value() VariantType {
 func VariantTypeChecked_(arg0 string) VariantType {
 	arg00 := (*C.gchar)(C.CString(arg0))
 	ret0 := C.g_variant_type_checked_(arg00)
-	C.free(unsafe.Pointer(arg00)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(arg00))
 	return wrapVariantType(ret0)
 }
 
@@ -911,8 +911,8 @@ func VariantTypeChecked_(arg0 string) VariantType {
 func VariantTypeStringIsValid(type_string string) bool {
 	type_string0 := (*C.gchar)(C.CString(type_string))
 	ret0 := C.g_variant_type_string_is_valid(type_string0)
-	C.free(unsafe.Pointer(type_string0)) /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0))      /*go:.util*/
+	C.free(unsafe.Pointer(type_string0))
+	return util.Int2Bool(int(ret0))
 }
 
 // VariantTypeStringScan is a wrapper around g_variant_type_string_scan().
@@ -921,11 +921,11 @@ func VariantTypeStringScan(string string, limit string) (bool, string) {
 	limit0 := (*C.gchar)(C.CString(limit))
 	var endptr0 *C.gchar
 	ret0 := C.g_variant_type_string_scan(string0, limit0, &endptr0)
-	C.free(unsafe.Pointer(string0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(limit0))  /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(string0))
+	C.free(unsafe.Pointer(limit0))
 	endptr := C.GoString((*C.char)(endptr0))
 	defer C.g_free(C.gpointer(endptr0))
-	return util.Int2Bool(int(ret0)) /*go:.util*/, endptr
+	return util.Int2Bool(int(ret0)), endptr
 }
 
 // Struct Error
@@ -977,7 +977,7 @@ func IWrapMainLoop(p unsafe.Pointer) interface{} {
 
 // MainLoopNew is a wrapper around g_main_loop_new().
 func MainLoopNew(context MainContext, is_running bool) MainLoop {
-	ret0 := C.g_main_loop_new(context.native(), C.gboolean(util.Bool2Int(is_running)) /*go:.util*/)
+	ret0 := C.g_main_loop_new(context.native(), C.gboolean(util.Bool2Int(is_running)))
 	return wrapMainLoop(ret0)
 }
 
@@ -990,7 +990,7 @@ func (loop MainLoop) GetContext() MainContext {
 // IsRunning is a wrapper around g_main_loop_is_running().
 func (loop MainLoop) IsRunning() bool {
 	ret0 := C.g_main_loop_is_running(loop.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Quit is a wrapper around g_main_loop_quit().
@@ -1044,7 +1044,7 @@ func MainContextNew() MainContext {
 // Acquire is a wrapper around g_main_context_acquire().
 func (context MainContext) Acquire() bool {
 	ret0 := C.g_main_context_acquire(context.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // AddPoll is a wrapper around g_main_context_add_poll().
@@ -1072,19 +1072,19 @@ func (context MainContext) FindSourceByUserData(user_data unsafe.Pointer) Source
 // IsOwner is a wrapper around g_main_context_is_owner().
 func (context MainContext) IsOwner() bool {
 	ret0 := C.g_main_context_is_owner(context.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Iteration is a wrapper around g_main_context_iteration().
 func (context MainContext) Iteration(may_block bool) bool {
-	ret0 := C.g_main_context_iteration(context.native(), C.gboolean(util.Bool2Int(may_block)) /*go:.util*/)
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	ret0 := C.g_main_context_iteration(context.native(), C.gboolean(util.Bool2Int(may_block)))
+	return util.Int2Bool(int(ret0))
 }
 
 // Pending is a wrapper around g_main_context_pending().
 func (context MainContext) Pending() bool {
 	ret0 := C.g_main_context_pending(context.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // PopThreadDefault is a wrapper around g_main_context_pop_thread_default().
@@ -1192,7 +1192,7 @@ func (source Source) Destroy() {
 // GetCanRecurse is a wrapper around g_source_get_can_recurse().
 func (source Source) GetCanRecurse() bool {
 	ret0 := C.g_source_get_can_recurse(source.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetContext is a wrapper around g_source_get_context().
@@ -1235,7 +1235,7 @@ func (source Source) GetTime() int64 {
 // IsDestroyed is a wrapper around g_source_is_destroyed().
 func (source Source) IsDestroyed() bool {
 	ret0 := C.g_source_is_destroyed(source.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // ModifyUnixFd is a wrapper around g_source_modify_unix_fd().
@@ -1272,14 +1272,14 @@ func (source Source) RemoveUnixFd(tag unsafe.Pointer) {
 
 // SetCanRecurse is a wrapper around g_source_set_can_recurse().
 func (source Source) SetCanRecurse(can_recurse bool) {
-	C.g_source_set_can_recurse(source.native(), C.gboolean(util.Bool2Int(can_recurse)) /*go:.util*/)
+	C.g_source_set_can_recurse(source.native(), C.gboolean(util.Bool2Int(can_recurse)))
 }
 
 // SetName is a wrapper around g_source_set_name().
 func (source Source) SetName(name string) {
 	name0 := C.CString(name)
 	C.g_source_set_name(source.native(), name0)
-	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
 }
 
 // SetPriority is a wrapper around g_source_set_priority().
@@ -1300,20 +1300,20 @@ func (source Source) Unref() {
 // SourceRemove is a wrapper around g_source_remove().
 func SourceRemove(tag uint) bool {
 	ret0 := C.g_source_remove(C.guint(tag))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // SourceRemoveByUserData is a wrapper around g_source_remove_by_user_data().
 func SourceRemoveByUserData(user_data unsafe.Pointer) bool {
 	ret0 := C.g_source_remove_by_user_data(C.gpointer(user_data))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // SourceSetNameById is a wrapper around g_source_set_name_by_id().
 func SourceSetNameById(tag uint, name string) {
 	name0 := C.CString(name)
 	C.g_source_set_name_by_id(C.guint(tag), name0)
-	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
 }
 
 // Struct VariantIter
@@ -1426,8 +1426,8 @@ func TimeValFromIso8601(iso_date string) (bool, TimeVal) {
 	iso_date0 := (*C.gchar)(C.CString(iso_date))
 	var time_0 C.GTimeVal
 	ret0 := C.g_time_val_from_iso8601(iso_date0, &time_0)
-	C.free(unsafe.Pointer(iso_date0)) /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0)) /*go:.util*/, wrapTimeVal(&time_0)
+	C.free(unsafe.Pointer(iso_date0))
+	return util.Int2Bool(int(ret0)), wrapTimeVal(&time_0)
 }
 
 // Struct KeyFile
@@ -1468,13 +1468,13 @@ func (key_file KeyFile) GetBoolean(group_name string, key string) (bool, error) 
 	key0 := (*C.gchar)(C.CString(key))
 	var err Error
 	ret0 := C.g_key_file_get_boolean(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // GetBooleanList is a wrapper around g_key_file_get_boolean_list().
@@ -1484,13 +1484,13 @@ func (key_file KeyFile) GetBooleanList(group_name string, key string) ([]bool, e
 	var length0 C.gsize
 	var err Error
 	ret0 := C.g_key_file_get_boolean_list(key_file.native(), group_name0, key0, &length0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
 	var ret0Slice []C.gboolean
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0))
 	ret := make([]bool, len(ret0Slice))
 	for idx, elem := range ret0Slice {
-		ret[idx] = util.Int2Bool(int(elem)) /*go:.util*/
+		ret[idx] = util.Int2Bool(int(elem))
 	}
 	C.g_free(C.gpointer(ret0))
 	if err.Ptr != nil {
@@ -1506,8 +1506,8 @@ func (key_file KeyFile) GetComment(group_name string, key string) (string, error
 	key0 := (*C.gchar)(C.CString(key))
 	var err Error
 	ret0 := C.g_key_file_get_comment(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
 	if err.Ptr != nil {
@@ -1523,8 +1523,8 @@ func (key_file KeyFile) GetDouble(group_name string, key string) (float64, error
 	key0 := (*C.gchar)(C.CString(key))
 	var err Error
 	ret0 := C.g_key_file_get_double(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return 0.0, err.GoValue()
@@ -1539,10 +1539,10 @@ func (key_file KeyFile) GetDoubleList(group_name string, key string) ([]float64,
 	var length0 C.gsize
 	var err Error
 	ret0 := C.g_key_file_get_double_list(key_file.native(), group_name0, key0, &length0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
 	var ret0Slice []C.gdouble
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0))
 	ret := make([]float64, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		ret[idx] = float64(elem)
@@ -1561,7 +1561,7 @@ func (key_file KeyFile) GetGroups() ([]string, uint) {
 	ret0 := C.g_key_file_get_groups(key_file.native(), &length0)
 	var ret0Slice []*C.gchar
 	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
-		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))))
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
@@ -1578,8 +1578,8 @@ func (key_file KeyFile) GetInt64(group_name string, key string) (int64, error) {
 	key0 := (*C.gchar)(C.CString(key))
 	var err Error
 	ret0 := C.g_key_file_get_int64(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return 0, err.GoValue()
@@ -1593,8 +1593,8 @@ func (key_file KeyFile) GetInteger(group_name string, key string) (int, error) {
 	key0 := (*C.gchar)(C.CString(key))
 	var err Error
 	ret0 := C.g_key_file_get_integer(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return 0, err.GoValue()
@@ -1609,10 +1609,10 @@ func (key_file KeyFile) GetIntegerList(group_name string, key string) ([]int, er
 	var length0 C.gsize
 	var err Error
 	ret0 := C.g_key_file_get_integer_list(key_file.native(), group_name0, key0, &length0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
 	var ret0Slice []C.gint
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0))
 	ret := make([]int, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		ret[idx] = int(elem)
@@ -1631,10 +1631,10 @@ func (key_file KeyFile) GetKeys(group_name string) ([]string, uint, error) {
 	var length0 C.gsize
 	var err Error
 	ret0 := C.g_key_file_get_keys(key_file.native(), group_name0, &length0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
 	var ret0Slice []*C.gchar
 	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
-		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))))
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
@@ -1656,9 +1656,9 @@ func (key_file KeyFile) GetLocaleString(group_name string, key string, locale st
 	locale0 := (*C.gchar)(C.CString(locale))
 	var err Error
 	ret0 := C.g_key_file_get_locale_string(key_file.native(), group_name0, key0, locale0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(locale0))     /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
+	C.free(unsafe.Pointer(locale0))
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
 	if err.Ptr != nil {
@@ -1676,11 +1676,11 @@ func (key_file KeyFile) GetLocaleStringList(group_name string, key string, local
 	var length0 C.gsize
 	var err Error
 	ret0 := C.g_key_file_get_locale_string_list(key_file.native(), group_name0, key0, locale0, &length0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(locale0))     /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
+	C.free(unsafe.Pointer(locale0))
 	var ret0Slice []*C.gchar
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0))
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
@@ -1709,8 +1709,8 @@ func (key_file KeyFile) GetString(group_name string, key string) (string, error)
 	key0 := (*C.gchar)(C.CString(key))
 	var err Error
 	ret0 := C.g_key_file_get_string(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
 	if err.Ptr != nil {
@@ -1727,10 +1727,10 @@ func (key_file KeyFile) GetStringList(group_name string, key string) ([]string, 
 	var length0 C.gsize
 	var err Error
 	ret0 := C.g_key_file_get_string_list(key_file.native(), group_name0, key0, &length0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
 	var ret0Slice []*C.gchar
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0)) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(length0))
 	ret := make([]string, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		elemG := C.GoString((*C.char)(elem))
@@ -1751,8 +1751,8 @@ func (key_file KeyFile) GetUint64(group_name string, key string) (uint64, error)
 	key0 := (*C.gchar)(C.CString(key))
 	var err Error
 	ret0 := C.g_key_file_get_uint64(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return 0, err.GoValue()
@@ -1766,8 +1766,8 @@ func (key_file KeyFile) GetValue(group_name string, key string) (string, error) 
 	key0 := (*C.gchar)(C.CString(key))
 	var err Error
 	ret0 := C.g_key_file_get_value(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
 	if err.Ptr != nil {
@@ -1781,8 +1781,8 @@ func (key_file KeyFile) GetValue(group_name string, key string) (string, error) 
 func (key_file KeyFile) HasGroup(group_name string) bool {
 	group_name0 := (*C.gchar)(C.CString(group_name))
 	ret0 := C.g_key_file_has_group(key_file.native(), group_name0)
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0))     /*go:.util*/
+	C.free(unsafe.Pointer(group_name0))
+	return util.Int2Bool(int(ret0))
 }
 
 // HasKey is a wrapper around g_key_file_has_key().
@@ -1791,13 +1791,13 @@ func (key_file KeyFile) HasKey(group_name string, key string) (bool, error) {
 	key0 := (*C.gchar)(C.CString(key))
 	var err Error
 	ret0 := C.g_key_file_has_key(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // LoadFromBytes is a wrapper around g_key_file_load_from_bytes().
@@ -1808,7 +1808,7 @@ func (key_file KeyFile) LoadFromBytes(bytes Bytes, flags KeyFileFlags) (bool, er
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // LoadFromData is a wrapper around g_key_file_load_from_data().
@@ -1816,12 +1816,12 @@ func (key_file KeyFile) LoadFromData(data string, length uint, flags KeyFileFlag
 	data0 := (*C.gchar)(C.CString(data))
 	var err Error
 	ret0 := C.g_key_file_load_from_data(key_file.native(), data0, C.gsize(length), C.GKeyFileFlags(flags), (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(data0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(data0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // LoadFromDataDirs is a wrapper around g_key_file_load_from_data_dirs().
@@ -1830,14 +1830,14 @@ func (key_file KeyFile) LoadFromDataDirs(file string, flags KeyFileFlags) (bool,
 	var full_path0 *C.gchar
 	var err Error
 	ret0 := C.g_key_file_load_from_data_dirs(key_file.native(), file0, &full_path0, C.GKeyFileFlags(flags), (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(file0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(file0))
 	full_path := C.GoString((*C.char)(full_path0))
 	defer C.g_free(C.gpointer(full_path0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, "", err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, full_path, nil
+	return util.Int2Bool(int(ret0)), full_path, nil
 }
 
 // LoadFromDirs is a wrapper around g_key_file_load_from_dirs().
@@ -1855,9 +1855,9 @@ func (key_file KeyFile) LoadFromDirs(file string, search_dirs []string, flags Ke
 	var full_path0 *C.gchar
 	var err Error
 	ret0 := C.g_key_file_load_from_dirs(key_file.native(), file0, search_dirs0Ptr, &full_path0, C.GKeyFileFlags(flags), (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(file0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(file0))
 	for _, elem := range search_dirs0 {
-		C.free(unsafe.Pointer(elem)) /*ch:<stdlib.h>*/
+		C.free(unsafe.Pointer(elem))
 	}
 	full_path := C.GoString((*C.char)(full_path0))
 	defer C.g_free(C.gpointer(full_path0))
@@ -1865,7 +1865,7 @@ func (key_file KeyFile) LoadFromDirs(file string, search_dirs []string, flags Ke
 		defer err.Free()
 		return false, "", err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, full_path, nil
+	return util.Int2Bool(int(ret0)), full_path, nil
 }
 
 // LoadFromFile is a wrapper around g_key_file_load_from_file().
@@ -1873,12 +1873,12 @@ func (key_file KeyFile) LoadFromFile(file string, flags KeyFileFlags) (bool, err
 	file0 := (*C.gchar)(C.CString(file))
 	var err Error
 	ret0 := C.g_key_file_load_from_file(key_file.native(), file0, C.GKeyFileFlags(flags), (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(file0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(file0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // Ref is a wrapper around g_key_file_ref().
@@ -1893,13 +1893,13 @@ func (key_file KeyFile) RemoveComment(group_name string, key string) (bool, erro
 	key0 := (*C.gchar)(C.CString(key))
 	var err Error
 	ret0 := C.g_key_file_remove_comment(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // RemoveGroup is a wrapper around g_key_file_remove_group().
@@ -1907,12 +1907,12 @@ func (key_file KeyFile) RemoveGroup(group_name string) (bool, error) {
 	group_name0 := (*C.gchar)(C.CString(group_name))
 	var err Error
 	ret0 := C.g_key_file_remove_group(key_file.native(), group_name0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // RemoveKey is a wrapper around g_key_file_remove_key().
@@ -1921,13 +1921,13 @@ func (key_file KeyFile) RemoveKey(group_name string, key string) (bool, error) {
 	key0 := (*C.gchar)(C.CString(key))
 	var err Error
 	ret0 := C.g_key_file_remove_key(key_file.native(), group_name0, key0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // SaveToFile is a wrapper around g_key_file_save_to_file().
@@ -1935,21 +1935,21 @@ func (key_file KeyFile) SaveToFile(filename string) (bool, error) {
 	filename0 := (*C.gchar)(C.CString(filename))
 	var err Error
 	ret0 := C.g_key_file_save_to_file(key_file.native(), filename0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(filename0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(filename0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // SetBoolean is a wrapper around g_key_file_set_boolean().
 func (key_file KeyFile) SetBoolean(group_name string, key string, value bool) {
 	group_name0 := (*C.gchar)(C.CString(group_name))
 	key0 := (*C.gchar)(C.CString(key))
-	C.g_key_file_set_boolean(key_file.native(), group_name0, key0, C.gboolean(util.Bool2Int(value)) /*go:.util*/)
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.g_key_file_set_boolean(key_file.native(), group_name0, key0, C.gboolean(util.Bool2Int(value)))
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
 }
 
 // SetComment is a wrapper around g_key_file_set_comment().
@@ -1959,14 +1959,14 @@ func (key_file KeyFile) SetComment(group_name string, key string, comment string
 	comment0 := (*C.gchar)(C.CString(comment))
 	var err Error
 	ret0 := C.g_key_file_set_comment(key_file.native(), group_name0, key0, comment0, (**C.GError)(unsafe.Pointer(&err)))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(comment0))    /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
+	C.free(unsafe.Pointer(comment0))
 	if err.Ptr != nil {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // SetDouble is a wrapper around g_key_file_set_double().
@@ -1974,8 +1974,8 @@ func (key_file KeyFile) SetDouble(group_name string, key string, value float64) 
 	group_name0 := (*C.gchar)(C.CString(group_name))
 	key0 := (*C.gchar)(C.CString(key))
 	C.g_key_file_set_double(key_file.native(), group_name0, key0, C.gdouble(value))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
 }
 
 // SetInt64 is a wrapper around g_key_file_set_int64().
@@ -1983,8 +1983,8 @@ func (key_file KeyFile) SetInt64(group_name string, key string, value int64) {
 	group_name0 := (*C.gchar)(C.CString(group_name))
 	key0 := (*C.gchar)(C.CString(key))
 	C.g_key_file_set_int64(key_file.native(), group_name0, key0, C.gint64(value))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
 }
 
 // SetInteger is a wrapper around g_key_file_set_integer().
@@ -1992,8 +1992,8 @@ func (key_file KeyFile) SetInteger(group_name string, key string, value int) {
 	group_name0 := (*C.gchar)(C.CString(group_name))
 	key0 := (*C.gchar)(C.CString(key))
 	C.g_key_file_set_integer(key_file.native(), group_name0, key0, C.gint(value))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
 }
 
 // SetListSeparator is a wrapper around g_key_file_set_list_separator().
@@ -2008,10 +2008,10 @@ func (key_file KeyFile) SetLocaleString(group_name string, key string, locale st
 	locale0 := (*C.gchar)(C.CString(locale))
 	string0 := (*C.gchar)(C.CString(string))
 	C.g_key_file_set_locale_string(key_file.native(), group_name0, key0, locale0, string0)
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(locale0))     /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(string0))     /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
+	C.free(unsafe.Pointer(locale0))
+	C.free(unsafe.Pointer(string0))
 }
 
 // SetString is a wrapper around g_key_file_set_string().
@@ -2020,9 +2020,9 @@ func (key_file KeyFile) SetString(group_name string, key string, string string) 
 	key0 := (*C.gchar)(C.CString(key))
 	string0 := (*C.gchar)(C.CString(string))
 	C.g_key_file_set_string(key_file.native(), group_name0, key0, string0)
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(string0))     /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
+	C.free(unsafe.Pointer(string0))
 }
 
 // SetUint64 is a wrapper around g_key_file_set_uint64().
@@ -2030,8 +2030,8 @@ func (key_file KeyFile) SetUint64(group_name string, key string, value uint64) {
 	group_name0 := (*C.gchar)(C.CString(group_name))
 	key0 := (*C.gchar)(C.CString(key))
 	C.g_key_file_set_uint64(key_file.native(), group_name0, key0, C.guint64(value))
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
 }
 
 // SetValue is a wrapper around g_key_file_set_value().
@@ -2040,9 +2040,9 @@ func (key_file KeyFile) SetValue(group_name string, key string, value string) {
 	key0 := (*C.gchar)(C.CString(key))
 	value0 := (*C.gchar)(C.CString(value))
 	C.g_key_file_set_value(key_file.native(), group_name0, key0, value0)
-	C.free(unsafe.Pointer(group_name0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(key0))        /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(value0))      /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(group_name0))
+	C.free(unsafe.Pointer(key0))
+	C.free(unsafe.Pointer(value0))
 }
 
 // ToData is a wrapper around g_key_file_to_data().
@@ -2095,7 +2095,7 @@ func IWrapTimeZone(p unsafe.Pointer) interface{} {
 func TimeZoneNew(identifier string) TimeZone {
 	identifier0 := (*C.gchar)(C.CString(identifier))
 	ret0 := C.g_time_zone_new(identifier0)
-	C.free(unsafe.Pointer(identifier0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(identifier0))
 	return wrapTimeZone(ret0)
 }
 
@@ -2133,7 +2133,7 @@ func (tz TimeZone) GetOffset(interval int) int32 {
 // IsDst is a wrapper around g_time_zone_is_dst().
 func (tz TimeZone) IsDst(interval int) bool {
 	ret0 := C.g_time_zone_is_dst(tz.native(), C.gint(interval))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Ref is a wrapper around g_time_zone_ref().
@@ -2292,7 +2292,7 @@ func (end DateTime) Difference(begin DateTime) TimeSpan {
 func (datetime DateTime) Format(format string) string {
 	format0 := (*C.gchar)(C.CString(format))
 	ret0 := C.g_date_time_format(datetime.native(), format0)
-	C.free(unsafe.Pointer(format0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(format0))
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
 	return ret
@@ -2395,7 +2395,7 @@ func (datetime DateTime) GetYmd() (int, int, int) {
 // IsDaylightSavings is a wrapper around g_date_time_is_daylight_savings().
 func (datetime DateTime) IsDaylightSavings() bool {
 	ret0 := C.g_date_time_is_daylight_savings(datetime.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Ref is a wrapper around g_date_time_ref().
@@ -2413,7 +2413,7 @@ func (datetime DateTime) ToLocal() DateTime {
 // ToTimeval is a wrapper around g_date_time_to_timeval().
 func (datetime DateTime) ToTimeval(tv TimeVal) bool {
 	ret0 := C.g_date_time_to_timeval(datetime.native(), tv.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // ToTimezone is a wrapper around g_date_time_to_timezone().
@@ -2448,7 +2448,7 @@ func DateTimeCompare(dt1 unsafe.Pointer, dt2 unsafe.Pointer) int {
 // DateTimeEqual is a wrapper around g_date_time_equal().
 func DateTimeEqual(dt1 unsafe.Pointer, dt2 unsafe.Pointer) bool {
 	ret0 := C.g_date_time_equal(C.gconstpointer(dt1), C.gconstpointer(dt2))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // DateTimeHash is a wrapper around g_date_time_hash().
@@ -2493,7 +2493,7 @@ func (group OptionGroup) Ref() OptionGroup {
 func (group OptionGroup) SetTranslationDomain(domain string) {
 	domain0 := (*C.gchar)(C.CString(domain))
 	C.g_option_group_set_translation_domain(group.native(), domain0)
-	C.free(unsafe.Pointer(domain0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(domain0))
 }
 
 // Unref is a wrapper around g_option_group_unref().

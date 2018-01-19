@@ -65,19 +65,19 @@ func (value Value) DupString() string {
 // DupVariant is a wrapper around g_value_dup_variant().
 func (value Value) DupVariant() glib.Variant {
 	ret0 := C.g_value_dup_variant(value.native())
-	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/
+	return glib.WrapVariant(unsafe.Pointer(ret0))
 }
 
 // FitsPointer is a wrapper around g_value_fits_pointer().
 func (value Value) FitsPointer() bool {
 	ret0 := C.g_value_fits_pointer(value.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetBoolean is a wrapper around g_value_get_boolean().
 func (value Value) GetBoolean() bool {
 	ret0 := C.g_value_get_boolean(value.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetBoxed is a wrapper around g_value_get_boxed().
@@ -186,7 +186,7 @@ func (value Value) GetUlong() uint {
 // GetVariant is a wrapper around g_value_get_variant().
 func (value Value) GetVariant() glib.Variant {
 	ret0 := C.g_value_get_variant(value.native())
-	return glib.WrapVariant(unsafe.Pointer(ret0)) /*gir:GLib*/
+	return glib.WrapVariant(unsafe.Pointer(ret0))
 }
 
 // InitFromInstance is a wrapper around g_value_init_from_instance().
@@ -208,7 +208,7 @@ func (value Value) Reset() Value {
 
 // SetBoolean is a wrapper around g_value_set_boolean().
 func (value Value) SetBoolean(v_boolean bool) {
-	C.g_value_set_boolean(value.native(), C.gboolean(util.Bool2Int(v_boolean)) /*go:.util*/)
+	C.g_value_set_boolean(value.native(), C.gboolean(util.Bool2Int(v_boolean)))
 }
 
 // SetBoxed is a wrapper around g_value_set_boxed().
@@ -285,14 +285,14 @@ func (value Value) SetStaticBoxed(v_boxed unsafe.Pointer) {
 func (value Value) SetStaticString(v_string string) {
 	v_string0 := (*C.gchar)(C.CString(v_string))
 	C.g_value_set_static_string(value.native(), v_string0)
-	C.free(unsafe.Pointer(v_string0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(v_string0))
 }
 
 // SetString is a wrapper around g_value_set_string().
 func (value Value) SetString(v_string string) {
 	v_string0 := (*C.gchar)(C.CString(v_string))
 	C.g_value_set_string(value.native(), v_string0)
-	C.free(unsafe.Pointer(v_string0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(v_string0))
 }
 
 // SetUchar is a wrapper around g_value_set_uchar().
@@ -339,7 +339,7 @@ func (value Value) TakeParam(param ParamSpec) {
 func (value Value) TakeString(v_string string) {
 	v_string0 := (*C.gchar)(C.CString(v_string))
 	C.g_value_take_string(value.native(), v_string0)
-	C.free(unsafe.Pointer(v_string0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(v_string0))
 }
 
 // TakeVariant is a wrapper around g_value_take_variant().
@@ -350,7 +350,7 @@ func (value Value) TakeVariant(variant glib.Variant) {
 // Transform is a wrapper around g_value_transform().
 func (src_value Value) Transform(dest_value Value) bool {
 	ret0 := C.g_value_transform(src_value.native(), dest_value.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Unset is a wrapper around g_value_unset().
@@ -393,8 +393,8 @@ func (source Object) BindProperty(source_property string, target Object, target_
 	source_property0 := (*C.gchar)(C.CString(source_property))
 	target_property0 := (*C.gchar)(C.CString(target_property))
 	ret0 := C.g_object_bind_property(C.gpointer(source.native()), source_property0, C.gpointer(target.native()), target_property0, C.GBindingFlags(flags))
-	C.free(unsafe.Pointer(source_property0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(target_property0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(source_property0))
+	C.free(unsafe.Pointer(target_property0))
 	return wrapBinding(ret0)
 }
 
@@ -403,8 +403,8 @@ func (source Object) BindPropertyFull(source_property string, target Object, tar
 	source_property0 := (*C.gchar)(C.CString(source_property))
 	target_property0 := (*C.gchar)(C.CString(target_property))
 	ret0 := C.g_object_bind_property_with_closures(C.gpointer(source.native()), source_property0, C.gpointer(target.native()), target_property0, C.GBindingFlags(flags), transform_to.native(), transform_from.native())
-	C.free(unsafe.Pointer(source_property0)) /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(target_property0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(source_property0))
+	C.free(unsafe.Pointer(target_property0))
 	return wrapBinding(ret0)
 }
 
@@ -422,7 +422,7 @@ func (object Object) FreezeNotify() {
 func (object Object) GetData(key string) unsafe.Pointer {
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_object_get_data(object.native(), key0)
-	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))
 	return unsafe.Pointer(ret0)
 }
 
@@ -430,11 +430,11 @@ func (object Object) GetData(key string) unsafe.Pointer {
 func (object Object) GetProperty(property_name string, value Value) {
 	property_name0 := (*C.gchar)(C.CString(property_name))
 	C.g_object_get_property(object.native(), property_name0, value.native())
-	C.free(unsafe.Pointer(property_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(property_name0))
 }
 
 // GetQdata is a wrapper around g_object_get_qdata().
-func (object Object) GetQdata(quark /*gir:GLib*/ glib.Quark) unsafe.Pointer {
+func (object Object) GetQdata(quark glib.Quark) unsafe.Pointer {
 	ret0 := C.g_object_get_qdata(object.native(), C.GQuark(quark))
 	return unsafe.Pointer(ret0)
 }
@@ -442,14 +442,14 @@ func (object Object) GetQdata(quark /*gir:GLib*/ glib.Quark) unsafe.Pointer {
 // IsFloating is a wrapper around g_object_is_floating().
 func (object Object) IsFloating() bool {
 	ret0 := C.g_object_is_floating(C.gpointer(object.native()))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Notify is a wrapper around g_object_notify().
 func (object Object) Notify(property_name string) {
 	property_name0 := (*C.gchar)(C.CString(property_name))
 	C.g_object_notify(object.native(), property_name0)
-	C.free(unsafe.Pointer(property_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(property_name0))
 }
 
 // NotifyByPspec is a wrapper around g_object_notify_by_pspec().
@@ -478,18 +478,18 @@ func (object Object) RunDispose() {
 func (object Object) SetData(key string, data unsafe.Pointer) {
 	key0 := (*C.gchar)(C.CString(key))
 	C.g_object_set_data(object.native(), key0, C.gpointer(data))
-	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))
 }
 
 // SetProperty is a wrapper around g_object_set_property().
 func (object Object) SetProperty(property_name string, value Value) {
 	property_name0 := (*C.gchar)(C.CString(property_name))
 	C.g_object_set_property(object.native(), property_name0, value.native())
-	C.free(unsafe.Pointer(property_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(property_name0))
 }
 
 // SetQdata is a wrapper around g_object_set_qdata().
-func (object Object) SetQdata(quark /*gir:GLib*/ glib.Quark, data unsafe.Pointer) {
+func (object Object) SetQdata(quark glib.Quark, data unsafe.Pointer) {
 	C.g_object_set_qdata(object.native(), C.GQuark(quark), C.gpointer(data))
 }
 
@@ -497,12 +497,12 @@ func (object Object) SetQdata(quark /*gir:GLib*/ glib.Quark, data unsafe.Pointer
 func (object Object) StealData(key string) unsafe.Pointer {
 	key0 := (*C.gchar)(C.CString(key))
 	ret0 := C.g_object_steal_data(object.native(), key0)
-	C.free(unsafe.Pointer(key0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(key0))
 	return unsafe.Pointer(ret0)
 }
 
 // StealQdata is a wrapper around g_object_steal_qdata().
-func (object Object) StealQdata(quark /*gir:GLib*/ glib.Quark) unsafe.Pointer {
+func (object Object) StealQdata(quark glib.Quark) unsafe.Pointer {
 	ret0 := C.g_object_steal_qdata(object.native(), C.GQuark(quark))
 	return unsafe.Pointer(ret0)
 }
@@ -526,7 +526,7 @@ func (object Object) WatchClosure(closure Closure) {
 func ObjectInterfaceFindProperty(g_iface TypeInterface, property_name string) ParamSpec {
 	property_name0 := (*C.gchar)(C.CString(property_name))
 	ret0 := C.g_object_interface_find_property(C.gpointer(g_iface.native()), property_name0)
-	C.free(unsafe.Pointer(property_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(property_name0))
 	return wrapParamSpec(ret0)
 }
 
@@ -540,7 +540,7 @@ func ObjectInterfaceListProperties(g_iface TypeInterface) []ParamSpec {
 	var n_properties_p0 C.guint
 	ret0 := C.g_object_interface_list_properties(C.gpointer(g_iface.native()), &n_properties_p0)
 	var ret0Slice []*C.GParamSpec
-	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(n_properties_p0)) /*go:.util*/
+	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0), int(n_properties_p0))
 	ret := make([]ParamSpec, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		ret[idx] = wrapParamSpec(elem)
@@ -720,9 +720,9 @@ func (pspec ParamSpec) GetName() string {
 }
 
 // GetNameQuark is a wrapper around g_param_spec_get_name_quark().
-func (pspec ParamSpec) GetNameQuark() /*gir:GLib*/ glib.Quark {
+func (pspec ParamSpec) GetNameQuark() glib.Quark {
 	ret0 := C.g_param_spec_get_name_quark(pspec.native())
-	return /*gir:GLib*/ glib.Quark(ret0)
+	return glib.Quark(ret0)
 }
 
 // GetNick is a wrapper around g_param_spec_get_nick().
@@ -733,7 +733,7 @@ func (pspec ParamSpec) GetNick() string {
 }
 
 // GetQdata is a wrapper around g_param_spec_get_qdata().
-func (pspec ParamSpec) GetQdata(quark /*gir:GLib*/ glib.Quark) unsafe.Pointer {
+func (pspec ParamSpec) GetQdata(quark glib.Quark) unsafe.Pointer {
 	ret0 := C.g_param_spec_get_qdata(pspec.native(), C.GQuark(quark))
 	return unsafe.Pointer(ret0)
 }
@@ -757,7 +757,7 @@ func (pspec ParamSpec) RefSink() ParamSpec {
 }
 
 // SetQdata is a wrapper around g_param_spec_set_qdata().
-func (pspec ParamSpec) SetQdata(quark /*gir:GLib*/ glib.Quark, data unsafe.Pointer) {
+func (pspec ParamSpec) SetQdata(quark glib.Quark, data unsafe.Pointer) {
 	C.g_param_spec_set_qdata(pspec.native(), C.GQuark(quark), C.gpointer(data))
 }
 
@@ -767,7 +767,7 @@ func (pspec ParamSpec) Sink() {
 }
 
 // StealQdata is a wrapper around g_param_spec_steal_qdata().
-func (pspec ParamSpec) StealQdata(quark /*gir:GLib*/ glib.Quark) unsafe.Pointer {
+func (pspec ParamSpec) StealQdata(quark glib.Quark) unsafe.Pointer {
 	ret0 := C.g_param_spec_steal_qdata(pspec.native(), C.GQuark(quark))
 	return unsafe.Pointer(ret0)
 }
@@ -886,7 +886,7 @@ func (v TypeModule) TypePlugin() TypePlugin {
 func (module TypeModule) SetName(name string) {
 	name0 := (*C.gchar)(C.CString(name))
 	C.g_type_module_set_name(module.native(), name0)
-	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
 }
 
 // Unuse is a wrapper around g_type_module_unuse().
@@ -897,7 +897,7 @@ func (module TypeModule) Unuse() {
 // Use is a wrapper around g_type_module_use().
 func (module TypeModule) Use() bool {
 	ret0 := C.g_type_module_use(module.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Interface TypePlugin

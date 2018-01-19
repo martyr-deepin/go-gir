@@ -585,7 +585,7 @@ func IWrapFrameTimings(p unsafe.Pointer) interface{} {
 // GetComplete is a wrapper around gdk_frame_timings_get_complete().
 func (timings FrameTimings) GetComplete() bool {
 	ret0 := C.gdk_frame_timings_get_complete(timings.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetFrameCounter is a wrapper around gdk_frame_timings_get_frame_counter().
@@ -722,7 +722,7 @@ func (rgba RGBA) Copy() RGBA {
 // Equal is a wrapper around gdk_rgba_equal().
 func (p1 RGBA) Equal(p2 RGBA) bool {
 	ret0 := C.gdk_rgba_equal(C.gconstpointer(p1.native()), C.gconstpointer(p2.native()))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Free is a wrapper around gdk_rgba_free().
@@ -740,8 +740,8 @@ func (p RGBA) Hash() uint {
 func (rgba RGBA) Parse(spec string) bool {
 	spec0 := (*C.gchar)(C.CString(spec))
 	ret0 := C.gdk_rgba_parse(rgba.native(), spec0)
-	C.free(unsafe.Pointer(spec0))   /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	C.free(unsafe.Pointer(spec0))
+	return util.Int2Bool(int(ret0))
 }
 
 // ToString is a wrapper around gdk_rgba_to_string().
@@ -776,14 +776,14 @@ func IWrapRectangle(p unsafe.Pointer) interface{} {
 // Equal is a wrapper around gdk_rectangle_equal().
 func (rect1 Rectangle) Equal(rect2 Rectangle) bool {
 	ret0 := C.gdk_rectangle_equal(rect1.native(), rect2.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Intersect is a wrapper around gdk_rectangle_intersect().
 func (src1 Rectangle) Intersect(src2 Rectangle) (bool, Rectangle) {
 	var dest0 C.GdkRectangle
 	ret0 := C.gdk_rectangle_intersect(src1.native(), src2.native(), &dest0)
-	return util.Int2Bool(int(ret0)) /*go:.util*/, wrapRectangle(&dest0)
+	return util.Int2Bool(int(ret0)), wrapRectangle(&dest0)
 }
 
 // Union is a wrapper around gdk_rectangle_union().
@@ -937,7 +937,7 @@ func (context AppLaunchContext) SetIcon(icon gio.Icon) {
 func (context AppLaunchContext) SetIconName(icon_name string) {
 	icon_name0 := C.CString(icon_name)
 	C.gdk_app_launch_context_set_icon_name(context.native(), icon_name0)
-	C.free(unsafe.Pointer(icon_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(icon_name0))
 }
 
 // SetScreen is a wrapper around gdk_app_launch_context_set_screen().
@@ -991,7 +991,7 @@ func (screen Screen) GetDisplay() Display {
 // GetFontOptions is a wrapper around gdk_screen_get_font_options().
 func (screen Screen) GetFontOptions() cairo.FontOptions {
 	ret0 := C.gdk_screen_get_font_options(screen.native())
-	return cairo.WrapFontOptions(unsafe.Pointer(ret0)) /*gir:cairo*/
+	return cairo.WrapFontOptions(unsafe.Pointer(ret0))
 }
 
 // GetResolution is a wrapper around gdk_screen_get_resolution().
@@ -1016,8 +1016,8 @@ func (screen Screen) GetRootWindow() Window {
 func (screen Screen) GetSetting(name string, value gobject.Value) bool {
 	name0 := (*C.gchar)(C.CString(name))
 	ret0 := C.gdk_screen_get_setting(screen.native(), name0, (*C.GValue)(value.Ptr))
-	C.free(unsafe.Pointer(name0))   /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	C.free(unsafe.Pointer(name0))
+	return util.Int2Bool(int(ret0))
 }
 
 // GetSystemVisual is a wrapper around gdk_screen_get_system_visual().
@@ -1030,27 +1030,27 @@ func (screen Screen) GetSystemVisual() Visual {
 func (screen Screen) GetToplevelWindows() glib.List {
 	ret0 := C.gdk_screen_get_toplevel_windows(screen.native())
 	return glib.WrapList(unsafe.Pointer(ret0),
-		func(p unsafe.Pointer) interface{} { return WrapWindow(p) }) /*gir:GLib*/
+		func(p unsafe.Pointer) interface{} { return WrapWindow(p) })
 }
 
 // GetWindowStack is a wrapper around gdk_screen_get_window_stack().
 func (screen Screen) GetWindowStack() glib.List {
 	ret0 := C.gdk_screen_get_window_stack(screen.native())
 	return glib.WrapList(unsafe.Pointer(ret0),
-		func(p unsafe.Pointer) interface{} { return WrapWindow(p) }) /*gir:GLib*/
+		func(p unsafe.Pointer) interface{} { return WrapWindow(p) })
 }
 
 // IsComposited is a wrapper around gdk_screen_is_composited().
 func (screen Screen) IsComposited() bool {
 	ret0 := C.gdk_screen_is_composited(screen.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // ListVisuals is a wrapper around gdk_screen_list_visuals().
 func (screen Screen) ListVisuals() glib.List {
 	ret0 := C.gdk_screen_list_visuals(screen.native())
 	return glib.WrapList(unsafe.Pointer(ret0),
-		func(p unsafe.Pointer) interface{} { return WrapVisual(p) }) /*gir:GLib*/
+		func(p unsafe.Pointer) interface{} { return WrapVisual(p) })
 }
 
 // SetFontOptions is a wrapper around gdk_screen_set_font_options().
@@ -1114,7 +1114,7 @@ func (display Display) Close() {
 // DeviceIsGrabbed is a wrapper around gdk_display_device_is_grabbed().
 func (display Display) DeviceIsGrabbed(device Device) bool {
 	ret0 := C.gdk_display_device_is_grabbed(display.native(), device.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Flush is a wrapper around gdk_display_flush().
@@ -1200,27 +1200,27 @@ func (display Display) GetPrimaryMonitor() Monitor {
 // HasPending is a wrapper around gdk_display_has_pending().
 func (display Display) HasPending() bool {
 	ret0 := C.gdk_display_has_pending(display.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsClosed is a wrapper around gdk_display_is_closed().
 func (display Display) IsClosed() bool {
 	ret0 := C.gdk_display_is_closed(display.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // ListSeats is a wrapper around gdk_display_list_seats().
 func (display Display) ListSeats() glib.List {
 	ret0 := C.gdk_display_list_seats(display.native())
 	return glib.WrapList(unsafe.Pointer(ret0),
-		func(p unsafe.Pointer) interface{} { return WrapSeat(p) }) /*gir:GLib*/
+		func(p unsafe.Pointer) interface{} { return WrapSeat(p) })
 }
 
 // NotifyStartupComplete is a wrapper around gdk_display_notify_startup_complete().
 func (display Display) NotifyStartupComplete(startup_id string) {
 	startup_id0 := (*C.gchar)(C.CString(startup_id))
 	C.gdk_display_notify_startup_complete(display.native(), startup_id0)
-	C.free(unsafe.Pointer(startup_id0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(startup_id0))
 }
 
 // SetDoubleClickDistance is a wrapper around gdk_display_set_double_click_distance().
@@ -1236,37 +1236,37 @@ func (display Display) SetDoubleClickTime(msec uint) {
 // SupportsClipboardPersistence is a wrapper around gdk_display_supports_clipboard_persistence().
 func (display Display) SupportsClipboardPersistence() bool {
 	ret0 := C.gdk_display_supports_clipboard_persistence(display.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // SupportsCursorAlpha is a wrapper around gdk_display_supports_cursor_alpha().
 func (display Display) SupportsCursorAlpha() bool {
 	ret0 := C.gdk_display_supports_cursor_alpha(display.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // SupportsCursorColor is a wrapper around gdk_display_supports_cursor_color().
 func (display Display) SupportsCursorColor() bool {
 	ret0 := C.gdk_display_supports_cursor_color(display.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // SupportsInputShapes is a wrapper around gdk_display_supports_input_shapes().
 func (display Display) SupportsInputShapes() bool {
 	ret0 := C.gdk_display_supports_input_shapes(display.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // SupportsSelectionNotification is a wrapper around gdk_display_supports_selection_notification().
 func (display Display) SupportsSelectionNotification() bool {
 	ret0 := C.gdk_display_supports_selection_notification(display.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // SupportsShapes is a wrapper around gdk_display_supports_shapes().
 func (display Display) SupportsShapes() bool {
 	ret0 := C.gdk_display_supports_shapes(display.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Sync is a wrapper around gdk_display_sync().
@@ -1284,7 +1284,7 @@ func DisplayGetDefault() Display {
 func DisplayOpen(display_name string) Display {
 	display_name0 := (*C.gchar)(C.CString(display_name))
 	ret0 := C.gdk_display_open(display_name0)
-	C.free(unsafe.Pointer(display_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(display_name0))
 	return wrapDisplay(ret0)
 }
 
@@ -1344,7 +1344,7 @@ func (device Device) GetAxis(axes []float64, use AxisUse) (bool, float64) {
 	}
 	var value0 C.gdouble
 	ret0 := C.gdk_device_get_axis(device.native(), axes0Ptr, C.GdkAxisUse(use), &value0)
-	return util.Int2Bool(int(ret0)) /*go:.util*/, float64(value0)
+	return util.Int2Bool(int(ret0)), float64(value0)
 }
 
 // GetAxisUse is a wrapper around gdk_device_get_axis_use().
@@ -1368,7 +1368,7 @@ func (device Device) GetDisplay() Display {
 // GetHasCursor is a wrapper around gdk_device_get_has_cursor().
 func (device Device) GetHasCursor() bool {
 	ret0 := C.gdk_device_get_has_cursor(device.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetKey is a wrapper around gdk_device_get_key().
@@ -1376,7 +1376,7 @@ func (device Device) GetKey(index_ uint) (bool, uint, ModifierType) {
 	var keyval0 C.guint
 	var modifiers0 C.GdkModifierType
 	ret0 := C.gdk_device_get_key(device.native(), C.guint(index_), &keyval0, &modifiers0)
-	return util.Int2Bool(int(ret0)) /*go:.util*/, uint(keyval0), ModifierType(modifiers0)
+	return util.Int2Bool(int(ret0)), uint(keyval0), ModifierType(modifiers0)
 }
 
 // GetLastEventWindow is a wrapper around gdk_device_get_last_event_window().
@@ -1489,14 +1489,14 @@ func (device Device) GetWindowAtPositionDouble() (Window, float64, float64) {
 func (device Device) ListAxes() glib.List {
 	ret0 := C.gdk_device_list_axes(device.native())
 	return glib.WrapList(unsafe.Pointer(ret0),
-		func(p unsafe.Pointer) interface{} { return WrapAtom(p) }) /*gir:GLib*/
+		func(p unsafe.Pointer) interface{} { return WrapAtom(p) })
 }
 
 // ListSlaveDevices is a wrapper around gdk_device_list_slave_devices().
 func (device Device) ListSlaveDevices() glib.List {
 	ret0 := C.gdk_device_list_slave_devices(device.native())
 	return glib.WrapList(unsafe.Pointer(ret0),
-		func(p unsafe.Pointer) interface{} { return WrapDevice(p) }) /*gir:GLib*/
+		func(p unsafe.Pointer) interface{} { return WrapDevice(p) })
 }
 
 // SetAxisUse is a wrapper around gdk_device_set_axis_use().
@@ -1512,7 +1512,7 @@ func (device Device) SetKey(index_ uint, keyval uint, modifiers ModifierType) {
 // SetMode is a wrapper around gdk_device_set_mode().
 func (device Device) SetMode(mode InputMode) bool {
 	ret0 := C.gdk_device_set_mode(device.native(), C.GdkInputMode(mode))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Warp is a wrapper around gdk_device_warp().
@@ -1570,6 +1570,12 @@ func (window Window) Beep() {
 	C.gdk_window_beep(window.native())
 }
 
+// BeginDrawFrame is a wrapper around gdk_window_begin_draw_frame().
+func (window Window) BeginDrawFrame(region cairo.Region) DrawingContext {
+	ret0 := C.gdk_window_begin_draw_frame(window.native(), (*C.cairo_region_t)(region.Ptr))
+	return wrapDrawingContext(ret0)
+}
+
 // BeginMoveDrag is a wrapper around gdk_window_begin_move_drag().
 func (window Window) BeginMoveDrag(button int, root_x int, root_y int, timestamp uint32) {
 	C.gdk_window_begin_move_drag(window.native(), C.gint(button), C.gint(root_x), C.gint(root_y), C.guint32(timestamp))
@@ -1618,9 +1624,9 @@ func (window Window) CreateGlContext() (GLContext, error) {
 }
 
 // CreateSimilarSurface is a wrapper around gdk_window_create_similar_surface().
-func (window Window) CreateSimilarSurface(content /*gir:cairo*/ cairo.Content, width int, height int) cairo.Surface {
+func (window Window) CreateSimilarSurface(content cairo.Content, width int, height int) cairo.Surface {
 	ret0 := C.gdk_window_create_similar_surface(window.native(), C.cairo_content_t(content), C.int(width), C.int(height))
-	return cairo.WrapSurface(unsafe.Pointer(ret0)) /*gir:cairo*/
+	return cairo.WrapSurface(unsafe.Pointer(ret0))
 }
 
 // Deiconify is a wrapper around gdk_window_deiconify().
@@ -1641,7 +1647,7 @@ func (window Window) EndDrawFrame(context DrawingContext) {
 // EnsureNative is a wrapper around gdk_window_ensure_native().
 func (window Window) EnsureNative() bool {
 	ret0 := C.gdk_window_ensure_native(window.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Focus is a wrapper around gdk_window_focus().
@@ -1672,27 +1678,27 @@ func (window Window) GeometryChanged() {
 // GetAcceptFocus is a wrapper around gdk_window_get_accept_focus().
 func (window Window) GetAcceptFocus() bool {
 	ret0 := C.gdk_window_get_accept_focus(window.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetChildren is a wrapper around gdk_window_get_children().
 func (window Window) GetChildren() glib.List {
 	ret0 := C.gdk_window_get_children(window.native())
 	return glib.WrapList(unsafe.Pointer(ret0),
-		func(p unsafe.Pointer) interface{} { return WrapWindow(p) }) /*gir:GLib*/
+		func(p unsafe.Pointer) interface{} { return WrapWindow(p) })
 }
 
 // GetChildrenWithUserData is a wrapper around gdk_window_get_children_with_user_data().
 func (window Window) GetChildrenWithUserData(user_data unsafe.Pointer) glib.List {
 	ret0 := C.gdk_window_get_children_with_user_data(window.native(), C.gpointer(user_data))
 	return glib.WrapList(unsafe.Pointer(ret0),
-		func(p unsafe.Pointer) interface{} { return WrapWindow(p) }) /*gir:GLib*/
+		func(p unsafe.Pointer) interface{} { return WrapWindow(p) })
 }
 
 // GetClipRegion is a wrapper around gdk_window_get_clip_region().
 func (window Window) GetClipRegion() cairo.Region {
 	ret0 := C.gdk_window_get_clip_region(window.native())
-	return cairo.WrapRegion(unsafe.Pointer(ret0)) /*gir:cairo*/
+	return cairo.WrapRegion(unsafe.Pointer(ret0))
 }
 
 // GetCursor is a wrapper around gdk_window_get_cursor().
@@ -1705,7 +1711,7 @@ func (window Window) GetCursor() Cursor {
 func (window Window) GetDecorations() (bool, WMDecoration) {
 	var decorations0 C.GdkWMDecoration
 	ret0 := C.gdk_window_get_decorations(window.native(), &decorations0)
-	return util.Int2Bool(int(ret0)) /*go:.util*/, WMDecoration(decorations0)
+	return util.Int2Bool(int(ret0)), WMDecoration(decorations0)
 }
 
 // GetDeviceCursor is a wrapper around gdk_window_get_device_cursor().
@@ -1766,7 +1772,7 @@ func (window Window) GetEffectiveToplevel() Window {
 // GetEventCompression is a wrapper around gdk_window_get_event_compression().
 func (window Window) GetEventCompression() bool {
 	ret0 := C.gdk_window_get_event_compression(window.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetEvents is a wrapper around gdk_window_get_events().
@@ -1778,7 +1784,7 @@ func (window Window) GetEvents() EventMask {
 // GetFocusOnMap is a wrapper around gdk_window_get_focus_on_map().
 func (window Window) GetFocusOnMap() bool {
 	ret0 := C.gdk_window_get_focus_on_map(window.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetFrameClock is a wrapper around gdk_window_get_frame_clock().
@@ -1825,7 +1831,7 @@ func (window Window) GetHeight() int {
 // GetModalHint is a wrapper around gdk_window_get_modal_hint().
 func (window Window) GetModalHint() bool {
 	ret0 := C.gdk_window_get_modal_hint(window.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetOrigin is a wrapper around gdk_window_get_origin().
@@ -1845,7 +1851,7 @@ func (window Window) GetParent() Window {
 // GetPassThrough is a wrapper around gdk_window_get_pass_through().
 func (window Window) GetPassThrough() bool {
 	ret0 := C.gdk_window_get_pass_through(window.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetPosition is a wrapper around gdk_window_get_position().
@@ -1899,7 +1905,7 @@ func (window Window) GetState() WindowState {
 // GetSupportMultidevice is a wrapper around gdk_window_get_support_multidevice().
 func (window Window) GetSupportMultidevice() bool {
 	ret0 := C.gdk_window_get_support_multidevice(window.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetToplevel is a wrapper around gdk_window_get_toplevel().
@@ -1917,7 +1923,7 @@ func (window Window) GetTypeHint() WindowTypeHint {
 // GetUpdateArea is a wrapper around gdk_window_get_update_area().
 func (window Window) GetUpdateArea() cairo.Region {
 	ret0 := C.gdk_window_get_update_area(window.native())
-	return cairo.WrapRegion(unsafe.Pointer(ret0)) /*gir:cairo*/
+	return cairo.WrapRegion(unsafe.Pointer(ret0))
 }
 
 // GetUserData is a wrapper around gdk_window_get_user_data().
@@ -1930,7 +1936,7 @@ func (window Window) GetUserData() unsafe.Pointer {
 // GetVisibleRegion is a wrapper around gdk_window_get_visible_region().
 func (window Window) GetVisibleRegion() cairo.Region {
 	ret0 := C.gdk_window_get_visible_region(window.native())
-	return cairo.WrapRegion(unsafe.Pointer(ret0)) /*gir:cairo*/
+	return cairo.WrapRegion(unsafe.Pointer(ret0))
 }
 
 // GetVisual is a wrapper around gdk_window_get_visual().
@@ -1954,7 +1960,7 @@ func (window Window) GetWindowType() WindowType {
 // HasNative is a wrapper around gdk_window_has_native().
 func (window Window) HasNative() bool {
 	ret0 := C.gdk_window_has_native(window.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Hide is a wrapper around gdk_window_hide().
@@ -1974,42 +1980,42 @@ func (window Window) InputShapeCombineRegion(shape_region cairo.Region, offset_x
 
 // InvalidateRect is a wrapper around gdk_window_invalidate_rect().
 func (window Window) InvalidateRect(rect Rectangle, invalidate_children bool) {
-	C.gdk_window_invalidate_rect(window.native(), rect.native(), C.gboolean(util.Bool2Int(invalidate_children)) /*go:.util*/)
+	C.gdk_window_invalidate_rect(window.native(), rect.native(), C.gboolean(util.Bool2Int(invalidate_children)))
 }
 
 // InvalidateRegion is a wrapper around gdk_window_invalidate_region().
 func (window Window) InvalidateRegion(region cairo.Region, invalidate_children bool) {
-	C.gdk_window_invalidate_region(window.native(), (*C.cairo_region_t)(region.Ptr), C.gboolean(util.Bool2Int(invalidate_children)) /*go:.util*/)
+	C.gdk_window_invalidate_region(window.native(), (*C.cairo_region_t)(region.Ptr), C.gboolean(util.Bool2Int(invalidate_children)))
 }
 
 // IsDestroyed is a wrapper around gdk_window_is_destroyed().
 func (window Window) IsDestroyed() bool {
 	ret0 := C.gdk_window_is_destroyed(window.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsInputOnly is a wrapper around gdk_window_is_input_only().
 func (window Window) IsInputOnly() bool {
 	ret0 := C.gdk_window_is_input_only(window.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsShaped is a wrapper around gdk_window_is_shaped().
 func (window Window) IsShaped() bool {
 	ret0 := C.gdk_window_is_shaped(window.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsViewable is a wrapper around gdk_window_is_viewable().
 func (window Window) IsViewable() bool {
 	ret0 := C.gdk_window_is_viewable(window.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsVisible is a wrapper around gdk_window_is_visible().
 func (window Window) IsVisible() bool {
 	ret0 := C.gdk_window_is_visible(window.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Lower is a wrapper around gdk_window_lower().
@@ -2056,7 +2062,7 @@ func (window Window) MoveResize(x int, y int, width int, height int) {
 func (window Window) PeekChildren() glib.List {
 	ret0 := C.gdk_window_peek_children(window.native())
 	return glib.WrapList(unsafe.Pointer(ret0),
-		func(p unsafe.Pointer) interface{} { return WrapWindow(p) }) /*gir:GLib*/
+		func(p unsafe.Pointer) interface{} { return WrapWindow(p) })
 }
 
 // Raise is a wrapper around gdk_window_raise().
@@ -2081,7 +2087,7 @@ func (window Window) Resize(width int, height int) {
 
 // Restack is a wrapper around gdk_window_restack().
 func (window Window) Restack(sibling Window, above bool) {
-	C.gdk_window_restack(window.native(), sibling.native(), C.gboolean(util.Bool2Int(above)) /*go:.util*/)
+	C.gdk_window_restack(window.native(), sibling.native(), C.gboolean(util.Bool2Int(above)))
 }
 
 // Scroll is a wrapper around gdk_window_scroll().
@@ -2091,7 +2097,7 @@ func (window Window) Scroll(dx int, dy int) {
 
 // SetAcceptFocus is a wrapper around gdk_window_set_accept_focus().
 func (window Window) SetAcceptFocus(accept_focus bool) {
-	C.gdk_window_set_accept_focus(window.native(), C.gboolean(util.Bool2Int(accept_focus)) /*go:.util*/)
+	C.gdk_window_set_accept_focus(window.native(), C.gboolean(util.Bool2Int(accept_focus)))
 }
 
 // SetChildInputShapes is a wrapper around gdk_window_set_child_input_shapes().
@@ -2126,7 +2132,7 @@ func (window Window) SetDeviceEvents(device Device, event_mask EventMask) {
 
 // SetEventCompression is a wrapper around gdk_window_set_event_compression().
 func (window Window) SetEventCompression(event_compression bool) {
-	C.gdk_window_set_event_compression(window.native(), C.gboolean(util.Bool2Int(event_compression)) /*go:.util*/)
+	C.gdk_window_set_event_compression(window.native(), C.gboolean(util.Bool2Int(event_compression)))
 }
 
 // SetEvents is a wrapper around gdk_window_set_events().
@@ -2136,7 +2142,7 @@ func (window Window) SetEvents(event_mask EventMask) {
 
 // SetFocusOnMap is a wrapper around gdk_window_set_focus_on_map().
 func (window Window) SetFocusOnMap(focus_on_map bool) {
-	C.gdk_window_set_focus_on_map(window.native(), C.gboolean(util.Bool2Int(focus_on_map)) /*go:.util*/)
+	C.gdk_window_set_focus_on_map(window.native(), C.gboolean(util.Bool2Int(focus_on_map)))
 }
 
 // SetFullscreenMode is a wrapper around gdk_window_set_fullscreen_mode().
@@ -2168,22 +2174,22 @@ func (window Window) SetIconList(pixbufs glib.List) {
 func (window Window) SetIconName(name string) {
 	name0 := (*C.gchar)(C.CString(name))
 	C.gdk_window_set_icon_name(window.native(), name0)
-	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
 }
 
 // SetKeepAbove is a wrapper around gdk_window_set_keep_above().
 func (window Window) SetKeepAbove(setting bool) {
-	C.gdk_window_set_keep_above(window.native(), C.gboolean(util.Bool2Int(setting)) /*go:.util*/)
+	C.gdk_window_set_keep_above(window.native(), C.gboolean(util.Bool2Int(setting)))
 }
 
 // SetKeepBelow is a wrapper around gdk_window_set_keep_below().
 func (window Window) SetKeepBelow(setting bool) {
-	C.gdk_window_set_keep_below(window.native(), C.gboolean(util.Bool2Int(setting)) /*go:.util*/)
+	C.gdk_window_set_keep_below(window.native(), C.gboolean(util.Bool2Int(setting)))
 }
 
 // SetModalHint is a wrapper around gdk_window_set_modal_hint().
 func (window Window) SetModalHint(modal bool) {
-	C.gdk_window_set_modal_hint(window.native(), C.gboolean(util.Bool2Int(modal)) /*go:.util*/)
+	C.gdk_window_set_modal_hint(window.native(), C.gboolean(util.Bool2Int(modal)))
 }
 
 // SetOpacity is a wrapper around gdk_window_set_opacity().
@@ -2198,19 +2204,19 @@ func (window Window) SetOpaqueRegion(region cairo.Region) {
 
 // SetOverrideRedirect is a wrapper around gdk_window_set_override_redirect().
 func (window Window) SetOverrideRedirect(override_redirect bool) {
-	C.gdk_window_set_override_redirect(window.native(), C.gboolean(util.Bool2Int(override_redirect)) /*go:.util*/)
+	C.gdk_window_set_override_redirect(window.native(), C.gboolean(util.Bool2Int(override_redirect)))
 }
 
 // SetPassThrough is a wrapper around gdk_window_set_pass_through().
 func (window Window) SetPassThrough(pass_through bool) {
-	C.gdk_window_set_pass_through(window.native(), C.gboolean(util.Bool2Int(pass_through)) /*go:.util*/)
+	C.gdk_window_set_pass_through(window.native(), C.gboolean(util.Bool2Int(pass_through)))
 }
 
 // SetRole is a wrapper around gdk_window_set_role().
 func (window Window) SetRole(role string) {
 	role0 := (*C.gchar)(C.CString(role))
 	C.gdk_window_set_role(window.native(), role0)
-	C.free(unsafe.Pointer(role0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(role0))
 }
 
 // SetShadowWidth is a wrapper around gdk_window_set_shadow_width().
@@ -2220,12 +2226,12 @@ func (window Window) SetShadowWidth(left int, right int, top int, bottom int) {
 
 // SetSkipPagerHint is a wrapper around gdk_window_set_skip_pager_hint().
 func (window Window) SetSkipPagerHint(skips_pager bool) {
-	C.gdk_window_set_skip_pager_hint(window.native(), C.gboolean(util.Bool2Int(skips_pager)) /*go:.util*/)
+	C.gdk_window_set_skip_pager_hint(window.native(), C.gboolean(util.Bool2Int(skips_pager)))
 }
 
 // SetSkipTaskbarHint is a wrapper around gdk_window_set_skip_taskbar_hint().
 func (window Window) SetSkipTaskbarHint(skips_taskbar bool) {
-	C.gdk_window_set_skip_taskbar_hint(window.native(), C.gboolean(util.Bool2Int(skips_taskbar)) /*go:.util*/)
+	C.gdk_window_set_skip_taskbar_hint(window.native(), C.gboolean(util.Bool2Int(skips_taskbar)))
 }
 
 // SetSourceEvents is a wrapper around gdk_window_set_source_events().
@@ -2237,19 +2243,19 @@ func (window Window) SetSourceEvents(source InputSource, event_mask EventMask) {
 func (window Window) SetStartupId(startup_id string) {
 	startup_id0 := (*C.gchar)(C.CString(startup_id))
 	C.gdk_window_set_startup_id(window.native(), startup_id0)
-	C.free(unsafe.Pointer(startup_id0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(startup_id0))
 }
 
 // SetSupportMultidevice is a wrapper around gdk_window_set_support_multidevice().
 func (window Window) SetSupportMultidevice(support_multidevice bool) {
-	C.gdk_window_set_support_multidevice(window.native(), C.gboolean(util.Bool2Int(support_multidevice)) /*go:.util*/)
+	C.gdk_window_set_support_multidevice(window.native(), C.gboolean(util.Bool2Int(support_multidevice)))
 }
 
 // SetTitle is a wrapper around gdk_window_set_title().
 func (window Window) SetTitle(title string) {
 	title0 := (*C.gchar)(C.CString(title))
 	C.gdk_window_set_title(window.native(), title0)
-	C.free(unsafe.Pointer(title0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(title0))
 }
 
 // SetTransientFor is a wrapper around gdk_window_set_transient_for().
@@ -2264,7 +2270,7 @@ func (window Window) SetTypeHint(hint WindowTypeHint) {
 
 // SetUrgencyHint is a wrapper around gdk_window_set_urgency_hint().
 func (window Window) SetUrgencyHint(urgent bool) {
-	C.gdk_window_set_urgency_hint(window.native(), C.gboolean(util.Bool2Int(urgent)) /*go:.util*/)
+	C.gdk_window_set_urgency_hint(window.native(), C.gboolean(util.Bool2Int(urgent)))
 }
 
 // SetUserData is a wrapper around gdk_window_set_user_data().
@@ -2360,7 +2366,7 @@ func (v GLContext) GetGValueGetter() gobject.GValueGetter {
 // GetDebugEnabled is a wrapper around gdk_gl_context_get_debug_enabled().
 func (context GLContext) GetDebugEnabled() bool {
 	ret0 := C.gdk_gl_context_get_debug_enabled(context.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetDisplay is a wrapper around gdk_gl_context_get_display().
@@ -2372,7 +2378,7 @@ func (context GLContext) GetDisplay() Display {
 // GetForwardCompatible is a wrapper around gdk_gl_context_get_forward_compatible().
 func (context GLContext) GetForwardCompatible() bool {
 	ret0 := C.gdk_gl_context_get_forward_compatible(context.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetRequiredVersion is a wrapper around gdk_gl_context_get_required_version().
@@ -2392,7 +2398,7 @@ func (context GLContext) GetSharedContext() GLContext {
 // GetUseEs is a wrapper around gdk_gl_context_get_use_es().
 func (context GLContext) GetUseEs() bool {
 	ret0 := C.gdk_gl_context_get_use_es(context.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetVersion is a wrapper around gdk_gl_context_get_version().
@@ -2412,7 +2418,7 @@ func (context GLContext) GetWindow() Window {
 // IsLegacy is a wrapper around gdk_gl_context_is_legacy().
 func (context GLContext) IsLegacy() bool {
 	ret0 := C.gdk_gl_context_is_legacy(context.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // MakeCurrent is a wrapper around gdk_gl_context_make_current().
@@ -2428,17 +2434,17 @@ func (context GLContext) Realize() (bool, error) {
 		defer err.Free()
 		return false, err.GoValue()
 	}
-	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+	return util.Int2Bool(int(ret0)), nil
 }
 
 // SetDebugEnabled is a wrapper around gdk_gl_context_set_debug_enabled().
 func (context GLContext) SetDebugEnabled(enabled bool) {
-	C.gdk_gl_context_set_debug_enabled(context.native(), C.gboolean(util.Bool2Int(enabled)) /*go:.util*/)
+	C.gdk_gl_context_set_debug_enabled(context.native(), C.gboolean(util.Bool2Int(enabled)))
 }
 
 // SetForwardCompatible is a wrapper around gdk_gl_context_set_forward_compatible().
 func (context GLContext) SetForwardCompatible(compatible bool) {
-	C.gdk_gl_context_set_forward_compatible(context.native(), C.gboolean(util.Bool2Int(compatible)) /*go:.util*/)
+	C.gdk_gl_context_set_forward_compatible(context.native(), C.gboolean(util.Bool2Int(compatible)))
 }
 
 // SetRequiredVersion is a wrapper around gdk_gl_context_set_required_version().
@@ -2497,13 +2503,13 @@ func (v DrawingContext) GetGValueGetter() gobject.GValueGetter {
 // GetCairoContext is a wrapper around gdk_drawing_context_get_cairo_context().
 func (context DrawingContext) GetCairoContext() cairo.Context {
 	ret0 := C.gdk_drawing_context_get_cairo_context(context.native())
-	return cairo.WrapContext(unsafe.Pointer(ret0)) /*gir:cairo*/
+	return cairo.WrapContext(unsafe.Pointer(ret0))
 }
 
 // GetClip is a wrapper around gdk_drawing_context_get_clip().
 func (context DrawingContext) GetClip() cairo.Region {
 	ret0 := C.gdk_drawing_context_get_clip(context.native())
-	return cairo.WrapRegion(unsafe.Pointer(ret0)) /*gir:cairo*/
+	return cairo.WrapRegion(unsafe.Pointer(ret0))
 }
 
 // GetWindow is a wrapper around gdk_drawing_context_get_window().
@@ -2515,7 +2521,7 @@ func (context DrawingContext) GetWindow() Window {
 // IsValid is a wrapper around gdk_drawing_context_is_valid().
 func (context DrawingContext) IsValid() bool {
 	ret0 := C.gdk_drawing_context_is_valid(context.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Object Cursor
@@ -2560,7 +2566,13 @@ func CursorNewForDisplay(display Display, cursor_type CursorType) Cursor {
 func CursorNewFromName(display Display, name string) Cursor {
 	name0 := (*C.gchar)(C.CString(name))
 	ret0 := C.gdk_cursor_new_from_name(display.native(), name0)
-	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
+	return wrapCursor(ret0)
+}
+
+// CursorNewFromPixbuf is a wrapper around gdk_cursor_new_from_pixbuf().
+func CursorNewFromPixbuf(display Display, pixbuf gdkpixbuf.Pixbuf, x int, y int) Cursor {
+	ret0 := C.gdk_cursor_new_from_pixbuf(display.native(), (*C.GdkPixbuf)(pixbuf.Ptr), C.gint(x), C.gint(y))
 	return wrapCursor(ret0)
 }
 
@@ -2585,7 +2597,7 @@ func (cursor Cursor) GetDisplay() Display {
 // GetImage is a wrapper around gdk_cursor_get_image().
 func (cursor Cursor) GetImage() gdkpixbuf.Pixbuf {
 	ret0 := C.gdk_cursor_get_image(cursor.native())
-	return gdkpixbuf.WrapPixbuf(unsafe.Pointer(ret0)) /*gir:GdkPixbuf*/
+	return gdkpixbuf.WrapPixbuf(unsafe.Pointer(ret0))
 }
 
 // GetSurface is a wrapper around gdk_cursor_get_surface().
@@ -2593,7 +2605,7 @@ func (cursor Cursor) GetSurface() (cairo.Surface, float64, float64) {
 	var x_hot0 C.gdouble
 	var y_hot0 C.gdouble
 	ret0 := C.gdk_cursor_get_surface(cursor.native(), &x_hot0, &y_hot0)
-	return cairo.WrapSurface(unsafe.Pointer(ret0)) /*gir:cairo*/, float64(x_hot0), float64(y_hot0)
+	return cairo.WrapSurface(unsafe.Pointer(ret0)), float64(x_hot0), float64(y_hot0)
 }
 
 // Object Seat
@@ -2656,7 +2668,7 @@ func (seat Seat) GetPointer() Device {
 func (seat Seat) GetSlaves(capabilities SeatCapabilities) glib.List {
 	ret0 := C.gdk_seat_get_slaves(seat.native(), C.GdkSeatCapabilities(capabilities))
 	return glib.WrapList(unsafe.Pointer(ret0),
-		func(p unsafe.Pointer) interface{} { return WrapDevice(p) }) /*gir:GLib*/
+		func(p unsafe.Pointer) interface{} { return WrapDevice(p) })
 }
 
 // Ungrab is a wrapper around gdk_seat_ungrab().
@@ -2688,8 +2700,8 @@ func IWrapAtom(p unsafe.Pointer) interface{} {
 // AtomIntern is a wrapper around gdk_atom_intern().
 func AtomIntern(atom_name string, only_if_exists bool) Atom {
 	atom_name0 := (*C.gchar)(C.CString(atom_name))
-	ret0 := C.gdk_atom_intern(atom_name0, C.gboolean(util.Bool2Int(only_if_exists)) /*go:.util*/)
-	C.free(unsafe.Pointer(atom_name0)) /*ch:<stdlib.h>*/
+	ret0 := C.gdk_atom_intern(atom_name0, C.gboolean(util.Bool2Int(only_if_exists)))
+	C.free(unsafe.Pointer(atom_name0))
 	return wrapAtom(&ret0)
 }
 
@@ -2697,7 +2709,7 @@ func AtomIntern(atom_name string, only_if_exists bool) Atom {
 func AtomInternStaticString(atom_name string) Atom {
 	atom_name0 := (*C.gchar)(C.CString(atom_name))
 	ret0 := C.gdk_atom_intern_static_string(atom_name0)
-	C.free(unsafe.Pointer(atom_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(atom_name0))
 	return wrapAtom(&ret0)
 }
 
@@ -2888,7 +2900,7 @@ func (monitor Monitor) GetWorkarea() Rectangle {
 // IsPrimary is a wrapper around gdk_monitor_is_primary().
 func (monitor Monitor) IsPrimary() bool {
 	ret0 := C.gdk_monitor_is_primary(monitor.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Object DisplayManager
@@ -2933,7 +2945,7 @@ func (manager DisplayManager) GetDefaultDisplay() Display {
 func (manager DisplayManager) OpenDisplay(name string) Display {
 	name0 := (*C.gchar)(C.CString(name))
 	ret0 := C.gdk_display_manager_open_display(manager.native(), name0)
-	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
 	return wrapDisplay(ret0)
 }
 
@@ -3032,13 +3044,13 @@ func (context DragContext) GetSuggestedAction() DragAction {
 func (context DragContext) ListTargets() glib.List {
 	ret0 := C.gdk_drag_context_list_targets(context.native())
 	return glib.WrapList(unsafe.Pointer(ret0),
-		func(p unsafe.Pointer) interface{} { return WrapAtom(p) }) /*gir:GLib*/
+		func(p unsafe.Pointer) interface{} { return WrapAtom(p) })
 }
 
 // ManageDnd is a wrapper around gdk_drag_context_manage_dnd().
 func (context DragContext) ManageDnd(ipc_window Window, actions DragAction) bool {
 	ret0 := C.gdk_drag_context_manage_dnd(context.native(), ipc_window.native(), C.GdkDragAction(actions))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // SetDevice is a wrapper around gdk_drag_context_set_device().
@@ -3163,13 +3175,13 @@ func (v Keymap) GetGValueGetter() gobject.GValueGetter {
 // GetCapsLockState is a wrapper around gdk_keymap_get_caps_lock_state().
 func (keymap Keymap) GetCapsLockState() bool {
 	ret0 := C.gdk_keymap_get_caps_lock_state(keymap.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetDirection is a wrapper around gdk_keymap_get_direction().
-func (keymap Keymap) GetDirection() /*gir:Pango*/ pango.Direction {
+func (keymap Keymap) GetDirection() pango.Direction {
 	ret0 := C.gdk_keymap_get_direction(keymap.native())
-	return /*gir:Pango*/ pango.Direction(ret0)
+	return pango.Direction(ret0)
 }
 
 // GetModifierMask is a wrapper around gdk_keymap_get_modifier_mask().
@@ -3187,19 +3199,19 @@ func (keymap Keymap) GetModifierState() uint {
 // GetNumLockState is a wrapper around gdk_keymap_get_num_lock_state().
 func (keymap Keymap) GetNumLockState() bool {
 	ret0 := C.gdk_keymap_get_num_lock_state(keymap.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetScrollLockState is a wrapper around gdk_keymap_get_scroll_lock_state().
 func (keymap Keymap) GetScrollLockState() bool {
 	ret0 := C.gdk_keymap_get_scroll_lock_state(keymap.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // HaveBidiLayouts is a wrapper around gdk_keymap_have_bidi_layouts().
 func (keymap Keymap) HaveBidiLayouts() bool {
 	ret0 := C.gdk_keymap_have_bidi_layouts(keymap.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // LookupKey is a wrapper around gdk_keymap_lookup_key().
@@ -3215,7 +3227,7 @@ func (keymap Keymap) TranslateKeyboardState(hardware_keycode uint, state Modifie
 	var level0 C.gint
 	var consumed_modifiers0 C.GdkModifierType
 	ret0 := C.gdk_keymap_translate_keyboard_state(keymap.native(), C.guint(hardware_keycode), C.GdkModifierType(state), C.gint(group), &keyval0, &effective_group0, &level0, &consumed_modifiers0)
-	return util.Int2Bool(int(ret0)) /*go:.util*/, uint(keyval0), int(effective_group0), int(level0), ModifierType(consumed_modifiers0)
+	return util.Int2Bool(int(ret0)), uint(keyval0), int(effective_group0), int(level0), ModifierType(consumed_modifiers0)
 }
 
 // KeymapGetDefault is a wrapper around gdk_keymap_get_default().

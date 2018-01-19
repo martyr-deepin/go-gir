@@ -171,7 +171,7 @@ func (v Component) GetGValueGetter() gobject.GValueGetter {
 // Contains is a wrapper around atk_component_contains().
 func (component *ComponentIface) Contains(x int, y int, coord_type CoordType) bool {
 	ret0 := C.atk_component_contains(component.native(), C.gint(x), C.gint(y), C.AtkCoordType(coord_type))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetAlpha is a wrapper around atk_component_get_alpha().
@@ -205,7 +205,7 @@ func (component *ComponentIface) GetMdiZorder() int {
 // GrabFocus is a wrapper around atk_component_grab_focus().
 func (component *ComponentIface) GrabFocus() bool {
 	ret0 := C.atk_component_grab_focus(component.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // RefAccessibleAtPoint is a wrapper around atk_component_ref_accessible_at_point().
@@ -217,19 +217,19 @@ func (component *ComponentIface) RefAccessibleAtPoint(x int, y int, coord_type C
 // SetExtents is a wrapper around atk_component_set_extents().
 func (component *ComponentIface) SetExtents(x int, y int, width int, height int, coord_type CoordType) bool {
 	ret0 := C.atk_component_set_extents(component.native(), C.gint(x), C.gint(y), C.gint(width), C.gint(height), C.AtkCoordType(coord_type))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // SetPosition is a wrapper around atk_component_set_position().
 func (component *ComponentIface) SetPosition(x int, y int, coord_type CoordType) bool {
 	ret0 := C.atk_component_set_position(component.native(), C.gint(x), C.gint(y), C.AtkCoordType(coord_type))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // SetSize is a wrapper around atk_component_set_size().
 func (component *ComponentIface) SetSize(width int, height int) bool {
 	ret0 := C.atk_component_set_size(component.native(), C.gint(width), C.gint(height))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Interface EditableText
@@ -288,7 +288,7 @@ func (text *EditableTextIface) PasteText(position int) {
 func (text *EditableTextIface) SetTextContents(string string) {
 	string0 := (*C.gchar)(C.CString(string))
 	C.atk_editable_text_set_text_contents(text.native(), string0)
-	C.free(unsafe.Pointer(string0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(string0))
 }
 
 // Struct Range
@@ -316,7 +316,7 @@ func IWrapRange(p unsafe.Pointer) interface{} {
 func RangeNew(lower_limit float64, upper_limit float64, description string) Range {
 	description0 := (*C.gchar)(C.CString(description))
 	ret0 := C.atk_range_new(C.gdouble(lower_limit), C.gdouble(upper_limit), description0)
-	C.free(unsafe.Pointer(description0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(description0))
 	return wrapRange(ret0)
 }
 
@@ -385,7 +385,7 @@ func (v Action) GetGValueGetter() gobject.GValueGetter {
 // DoAction is a wrapper around atk_action_do_action().
 func (action *ActionIface) DoAction(i int) bool {
 	ret0 := C.atk_action_do_action(action.native(), C.gint(i))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetDescription is a wrapper around atk_action_get_description().
@@ -426,8 +426,8 @@ func (action *ActionIface) GetName(i int) string {
 func (action *ActionIface) SetDescription(i int, desc string) bool {
 	desc0 := (*C.gchar)(C.CString(desc))
 	ret0 := C.atk_action_set_description(action.native(), C.gint(i), desc0)
-	C.free(unsafe.Pointer(desc0))   /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	C.free(unsafe.Pointer(desc0))
+	return util.Int2Bool(int(ret0))
 }
 
 // Object Object
@@ -465,7 +465,7 @@ func (v Object) GetGValueGetter() gobject.GValueGetter {
 // AddRelationship is a wrapper around atk_object_add_relationship().
 func (object Object) AddRelationship(relationship RelationType, target Object) bool {
 	ret0 := C.atk_object_add_relationship(object.native(), C.AtkRelationType(relationship), target.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetDescription is a wrapper around atk_object_get_description().
@@ -520,7 +520,7 @@ func (accessible Object) Initialize(data unsafe.Pointer) {
 
 // NotifyStateChange is a wrapper around atk_object_notify_state_change().
 func (accessible Object) NotifyStateChange(state State, value bool) {
-	C.atk_object_notify_state_change(accessible.native(), C.AtkState(state), C.gboolean(util.Bool2Int(value)) /*go:.util*/)
+	C.atk_object_notify_state_change(accessible.native(), C.AtkState(state), C.gboolean(util.Bool2Int(value)))
 }
 
 // PeekParent is a wrapper around atk_object_peek_parent().
@@ -550,21 +550,21 @@ func (accessible Object) RefStateSet() StateSet {
 // RemoveRelationship is a wrapper around atk_object_remove_relationship().
 func (object Object) RemoveRelationship(relationship RelationType, target Object) bool {
 	ret0 := C.atk_object_remove_relationship(object.native(), C.AtkRelationType(relationship), target.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // SetDescription is a wrapper around atk_object_set_description().
 func (accessible Object) SetDescription(description string) {
 	description0 := (*C.gchar)(C.CString(description))
 	C.atk_object_set_description(accessible.native(), description0)
-	C.free(unsafe.Pointer(description0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(description0))
 }
 
 // SetName is a wrapper around atk_object_set_name().
 func (accessible Object) SetName(name string) {
 	name0 := (*C.gchar)(C.CString(name))
 	C.atk_object_set_name(accessible.native(), name0)
-	C.free(unsafe.Pointer(name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(name0))
 }
 
 // SetParent is a wrapper around atk_object_set_parent().
@@ -628,13 +628,13 @@ func (set RelationSet) AddRelationByType(relationship RelationType, target Objec
 // Contains is a wrapper around atk_relation_set_contains().
 func (set RelationSet) Contains(relationship RelationType) bool {
 	ret0 := C.atk_relation_set_contains(set.native(), C.AtkRelationType(relationship))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // ContainsTarget is a wrapper around atk_relation_set_contains_target().
 func (set RelationSet) ContainsTarget(relationship RelationType, target Object) bool {
 	ret0 := C.atk_relation_set_contains_target(set.native(), C.AtkRelationType(relationship), target.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetNRelations is a wrapper around atk_relation_set_get_n_relations().
@@ -720,7 +720,7 @@ func (relation Relation) GetRelationType() RelationType {
 // RemoveTarget is a wrapper around atk_relation_remove_target().
 func (relation Relation) RemoveTarget(target Object) bool {
 	ret0 := C.atk_relation_remove_target(relation.native(), target.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Interface Document
@@ -759,7 +759,7 @@ func (v Document) GetGValueGetter() gobject.GValueGetter {
 func (document *DocumentIface) GetAttributeValue(attribute_name string) string {
 	attribute_name0 := (*C.gchar)(C.CString(attribute_name))
 	ret0 := C.atk_document_get_attribute_value(document.native(), attribute_name0)
-	C.free(unsafe.Pointer(attribute_name0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(attribute_name0))
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
@@ -781,9 +781,9 @@ func (document *DocumentIface) SetAttributeValue(attribute_name string, attribut
 	attribute_name0 := (*C.gchar)(C.CString(attribute_name))
 	attribute_value0 := (*C.gchar)(C.CString(attribute_value))
 	ret0 := C.atk_document_set_attribute_value(document.native(), attribute_name0, attribute_value0)
-	C.free(unsafe.Pointer(attribute_name0))  /*ch:<stdlib.h>*/
-	C.free(unsafe.Pointer(attribute_value0)) /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0))          /*go:.util*/
+	C.free(unsafe.Pointer(attribute_name0))
+	C.free(unsafe.Pointer(attribute_value0))
+	return util.Int2Bool(int(ret0))
 }
 
 // Interface HyperlinkImpl
@@ -895,13 +895,13 @@ func (link_ Hyperlink) GetUri(i int) string {
 // IsInline is a wrapper around atk_hyperlink_is_inline().
 func (link_ Hyperlink) IsInline() bool {
 	ret0 := C.atk_hyperlink_is_inline(link_.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsValid is a wrapper around atk_hyperlink_is_valid().
 func (link_ Hyperlink) IsValid() bool {
 	ret0 := C.atk_hyperlink_is_valid(link_.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Interface Hypertext
@@ -1020,8 +1020,8 @@ func (image *ImageIface) GetImageSize() (int, int) {
 func (image *ImageIface) SetImageDescription(description string) bool {
 	description0 := (*C.gchar)(C.CString(description))
 	ret0 := C.atk_image_set_image_description(image.native(), description0)
-	C.free(unsafe.Pointer(description0)) /*ch:<stdlib.h>*/
-	return util.Int2Bool(int(ret0))      /*go:.util*/
+	C.free(unsafe.Pointer(description0))
+	return util.Int2Bool(int(ret0))
 }
 
 // Interface ImplementorIface
@@ -1091,13 +1091,13 @@ func (v Selection) GetGValueGetter() gobject.GValueGetter {
 // AddSelection is a wrapper around atk_selection_add_selection().
 func (selection *SelectionIface) AddSelection(i int) bool {
 	ret0 := C.atk_selection_add_selection(selection.native(), C.gint(i))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // ClearSelection is a wrapper around atk_selection_clear_selection().
 func (selection *SelectionIface) ClearSelection() bool {
 	ret0 := C.atk_selection_clear_selection(selection.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetSelectionCount is a wrapper around atk_selection_get_selection_count().
@@ -1109,7 +1109,7 @@ func (selection *SelectionIface) GetSelectionCount() int {
 // IsChildSelected is a wrapper around atk_selection_is_child_selected().
 func (selection *SelectionIface) IsChildSelected(i int) bool {
 	ret0 := C.atk_selection_is_child_selected(selection.native(), C.gint(i))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // RefSelection is a wrapper around atk_selection_ref_selection().
@@ -1121,13 +1121,13 @@ func (selection *SelectionIface) RefSelection(i int) Object {
 // RemoveSelection is a wrapper around atk_selection_remove_selection().
 func (selection *SelectionIface) RemoveSelection(i int) bool {
 	ret0 := C.atk_selection_remove_selection(selection.native(), C.gint(i))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // SelectAllSelection is a wrapper around atk_selection_select_all_selection().
 func (selection *SelectionIface) SelectAllSelection() bool {
 	ret0 := C.atk_selection_select_all_selection(selection.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Interface StreamableContent
@@ -1179,7 +1179,7 @@ func (streamable *StreamableContentIface) GetNMimeTypes() int {
 func (streamable *StreamableContentIface) GetUri(mime_type string) string {
 	mime_type0 := (*C.gchar)(C.CString(mime_type))
 	ret0 := C.atk_streamable_content_get_uri(streamable.native(), mime_type0)
-	C.free(unsafe.Pointer(mime_type0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(mime_type0))
 	ret := C.GoString((*C.char)(ret0))
 	return ret
 }
@@ -1219,13 +1219,13 @@ func (v Table) GetGValueGetter() gobject.GValueGetter {
 // AddColumnSelection is a wrapper around atk_table_add_column_selection().
 func (table *TableIface) AddColumnSelection(column int) bool {
 	ret0 := C.atk_table_add_column_selection(table.native(), C.gint(column))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // AddRowSelection is a wrapper around atk_table_add_row_selection().
 func (table *TableIface) AddRowSelection(row int) bool {
 	ret0 := C.atk_table_add_row_selection(table.native(), C.gint(row))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetCaption is a wrapper around atk_table_get_caption().
@@ -1293,19 +1293,19 @@ func (table *TableIface) GetSummary() Object {
 // IsColumnSelected is a wrapper around atk_table_is_column_selected().
 func (table *TableIface) IsColumnSelected(column int) bool {
 	ret0 := C.atk_table_is_column_selected(table.native(), C.gint(column))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsRowSelected is a wrapper around atk_table_is_row_selected().
 func (table *TableIface) IsRowSelected(row int) bool {
 	ret0 := C.atk_table_is_row_selected(table.native(), C.gint(row))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsSelected is a wrapper around atk_table_is_selected().
 func (table *TableIface) IsSelected(row int, column int) bool {
 	ret0 := C.atk_table_is_selected(table.native(), C.gint(row), C.gint(column))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // RefAt is a wrapper around atk_table_ref_at().
@@ -1317,13 +1317,13 @@ func (table *TableIface) RefAt(row int, column int) Object {
 // RemoveColumnSelection is a wrapper around atk_table_remove_column_selection().
 func (table *TableIface) RemoveColumnSelection(column int) bool {
 	ret0 := C.atk_table_remove_column_selection(table.native(), C.gint(column))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // RemoveRowSelection is a wrapper around atk_table_remove_row_selection().
 func (table *TableIface) RemoveRowSelection(row int) bool {
 	ret0 := C.atk_table_remove_row_selection(table.native(), C.gint(row))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // SetCaption is a wrapper around atk_table_set_caption().
@@ -1335,7 +1335,7 @@ func (table *TableIface) SetCaption(caption Object) {
 func (table *TableIface) SetColumnDescription(column int, description string) {
 	description0 := (*C.gchar)(C.CString(description))
 	C.atk_table_set_column_description(table.native(), C.gint(column), description0)
-	C.free(unsafe.Pointer(description0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(description0))
 }
 
 // SetColumnHeader is a wrapper around atk_table_set_column_header().
@@ -1347,7 +1347,7 @@ func (table *TableIface) SetColumnHeader(column int, header Object) {
 func (table *TableIface) SetRowDescription(row int, description string) {
 	description0 := (*C.gchar)(C.CString(description))
 	C.atk_table_set_row_description(table.native(), C.gint(row), description0)
-	C.free(unsafe.Pointer(description0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(description0))
 }
 
 // SetRowHeader is a wrapper around atk_table_set_row_header().
@@ -1403,7 +1403,7 @@ func (cell *TableCellIface) GetPosition() (bool, int, int) {
 	var row0 C.gint
 	var column0 C.gint
 	ret0 := C.atk_table_cell_get_position(cell.native(), &row0, &column0)
-	return util.Int2Bool(int(ret0)) /*go:.util*/, int(row0), int(column0)
+	return util.Int2Bool(int(ret0)), int(row0), int(column0)
 }
 
 // GetRowColumnSpan is a wrapper around atk_table_cell_get_row_column_span().
@@ -1413,7 +1413,7 @@ func (cell *TableCellIface) GetRowColumnSpan() (bool, int, int, int, int) {
 	var row_span0 C.gint
 	var column_span0 C.gint
 	ret0 := C.atk_table_cell_get_row_column_span(cell.native(), &row0, &column0, &row_span0, &column_span0)
-	return util.Int2Bool(int(ret0)) /*go:.util*/, int(row0), int(column0), int(row_span0), int(column_span0)
+	return util.Int2Bool(int(ret0)), int(row0), int(column0), int(row_span0), int(column_span0)
 }
 
 // GetRowSpan is a wrapper around atk_table_cell_get_row_span().
@@ -1463,7 +1463,7 @@ func (v Text) GetGValueGetter() gobject.GValueGetter {
 // AddSelection is a wrapper around atk_text_add_selection().
 func (text *TextIface) AddSelection(start_offset int, end_offset int) bool {
 	ret0 := C.atk_text_add_selection(text.native(), C.gint(start_offset), C.gint(end_offset))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // GetBoundedRanges is a wrapper around atk_text_get_bounded_ranges().
@@ -1471,7 +1471,7 @@ func (text *TextIface) GetBoundedRanges(rect TextRectangle, coord_type CoordType
 	ret0 := C.atk_text_get_bounded_ranges(text.native(), rect.native(), C.AtkCoordType(coord_type), C.AtkTextClipType(x_clip_type), C.AtkTextClipType(y_clip_type))
 	var ret0Slice []*C.AtkTextRange
 	util.SetSliceDataLen(unsafe.Pointer(&ret0Slice), unsafe.Pointer(ret0),
-		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))) /*go:.util*/) /*go:.util*/
+		util.GetZeroTermArrayLen(unsafe.Pointer(ret0), unsafe.Sizeof(uintptr(0))))
 	ret := make([]TextRange, len(ret0Slice))
 	for idx, elem := range ret0Slice {
 		ret[idx] = wrapTextRange(elem)
@@ -1552,19 +1552,19 @@ func (text *TextIface) GetText(start_offset int, end_offset int) string {
 // RemoveSelection is a wrapper around atk_text_remove_selection().
 func (text *TextIface) RemoveSelection(selection_num int) bool {
 	ret0 := C.atk_text_remove_selection(text.native(), C.gint(selection_num))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // SetCaretOffset is a wrapper around atk_text_set_caret_offset().
 func (text *TextIface) SetCaretOffset(offset int) bool {
 	ret0 := C.atk_text_set_caret_offset(text.native(), C.gint(offset))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // SetSelection is a wrapper around atk_text_set_selection().
 func (text *TextIface) SetSelection(selection_num int, start_offset int, end_offset int) bool {
 	ret0 := C.atk_text_set_selection(text.native(), C.gint(selection_num), C.gint(start_offset), C.gint(end_offset))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // TextFreeRanges is a wrapper around atk_text_free_ranges().
@@ -1706,7 +1706,7 @@ func (v GObjectAccessible) GetGValueGetter() gobject.GValueGetter {
 // GetObject is a wrapper around atk_gobject_accessible_get_object().
 func (obj GObjectAccessible) GetObject() gobject.Object {
 	ret0 := C.atk_gobject_accessible_get_object(obj.native())
-	return gobject.WrapObject(unsafe.Pointer(ret0)) /*gir:GObject*/
+	return gobject.WrapObject(unsafe.Pointer(ret0))
 }
 
 // GObjectAccessibleForObject is a wrapper around atk_gobject_accessible_for_object().
@@ -1878,9 +1878,9 @@ func (factory ObjectFactory) CreateAccessible(obj gobject.Object) Object {
 }
 
 // GetAccessibleType is a wrapper around atk_object_factory_get_accessible_type().
-func (factory ObjectFactory) GetAccessibleType() /*Gir:GObject*/ gobject.Type {
+func (factory ObjectFactory) GetAccessibleType() gobject.Type {
 	ret0 := C.atk_object_factory_get_accessible_type(factory.native())
-	return /*Gir:GObject*/ gobject.Type(ret0)
+	return gobject.Type(ret0)
 }
 
 // Invalidate is a wrapper around atk_object_factory_invalidate().
@@ -1929,7 +1929,7 @@ func StateSetNew() StateSet {
 // AddState is a wrapper around atk_state_set_add_state().
 func (set StateSet) AddState(type_ StateType) bool {
 	ret0 := C.atk_state_set_add_state(set.native(), C.AtkStateType(type_))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // AddStates is a wrapper around atk_state_set_add_states().
@@ -1959,7 +1959,7 @@ func (set StateSet) ClearStates() {
 // ContainsState is a wrapper around atk_state_set_contains_state().
 func (set StateSet) ContainsState(type_ StateType) bool {
 	ret0 := C.atk_state_set_contains_state(set.native(), C.AtkStateType(type_))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // ContainsStates is a wrapper around atk_state_set_contains_states().
@@ -1973,13 +1973,13 @@ func (set StateSet) ContainsStates(types []StateType) bool {
 		types0Ptr = &types0[0]
 	}
 	ret0 := C.atk_state_set_contains_states(set.native(), types0Ptr, C.gint(len(types)))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // IsEmpty is a wrapper around atk_state_set_is_empty().
 func (set StateSet) IsEmpty() bool {
 	ret0 := C.atk_state_set_is_empty(set.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // OrSets is a wrapper around atk_state_set_or_sets().
@@ -1991,7 +1991,7 @@ func (set StateSet) OrSets(compare_set StateSet) StateSet {
 // RemoveState is a wrapper around atk_state_set_remove_state().
 func (set StateSet) RemoveState(type_ StateType) bool {
 	ret0 := C.atk_state_set_remove_state(set.native(), C.AtkStateType(type_))
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // XorSets is a wrapper around atk_state_set_xor_sets().
@@ -2083,19 +2083,19 @@ func (v Registry) GetGValueGetter() gobject.GValueGetter {
 }
 
 // GetFactory is a wrapper around atk_registry_get_factory().
-func (registry Registry) GetFactory(type_ /*Gir:GObject*/ gobject.Type) ObjectFactory {
+func (registry Registry) GetFactory(type_ gobject.Type) ObjectFactory {
 	ret0 := C.atk_registry_get_factory(registry.native(), C.GType(type_))
 	return wrapObjectFactory(ret0)
 }
 
 // GetFactoryType is a wrapper around atk_registry_get_factory_type().
-func (registry Registry) GetFactoryType(type_ /*Gir:GObject*/ gobject.Type) /*Gir:GObject*/ gobject.Type {
+func (registry Registry) GetFactoryType(type_ gobject.Type) gobject.Type {
 	ret0 := C.atk_registry_get_factory_type(registry.native(), C.GType(type_))
-	return /*Gir:GObject*/ gobject.Type(ret0)
+	return gobject.Type(ret0)
 }
 
 // SetFactoryType is a wrapper around atk_registry_set_factory_type().
-func (registry Registry) SetFactoryType(type_ /*Gir:GObject*/ gobject.Type, factory_type /*Gir:GObject*/ gobject.Type) {
+func (registry Registry) SetFactoryType(type_ gobject.Type, factory_type gobject.Type) {
 	C.atk_registry_set_factory_type(registry.native(), C.GType(type_), C.GType(factory_type))
 }
 
@@ -2145,13 +2145,13 @@ func SocketNew() Object {
 func (obj Socket) Embed(plug_id string) {
 	plug_id0 := (*C.gchar)(C.CString(plug_id))
 	C.atk_socket_embed(obj.native(), plug_id0)
-	C.free(unsafe.Pointer(plug_id0)) /*ch:<stdlib.h>*/
+	C.free(unsafe.Pointer(plug_id0))
 }
 
 // IsOccupied is a wrapper around atk_socket_is_occupied().
 func (obj Socket) IsOccupied() bool {
 	ret0 := C.atk_socket_is_occupied(obj.native())
-	return util.Int2Bool(int(ret0)) /*go:.util*/
+	return util.Int2Bool(int(ret0))
 }
 
 // Object Util
