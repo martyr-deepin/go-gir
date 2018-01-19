@@ -132,6 +132,13 @@ func BindingEntryAddSignalFromString(binding_set BindingSet, signal_desc string)
 	return /*gir:GLib*/ glib.TokenType(ret0)
 }
 
+// BindingEntryAddSignall is a wrapper around gtk_binding_entry_add_signall().
+func BindingEntryAddSignall(binding_set BindingSet, keyval uint, modifiers /*gir:Gdk*/ gdk.ModifierType, signal_name string, binding_args glib.SList) {
+	signal_name0 := (*C.gchar)(C.CString(signal_name))
+	C.gtk_binding_entry_add_signall(binding_set.native(), C.guint(keyval), C.GdkModifierType(modifiers), signal_name0, (*C.GSList)(binding_args.Ptr))
+	C.free(unsafe.Pointer(signal_name0)) /*ch:<stdlib.h>*/
+}
+
 // BindingEntrySkip is a wrapper around gtk_binding_entry_skip().
 func BindingEntrySkip(binding_set BindingSet, keyval uint, modifiers /*gir:Gdk*/ gdk.ModifierType) {
 	C.gtk_binding_entry_skip(binding_set.native(), C.guint(keyval), C.GdkModifierType(modifiers))
@@ -1082,6 +1089,12 @@ func (selection_data SelectionData) GetPixbuf() gdkpixbuf.Pixbuf {
 	return gdkpixbuf.WrapPixbuf(unsafe.Pointer(ret0)) /*gir:GdkPixbuf*/
 }
 
+// GetTarget is a wrapper around gtk_selection_data_get_target().
+func (selection_data SelectionData) GetTarget() gdk.Atom {
+	ret0 := C.gtk_selection_data_get_target(selection_data.native())
+	return gdk.WrapAtom(unsafe.Pointer(&ret0)) /*gir:Gdk*/
+}
+
 // GetUris is a wrapper around gtk_selection_data_get_uris().
 func (selection_data SelectionData) GetUris() []string {
 	ret0 := C.gtk_selection_data_get_uris(selection_data.native())
@@ -1520,6 +1533,22 @@ func (buffer TextBuffer) PasteClipboard(clipboard Clipboard, override_location T
 // PlaceCursor is a wrapper around gtk_text_buffer_place_cursor().
 func (buffer TextBuffer) PlaceCursor(where TextIter) {
 	C.gtk_text_buffer_place_cursor(buffer.native(), where.native())
+}
+
+// RegisterDeserializeTagset is a wrapper around gtk_text_buffer_register_deserialize_tagset().
+func (buffer TextBuffer) RegisterDeserializeTagset(tagset_name string) gdk.Atom {
+	tagset_name0 := (*C.gchar)(C.CString(tagset_name))
+	ret0 := C.gtk_text_buffer_register_deserialize_tagset(buffer.native(), tagset_name0)
+	C.free(unsafe.Pointer(tagset_name0))       /*ch:<stdlib.h>*/
+	return gdk.WrapAtom(unsafe.Pointer(&ret0)) /*gir:Gdk*/
+}
+
+// RegisterSerializeTagset is a wrapper around gtk_text_buffer_register_serialize_tagset().
+func (buffer TextBuffer) RegisterSerializeTagset(tagset_name string) gdk.Atom {
+	tagset_name0 := (*C.gchar)(C.CString(tagset_name))
+	ret0 := C.gtk_text_buffer_register_serialize_tagset(buffer.native(), tagset_name0)
+	C.free(unsafe.Pointer(tagset_name0))       /*ch:<stdlib.h>*/
+	return gdk.WrapAtom(unsafe.Pointer(&ret0)) /*gir:Gdk*/
 }
 
 // RemoveAllTags is a wrapper around gtk_text_buffer_remove_all_tags().
@@ -2475,6 +2504,12 @@ func (widget Widget) GetRequestMode() SizeRequestMode {
 func (widget Widget) GetScaleFactor() int {
 	ret0 := C.gtk_widget_get_scale_factor(widget.native())
 	return int(ret0)
+}
+
+// GetScreen is a wrapper around gtk_widget_get_screen().
+func (widget Widget) GetScreen() gdk.Screen {
+	ret0 := C.gtk_widget_get_screen(widget.native())
+	return gdk.WrapScreen(unsafe.Pointer(ret0)) /*gir:Gdk*/
 }
 
 // GetSensitive is a wrapper around gtk_widget_get_sensitive().
@@ -5192,6 +5227,13 @@ func (area CellArea) CreateContext() CellAreaContext {
 func (area CellArea) Focus(direction DirectionType) bool {
 	ret0 := C.gtk_cell_area_focus(area.native(), C.GtkDirectionType(direction))
 	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// GetCellAllocation is a wrapper around gtk_cell_area_get_cell_allocation().
+func (area CellArea) GetCellAllocation(context CellAreaContext, widget Widget, renderer CellRenderer, cell_area gdk.Rectangle) gdk.Rectangle {
+	var allocation0 C.GdkRectangle
+	C.gtk_cell_area_get_cell_allocation(area.native(), context.native(), widget.native(), renderer.native(), (*C.GdkRectangle)(cell_area.Ptr), &allocation0)
+	return gdk.WrapRectangle(unsafe.Pointer(&allocation0)) /*gir:Gdk*/
 }
 
 // GetCurrentPathString is a wrapper around gtk_cell_area_get_current_path_string().
@@ -7952,6 +7994,11 @@ func (window Window) SetIconFromFile(filename string) (bool, error) {
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
 }
 
+// SetIconList is a wrapper around gtk_window_set_icon_list().
+func (window Window) SetIconList(list glib.List) {
+	C.gtk_window_set_icon_list(window.native(), (*C.GList)(list.Ptr))
+}
+
 // SetIconName is a wrapper around gtk_window_set_icon_name().
 func (window Window) SetIconName(name string) {
 	name0 := (*C.gchar)(C.CString(name))
@@ -8095,6 +8142,11 @@ func WindowSetDefaultIconFromFile(filename string) (bool, error) {
 		return false, err.GoValue()
 	}
 	return util.Int2Bool(int(ret0)) /*go:.util*/, nil
+}
+
+// WindowSetDefaultIconList is a wrapper around gtk_window_set_default_icon_list().
+func WindowSetDefaultIconList(list glib.List) {
+	C.gtk_window_set_default_icon_list((*C.GList)(list.Ptr))
 }
 
 // WindowSetDefaultIconName is a wrapper around gtk_window_set_default_icon_name().
@@ -12230,6 +12282,12 @@ func (clipboard Clipboard) GetDisplay() gdk.Display {
 func (clipboard Clipboard) GetOwner() gobject.Object {
 	ret0 := C.gtk_clipboard_get_owner(clipboard.native())
 	return gobject.WrapObject(unsafe.Pointer(ret0)) /*gir:GObject*/
+}
+
+// GetSelection is a wrapper around gtk_clipboard_get_selection().
+func (clipboard Clipboard) GetSelection() gdk.Atom {
+	ret0 := C.gtk_clipboard_get_selection(clipboard.native())
+	return gdk.WrapAtom(unsafe.Pointer(&ret0)) /*gir:Gdk*/
 }
 
 // SetImage is a wrapper around gtk_clipboard_set_image().
@@ -18106,6 +18164,15 @@ func (context StyleContext) HasClass(class_name string) bool {
 	return util.Int2Bool(int(ret0))     /*go:.util*/
 }
 
+// LookupColor is a wrapper around gtk_style_context_lookup_color().
+func (context StyleContext) LookupColor(color_name string) (bool, gdk.RGBA) {
+	color_name0 := (*C.gchar)(C.CString(color_name))
+	var color0 C.GdkRGBA
+	ret0 := C.gtk_style_context_lookup_color(context.native(), color_name0, &color0)
+	C.free(unsafe.Pointer(color_name0))                                                 /*ch:<stdlib.h>*/
+	return util.Int2Bool(int(ret0)) /*go:.util*/, gdk.WrapRGBA(unsafe.Pointer(&color0)) /*gir:Gdk*/
+}
+
 // RemoveClass is a wrapper around gtk_style_context_remove_class().
 func (context StyleContext) RemoveClass(class_name string) {
 	class_name0 := (*C.gchar)(C.CString(class_name))
@@ -20524,6 +20591,13 @@ func (popover Popover) GetModal() bool {
 	return util.Int2Bool(int(ret0)) /*go:.util*/
 }
 
+// GetPointingTo is a wrapper around gtk_popover_get_pointing_to().
+func (popover Popover) GetPointingTo() (bool, gdk.Rectangle) {
+	var rect0 C.GdkRectangle
+	ret0 := C.gtk_popover_get_pointing_to(popover.native(), &rect0)
+	return util.Int2Bool(int(ret0)) /*go:.util*/, gdk.WrapRectangle(unsafe.Pointer(&rect0)) /*gir:Gdk*/
+}
+
 // GetPosition is a wrapper around gtk_popover_get_position().
 func (popover Popover) GetPosition() PositionType {
 	ret0 := C.gtk_popover_get_position(popover.native())
@@ -21209,6 +21283,12 @@ func MountOperationNew(parent Window) gio.MountOperation {
 func (op MountOperation) GetParent() Window {
 	ret0 := C.gtk_mount_operation_get_parent(op.native())
 	return wrapWindow(ret0)
+}
+
+// GetScreen is a wrapper around gtk_mount_operation_get_screen().
+func (op MountOperation) GetScreen() gdk.Screen {
+	ret0 := C.gtk_mount_operation_get_screen(op.native())
+	return gdk.WrapScreen(unsafe.Pointer(ret0)) /*gir:Gdk*/
 }
 
 // IsShowing is a wrapper around gtk_mount_operation_is_showing().
@@ -23687,9 +23767,23 @@ func (v RadioButton) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
 }
 
+// RadioButtonNew is a wrapper around gtk_radio_button_new().
+func RadioButtonNew(group glib.SList) Widget {
+	ret0 := C.gtk_radio_button_new((*C.GSList)(group.Ptr))
+	return wrapWidget(ret0)
+}
+
 // RadioButtonNewFromWidget is a wrapper around gtk_radio_button_new_from_widget().
 func RadioButtonNewFromWidget(radio_group_member RadioButton) Widget {
 	ret0 := C.gtk_radio_button_new_from_widget(radio_group_member.native())
+	return wrapWidget(ret0)
+}
+
+// RadioButtonNewWithLabel is a wrapper around gtk_radio_button_new_with_label().
+func RadioButtonNewWithLabel(group glib.SList, label string) Widget {
+	label0 := (*C.gchar)(C.CString(label))
+	ret0 := C.gtk_radio_button_new_with_label((*C.GSList)(group.Ptr), label0)
+	C.free(unsafe.Pointer(label0)) /*ch:<stdlib.h>*/
 	return wrapWidget(ret0)
 }
 
@@ -23697,6 +23791,14 @@ func RadioButtonNewFromWidget(radio_group_member RadioButton) Widget {
 func RadioButtonNewWithLabelFromWidget(radio_group_member RadioButton, label string) Widget {
 	label0 := (*C.gchar)(C.CString(label))
 	ret0 := C.gtk_radio_button_new_with_label_from_widget(radio_group_member.native(), label0)
+	C.free(unsafe.Pointer(label0)) /*ch:<stdlib.h>*/
+	return wrapWidget(ret0)
+}
+
+// RadioButtonNewWithMnemonic is a wrapper around gtk_radio_button_new_with_mnemonic().
+func RadioButtonNewWithMnemonic(group glib.SList, label string) Widget {
+	label0 := (*C.gchar)(C.CString(label))
+	ret0 := C.gtk_radio_button_new_with_mnemonic((*C.GSList)(group.Ptr), label0)
 	C.free(unsafe.Pointer(label0)) /*ch:<stdlib.h>*/
 	return wrapWidget(ret0)
 }
@@ -23712,6 +23814,11 @@ func RadioButtonNewWithMnemonicFromWidget(radio_group_member RadioButton, label 
 // JoinGroup is a wrapper around gtk_radio_button_join_group().
 func (radio_button RadioButton) JoinGroup(group_source RadioButton) {
 	C.gtk_radio_button_join_group(radio_button.native(), group_source.native())
+}
+
+// SetGroup is a wrapper around gtk_radio_button_set_group().
+func (radio_button RadioButton) SetGroup(group glib.SList) {
+	C.gtk_radio_button_set_group(radio_button.native(), (*C.GSList)(group.Ptr))
 }
 
 // Object RadioButtonAccessible
@@ -23806,9 +23913,23 @@ func (v RadioMenuItem) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
 }
 
+// RadioMenuItemNew is a wrapper around gtk_radio_menu_item_new().
+func RadioMenuItemNew(group glib.SList) Widget {
+	ret0 := C.gtk_radio_menu_item_new((*C.GSList)(group.Ptr))
+	return wrapWidget(ret0)
+}
+
 // RadioMenuItemNewFromWidget is a wrapper around gtk_radio_menu_item_new_from_widget().
 func RadioMenuItemNewFromWidget(group RadioMenuItem) Widget {
 	ret0 := C.gtk_radio_menu_item_new_from_widget(group.native())
+	return wrapWidget(ret0)
+}
+
+// RadioMenuItemNewWithLabel is a wrapper around gtk_radio_menu_item_new_with_label().
+func RadioMenuItemNewWithLabel(group glib.SList, label string) Widget {
+	label0 := (*C.gchar)(C.CString(label))
+	ret0 := C.gtk_radio_menu_item_new_with_label((*C.GSList)(group.Ptr), label0)
+	C.free(unsafe.Pointer(label0)) /*ch:<stdlib.h>*/
 	return wrapWidget(ret0)
 }
 
@@ -23816,6 +23937,14 @@ func RadioMenuItemNewFromWidget(group RadioMenuItem) Widget {
 func RadioMenuItemNewWithLabelFromWidget(group RadioMenuItem, label string) Widget {
 	label0 := (*C.gchar)(C.CString(label))
 	ret0 := C.gtk_radio_menu_item_new_with_label_from_widget(group.native(), label0)
+	C.free(unsafe.Pointer(label0)) /*ch:<stdlib.h>*/
+	return wrapWidget(ret0)
+}
+
+// RadioMenuItemNewWithMnemonic is a wrapper around gtk_radio_menu_item_new_with_mnemonic().
+func RadioMenuItemNewWithMnemonic(group glib.SList, label string) Widget {
+	label0 := (*C.gchar)(C.CString(label))
+	ret0 := C.gtk_radio_menu_item_new_with_mnemonic((*C.GSList)(group.Ptr), label0)
 	C.free(unsafe.Pointer(label0)) /*ch:<stdlib.h>*/
 	return wrapWidget(ret0)
 }
@@ -23831,6 +23960,11 @@ func RadioMenuItemNewWithMnemonicFromWidget(group RadioMenuItem, label string) W
 // JoinGroup is a wrapper around gtk_radio_menu_item_join_group().
 func (radio_menu_item RadioMenuItem) JoinGroup(group_source RadioMenuItem) {
 	C.gtk_radio_menu_item_join_group(radio_menu_item.native(), group_source.native())
+}
+
+// SetGroup is a wrapper around gtk_radio_menu_item_set_group().
+func (radio_menu_item RadioMenuItem) SetGroup(group glib.SList) {
+	C.gtk_radio_menu_item_set_group(radio_menu_item.native(), (*C.GSList)(group.Ptr))
 }
 
 // Object RadioMenuItemAccessible
@@ -23990,10 +24124,21 @@ func (v RadioToolButton) Buildable() Buildable {
 	return WrapBuildable(v.Ptr)
 }
 
+// RadioToolButtonNew is a wrapper around gtk_radio_tool_button_new().
+func RadioToolButtonNew(group glib.SList) ToolItem {
+	ret0 := C.gtk_radio_tool_button_new((*C.GSList)(group.Ptr))
+	return wrapToolItem(ret0)
+}
+
 // RadioToolButtonNewFromWidget is a wrapper around gtk_radio_tool_button_new_from_widget().
 func RadioToolButtonNewFromWidget(group RadioToolButton) ToolItem {
 	ret0 := C.gtk_radio_tool_button_new_from_widget(group.native())
 	return wrapToolItem(ret0)
+}
+
+// SetGroup is a wrapper around gtk_radio_tool_button_set_group().
+func (button RadioToolButton) SetGroup(group glib.SList) {
+	C.gtk_radio_tool_button_set_group(button.native(), (*C.GSList)(group.Ptr))
 }
 
 // Object RangeAccessible
@@ -26711,6 +26856,13 @@ func (text_view TextView) GetTopMargin() int {
 	return int(ret0)
 }
 
+// GetVisibleRect is a wrapper around gtk_text_view_get_visible_rect().
+func (text_view TextView) GetVisibleRect() gdk.Rectangle {
+	var visible_rect0 C.GdkRectangle
+	C.gtk_text_view_get_visible_rect(text_view.native(), &visible_rect0)
+	return gdk.WrapRectangle(unsafe.Pointer(&visible_rect0)) /*gir:Gdk*/
+}
+
 // GetWrapMode is a wrapper around gtk_text_view_get_wrap_mode().
 func (text_view TextView) GetWrapMode() WrapMode {
 	ret0 := C.gtk_text_view_get_wrap_mode(text_view.native())
@@ -27883,6 +28035,13 @@ func (tree_view TreeView) ExpandToPath(path TreePath) {
 func (tree_view TreeView) GetActivateOnSingleClick() bool {
 	ret0 := C.gtk_tree_view_get_activate_on_single_click(tree_view.native())
 	return util.Int2Bool(int(ret0)) /*go:.util*/
+}
+
+// GetBackgroundArea is a wrapper around gtk_tree_view_get_background_area().
+func (tree_view TreeView) GetBackgroundArea(path TreePath, column TreeViewColumn) gdk.Rectangle {
+	var rect0 C.GdkRectangle
+	C.gtk_tree_view_get_background_area(tree_view.native(), path.native(), column.native(), &rect0)
+	return gdk.WrapRectangle(unsafe.Pointer(&rect0)) /*gir:Gdk*/
 }
 
 // GetColumn is a wrapper around gtk_tree_view_get_column().
