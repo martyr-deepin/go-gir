@@ -1100,6 +1100,12 @@ func (selection_data SelectionData) GetPixbuf() gdkpixbuf.Pixbuf {
 	return gdkpixbuf.WrapPixbuf(unsafe.Pointer(ret0))
 }
 
+// GetSelection is a wrapper around gtk_selection_data_get_selection().
+func (selection_data SelectionData) GetSelection() gdk.Atom {
+	ret0 := C.gtk_selection_data_get_selection(selection_data.native())
+	return gdk.WrapAtom(unsafe.Pointer(&ret0))
+}
+
 // GetTarget is a wrapper around gtk_selection_data_get_target().
 func (selection_data SelectionData) GetTarget() gdk.Atom {
 	ret0 := C.gtk_selection_data_get_target(selection_data.native())
@@ -3131,6 +3137,11 @@ func (widget Widget) SetVisual(visual gdk.Visual) {
 	C.gtk_widget_set_visual(widget.native(), (*C.GdkVisual)(visual.Ptr))
 }
 
+// SetWindow is a wrapper around gtk_widget_set_window().
+func (widget Widget) SetWindow(window gdk.Window) {
+	C.gtk_widget_set_window(widget.native(), (*C.GdkWindow)(window.Ptr))
+}
+
 // ShapeCombineRegion is a wrapper around gtk_widget_shape_combine_region().
 func (widget Widget) ShapeCombineRegion(region cairo.Region) {
 	C.gtk_widget_shape_combine_region(widget.native(), (*C.cairo_region_t)(region.Ptr))
@@ -3870,6 +3881,13 @@ func (iter TextIter) GetLineOffset() int {
 	return int(ret0)
 }
 
+// GetMarks is a wrapper around gtk_text_iter_get_marks().
+func (iter TextIter) GetMarks() glib.SList {
+	ret0 := C.gtk_text_iter_get_marks(iter.native())
+	return glib.WrapSList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapTextMark(p) })
+}
+
 // GetOffset is a wrapper around gtk_text_iter_get_offset().
 func (iter TextIter) GetOffset() int {
 	ret0 := C.gtk_text_iter_get_offset(iter.native())
@@ -3890,12 +3908,26 @@ func (start TextIter) GetSlice(end TextIter) string {
 	return ret
 }
 
+// GetTags is a wrapper around gtk_text_iter_get_tags().
+func (iter TextIter) GetTags() glib.SList {
+	ret0 := C.gtk_text_iter_get_tags(iter.native())
+	return glib.WrapSList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapTextTag(p) })
+}
+
 // GetText is a wrapper around gtk_text_iter_get_text().
 func (start TextIter) GetText(end TextIter) string {
 	ret0 := C.gtk_text_iter_get_text(start.native(), end.native())
 	ret := C.GoString((*C.char)(ret0))
 	C.g_free(C.gpointer(ret0))
 	return ret
+}
+
+// GetToggledTags is a wrapper around gtk_text_iter_get_toggled_tags().
+func (iter TextIter) GetToggledTags(toggled_on bool) glib.SList {
+	ret0 := C.gtk_text_iter_get_toggled_tags(iter.native(), C.gboolean(util.Bool2Int(toggled_on)))
+	return glib.WrapSList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapTextTag(p) })
 }
 
 // GetVisibleLineIndex is a wrapper around gtk_text_iter_get_visible_line_index().
@@ -5435,6 +5467,13 @@ func (area CellArea) HasRenderer(renderer CellRenderer) bool {
 	return util.Int2Bool(int(ret0))
 }
 
+// InnerCellArea is a wrapper around gtk_cell_area_inner_cell_area().
+func (area CellArea) InnerCellArea(widget Widget, cell_area gdk.Rectangle) gdk.Rectangle {
+	var inner_area0 C.GdkRectangle
+	C.gtk_cell_area_inner_cell_area(area.native(), widget.native(), (*C.GdkRectangle)(cell_area.Ptr), &inner_area0)
+	return gdk.WrapRectangle(unsafe.Pointer(&inner_area0))
+}
+
 // IsActivatable is a wrapper around gtk_cell_area_is_activatable().
 func (area CellArea) IsActivatable() bool {
 	ret0 := C.gtk_cell_area_is_activatable(area.native())
@@ -5938,6 +5977,13 @@ func (chooser *FileChooserIface) GetUri() string {
 func (chooser *FileChooserIface) GetUsePreviewLabel() bool {
 	ret0 := C.gtk_file_chooser_get_use_preview_label(chooser.native())
 	return util.Int2Bool(int(ret0))
+}
+
+// ListFilters is a wrapper around gtk_file_chooser_list_filters().
+func (chooser *FileChooserIface) ListFilters() glib.SList {
+	ret0 := C.gtk_file_chooser_list_filters(chooser.native())
+	return glib.WrapSList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapFileFilter(p) })
 }
 
 // RemoveChoice is a wrapper around gtk_file_chooser_remove_choice().
@@ -9238,6 +9284,13 @@ func (chooser *RecentChooserIface) GetUris() []string {
 	return ret
 }
 
+// ListFilters is a wrapper around gtk_recent_chooser_list_filters().
+func (chooser *RecentChooserIface) ListFilters() glib.SList {
+	ret0 := C.gtk_recent_chooser_list_filters(chooser.native())
+	return glib.WrapSList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapRecentFilter(p) })
+}
+
 // RemoveFilter is a wrapper around gtk_recent_chooser_remove_filter().
 func (chooser *RecentChooserIface) RemoveFilter(filter RecentFilter) {
 	C.gtk_recent_chooser_remove_filter(chooser.native(), filter.native())
@@ -9488,6 +9541,13 @@ func (size_group SizeGroup) AddWidget(widget Widget) {
 func (size_group SizeGroup) GetMode() SizeGroupMode {
 	ret0 := C.gtk_size_group_get_mode(size_group.native())
 	return SizeGroupMode(ret0)
+}
+
+// GetWidgets is a wrapper around gtk_size_group_get_widgets().
+func (size_group SizeGroup) GetWidgets() glib.SList {
+	ret0 := C.gtk_size_group_get_widgets(size_group.native())
+	return glib.WrapSList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapWidget(p) })
 }
 
 // RemoveWidget is a wrapper around gtk_size_group_remove_widget().
@@ -22824,6 +22884,12 @@ func (plug Plug) GetEmbedded() bool {
 	return util.Int2Bool(int(ret0))
 }
 
+// GetSocketWindow is a wrapper around gtk_plug_get_socket_window().
+func (plug Plug) GetSocketWindow() gdk.Window {
+	ret0 := C.gtk_plug_get_socket_window(plug.native())
+	return gdk.WrapWindow(unsafe.Pointer(ret0))
+}
+
 // Object PopoverAccessible
 type PopoverAccessible struct {
 	atk.ComponentIface
@@ -24110,6 +24176,13 @@ func RadioButtonNewWithMnemonicFromWidget(radio_group_member RadioButton, label 
 	return wrapWidget(ret0)
 }
 
+// GetGroup is a wrapper around gtk_radio_button_get_group().
+func (radio_button RadioButton) GetGroup() glib.SList {
+	ret0 := C.gtk_radio_button_get_group(radio_button.native())
+	return glib.WrapSList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapRadioButton(p) })
+}
+
 // JoinGroup is a wrapper around gtk_radio_button_join_group().
 func (radio_button RadioButton) JoinGroup(group_source RadioButton) {
 	C.gtk_radio_button_join_group(radio_button.native(), group_source.native())
@@ -24254,6 +24327,13 @@ func RadioMenuItemNewWithMnemonicFromWidget(group RadioMenuItem, label string) W
 	ret0 := C.gtk_radio_menu_item_new_with_mnemonic_from_widget(group.native(), label0)
 	C.free(unsafe.Pointer(label0))
 	return wrapWidget(ret0)
+}
+
+// GetGroup is a wrapper around gtk_radio_menu_item_get_group().
+func (radio_menu_item RadioMenuItem) GetGroup() glib.SList {
+	ret0 := C.gtk_radio_menu_item_get_group(radio_menu_item.native())
+	return glib.WrapSList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapRadioMenuItem(p) })
 }
 
 // JoinGroup is a wrapper around gtk_radio_menu_item_join_group().
@@ -24433,6 +24513,13 @@ func RadioToolButtonNew(group glib.SList) ToolItem {
 func RadioToolButtonNewFromWidget(group RadioToolButton) ToolItem {
 	ret0 := C.gtk_radio_tool_button_new_from_widget(group.native())
 	return wrapToolItem(ret0)
+}
+
+// GetGroup is a wrapper around gtk_radio_tool_button_get_group().
+func (button RadioToolButton) GetGroup() glib.SList {
+	ret0 := C.gtk_radio_tool_button_get_group(button.native())
+	return glib.WrapSList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapRadioButton(p) })
 }
 
 // SetGroup is a wrapper around gtk_radio_tool_button_set_group().
@@ -28370,6 +28457,13 @@ func (tree_view TreeView) GetBackgroundArea(path TreePath, column TreeViewColumn
 func (tree_view TreeView) GetBinWindow() gdk.Window {
 	ret0 := C.gtk_tree_view_get_bin_window(tree_view.native())
 	return gdk.WrapWindow(unsafe.Pointer(ret0))
+}
+
+// GetCellArea is a wrapper around gtk_tree_view_get_cell_area().
+func (tree_view TreeView) GetCellArea(path TreePath, column TreeViewColumn) gdk.Rectangle {
+	var rect0 C.GdkRectangle
+	C.gtk_tree_view_get_cell_area(tree_view.native(), path.native(), column.native(), &rect0)
+	return gdk.WrapRectangle(unsafe.Pointer(&rect0))
 }
 
 // GetColumn is a wrapper around gtk_tree_view_get_column().
