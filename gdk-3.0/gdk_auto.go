@@ -2941,6 +2941,13 @@ func (manager DisplayManager) GetDefaultDisplay() Display {
 	return wrapDisplay(ret0)
 }
 
+// ListDisplays is a wrapper around gdk_display_manager_list_displays().
+func (manager DisplayManager) ListDisplays() glib.SList {
+	ret0 := C.gdk_display_manager_list_displays(manager.native())
+	return glib.WrapSList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapDisplay(p) })
+}
+
 // OpenDisplay is a wrapper around gdk_display_manager_open_display().
 func (manager DisplayManager) OpenDisplay(name string) Display {
 	name0 := (*C.gchar)(C.CString(name))

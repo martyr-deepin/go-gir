@@ -98,9 +98,41 @@ func (v List) Insert(data unsafe.Pointer, position int) List {
 	return wrapList(list, v.DataWrap)
 }
 
+func (v List) InsertBefore(sibling List, data unsafe.Pointer) List {
+	list := C.g_list_insert_before(v.native(), sibling.native(), C.gpointer(data))
+	return wrapList(list, v.DataWrap)
+}
+
 type SList struct {
 	Ptr unsafe.Pointer
 	DataWrap DataWrapFunc
+}
+
+func WrapSList(p unsafe.Pointer, dataWrap DataWrapFunc) SList {
+	return SList{Ptr: p, DataWrap: dataWrap}
+}
+
+func wrapSList(p *C.GSList, dataWrap DataWrapFunc) SList {
+	return SList{Ptr: unsafe.Pointer(p), DataWrap: dataWrap}
+}
+
+func (v SList) native() *C.GSList {
+	return (*C.GSList)(v.Ptr)
+}
+
+func (v SList) Append(data unsafe.Pointer) SList {
+	list := C.g_slist_append(v.native(), C.gpointer(data))
+	return wrapSList(list, v.DataWrap)
+}
+
+func (v SList) Prepend(data unsafe.Pointer) SList {
+	list := C.g_slist_prepend(v.native(), C.gpointer(data))
+	return wrapSList(list, v.DataWrap)
+}
+
+func (v SList) Insert(data unsafe.Pointer, position int) SList {
+	list := C.g_slist_insert(v.native(), C.gpointer(data), C.gint(position))
+	return wrapSList(list, v.DataWrap)
 }
 
 // TimeVal

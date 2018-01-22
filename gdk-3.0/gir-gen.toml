@@ -342,8 +342,8 @@ version = "3.0"
   name = "Monitor"
 
 [[types]]
-  err_funcs = ["gdk_display_manager_list_displays"]
-  funcs = ["gdk_display_manager_get_default_display","gdk_display_manager_open_display","gdk_display_manager_set_default_display","gdk_display_manager_get"]
+  err_funcs = []
+  funcs = ["gdk_display_manager_get_default_display","gdk_display_manager_open_display","gdk_display_manager_set_default_display","gdk_display_manager_get","gdk_display_manager_list_displays"]
   ignore_funcs = []
   manual_funcs = []
   name = "DisplayManager"

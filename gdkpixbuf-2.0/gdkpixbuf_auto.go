@@ -578,6 +578,13 @@ func PixbufGetFileInfoFinish(async_result gio.AsyncResult) (PixbufFormat, int, i
 	return wrapPixbufFormat(ret0), int(width0), int(height0), nil
 }
 
+// PixbufGetFormats is a wrapper around gdk_pixbuf_get_formats().
+func PixbufGetFormats() glib.SList {
+	ret0 := C.gdk_pixbuf_get_formats()
+	return glib.WrapSList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapPixbufFormat(p) })
+}
+
 // PixbufSaveToStreamFinish is a wrapper around gdk_pixbuf_save_to_stream_finish().
 func PixbufSaveToStreamFinish(async_result gio.AsyncResult) (bool, error) {
 	var err glib.Error

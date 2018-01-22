@@ -6,6 +6,7 @@ package pango
 #include <stdlib.h>
 */
 import "C"
+import "github.com/linuxdeepin/go-gir/glib-2.0"
 import "github.com/linuxdeepin/go-gir/gobject-2.0"
 import "github.com/linuxdeepin/go-gir/util"
 import "unsafe"
@@ -29,6 +30,15 @@ func (v GlyphItem) IsNil() bool {
 }
 func IWrapGlyphItem(p unsafe.Pointer) interface{} {
 	return WrapGlyphItem(p)
+}
+
+// ApplyAttrs is a wrapper around pango_glyph_item_apply_attrs().
+func (glyph_item GlyphItem) ApplyAttrs(text string, list AttrList) glib.SList {
+	text0 := C.CString(text)
+	ret0 := C.pango_glyph_item_apply_attrs(glyph_item.native(), text0, list.native())
+	C.free(unsafe.Pointer(text0))
+	return glib.WrapSList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapGlyphItem(p) })
 }
 
 // Copy is a wrapper around pango_glyph_item_copy().
@@ -859,6 +869,13 @@ func (iterator AttrIterator) Get(type_ AttrType) Attribute {
 	return wrapAttribute(ret0)
 }
 
+// GetAttrs is a wrapper around pango_attr_iterator_get_attrs().
+func (iterator AttrIterator) GetAttrs() glib.SList {
+	ret0 := C.pango_attr_iterator_get_attrs(iterator.native())
+	return glib.WrapSList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapAttribute(p) })
+}
+
 // Next is a wrapper around pango_attr_iterator_next().
 func (iterator AttrIterator) Next() bool {
 	ret0 := C.pango_attr_iterator_next(iterator.native())
@@ -1508,6 +1525,20 @@ func (layout Layout) GetLineCount() int {
 func (layout Layout) GetLineReadonly(line int) LayoutLine {
 	ret0 := C.pango_layout_get_line_readonly(layout.native(), C.int(line))
 	return wrapLayoutLine(ret0)
+}
+
+// GetLines is a wrapper around pango_layout_get_lines().
+func (layout Layout) GetLines() glib.SList {
+	ret0 := C.pango_layout_get_lines(layout.native())
+	return glib.WrapSList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapLayoutLine(p) })
+}
+
+// GetLinesReadonly is a wrapper around pango_layout_get_lines_readonly().
+func (layout Layout) GetLinesReadonly() glib.SList {
+	ret0 := C.pango_layout_get_lines_readonly(layout.native())
+	return glib.WrapSList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapLayoutLine(p) })
 }
 
 // GetLogAttrsReadonly is a wrapper around pango_layout_get_log_attrs_readonly().

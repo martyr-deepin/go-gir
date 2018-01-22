@@ -6,6 +6,7 @@ package atk
 #include <stdlib.h>
 */
 import "C"
+import "github.com/linuxdeepin/go-gir/glib-2.0"
 import "github.com/linuxdeepin/go-gir/gobject-2.0"
 import "github.com/linuxdeepin/go-gir/util"
 import "unsafe"
@@ -1622,6 +1623,13 @@ func (obj *ValueIface) GetIncrement() float64 {
 func (obj *ValueIface) GetRange() Range {
 	ret0 := C.atk_value_get_range(obj.native())
 	return wrapRange(ret0)
+}
+
+// GetSubRanges is a wrapper around atk_value_get_sub_ranges().
+func (obj *ValueIface) GetSubRanges() glib.SList {
+	ret0 := C.atk_value_get_sub_ranges(obj.native())
+	return glib.WrapSList(unsafe.Pointer(ret0),
+		func(p unsafe.Pointer) interface{} { return WrapRange(p) })
 }
 
 // GetValueAndText is a wrapper around atk_value_get_value_and_text().
